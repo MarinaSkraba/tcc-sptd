@@ -29,7 +29,7 @@ public class Administracao implements Serializable {
         this.idAdministracao = 0;
         this.tipoAdministracao = new TipoAdministracao();
         this.horariosAdministracao = new ArrayList<>();
-        // gitzinho lindo modificando
+        
     }
 
     public Administracao(int idAdministracao, List<Horario> horarios, TipoAdministracao tipoAdministracao) {
