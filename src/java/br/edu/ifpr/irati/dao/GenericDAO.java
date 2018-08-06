@@ -1,10 +1,11 @@
 package br.edu.ifpr.irati.dao;
+
+import br.edu.ifpr.irati.modelo.Usuario;
 import br.edu.ifpr.irati.util.HibernateUtil;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
-
 
 public class GenericDAO<T> implements Dao<T> {
 
@@ -22,7 +23,8 @@ public class GenericDAO<T> implements Dao<T> {
         session.close();
         return t;
     }
-      @Override
+
+    @Override
     public void salvar(T t) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -57,11 +59,11 @@ public class GenericDAO<T> implements Dao<T> {
         session.clear();
         session.close();
     }
-    
+
     @Override
     public List<T> buscarTodos(Class<T> clazz) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from "+clazz.getCanonicalName();
+        String hql = "from " + clazz.getCanonicalName();
         Query query = session.createQuery(hql);
         List results = query.list();
         session.clear();
@@ -70,13 +72,16 @@ public class GenericDAO<T> implements Dao<T> {
     }
 
     @Override
-    public T verificarUsuario(String email, String senhaAlfanumerica) {
+    public List verificarUsuario(String email, String senhaAlfanumerica) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        T t = (T) session.load(email, senhaAlfanumerica);
+        String hql = "from usuario where email = ? and senhaAlfanumérica = ?";
+        Query query = session.createQuery(hql);
+        query.setString(0, email);
+        query.setString(1, senhaAlfanumerica);
+        List resultados = query.list();
         session.clear();
         session.close();
-        return t;
+        return resultados;
     }
 
-            
 }

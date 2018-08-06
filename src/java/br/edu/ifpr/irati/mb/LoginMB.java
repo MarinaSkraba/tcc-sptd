@@ -12,6 +12,7 @@ import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.Usuario;
 import br.edu.ifpr.irati.util.Digest;
 import br.edu.ifpr.irati.util.HashGenerationException;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -25,26 +26,26 @@ public class LoginMB {
         usuario = new Usuario();
     }
 
-    public void verificarLogin() throws HashGenerationException {
-        String senhaSHA512 = Digest.hashString(usuario.getSenhaAlfanumerica(), "SHA-512");     
+    public String verificarLogin() throws HashGenerationException {
+        String senhaSHA512 = Digest.hashString(usuario.getSenhaAlfanumerica(), "SHA-512");
         System.out.println("Chegou criptografia");
         System.out.println(usuario.getEmail());
         System.out.println(senhaSHA512);
         Dao<Usuario> usuarioDao = new GenericDAO<>(Usuario.class);
-        usuario = usuarioDao.verificarUsuario(usuario.getEmail(), senhaSHA512);
+        List<Usuario> usuarios = usuarioDao.verificarUsuario(usuario.getEmail(), senhaSHA512);
+        usuario = usuarios.get(0);
         System.out.println("Chegou object");
         System.out.println(usuario);
-
-        efetuarLogin(usuario);
-    }
-
-    public String efetuarLogin(Object o) {
-        if (o instanceof Professor) {
-            return "/PTD";
-        } else if (o instanceof DiretorEnsino) {
-            return "/index";
+        if (usuario.getIdUsuario() != 0) {
+            if (usuario instanceof Professor) {
+                return "/notificacoes";
+            } else if (usuario instanceof DiretorEnsino) {
+                return "/notificacoes";
+            }
+            return "/notificacoes";
+        }else{
+            System.out.println("Usuário não existe");
         }
-        System.out.println("Usuário não existe");
         return null;
     }
 
@@ -55,4 +56,9 @@ public class LoginMB {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+    
+    public String entrar(){
+        return "/criarCorrigirPTD";
+    }
+    
 }
