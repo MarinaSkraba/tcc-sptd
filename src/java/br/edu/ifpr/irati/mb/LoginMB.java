@@ -38,11 +38,11 @@ public class LoginMB {
         System.out.println(usuario);
         if (usuario.getIdUsuario() != 0) {
             if (usuario instanceof Professor) {
-                return "/notificacoes";
+                return "/Notificacoes";
             } else if (usuario instanceof DiretorEnsino) {
-                return "/notificacoes";
+                return "/Notificacoes";
             }
-            return "/notificacoes";
+            return "/Notificacoes";
         }else{
             System.out.println("Usuário não existe");
         }
@@ -58,7 +58,7 @@ public class LoginMB {
     }
     
     public String entrar(){
-        return "/criarCorrigirPTD";
+        return "/CriarCorrigirPTD";
     }
     
 }
