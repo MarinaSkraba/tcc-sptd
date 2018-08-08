@@ -132,27 +132,59 @@
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             CURSO
+                            <br>
+                                <p:selectOneMenu id="selectCurso" 
+
+                                                 value="#{cursoMB.cursoSelecionado}"
+                                                 converter="cursoConverter">
+
+                                    <f:selectItems value="#{cursoMB.cursos}" var="curso" itemValue="#{curso}"
+                                                   itemLabel="#{curso}" />
+                                </p:selectOneMenu>
+                            </br>
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             COMPONENTE CURRICULAR
+                            <br> <p:inputText value="#{aulaMB.aula.componenteCurricular}"/> </br>
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
-                            CARGA HORÁRIA TOTAL
+                            DIA DA SEMANA
+                            <br> <p:inputText value="#{aulaMB.horario.diaSemana}"/> </br>
                         </font>
-                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            HORÁRIO INÍCIO
+                            <br> <p:calendar id="horaInicio" value="#{aulaMB.horario.horaInicio}" pattern="HH:mm"/></br>
+                        </font>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            HORÁRIO TÉRMINO
+                            <br> <p:calendar id="horaTermino" value="#{aulaMB.horario.horaTermino}" pattern="HH:mm"/></br>
+                        </font>
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             ORGANIZAÇÃO
+                            <br> <p:inputText value="#{aulaMB.tipoOferta.rotulo}"/> </br>
+                            <br> <p:commandButton styleClass="botao" 
+                                             style="float:left;" 
+                                             value="Salvar" 
+                                             action="#{manutencaoMB.salvar()}"/> </br>
+                                             
                         </font>
 
                         <!--
@@ -190,12 +222,51 @@
                             </font>
                             <p:commandButton styleClass="botao" 
                                              style="float: left;" 
-                                             value="Adicionar"/>
+                                             value="Adicionar" 
+                                             onclick="PF('addManutencaoDialog').show();"/>
                             <p:commandButton styleClass="botaoAjuda" 
                                              style="float: left;" 
                                              value="?"/>
                         </h:panelGrid>
                     </h:panelGrid>
+                    <p:dialog header="Adicionar Manutenção" 
+                              widgetVar="addManutencaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            TIPO DA ATIVIDADE
+                            <br> <p:inputText value="#{manutencaoMB.manutencaoEnsino.tipoManutencao.rotulo}"/> </br>
+                        </font>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            DIA DA SEMANA
+                            <br> <p:inputText value="#{horarioMB.horario.diaSemana}"/> </br>
+                        </font>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            HORÁRIO INÍCIO
+                            <br> <p:calendar id="horaInicio" value="#{horarioMB.horario.horaInicio}" pattern="HH:mm" /></br>
+                        </font>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            HORÁRIO TÉRMINO
+                            <br> <p:calendar id="horaTermino" value="#{horarioMB.horario.horaTermino}" pattern="HH:mm"/></br>
+                        </font>
+
+
+                    </p:dialog>
 
                 </h:form>
                 <br/>
@@ -213,12 +284,51 @@
                             </font>
                             <p:commandButton styleClass="botao" 
                                              style="float: left;" 
-                                             value="Adicionar"/>
+                                             value="Adicionar" 
+                                             onclick="PF('addApoioEnsinoDialog').show();"/>
                             <p:commandButton styleClass="botaoAjuda" 
                                              style="float: left;" 
                                              value="?"/>
                         </h:panelGrid>
                     </h:panelGrid>
+                    <p:dialog header="Adicionar Apoio ao Ensino" 
+                              widgetVar="addApoioEnsinoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            TIPO DA ATIVIDADE
+                            <br> <p:inputText value="#{apoioMB.apoio.tipoApoio.rotulo}"/> </br>
+                        </font>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            DIA DA SEMANA
+                            <br> <p:inputText value="#{horarioMB.horario.diaSemana}"/> </br>
+                        </font>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            HORÁRIO INÍCIO
+                            <br> <p:calendar id="horaInicio" value="#{horarioMB.horario.horaInicio}" pattern="HH:mm"/></br>
+                        </font>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            HORÁRIO TÉRMINO
+                            <br> <p:calendar id="horaTermino" value="#{horarioMB.horario.horaTermino}" pattern="HH:mm"/></br>
+                        </font>
+
+
+                    </p:dialog>
 
                 </h:form>
                 <br/>
@@ -245,15 +355,16 @@
                                   styleClass="text">
                                 Pesquisa e/ou extensão cadastradas no COPE (Autor)
                             </font>
-                            <p:commandButton styleClass="botao" 
+                             <p:commandButton styleClass="botao" 
                                              style="float: left;" 
-                                             value="Adicionar"/>
+                                             value="Adicionar" 
+                                             onclick="PF('addPesquisaExtensaoAutorDialog').show();"/>
                             <p:commandButton styleClass="botaoAjuda" 
                                              style="float: left;" 
                                              value="?"/>
                         </h:panelGrid>
                     </h:panelGrid>
-
+                    
                 </h:form>
                 <br/>
 

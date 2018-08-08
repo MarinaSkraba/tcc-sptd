@@ -80,5 +80,19 @@ public class Curso implements Serializable {
     public void setNomeCurso(String nomeCurso) {
         this.nomeCurso = nomeCurso;
     }
+    @Override
+    public String toString() {
+        return nomeCurso;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Curso c = (Curso) obj;
+        if (this.idCurso == c.getIdCurso()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
