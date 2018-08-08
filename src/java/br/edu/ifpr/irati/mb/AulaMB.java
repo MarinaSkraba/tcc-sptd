@@ -32,7 +32,7 @@ public class AulaMB {
     }
 
     public void salvar() {
-   
+
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aula.getCursos().add(cursoSelecionado);
         aula.getHorarios().add(horario);
