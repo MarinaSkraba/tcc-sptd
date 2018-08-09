@@ -29,7 +29,7 @@ public class Aula implements Serializable {
     @OneToOne
     private TipoOferta tipoOferta;
 
-    @OneToMany
+    @OneToMany(fetch=FetchType.EAGER)
     private List<Horario> horariosAula;
 
     public Aula() {

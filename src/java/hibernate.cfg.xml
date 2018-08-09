@@ -6,6 +6,7 @@
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sptd</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
         <!-- para criar as tabelas sempre que executar pode ser usado o valor create - para apenas atualizar usa-se update -->
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
