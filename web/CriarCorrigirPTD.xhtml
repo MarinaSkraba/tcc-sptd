@@ -164,14 +164,14 @@
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             HORÁRIO INÍCIO
-                            <br> <p:calendar id="horaInicio" value="#{aulaMB.horario.horaInicio}" pattern="HH:mm"/></br>
+                            <br> <p:calendar id="horaInicio" value="#{aulaMB.horario.horaInicio}" pattern="HH:mm" timeOnly="true"/></br>
                         </font>
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             HORÁRIO TÉRMINO
-                            <br> <p:calendar id="horaTermino" value="#{aulaMB.horario.horaTermino}" pattern="HH:mm"/></br>
+                            <br> <p:calendar id="horaTermino" value="#{aulaMB.horario.horaTermino}" pattern="HH:mm" timeOnly="true"/></br>
                         </font>
 
                         <font face="Calibri" 
@@ -180,10 +180,7 @@
                               styleClass="text">
                             ORGANIZAÇÃO
                             <br> <p:inputText value="#{aulaMB.tipoOferta.rotulo}"/> </br>
-                            <br> <p:commandButton styleClass="botao" 
-                                                  style="float:left;" 
-                                                  value="Salvar" 
-                                                  action="#{aulaMB.salvar()}"/> </br>
+                            <br> <h:commandButton value="Salvar" action="#{aulaMB.salvar()}"/> </br>
 
                         </font>
 
@@ -393,13 +390,7 @@
                             TÍTULO
                             <br> <p:inputText value=""/> </br>
                         </font>
-                        <font face="Calibri" 
-                              color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                              styleClass="text">
-                            CARGA HORÁRIA SEMANAL
-                            <br> <p:inputText value=""/> </br>
-                        </font>
+ 
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
