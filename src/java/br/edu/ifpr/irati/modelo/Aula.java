@@ -9,7 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -22,9 +23,10 @@ public class Aula implements Serializable {
 
     @Column(name = "componenteCurricular", nullable = false, length = 50)
     private String componenteCurricular;
-
-    @OneToMany(fetch=FetchType.EAGER)
-    private List<Curso> cursos;
+    
+    @ManyToOne
+    @JoinColumn(name = "curso_idCurso")
+    private Curso curso;
 
     @OneToOne
     private TipoOferta tipoOferta;
@@ -35,7 +37,7 @@ public class Aula implements Serializable {
     public Aula() {
         this.idAula = 0;
         this.componenteCurricular = "";
-        this.cursos = new ArrayList();
+        this.curso = new Curso();
         this.tipoOferta = new TipoOferta();
         this.horariosAula = new ArrayList<>();
 
@@ -44,16 +46,16 @@ public class Aula implements Serializable {
     public Aula(int idAula, String componenteCurricular) {
         this.idAula = idAula;
         this.componenteCurricular = componenteCurricular;
-        this.cursos = new ArrayList();
+        this.curso = new Curso();
         this.tipoOferta = new TipoOferta();
         this.horariosAula = new ArrayList<>();
 
     }
 
-    public Aula(int idAula, String componenteCurricular, List<Curso> cursos, TipoOferta tipoOferta, List<Horario> horariosAula) {
+    public Aula(int idAula, String componenteCurricular, Curso curso, TipoOferta tipoOferta, List<Horario> horariosAula) {
         this.idAula = idAula;
         this.componenteCurricular = componenteCurricular;
-        this.cursos = cursos;
+        this.curso = curso;
         this.tipoOferta = tipoOferta;
         this.horariosAula = horariosAula;
     }
@@ -90,12 +92,20 @@ public class Aula implements Serializable {
         this.tipoOferta = tipoOferta;
     }
 
-    public List<Curso> getCursos() {
-        return cursos;
+    public Curso getCurso() {
+        return curso;
     }
 
-    public void setCursos(List<Curso> cursos) {
-        this.cursos = cursos;
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+    public List<Horario> getHorariosAula() {
+        return horariosAula;
+    }
+
+    public void setHorariosAula(List<Horario> horariosAula) {
+        this.horariosAula = horariosAula;
     }
 
 }
