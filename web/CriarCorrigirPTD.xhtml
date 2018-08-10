@@ -245,25 +245,22 @@
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             DIA DA SEMANA
-                            <br> <p:inputText value="#{horarioMB.horario.diaSemana}"/> </br>
+                            <br> <p:inputText value="#{manutencaoMB.horario.diaSemana}"/> </br>
                         </font>
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             HORÁRIO INÍCIO
-                            <br> <p:calendar id="horaInicio" value="#{horarioMB.horario.horaInicio}" pattern="HH:mm" /></br>
+                            <br> <p:calendar id="horaInicio" value="#{manutencaoMB.horario.horaInicio}" pattern="HH:mm" /></br>
                         </font>
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             HORÁRIO TÉRMINO
-                            <br> <p:calendar id="horaTermino" value="#{horarioMB.horario.horaTermino}" pattern="HH:mm"/></br>
-                        <br> <p:commandButton styleClass="botao" 
-                                                  style="float:left;" 
-                                                  value="Salvar" 
-                                                  action="#{manutencaoMB.salvar()}"/> </br>
+                            <br> <p:calendar id="horaTermino" value="#{manutencaoMB.horario.horaTermino}" pattern="HH:mm"/></br>
+                            <br> <h:commandButton value="Salvar" action="#{manutencaoMB.salvar()}"/> </br>
                         </font>
 
 
