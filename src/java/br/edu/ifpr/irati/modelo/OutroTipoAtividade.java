@@ -37,16 +37,26 @@ public class OutroTipoAtividade implements Serializable {
 
     public OutroTipoAtividade() {
         this.idOutroTipoAtividade = 0;
-        this.periodicidade = "";
+        this.rotulo = "";
+        this.periodicidade = "";     
         this.horariosOutroTipoAtividade = new ArrayList<>();
     }
 
-    public OutroTipoAtividade(int idOutroTipoAtividade, String periodicidade, List<Horario> horarios) {
+    public OutroTipoAtividade(int idOutroTipoAtividade, String rotulo, String periodicidade) {
         this.idOutroTipoAtividade = idOutroTipoAtividade;
+        this.rotulo = rotulo;
         this.periodicidade = periodicidade;
-        this.horariosOutroTipoAtividade = horarios;
+        this.horariosOutroTipoAtividade = new ArrayList();
     }
 
+    public OutroTipoAtividade(int idOutroTipoAtividade, String rotulo, String periodicidade, List<Horario> horariosOutroTipoAtividade) {
+        this.idOutroTipoAtividade = idOutroTipoAtividade;
+        this.rotulo = rotulo;
+        this.periodicidade = periodicidade;
+        this.horariosOutroTipoAtividade = horariosOutroTipoAtividade;
+    }
+
+   
     public int getIdOutroTipoAtividade() {
         return idOutroTipoAtividade;
     }
@@ -85,5 +95,13 @@ public class OutroTipoAtividade implements Serializable {
 
     public void setHorariosOutroTipoAtividades(List<Horario> horariosOutroTipoAtividades) {
         this.horariosOutroTipoAtividade = horariosOutroTipoAtividades;
+    }
+
+    public List<Horario> getHorariosOutroTipoAtividade() {
+        return horariosOutroTipoAtividade;
+    }
+
+    public void setHorariosOutroTipoAtividade(List<Horario> horariosOutroTipoAtividade) {
+        this.horariosOutroTipoAtividade = horariosOutroTipoAtividade;
     }
 }

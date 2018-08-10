@@ -645,46 +645,36 @@
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             ATIVIDADE
-                            <br> <p:inputText value=""/> </br>
+                            <br> <p:inputText value="#{outroTipoAtividadeMB.outroTipoAtividade.rotulo}"/> </br>
                         </font>
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             PERIODICIDADE
-                            <br> <p:inputText value=""/> </br>
-                        </font>
-                        <font face="Calibri" 
-                              color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                              styleClass="text">
-                            CARGA HORÁRIA SEMANAL
-                            <br> <p:inputText value=""/> </br>
+                            <br> <p:inputText value="#{outroTipoAtividadeMB.outroTipoAtividade.periodicidade}"/> </br>
                         </font>
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             DIA DA SEMANA
-                            <br> <p:inputText value="#{horarioMB.horario.diaSemana}"/> </br>
+                            <br> <p:inputText value="#{outroTipoAtividadeMB.horario.diaSemana}"/> </br>
                         </font>
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             HORÁRIO INÍCIO
-                            <br> <p:calendar id="horaInicio" value="#{horarioMB.horario.horaInicio}" pattern="HH:mm"/></br>
+                            <br> <p:calendar id="horaInicio" value="#{outroTipoAtividadeMB.horario.horaInicio}" pattern="HH:mm"/></br>
                         </font>
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             HORÁRIO TÉRMINO
-                            <br> <p:calendar id="horaTermino" value="#{horarioMB.horario.horaTermino}" pattern="HH:mm"/></br>
-                            <br> <p:commandButton styleClass="botao" 
-                                                  style="float:left;" 
-                                                  value="Salvar" 
-                                                  action="#{manutencaoMB.salvar()}"/> </br>
+                            <br> <p:calendar id="horaTermino" value="#{outroTipoAtividadeMB.horario.horaTermino}" pattern="HH:mm"/></br>
+                            <br> <h:commandButton value="Salvar" action="#{outroTipoAtividadeMB.salvar()}"/> </br>
                         </font>
 
 
