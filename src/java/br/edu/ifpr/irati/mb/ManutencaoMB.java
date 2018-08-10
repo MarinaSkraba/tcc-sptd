@@ -39,8 +39,8 @@ public class ManutencaoMB {
         horarioDAO.salvar(horario);  
         manutencaoEnsino.setTipoManutencao(tipoManutencao);
         manutencaoEnsino.getHorarios().add(horario);
-        manutencaoEnsinoDAO.salvar(manutencaoEnsino);
-        manutencaoEnsino = new ManutencaoEnsino();
+        ManutencaoEnsino mE = new ManutencaoEnsino(manutencaoEnsino.getIdManutencao(), manutencaoEnsino.getHorarios(), tipoManutencao);
+        manutencaoEnsinoDAO.salvar(mE);
         manutencoesEnsino = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class);
 
     }
