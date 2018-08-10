@@ -26,6 +26,9 @@ public class AulaMB {
     public AulaMB() {
 
         aula = new Aula();
+        horario = new Horario();
+        cursoSelecionado = new Curso();
+        tipoOferta = new TipoOferta();
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aulas = aulaDAO.buscarTodos(Aula.class);
 
@@ -33,10 +36,15 @@ public class AulaMB {
 
     public void salvar() {
 
+        Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
+        tipoOfertaDAO.salvar(tipoOferta);
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        horarioDAO.salvar(horario);       
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-        aula.getCursos().add(cursoSelecionado);
         aula.getHorarios().add(horario);
         aula.setTipoOferta(tipoOferta);
+        aula.getCursos().add(cursoSelecionado);      
+        System.out.println(aula.getCursos());
         Aula a = new Aula(aula.getIdAula(), aula.getComponenteCurricular(), aula.getCursos(), tipoOferta, aula.getHorarios());
         aulaDAO.salvar(a);
         aulas = aulaDAO.buscarTodos(Aula.class);

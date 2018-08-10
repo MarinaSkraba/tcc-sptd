@@ -23,7 +23,7 @@ public class Aula implements Serializable {
     @Column(name = "componenteCurricular", nullable = false, length = 50)
     private String componenteCurricular;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch=FetchType.EAGER)
     private List<Curso> cursos;
 
     @OneToOne
