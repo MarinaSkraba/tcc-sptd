@@ -1,6 +1,7 @@
 package br.edu.ifpr.irati.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity(name = "atividadeaserproposta")
-public class AtividadesASeremPropostas implements Serializable {
+public class AtividadeASerProposta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +25,29 @@ public class AtividadesASeremPropostas implements Serializable {
 
     @OneToMany
     private List<Horario> horariosAtividadesASerProposta;
+
+    public AtividadeASerProposta() {
+
+        this.idAtividadeASerProposta = 0;
+        this.periodicidade = "";
+        this.rotulo = "";
+        this.horariosAtividadesASerProposta = new ArrayList();
+
+    }
+
+    public AtividadeASerProposta(int idAtividadeASerProposta, String rotulo, String periodicidade) {
+        this.idAtividadeASerProposta = idAtividadeASerProposta;
+        this.rotulo = rotulo;
+        this.periodicidade = periodicidade;
+        this.horariosAtividadesASerProposta = new ArrayList();
+    }
+
+    public AtividadeASerProposta(int idAtividadeASerProposta, String rotulo, String periodicidade, List<Horario> horariosAtividadesASerProposta) {
+        this.idAtividadeASerProposta = idAtividadeASerProposta;
+        this.rotulo = rotulo;
+        this.periodicidade = periodicidade;
+        this.horariosAtividadesASerProposta = horariosAtividadesASerProposta;
+    }
 
     public int getIdAtividadeASerProposta() {
         return idAtividadeASerProposta;

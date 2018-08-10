@@ -21,7 +21,7 @@
         <mapping class="br.edu.ifpr.irati.modelo.TipoAdministracao"/>
         <mapping class="br.edu.ifpr.irati.modelo.Administracao"/>
         <mapping class="br.edu.ifpr.irati.modelo.Apoio"/>
-        <mapping class="br.edu.ifpr.irati.modelo.AtividadesASeremPropostas"/>
+        <mapping class="br.edu.ifpr.irati.modelo.AtividadeASerProposta"/>
         <mapping class="br.edu.ifpr.irati.modelo.ManutencaoEnsino"/>
         <mapping class="br.edu.ifpr.irati.modelo.OutroTipoAtividade"/>
         <mapping class="br.edu.ifpr.irati.modelo.ProjetoEnsino"/>
