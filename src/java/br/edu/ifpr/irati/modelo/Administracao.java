@@ -29,9 +29,7 @@ public class Administracao implements Serializable {
         this.idAdministracao = 0;
         this.tipoAdministracao = new TipoAdministracao();
         this.horariosAdministracao = new ArrayList<>();
-        //William olha a alteração a
-        //William olha a alteração b
- 
+      
     }
 
     public Administracao(int idAdministracao, List<Horario> horarios, TipoAdministracao tipoAdministracao) {
