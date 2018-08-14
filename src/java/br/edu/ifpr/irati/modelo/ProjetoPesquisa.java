@@ -131,4 +131,18 @@ public class ProjetoPesquisa implements Serializable {
     public void setParticipacoes(List<Participacao> participacoes) {
         this.participacoes = participacoes;
     }
+      @Override
+    public String toString() {
+        return tituloProcesso;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        ProjetoPesquisa pP = (ProjetoPesquisa) obj;
+        if (this.idProjetoPesquisa == pP.getIdProjetoPesquisa()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
