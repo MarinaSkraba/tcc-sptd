@@ -21,8 +21,8 @@
                         <h:outputLabel for="email" 
                                        value="Email:" 
                                        styleClass="text"/>
-                        <p:inputText id="name" 
-                                     value="#{loginMB.usuario.email}" 
+                        <p:inputText id="email" 
+                                     value="#{usuarioMB.usuarioLogado.email}" 
                                      required="true"
                                      styleClass="caixaTexto">
                             <f:validateLength minimum="2" />
@@ -33,7 +33,7 @@
                                        value="Senha:" 
                                        styleClass="text"/>
                         <p:password id="senha" 
-                                    value="#{loginMB.usuario.senhaAlfanumerica}" 
+                                    value="#{usuarioMB.usuarioLogado.senhaAlfanumerica}" 
                                     required="true"
                                     styleClass="caixaTexto"/>
                     </h:panelGrid>
@@ -42,7 +42,7 @@
                                      ajax="false" 
                                      validateClient="true"
                                      styleClass="botaoLogin"
-                                     action="#{loginMB.verificarLogin()}"/>
+                                     action="#{usuarioMB.verificarLogin()}"/>
                 </h:form>
             </div>
         </div>
