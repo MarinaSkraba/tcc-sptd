@@ -24,7 +24,7 @@ public class UsuarioMB {
     private List<Usuario> usuarios;
 
     public UsuarioMB() {
-
+        usuarioLogado = new Usuario();
         usuario = new Usuario();
         usuarios = new ArrayList<>();
     }
@@ -43,27 +43,29 @@ public class UsuarioMB {
     public void desabilitar() {
         //implementar depois
     }
-    
+
     public String verificarLogin() throws HashGenerationException {
         String senhaSHA512 = Digest.hashString(usuario.getSenhaAlfanumerica(), "SHA-512");
         System.out.println("Chegou criptografia");
         System.out.println(getUsuarioLogado().getEmail());
         System.out.println(senhaSHA512);
         Dao<Usuario> usuarioDao = new GenericDAO<>(Usuario.class);
-        List<Usuario> usuarios = usuarioDao.verificarUsuario(getUsuarioLogado().getEmail(), senhaSHA512);
-        setUsuarioLogado(usuarios.get(0));
-        System.out.println("Chegou object");
-        System.out.println(getUsuarioLogado());
-        if (getUsuarioLogado().getIdUsuario() != 0) {
+        List<Usuario> usuariosPesquisados = usuarioDao.verificarUsuario(getUsuarioLogado().getEmail(), senhaSHA512);
+        if (usuarios.isEmpty()) {
+            setUsuarioLogado(usuarios.get(0));
+            System.out.println("Chegou object");
+            System.out.println(getUsuarioLogado());
+            return "/Login";
+        } else {
+            setUsuarioLogado(usuarios.get(0));
+            System.out.println("Chegou object");
+            System.out.println(getUsuarioLogado());
             if (getUsuarioLogado() instanceof Professor) {
                 return "/Notificacoes";
             } else if (getUsuarioLogado() instanceof DiretorEnsino) {
                 return "/Notificacoes";
             }
             return "/Notificacoes";
-        } else {
-            System.out.println("Usuário não existe");
-            return null;
         }
     }
 
@@ -96,10 +98,5 @@ public class UsuarioMB {
     public void setUsuarioLogado(Usuario usuarioLogado) {
         this.usuarioLogado = usuarioLogado;
     }
-    
-    // Código fictício:
-    public String entrar() {
-        return "/CriarCorrigirPTD";
-    }
-    
+
 }
