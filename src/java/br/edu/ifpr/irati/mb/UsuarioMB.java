@@ -24,7 +24,7 @@ public class UsuarioMB {
     private List<Usuario> usuarios;
 
     public UsuarioMB() {
-
+        usuarioLogado = new Usuario();
         usuario = new Usuario();
         usuarios = new ArrayList<>();
     }
