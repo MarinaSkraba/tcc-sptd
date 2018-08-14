@@ -116,14 +116,6 @@ public class ProjetoPesquisa implements Serializable {
         this.instituicaoPesquisa = instituicaoPesquisa;
     }
 
-    public List<Horario> getHorarios() {
-        return horariosProjetoPesquisa;
-    }
-
-    public void setHorarios(List<Horario> horariosProjetoPesquisa) {
-        this.horariosProjetoPesquisa = horariosProjetoPesquisa;
-    }
-
     public List<Horario> getHorariosProjetoPesquisa() {
         return horariosProjetoPesquisa;
     }

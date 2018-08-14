@@ -78,10 +78,8 @@ public class ProjetoExtensao implements Serializable {
         this.participacoes = participacoes;
     }
 
-    
-
     public void adicionarHorario(Horario horario) {
-        this.getHorarios().add(horario);
+        this.getHorariosProjetoExtensao().add(horario);
     }
 
     public int getIdProjetoExtensao() {
@@ -122,14 +120,6 @@ public class ProjetoExtensao implements Serializable {
 
     public void setInstituicaoPesquisa(String instituicaoPesquisa) {
         this.instituicaoPesquisa = instituicaoPesquisa;
-    }
-
-    public List<Horario> getHorarios() {
-        return horariosProjetoExtensao;
-    }
-
-    public void setHorarios(List<Horario> horariosProjetoExtensao) {
-        this.horariosProjetoExtensao = horariosProjetoExtensao;
     }
 
     public List<Horario> getHorariosProjetoExtensao() {
