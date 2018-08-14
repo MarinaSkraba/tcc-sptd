@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,6 +41,9 @@ public class ProjetoExtensao implements Serializable {
     @OneToMany
     private List<Horario> horariosProjetoExtensao;
     
+    @OneToMany(fetch=FetchType.EAGER)
+    private List<Participacao> participacoes;
+    
 
     public ProjetoExtensao() {
 
@@ -64,14 +68,17 @@ public class ProjetoExtensao implements Serializable {
 
     }
 
-    public ProjetoExtensao(int idProjetoExtensao, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa, List<Horario> horarios) {
+    public ProjetoExtensao(int idProjetoExtensao, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa, List<Horario> horariosProjetoExtensao, List<Participacao> participacoes) {
         this.idProjetoExtensao = idProjetoExtensao;
         this.numeroProcesso = numeroProcesso;
         this.tituloProcesso = tituloProcesso;
         this.previsaoConclusao = previsaoConclusao;
         this.instituicaoPesquisa = instituicaoPesquisa;
-        this.horariosProjetoExtensao = horarios;
+        this.horariosProjetoExtensao = horariosProjetoExtensao;
+        this.participacoes = participacoes;
     }
+
+    
 
     public void adicionarHorario(Horario horario) {
         this.getHorarios().add(horario);
@@ -123,6 +130,22 @@ public class ProjetoExtensao implements Serializable {
 
     public void setHorarios(List<Horario> horariosProjetoExtensao) {
         this.horariosProjetoExtensao = horariosProjetoExtensao;
+    }
+
+    public List<Horario> getHorariosProjetoExtensao() {
+        return horariosProjetoExtensao;
+    }
+
+    public void setHorariosProjetoExtensao(List<Horario> horariosProjetoExtensao) {
+        this.horariosProjetoExtensao = horariosProjetoExtensao;
+    }
+
+    public List<Participacao> getParticipacoes() {
+        return participacoes;
+    }
+
+    public void setParticipacoes(List<Participacao> participacoes) {
+        this.participacoes = participacoes;
     }
 
 }

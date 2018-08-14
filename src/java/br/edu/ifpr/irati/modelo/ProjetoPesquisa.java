@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,6 +44,9 @@ public class ProjetoPesquisa implements Serializable {
 
     @OneToMany
     private List<Horario> horariosProjetoPesquisa;
+            
+    @OneToMany(fetch=FetchType.EAGER)
+    private List<Participacao> participacoes;
 
     public ProjetoPesquisa() {
         this.idProjetoPesquisa = 0;
@@ -126,5 +130,13 @@ public class ProjetoPesquisa implements Serializable {
 
     public void setHorariosProjetoPesquisa(List<Horario> horariosProjetoPesquisa) {
         this.horariosProjetoPesquisa = horariosProjetoPesquisa;
+    }
+
+    public List<Participacao> getParticipacoes() {
+        return participacoes;
+    }
+
+    public void setParticipacoes(List<Participacao> participacoes) {
+        this.participacoes = participacoes;
     }
 }
