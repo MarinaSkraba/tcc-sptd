@@ -97,9 +97,4 @@ public class UsuarioMB {
         this.usuarioLogado = usuarioLogado;
     }
     
-    // Código fictício:
-    public String entrar() {
-        return "/CriarCorrigirPTD";
-    }
-    
 }

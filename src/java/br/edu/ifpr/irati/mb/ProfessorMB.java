@@ -33,5 +33,10 @@ public class ProfessorMB {
     public void setProfessores(List<Professor> professores) {
         this.professores = professores;
     }
+    
+    // Código fictício:
+    public String criarCorrigirPTD() {
+        return "/CriarCorrigirPTD";
+    }
 
 }
