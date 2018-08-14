@@ -29,14 +29,6 @@ public class Participacao implements Serializable {
     private String rotulo;
 
     @ManyToOne
-    @JoinColumn(name = "ProjetoExtensao_idProjetoExtensao")
-    private ProjetoExtensao projetoExtensao;
-
-    @ManyToOne
-    @JoinColumn(name = "ProjetoPesquisa_idProjetoPesquisa")
-    private ProjetoPesquisa projetoPesquisa;
-
-    @ManyToOne
     @JoinColumn(name = "professor_idProfessor")
     private Professor professor;
 
@@ -44,8 +36,6 @@ public class Participacao implements Serializable {
 
         this.idParticipacao = 0;
         this.professor = new Professor();
-        this.projetoExtensao = new ProjetoExtensao();
-        this.projetoPesquisa = new ProjetoPesquisa();
 
     }
 
@@ -53,15 +43,12 @@ public class Participacao implements Serializable {
         this.idParticipacao = idParticipacao;
         this.rotulo = rotulo;
         this.professor = new Professor();
-        this.projetoExtensao = new ProjetoExtensao();
-        this.projetoPesquisa = new ProjetoPesquisa();
+
     }
 
     public Participacao(int idParticipacao, String rotulo, ProjetoExtensao projetoExtensao, ProjetoPesquisa projetoPesquisa, Professor professor) {
         this.idParticipacao = idParticipacao;
         this.rotulo = rotulo;
-        this.projetoExtensao = projetoExtensao;
-        this.projetoPesquisa = projetoPesquisa;
         this.professor = professor;
     }
 
@@ -87,22 +74,6 @@ public class Participacao implements Serializable {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
-    }
-
-    public ProjetoExtensao getProjetoExtensao() {
-        return projetoExtensao;
-    }
-
-    public void setProjetoExtensao(ProjetoExtensao projetoExtensao) {
-        this.projetoExtensao = projetoExtensao;
-    }
-
-    public ProjetoPesquisa getProjetoPesquisa() {
-        return projetoPesquisa;
-    }
-
-    public void setProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
-        this.projetoPesquisa = projetoPesquisa;
     }
 
 }

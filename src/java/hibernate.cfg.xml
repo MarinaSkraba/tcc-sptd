@@ -12,6 +12,7 @@
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
+       
         <mapping class="br.edu.ifpr.irati.modelo.Usuario"/>
         <mapping class="br.edu.ifpr.irati.modelo.Horario"/>
         <mapping class="br.edu.ifpr.irati.modelo.TipoManutencao"/>
