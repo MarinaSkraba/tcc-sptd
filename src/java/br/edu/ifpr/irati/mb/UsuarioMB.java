@@ -44,10 +44,10 @@ public class UsuarioMB {
     public String verificarLogin() throws HashGenerationException {
         String senhaSHA512 = Digest.hashString(usuario.getSenhaAlfanumerica(),"SHA-512");
         System.out.println("Chegou criptografia");
-        System.out.println(getUsuarioLogado().getEmail());
+        System.out.println(getUsuario().getEmail());
         System.out.println(senhaSHA512);
         Dao<Usuario> usuarioDao = new GenericDAO<>(Usuario.class);
-        List<Usuario> usuarios = usuarioDao.verificarUsuario(getUsuarioLogado().getEmail(), senhaSHA512);
+        List<Usuario> usuarios = usuarioDao.verificarUsuario(getUsuario().getEmail(), senhaSHA512);
         if (usuarios.isEmpty()) {
             setUsuarioLogado(new Usuario());
             System.out.println("Chegou object");
