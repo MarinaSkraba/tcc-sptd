@@ -21,18 +21,15 @@ public class UsuarioMB {
 
     private Usuario usuario;
     private Usuario usuarioLogado;
-    private List<Usuario> usuarios;
 
     public UsuarioMB() {
         usuarioLogado = new Usuario();
         usuario = new Usuario();
-        usuarios = new ArrayList<>();
     }
 
     public void salvar() {
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
         usuarioDAO.salvar(usuario);
-        usuarios = usuarioDAO.buscarTodos(Usuario.class);
     }
 
     public String alterar(Usuario usuario) {
@@ -50,7 +47,7 @@ public class UsuarioMB {
         System.out.println(getUsuarioLogado().getEmail());
         System.out.println(senhaSHA512);
         Dao<Usuario> usuarioDao = new GenericDAO<>(Usuario.class);
-        List<Usuario> usuariosPesquisados = usuarioDao.verificarUsuario(getUsuarioLogado().getEmail(), senhaSHA512);
+        List<Usuario> usuarios = usuarioDao.verificarUsuario(getUsuarioLogado().getEmail(), senhaSHA512);
         if (usuarios.isEmpty()) {
             setUsuarioLogado(new Usuario());
             System.out.println("Chegou object");
@@ -76,15 +73,7 @@ public class UsuarioMB {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
+    
     /**
      * @return the usuarioLogado
      */
