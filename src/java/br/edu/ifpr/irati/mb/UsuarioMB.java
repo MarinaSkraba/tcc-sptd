@@ -58,11 +58,11 @@ public class UsuarioMB {
             System.out.println("Chegou object");
             System.out.println(getUsuarioLogado());
             if (getUsuarioLogado() instanceof Professor) {
-                return "/Notificacoes";
+                return "/NotificacoesDocente";
             } else if (getUsuarioLogado() instanceof DiretorEnsino) {
-                return "/Notificacoes";
+                return "/NotificacoesDocente";
             }
-            return "/Notificacoes";
+            return "/NotificacoesDocente";
         }
     }
 
