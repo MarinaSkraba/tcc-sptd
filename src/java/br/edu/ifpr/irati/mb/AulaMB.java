@@ -11,6 +11,7 @@ import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Curso;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.TipoOferta;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
@@ -19,14 +20,16 @@ public class AulaMB {
 
     private Aula aula;
     private Horario horario;
+    private List<Horario> horarios;
     private Curso cursoSelecionado;
     private TipoOferta tipoOferta;
     private List<Aula> aulas;
 
     public AulaMB() {
-        
+
         aula = new Aula();
         horario = new Horario();
+        horarios = new ArrayList<>();
         cursoSelecionado = new Curso();
         tipoOferta = new TipoOferta();
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
@@ -34,14 +37,23 @@ public class AulaMB {
 
     }
 
+    public void adicionarHorario() {
+        horarios.add(horario);
+        horario = new Horario();
+    }
+
     public void salvar() {
-        
+
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
         tipoOfertaDAO.salvar(tipoOferta);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        horarioDAO.salvar(horario);       
-        aula.getHorarios().add(horario);
+        for (Horario h : horarios) {
+            aula.getHorarios().add(h);
+        }
+        for (Horario h : aula.getHorarios()) {
+            horarioDAO.salvar(h);
+        }
         aula.setTipoOferta(tipoOferta);
         aula.setCurso(cursoSelecionado);
         Aula a = new Aula(aula.getIdAula(), aula.getComponenteCurricular(), cursoSelecionado, tipoOferta, aula.getHorarios());
@@ -74,20 +86,40 @@ public class AulaMB {
         this.cursoSelecionado = cursoSelecionado;
     }
 
-    public Horario getHorario() {
-        return horario;
-    }
-
-    public void setHorario(Horario horario) {
-        this.horario = horario;
-    }
-
     public TipoOferta getTipoOferta() {
         return tipoOferta;
     }
 
     public void setTipoOferta(TipoOferta tipoOferta) {
         this.tipoOferta = tipoOferta;
+    }
+
+    /**
+     * @return the horarios
+     */
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    /**
+     * @param horarios the horarios to set
+     */
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
+    }
+
+    /**
+     * @return the horario
+     */
+    public Horario getHorario() {
+        return horario;
+    }
+
+    /**
+     * @param horario the horario to set
+     */
+    public void setHorario(Horario horario) {
+        this.horario = horario;
     }
 
 }

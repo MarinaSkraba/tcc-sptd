@@ -132,17 +132,16 @@
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
                               styleClass="text">
                             CURSO
-                            <br>
-                                <p:selectOneMenu id="selectCurso" 
-
-                                                 value="#{aulaMB.cursoSelecionado}"
-                                                 converter="cursoConverter">
-
-                                    <f:selectItems value="#{cursoMB.cursos}" var="curso" itemValue="#{curso}"
-                                                   itemLabel="#{curso}" />
-                                </p:selectOneMenu>
-                            </br>
                         </font>
+                        <br/>
+                        <p:selectOneMenu id="selectCurso" 
+
+                                         value="#{aulaMB.cursoSelecionado}"
+                                         converter="cursoConverter">
+
+                            <f:selectItems value="#{cursoMB.cursos}" var="curso" itemValue="#{curso}"
+                                           itemLabel="#{curso}" />
+                        </p:selectOneMenu>
 
                         <font face="Calibri" 
                               color="black" 

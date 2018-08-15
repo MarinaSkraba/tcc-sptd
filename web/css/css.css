@@ -31,7 +31,7 @@ body{
     margin: 0;  	
     padding: 0;
     width: 200px;
-    height: auto;
+    height: 60px;
     transition: background-color 0.3s;
 }
 #usuarioLogado:hover{
@@ -74,6 +74,15 @@ body{
     border-style: none;
     border-radius: 20px;
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+}
+.usuario{
+    background-color: #1785ad;
+    box-shadow: 0 rgba(0,0,0,0);
+    border-style: none;
+    border-width: thin;
+    border-color: white;
+    border-top-color: transparent;
+    font-weight: normal;
 }
 .opMenu:hover{
     background-color: #1785ad;

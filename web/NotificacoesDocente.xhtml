@@ -29,18 +29,12 @@
                                  style="float: left;"/>
 
                 <div id="usuarioLogado">
+                    <p:commandButton styleClass="usuario"
+                                     value="#{usuarioMB.usuarioLogado.nomeCompleto}"/>
                     <img src="img/User/will.jpeg" 
                          width="40" 
                          height="40" 
                          style="border-radius:100px; border:2px white solid; float: right; margin: 8px"/>
-                    <p>
-                        <font face="Calibri" 
-                              size="4,5" 
-                              color="white" 
-                              style="margin: 15px 10px;">
-                            Usuário logado
-                        </font>
-                    </p>
                 </div>
 
                 <p:commandButton id="addPTD"
