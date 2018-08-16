@@ -15,8 +15,10 @@ import br.edu.ifpr.irati.util.HashGenerationException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean
+@SessionScoped
 public class UsuarioMB {
 
     private Usuario usuario;
@@ -64,6 +66,11 @@ public class UsuarioMB {
             }
             return "/NotificacoesDocente";
         }
+    }
+    
+    public String realizarLogout(){
+        usuarioLogado = new Usuario();
+        return "/Login";
     }
 
     public Usuario getUsuario() {

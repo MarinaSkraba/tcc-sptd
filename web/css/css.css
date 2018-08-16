@@ -26,17 +26,6 @@ body{
     justify-content: center;
     align-items: center;
 }
-#usuarioLogado{
-    float: right;
-    margin: 0;  	
-    padding: 0;
-    width: 200px;
-    height: 60px;
-    transition: background-color 0.3s;
-}
-#usuarioLogado:hover{
-    background-color: #1785ad;
-}
 .ui-overlaypanel .opMenu{  	
     padding: 0px ;
     width: 180px;
@@ -75,15 +64,6 @@ body{
     border-radius: 20px;
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
 }
-.usuario{
-    background-color: #1785ad;
-    box-shadow: 0 rgba(0,0,0,0);
-    border-style: none;
-    border-width: thin;
-    border-color: white;
-    border-top-color: transparent;
-    font-weight: normal;
-}
 .opMenu:hover{
     background-color: #1785ad;
     box-shadow: 0 rgba(0,0,0,0);
@@ -108,6 +88,17 @@ body{
     border-style: none;
     border-radius: 20px;
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+}
+.imgLogado{
+    border-radius:100px; 
+    border:2px white solid; 
+    float: right; 
+    margin: 8px; 
+    width: 40px; 
+    height: 40px;
+}
+.imgLogado:hover{
+    box-shadow: 0px 0px 0px 8px rgb(23,133,173);
 }
 #content{
     margin: 10px 0;  	

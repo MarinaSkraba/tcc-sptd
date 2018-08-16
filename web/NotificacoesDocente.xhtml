@@ -28,26 +28,39 @@
                                  action="notificacoes"
                                  style="float: left;"/>
 
-                <div id="usuarioLogado">
-                    <p:commandButton styleClass="usuario"
-                                     value="#{usuarioMB.usuarioLogado.nomeCompleto}"/>
-                    <img src="img/User/will.jpeg" 
-                         width="40" 
-                         height="40" 
-                         style="border-radius:100px; border:2px white solid; float: right; margin: 8px"/>
-                </div>
+                <p:commandButton id="logout"
+                                 image="img/fundo_login.png" 
+                                 styleClass="imgLogado"/>
+
+                <!-- Informações e Logout -->
+                <p:overlayPanel id="Usuário" 
+                                for="logout" 
+                                hideEffect="fade" 
+                                style="padding: 0px;">
+                    
+                    <br/>
+                    <p:commandButton value="Sair"
+                                     styleClass="opMenu"
+                                     ajax="false" 
+                                     immediate="true"
+                                     action="#{usuarioMB.realizarLogout()}"/>
+                </p:overlayPanel>
+
+                <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
+                              styleClass="text01"
+                              style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
                 <p:commandButton id="addPTD"
                                  styleClass="opMenu"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Novo PTD"/>
 
+                <!-- Caixa de "novo" PTD -->
                 <p:overlayPanel id="addPanel" 
                                 for="addPTD" 
                                 hideEffect="fade" 
                                 style="padding: 0px;">
-                    <p:commandButton id="op1"
-                                     value="PTD em branco"
+                    <p:commandButton value="PTD em branco"
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
