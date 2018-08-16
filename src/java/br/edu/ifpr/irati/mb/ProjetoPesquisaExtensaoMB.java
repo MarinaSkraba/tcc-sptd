@@ -18,6 +18,8 @@ public class ProjetoPesquisaExtensaoMB {
     private List<ProjetoExtensao> projetosExtensao;
     private Horario horario;
     private Participacao participacao;
+    private ProjetoPesquisa projetoPesquisaSelecionado;
+    private ProjetoExtensao projetoExtensaoSelecionado;
 
     public ProjetoPesquisaExtensaoMB() {
 
@@ -40,8 +42,8 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.salvar(horario);
         projetoPesquisa.getParticipacoes().add(p);
-        projetoPesquisa.getHorarios().add(horario);
-        ProjetoPesquisa pP = new ProjetoPesquisa(projetoPesquisa.getIdProjetoPesquisa(), projetoPesquisa.getNumeroProcesso(), projetoPesquisa.getTituloProcesso(), projetoPesquisa.getPrevisaoConclusao(), projetoPesquisa.getInstituicaoPesquisa(), projetoPesquisa.getHorarios(), projetoPesquisa.getParticipacoes());
+        projetoPesquisa.getHorariosProjetoPesquisa().add(horario);
+        ProjetoPesquisa pP = new ProjetoPesquisa(projetoPesquisa.getIdProjetoPesquisa(), projetoPesquisa.getNumeroProcesso(), projetoPesquisa.getTituloProcesso(), projetoPesquisa.getPrevisaoConclusao(), projetoPesquisa.getInstituicaoPesquisa(), projetoPesquisa.getHorariosProjetoPesquisa(), projetoPesquisa.getParticipacoes());
         projetoPesquisaDAO.salvar(pP);
         projetosPesquisa = projetoPesquisaDAO.buscarTodos(ProjetoPesquisa.class);
 
@@ -55,10 +57,38 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.salvar(horario);
         projetoExtensao.getParticipacoes().add(p);
-        projetoExtensao.getHorarios().add(horario);
-        ProjetoExtensao pE = new ProjetoExtensao(projetoExtensao.getIdProjetoExtensao(), projetoExtensao.getNumeroProcesso(), projetoExtensao.getTituloProcesso(), projetoExtensao.getPrevisaoConclusao(), projetoExtensao.getInstituicaoPesquisa(), projetoExtensao.getHorarios(), projetoExtensao.getParticipacoes());
+        projetoExtensao.getHorariosProjetoExtensao().add(horario);
+        ProjetoExtensao pE = new ProjetoExtensao(projetoExtensao.getIdProjetoExtensao(), projetoExtensao.getNumeroProcesso(), projetoExtensao.getTituloProcesso(), projetoExtensao.getPrevisaoConclusao(), projetoExtensao.getInstituicaoPesquisa(), projetoExtensao.getHorariosProjetoExtensao(), projetoExtensao.getParticipacoes());
         projetoExtensaoDAO.salvar(pE);
         projetosExtensao = projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class);
+    }
+
+    public void salvarColaboracaoProjetoPesquisa() {
+
+        Dao<ProjetoPesquisa> projetoPesquisaDAO = new GenericDAO<>(ProjetoPesquisa.class);
+        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
+        Participacao p = new Participacao(participacao.getIdParticipacao(), "Colaborador");
+        participacaoDAO.salvar(p);
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        horarioDAO.salvar(horario);
+        projetoPesquisaSelecionado.getParticipacoes().add(p);
+        projetoPesquisaSelecionado.getHorariosProjetoPesquisa().add(horario);
+        projetoPesquisaDAO.alterar(projetoPesquisaSelecionado);
+                
+    }
+
+    public void salvarColaboracaoProjetoExtensao() {
+
+        Dao<ProjetoExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
+        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
+        Participacao p = new Participacao(participacao.getIdParticipacao(), "Colaborador");
+        participacaoDAO.salvar(p);
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        horarioDAO.salvar(horario);
+        projetoExtensaoSelecionado.getParticipacoes().add(p);
+        projetoExtensaoSelecionado.getHorariosProjetoExtensao().add(horario);
+        projetoExtensaoDAO.alterar(projetoExtensaoSelecionado);
+        
     }
 
     public ProjetoPesquisa getProjetoPesquisa() {
@@ -107,6 +137,22 @@ public class ProjetoPesquisaExtensaoMB {
 
     public void setParticipacao(Participacao participacao) {
         this.participacao = participacao;
+    }
+
+    public ProjetoPesquisa getProjetoPesquisaSelecionado() {
+        return projetoPesquisaSelecionado;
+    }
+
+    public void setProjetoPesquisaSelecionado(ProjetoPesquisa projetoPesquisaSelecionado) {
+        this.projetoPesquisaSelecionado = projetoPesquisaSelecionado;
+    }
+
+    public ProjetoExtensao getProjetoExtensaoSelecionado() {
+        return projetoExtensaoSelecionado;
+    }
+
+    public void setProjetoExtensaoSelecionado(ProjetoExtensao projetoExtensaoSelecionado) {
+        this.projetoExtensaoSelecionado = projetoExtensaoSelecionado;
     }
 
 }
