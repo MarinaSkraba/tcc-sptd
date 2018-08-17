@@ -16,13 +16,12 @@ public class Apoio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idApoio;
-    
+
     @OneToOne
     private TipoApoio tipoApoio;
-    
+
     @OneToMany
     private List<Horario> horariosApoio;
-
 
     public Apoio() {
 
@@ -44,14 +43,6 @@ public class Apoio implements Serializable {
 
     public void setIdApoio(int idApoio) {
         this.idApoio = idApoio;
-    }
-
-    public List<Horario> getHorarios() {
-        return horariosApoio;
-    }
-
-    public void setHorarios(List<Horario> horarios) {
-        this.horariosApoio = horarios;
     }
 
     public TipoApoio getTipoApoio() {

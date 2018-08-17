@@ -49,14 +49,14 @@ public class AulaMB {
         tipoOfertaDAO.salvar(tipoOferta);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         for (Horario h : horarios) {
-            aula.getHorarios().add(h);
+            aula.getHorariosAula().add(h);
         }
-        for (Horario h : aula.getHorarios()) {
+        for (Horario h : aula.getHorariosAula()) {
             horarioDAO.salvar(h);
         }
         aula.setTipoOferta(tipoOferta);
         aula.setCurso(cursoSelecionado);
-        Aula a = new Aula(aula.getIdAula(), aula.getComponenteCurricular(), cursoSelecionado, tipoOferta, aula.getHorarios());
+        Aula a = new Aula(aula.getIdAula(), aula.getComponenteCurricular(), cursoSelecionado, tipoOferta, aula.getHorariosAula());
         aulaDAO.salvar(a);
         aulas = aulaDAO.buscarTodos(Aula.class);
 

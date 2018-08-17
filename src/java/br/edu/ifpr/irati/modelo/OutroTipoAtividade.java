@@ -15,10 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-/**
- *
- * @author Marina
- */
 @Entity(name = "outrotipoatividade")
 public class OutroTipoAtividade implements Serializable {
 
@@ -72,15 +68,6 @@ public class OutroTipoAtividade implements Serializable {
     public void setPeriodicidade(String periodicidade) {
         this.periodicidade = periodicidade;
     }
-
-    public List<Horario> getHorarios() {
-        return horariosOutroTipoAtividade;
-    }
-
-    public void setHorarios(List<Horario> horarios) {
-        this.horariosOutroTipoAtividade = horarios;
-    }
-
     public String getRotulo() {
         return rotulo;
     }
@@ -97,11 +84,4 @@ public class OutroTipoAtividade implements Serializable {
         this.horariosOutroTipoAtividade = horariosOutroTipoAtividades;
     }
 
-    public List<Horario> getHorariosOutroTipoAtividade() {
-        return horariosOutroTipoAtividade;
-    }
-
-    public void setHorariosOutroTipoAtividade(List<Horario> horariosOutroTipoAtividade) {
-        this.horariosOutroTipoAtividade = horariosOutroTipoAtividade;
-    }
 }
