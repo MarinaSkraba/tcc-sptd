@@ -45,21 +45,21 @@ public class Administracao implements Serializable {
     public void setIdAdministracao(int idAdministracao) {
         this.idAdministracao = idAdministracao;
     }
-
-    public List<Horario> getHorarios() {
-        return horariosAdministracao;
-    }
-
-    public void setHorarios(List<Horario> horarios) {
-        this.horariosAdministracao = horarios;
+    
+    public void setTipoAdministracao(TipoAdministracao tipoAdministracao) {
+        this.tipoAdministracao = tipoAdministracao;
     }
 
     public TipoAdministracao getTipoAdministracao() {
         return tipoAdministracao;
     }
 
-    public void setTipoAdministracao(TipoAdministracao tipoAdministracao) {
-        this.tipoAdministracao = tipoAdministracao;
+    public List<Horario> getHorariosAdministracao() {
+        return horariosAdministracao;
+    }
+
+    public void setHorariosAdministracao(List<Horario> horariosAdministracao) {
+        this.horariosAdministracao = horariosAdministracao;
     }
 
 }

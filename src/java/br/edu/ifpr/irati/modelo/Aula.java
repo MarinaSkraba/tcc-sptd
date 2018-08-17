@@ -75,15 +75,6 @@ public class Aula implements Serializable {
     public void setComponenteCurricular(String componenteCurricular) {
         this.componenteCurricular = componenteCurricular;
     }
-
-    public List<Horario> getHorarios() {
-        return horariosAula;
-    }
-
-    public void setHorarios(List<Horario> horarios) {
-        this.horariosAula = horarios;
-    }
-
     public TipoOferta getTipoOferta() {
         return tipoOferta;
     }

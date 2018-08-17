@@ -52,21 +52,21 @@ public class ProjetoEnsino implements Serializable {
     public void setIdProjetoEnsino(int idProjetoEnsino) {
         this.idProjetoEnsino = idProjetoEnsino;
     }
-
-    public List<Horario> getHorarios() {
-        return horariosProjetoEnsino;
-    }
-
-    public void setHorarios(List<Horario> horarios) {
-        this.horariosProjetoEnsino = horarios;
-    }
-
+    
     public TipoProjetoEnsino getTipoProjetoEnsino() {
         return tipoProjetoEnsino;
     }
 
     public void setTipoProjetoEnsino(TipoProjetoEnsino tipoProjetoEnsino) {
         this.tipoProjetoEnsino = tipoProjetoEnsino;
+    }
+
+    public List<Horario> getHorariosProjetoEnsino() {
+        return horariosProjetoEnsino;
+    }
+
+    public void setHorariosProjetoEnsino(List<Horario> horariosProjetoEnsino) {
+        this.horariosProjetoEnsino = horariosProjetoEnsino;
     }
 
 }

@@ -39,8 +39,8 @@ public class ApoioMB {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.salvar(horario);
         apoio.setTipoApoio(tipoApoio);
-        apoio.getHorarios().add(horario);
-        Apoio ap = new Apoio(apoio.getIdApoio(), apoio.getHorarios(), tipoApoio);
+        apoio.getHorariosApoio().add(horario);
+        Apoio ap = new Apoio(apoio.getIdApoio(), apoio.getHorariosApoio(), tipoApoio);
         apoioDAO.salvar(ap);
         apoios = apoioDAO.buscarTodos(Apoio.class);
 

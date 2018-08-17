@@ -49,20 +49,20 @@ public class ManutencaoEnsino implements Serializable {
     public void setIdManutencao(int idManutencao) {
         this.idManutencao = idManutencao;
     }
-
-    public List<Horario> getHorarios() {
-        return horariosManutecao;
-    }
-
-    public void setHorarios(List<Horario> horarios) {
-        this.horariosManutecao = horarios;
-    }
-
+    
     public TipoManutencao getTipoManutencao() {
         return tipoManutencao;
     }
 
     public void setTipoManutencao(TipoManutencao tipoManutencao) {
         this.tipoManutencao = tipoManutencao;
+    }
+
+    public List<Horario> getHorariosManutecao() {
+        return horariosManutecao;
+    }
+
+    public void setHorariosManutecao(List<Horario> horariosManutecao) {
+        this.horariosManutecao = horariosManutecao;
     }
 }

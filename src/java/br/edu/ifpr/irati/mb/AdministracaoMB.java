@@ -38,8 +38,8 @@ public class AdministracaoMB {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.salvar(horario);
         administracao.setTipoAdministracao(tipoAdministracao);
-        administracao.getHorarios().add(horario);
-        Administracao adm = new Administracao(administracao.getIdAdministracao(), administracao.getHorarios(), tipoAdministracao);
+        administracao.getHorariosAdministracao().add(horario);
+        Administracao adm = new Administracao(administracao.getIdAdministracao(), administracao.getHorariosAdministracao(), tipoAdministracao);
         administracaoDAO.salvar(adm);
         administracoes = administracaoDAO.buscarTodos(Administracao.class);
     }
