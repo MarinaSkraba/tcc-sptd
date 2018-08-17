@@ -7,9 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 
 @Entity(name = "horario")
 public class Horario implements Serializable {
@@ -27,6 +28,10 @@ public class Horario implements Serializable {
     @Column(name = "diaSemana", nullable = false, length = 15)
     private String diaSemana;
 
+    @ManyToOne
+    @JoinColumn(name = "professor_idUsuario")
+    private Professor professor;
+
     public Horario() {
 
         idHorario = 0;
@@ -42,13 +47,13 @@ public class Horario implements Serializable {
         this.diaSemana = diaSemana;
     }
 
-    public int calcularCargaHoraria(){
-        
+    public int calcularCargaHoraria() {
+
         return 0;
       // rever isso
-       
+
     }
-    
+
     public int getIdHorario() {
         return idHorario;
     }
@@ -79,5 +84,13 @@ public class Horario implements Serializable {
 
     public void setDiaSemana(String diaSemana) {
         this.diaSemana = diaSemana;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 }
