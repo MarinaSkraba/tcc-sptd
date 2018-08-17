@@ -44,6 +44,23 @@ public class AdministracaoMB {
         administracoes = administracaoDAO.buscarTodos(Administracao.class);
     }
 
+    public String alterar(Administracao administracao) {
+        this.administracao = administracao;
+        return "/adicionar aqui";
+    }
+
+    public String desabilitar(Administracao administracao) {
+        //implementar depois
+        return "";
+    }
+
+    public String excluir(Administracao administracao) {
+        Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
+        administracaoDAO.excluir(administracao);
+        administracoes = administracaoDAO.buscarTodos(Administracao.class);
+        return "/adicionar aqui";
+    }
+
     public Horario getHorario() {
         return horario;
     }

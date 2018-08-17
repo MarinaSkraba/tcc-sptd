@@ -33,14 +33,18 @@ public class HorarioMB {
 
     public String alterar(Horario horario) {
         this.horario = horario;
-        return " adicionar xhtml aqui";
+        return "/adicionar aqui";
     }
 
+    public String desabilitar(Horario horario) {
+        //implementar depois
+        return "";
+    }
     public String excluir(Horario horario) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.excluir(horario);
         horarios = horarioDAO.buscarTodos(Horario.class);
-        return "adicionar xhtml aqui";
+        return "/adicionar aqui";
     }
 
     public Horario getHorario() {

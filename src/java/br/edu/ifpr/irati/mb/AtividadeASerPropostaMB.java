@@ -34,6 +34,23 @@ public class AtividadeASerPropostaMB {
 
     }
 
+    public String alterar(AtividadeASerProposta atividadeASerProposta) {
+        this.atividadeASerProposta = atividadeASerProposta;
+        return "/adicionar aqui";
+    }
+
+    public String desabilitar(AtividadeASerProposta atividadeASerProposta) {
+        //implementar depois
+        return "";
+    }
+
+    public String excluir(AtividadeASerProposta atividadeASerProposta) {
+        Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
+        atividadeASerPropostaDAO.excluir(atividadeASerProposta);
+        atividadesASeremPropostas = atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class);
+        return "/adicionar aqui";
+    }
+
     public AtividadeASerProposta getAtividadeASerProposta() {
         return atividadeASerProposta;
     }

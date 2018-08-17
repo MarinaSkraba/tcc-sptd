@@ -46,6 +46,22 @@ public class ApoioMB {
 
     }
 
+    public String alterar(Apoio apoio) {
+        this.apoio = apoio;
+        return "/adicionar aqui";
+    }
+
+    public String desabilitar(Apoio apoio) {
+    //implementar depois
+        return "";
+    }
+     public String excluir(Apoio apoio) {
+        Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
+        apoioDAO.excluir(apoio);
+        apoios = apoioDAO.buscarTodos(Apoio.class);
+        return "/adicionar aqui";
+    }
+
     public Apoio getApoio() {
         return apoio;
     }

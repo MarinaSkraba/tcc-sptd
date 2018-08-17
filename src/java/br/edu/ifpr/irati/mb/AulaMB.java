@@ -61,6 +61,21 @@ public class AulaMB {
         aulas = aulaDAO.buscarTodos(Aula.class);
 
     }
+     public String alterar(Aula aula) {
+        this.aula = aula;
+        return "/adicionar aqui";
+    }
+
+    public String desabilitar(Aula aula) {
+        //implementar depois
+        return "";
+    }
+    public String excluir(Aula aula) {
+        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
+        aulaDAO.excluir(aula);
+        aulas = aulaDAO.buscarTodos(Aula.class);
+        return "/adicionar aqui";
+    }
 
     public Aula getAula() {
         return aula;

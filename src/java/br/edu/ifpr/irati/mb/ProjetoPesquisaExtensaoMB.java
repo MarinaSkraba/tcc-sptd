@@ -74,7 +74,7 @@ public class ProjetoPesquisaExtensaoMB {
         projetoPesquisaSelecionado.getParticipacoes().add(p);
         projetoPesquisaSelecionado.getHorariosProjetoPesquisa().add(horario);
         projetoPesquisaDAO.alterar(projetoPesquisaSelecionado);
-                
+
     }
 
     public void salvarColaboracaoProjetoExtensao() {
@@ -88,7 +88,40 @@ public class ProjetoPesquisaExtensaoMB {
         projetoExtensaoSelecionado.getParticipacoes().add(p);
         projetoExtensaoSelecionado.getHorariosProjetoExtensao().add(horario);
         projetoExtensaoDAO.alterar(projetoExtensaoSelecionado);
-        
+
+    }
+
+    public String alterarProjetoExtensao(ProjetoExtensao projetoExtensao) {
+        this.projetoExtensao = projetoExtensao;
+        return "/adicionar aqui";
+    }
+
+    public String desabilitarProjetoExtensao(ProjetoExtensao atividadeASerProposta) {
+        //implementar depois
+        return "";
+    }
+    public String excluirProjetoExtensao(ProjetoExtensao projetoExtensao) {
+        Dao<ProjetoExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
+        projetoExtensaoDAO.excluir(projetoExtensao);
+        projetosExtensao = projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class);
+        return "/adicionar aqui";
+    }
+    
+
+    public String alterarProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
+        this.projetoPesquisa = projetoPesquisa;
+        return "/adicionar aqui";
+    }
+
+    public String desabilitarProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
+        //implementar depois
+        return "";
+    }
+    public String excluirProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
+        Dao<ProjetoPesquisa> projetoPesquisaDAO = new GenericDAO<>(ProjetoPesquisa.class);
+        projetoPesquisaDAO.excluir(projetoPesquisa);
+        projetosPesquisa = projetoPesquisaDAO.buscarTodos(ProjetoPesquisa.class);
+        return "/adicionar aqui";
     }
 
     public ProjetoPesquisa getProjetoPesquisa() {

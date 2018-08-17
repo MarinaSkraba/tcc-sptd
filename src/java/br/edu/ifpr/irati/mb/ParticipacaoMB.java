@@ -33,14 +33,19 @@ public class ParticipacaoMB {
 
     public String alterar(Participacao participacao) {
         this.participacao = participacao;
-        return " adicionar xhtml aqui";
+        return "/adicionar aqui";
+    }
+
+    public String desabilitar(Participacao participacao) {
+        //implementar depois
+        return "";
     }
 
     public String excluir(Participacao participacao) {
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         participacaoDAO.excluir(participacao);
         participacoes = participacaoDAO.buscarTodos(Participacao.class);
-        return "adicionar xhtml aqui";
+        return "/adicionar aqui";
     }
 
     public Participacao getParticipacao() {

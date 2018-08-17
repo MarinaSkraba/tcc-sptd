@@ -15,9 +15,8 @@ public class ProfessorMB {
 
         professor = new Professor();
         professores = new ArrayList();
-
     }
-
+ 
     public Professor getProfessor() {
         return professor;
     }

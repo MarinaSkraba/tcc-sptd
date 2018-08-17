@@ -33,6 +33,22 @@ public class OutroTipoAtividadeMB {
 
     }
 
+    public String alterar(OutroTipoAtividade outroTipoAtividade) {
+        this.outroTipoAtividade = outroTipoAtividade;
+        return "/adicionar aqui";
+    }
+
+    public String desabilitar(OutroTipoAtividade outroTipoAtividade) {
+        //implementar depois
+        return "";
+    }
+    public String excluir(OutroTipoAtividade outroTipoAtividade) {
+        Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
+        outroTipoAtividadeDAO.excluir(outroTipoAtividade);
+        outrosTiposAtividades = outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class);
+        return "/adicionar aqui";
+    }
+
     public OutroTipoAtividade getOutroTipoAtividade() {
         return outroTipoAtividade;
     }
