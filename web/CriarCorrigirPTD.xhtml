@@ -23,48 +23,55 @@
             <h:form id="barraMenu">
 
                 <p:commandButton styleClass="opMenu"
-                                 icon="/img/Search/searchLarger_24.png"
                                  iconPos="right"
+                                 icon="/img/Search/searchLarger_24.png"
                                  value="Notificações"
                                  action="/NotificacoesDocente"
                                  style="float: left;"/>
 
-                <div id="usuarioLogado">
-                    <img src="img/User/will.jpeg" 
-                         width="40" 
-                         height="40" 
-                         style="border-radius:100px; border:2px white solid; float: right; margin: 8px"/>
-                    <p>
-                        <font face="Calibri" 
-                              size="4,5" 
-                              color="white" 
-                              style="margin: 15px 10px;">
-                            Usuário logado
-                        </font>
-                    </p>
-                </div>
+                <p:commandButton id="logout"
+                                 image="img/fundo_login.png" 
+                                 styleClass="imgLogado"/>
+
+                <!-- Informações e Logout -->
+                <p:overlayPanel id="Usuário" 
+                                for="logout" 
+                                hideEffect="fade" 
+                                style="padding: 0px;">
+
+                    <br/>
+                    <p:commandButton value="Sair"
+                                     styleClass="opMenu"
+                                     ajax="false" 
+                                     immediate="true"
+                                     action="#{usuarioMB.realizarLogout()}"/>
+                </p:overlayPanel>
+
+                <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
+                              styleClass="text01"
+                              style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
                 <p:commandButton id="addPTD"
-                                 styleClass="opSelecionadaMenu"
+                                 styleClass="opMenu"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Novo PTD"/>
 
+                <!-- Caixa de "novo" PTD -->
                 <p:overlayPanel id="addPanel" 
                                 for="addPTD" 
                                 hideEffect="fade" 
                                 style="padding: 0px;">
-                    <p:commandButton id="op1"
-                                     value="PTD em branco"
+                    <p:commandButton value="PTD em branco"
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
-                                     action="#{loginMB.entrar()}"/>
+                                     action="#{professorMB.criarCorrigirPTD()}"/>
                     <br/>
                     <p:commandButton value="Recuperar último"
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
-                                     action="#{loginMB.entrar()}"/>
+                                     action="#{professorMB.criarCorrigirPTD()}"/>
                 </p:overlayPanel>
 
                 <p:commandButton styleClass="opMenu"
@@ -113,7 +120,7 @@
                                              value="?"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Caixa de adição de aulas -->
                     <p:dialog header="Adicionar aula" 
                               widgetVar="addAulaDialog" 
@@ -165,7 +172,9 @@
                                               styleClass="text01"
                                               style="font-size: 15pt;"/>
                             </f:facet>
-                            <h:outputText value="#{aula.curso.nomeCurso}" />
+                            <h:outputText value="#{aula.curso.nomeCurso}" 
+                                          styleClass="text01"
+                                          style="font-size: 12pt;"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -173,7 +182,9 @@
                                               styleClass="text01"
                                               style="font-size: 15pt;"/>
                             </f:facet>
-                            <h:outputText value="#{aula.componenteCurricular}" />
+                            <h:outputText value="#{aula.componenteCurricular}"
+                                          styleClass="text01"
+                                          style="font-size: 12pt;" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -181,49 +192,52 @@
                                               styleClass="text01"
                                               style="font-size: 15pt;"/>
                             </f:facet>
-                            <h:outputText value="à implementar"/>
+                            <h:outputText value="à implementar"
+                                          styleClass="text01"
+                                          style="font-size: 12pt;"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="HORÁRIO"
                                               styleClass="text01"/>
+                                <p:panelGrid columns="3">
+
+                                    <h:outputText value="dia da semana" 
+                                                  styleClass="text01"/>
+                                    <h:outputText value="horário início" 
+                                                  styleClass="text01"/>
+                                    <h:outputText value="horário término" 
+                                                  styleClass="text01"/>
+
+                                </p:panelGrid>
                             </f:facet>
+
+
 
                             <h:dataTable  value="#{aulaMB.aula.horariosAula}" 
                                           var="horario" 
                                           headerClass="text-center"
                                           footerClass="text-center">
 
-                                <f:facet name="header">
-                                    <h:outputText value="" 
+                                <h:column>
+                                    <h:outputText value="#{horario.diaSemana}" 
+                                                  styleClass="text01"
+                                                  style="font-size: 12pt;"/>
+                                </h:column>
+                                <h:column>
+                                    <h:outputText value="#{horario.horaInicio}"
                                                   styleClass="text01" 
-                                                  style="color: white; background-color: #44d9e6; padding: 5px 70px; border-radius: 50px;"/>
-                                </f:facet>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="dia da semana" 
-                                                      styleClass="text01"/>
-                                    </f:facet>
-                                    <h:outputText value="#{horario.diaSemana}" />
+                                                  style="font-size: 12pt;"/>
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="horário início" 
-                                                      styleClass="text01"/>
-                                    </f:facet>
-                                    <h:outputText value="#{horario.horaInicio}" />
+                                    <h:outputText value="#{horario.horaTermino}"
+                                                  styleClass="text01" 
+                                                  style="font-size: 12pt;"/>
+                                    <p:commandButton styleClass="botao" 
+                                                     value="+ horário" 
+                                                     oncomplete="PF('addHorarioDialog').show()"/>
                                 </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="horário término" 
-                                                      styleClass="text01"/>
-                                    </f:facet>
-                                    <h:outputText value="#{horario.horaTermino}" />
-                                </h:column>
-                                <p:commandButton styleClass="botao" 
-                                                 style="float: left;" 
-                                                 value="+ horário" 
-                                                 oncomplete="PF('addHorarioDialog').show()"/>
+
                             </h:dataTable>
                         </h:column>
                         <h:column>
@@ -232,7 +246,9 @@
                                               styleClass="text01"
                                               style="font-size: 15pt;"/>
                             </f:facet>
-                            <h:outputText value="#{aula.tipoOferta.rotulo}"/>
+                            <h:outputText value="#{aula.tipoOferta.rotulo}"
+                                          styleClass="text01"
+                                          style="font-size: 12pt;"/>
                         </h:column>
 
                     </h:dataTable>

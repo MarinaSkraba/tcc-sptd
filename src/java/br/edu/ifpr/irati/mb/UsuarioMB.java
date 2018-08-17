@@ -69,6 +69,7 @@ public class UsuarioMB {
     }
     
     public String realizarLogout(){
+        usuario = new Usuario();
         usuarioLogado = new Usuario();
         return "/Login";
     }
