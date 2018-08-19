@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
+ 
     <h:head>
         <title>Tela Inicial</title>
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
@@ -50,28 +51,6 @@
                               styleClass="text01"
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
-                <p:commandButton id="addPTD"
-                                 styleClass="opMenu"
-                                 icon="/img/Search/searchLarger_24.png"
-                                 value="Novo PTD"/>
-
-                <!-- Caixa de "novo" PTD -->
-                <p:overlayPanel id="addPanel" 
-                                for="addPTD" 
-                                hideEffect="fade" 
-                                style="padding: 0px;">
-                    <p:commandButton value="PTD em branco"
-                                     styleClass="opMenu"
-                                     ajax="false" 
-                                     immediate="true"
-                                     action="#{professorMB.criarCorrigirPTD()}"/>
-                    <br/>
-                    <p:commandButton value="Recuperar último"
-                                     styleClass="opMenu"
-                                     ajax="false" 
-                                     immediate="true"
-                                     action="#{professorMB.criarCorrigirPTD()}"/>
-                </p:overlayPanel>
 
                 <p:commandButton styleClass="opMenu"
                                  icon="/img/Search/searchLarger_24.png"
