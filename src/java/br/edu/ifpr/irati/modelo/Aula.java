@@ -23,7 +23,10 @@ public class Aula implements Serializable {
 
     @Column(name = "componenteCurricular", nullable = false, length = 50)
     private String componenteCurricular;
-    
+
+    @Column(name = "estadoAula", nullable = false, length = 10)
+    private String estadoAula;
+
     @ManyToOne
     @JoinColumn(name = "curso_idCurso")
     private Curso curso;
@@ -31,11 +34,12 @@ public class Aula implements Serializable {
     @OneToOne
     private TipoOferta tipoOferta;
 
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Horario> horariosAula;
 
     public Aula() {
         this.idAula = 0;
+        this.estadoAula = "";
         this.componenteCurricular = "";
         this.curso = new Curso();
         this.tipoOferta = new TipoOferta();
@@ -43,18 +47,20 @@ public class Aula implements Serializable {
 
     }
 
-    public Aula(int idAula, String componenteCurricular) {
+    public Aula(int idAula, String componenteCurricular, String estadoAula) {
         this.idAula = idAula;
         this.componenteCurricular = componenteCurricular;
+        this.estadoAula = estadoAula;
         this.curso = new Curso();
         this.tipoOferta = new TipoOferta();
-        this.horariosAula = new ArrayList<>();
+        this.horariosAula = new ArrayList();
 
     }
 
-    public Aula(int idAula, String componenteCurricular, Curso curso, TipoOferta tipoOferta, List<Horario> horariosAula) {
+    public Aula(int idAula, String componenteCurricular, String estadoAula, Curso curso, TipoOferta tipoOferta, List<Horario> horariosAula) {
         this.idAula = idAula;
         this.componenteCurricular = componenteCurricular;
+        this.estadoAula = estadoAula;
         this.curso = curso;
         this.tipoOferta = tipoOferta;
         this.horariosAula = horariosAula;
@@ -75,6 +81,7 @@ public class Aula implements Serializable {
     public void setComponenteCurricular(String componenteCurricular) {
         this.componenteCurricular = componenteCurricular;
     }
+
     public TipoOferta getTipoOferta() {
         return tipoOferta;
     }
@@ -97,6 +104,14 @@ public class Aula implements Serializable {
 
     public void setHorariosAula(List<Horario> horariosAula) {
         this.horariosAula = horariosAula;
+    }
+
+    public String getEstadoAula() {
+        return estadoAula;
+    }
+
+    public void setEstadoAula(String estadoAula) {
+        this.estadoAula = estadoAula;
     }
 
 }

@@ -19,6 +19,7 @@ public class ManutencaoMB {
     private ManutencaoEnsino manutencaoEnsino;
     private List<ManutencaoEnsino> manutencoesEnsino;
     private Horario horario;
+    private List<Horario> horarios;
     private TipoManutencao tipoManutencao;
 
     public ManutencaoMB() {
@@ -39,7 +40,8 @@ public class ManutencaoMB {
         horarioDAO.salvar(horario);
         manutencaoEnsino.setTipoManutencao(tipoManutencao);
         manutencaoEnsino.getHorariosManutecao().add(horario);
-        ManutencaoEnsino mE = new ManutencaoEnsino(manutencaoEnsino.getIdManutencao(), manutencaoEnsino.getHorariosManutecao(), tipoManutencao);
+        manutencaoEnsino.setEstadoManutencaoEnsino("Ativo");
+        ManutencaoEnsino mE = new ManutencaoEnsino(manutencaoEnsino.getIdManutencao(), manutencaoEnsino.getEstadoManutencaoEnsino(), manutencaoEnsino.getTipoManutencao(), manutencaoEnsino.getHorariosManutecao());
         manutencaoEnsinoDAO.salvar(mE);
         manutencoesEnsino = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class);
 
@@ -51,14 +53,22 @@ public class ManutencaoMB {
     }
 
     public String desabilitar(ManutencaoEnsino manutencaoEnsino) {
-        //implementar depois
-        return "";
+        Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+        manutencaoEnsino.setEstadoManutencaoEnsino("Desativado");
+        manutencaoEnsinoDAO.alterar(manutencaoEnsino);
+        return "/adicionar html aqui";
     }
+
     public String excluir(ManutencaoEnsino manutencaoEnsino) {
         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
         manutencaoEnsinoDAO.excluir(manutencaoEnsino);
         manutencoesEnsino = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class);
         return "/adicionar aqui";
+    }
+
+    public void adicionarHorario() {
+        horarios.add(horario);
+        horario = new Horario();
     }
 
     public ManutencaoEnsino getManutencaoEnsino() {
@@ -91,5 +101,13 @@ public class ManutencaoMB {
 
     public void setHorario(Horario horario) {
         this.horario = horario;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
     }
 }

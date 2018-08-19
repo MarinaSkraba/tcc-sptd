@@ -1,9 +1,9 @@
-
 package br.edu.ifpr.irati.modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +18,9 @@ public class Administracao implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idAdministracao;
 
+    @Column(name = "estadoAtividadeAdministracao", nullable = false, length = 10)
+    private String estadoAtividadeAdministracao;
+
     @OneToOne
     private TipoAdministracao tipoAdministracao;
 
@@ -27,15 +30,24 @@ public class Administracao implements Serializable {
     public Administracao() {
 
         this.idAdministracao = 0;
+        this.estadoAtividadeAdministracao = "";
         this.tipoAdministracao = new TipoAdministracao();
         this.horariosAdministracao = new ArrayList<>();
-      
+
     }
 
-    public Administracao(int idAdministracao, List<Horario> horarios, TipoAdministracao tipoAdministracao) {
+    public Administracao(int idAdministracao, String estadoAtividadeAdministracao) {
         this.idAdministracao = idAdministracao;
+        this.estadoAtividadeAdministracao = estadoAtividadeAdministracao;
+        this.tipoAdministracao = new TipoAdministracao();
+        this.horariosAdministracao = new ArrayList();
+    }
+
+    public Administracao(int idAdministracao, String estadoAtividadeAdministracao, TipoAdministracao tipoAdministracao, List<Horario> horariosAdministracao) {
+        this.idAdministracao = idAdministracao;
+        this.estadoAtividadeAdministracao = estadoAtividadeAdministracao;
         this.tipoAdministracao = tipoAdministracao;
-        this.horariosAdministracao = horarios;
+        this.horariosAdministracao = horariosAdministracao;
     }
 
     public int getIdAdministracao() {
@@ -45,7 +57,7 @@ public class Administracao implements Serializable {
     public void setIdAdministracao(int idAdministracao) {
         this.idAdministracao = idAdministracao;
     }
-    
+
     public void setTipoAdministracao(TipoAdministracao tipoAdministracao) {
         this.tipoAdministracao = tipoAdministracao;
     }
@@ -60,6 +72,14 @@ public class Administracao implements Serializable {
 
     public void setHorariosAdministracao(List<Horario> horariosAdministracao) {
         this.horariosAdministracao = horariosAdministracao;
+    }
+
+    public String getEstadoAtividadeAdministracao() {
+        return estadoAtividadeAdministracao;
+    }
+
+    public void setEstadoAtividadeAdministracao(String estadoAtividadeAdministracao) {
+        this.estadoAtividadeAdministracao = estadoAtividadeAdministracao;
     }
 
 }

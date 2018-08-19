@@ -22,7 +22,7 @@ public class DiretorEnsino extends Usuario implements Serializable {
     }
 
     public DiretorEnsino(int idUsuario, String nomeCompleto, String email, String imagemPerfil, String senhaAlfanumerica) {
-        super(idUsuario, nomeCompleto, email, imagemPerfil, senhaAlfanumerica);
+        super(idUsuario, nomeCompleto, email, imagemPerfil, senhaAlfanumerica, email);
     }
 
     public List<Curso> getCursos() {

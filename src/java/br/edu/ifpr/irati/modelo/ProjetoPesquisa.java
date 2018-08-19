@@ -42,38 +42,44 @@ public class ProjetoPesquisa implements Serializable {
     @Column(name = "instituicaoPesquisa", nullable = false, length = 150)
     private String instituicaoPesquisa;
 
+    @Column(name = "estadoProjetoPesquisa", nullable = false, length = 10)
+    private String estadoProjetoPesquisa;
+
     @OneToMany
     private List<Horario> horariosProjetoPesquisa;
-            
-    @OneToMany(fetch=FetchType.EAGER)
+
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Participacao> participacoes;
 
     public ProjetoPesquisa() {
         this.idProjetoPesquisa = 0;
+        this.estadoProjetoPesquisa = "";
         this.numeroProcesso = "";
         this.tituloProcesso = "";
         this.previsaoConclusao = new Date();
         this.instituicaoPesquisa = "";
     }
 
-    public ProjetoPesquisa(int idProjetoPesquisa, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa) {
+    public ProjetoPesquisa(int idProjetoPesquisa, String numeroProcesso, String tituloProcesso, String instituicaoPesquisa, String estadoProjetoPesquisa) {
         this.idProjetoPesquisa = idProjetoPesquisa;
         this.numeroProcesso = numeroProcesso;
         this.tituloProcesso = tituloProcesso;
-        this.previsaoConclusao = previsaoConclusao;
+        this.previsaoConclusao = new Date();
         this.instituicaoPesquisa = instituicaoPesquisa;
-        this.horariosProjetoPesquisa = new ArrayList<>();
-
+        this.estadoProjetoPesquisa = estadoProjetoPesquisa;
+        this.horariosProjetoPesquisa = new ArrayList();
+        this.participacoes = new ArrayList();
     }
 
-    public ProjetoPesquisa(int idProjetoPesquisa, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa, List<Horario> horarios, List<Participacao> participacoes) {
+    public ProjetoPesquisa(int idProjetoPesquisa, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa, String estadoProjetoPesquisa, List<Horario> horariosProjetoPesquisa, List<Participacao> participacoes) {
         this.idProjetoPesquisa = idProjetoPesquisa;
         this.numeroProcesso = numeroProcesso;
         this.tituloProcesso = tituloProcesso;
         this.previsaoConclusao = previsaoConclusao;
         this.instituicaoPesquisa = instituicaoPesquisa;
-        this.horariosProjetoPesquisa = horarios;
-
+        this.estadoProjetoPesquisa = estadoProjetoPesquisa;
+        this.horariosProjetoPesquisa = horariosProjetoPesquisa;
+        this.participacoes = participacoes;
     }
 
     public int getIdProjetoPesquisa() {
@@ -131,7 +137,8 @@ public class ProjetoPesquisa implements Serializable {
     public void setParticipacoes(List<Participacao> participacoes) {
         this.participacoes = participacoes;
     }
-      @Override
+
+    @Override
     public String toString() {
         return tituloProcesso;
     }
@@ -144,5 +151,13 @@ public class ProjetoPesquisa implements Serializable {
         } else {
             return false;
         }
+    }
+
+    public String getEstadoProjetoPesquisa() {
+        return estadoProjetoPesquisa;
+    }
+
+    public void setEstadoProjetoPesquisa(String estadoProjetoPesquisa) {
+        this.estadoProjetoPesquisa = estadoProjetoPesquisa;
     }
 }

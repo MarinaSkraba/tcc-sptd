@@ -19,6 +19,7 @@ public class AdministracaoMB {
     private Administracao administracao;
     private List<Administracao> administracoes;
     private Horario horario;
+    private List<Horario> horarios;
     private TipoAdministracao tipoAdministracao;
 
     public AdministracaoMB() {
@@ -39,19 +40,22 @@ public class AdministracaoMB {
         horarioDAO.salvar(horario);
         administracao.setTipoAdministracao(tipoAdministracao);
         administracao.getHorariosAdministracao().add(horario);
-        Administracao adm = new Administracao(administracao.getIdAdministracao(), administracao.getHorariosAdministracao(), tipoAdministracao);
+        administracao.setEstadoAtividadeAdministracao("Ativo");
+        Administracao adm = new Administracao(administracao.getIdAdministracao(), administracao.getEstadoAtividadeAdministracao(), administracao.getTipoAdministracao(), administracao.getHorariosAdministracao());
         administracaoDAO.salvar(adm);
         administracoes = administracaoDAO.buscarTodos(Administracao.class);
     }
 
     public String alterar(Administracao administracao) {
         this.administracao = administracao;
-        return "/adicionar aqui";
+        return "/adicionar html aqui";
     }
 
     public String desabilitar(Administracao administracao) {
-        //implementar depois
-        return "";
+        Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
+        administracao.setEstadoAtividadeAdministracao("Desativado");
+        administracaoDAO.alterar(administracao);
+        return "/adicionar html aqui";
     }
 
     public String excluir(Administracao administracao) {
@@ -59,6 +63,11 @@ public class AdministracaoMB {
         administracaoDAO.excluir(administracao);
         administracoes = administracaoDAO.buscarTodos(Administracao.class);
         return "/adicionar aqui";
+    }
+
+    public void adicionarHorario() {
+        horarios.add(horario);
+        horario = new Horario();
     }
 
     public Horario getHorario() {
@@ -91,6 +100,14 @@ public class AdministracaoMB {
 
     public void setAdministracoes(List<Administracao> administracoes) {
         this.administracoes = administracoes;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
     }
 
 }

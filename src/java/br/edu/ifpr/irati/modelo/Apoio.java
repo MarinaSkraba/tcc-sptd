@@ -3,6 +3,7 @@ package br.edu.ifpr.irati.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,9 @@ public class Apoio implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idApoio;
 
+    @Column(name = "estadoAtividadeApoio", nullable = false, length = 10)
+    private String estadoAtividadeApoio;
+
     @OneToOne
     private TipoApoio tipoApoio;
 
@@ -26,15 +30,24 @@ public class Apoio implements Serializable {
     public Apoio() {
 
         this.idApoio = 0;
+        this.estadoAtividadeApoio = "";
         this.tipoApoio = new TipoApoio();
         this.horariosApoio = new ArrayList<>();
 
     }
 
-    public Apoio(int idApoio, List<Horario> horarios, TipoApoio tipoApoio) {
+    public Apoio(int idApoio, String estadoAtividadeApoio) {
         this.idApoio = idApoio;
+        this.estadoAtividadeApoio = estadoAtividadeApoio;
+        this.tipoApoio = new TipoApoio();
+        this.horariosApoio = new ArrayList();
+    }
+
+    public Apoio(int idApoio, String estadoAtividadeApoio, TipoApoio tipoApoio, List<Horario> horariosApoio) {
+        this.idApoio = idApoio;
+        this.estadoAtividadeApoio = estadoAtividadeApoio;
         this.tipoApoio = tipoApoio;
-        this.horariosApoio = horarios;
+        this.horariosApoio = horariosApoio;
     }
 
     public int getIdApoio() {
@@ -59,6 +72,14 @@ public class Apoio implements Serializable {
 
     public void setHorariosApoio(List<Horario> horariosApoio) {
         this.horariosApoio = horariosApoio;
+    }
+
+    public String getEstadoAtividadeApoio() {
+        return estadoAtividadeApoio;
+    }
+
+    public void setEstadoAtividadeApoio(String estadoAtividadeApoio) {
+        this.estadoAtividadeApoio = estadoAtividadeApoio;
     }
 
 }

@@ -19,6 +19,7 @@ public class ApoioMB {
     private Apoio apoio;
     private List<Apoio> apoios;
     private Horario horario;
+    private List<Horario> horarios;
     private TipoApoio tipoApoio;
 
     public ApoioMB() {
@@ -40,7 +41,8 @@ public class ApoioMB {
         horarioDAO.salvar(horario);
         apoio.setTipoApoio(tipoApoio);
         apoio.getHorariosApoio().add(horario);
-        Apoio ap = new Apoio(apoio.getIdApoio(), apoio.getHorariosApoio(), tipoApoio);
+        apoio.setEstadoAtividadeApoio("Ativo");
+        Apoio ap = new Apoio(apoio.getIdApoio(), apoio.getEstadoAtividadeApoio(), apoio.getTipoApoio(), apoio.getHorariosApoio());
         apoioDAO.salvar(ap);
         apoios = apoioDAO.buscarTodos(Apoio.class);
 
@@ -52,14 +54,22 @@ public class ApoioMB {
     }
 
     public String desabilitar(Apoio apoio) {
-    //implementar depois
-        return "";
+        Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
+        apoio.setEstadoAtividadeApoio("Desativado");
+        apoioDAO.alterar(apoio);
+        return "/adicionar html aqui";
     }
-     public String excluir(Apoio apoio) {
+
+    public String excluir(Apoio apoio) {
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         apoioDAO.excluir(apoio);
         apoios = apoioDAO.buscarTodos(Apoio.class);
         return "/adicionar aqui";
+    }
+
+    public void adicionarHorario() {
+        horarios.add(horario);
+        horario = new Horario();
     }
 
     public Apoio getApoio() {
@@ -92,5 +102,13 @@ public class ApoioMB {
 
     public void setTipoApoio(TipoApoio tipoApoio) {
         this.tipoApoio = tipoApoio;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
     }
 }

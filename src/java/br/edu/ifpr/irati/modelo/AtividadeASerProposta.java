@@ -17,6 +17,9 @@ public class AtividadeASerProposta implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idAtividadeASerProposta;
 
+    @Column(name = "estadoAtividadeASerProposta", nullable = false, length = 10)
+    private String estadoAtividadeASerProposta;
+
     @Column(name = "rotulo", nullable = false, length = 250)
     private String rotulo;
 
@@ -29,21 +32,24 @@ public class AtividadeASerProposta implements Serializable {
     public AtividadeASerProposta() {
 
         this.idAtividadeASerProposta = 0;
+        this.estadoAtividadeASerProposta = "";
         this.periodicidade = "";
         this.rotulo = "";
         this.horariosAtividadesASerProposta = new ArrayList();
 
     }
 
-    public AtividadeASerProposta(int idAtividadeASerProposta, String rotulo, String periodicidade) {
+    public AtividadeASerProposta(int idAtividadeASerProposta, String estadoAtividadeASerProposta, String rotulo, String periodicidade) {
         this.idAtividadeASerProposta = idAtividadeASerProposta;
+        this.estadoAtividadeASerProposta = estadoAtividadeASerProposta;
         this.rotulo = rotulo;
         this.periodicidade = periodicidade;
         this.horariosAtividadesASerProposta = new ArrayList();
     }
 
-    public AtividadeASerProposta(int idAtividadeASerProposta, String rotulo, String periodicidade, List<Horario> horariosAtividadesASerProposta) {
+    public AtividadeASerProposta(int idAtividadeASerProposta, String estadoAtividadeASerProposta, String rotulo, String periodicidade, List<Horario> horariosAtividadesASerProposta) {
         this.idAtividadeASerProposta = idAtividadeASerProposta;
+        this.estadoAtividadeASerProposta = estadoAtividadeASerProposta;
         this.rotulo = rotulo;
         this.periodicidade = periodicidade;
         this.horariosAtividadesASerProposta = horariosAtividadesASerProposta;
@@ -79,5 +85,13 @@ public class AtividadeASerProposta implements Serializable {
 
     public void setHorariosAtividadesASerProposta(List<Horario> horariosAtividadesASerProposta) {
         this.horariosAtividadesASerProposta = horariosAtividadesASerProposta;
+    }
+
+    public String getEstadoAtividadeASerProposta() {
+        return estadoAtividadeASerProposta;
+    }
+
+    public void setEstadoAtividadeASerProposta(String estadoAtividadeASerProposta) {
+        this.estadoAtividadeASerProposta = estadoAtividadeASerProposta;
     }
 }

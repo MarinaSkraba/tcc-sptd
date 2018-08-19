@@ -21,7 +21,7 @@ public class TipoApoio implements Serializable {
 
     @Column(name = "rotulo", nullable = false, length = 250)
     private String rotulo;
-
+    
     public TipoApoio() {
 
         this.idTipoApoio = 0;

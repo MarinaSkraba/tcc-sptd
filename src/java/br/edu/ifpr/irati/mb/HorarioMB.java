@@ -37,8 +37,10 @@ public class HorarioMB {
     }
 
     public String desabilitar(Horario horario) {
-        //implementar depois
-        return "";
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        horario.setEstadoHorario("Desativado");
+        horarioDAO.alterar(horario);
+        return "/adicionar html aqui";
     }
     public String excluir(Horario horario) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);

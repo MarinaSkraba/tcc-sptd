@@ -22,6 +22,9 @@ public class Curso implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idCurso;
 
+    @Column(name = "estadoCurso", nullable = false, length = 10)
+    private String estadoCurso;
+
     @Column(name = "nomeCurso", nullable = false, length = 100)
     private String nomeCurso;
 
@@ -30,21 +33,23 @@ public class Curso implements Serializable {
     private DiretorEnsino diretorEnsino;
 
     public Curso() {
-        idCurso = 0;
-        nomeCurso = "";
-        diretorEnsino = new DiretorEnsino();
-
-    }
-
-    public Curso(int idCurso, String nomeCurso) {
-        this.idCurso = idCurso;
-        this.nomeCurso = nomeCurso;
+        this.idCurso = 0;
+        this.estadoCurso = "";
+        this.nomeCurso = "";
         this.diretorEnsino = new DiretorEnsino();
 
     }
 
-    public Curso(int idCurso, String nomeCurso, DiretorEnsino diretorEnsino) {
+    public Curso(int idCurso, String estadoCurso, String nomeCurso) {
         this.idCurso = idCurso;
+        this.estadoCurso = estadoCurso;
+        this.nomeCurso = nomeCurso;
+        this.diretorEnsino = new DiretorEnsino();
+    }
+
+    public Curso(int idCurso, String estadoCurso, String nomeCurso, DiretorEnsino diretorEnsino) {
+        this.idCurso = idCurso;
+        this.estadoCurso = estadoCurso;
         this.nomeCurso = nomeCurso;
         this.diretorEnsino = diretorEnsino;
     }
@@ -80,6 +85,7 @@ public class Curso implements Serializable {
     public void setNomeCurso(String nomeCurso) {
         this.nomeCurso = nomeCurso;
     }
+
     @Override
     public String toString() {
         return nomeCurso;
@@ -93,6 +99,14 @@ public class Curso implements Serializable {
         } else {
             return false;
         }
+    }
+
+    public String getEstadoCurso() {
+        return estadoCurso;
+    }
+
+    public void setEstadoCurso(String estadoCurso) {
+        this.estadoCurso = estadoCurso;
     }
 
 }

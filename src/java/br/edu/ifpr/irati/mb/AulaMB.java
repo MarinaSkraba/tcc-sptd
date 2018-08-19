@@ -37,11 +37,6 @@ public class AulaMB {
 
     }
 
-    public void adicionarHorario() {
-        horarios.add(horario);
-        horario = new Horario();
-    }
-
     public void salvar() {
 
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
@@ -56,25 +51,35 @@ public class AulaMB {
         }
         aula.setTipoOferta(tipoOferta);
         aula.setCurso(cursoSelecionado);
-        Aula a = new Aula(aula.getIdAula(), aula.getComponenteCurricular(), cursoSelecionado, tipoOferta, aula.getHorariosAula());
+        aula.setEstadoAula("Ativo");
+        Aula a = new Aula(aula.getIdAula(), aula.getComponenteCurricular(), aula.getEstadoAula(), cursoSelecionado, aula.getTipoOferta(), aula.getHorariosAula());
         aulaDAO.salvar(a);
         aulas = aulaDAO.buscarTodos(Aula.class);
 
     }
-     public String alterar(Aula aula) {
+
+    public String alterar(Aula aula) {
         this.aula = aula;
         return "/adicionar aqui";
     }
 
     public String desabilitar(Aula aula) {
-        //implementar depois
-        return "";
+        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
+        aula.setEstadoAula("Desativado");
+        aulaDAO.alterar(aula);
+        return "/adicionar html aqui";
     }
+
     public String excluir(Aula aula) {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aulaDAO.excluir(aula);
         aulas = aulaDAO.buscarTodos(Aula.class);
         return "/adicionar aqui";
+    }
+
+    public void adicionarHorario() {
+        horarios.add(horario);
+        horario = new Horario();
     }
 
     public Aula getAula() {

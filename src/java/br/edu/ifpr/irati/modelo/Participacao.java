@@ -28,6 +28,9 @@ public class Participacao implements Serializable {
     @Column(name = "rotulo", nullable = false, length = 250)
     private String rotulo;
 
+    @Column(name = "estadoParticipacao", nullable = false, length = 10)
+    private String estadoParticipacao;
+
     @ManyToOne
     @JoinColumn(name = "professor_idProfessor")
     private Professor professor;
@@ -35,20 +38,22 @@ public class Participacao implements Serializable {
     public Participacao() {
 
         this.idParticipacao = 0;
+        this.estadoParticipacao = "";
         this.professor = new Professor();
 
     }
 
-    public Participacao(int idParticipacao, String rotulo) {
+    public Participacao(int idParticipacao, String rotulo, String estadoParticipacao) {
         this.idParticipacao = idParticipacao;
         this.rotulo = rotulo;
+        this.estadoParticipacao = estadoParticipacao;
         this.professor = new Professor();
-
     }
 
-    public Participacao(int idParticipacao, String rotulo, ProjetoExtensao projetoExtensao, ProjetoPesquisa projetoPesquisa, Professor professor) {
+    public Participacao(int idParticipacao, String rotulo, String estadoParticipacao, Professor professor) {
         this.idParticipacao = idParticipacao;
         this.rotulo = rotulo;
+        this.estadoParticipacao = estadoParticipacao;
         this.professor = professor;
     }
 
@@ -74,6 +79,14 @@ public class Participacao implements Serializable {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public String getEstadoParticipacao() {
+        return estadoParticipacao;
+    }
+
+    public void setEstadoParticipacao(String estadoParticipacao) {
+        this.estadoParticipacao = estadoParticipacao;
     }
 
 }

@@ -28,29 +28,34 @@ public class Horario implements Serializable {
     @Column(name = "diaSemana", nullable = false, length = 15)
     private String diaSemana;
 
+    @Column(name = "estadoHorario", nullable = false, length = 10)
+    private String estadoHorario;
+
     @ManyToOne
     @JoinColumn(name = "professor_idUsuario")
     private Professor professor;
 
     public Horario() {
 
-        idHorario = 0;
-        horaInicio = new Date();
-        horaTermino = new Date();
-        diaSemana = "";
+        this.idHorario = 0;
+        this.horaInicio = new Date();
+        this.horaTermino = new Date();
+        this.diaSemana = "";
     }
 
-    public Horario(int idHorario, Date horaInicio, Date horaTermino, String diaSemana) {
+    public Horario(int idHorario, Date horaInicio, Date horaTermino, String diaSemana, String estadoHorario, Professor professor) {
         this.idHorario = idHorario;
         this.horaInicio = horaInicio;
         this.horaTermino = horaTermino;
         this.diaSemana = diaSemana;
+        this.estadoHorario = estadoHorario;
+        this.professor = professor;
     }
 
     public int calcularCargaHoraria() {
 
         return 0;
-      // rever isso
+        // rever isso
 
     }
 
@@ -92,5 +97,13 @@ public class Horario implements Serializable {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public String getEstadoHorario() {
+        return estadoHorario;
+    }
+
+    public void setEstadoHorario(String estadoHorario) {
+        this.estadoHorario = estadoHorario;
     }
 }

@@ -22,9 +22,12 @@ public class OutroTipoAtividade implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idOutroTipoAtividade;
 
+    @Column(name = "estadoOutroTipoAtividade", nullable = false, length = 10)
+    private String estadoOutroTipoAtividade;
+
     @Column(name = "rotulo", nullable = false, length = 250)
     private String rotulo;
-    
+
     @Column(name = "periodicidade", nullable = false, length = 20)
     private String periodicidade;
 
@@ -33,26 +36,28 @@ public class OutroTipoAtividade implements Serializable {
 
     public OutroTipoAtividade() {
         this.idOutroTipoAtividade = 0;
+        this.estadoOutroTipoAtividade = "";
         this.rotulo = "";
-        this.periodicidade = "";     
+        this.periodicidade = "";
         this.horariosOutroTipoAtividade = new ArrayList<>();
     }
 
-    public OutroTipoAtividade(int idOutroTipoAtividade, String rotulo, String periodicidade) {
+    public OutroTipoAtividade(int idOutroTipoAtividade, String estadoOutroTipoAtividade, String rotulo, String periodicidade) {
         this.idOutroTipoAtividade = idOutroTipoAtividade;
+        this.estadoOutroTipoAtividade = estadoOutroTipoAtividade;
         this.rotulo = rotulo;
         this.periodicidade = periodicidade;
         this.horariosOutroTipoAtividade = new ArrayList();
     }
 
-    public OutroTipoAtividade(int idOutroTipoAtividade, String rotulo, String periodicidade, List<Horario> horariosOutroTipoAtividade) {
+    public OutroTipoAtividade(int idOutroTipoAtividade, String estadoOutroTipoAtividade, String rotulo, String periodicidade, List<Horario> horariosOutroTipoAtividade) {
         this.idOutroTipoAtividade = idOutroTipoAtividade;
+        this.estadoOutroTipoAtividade = estadoOutroTipoAtividade;
         this.rotulo = rotulo;
         this.periodicidade = periodicidade;
         this.horariosOutroTipoAtividade = horariosOutroTipoAtividade;
     }
 
-   
     public int getIdOutroTipoAtividade() {
         return idOutroTipoAtividade;
     }
@@ -68,6 +73,7 @@ public class OutroTipoAtividade implements Serializable {
     public void setPeriodicidade(String periodicidade) {
         this.periodicidade = periodicidade;
     }
+
     public String getRotulo() {
         return rotulo;
     }
@@ -76,12 +82,20 @@ public class OutroTipoAtividade implements Serializable {
         this.rotulo = rotulo;
     }
 
-    public List<Horario> getHorariosOutroTipoAtividades() {
+    public String getEstadoOutroTipoAtividade() {
+        return estadoOutroTipoAtividade;
+    }
+
+    public void setEstadoOutroTipoAtividade(String estadoOutroTipoAtividade) {
+        this.estadoOutroTipoAtividade = estadoOutroTipoAtividade;
+    }
+
+    public List<Horario> getHorariosOutroTipoAtividade() {
         return horariosOutroTipoAtividade;
     }
 
-    public void setHorariosOutroTipoAtividades(List<Horario> horariosOutroTipoAtividades) {
-        this.horariosOutroTipoAtividade = horariosOutroTipoAtividades;
+    public void setHorariosOutroTipoAtividade(List<Horario> horariosOutroTipoAtividade) {
+        this.horariosOutroTipoAtividade = horariosOutroTipoAtividade;
     }
 
 }

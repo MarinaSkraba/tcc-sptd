@@ -8,6 +8,7 @@ package br.edu.ifpr.irati.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,9 @@ public class ManutencaoEnsino implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idManutencao;
 
+    @Column(name = "estadoManutecaoEnsino", nullable = false, length = 10)
+    private String estadoManutencaoEnsino;
+
     @OneToOne
     private TipoManutencao tipoManutencao;
 
@@ -31,15 +35,24 @@ public class ManutencaoEnsino implements Serializable {
     public ManutencaoEnsino() {
 
         this.idManutencao = 0;
+        this.estadoManutencaoEnsino = "";
         this.tipoManutencao = new TipoManutencao();
         this.horariosManutecao = new ArrayList<>();
 
     }
 
-    public ManutencaoEnsino(int idManutencao, List<Horario> horarios, TipoManutencao tipoManutencao) {
+    public ManutencaoEnsino(int idManutencao, String estadoManutencaoEnsino) {
         this.idManutencao = idManutencao;
+        this.estadoManutencaoEnsino = estadoManutencaoEnsino;
+        this.tipoManutencao = new TipoManutencao();
+        this.horariosManutecao = new ArrayList();
+    }
+
+    public ManutencaoEnsino(int idManutencao, String estadoManutencaoEnsino, TipoManutencao tipoManutencao, List<Horario> horariosManutecao) {
+        this.idManutencao = idManutencao;
+        this.estadoManutencaoEnsino = estadoManutencaoEnsino;
         this.tipoManutencao = tipoManutencao;
-        this.horariosManutecao = horarios;
+        this.horariosManutecao = horariosManutecao;
     }
 
     public int getIdManutencao() {
@@ -49,7 +62,7 @@ public class ManutencaoEnsino implements Serializable {
     public void setIdManutencao(int idManutencao) {
         this.idManutencao = idManutencao;
     }
-    
+
     public TipoManutencao getTipoManutencao() {
         return tipoManutencao;
     }
@@ -64,5 +77,13 @@ public class ManutencaoEnsino implements Serializable {
 
     public void setHorariosManutecao(List<Horario> horariosManutecao) {
         this.horariosManutecao = horariosManutecao;
+    }
+
+    public String getEstadoManutencaoEnsino() {
+        return estadoManutencaoEnsino;
+    }
+
+    public void setEstadoManutencaoEnsino(String estadoManutencaoEnsino) {
+        this.estadoManutencaoEnsino = estadoManutencaoEnsino;
     }
 }

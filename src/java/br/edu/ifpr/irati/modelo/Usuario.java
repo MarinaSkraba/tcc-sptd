@@ -38,21 +38,25 @@ public class Usuario implements Serializable {
     @Column(name = "senhaAlfanumérica", nullable = false, length = 128)
     private String senhaAlfanumerica;
 
+    @Column(name = "estadoUsuario", nullable = false, length = 10)
+    private String estadoUsuario;
+
     public Usuario() {
 
-        idUsuario = 0;
-        nomeCompleto = "";
-        email = "";
-        imagemPerfil = "";
-        senhaAlfanumerica = "";
+        this.idUsuario = 0;
+        this.nomeCompleto = "";
+        this.email = "";
+        this.imagemPerfil = "";
+        this.senhaAlfanumerica = "";
     }
 
-    public Usuario(int idUsuario, String nomeCompleto, String email, String imagemPerfil, String senhaAlfanumerica) {
+    public Usuario(int idUsuario, String nomeCompleto, String email, String imagemPerfil, String senhaAlfanumerica, String estadoUsuario) {
         this.idUsuario = idUsuario;
         this.nomeCompleto = nomeCompleto;
         this.email = email;
         this.imagemPerfil = imagemPerfil;
         this.senhaAlfanumerica = senhaAlfanumerica;
+        this.estadoUsuario = estadoUsuario;
     }
 
     public int getIdUsuario() {
@@ -94,6 +98,7 @@ public class Usuario implements Serializable {
     public void setSenhaAlfanumerica(String senhaAlfanumerica) {
         this.senhaAlfanumerica = senhaAlfanumerica;
     }
+
     @Override
     public boolean equals(Object obj) {
         Usuario u = (Usuario) obj;

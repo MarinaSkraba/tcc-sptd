@@ -26,6 +26,9 @@ public class ProjetoExtensao implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idProjetoExtensao;
 
+    @Column(name = "estadoProjetoExtensao", nullable = false, length = 10)
+    private String estadoProjetoExtensao;
+
     @Column(name = "numeroProcesso", nullable = false, length = 20)
     private String numeroProcesso;
 
@@ -40,36 +43,36 @@ public class ProjetoExtensao implements Serializable {
 
     @OneToMany
     private List<Horario> horariosProjetoExtensao;
-    
-    @OneToMany(fetch=FetchType.EAGER)
+
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Participacao> participacoes;
-    
 
     public ProjetoExtensao() {
 
         this.idProjetoExtensao = 0;
+        this.estadoProjetoExtensao = "";
         this.numeroProcesso = "";
         this.tituloProcesso = "";
         this.previsaoConclusao = new Date();
         this.instituicaoPesquisa = "";
         this.horariosProjetoExtensao = new ArrayList();
-        
 
     }
 
-    public ProjetoExtensao(int idProjetoExtensao, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa) {
+    public ProjetoExtensao(int idProjetoExtensao, String estadoProjetoExtensao, String numeroProcesso, String tituloProcesso, String instituicaoPesquisa) {
         this.idProjetoExtensao = idProjetoExtensao;
+        this.estadoProjetoExtensao = estadoProjetoExtensao;
         this.numeroProcesso = numeroProcesso;
         this.tituloProcesso = tituloProcesso;
-        this.previsaoConclusao = previsaoConclusao;
+        this.previsaoConclusao = new Date();
         this.instituicaoPesquisa = instituicaoPesquisa;
         this.horariosProjetoExtensao = new ArrayList();
-        
-
+        this.participacoes = new ArrayList();
     }
 
-    public ProjetoExtensao(int idProjetoExtensao, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa, List<Horario> horariosProjetoExtensao, List<Participacao> participacoes) {
+    public ProjetoExtensao(int idProjetoExtensao, String estadoProjetoExtensao, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa, List<Horario> horariosProjetoExtensao, List<Participacao> participacoes) {
         this.idProjetoExtensao = idProjetoExtensao;
+        this.estadoProjetoExtensao = estadoProjetoExtensao;
         this.numeroProcesso = numeroProcesso;
         this.tituloProcesso = tituloProcesso;
         this.previsaoConclusao = previsaoConclusao;
@@ -137,7 +140,8 @@ public class ProjetoExtensao implements Serializable {
     public void setParticipacoes(List<Participacao> participacoes) {
         this.participacoes = participacoes;
     }
-      @Override
+
+    @Override
     public String toString() {
         return tituloProcesso;
     }
@@ -150,6 +154,14 @@ public class ProjetoExtensao implements Serializable {
         } else {
             return false;
         }
+    }
+
+    public String getEstadoProjetoExtensao() {
+        return estadoProjetoExtensao;
+    }
+
+    public void setEstadoProjetoExtensao(String estadoProjetoExtensao) {
+        this.estadoProjetoExtensao = estadoProjetoExtensao;
     }
 
 }

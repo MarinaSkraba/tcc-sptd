@@ -41,7 +41,7 @@ public class Professor extends Usuario implements Serializable {
     }
 
     public Professor(int idUsuario, String nomeCompleto, String email, String imagemPerfil, String senhaAlfanumerica) {
-        super(idUsuario, nomeCompleto, email, imagemPerfil, senhaAlfanumerica);
+        super(idUsuario, nomeCompleto, email, imagemPerfil, senhaAlfanumerica, email);
     }
 
     public Professor(String matriculaSIAPE, String regimeTrabalho, String tipoContrato, Date dataContratacao, List<PTD> PTDs) {
@@ -53,7 +53,7 @@ public class Professor extends Usuario implements Serializable {
     }
 
     public Professor(String matriculaSIAPE, String regimeTrabalho, String tipoContrato, Date dataContratacao, List<PTD> PTDs, int idUsuario, String nomeCompleto, String email, String imagemPerfil, String senhaAlfanumerica) {
-        super(idUsuario, nomeCompleto, email, imagemPerfil, senhaAlfanumerica);
+        super(idUsuario, nomeCompleto, email, imagemPerfil, senhaAlfanumerica, email);
         this.matriculaSIAPE = matriculaSIAPE;
         this.regimeTrabalho = regimeTrabalho;
         this.tipoContrato = tipoContrato;
