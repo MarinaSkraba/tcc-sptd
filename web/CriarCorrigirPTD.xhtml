@@ -170,37 +170,39 @@
                             <f:facet name="header">
                                 <h:outputText value="CURSO" 
                                               styleClass="text01"
-                                              style="font-size: 15pt;"/>
+                                              style="font-size: large; font-weight: bold;"/>
                             </f:facet>
                             <h:outputText value="#{aula.curso.nomeCurso}" 
                                           styleClass="text01"
-                                          style="font-size: 12pt;"/>
+                                          style="font-size: large;"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="COMPONENTE CURRICULAR" 
                                               styleClass="text01"
-                                              style="font-size: 15pt;"/>
+                                              style="font-size: large; font-weight: bold;"/>
                             </f:facet>
                             <h:outputText value="#{aula.componenteCurricular}"
                                           styleClass="text01"
-                                          style="font-size: 12pt;" />
+                                          style="font-size: large;" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="CARGA HORÁRIA TOTAL" 
                                               styleClass="text01"
-                                              style="font-size: 15pt;"/>
+                                              style="font-size: large; font-weight: bold;"/>
                             </f:facet>
                             <h:outputText value="à implementar"
                                           styleClass="text01"
-                                          style="font-size: 12pt;"/>
+                                          style="font-size: large;"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="HORÁRIO"
-                                              styleClass="text01"/>
-                                <p:panelGrid columns="3">
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+                                <h:panelGrid border="0"
+                                             columns="3">
 
                                     <h:outputText value="dia da semana" 
                                                   styleClass="text01"/>
@@ -209,7 +211,7 @@
                                     <h:outputText value="horário término" 
                                                   styleClass="text01"/>
 
-                                </p:panelGrid>
+                                </h:panelGrid>
                             </f:facet>
 
 
@@ -222,20 +224,20 @@
                                 <h:column>
                                     <h:outputText value="#{horario.diaSemana}" 
                                                   styleClass="text01"
-                                                  style="font-size: 12pt;"/>
+                                                  style="font-size: large;"/>
                                 </h:column>
                                 <h:column>
                                     <h:outputText value="#{horario.horaInicio}"
                                                   styleClass="text01" 
-                                                  style="font-size: 12pt;"/>
+                                                  style="font-size: large;"/>
                                 </h:column>
                                 <h:column>
                                     <h:outputText value="#{horario.horaTermino}"
                                                   styleClass="text01" 
-                                                  style="font-size: 12pt;"/>
+                                                  style="font-size: large;"/>
                                     <p:commandButton styleClass="botao" 
                                                      value="+ horário" 
-                                                     oncomplete="PF('addHorarioDialog').show()"/>
+                                                     onclick="PF('addHorarioDialog').show();"/>
                                 </h:column>
 
                             </h:dataTable>
@@ -244,11 +246,11 @@
                             <f:facet name="header">
                                 <h:outputText value="ORGANIZAÇÃO" 
                                               styleClass="text01"
-                                              style="font-size: 15pt;"/>
+                                              style="font-size: large; font-weight: bold;"/>
                             </f:facet>
                             <h:outputText value="#{aula.tipoOferta.rotulo}"
                                           styleClass="text01"
-                                          style="font-size: 12pt;"/>
+                                          style="font-size: large;"/>
                         </h:column>
 
                     </h:dataTable>
@@ -262,21 +264,21 @@
 
                         <font face="Calibri" 
                               color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: large;" 
                               styleClass="text">
                             DIA DA SEMANA
                             <br> <p:inputText value="#{aulaMB.horario.diaSemana}"/> </br>
                         </font>
                         <font face="Calibri" 
                               color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: large;" 
                               styleClass="text">
                             HORÁRIO INÍCIO
                             <br> <p:calendar id="horaInicio" value="#{aulaMB.horario.horaInicio}" pattern="HH:mm" timeOnly="true"/></br>
                         </font>
                         <font face="Calibri" 
                               color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: large;" 
                               styleClass="text">
                             HORÁRIO TÉRMINO
                             <br> <p:calendar id="horaTermino" value="#{aulaMB.horario.horaTermino}" pattern="HH:mm" timeOnly="true"/></br>
