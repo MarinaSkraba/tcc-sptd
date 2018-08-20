@@ -498,6 +498,19 @@
                               hideEffect="fade" 
                               resizable="false">
 
+                        <h:form>
+                            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                <h:outputText value="Projeto:" />
+                                <p:selectOneButton value="#{selectOneView.option}">
+                                    <f:selectItem itemLabel="Pesquisa" itemValue="implementar depois" />
+                                    <f:selectItem itemLabel="Extensão" itemValue="implementar depois" />
+                                    
+                                </p:selectOneButton>
+
+                            </h:panelGrid>
+                        </h:form>
+
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
@@ -585,6 +598,18 @@
                               hideEffect="fade" 
                               resizable="false">
 
+                         <h:form>
+                            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                <h:outputText value="PROJETO:" />
+                                <p:selectOneButton value="#{selectOneView.option}">
+                                    <f:selectItem itemLabel="Pesquisa" itemValue="implementar depois" />
+                                    <f:selectItem itemLabel="Extensão" itemValue="implementar depois" />
+                                    
+                                </p:selectOneButton>
+
+                            </h:panelGrid>
+                        </h:form>
+                        
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
