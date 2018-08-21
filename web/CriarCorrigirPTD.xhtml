@@ -502,8 +502,8 @@
                             <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
                                 <h:outputText value="Projeto:" />
                                 <p:selectOneButton value="#{selectOneView.option}">
-                                    <f:selectItem itemLabel="Pesquisa" itemValue="implementar depois" />
-                                    <f:selectItem itemLabel="Extensão" itemValue="implementar depois" />
+                                    <f:selectItem itemLabel="Pesquisa" itemValue="#{projetoPesquisaExtensaoMB.tipoProjetoAutor}" />
+                                    <f:selectItem itemLabel="Extensão" itemValue="#{projetoPesquisaExtensaoMB.tipoProjetoAutor}" />
                                     
                                 </p:selectOneButton>
 
@@ -563,7 +563,7 @@
                             <br> <p:commandButton styleClass="botao" 
                                                   style="float:left;" 
                                                   value="Salvar" 
-                                                  action="#{manutencaoMB.salvar()}"/> </br>
+                                                  action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensaoAutor(usuarioMB.usuarioLogado)}"/> </br>
                         </font>
 
                     </p:dialog>
@@ -602,8 +602,8 @@
                             <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
                                 <h:outputText value="PROJETO:" />
                                 <p:selectOneButton value="#{selectOneView.option}">
-                                    <f:selectItem itemLabel="Pesquisa" itemValue="implementar depois" />
-                                    <f:selectItem itemLabel="Extensão" itemValue="implementar depois" />
+                                    <f:selectItem itemLabel="Pesquisa" itemValue="#{projetoPesquisaExtensaoMB.tipoProjetoColab}" />
+                                    <f:selectItem itemLabel="Extensão" itemValue="#{projetoPesquisaExtensaoMB.tipoProjetoColab}" />
                                     
                                 </p:selectOneButton>
 
@@ -675,7 +675,7 @@
                             <br> <p:commandButton styleClass="botao" 
                                                   style="float:left;" 
                                                   value="Salvar" 
-                                                  action="#{manutencaoMB.salvar()}"/> </br>
+                                                  action="#{projetoPesquisaExtensaoMB.salvarColaboracaoPesquisaExtensao(usuarioMB.usuarioLogado)}"/> </br>
                         </font>
 
                     </p:dialog>

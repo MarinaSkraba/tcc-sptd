@@ -4,8 +4,10 @@ import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.Participacao;
+import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.ProjetoExtensao;
 import br.edu.ifpr.irati.modelo.ProjetoPesquisa;
+import br.edu.ifpr.irati.modelo.Usuario;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
@@ -43,14 +45,14 @@ public class ProjetoPesquisaExtensaoMB {
         this.tipoProjetoColab = tipoProjetoColab;
     }
 
-    public void salvarProjetoPesquisaExtensaoAutor() {
+    public void salvarProjetoPesquisaExtensaoAutor(Professor professorAutor) {
         switch (tipoProjetoAutor) {
             case "Pesquisa": {
                 Dao<ProjetoExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
                 Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
                 participacao.setRotulo("Autor");
                 participacao.setEstadoParticipacao("Ativo");
-                Participacao p = new Participacao(participacao.getIdParticipacao(), participacao.getRotulo(), participacao.getEstadoParticipacao());
+                Participacao p = new Participacao(participacao.getIdParticipacao(), participacao.getRotulo(), participacao.getEstadoParticipacao(), professorAutor);
                 participacaoDAO.salvar(p);
                 Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
                 horarioDAO.salvar(horario);
@@ -61,7 +63,7 @@ public class ProjetoPesquisaExtensaoMB {
                 projetosExtensao = projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class);
                 break;
             }
-            case "Extensao": {
+            case "Extensão": {
                 Dao<ProjetoExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
                 Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
                 participacao.setRotulo("Autor");
@@ -81,14 +83,14 @@ public class ProjetoPesquisaExtensaoMB {
 
     }
 
-    public void salvarColaboracaoPesquisaExtensao() {
+    public void salvarColaboracaoPesquisaExtensao(Professor professorColaborador) {
         switch (tipoProjetoColab) {
             case "Pesquisa": {
                 Dao<ProjetoPesquisa> projetoPesquisaDAO = new GenericDAO<>(ProjetoPesquisa.class);
                 Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
                 participacao.setRotulo("Colaborador");
                 participacao.setEstadoParticipacao("Ativo");
-                Participacao p = new Participacao(participacao.getIdParticipacao(), participacao.getRotulo(), participacao.getEstadoParticipacao());
+                Participacao p = new Participacao(participacao.getIdParticipacao(), participacao.getRotulo(), participacao.getEstadoParticipacao(),professorColaborador);
                 participacaoDAO.salvar(p);
                 Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
                 horarioDAO.salvar(horario);
@@ -97,7 +99,7 @@ public class ProjetoPesquisaExtensaoMB {
                 projetoPesquisaDAO.alterar(projetoPesquisaSelecionado);
                 break;
             }
-            case "Extensao": {
+            case "Extensão": {
                 Dao<ProjetoExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
                 Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
                 participacao.setRotulo("Colaborador");
