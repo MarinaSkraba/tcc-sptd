@@ -116,7 +116,7 @@
                                              style="float: left;" 
                                              value="Adicionar" 
                                              onclick="PF('addAulaDialog').show();"/>
-                            <p:commandButton styleClass="botaoAjuda" 
+                            <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"/>
                         </h:panelGrid>
@@ -272,9 +272,13 @@
                                     <h:outputText value="#{horario.horaTermino}"
                                                   styleClass="text01" 
                                                   style="font-size: large;"/>
-                                    <p:commandButton styleClass="botao" 
-                                                     value="+ horário" 
-                                                     onclick="PF('addHorarioDialog').show();"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="footer">
+                                        <p:commandButton styleClass="botao" 
+                                                         value="+ horário" 
+                                                         onclick="PF('addHorarioDialog').show();"/>
+                                    </f:facet>
                                 </h:column>
 
                             </h:dataTable>
@@ -291,17 +295,18 @@
                         </h:column>
                         <h:column>
 
-                            <p:splitButton value="Update" 
-                                           onclick="PF('edcAulaDialog').show();" 
-                                           icon="ui-icon-arrowrefresh-1-w">
+                            <p:splitButton value="Op" 
+                                           icon="ui-icon-arrowrefresh-1-w"
+                                           styleClass="botaoAzul">
+                                <p:menuitem value="Atualizar" 
+                                            onclick="PF('edcAulaDialog').show();"
+                                            icon="ui-icon-extlink" />
+                                <p:separator />
                                 <p:menuitem value="Delete" 
-                                            actionListener="#{aulaMB.desabilitar(aula)}" 
+                                            action="#{aulaMB.desabilitar(aula)}" 
                                             ajax="false" 
                                             icon="ui-icon-close" />
-                                <p:separator />
-                                <p:menuitem value="Homepage" 
-                                            url="http://www.primefaces.org" 
-                                            icon="ui-icon-extlink" />
+                                
                             </p:splitButton>
 
                         </h:column>
@@ -362,7 +367,7 @@
                                              style="float: left;" 
                                              value="Adicionar" 
                                              onclick="PF('addManutencaoDialog').show();"/>
-                            <p:commandButton styleClass="botaoAjuda" 
+                            <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"/>
                         </h:panelGrid>
@@ -425,7 +430,7 @@
                                              style="float: left;" 
                                              value="Adicionar" 
                                              onclick="PF('addApoioEnsinoDialog').show();"/>
-                            <p:commandButton styleClass="botaoAjuda" 
+                            <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"/>
                         </h:panelGrid>
@@ -499,7 +504,7 @@
                                              style="float: left;" 
                                              value="Adicionar" 
                                              onclick="PF('addPesquisaExtensaoAutorDialog').show();"/>
-                            <p:commandButton styleClass="botaoAjuda" 
+                            <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"/>
 
@@ -599,7 +604,7 @@
                                              style="float: left;" 
                                              value="Adicionar"
                                              onclick="PF('addPesquisaExtensaoColabDialog').show();"/>
-                            <p:commandButton styleClass="botaoAjuda" 
+                            <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"/>
                         </h:panelGrid>
@@ -719,7 +724,7 @@
                                              style="float: left;" 
                                              value="Adicionar"
                                              onclick="PF('addAdministrativasDialog').show();"/>
-                            <p:commandButton styleClass="botaoAjuda" 
+                            <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"/>
                         </h:panelGrid>
@@ -793,7 +798,7 @@
                                              style="float: left;" 
                                              value="Adicionar"
                                              onclick="PF('addOutrasAtividadesDialog').show();"/>
-                            <p:commandButton styleClass="botaoAjuda" 
+                            <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"/>
                         </h:panelGrid>
@@ -873,7 +878,7 @@
                                              style="float: left;" 
                                              value="Adicionar"
                                              onclick="PF('addAtividadesProporDialog').show();"/>
-                            <p:commandButton styleClass="botaoAjuda" 
+                            <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"/>
                         </h:panelGrid>

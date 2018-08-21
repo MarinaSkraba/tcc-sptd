@@ -149,7 +149,7 @@ body{
     background-color: #7497A3;
     background-image: linear-gradient(to right, #7497A3, #7497A3);
 }
-.botaoAjuda{
+.botaoAzul{
     width: auto;
     height: auto;
     font-size: medium;
@@ -163,7 +163,7 @@ body{
     background-image: linear-gradient(to right, #FFFFFF, #FFFFFF);
     transition: background-color 0.3s;
 }
-.botaoAjuda:hover{
+.botaoAzul:hover{
     color: white;
     font-weight: normal;
     background-color: #A8A8A8;
