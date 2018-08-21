@@ -25,10 +25,14 @@ public class UsuarioDAO implements IUsuarioDao {
             query = session.createQuery(hql02);
             query.setInteger(0, u.getIdUsuario());
             List professores = query.list();
-            if (professores.isEmpty()) {
-                u = (DiretorEnsino) u;
+            if (professores.isEmpty() != true) {
+                u = (Professor) professores.get(0);
             } else {
-                u = (Professor) u;
+                String hql03 = "from diretorensino where idUsuario = ?";
+                query = session.createQuery(hql03);
+                query.setInteger(0, u.getIdUsuario());
+                List diretor = query.list();
+                u = (DiretorEnsino) diretor.get(0);
             }
         }
         session.clear();
