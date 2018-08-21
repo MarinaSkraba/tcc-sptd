@@ -195,6 +195,7 @@
 
                     <h:dataTable  value="#{aulaMB.aulas}" 
                                   var="aula" 
+                                  style="border-spacing: 0pt;"
                                   headerClass="text-center"
                                   footerClass="text-center">
 
@@ -238,11 +239,14 @@
                                              columns="3">
 
                                     <h:outputText value="dia da semana" 
-                                                  styleClass="text01"/>
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
                                     <h:outputText value="horário início" 
-                                                  styleClass="text01"/>
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
                                     <h:outputText value="horário término" 
-                                                  styleClass="text01"/>
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
 
                                 </h:panelGrid>
                             </f:facet>
@@ -287,11 +291,19 @@
                         </h:column>
                         <h:column>
 
-                            <p:splitButton value="Update" onclick="PF('edcAulaDialog').show();" update="messages" icon="ui-icon-arrowrefresh-1-w">
-                                <p:menuitem value="Delete" actionListener="#{aulaMB.desabilitar(aula)}" ajax="false" icon="ui-icon-close" />
+                            <p:splitButton value="Update" 
+                                           onclick="PF('edcAulaDialog').show();" 
+                                           icon="ui-icon-arrowrefresh-1-w">
+                                <p:menuitem value="Delete" 
+                                            actionListener="#{aulaMB.desabilitar(aula)}" 
+                                            ajax="false" 
+                                            icon="ui-icon-close" />
                                 <p:separator />
-                                <p:menuitem value="Homepage" url="http://www.primefaces.org" icon="ui-icon-extlink" />
+                                <p:menuitem value="Homepage" 
+                                            url="http://www.primefaces.org" 
+                                            icon="ui-icon-extlink" />
                             </p:splitButton>
+
                         </h:column>
 
                     </h:dataTable>
@@ -511,62 +523,62 @@
 
                             </h:panelGrid>
                         </h:form>
-                                         
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                PROCESSO
-                                <br> <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisa.numeroProcesso}"/> </br>
-                            </font>
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                TÍTULO
-                                <br> <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisa.tituloProcesso}"/> </br>
-                            </font>
 
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                DIA DA SEMANA
-                                <br> <p:inputText value="#{horarioMB.horario.diaSemana}"/> </br>
-                            </font>
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                HORÁRIO INÍCIO
-                                <br> <p:calendar id="horaInicio" value="#{horarioMB.horario.horaInicio}" pattern="HH:mm"/></br>
-                            </font>
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                HORÁRIO TÉRMINO
-                                <br> <p:calendar id="horaTermino" value="#{horarioMB.horario.horaTermino}" pattern="HH:mm"/></br>
-                            </font>
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                PREVISÃO DE CONCLUSÃO
-                                <br> <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisa.previsaoConclusao}"/> </br>
-                            </font>
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                INSTITUIÇÃO ONDE A PESQUISA É REALIZADA
-                                <br> <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisa.instituicaoPesquisa}"/> </br>
-                                <br> <h:commandButton styleClass="botao" 
-                                                      style="float:left;" 
-                                                      value="Salvar" 
-                                                      action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaAutor(usuarioMB.usuarioLogado)}"/> </br>
-                            </font>                     
-                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            PROCESSO
+                            <br> <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisa.numeroProcesso}"/> </br>
+                        </font>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            TÍTULO
+                            <br> <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisa.tituloProcesso}"/> </br>
+                        </font>
+
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            DIA DA SEMANA
+                            <br> <p:inputText value="#{horarioMB.horario.diaSemana}"/> </br>
+                        </font>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            HORÁRIO INÍCIO
+                            <br> <p:calendar id="horaInicio" value="#{horarioMB.horario.horaInicio}" pattern="HH:mm"/></br>
+                        </font>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            HORÁRIO TÉRMINO
+                            <br> <p:calendar id="horaTermino" value="#{horarioMB.horario.horaTermino}" pattern="HH:mm"/></br>
+                        </font>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            PREVISÃO DE CONCLUSÃO
+                            <br> <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisa.previsaoConclusao}"/> </br>
+                        </font>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                              styleClass="text">
+                            INSTITUIÇÃO ONDE A PESQUISA É REALIZADA
+                            <br> <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisa.instituicaoPesquisa}"/> </br>
+                            <br> <h:commandButton styleClass="botao" 
+                                                  style="float:left;" 
+                                                  value="Salvar" 
+                                                  action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaAutor(usuarioMB.usuarioLogado)}"/> </br>
+                        </font>                     
+
                     </p:dialog>
                 </h:form>
                 <br/>
