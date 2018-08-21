@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <title>Edição de PTDs</title>
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
@@ -153,7 +154,7 @@
                         <h:commandButton value="Salvar" action="#{aulaMB.salvar()}"/>
 
                     </p:dialog>
-                    
+
                     <!-- Caixa de edição de aulas -->
                     <p:dialog header="Editar aula" 
                               widgetVar="edcAulaDialog" 
@@ -294,7 +295,7 @@
                         </h:column>
 
                     </h:dataTable>
-                    
+
                     <!-- Caixa para adicionar horário à aula -->
                     <p:dialog header="Adicionar Horario" 
                               widgetVar="addHorarioDialog" 
@@ -489,6 +490,7 @@
                             <p:commandButton styleClass="botaoAjuda" 
                                              style="float: left;" 
                                              value="?"/>
+
                         </h:panelGrid>
                     </h:panelGrid>
                     <p:dialog header="Adicionar projeto de pesquisa/extensão como autor" 
@@ -501,71 +503,70 @@
                         <h:form>
                             <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
                                 <h:outputText value="Projeto:" />
-                                <p:selectOneButton value="#{selectOneView.option}">
-                                    <f:selectItem itemLabel="Pesquisa" itemValue="#{projetoPesquisaExtensaoMB.tipoProjetoAutor}" />
-                                    <f:selectItem itemLabel="Extensão" itemValue="#{projetoPesquisaExtensaoMB.tipoProjetoAutor}" />
-                                    
+                                <p:selectOneButton  value="#{projetoPesquisaExtensaoMB.tipoProjetoAutor}">
+                                    <f:selectItem itemLabel="Pesquisa" itemValue="Pesquisa" />
+                                    <f:selectItem itemLabel="Extensão" itemValue="Extensão" />
+
                                 </p:selectOneButton>
 
                             </h:panelGrid>
                         </h:form>
+                                         
+                            <font face="Calibri" 
+                                  color="black" 
+                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                                  styleClass="text">
+                                PROCESSO
+                                <br> <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisa.numeroProcesso}"/> </br>
+                            </font>
+                            <font face="Calibri" 
+                                  color="black" 
+                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                                  styleClass="text">
+                                TÍTULO
+                                <br> <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisa.tituloProcesso}"/> </br>
+                            </font>
 
-
-                        <font face="Calibri" 
-                              color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                              styleClass="text">
-                            PROCESSO
-                            <br> <p:inputText value=""/> </br>
-                        </font>
-                        <font face="Calibri" 
-                              color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                              styleClass="text">
-                            TÍTULO
-                            <br> <p:inputText value=""/> </br>
-                        </font>
-
-                        <font face="Calibri" 
-                              color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                              styleClass="text">
-                            DIA DA SEMANA
-                            <br> <p:inputText value="#{horarioMB.horario.diaSemana}"/> </br>
-                        </font>
-                        <font face="Calibri" 
-                              color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                              styleClass="text">
-                            HORÁRIO INÍCIO
-                            <br> <p:calendar id="horaInicio" value="#{horarioMB.horario.horaInicio}" pattern="HH:mm"/></br>
-                        </font>
-                        <font face="Calibri" 
-                              color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                              styleClass="text">
-                            HORÁRIO TÉRMINO
-                            <br> <p:calendar id="horaTermino" value="#{horarioMB.horario.horaTermino}" pattern="HH:mm"/></br>
-                        </font>
-                        <font face="Calibri" 
-                              color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                              styleClass="text">
-                            PREVISÃO DE CONCLUSÃO
-                            <br> <p:inputText value=""/> </br>
-                        </font>
-                        <font face="Calibri" 
-                              color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                              styleClass="text">
-                            INSTITUIÇÃO ONDE A PESQUISA É REALIZADA
-                            <br> <p:inputText value=""/> </br>
-                            <br> <p:commandButton styleClass="botao" 
-                                                  style="float:left;" 
-                                                  value="Salvar" 
-                                                  action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensaoAutor(usuarioMB.usuarioLogado)}"/> </br>
-                        </font>
-
+                            <font face="Calibri" 
+                                  color="black" 
+                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                                  styleClass="text">
+                                DIA DA SEMANA
+                                <br> <p:inputText value="#{horarioMB.horario.diaSemana}"/> </br>
+                            </font>
+                            <font face="Calibri" 
+                                  color="black" 
+                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                                  styleClass="text">
+                                HORÁRIO INÍCIO
+                                <br> <p:calendar id="horaInicio" value="#{horarioMB.horario.horaInicio}" pattern="HH:mm"/></br>
+                            </font>
+                            <font face="Calibri" 
+                                  color="black" 
+                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                                  styleClass="text">
+                                HORÁRIO TÉRMINO
+                                <br> <p:calendar id="horaTermino" value="#{horarioMB.horario.horaTermino}" pattern="HH:mm"/></br>
+                            </font>
+                            <font face="Calibri" 
+                                  color="black" 
+                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                                  styleClass="text">
+                                PREVISÃO DE CONCLUSÃO
+                                <br> <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisa.previsaoConclusao}"/> </br>
+                            </font>
+                            <font face="Calibri" 
+                                  color="black" 
+                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
+                                  styleClass="text">
+                                INSTITUIÇÃO ONDE A PESQUISA É REALIZADA
+                                <br> <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisa.instituicaoPesquisa}"/> </br>
+                                <br> <h:commandButton styleClass="botao" 
+                                                      style="float:left;" 
+                                                      value="Salvar" 
+                                                      action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaAutor(usuarioMB.usuarioLogado)}"/> </br>
+                            </font>                     
+                        
                     </p:dialog>
                 </h:form>
                 <br/>
@@ -598,18 +599,17 @@
                               hideEffect="fade" 
                               resizable="false">
 
-                         <h:form>
+                        <h:form>
                             <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
                                 <h:outputText value="PROJETO:" />
-                                <p:selectOneButton value="#{selectOneView.option}">
-                                    <f:selectItem itemLabel="Pesquisa" itemValue="#{projetoPesquisaExtensaoMB.tipoProjetoColab}" />
-                                    <f:selectItem itemLabel="Extensão" itemValue="#{projetoPesquisaExtensaoMB.tipoProjetoColab}" />
-                                    
+                                <p:selectOneButton value="#{projetoPesquisaExtensaoMB.tipoProjetoColab}">
+                                    <f:selectItem itemLabel="Pesquisa" itemValue="Pesquisa" />
+                                    <f:selectItem itemLabel="Extensão" itemValue="Extensão" />
                                 </p:selectOneButton>
 
                             </h:panelGrid>
                         </h:form>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
