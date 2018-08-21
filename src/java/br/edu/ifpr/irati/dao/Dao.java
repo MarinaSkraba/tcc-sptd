@@ -20,6 +20,4 @@ public interface Dao<T> {
     
     public List<T> buscarTodos(Class<T> clazz);
     
-    public List verificarUsuario(String user, String senha);
-    
 }

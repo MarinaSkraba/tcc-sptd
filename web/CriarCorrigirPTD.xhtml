@@ -153,6 +153,38 @@
                         <h:commandButton value="Salvar" action="#{aulaMB.salvar()}"/>
 
                     </p:dialog>
+                    
+                    <!-- Caixa de edição de aulas -->
+                    <p:dialog header="Editar aula" 
+                              widgetVar="edcAulaDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="CURSO" 
+                                      styleClass="text01"/>
+                        <br/>
+                        <p:selectOneMenu value="#{aulaMB.cursoSelecionado}"
+                                         converter="cursoConverter">
+
+                            <f:selectItems value="#{cursoMB.cursos}" var="curso" itemValue="#{curso}"
+                                           itemLabel="#{curso}" />
+                        </p:selectOneMenu>
+
+                        <h:outputText value="COMPONENTE CURRICULAR" 
+                                      styleClass="text01"/>
+                        <br/>
+                        <p:inputText value="#{aulaMB.aula.componenteCurricular}"/>
+
+                        <h:outputText value="ORGANIZAÇÃO" 
+                                      styleClass="text01"/>
+                        <br/>
+                        <p:inputText value="#{aulaMB.tipoOferta.rotulo}"/>
+                        <br/>
+                        <h:commandButton value="Salvar" action="#{aulaMB.salvar()}"/>
+
+                    </p:dialog>
 
                 </h:form>
                 <br/>
@@ -252,9 +284,18 @@
                                           styleClass="text01"
                                           style="font-size: large;"/>
                         </h:column>
+                        <h:column>
+
+                            <p:splitButton value="Update" onclick="PF('edcAulaDialog').show();" update="messages" icon="ui-icon-arrowrefresh-1-w">
+                                <p:menuitem value="Delete" actionListener="#{aulaMB.desabilitar(aula)}" ajax="false" icon="ui-icon-close" />
+                                <p:separator />
+                                <p:menuitem value="Homepage" url="http://www.primefaces.org" icon="ui-icon-extlink" />
+                            </p:splitButton>
+                        </h:column>
 
                     </h:dataTable>
-
+                    
+                    <!-- Caixa para adicionar horário à aula -->
                     <p:dialog header="Adicionar Horario" 
                               widgetVar="addHorarioDialog" 
                               modal="true" 
@@ -283,6 +324,8 @@
                             HORÁRIO TÉRMINO
                             <br> <p:calendar id="horaTermino" value="#{aulaMB.horario.horaTermino}" pattern="HH:mm" timeOnly="true"/></br>
                         </font>
+                        <br/>
+                        <h:commandButton value="Salvar" action="#{aulaMB.salvar()}"/>
 
                     </p:dialog>
 
@@ -459,8 +502,8 @@
                             <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
                                 <h:outputText value="Projeto:" />
                                 <p:selectOneButton value="#{selectOneView.option}">
-                                    <f:selectItem itemLabel="Pesquisa" itemValue="implementar depois" />
-                                    <f:selectItem itemLabel="Extensão" itemValue="implementar depois" />
+                                    <f:selectItem itemLabel="Pesquisa" itemValue="#{projetoPesquisaExtensaoMB.tipoProjetoAutor}" />
+                                    <f:selectItem itemLabel="Extensão" itemValue="#{projetoPesquisaExtensaoMB.tipoProjetoAutor}" />
                                     
                                 </p:selectOneButton>
 
@@ -520,7 +563,7 @@
                             <br> <p:commandButton styleClass="botao" 
                                                   style="float:left;" 
                                                   value="Salvar" 
-                                                  action="#{manutencaoMB.salvar()}"/> </br>
+                                                  action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensaoAutor(usuarioMB.usuarioLogado)}"/> </br>
                         </font>
 
                     </p:dialog>
@@ -559,8 +602,8 @@
                             <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
                                 <h:outputText value="PROJETO:" />
                                 <p:selectOneButton value="#{selectOneView.option}">
-                                    <f:selectItem itemLabel="Pesquisa" itemValue="implementar depois" />
-                                    <f:selectItem itemLabel="Extensão" itemValue="implementar depois" />
+                                    <f:selectItem itemLabel="Pesquisa" itemValue="#{projetoPesquisaExtensaoMB.tipoProjetoColab}" />
+                                    <f:selectItem itemLabel="Extensão" itemValue="#{projetoPesquisaExtensaoMB.tipoProjetoColab}" />
                                     
                                 </p:selectOneButton>
 
@@ -632,7 +675,7 @@
                             <br> <p:commandButton styleClass="botao" 
                                                   style="float:left;" 
                                                   value="Salvar" 
-                                                  action="#{manutencaoMB.salvar()}"/> </br>
+                                                  action="#{projetoPesquisaExtensaoMB.salvarColaboracaoPesquisaExtensao(usuarioMB.usuarioLogado)}"/> </br>
                         </font>
 
                     </p:dialog>
