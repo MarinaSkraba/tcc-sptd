@@ -28,7 +28,7 @@ public class UsuarioDAO implements IUsuarioDao {
             if (professores.isEmpty() != true) {
                 u = (Professor) professores.get(0);
             } else {
-                String hql03 = "from diretorensino where idUsuario = ?";
+                String hql03 = "from diretorEnsino where idUsuario = ?";
                 query = session.createQuery(hql03);
                 query.setInteger(0, u.getIdUsuario());
                 List diretor = query.list();
