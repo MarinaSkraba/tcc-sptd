@@ -61,13 +61,12 @@ public class UsuarioMB {
             System.out.println(getUsuarioLogado());
             if (getUsuarioLogado() instanceof Professor) {
                 return "/NotificacoesDocente";
-            } else if (getUsuarioLogado() instanceof DiretorEnsino) {
-                return "/NotificacoesDocente";
+            } else {
+                return "/NotificacoesDiretorEnsino";
             }
-            return "/NotificacoesDocente";
         }
     }
-    
+
     public String realizarLogout(){
         usuario = new Usuario();
         usuarioLogado = new Usuario();
