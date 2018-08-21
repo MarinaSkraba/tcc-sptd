@@ -7,6 +7,8 @@ package br.edu.ifpr.irati.mb;
 
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
+import br.edu.ifpr.irati.dao.IUsuarioDao;
+import br.edu.ifpr.irati.dao.UsuarioDAO;
 import br.edu.ifpr.irati.modelo.DiretorEnsino;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.Usuario;
@@ -48,26 +50,25 @@ public class UsuarioMB {
         System.out.println("Chegou criptografia");
         System.out.println(getUsuario().getEmail());
         System.out.println(senhaSHA512);
-        Dao<Usuario> usuarioDao = new GenericDAO<>(Usuario.class);
-        List<Usuario> usuarios = usuarioDao.verificarUsuario(getUsuario().getEmail(), senhaSHA512);
-        if (usuarios.isEmpty()) {
+        IUsuarioDao usuarioDao = new UsuarioDAO();
+        usuario = usuarioDao.verificarUsuario(getUsuario().getEmail(), senhaSHA512);
+        if (usuario.getIdUsuario() == 0) {
             setUsuarioLogado(new Usuario());
             System.out.println("Chegou object");
             System.out.println(getUsuarioLogado());
             return "/Login";
         } else {
-            setUsuarioLogado(usuarios.get(0));
+            setUsuarioLogado(usuario);
             System.out.println("Chegou object");
             System.out.println(getUsuarioLogado());
             if (getUsuarioLogado() instanceof Professor) {
                 return "/NotificacoesDocente";
-            } else if (getUsuarioLogado() instanceof DiretorEnsino) {
-                return "/NotificacoesDocente";
+            } else {
+                return "/NotificacoesDiretorEnsino";
             }
-            return "/NotificacoesDocente";
         }
     }
-    
+
     public String realizarLogout(){
         usuario = new Usuario();
         usuarioLogado = new Usuario();
