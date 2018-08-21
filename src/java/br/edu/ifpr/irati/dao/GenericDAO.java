@@ -70,18 +70,4 @@ public class GenericDAO<T> implements Dao<T> {
         session.close();
         return results;
     }
-
-    @Override
-    public List verificarUsuario(String email, String senhaAlfanumerica) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from usuario where email = ? and senhaAlfanumérica = ?";
-        Query query = session.createQuery(hql);
-        query.setString(0, email);
-        query.setString(1, senhaAlfanumerica);
-        List resultados = query.list();
-        session.clear();
-        session.close();
-        return resultados;
-    }
-
 }
