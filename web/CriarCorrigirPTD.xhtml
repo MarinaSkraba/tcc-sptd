@@ -106,6 +106,7 @@
                 <!-- Aulas -->
                 <h:form id="cadAulas">
 
+                    <!-- Título -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
@@ -250,9 +251,7 @@
 
                                 </h:panelGrid>
                             </f:facet>
-
-
-
+                            <!-- Tabela para os títulos de horário -->
                             <h:dataTable  value="#{aulaMB.aula.horariosAula}" 
                                           var="horario" 
                                           headerClass="text-center"
@@ -277,13 +276,16 @@
                                     <f:facet name="footer">
                                         <p:commandButton styleClass="botao" 
                                                          value="+ horário" 
+                                                         action="#{aulaMB.setAulaSelecionada(aula)}"
                                                          onclick="PF('addHorarioDialog').show();"/>
                                     </f:facet>
                                 </h:column>
 
                             </h:dataTable>
+
                         </h:column>
                         <h:column>
+
                             <f:facet name="header">
                                 <h:outputText value="ORGANIZAÇÃO" 
                                               styleClass="text01"
@@ -292,6 +294,7 @@
                             <h:outputText value="#{aula.tipoOferta.rotulo}"
                                           styleClass="text01"
                                           style="font-size: large;"/>
+
                         </h:column>
                         <h:column>
 
@@ -333,24 +336,24 @@
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: large;" 
                               styleClass="text">
                             DIA DA SEMANA
-                            <br> <p:inputText value="#{aulaMB.horario.diaSemana}"/> </br>
+                            <br> <p:inputText value="#{horarioMB.horario.diaSemana}"/> </br>
                         </font>
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: large;" 
                               styleClass="text">
                             HORÁRIO INÍCIO
-                            <br> <p:calendar id="horaInicio" value="#{aulaMB.horario.horaInicio}" pattern="HH:mm" timeOnly="true"/></br>
+                            <br> <p:calendar id="horaInicio" value="#{horarioMB.horario.horaInicio}" pattern="HH:mm" timeOnly="true"/></br>
                         </font>
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: large;" 
                               styleClass="text">
                             HORÁRIO TÉRMINO
-                            <br> <p:calendar id="horaTermino" value="#{aulaMB.horario.horaTermino}" pattern="HH:mm" timeOnly="true"/></br>
+                            <br> <p:calendar id="horaTermino" value="#{horarioMB.horario.horaTermino}" pattern="HH:mm" timeOnly="true"/></br>
                         </font>
                         <br/>
-                        <h:commandButton value="Salvar" action="#{aulaMB.salvar()}"/>
+                        <h:commandButton value="Salvar" action="#{horarioMB.salvar(aulaMB.aulaSelecionada)}"/>
 
                     </p:dialog>
 
