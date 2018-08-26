@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-@Entity(name = "projetonsino")
+@Entity(name = "projetoensino")
 public class ProjetoEnsino implements Serializable {
 
     @Id

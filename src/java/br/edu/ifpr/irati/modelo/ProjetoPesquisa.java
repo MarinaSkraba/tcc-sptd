@@ -19,10 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author Marina
- */
 @Entity(name = "projetopesquisa")
 public class ProjetoPesquisa implements Serializable {
 

@@ -1,0 +1,12 @@
+
+package br.edu.ifpr.irati.dao;
+
+import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
+import java.util.List;
+
+public interface IOutroTipoAtividadeDao {
+ 
+    
+     public List<OutroTipoAtividade> buscarOutrosTipoAtividadesAtivas();
+    
+}
