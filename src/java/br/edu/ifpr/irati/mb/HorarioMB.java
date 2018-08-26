@@ -7,6 +7,7 @@ package br.edu.ifpr.irati.mb;
 
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
+import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Horario;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +25,11 @@ public class HorarioMB {
         horarios = new ArrayList<>();
     }
 
-    public void salvar() {
+    public void salvar(Aula aula) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        aula.getHorariosAula().add(horario);
         horarioDAO.salvar(horario);
         horarios = horarioDAO.buscarTodos(Horario.class);
-
     }
 
     public String alterar(Horario horario) {

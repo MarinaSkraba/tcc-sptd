@@ -19,6 +19,7 @@ import javax.faces.bean.ManagedBean;
 public class AulaMB {
 
     private Aula aula;
+    private Aula aulaSelecionada;
     private Horario horario;
     private List<Horario> horarios;
     private Curso cursoSelecionado;
@@ -29,6 +30,7 @@ public class AulaMB {
 
         aula = new Aula();
         horario = new Horario();
+        aulaSelecionada = new Aula();
         horarios = new ArrayList<>();
         cursoSelecionado = new Curso();
         tipoOferta = new TipoOferta();
@@ -42,13 +44,9 @@ public class AulaMB {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
         tipoOfertaDAO.salvar(tipoOferta);
-        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        for (Horario h : horarios) {
-            aula.getHorariosAula().add(h);
-        }
-        for (Horario h : aula.getHorariosAula()) {
-            horarioDAO.salvar(h);
-        }
+        
+        // De onde que vem o valor dessa variárel de tipo oferta se na tela é pego apenas o rótulo e já colocado dentro de aula?
+        
         aula.setTipoOferta(tipoOferta);
         aula.setCurso(cursoSelecionado);
         aula.setEstadoAula("Ativo");
@@ -140,6 +138,20 @@ public class AulaMB {
      */
     public void setHorario(Horario horario) {
         this.horario = horario;
+    }
+
+    /**
+     * @return the aulaSelecionada
+     */
+    public Aula getAulaSelecionada() {
+        return aulaSelecionada;
+    }
+
+    /**
+     * @param aulaSelecionada the aulaSelecionada to set
+     */
+    public void setAulaSelecionada(Aula aulaSelecionada) {
+        this.aulaSelecionada = aulaSelecionada;
     }
 
 }
