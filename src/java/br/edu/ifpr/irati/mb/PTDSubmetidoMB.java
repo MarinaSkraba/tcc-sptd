@@ -78,6 +78,7 @@ public class PTDSubmetidoMB {
         projetosEnsino = new ArrayList();
         projetosExtensao = new ArrayList();
         projetosPesquisa = new ArrayList();
+        
     }
 
     public void submeterPTD(Professor professor) {
@@ -85,28 +86,28 @@ public class PTDSubmetidoMB {
         Dao<PTDSubmetido> ptdSubmetidoDAO = new GenericDAO<>(PTDSubmetido.class);
         IAdministracaoDao administracaoDAO = new AdministracaoDAO();
         ptdSubmetido.setProfessor(professor);
-        administracoes = administracaoDAO.buscarAdministracoesAtivas();
+        administracoes = administracaoDAO.buscarAdministracoesAtivas(professor);
         ptdSubmetido.setAdministrativas(administracoes);
         IApoioDao apoioDAO = new ApoioDAO();
-        apoios = apoioDAO.buscarApoiosAtivos();
+        apoios = apoioDAO.buscarApoiosAtivos(professor);
         ptdSubmetido.setApoios(apoios);
         IAtividadeASerPropostaDao atividadeASerPropostaDAO = new AtividadeASerPropostaDAO();
-        atividadesASeremPropostas = atividadeASerPropostaDAO.buscarAtividadesAtivas();
+        atividadesASeremPropostas = atividadeASerPropostaDAO.buscarAtividadesAtivas(professor);
         ptdSubmetido.setAtividadesASeremPropostas(atividadesASeremPropostas);
         IAulaDao aulaDAO = new AulaDAO();
-        aulas = aulaDAO.buscarAulasAtivas();
+        aulas = aulaDAO.buscarAulasAtivas(professor);
         ptdSubmetido.setAulas(aulas);
         IManutencaoDao manutencaoDAO = new ManutencaoDAO();
-        manutencoesEnsino = manutencaoDAO.buscarManutencoesAtivas();
+        manutencoesEnsino = manutencaoDAO.buscarManutencoesAtivas(professor);
         ptdSubmetido.setManutencoesEnsino(manutencoesEnsino);
         IProjetoEnsinoDao projetoEnsinoDAO = new ProjetoEnsinoDAO();
-        projetosEnsino = projetoEnsinoDAO.buscarProjetosEnsinoAtivos();
+        projetosEnsino = projetoEnsinoDAO.buscarProjetosEnsinoAtivos(professor);
         ptdSubmetido.setProjetosEnsino(projetosEnsino);
         IProjetoExtensaoDao projetoExtensaoDAO = new ProjetoExtensaoDAO();
-        projetosExtensao = projetoExtensaoDAO.buscarProjetosExtensaoAtivos();
+        projetosExtensao = projetoExtensaoDAO.buscarProjetosExtensaoAtivos(professor);
         ptdSubmetido.setProjetosExtensao(projetosExtensao);
         IProjetoPesquisaDao projetoPesquisaDAO = new ProjetoPesquisaDAO();
-        projetosPesquisa = projetoPesquisaDAO.buscarProjetosPesquisaAtivos();
+        projetosPesquisa = projetoPesquisaDAO.buscarProjetosPesquisaAtivos(professor);
         ptdSubmetido.setProjetosPesquisa(projetosPesquisa);
         PTDSubmetido ptdSubm = new PTDSubmetido();
         ptdSubmetidoDAO.salvar(ptdSubm);
