@@ -1,6 +1,7 @@
 package br.edu.ifpr.irati.dao;
 
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
+import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Query;
@@ -9,7 +10,7 @@ import org.hibernate.Session;
 public class ManutencaoDAO implements IManutencaoDao {
 
     @Override
-    public List<ManutencaoEnsino> buscarManutencoesAtivas() {
+    public List<ManutencaoEnsino> buscarManutencoesAtivas(Professor professor) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from manutencao where estadoManutencaoEnsino = Ativo";
         Query query = session.createQuery(hql);
