@@ -27,6 +27,7 @@ import br.edu.ifpr.irati.modelo.Administracao;
 import br.edu.ifpr.irati.modelo.Apoio;
 import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
 import br.edu.ifpr.irati.modelo.Aula;
+import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
 import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
 import br.edu.ifpr.irati.modelo.PTDIncompleto;
@@ -34,6 +35,7 @@ import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.ProjetoEnsino;
 import br.edu.ifpr.irati.modelo.ProjetoExtensao;
 import br.edu.ifpr.irati.modelo.ProjetoPesquisa;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -115,7 +117,7 @@ public class PTDIncompletoMB {
         PTDIncompleto ptdIncom = new PTDIncompleto();
         ptdIncompletoDAO.salvar(ptdIncom);
     }
-  
+
     public PTDIncompleto getPtdIncompleto() {
         return ptdIncompleto;
     }

@@ -11,9 +11,9 @@ import org.hibernate.Session;
 public class AdministracaoDAO implements IAdministracaoDao {
 
     @Override
-    public List<Administracao> buscarAdministracoesAtivas(Professor professor) {
+    public List<Administracao> buscarAdministracoesAtivas(Professor idUsuario) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from administracao where estadoAtividadeAdministracao = Ativo";
+        String hql = "from administracao, professor where estadoAtividadeAdministracao = 'Ativo' and idUsuario = ? ";
         Query query = session.createQuery(hql);
         List results = query.list();
         session.clear();

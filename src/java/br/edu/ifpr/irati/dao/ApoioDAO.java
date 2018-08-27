@@ -11,9 +11,9 @@ import org.hibernate.Session;
 public class ApoioDAO implements IApoioDao{
 
     @Override
-    public List<Apoio> buscarApoiosAtivos(Professor professor) {
+    public List<Apoio> buscarApoiosAtivos(Professor idUsuario) {
        Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from apoio where estadoApoio = Ativo";
+        String hql = "from apoio, professor where estadoApoio = 'Ativo' and idUsuario = ?";
         Query query = session.createQuery(hql);
         List results = query.list();
         session.clear();

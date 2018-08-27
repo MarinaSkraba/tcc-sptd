@@ -13,7 +13,7 @@ public class ProjetoEnsinoDAO implements IProjetoEnsinoDao {
     @Override
     public List<ProjetoEnsino> buscarProjetosEnsinoAtivos(Professor professor) {
       Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from projetoensino where estadoProjetoEnsino = Ativo";
+        String hql = "from projetoensino, professor where estadoProjetoEnsino = 'Ativo' and idUsuario = ?";
         Query query = session.createQuery(hql);
         List results = query.list();
         session.clear();

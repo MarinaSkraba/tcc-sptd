@@ -10,9 +10,9 @@ import org.hibernate.Session;
 public class ManutencaoDAO implements IManutencaoDao {
 
     @Override
-    public List<ManutencaoEnsino> buscarManutencoesAtivas(Professor professor) {
+    public List<ManutencaoEnsino> buscarManutencoesAtivas(Professor idUsuario) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from manutencao where estadoManutencaoEnsino = Ativo";
+        String hql = "from manutencao, professor where estadoManutencaoEnsino = 'Ativo' and idUsuario = ? ";
         Query query = session.createQuery(hql);
         List results = query.list();
         session.clear();

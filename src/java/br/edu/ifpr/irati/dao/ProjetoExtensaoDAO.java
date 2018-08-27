@@ -14,7 +14,7 @@ public class ProjetoExtensaoDAO implements IProjetoExtensaoDao {
     public List<ProjetoExtensao> buscarProjetosExtensaoAtivos(Professor professor) {
      
      Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from projetextensao where estadoProjetoExtensao = Ativo";
+        String hql = "from projetextensao, professor where estadoProjetoExtensao = 'Ativo' and idUsuario = ?";
         Query query = session.createQuery(hql);
         List results = query.list();
         session.clear();

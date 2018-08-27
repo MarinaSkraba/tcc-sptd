@@ -18,15 +18,11 @@ public class DiretorEnsinoMB {
     private List<PTDSubmetido> ptdsSubmetidos;
 
     public DiretorEnsinoMB() {
-        
+
         ptdSubmetido = new PTDSubmetido();
         Dao<PTDSubmetido> ptdSubmetidoDAO = new GenericDAO<>(PTDSubmetido.class);
         ptdsSubmetidos = ptdSubmetidoDAO.buscarTodos(PTDSubmetido.class);
 
-    }
-
-    public PTDSubmetido getPtdSubmetido() {
-        return ptdSubmetido;
     }
 
     public void aprovarPTD(PTDSubmetido ptdSubmetido) {
@@ -43,6 +39,10 @@ public class DiretorEnsinoMB {
         ptdSubmetido.setEstado("Reprovado");
         ptdSubmetidoDAO.alterar(ptdSubmetido);
 
+    }
+
+    public PTDSubmetido getPtdSubmetido() {
+        return ptdSubmetido;
     }
 
     public void setPtdSubmetido(PTDSubmetido ptdSubmetido) {

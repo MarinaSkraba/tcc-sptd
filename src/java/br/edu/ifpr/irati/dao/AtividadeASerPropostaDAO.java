@@ -11,9 +11,9 @@ import org.hibernate.Session;
 public class AtividadeASerPropostaDAO implements IAtividadeASerPropostaDao {
 
     @Override
-    public List<AtividadeASerProposta> buscarAtividadesAtivas(Professor professor) {
-         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from atividadeaserproposta where estadoAtividadeASerProposta = Ativo";
+    public List<AtividadeASerProposta> buscarAtividadesAtivas(Professor idUsuario) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "from atividadeaserproposta, professor where estadoAtividadeASerProposta = 'Ativo' and idUsuario = ? ";
         Query query = session.createQuery(hql);
         List results = query.list();
         session.clear();

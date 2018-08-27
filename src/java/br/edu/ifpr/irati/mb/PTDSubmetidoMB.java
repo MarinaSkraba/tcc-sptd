@@ -78,6 +78,7 @@ public class PTDSubmetidoMB {
         projetosEnsino = new ArrayList();
         projetosExtensao = new ArrayList();
         projetosPesquisa = new ArrayList();
+        
     }
 
     public void submeterPTD(Professor professor) {
