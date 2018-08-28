@@ -17,8 +17,7 @@ public class TipoOfertaMB {
         tipoOferta = new TipoOferta();
         Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
         tiposOferta = tipoOfertaDAO.buscarTodos(TipoOferta.class);
-        verificarTiposOferta();
-        
+        verificarTiposOferta();        
     }
 
     public void verificarTiposOferta() {
