@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifpr.irati.modelo;
 
 import java.io.Serializable;
@@ -14,10 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-/**
- *
- * @author Marina
- */
 @Entity(name = "participacao")
 public class Participacao implements Serializable {
 
@@ -32,7 +23,7 @@ public class Participacao implements Serializable {
     private String estadoParticipacao;
 
     @ManyToOne
-    @JoinColumn(name = "professor_idProfessor")
+    @JoinColumn(name = "professor_idUsuario")
     private Professor professor;
 
     public Participacao() {
