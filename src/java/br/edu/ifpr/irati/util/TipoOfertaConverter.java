@@ -7,14 +7,18 @@ package br.edu.ifpr.irati.util;
 
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
-import br.edu.ifpr.irati.modelo.Curso;
+import br.edu.ifpr.irati.modelo.TipoOferta;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@FacesConverter(forClass = Curso.class, value = "cursoConverter")
-public class CursoConverter implements Converter {
+/**
+ *
+ * @author willi
+ */
+@FacesConverter(forClass = TipoOferta.class, value = "tipoOfertaConverter")
+public class TipoOfertaConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -22,21 +26,20 @@ public class CursoConverter implements Converter {
             return null;
         } else {
             Integer id = Integer.parseInt(value);
-            Dao<Curso> cDAO = new GenericDAO<>(Curso.class);
-            Curso curso = cDAO.buscarPorId(id);
-            return curso;
+            Dao<TipoOferta> toDAO = new GenericDAO<>(TipoOferta.class);
+            TipoOferta tipoOferta = toDAO.buscarPorId(id);
+            return tipoOferta;
         }
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        Curso curso = (Curso) value;
-        if (curso != null) {
-            return String.valueOf(curso.getIdCurso());
+        TipoOferta tipoOferta = (TipoOferta) value;
+        if (tipoOferta != null) {
+            return String.valueOf(tipoOferta.getIdTipoOferta());
         } else {
             return null;
         }
 
     }
-
 }

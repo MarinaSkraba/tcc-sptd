@@ -105,7 +105,7 @@
                     <br/>
                     <br/>
 
-                    <!-- Aulas - Título -->
+                    <!-- Subtítulo: Aulas -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
@@ -149,43 +149,20 @@
                         <h:outputText value="ORGANIZAÇÃO" 
                                       styleClass="text01"/>
                         <br/>
-                        <p:inputText value="#{aulaMB.tipoOferta.rotulo}"/>
+
+                        <p:selectOneRadio id="tipoOferta" value="#{aulaMB.tipoOfertaSelecionado.rotulo}" converter="TipoOfertaConverter">
+                            <f:selectItem itemLabel="#{tipoOfertaMB.tiposOferta.get(0)}" itemValue="#{tipoOfertaMB.tiposOferta.get(0)}" />
+                            <f:selectItem itemLabel="#{tipoOfertaMB.tiposOferta.get(1)}" itemValue="#{tipoOfertaMB.tiposOferta.get(1)}" />
+                            <f:selectItem itemLabel="#{tipoOfertaMB.tiposOferta.get(2)}" itemValue="#{tipoOfertaMB.tiposOferta.get(2)}" />
+                        </p:selectOneRadio>
+
                         <br/>
-                        <h:commandButton value="Salvar" action="#{aulaMB.salvar()}"/>
+                        <h:commandButton value="Salvar" action="#{aulaMB.salvarAula()}"/>
 
                     </p:dialog>
 
                     <!-- Caixa de edição de aulas -->
-                    <p:dialog header="Editar aula" 
-                              widgetVar="edcAulaDialog" 
-                              modal="true" 
-                              showEffect="fade" 
-                              hideEffect="fade" 
-                              resizable="false">
-
-                        <h:outputText value="CURSO" 
-                                      styleClass="text01"/>
-                        <br/>
-                        <p:selectOneMenu value="#{aulaMB.cursoSelecionado}"
-                                         converter="cursoConverter">
-
-                            <f:selectItems value="#{cursoMB.cursos}" var="curso" itemValue="#{curso}"
-                                           itemLabel="#{curso}" />
-                        </p:selectOneMenu>
-
-                        <h:outputText value="COMPONENTE CURRICULAR" 
-                                      styleClass="text01"/>
-                        <br/>
-                        <p:inputText value="#{aulaMB.aula.componenteCurricular}"/>
-
-                        <h:outputText value="ORGANIZAÇÃO" 
-                                      styleClass="text01"/>
-                        <br/>
-                        <p:inputText value="#{aulaMB.tipoOferta.rotulo}"/>
-                        <br/>
-                        <h:commandButton value="Salvar" action="#{aulaMB.salvar()}"/>
-
-                    </p:dialog>
+                    <!-- Implementar... -->
 
                     <br/>
 
@@ -355,6 +332,7 @@
 
                     <br/>
 
+                    <!-- Subtítulo: Manutenção de ensino -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
@@ -378,6 +356,7 @@
 
                     <br/>
 
+                    <!-- Subtítulo: Apoio ao ensino -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" style="align-items: center;">
                             <font face="Calibri" 
@@ -409,6 +388,7 @@
                     <br/>
                     <br/>
 
+                    <!-- Subtítulo: Pesquisa e/ou extensão (Autor) -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" style="align-items: center;">
                             <font face="Calibri" 
@@ -430,6 +410,7 @@
 
                     <br/>
 
+                    <!-- Subtítulo: Pesquisa e/ou extensão (Colaborador) -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
@@ -462,6 +443,7 @@
                     <br/>
                     <br/>
 
+                    <!-- Subtítulo de Atividades administrativas -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" style="align-items: center;">
                             <font face="Calibri" 
@@ -493,6 +475,7 @@
                     <br/>
                     <br/>
 
+                    <!-- Subtítulo de Outras atividades desenvolvidas no campus -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
@@ -525,6 +508,7 @@
                     <br/>
                     <br/>
 
+                    <!-- Subtítulo de Outras Atividades que pretendo propor no semestre -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
@@ -544,7 +528,7 @@
                         </h:panelGrid>
                     </h:panelGrid>
 
-
+                    <!-- Tabela de resultados de horários -->
                     <p:dataTable var="horarios">
 
                         <p:column headerText="Atividade">

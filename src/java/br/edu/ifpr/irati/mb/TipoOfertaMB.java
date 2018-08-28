@@ -18,6 +18,7 @@ public class TipoOfertaMB {
         Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
         tiposOferta = tipoOfertaDAO.buscarTodos(TipoOferta.class);
         verificarTiposOferta();
+        
     }
 
     public void verificarTiposOferta() {
@@ -31,6 +32,10 @@ public class TipoOfertaMB {
             tipoOfertaDAO.salvar(tipo1);
             tipoOfertaDAO.salvar(tipo2);
             tipoOfertaDAO.salvar(tipo3);
+            tiposOferta.add(tipo1);
+            tiposOferta.add(tipo2);
+            tiposOferta.add(tipo3);
+            
         }
 
     }
