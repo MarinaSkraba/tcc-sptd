@@ -27,8 +27,11 @@ public class HorarioMB {
 
     public void salvar(Aula aula) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
+        horario.setEstadoHorario("Ativo");
         aula.getHorariosAula().add(horario);
-        horarioDAO.salvar(horario);
+        horarioDAO.salvar(aula.getHorariosAula().get(aula.getHorariosAula().size() - 1));
+        aulaDAO.alterar(aula);
         horarios = horarioDAO.buscarTodos(Horario.class);
     }
 
