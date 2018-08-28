@@ -154,12 +154,12 @@
                         <p:selectOneMenu id="selectTipoOferta" 
                                          value="#{aulaMB.tipoOfertaSelecionado}"
                                          converter="tipoOfertaConverter">
-                            
+
                             <f:selectItems value="#{tipoOfertaMB.tiposOferta}" 
                                            var="tipoOferta" 
                                            itemValue="#{tipoOferta}"
                                            itemLabel="#{tipoOferta}" />
-                            
+
                         </p:selectOneMenu>
 
                         <br/>
@@ -535,17 +535,136 @@
                     </h:panelGrid>
 
                     <!-- Tabela de resultados de horários -->
-                    <p:dataTable var="horarios">
+                    <h:panelGrid columns="2" 
+                                 style="align-items: center;"
+                                 border="1">
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 8000; font-size: 17pt;" 
+                              styleClass="text">
+                            Atividades
+                        </font>
 
-                        <p:column headerText="Atividade">
-                            Não sei o que fazer para aparecer as linhas   
-                        </p:column>
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 8000; font-size: 17pt;" 
+                              styleClass="text">
+                           Horarios
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           Aulas
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           o horario aaaa
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           Manutenção de Ensino
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           o horario aaaa
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           Apoio ao Ensino 
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           o horario aaaa
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           Atividade de Pesquisa e Extensão (autor)
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           o horario aaaa
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           Atividade de Pesquisa e Extensão (colaborador)
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           o horario aaaa
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           Atividades Administrativas
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           o horario aaaa
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           Outras Atividades Desenvolvidas no Campus
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           o horario aaaa
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           Atividade que Pretendo Propor no Semestre
+                        </font>
+                        
+                        <font face="Calibri" 
+                              color="black" 
+                              style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
+                              styleClass="text">
+                           o horario aaaa
+                        </font>
+                    </h:panelGrid>
 
-                        <p:column headerText="Horário">
-                            Não sei o que fazer para aparecer as linhas
-                        </p:column>
-
-                    </p:dataTable>
                     <p:commandButton styleClass="botao" 
                                      style="float: left;" 
                                      value="Will me pediu esse botão"/>
