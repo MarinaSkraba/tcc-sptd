@@ -24,7 +24,6 @@ import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
 import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
-import br.edu.ifpr.irati.modelo.PTDIncompleto;
 import br.edu.ifpr.irati.modelo.PTDSubmetido;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.ProjetoEnsino;
@@ -109,10 +108,10 @@ public class PTDSubmetidoMB {
         IProjetoPesquisaDao projetoPesquisaDAO = new ProjetoPesquisaDAO();
         projetosPesquisa = projetoPesquisaDAO.buscarProjetosPesquisaAtivos(professor);
         ptdSubmetido.setProjetosPesquisa(projetosPesquisa);
+        ptdSubmetido.setEstado("Em avaliação");
         PTDSubmetido ptdSubm = new PTDSubmetido();
         ptdSubmetidoDAO.salvar(ptdSubm);
     }
-    
     
     public String alterar(PTDSubmetido ptdSubmetido) {
         this.ptdSubmetido = ptdSubmetido;
