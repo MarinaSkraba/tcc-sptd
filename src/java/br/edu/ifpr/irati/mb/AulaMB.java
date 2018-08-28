@@ -41,7 +41,7 @@ public class AulaMB {
 
     }
 
-    public void salvar() {
+    public void salvarAula() {
 
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);        
         aula.setTipoOferta(tipoOfertaSelecionado);
@@ -53,26 +53,26 @@ public class AulaMB {
 
     }
 
-    public String alterar(Aula aula) {
+    public String alterarAula(Aula aula) {
         this.aula = aula;
         return "/adicionar aqui";
     }
 
-    public String desabilitar(Aula aula) {
+    public String desabilitarAula(Aula aula) {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aula.setEstadoAula("Desativado");
         aulaDAO.alterar(aula);
         return "/adicionar html aqui";
     }
 
-    public String excluir(Aula aula) {
+    public String excluirAula(Aula aula) {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aulaDAO.excluir(aula);
         aulas = aulaDAO.buscarTodos(Aula.class);
         return "/adicionar aqui";
     }
 
-    public void adicionarHorario() {
+    public void adicionarHorarioAula() {
         horarios.add(horario);
         horario = new Horario();
     }

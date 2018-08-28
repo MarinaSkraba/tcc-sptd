@@ -124,7 +124,7 @@ public class PTDIncompletoMB {
         ptdIncompletoDAO.alterar(ptdIncom);
     }
     
-    public String excluir(PTDIncompleto ptdIncompleto) {
+    public String excluirPTDIncompleto(PTDIncompleto ptdIncompleto) {
         Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
         ptdIncompletoDAO.excluir(ptdIncompleto);
         return "/adicionar html aqui";

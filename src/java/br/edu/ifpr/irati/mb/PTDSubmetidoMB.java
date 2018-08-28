@@ -80,7 +80,7 @@ public class PTDSubmetidoMB {
         
     }
 
-    public void submeterPTD(Professor professor) {
+    public void submeterPTDSubmetido(Professor professor) {
 
         Dao<PTDSubmetido> ptdSubmetidoDAO = new GenericDAO<>(PTDSubmetido.class);
         IAdministracaoDao administracaoDAO = new AdministracaoDAO();
@@ -113,12 +113,12 @@ public class PTDSubmetidoMB {
         ptdSubmetidoDAO.salvar(ptdSubm);
     }
     
-    public String alterar(PTDSubmetido ptdSubmetido) {
+    public String alterarPTDSubmetido(PTDSubmetido ptdSubmetido) {
         this.ptdSubmetido = ptdSubmetido;
         return "/adicionar aqui";
     }
 
-     public String excluir(PTDSubmetido ptdSubmetido) {
+     public String excluirPTDSubmetido(PTDSubmetido ptdSubmetido) {
         Dao<PTDSubmetido> ptdSubmetidoDAO = new GenericDAO<>(PTDSubmetido.class);
         ptdSubmetidoDAO.excluir(ptdSubmetido);
         ptdsSubmetidos = ptdSubmetidoDAO.buscarTodos(PTDSubmetido.class);

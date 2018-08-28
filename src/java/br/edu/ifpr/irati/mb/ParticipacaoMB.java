@@ -24,24 +24,26 @@ public class ParticipacaoMB {
         participacoes = new ArrayList<>();
     }
 
-    public void salvar() {
+    public void salvarParticipacao() {
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         participacaoDAO.salvar(participacao);
         participacoes = participacaoDAO.buscarTodos(Participacao.class);
 
     }
 
-    public String alterar(Participacao participacao) {
+    public String alterarParticipacao(Participacao participacao) {
         this.participacao = participacao;
         return "/adicionar aqui";
     }
 
-    public String desabilitar(Participacao participacao) {
-        //implementar depois
-        return "";
+    public void desabilitarParticipacao(Participacao participacao) {
+        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
+        participacao.setEstadoParticipacao("Desativado");
+        participacaoDAO.alterar(participacao);
+
     }
 
-    public String excluir(Participacao participacao) {
+    public String excluirParticipacao(Participacao participacao) {
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         participacaoDAO.excluir(participacao);
         participacoes = participacaoDAO.buscarTodos(Participacao.class);
