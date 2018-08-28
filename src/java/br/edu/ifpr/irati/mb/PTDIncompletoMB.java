@@ -87,8 +87,7 @@ public class PTDIncompletoMB {
 
         Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
         ptdIncompleto.setProfessor(professor);
-        PTDIncompleto ptdIncom = new PTDIncompleto();
-        ptdIncompletoDAO.salvar(ptdIncom);
+        ptdIncompletoDAO.salvar(ptdIncompleto);
 
     }
 

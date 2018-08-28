@@ -109,8 +109,7 @@ public class PTDSubmetidoMB {
         projetosPesquisa = projetoPesquisaDAO.buscarProjetosPesquisaAtivos(professor);
         ptdSubmetido.setProjetosPesquisa(projetosPesquisa);
         ptdSubmetido.setEstado("Em avaliação");
-        PTDSubmetido ptdSubm = new PTDSubmetido();
-        ptdSubmetidoDAO.salvar(ptdSubm);
+        ptdSubmetidoDAO.salvar(ptdSubmetido);
     }
     
     public String alterarPTDSubmetido(PTDSubmetido ptdSubmetido) {

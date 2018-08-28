@@ -29,8 +29,7 @@ public class OutroTipoAtividadeMB {
         horarioDAO.salvar(horario);
         outroTipoAtividade.getHorariosOutroTipoAtividade().add(horario);
         outroTipoAtividade.setEstadoOutroTipoAtividade("Ativo");
-        OutroTipoAtividade ota = new OutroTipoAtividade(outroTipoAtividade.getIdOutroTipoAtividade(), outroTipoAtividade.getEstadoOutroTipoAtividade(), outroTipoAtividade.getRotulo(), outroTipoAtividade.getPeriodicidade(), outroTipoAtividade.getHorariosOutroTipoAtividade());
-        outroTipoAtividadeDAO.salvar(ota);
+        outroTipoAtividadeDAO.salvar(outroTipoAtividade);
         outrosTiposAtividades = outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class);
 
     }

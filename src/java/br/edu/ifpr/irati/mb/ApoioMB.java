@@ -42,8 +42,7 @@ public class ApoioMB {
         apoio.setTipoApoio(tipoApoio);
         apoio.getHorariosApoio().add(horario);
         apoio.setEstadoAtividadeApoio("Ativo");
-        Apoio ap = new Apoio(apoio.getIdApoio(), apoio.getEstadoAtividadeApoio(), apoio.getTipoApoio(), apoio.getHorariosApoio());
-        apoioDAO.salvar(ap);
+        apoioDAO.salvar(apoio);
         apoios = apoioDAO.buscarTodos(Apoio.class);
 
     }
