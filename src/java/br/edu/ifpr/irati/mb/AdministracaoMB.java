@@ -32,7 +32,7 @@ public class AdministracaoMB {
 
     }
 
-    public void salvar() {
+    public void salvarAdministracao() {
         Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
         Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
         tipoAdministracaoDAO.salvar(tipoAdministracao);
@@ -46,26 +46,26 @@ public class AdministracaoMB {
         administracoes = administracaoDAO.buscarTodos(Administracao.class);
     }
 
-    public String alterar(Administracao administracao) {
+    public String alterarAdministracao(Administracao administracao) {
         this.administracao = administracao;
         return "/adicionar html aqui";
     }
 
-    public String desabilitar(Administracao administracao) {
+    public String desabilitarAdministracao(Administracao administracao) {
         Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
         administracao.setEstadoAtividadeAdministracao("Desativado");
         administracaoDAO.alterar(administracao);
         return "/adicionar html aqui";
     }
 
-    public String excluir(Administracao administracao) {
+    public String excluirAdministracao(Administracao administracao) {
         Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
         administracaoDAO.excluir(administracao);
         administracoes = administracaoDAO.buscarTodos(Administracao.class);
         return "/adicionar aqui";
     }
 
-    public void adicionarHorario() {
+    public void adicionarHorarioAdministracao() {
         horarios.add(horario);
         horario = new Horario();
     }

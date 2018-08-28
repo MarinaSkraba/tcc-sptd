@@ -4,7 +4,6 @@ package br.edu.ifpr.irati.mb;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.modelo.Curso;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 

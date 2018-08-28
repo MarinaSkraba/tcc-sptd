@@ -25,7 +25,7 @@ public class AulaMB {
     private Horario horario;
     private List<Horario> horarios;
     private Curso cursoSelecionado;
-    private TipoOferta tipoOferta;
+    private TipoOferta tipoOfertaSelecionado;
     private List<Aula> aulas;
 
     public AulaMB() {
@@ -34,50 +34,45 @@ public class AulaMB {
         horario = new Horario();
         aulaSelecionada = new Aula();
         horarios = new ArrayList<>();
-        cursoSelecionado = new Curso();
-        tipoOferta = new TipoOferta();
+        cursoSelecionado = new Curso();    
+        tipoOfertaSelecionado = new TipoOferta(); 
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aulas = aulaDAO.buscarTodos(Aula.class);
 
     }
 
-    public void salvar() {
+    public void salvarAula() {
 
-        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-        Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
-        tipoOfertaDAO.salvar(tipoOferta);
-        
-        // De onde que vem o valor dessa variárel de tipo oferta se na tela é pego apenas o rótulo e já colocado dentro de aula?
-        
-        aula.setTipoOferta(tipoOferta);
+        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);        
+        aula.setTipoOferta(tipoOfertaSelecionado);
         aula.setCurso(cursoSelecionado);
         aula.setEstadoAula("Ativo");
-        Aula a = new Aula(aula.getIdAula(), aula.getComponenteCurricular(), aula.getEstadoAula(), cursoSelecionado, aula.getTipoOferta(), aula.getHorariosAula());
+        Aula a = new Aula();
         aulaDAO.salvar(a);
         aulas = aulaDAO.buscarTodos(Aula.class);
 
     }
 
-    public String alterar(Aula aula) {
+    public String alterarAula(Aula aula) {
         this.aula = aula;
         return "/adicionar aqui";
     }
 
-    public String desabilitar(Aula aula) {
+    public String desabilitarAula(Aula aula) {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aula.setEstadoAula("Desativado");
         aulaDAO.alterar(aula);
         return "/adicionar html aqui";
     }
 
-    public String excluir(Aula aula) {
+    public String excluirAula(Aula aula) {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aulaDAO.excluir(aula);
         aulas = aulaDAO.buscarTodos(Aula.class);
         return "/adicionar aqui";
     }
 
-    public void adicionarHorario() {
+    public void adicionarHorarioAula() {
         horarios.add(horario);
         horario = new Horario();
     }
@@ -105,15 +100,6 @@ public class AulaMB {
     public void setCursoSelecionado(Curso cursoSelecionado) {
         this.cursoSelecionado = cursoSelecionado;
     }
-
-    public TipoOferta getTipoOferta() {
-        return tipoOferta;
-    }
-
-    public void setTipoOferta(TipoOferta tipoOferta) {
-        this.tipoOferta = tipoOferta;
-    }
-
     /**
      * @return the horarios
      */
@@ -154,6 +140,14 @@ public class AulaMB {
      */
     public void setAulaSelecionada(Aula aulaSelecionada) {
         this.aulaSelecionada = aulaSelecionada;
+    }
+
+    public TipoOferta getTipoOfertaSelecionado() {
+        return tipoOfertaSelecionado;
+    }
+
+    public void setTipoOfertaSelecionado(TipoOferta tipoOfertaSelecionado) {
+        this.tipoOfertaSelecionado = tipoOfertaSelecionado;
     }
 
 }

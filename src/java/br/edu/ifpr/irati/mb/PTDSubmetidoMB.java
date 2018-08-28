@@ -24,7 +24,6 @@ import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
 import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
-import br.edu.ifpr.irati.modelo.PTDIncompleto;
 import br.edu.ifpr.irati.modelo.PTDSubmetido;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.ProjetoEnsino;
@@ -81,7 +80,7 @@ public class PTDSubmetidoMB {
         
     }
 
-    public void submeterPTD(Professor professor) {
+    public void submeterPTDSubmetido(Professor professor) {
 
         Dao<PTDSubmetido> ptdSubmetidoDAO = new GenericDAO<>(PTDSubmetido.class);
         IAdministracaoDao administracaoDAO = new AdministracaoDAO();
@@ -109,17 +108,17 @@ public class PTDSubmetidoMB {
         IProjetoPesquisaDao projetoPesquisaDAO = new ProjetoPesquisaDAO();
         projetosPesquisa = projetoPesquisaDAO.buscarProjetosPesquisaAtivos(professor);
         ptdSubmetido.setProjetosPesquisa(projetosPesquisa);
+        ptdSubmetido.setEstado("Em avaliação");
         PTDSubmetido ptdSubm = new PTDSubmetido();
         ptdSubmetidoDAO.salvar(ptdSubm);
     }
     
-    
-    public String alterar(PTDSubmetido ptdSubmetido) {
+    public String alterarPTDSubmetido(PTDSubmetido ptdSubmetido) {
         this.ptdSubmetido = ptdSubmetido;
         return "/adicionar aqui";
     }
 
-     public String excluir(PTDSubmetido ptdSubmetido) {
+     public String excluirPTDSubmetido(PTDSubmetido ptdSubmetido) {
         Dao<PTDSubmetido> ptdSubmetidoDAO = new GenericDAO<>(PTDSubmetido.class);
         ptdSubmetidoDAO.excluir(ptdSubmetido);
         ptdsSubmetidos = ptdSubmetidoDAO.buscarTodos(PTDSubmetido.class);

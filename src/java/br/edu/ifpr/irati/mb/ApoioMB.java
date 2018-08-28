@@ -32,7 +32,7 @@ public class ApoioMB {
 
     }
 
-    public void salvar() {
+    public void salvarApoio() {
 
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         Dao<TipoApoio> tipoApoioDAO = new GenericDAO<>(TipoApoio.class);
@@ -48,26 +48,26 @@ public class ApoioMB {
 
     }
 
-    public String alterar(Apoio apoio) {
+    public String alterarApoio(Apoio apoio) {
         this.apoio = apoio;
         return "/adicionar aqui";
     }
 
-    public String desabilitar(Apoio apoio) {
+    public String desabilitarApoio(Apoio apoio) {
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         apoio.setEstadoAtividadeApoio("Desativado");
         apoioDAO.alterar(apoio);
         return "/adicionar html aqui";
     }
 
-    public String excluir(Apoio apoio) {
+    public String excluirApoio(Apoio apoio) {
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         apoioDAO.excluir(apoio);
         apoios = apoioDAO.buscarTodos(Apoio.class);
         return "/adicionar aqui";
     }
 
-    public void adicionarHorario() {
+    public void adicionarHorarioApoio() {
         horarios.add(horario);
         horario = new Horario();
     }

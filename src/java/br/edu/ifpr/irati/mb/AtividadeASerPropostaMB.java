@@ -23,7 +23,7 @@ public class AtividadeASerPropostaMB {
         atividadesASeremPropostas = atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class);
     }
 
-    public void salvar() {
+    public void salvarAtividadeASerProposta() {
 
         Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
@@ -36,26 +36,26 @@ public class AtividadeASerPropostaMB {
 
     }
 
-    public String alterar(AtividadeASerProposta atividadeASerProposta) {
+    public String alterarAtividadeASerProposta(AtividadeASerProposta atividadeASerProposta) {
         this.atividadeASerProposta = atividadeASerProposta;
         return "/adicionar aqui";
     }
 
-    public String desabilitar(AtividadeASerProposta atividadeASerProposta) {
+    public String desabilitarAtividadeASerProposta(AtividadeASerProposta atividadeASerProposta) {
         Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
         atividadeASerProposta.setEstadoAtividadeASerProposta("Desativado");
         atividadeASerPropostaDAO.alterar(atividadeASerProposta);
         return "/adicionar html aqui";
     }
 
-    public String excluir(AtividadeASerProposta atividadeASerProposta) {
+    public String excluirAtividadeASerProposta(AtividadeASerProposta atividadeASerProposta) {
         Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
         atividadeASerPropostaDAO.excluir(atividadeASerProposta);
         atividadesASeremPropostas = atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class);
         return "/adicionar aqui";
     }
 
-    public void adicionarHorario() {
+    public void adicionarHorarioAtividadeASerProposta() {
         horarios.add(horario);
         horario = new Horario();
     }

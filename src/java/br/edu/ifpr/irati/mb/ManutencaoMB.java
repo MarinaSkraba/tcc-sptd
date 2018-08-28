@@ -31,7 +31,7 @@ public class ManutencaoMB {
         manutencoesEnsino = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class);
     }
 
-    public void salvar() {
+    public void salvarManutencao() {
 
         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
         Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class);
@@ -47,26 +47,26 @@ public class ManutencaoMB {
 
     }
 
-    public String alterar(ManutencaoEnsino manutencaoEnsino) {
+    public String alterarManutencao(ManutencaoEnsino manutencaoEnsino) {
         this.manutencaoEnsino = manutencaoEnsino;
         return "/adicionar aqui";
     }
 
-    public String desabilitar(ManutencaoEnsino manutencaoEnsino) {
+    public String desabilitarManutencao(ManutencaoEnsino manutencaoEnsino) {
         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
         manutencaoEnsino.setEstadoManutencaoEnsino("Desativado");
         manutencaoEnsinoDAO.alterar(manutencaoEnsino);
         return "/adicionar html aqui";
     }
 
-    public String excluir(ManutencaoEnsino manutencaoEnsino) {
+    public String excluirManutencao(ManutencaoEnsino manutencaoEnsino) {
         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
         manutencaoEnsinoDAO.excluir(manutencaoEnsino);
         manutencoesEnsino = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class);
         return "/adicionar aqui";
     }
 
-    public void adicionarHorario() {
+    public void adicionarHorarioManutencao() {
         horarios.add(horario);
         horario = new Horario();
     }
