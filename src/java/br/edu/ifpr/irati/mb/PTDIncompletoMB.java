@@ -27,7 +27,6 @@ import br.edu.ifpr.irati.modelo.Administracao;
 import br.edu.ifpr.irati.modelo.Apoio;
 import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
 import br.edu.ifpr.irati.modelo.Aula;
-import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
 import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
 import br.edu.ifpr.irati.modelo.PTDIncompleto;
@@ -35,7 +34,6 @@ import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.ProjetoEnsino;
 import br.edu.ifpr.irati.modelo.ProjetoExtensao;
 import br.edu.ifpr.irati.modelo.ProjetoPesquisa;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -44,7 +42,6 @@ import javax.faces.bean.ManagedBean;
 public class PTDIncompletoMB {
 
     private PTDIncompleto ptdIncompleto;
-    private List<PTDIncompleto> ptdsIncompletos;
     private Administracao administracao;
     private List<Administracao> administracoes;
     private Apoio apoio;
@@ -126,6 +123,12 @@ public class PTDIncompletoMB {
         PTDIncompleto ptdIncom = new PTDIncompleto();
         ptdIncompletoDAO.alterar(ptdIncom);
     }
+    
+    public String excluir(PTDIncompleto ptdIncompleto) {
+        Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
+        ptdIncompletoDAO.excluir(ptdIncompleto);
+        return "/adicionar html aqui";
+    }
 
     public PTDIncompleto getPtdIncompleto() {
         return ptdIncompleto;
@@ -134,15 +137,7 @@ public class PTDIncompletoMB {
     public void setPtdIncompleto(PTDIncompleto ptdIncompleto) {
         this.ptdIncompleto = ptdIncompleto;
     }
-
-    public List<PTDIncompleto> getPtdsIncompletos() {
-        return ptdsIncompletos;
-    }
-
-    public void setPtdsIncompletos(List<PTDIncompleto> ptdsIncompletos) {
-        this.ptdsIncompletos = ptdsIncompletos;
-    }
-
+    
     public Administracao getAdministracao() {
         return administracao;
     }
