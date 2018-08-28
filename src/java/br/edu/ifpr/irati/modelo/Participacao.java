@@ -14,10 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-/**
- *
- * @author Marina
- */
 @Entity(name = "participacao")
 public class Participacao implements Serializable {
 
@@ -32,7 +28,7 @@ public class Participacao implements Serializable {
     private String estadoParticipacao;
 
     @ManyToOne
-    @JoinColumn(name = "professor_idProfessor")
+    @JoinColumn(name = "professor_idUsuario")
     private Professor professor;
 
     public Participacao() {
