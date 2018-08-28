@@ -90,10 +90,19 @@ public class PTDIncompletoMB {
 
         Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
         ptdIncompleto.setProfessor(professor);
+        PTDIncompleto ptdIncom = new PTDIncompleto();
+        ptdIncompletoDAO.salvar(ptdIncom);
+
+    }
+
+    public void alterarPTDIncompleto(Professor professor) {
+
+        Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
+        ptdIncompleto.setProfessor(professor);
         IAdministracaoDao administracaoDAO = new AdministracaoDAO();
         administracoes = administracaoDAO.buscarAdministracoesAtivas(professor);
         ptdIncompleto.setAdministrativas(administracoes);
-        IApoioDao apoioDAO =  new ApoioDAO();
+        IApoioDao apoioDAO = new ApoioDAO();
         apoios = apoioDAO.buscarApoiosAtivos(professor);
         ptdIncompleto.setApoios(apoios);
         IAtividadeASerPropostaDao atividadeASerPropostaDAO = new AtividadeASerPropostaDAO();
@@ -115,7 +124,7 @@ public class PTDIncompletoMB {
         projetosPesquisa = projetoPesquisaDAO.buscarProjetosPesquisaAtivos(professor);
         ptdIncompleto.setProjetosPesquisa(projetosPesquisa);
         PTDIncompleto ptdIncom = new PTDIncompleto();
-        ptdIncompletoDAO.salvar(ptdIncom);
+        ptdIncompletoDAO.alterar(ptdIncom);
     }
 
     public PTDIncompleto getPtdIncompleto() {

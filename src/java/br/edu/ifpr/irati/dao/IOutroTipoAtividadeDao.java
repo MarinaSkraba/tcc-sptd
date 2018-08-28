@@ -2,12 +2,12 @@
 package br.edu.ifpr.irati.dao;
 
 import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
-import br.edu.ifpr.irati.modelo.Professor;
+import java.io.Serializable;
 import java.util.List;
 
 public interface IOutroTipoAtividadeDao {
  
     
-     public List<OutroTipoAtividade> buscarOutrosTipoAtividadesAtivas(Professor professor);
+     public List<OutroTipoAtividade> buscarOutrosTipoAtividadesAtivas(Serializable professor);
     
 }
