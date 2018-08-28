@@ -42,4 +42,18 @@ public class TipoOferta implements Serializable {
     public void setRotulo(String rotulo) {
         this.rotulo = rotulo;
     }
+       @Override
+    public String toString() {
+        return rotulo;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        TipoOferta tO = (TipoOferta) obj;
+        if (this.idTipoOferta == tO.getIdTipoOferta()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
