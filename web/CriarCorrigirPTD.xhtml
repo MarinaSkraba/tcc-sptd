@@ -151,11 +151,16 @@
                         <h:outputText value="ORGANIZAÇÃO" 
                                       styleClass="text01"/>
                         <br/>
-
-                        <f:selectItems value="#{tipoOfertaMB}" 
-                                       var="tipoOferta" 
-                                       itemValue="#{tipoOferta}"
-                                       itemLabel="#{tipoOferta}" />
+                        <p:selectOneMenu id="selectTipoOferta" 
+                                         value="#{aulaMB.tipoOfertaSelecionado}"
+                                         converter="TipoOfertaConverter">
+                            
+                            <f:selectItems value="#{tipoOfertaMB}" 
+                                           var="tipoOferta" 
+                                           itemValue="#{tipoOferta}"
+                                           itemLabel="#{tipoOferta}" />
+                            
+                        </p:selectOneMenu>
 
                         <br/>
                         <h:commandButton value="Salvar" action="#{aulaMB.salvarAula()}"/>
