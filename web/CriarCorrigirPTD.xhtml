@@ -137,7 +137,9 @@
                                          value="#{aulaMB.cursoSelecionado}"
                                          converter="cursoConverter">
 
-                            <f:selectItems value="#{cursoMB.cursos}" var="curso" itemValue="#{curso}"
+                            <f:selectItems value="#{cursoMB.cursos}" 
+                                           var="curso" 
+                                           itemValue="#{curso}"
                                            itemLabel="#{curso}" />
                         </p:selectOneMenu>
 
@@ -150,11 +152,10 @@
                                       styleClass="text01"/>
                         <br/>
 
-                        <p:selectOneRadio id="tipoOferta" value="#{aulaMB.tipoOfertaSelecionado.rotulo}" converter="TipoOfertaConverter">
-                            <f:selectItem itemLabel="#{tipoOfertaMB.tiposOferta.get(0)}" itemValue="#{tipoOfertaMB.tiposOferta.get(0)}" />
-                            <f:selectItem itemLabel="#{tipoOfertaMB.tiposOferta.get(1)}" itemValue="#{tipoOfertaMB.tiposOferta.get(1)}" />
-                            <f:selectItem itemLabel="#{tipoOfertaMB.tiposOferta.get(2)}" itemValue="#{tipoOfertaMB.tiposOferta.get(2)}" />
-                        </p:selectOneRadio>
+                        <f:selectItems value="#{tipoOfertaMB}" 
+                                       var="tipoOferta" 
+                                       itemValue="#{tipoOferta}"
+                                       itemLabel="#{tipoOferta}" />
 
                         <br/>
                         <h:commandButton value="Salvar" action="#{aulaMB.salvarAula()}"/>
