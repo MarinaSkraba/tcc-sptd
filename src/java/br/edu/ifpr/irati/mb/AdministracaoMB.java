@@ -41,8 +41,7 @@ public class AdministracaoMB {
         administracao.setTipoAdministracao(tipoAdministracao);
         administracao.getHorariosAdministracao().add(horario);
         administracao.setEstadoAtividadeAdministracao("Ativo");
-        Administracao adm = new Administracao(administracao.getIdAdministracao(), administracao.getEstadoAtividadeAdministracao(), administracao.getTipoAdministracao(), administracao.getHorariosAdministracao());
-        administracaoDAO.salvar(adm);
+        administracaoDAO.salvar(administracao);
         administracoes = administracaoDAO.buscarTodos(Administracao.class);
     }
 

@@ -47,8 +47,7 @@ public class AulaMB {
         aula.setTipoOferta(tipoOfertaSelecionado);
         aula.setCurso(cursoSelecionado);
         aula.setEstadoAula("Ativo");
-        Aula a = new Aula();
-        aulaDAO.salvar(a);
+        aulaDAO.salvar(aula);
         aulas = aulaDAO.buscarTodos(Aula.class);
 
     }

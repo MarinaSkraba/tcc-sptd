@@ -30,8 +30,7 @@ public class AtividadeASerPropostaMB {
         horarioDAO.salvar(horario);
         atividadeASerProposta.getHorariosAtividadesASerProposta().add(horario);
         atividadeASerProposta.setEstadoAtividadeASerProposta("Ativo");
-        AtividadeASerProposta atasp = new AtividadeASerProposta(atividadeASerProposta.getIdAtividadeASerProposta(), atividadeASerProposta.getEstadoAtividadeASerProposta(), atividadeASerProposta.getRotulo(), atividadeASerProposta.getPeriodicidade(), atividadeASerProposta.getHorariosAtividadesASerProposta());
-        atividadeASerPropostaDAO.salvar(atasp);
+        atividadeASerPropostaDAO.salvar(atividadeASerProposta);
         atividadesASeremPropostas = atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class);
 
     }

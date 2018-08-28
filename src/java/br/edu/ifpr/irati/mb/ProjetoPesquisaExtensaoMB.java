@@ -51,14 +51,13 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         participacao.setRotulo("Autor");
         participacao.setEstadoParticipacao("Ativo");
-        Participacao p = new Participacao(participacao.getIdParticipacao(), participacao.getRotulo(), participacao.getEstadoParticipacao());
-        participacaoDAO.salvar(p);
+        participacao.setProfessor(professorAutor);
+        participacaoDAO.salvar(participacao);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.salvar(horario);
-        projetoExtensao.getParticipacoes().add(p);
+        projetoExtensao.getParticipacoes().add(participacao);
         projetoExtensao.getHorariosProjetoExtensao().add(horario);
-        ProjetoExtensao pE = new ProjetoExtensao(projetoExtensao.getIdProjetoExtensao(), projetoExtensao.getEstadoProjetoExtensao(), projetoExtensao.getNumeroProcesso(), projetoExtensao.getTituloProcesso(), projetoExtensao.getPrevisaoConclusao(), projetoExtensao.getInstituicaoPesquisa(), projetoExtensao.getHorariosProjetoExtensao(), projetoExtensao.getParticipacoes());
-        projetoExtensaoDAO.salvar(pE);
+        projetoExtensaoDAO.salvar(projetoExtensao);
         projetosExtensao = projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class);
 
     }
@@ -68,14 +67,13 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         participacao.setRotulo("Autor");
         participacao.setEstadoParticipacao("Ativo");
-        Participacao p = new Participacao(participacao.getIdParticipacao(), participacao.getRotulo(), participacao.getEstadoParticipacao(), professorAutor);
-        participacaoDAO.salvar(p);
+        participacao.setProfessor(professorAutor);
+        participacaoDAO.salvar(participacao);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.salvar(horario);
-        projetoExtensao.getParticipacoes().add(p);
+        projetoExtensao.getParticipacoes().add(participacao);
         projetoExtensao.getHorariosProjetoExtensao().add(horario);
-        ProjetoExtensao pE = new ProjetoExtensao(projetoExtensao.getIdProjetoExtensao(), projetoExtensao.getEstadoProjetoExtensao(), projetoExtensao.getNumeroProcesso(), projetoExtensao.getTituloProcesso(), projetoExtensao.getPrevisaoConclusao(), projetoExtensao.getInstituicaoPesquisa(), projetoExtensao.getHorariosProjetoExtensao(), projetoExtensao.getParticipacoes());
-        projetoExtensaoDAO.salvar(pE);
+        projetoExtensaoDAO.salvar(projetoExtensao);
         projetosExtensao = projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class);
     }
 
@@ -85,11 +83,11 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         participacao.setRotulo("Colaborador");
         participacao.setEstadoParticipacao("Ativo");
-        Participacao p = new Participacao(participacao.getIdParticipacao(), participacao.getRotulo(), participacao.getEstadoParticipacao());
-        participacaoDAO.salvar(p);
+        participacao.setProfessor(professorColaborador);
+        participacaoDAO.salvar(participacao);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.salvar(horario);
-        projetoExtensaoSelecionado.getParticipacoes().add(p);
+        projetoExtensaoSelecionado.getParticipacoes().add(participacao);
         projetoExtensaoSelecionado.getHorariosProjetoExtensao().add(horario);
         projetoExtensaoDAO.alterar(projetoExtensaoSelecionado);
 
@@ -100,11 +98,11 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         participacao.setRotulo("Colaborador");
         participacao.setEstadoParticipacao("Ativo");
-        Participacao p = new Participacao(participacao.getIdParticipacao(), participacao.getRotulo(), participacao.getEstadoParticipacao(), professorColaborador);
-        participacaoDAO.salvar(p);
+        participacao.setProfessor(professorColaborador);
+        participacaoDAO.salvar(participacao);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.salvar(horario);
-        projetoPesquisaSelecionado.getParticipacoes().add(p);
+        projetoPesquisaSelecionado.getParticipacoes().add(participacao);
         projetoPesquisaSelecionado.getHorariosProjetoPesquisa().add(horario);
         projetoPesquisaDAO.alterar(projetoPesquisaSelecionado);
     }
