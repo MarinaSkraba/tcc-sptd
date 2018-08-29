@@ -17,12 +17,21 @@ import javax.faces.bean.ManagedBean;
 public class HorarioMB {
 
     private Horario horario;
-    List<Horario> horarios;
+    private List<Horario> horarios;
+    private List<String> diasSemana;
 
     public HorarioMB() {
 
         horario = new Horario();
         horarios = new ArrayList<>();
+        diasSemana = new ArrayList<>();
+        diasSemana.add("Segunda");
+        diasSemana.add("Terça");
+        diasSemana.add("Quarta");
+        diasSemana.add("Quinta");
+        diasSemana.add("Sexta");
+        diasSemana.add("Sábado");
+        
     }
 
     public void salvar(Aula aula) {
@@ -32,7 +41,7 @@ public class HorarioMB {
         aula.getHorariosAula().add(horario);
         horarioDAO.salvar(aula.getHorariosAula().get(aula.getHorariosAula().size() - 1));
         aulaDAO.alterar(aula);
-        horarios = horarioDAO.buscarTodos(Horario.class);
+        setHorarios(horarioDAO.buscarTodos(Horario.class));
     }
 
     public String alterar(Horario horario) {
@@ -49,7 +58,7 @@ public class HorarioMB {
     public String excluir(Horario horario) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.excluir(horario);
-        horarios = horarioDAO.buscarTodos(Horario.class);
+        setHorarios(horarioDAO.buscarTodos(Horario.class));
         return "/adicionar aqui";
     }
 
@@ -59,5 +68,33 @@ public class HorarioMB {
 
     public void setHorario(Horario horario) {
         this.horario = horario;
+    }
+
+    /**
+     * @return the horarios
+     */
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    /**
+     * @param horarios the horarios to set
+     */
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
+    }
+
+    /**
+     * @return the diasSemana
+     */
+    public List<String> getDiasSemana() {
+        return diasSemana;
+    }
+
+    /**
+     * @param diasSemana the diasSemana to set
+     */
+    public void setDiasSemana(List<String> diasSemana) {
+        this.diasSemana = diasSemana;
     }
 }

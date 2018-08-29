@@ -41,7 +41,7 @@ public class AulaMB {
 
     }
 
-    public void salvarAula() {
+    public String salvarAula() {
 
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);        
         aula.setTipoOferta(tipoOfertaSelecionado);
@@ -49,6 +49,8 @@ public class AulaMB {
         aula.setEstadoAula("Ativo");
         aulaDAO.salvar(aula);
         aulas = aulaDAO.buscarTodos(Aula.class);
+        aula = new Aula();
+        return "CriarCorrigirPTD";
 
     }
 

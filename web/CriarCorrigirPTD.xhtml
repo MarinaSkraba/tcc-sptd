@@ -231,7 +231,7 @@
                                 </h:panelGrid>
                             </f:facet>
                             <!-- Tabela para os títulos de horário -->
-                            <h:dataTable  value="#{aulaMB.aula.horariosAula}" 
+                            <h:dataTable  value="#{aula.horariosAula}" 
                                           var="horario" 
                                           headerClass="text-center"
                                           footerClass="text-center">
@@ -251,14 +251,12 @@
                                                   styleClass="text01" 
                                                   style="font-size: large;"/>
                                 </h:column>
-                                <h:column>
-                                    <f:facet name="footer">
-                                        <p:commandButton styleClass="botao" 
-                                                         value="+ horário" 
-                                                         action="#{aulaMB.setAulaSelecionada(aula)}"
-                                                         onclick="PF('addHorarioDialog').show();"/>
-                                    </f:facet>
-                                </h:column>
+                                <f:facet name="footer">
+                                    <p:commandButton styleClass="botao" 
+                                                     value="+ horário" 
+                                                     action="#{aulaMB.setAulaSelecionada(aula)}"
+                                                     onclick="PF('addHorarioDialog').show();"/>
+                                </f:facet>
 
                             </h:dataTable>
 
@@ -292,7 +290,7 @@
                                             icon="ui-icon-extlink" />
                                 <p:separator />
                                 <p:menuitem value="Delete" 
-                                            action="#{aulaMB.desabilitar(aula)}" 
+                                            action="#{aulaMB.desabilitarAula(aula)}" 
                                             ajax="false" 
                                             icon="ui-icon-close" />
 
@@ -310,13 +308,15 @@
                               hideEffect="fade" 
                               resizable="false">
 
-                        <font face="Calibri" 
-                              color="black" 
-                              style="margin: 5px 35px; float:left; font-weight: 100; font-size: large;" 
-                              styleClass="text">
-                            DIA DA SEMANA
-                            <br> <p:inputText value="#{horarioMB.horario.diaSemana}"/> </br>
-                        </font>
+                        <p:selectOneMenu id="selectDiaSemana" 
+                                         value="#{horarioMB.horario.diaSemana}">
+
+                            <f:selectItems value="#{horarioMB.diasSemana}" 
+                                           var="diaSemana" 
+                                           itemValue="#{diaSemana}"
+                                           itemLabel="#{diaSemana}" />
+                        </p:selectOneMenu>
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 100; font-size: large;" 
@@ -549,119 +549,119 @@
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 8000; font-size: 17pt;" 
                               styleClass="text">
-                           Horarios
+                            Horarios
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           Aulas
+                            Aulas
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           o horario aaaa
+                            o horario aaaa
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           Manutenção de Ensino
+                            Manutenção de Ensino
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           o horario aaaa
+                            o horario aaaa
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           Apoio ao Ensino 
+                            Apoio ao Ensino 
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           o horario aaaa
+                            o horario aaaa
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           Atividade de Pesquisa e Extensão (autor)
+                            Atividade de Pesquisa e Extensão (autor)
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           o horario aaaa
+                            o horario aaaa
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           Atividade de Pesquisa e Extensão (colaborador)
+                            Atividade de Pesquisa e Extensão (colaborador)
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           o horario aaaa
+                            o horario aaaa
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           Atividades Administrativas
+                            Atividades Administrativas
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           o horario aaaa
+                            o horario aaaa
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           Outras Atividades Desenvolvidas no Campus
+                            Outras Atividades Desenvolvidas no Campus
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           o horario aaaa
+                            o horario aaaa
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           Atividade que Pretendo Propor no Semestre
+                            Atividade que Pretendo Propor no Semestre
                         </font>
-                        
+
                         <font face="Calibri" 
                               color="black" 
                               style="margin: 5px 35px; float:left; font-weight: 500; font-size: 17pt;" 
                               styleClass="text">
-                           o horario aaaa
+                            o horario aaaa
                         </font>
                     </h:panelGrid>
 
