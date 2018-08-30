@@ -7,9 +7,13 @@ package br.edu.ifpr.irati.mb;
 
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
+import br.edu.ifpr.irati.dao.IManutencaoDao;
+import br.edu.ifpr.irati.dao.ManutencaoDAO;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
 import br.edu.ifpr.irati.modelo.TipoManutencao;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
@@ -27,11 +31,10 @@ public class ManutencaoMB {
         horario = new Horario();
         tipoManutencao = new TipoManutencao();
         manutencaoEnsino = new ManutencaoEnsino();
-        Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
-        manutencoesEnsino = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class);
+        manutencoesEnsino = new ArrayList();
     }
 
-    public void salvarManutencao() {
+    public void salvarManutencao(Serializable idUsuario) {
 
         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
         Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class);
@@ -42,12 +45,15 @@ public class ManutencaoMB {
         manutencaoEnsino.getHorariosManutecao().add(horario);
         manutencaoEnsino.setEstadoManutencaoEnsino("Ativo");
         manutencaoEnsinoDAO.salvar(manutencaoEnsino);
-        manutencoesEnsino = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class);
+        IManutencaoDao mDAO = new ManutencaoDAO();
+        manutencoesEnsino = mDAO.buscarManutencoesPorProfessor(idUsuario);
 
     }
 
     public String alterarManutencao(ManutencaoEnsino manutencaoEnsino) {
+        Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
         this.manutencaoEnsino = manutencaoEnsino;
+        manutencaoEnsinoDAO.alterar(manutencaoEnsino);
         return "/adicionar aqui";
     }
 

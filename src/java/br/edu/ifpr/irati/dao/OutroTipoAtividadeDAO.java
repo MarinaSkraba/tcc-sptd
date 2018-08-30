@@ -21,4 +21,16 @@ public class OutroTipoAtividadeDAO implements IOutroTipoAtividadeDao {
         return results;
     }
 
+    @Override
+    public List<OutroTipoAtividade> buscarOutrosTipoAtividadesPorProfessor(Serializable professor) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "from outrotipoatividade, professor where idUsuario = ? ";
+        Query query = session.createQuery(hql);
+        List results = query.list();
+        session.clear();
+        session.close();
+        return results;
+    }
+
 }

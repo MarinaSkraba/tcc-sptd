@@ -5,11 +5,15 @@
  */
 package br.edu.ifpr.irati.mb;
 
+import br.edu.ifpr.irati.dao.ApoioDAO;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
+import br.edu.ifpr.irati.dao.IApoioDao;
 import br.edu.ifpr.irati.modelo.Apoio;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.TipoApoio;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
@@ -27,12 +31,11 @@ public class ApoioMB {
         horario = new Horario();
         tipoApoio = new TipoApoio();
         apoio = new Apoio();
-        Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
-        apoios = apoioDAO.buscarTodos(Apoio.class);
+        apoios = new ArrayList();
 
     }
 
-    public void salvarApoio() {
+    public void salvarApoio(Serializable idUsuario) {
 
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         Dao<TipoApoio> tipoApoioDAO = new GenericDAO<>(TipoApoio.class);
@@ -43,12 +46,15 @@ public class ApoioMB {
         apoio.getHorariosApoio().add(horario);
         apoio.setEstadoAtividadeApoio("Ativo");
         apoioDAO.salvar(apoio);
-        apoios = apoioDAO.buscarTodos(Apoio.class);
+        IApoioDao apDAO = new ApoioDAO();
+        apoios = apDAO.buscarApoiosPorProfessor(idUsuario);
 
     }
 
     public String alterarApoio(Apoio apoio) {
+        Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         this.apoio = apoio;
+        apoioDAO.alterar(apoio);
         return "/adicionar aqui";
     }
 

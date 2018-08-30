@@ -8,4 +8,7 @@ public interface IProjetoPesquisaDao {
 
     public List<ProjetoPesquisa> buscarProjetosPesquisaAtivos(Serializable idUsuario);
 
+    public List<ProjetoPesquisa> buscarProjetosPesquisaPorProfessor(Serializable idUsuario);
+
+    public List<ProjetoPesquisa> buscarProjetosPesquisaColabPorProfessor(Serializable idUsuario);
 }

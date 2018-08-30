@@ -1,4 +1,3 @@
-
 package br.edu.ifpr.irati.dao;
 
 import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
@@ -21,5 +20,17 @@ public class AtividadeASerPropostaDAO implements IAtividadeASerPropostaDao {
         session.close();
         return results;
     }
-    
+
+    @Override
+    public List<AtividadeASerProposta> buscarAtividadesPorProfessor(Serializable professor) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "from atividadeaserproposta, professor where idUsuario = ? ";
+        Query query = session.createQuery(hql);
+        List results = query.list();
+        session.clear();
+        session.close();
+        return results;
+
+    }
+
 }

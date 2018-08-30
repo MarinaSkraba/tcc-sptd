@@ -9,5 +9,7 @@ public interface IOutroTipoAtividadeDao {
  
     
      public List<OutroTipoAtividade> buscarOutrosTipoAtividadesAtivas(Serializable professor);
+     
+     public List<OutroTipoAtividade> buscarOutrosTipoAtividadesPorProfessor(Serializable professor);
     
 }

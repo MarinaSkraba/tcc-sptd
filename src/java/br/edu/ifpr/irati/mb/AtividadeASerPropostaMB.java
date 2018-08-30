@@ -1,9 +1,13 @@
 package br.edu.ifpr.irati.mb;
 
+import br.edu.ifpr.irati.dao.AtividadeASerPropostaDAO;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
+import br.edu.ifpr.irati.dao.IAtividadeASerPropostaDao;
 import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
 import br.edu.ifpr.irati.modelo.Horario;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
@@ -19,11 +23,10 @@ public class AtividadeASerPropostaMB {
 
         atividadeASerProposta = new AtividadeASerProposta();
         horario = new Horario();
-        Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
-        atividadesASeremPropostas = atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class);
+        atividadesASeremPropostas = new ArrayList();
     }
 
-    public void salvarAtividadeASerProposta() {
+    public void salvarAtividadeASerProposta(Serializable idUsuario) {
 
         Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
@@ -31,12 +34,15 @@ public class AtividadeASerPropostaMB {
         atividadeASerProposta.getHorariosAtividadesASerProposta().add(horario);
         atividadeASerProposta.setEstadoAtividadeASerProposta("Ativo");
         atividadeASerPropostaDAO.salvar(atividadeASerProposta);
-        atividadesASeremPropostas = atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class);
+        IAtividadeASerPropostaDao atDAO = new AtividadeASerPropostaDAO();
+        atividadesASeremPropostas = atDAO.buscarAtividadesPorProfessor(idUsuario);
 
     }
 
     public String alterarAtividadeASerProposta(AtividadeASerProposta atividadeASerProposta) {
+        Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
         this.atividadeASerProposta = atividadeASerProposta;
+        atividadeASerPropostaDAO.alterar(atividadeASerProposta);
         return "/adicionar aqui";
     }
 

@@ -2,12 +2,17 @@ package br.edu.ifpr.irati.mb;
 
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
+import br.edu.ifpr.irati.dao.IProjetoExtensaoDao;
+import br.edu.ifpr.irati.dao.IProjetoPesquisaDao;
+import br.edu.ifpr.irati.dao.ProjetoExtensaoDAO;
+import br.edu.ifpr.irati.dao.ProjetoPesquisaDAO;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.Participacao;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.ProjetoExtensao;
 import br.edu.ifpr.irati.modelo.ProjetoPesquisa;
 import br.edu.ifpr.irati.modelo.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
@@ -18,6 +23,8 @@ public class ProjetoPesquisaExtensaoMB {
     private ProjetoExtensao projetoExtensao;
     private List<ProjetoPesquisa> projetosPesquisa;
     private List<ProjetoExtensao> projetosExtensao;
+    private List<ProjetoPesquisa> projetosPesquisaColab;
+    private List<ProjetoExtensao> projetosExtensaoColab;
     private Horario horario;
     private List<Horario> horarios;
     private Participacao participacao;
@@ -33,10 +40,12 @@ public class ProjetoPesquisaExtensaoMB {
         projetoExtensao = new ProjetoExtensao();
         horario = new Horario();
         participacao = new Participacao();
+        projetosExtensao = new ArrayList();
+        projetosPesquisa = new ArrayList();
         Dao<ProjetoPesquisa> projetoPesquisaDAO = new GenericDAO<>(ProjetoPesquisa.class);
-        projetosPesquisa = projetoPesquisaDAO.buscarTodos(ProjetoPesquisa.class);
+        projetosPesquisaColab = projetoPesquisaDAO.buscarTodos(ProjetoPesquisa.class);
         Dao<ProjetoExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
-        projetosExtensao = projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class);
+        projetosExtensaoColab = projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class);
     }
 
     public ProjetoPesquisaExtensaoMB(String tipoProjetoAutor, String tipoProjetoColab) {
@@ -58,12 +67,13 @@ public class ProjetoPesquisaExtensaoMB {
         projetoExtensao.getParticipacoes().add(participacao);
         projetoExtensao.getHorariosProjetoExtensao().add(horario);
         projetoExtensaoDAO.salvar(projetoExtensao);
-        projetosExtensao = projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class);
+        IProjetoExtensaoDao peDAO = new ProjetoExtensaoDAO();
+        projetosExtensao = peDAO.buscarProjetosExtensaoPorProfessor(professorAutor.getIdUsuario());
 
     }
 
     public void salvarProjetoPesquisaAutor(Professor professorAutor) {
-        Dao<ProjetoExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
+        Dao<ProjetoPesquisa> projetoPesquisaDAO = new GenericDAO<>(ProjetoPesquisa.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         participacao.setRotulo("Autor");
         participacao.setEstadoParticipacao("Ativo");
@@ -71,10 +81,11 @@ public class ProjetoPesquisaExtensaoMB {
         participacaoDAO.salvar(participacao);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.salvar(horario);
-        projetoExtensao.getParticipacoes().add(participacao);
-        projetoExtensao.getHorariosProjetoExtensao().add(horario);
-        projetoExtensaoDAO.salvar(projetoExtensao);
-        projetosExtensao = projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class);
+        projetoPesquisa.getParticipacoes().add(participacao);
+        projetoPesquisa.getHorariosProjetoPesquisa().add(horario);
+        projetoPesquisaDAO.salvar(projetoPesquisa);
+        IProjetoPesquisaDao ppDAO = new ProjetoPesquisaDAO();
+        projetosPesquisa = ppDAO.buscarProjetosPesquisaPorProfessor(professorAutor.getIdUsuario());
     }
 
     public void salvarColaboracaoExtensao(Professor professorColaborador) {
@@ -90,6 +101,8 @@ public class ProjetoPesquisaExtensaoMB {
         projetoExtensaoSelecionado.getParticipacoes().add(participacao);
         projetoExtensaoSelecionado.getHorariosProjetoExtensao().add(horario);
         projetoExtensaoDAO.alterar(projetoExtensaoSelecionado);
+        IProjetoExtensaoDao peDAO = new ProjetoExtensaoDAO();
+        projetosExtensaoColab = peDAO.buscarProjetosExtensaoColabPorProfessor(professorColaborador.getIdUsuario());
 
     }
 
@@ -105,10 +118,14 @@ public class ProjetoPesquisaExtensaoMB {
         projetoPesquisaSelecionado.getParticipacoes().add(participacao);
         projetoPesquisaSelecionado.getHorariosProjetoPesquisa().add(horario);
         projetoPesquisaDAO.alterar(projetoPesquisaSelecionado);
+        IProjetoPesquisaDao ppDAO = new ProjetoPesquisaDAO();
+        projetosPesquisaColab = ppDAO.buscarProjetosPesquisaColabPorProfessor(professorColaborador.getIdUsuario());
     }
 
     public String alterarProjetoExtensao(ProjetoExtensao projetoExtensao) {
+        Dao<ProjetoExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
         this.projetoExtensao = projetoExtensao;
+        projetoExtensaoDAO.alterar(projetoExtensao);
         return "/adicionar aqui";
     }
 
@@ -128,6 +145,8 @@ public class ProjetoPesquisaExtensaoMB {
 
     public String alterarProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
         this.projetoPesquisa = projetoPesquisa;
+        Dao<ProjetoPesquisa> projetoPesquisaDAO = new GenericDAO<>(ProjetoPesquisa.class);
+        projetoPesquisaDAO.alterar(projetoPesquisa);
         return "/adicionar aqui";
     }
 
@@ -236,6 +255,22 @@ public class ProjetoPesquisaExtensaoMB {
 
     public void setTipoProjetoColab(String tipoProjetoColab) {
         this.tipoProjetoColab = tipoProjetoColab;
+    }
+
+    public List<ProjetoPesquisa> getProjetosPesquisaColab() {
+        return projetosPesquisaColab;
+    }
+
+    public void setProjetosPesquisaColab(List<ProjetoPesquisa> projetosPesquisaColab) {
+        this.projetosPesquisaColab = projetosPesquisaColab;
+    }
+
+    public List<ProjetoExtensao> getProjetosExtensaoColab() {
+        return projetosExtensaoColab;
+    }
+
+    public void setProjetosExtensaoColab(List<ProjetoExtensao> projetosExtensaoColab) {
+        this.projetosExtensaoColab = projetosExtensaoColab;
     }
 
 }
