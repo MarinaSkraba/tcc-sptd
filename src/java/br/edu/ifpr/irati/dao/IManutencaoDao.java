@@ -7,5 +7,7 @@ import java.util.List;
 public interface IManutencaoDao {
 
     public List<ManutencaoEnsino> buscarManutencoesAtivas(Serializable professor);
+    
+    public List<ManutencaoEnsino> buscarManutencoesPorProfessor(Serializable professor);
 
 }

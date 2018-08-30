@@ -113,7 +113,9 @@ public class PTDSubmetidoMB {
     }
     
     public String alterarPTDSubmetido(PTDSubmetido ptdSubmetido) {
+        Dao<PTDSubmetido> ptdSubmetidoDAO = new GenericDAO<>(PTDSubmetido.class);
         this.ptdSubmetido = ptdSubmetido;
+        ptdSubmetidoDAO.alterar(ptdSubmetido);
         return "/adicionar aqui";
     }
 

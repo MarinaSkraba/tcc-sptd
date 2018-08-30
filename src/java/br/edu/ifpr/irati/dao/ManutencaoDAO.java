@@ -21,4 +21,16 @@ public class ManutencaoDAO implements IManutencaoDao {
         return results;
     }
 
+    @Override
+    public List<ManutencaoEnsino> buscarManutencoesPorProfessor(Serializable professor) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "from manutencao, professor where idUsuario = ? ";
+        Query query = session.createQuery(hql);
+        List results = query.list();
+        session.clear();
+        session.close();
+        return results;
+
+    }
+
 }

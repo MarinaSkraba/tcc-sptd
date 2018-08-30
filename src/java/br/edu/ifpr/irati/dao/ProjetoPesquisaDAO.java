@@ -12,7 +12,7 @@ public class ProjetoPesquisaDAO implements IProjetoPesquisaDao {
 
     @Override
     public List<ProjetoPesquisa> buscarProjetosPesquisaAtivos(Serializable idUsuario) {
-     Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from projetopesquisa, professor where estadoProjetoPesquisa = 'Ativo' and idUsuario = ?";
         Query query = session.createQuery(hql);
         List results = query.list();
@@ -20,5 +20,26 @@ public class ProjetoPesquisaDAO implements IProjetoPesquisaDao {
         session.close();
         return results;
     }
+
+    @Override
+    public List<ProjetoPesquisa> buscarProjetosPesquisaPorProfessor(Serializable idUsuario) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "from projetopesquisa, professor where idUsuario = ?";
+        Query query = session.createQuery(hql);
+        List results = query.list();
+        session.clear();
+        session.close();
+        return results;
+    }
+
+    @Override
+    public List<ProjetoPesquisa> buscarProjetosPesquisaColabPorProfessor(Serializable idUsuario) {
+       Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "from projetopesquisa, professor, participacao where idUsuario = ? and rotulo = 'Colaborador'";
+        Query query = session.createQuery(hql);
+        List results = query.list();
+        session.clear();
+        session.close();
+        return results;}
 
 }

@@ -32,7 +32,9 @@ public class ParticipacaoMB {
     }
 
     public String alterarParticipacao(Participacao participacao) {
+        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         this.participacao = participacao;
+        participacaoDAO.alterar(participacao);
         return "/adicionar aqui";
     }
 

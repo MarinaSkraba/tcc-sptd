@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface IProjetoExtensaoDao {
 
-public List<ProjetoExtensao> buscarProjetosExtensaoAtivos(Serializable idUsuario);
+    public List<ProjetoExtensao> buscarProjetosExtensaoAtivos(Serializable idUsuario);
+
+    public List<ProjetoExtensao> buscarProjetosExtensaoPorProfessor(Serializable idUsuario);
+
+     public List<ProjetoExtensao> buscarProjetosExtensaoColabPorProfessor(Serializable idUsuario);
 
 }

@@ -5,12 +5,15 @@
  */
 package br.edu.ifpr.irati.mb;
 
+import br.edu.ifpr.irati.dao.AulaDAO;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
+import br.edu.ifpr.irati.dao.IAulaDao;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Curso;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.TipoOferta;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -34,28 +37,29 @@ public class AulaMB {
         horario = new Horario();
         aulaSelecionada = new Aula();
         horarios = new ArrayList<>();
-        cursoSelecionado = new Curso();    
-        tipoOfertaSelecionado = new TipoOferta(); 
-        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-        aulas = aulaDAO.buscarTodos(Aula.class);
-
+        cursoSelecionado = new Curso();
+        tipoOfertaSelecionado = new TipoOferta();
+        aulas = new ArrayList();
     }
 
-    public String salvarAula() {
+    public String salvarAula(Serializable idUsuario) {
 
-        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);        
+        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aula.setTipoOferta(tipoOfertaSelecionado);
         aula.setCurso(cursoSelecionado);
         aula.setEstadoAula("Ativo");
         aulaDAO.salvar(aula);
-        aulas = aulaDAO.buscarTodos(Aula.class);
+        IAulaDao aDAO = new AulaDAO();
+        aulas = aDAO.buscarAulasPorProfessor(idUsuario);
         aula = new Aula();
         return "CriarCorrigirPTD";
 
     }
 
     public String alterarAula(Aula aula) {
+        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         this.aula = aula;
+        aulaDAO.alterar(aula);
         return "/adicionar aqui";
     }
 
@@ -101,6 +105,7 @@ public class AulaMB {
     public void setCursoSelecionado(Curso cursoSelecionado) {
         this.cursoSelecionado = cursoSelecionado;
     }
+
     /**
      * @return the horarios
      */

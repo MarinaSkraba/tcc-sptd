@@ -8,4 +8,6 @@ public interface IProjetoEnsinoDao {
 
     public List<ProjetoEnsino> buscarProjetosEnsinoAtivos(Serializable professor);
 
+    public List<ProjetoEnsino> buscarProjetosEnsinoPorProfessor(Serializable professor);
+
 }

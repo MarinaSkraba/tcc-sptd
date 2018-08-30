@@ -5,11 +5,15 @@
  */
 package br.edu.ifpr.irati.mb;
 
+import br.edu.ifpr.irati.dao.AdministracaoDAO;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
+import br.edu.ifpr.irati.dao.IAdministracaoDao;
 import br.edu.ifpr.irati.modelo.Administracao;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.TipoAdministracao;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
@@ -27,12 +31,11 @@ public class AdministracaoMB {
         horario = new Horario();
         tipoAdministracao = new TipoAdministracao();
         administracao = new Administracao();
-        Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
-        administracoes = administracaoDAO.buscarTodos(Administracao.class);
+        administracoes = new ArrayList();
 
     }
 
-    public void salvarAdministracao() {
+    public void salvarAdministracao(Serializable idUsuario) {
         Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
         Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
         tipoAdministracaoDAO.salvar(tipoAdministracao);
@@ -42,11 +45,14 @@ public class AdministracaoMB {
         administracao.getHorariosAdministracao().add(horario);
         administracao.setEstadoAtividadeAdministracao("Ativo");
         administracaoDAO.salvar(administracao);
-        administracoes = administracaoDAO.buscarTodos(Administracao.class);
+        IAdministracaoDao admDAO = new AdministracaoDAO();
+        administracoes = admDAO.buscarAdministracoesPorProfessor(idUsuario);
     }
 
     public String alterarAdministracao(Administracao administracao) {
+        Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
         this.administracao = administracao;
+        administracaoDAO.alterar(administracao);
         return "/adicionar html aqui";
     }
 

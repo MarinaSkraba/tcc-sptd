@@ -20,5 +20,18 @@ public class ApoioDAO implements IApoioDao{
         session.close();
         return results;
     }
+
+    @Override
+    public List<Apoio> buscarApoiosPorProfessor(Serializable professor) {
+        
+     Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "from apoio, professor where idUsuario = ?";
+        Query query = session.createQuery(hql);
+        List results = query.list();
+        session.clear();
+        session.close();
+        return results;
+        
+    }
     
 }
