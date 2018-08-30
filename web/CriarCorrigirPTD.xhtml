@@ -131,8 +131,10 @@
                               resizable="false">
 
                         <h:outputText value="CURSO" 
-                                      styleClass="text01"/>
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
                         <br/>
+                        
                         <p:selectOneMenu id="selectCurso" 
                                          value="#{aulaMB.cursoSelecionado}"
                                          converter="cursoConverter">
@@ -144,12 +146,14 @@
                         </p:selectOneMenu>
 
                         <h:outputText value="COMPONENTE CURRICULAR" 
-                                      styleClass="text01"/>
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:inputText value="#{aulaMB.aula.componenteCurricular}"/>
 
                         <h:outputText value="ORGANIZAÇÃO" 
-                                      styleClass="text01"/>
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:selectOneMenu id="selectTipoOferta" 
                                          value="#{aulaMB.tipoOfertaSelecionado}"
@@ -163,7 +167,7 @@
                         </p:selectOneMenu>
 
                         <br/>
-                        <h:commandButton value="Salvar" action="#{aulaMB.salvarAula()}"/>
+                        <h:commandButton value="Salvar" action="#{aulaMB.salvarAula()}" styleClass="botaoAzul"/>
 
                     </p:dialog>
 
@@ -230,6 +234,7 @@
 
                                 </h:panelGrid>
                             </f:facet>
+                            
                             <!-- Tabela para os títulos de horário -->
                             <h:dataTable  value="#{aula.horariosAula}" 
                                           var="horario" 
@@ -287,7 +292,8 @@
                                            box-shadow: 1px 1px 2px #E0E0E0;">
                                 <p:menuitem value="Atualizar" 
                                             onclick="PF('edcAulaDialog').show();"
-                                            icon="ui-icon-extlink" />
+                                            icon="ui-icon-extlink" 
+                                            style="background-color: red;"/>
                                 <p:separator />
                                 <p:menuitem value="Delete" 
                                             action="#{aulaMB.desabilitarAula(aula)}" 
@@ -664,11 +670,16 @@
                             o horario aaaa
                         </font>
                     </h:panelGrid>
-
+                    
+                    <br/>
+                    
+                    <p:commandButton styleClass="botaoAzul" 
+                                     style="float: right; border-radius: 30px; font-size: large; margin-left: 10px;" 
+                                     value="Submeter"/>
                     <p:commandButton styleClass="botao" 
-                                     style="float: left;" 
-                                     value="Will me pediu esse botão"/>
-
+                                     style="float: right; border-radius: 30px; font-size: large;" 
+                                     value="Salvar"/>
+                    
                     <br/>
 
                 </h:form>

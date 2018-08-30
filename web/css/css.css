@@ -169,6 +169,32 @@ body{
     background-color: #A8A8A8;
     background-image: linear-gradient(to right, #1785ad, #1785ad);
 }
+
+.ui-dialog .botaoAzul{
+    width: auto;
+    height: auto;
+    margin: 15px;
+    padding: 5px 10px;
+    font-size: large;
+    font-family: calibri, sans-serif;
+    font-weight: normal;
+    color: #1785ad;
+    border-color: #1785ad;
+    border-width: thin;
+    border-radius: 50px;
+    border-style: solid;
+    background-color: white;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    background-image: linear-gradient(to right, #FFFFFF, #FFFFFF);
+    transition: background-color 0.3s;
+}
+.ui-dialog .botaoAzul:hover{
+    color: white;
+    font-weight: normal;
+    background-color: #A8A8A8;
+    background-image: linear-gradient(to right, #1785ad, #1785ad);
+}
+
 #loginForm{
     width: 450px;
     height: 450px;
