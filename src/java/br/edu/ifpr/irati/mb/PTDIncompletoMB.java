@@ -16,10 +16,14 @@ import br.edu.ifpr.irati.dao.IApoioDao;
 import br.edu.ifpr.irati.dao.IAtividadeASerPropostaDao;
 import br.edu.ifpr.irati.dao.IAulaDao;
 import br.edu.ifpr.irati.dao.IManutencaoDao;
+import br.edu.ifpr.irati.dao.IPTDIncompletoDAO;
+import br.edu.ifpr.irati.dao.IPTDSubmetidoDAO;
 import br.edu.ifpr.irati.dao.IProjetoEnsinoDao;
 import br.edu.ifpr.irati.dao.IProjetoExtensaoDao;
 import br.edu.ifpr.irati.dao.IProjetoPesquisaDao;
 import br.edu.ifpr.irati.dao.ManutencaoDAO;
+import br.edu.ifpr.irati.dao.PTDIncompletoDAO;
+import br.edu.ifpr.irati.dao.PTDSubmetidoDAO;
 import br.edu.ifpr.irati.dao.ProjetoEnsinoDAO;
 import br.edu.ifpr.irati.dao.ProjetoExtensaoDAO;
 import br.edu.ifpr.irati.dao.ProjetoPesquisaDAO;
@@ -42,6 +46,7 @@ import javax.faces.bean.ManagedBean;
 public class PTDIncompletoMB {
 
     private PTDIncompleto ptdIncompleto;
+    private List<PTDIncompleto> ptdsIncompletos;
     private Administracao administracao;
     private List<Administracao> administracoes;
     private Apoio apoio;
@@ -63,6 +68,7 @@ public class PTDIncompletoMB {
 
     public PTDIncompletoMB() {
         ptdIncompleto = new PTDIncompleto();
+        ptdsIncompletos = new ArrayList<>();
         administracao = new Administracao();
         apoio = new Apoio();
         atividadeASerProposta = new AtividadeASerProposta();
@@ -81,6 +87,39 @@ public class PTDIncompletoMB {
         projetosEnsino = new ArrayList();
         projetosExtensao = new ArrayList();
         projetosPesquisa = new ArrayList();
+    }
+
+    public String abrirCriarCorrigirPTDEmBranco(Professor professor) {
+        Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
+        ptdsIncompletos = ptdIncompletoDAO.buscarTodos(PTDIncompleto.class);
+        if (ptdsIncompletos.isEmpty() != true) {
+            ptdIncompletoDAO.excluir(ptdsIncompletos.get(0));
+        }
+        ptdIncompleto.setProfessor(professor);
+        ptdIncompletoDAO.salvar(ptdIncompleto);
+        return "/CriarCorrigirPTD";
+    }
+
+    public String abrirCriarCorrigirPTDAPartirDoUltimo(Professor professor) {
+        Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
+        IPTDIncompletoDAO ptdIDAO = new PTDIncompletoDAO();
+        IPTDSubmetidoDAO ptdSDAO = new PTDSubmetidoDAO();
+        ptdsIncompletos = ptdIDAO.buscarPTDsIncompletosPorProfessor(professor);
+        if (ptdsIncompletos.isEmpty() != true) {
+            ptdIncompletoDAO.excluir(ptdsIncompletos.get(0));
+        }
+        ptdIncompleto = ptdsIncompletos.get(ptdsIncompletos.size() - 1);
+        ptdIncompletoDAO.salvar(ptdIncompleto);
+        return "/CriarCorrigirPTD";
+    }
+
+    public String abrirCriarCorrigirPTDAPartirDePTDImcompleto(Professor professor) {
+        Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
+        IPTDIncompletoDAO ptdIDAO = new PTDIncompletoDAO();
+        ptdsIncompletos = ptdIDAO.buscarPTDsIncompletosPorProfessor(professor);
+        ptdIncompleto = ptdsIncompletos.get(0);
+        ptdIncompletoDAO.salvar(ptdIncompleto);
+        return "/CriarCorrigirPTD";
     }
 
     public void salvarPTDIncompleto(Professor professor) {
@@ -122,7 +161,7 @@ public class PTDIncompletoMB {
         PTDIncompleto ptdIncom = new PTDIncompleto();
         ptdIncompletoDAO.alterar(ptdIncom);
     }
-    
+
     public String excluirPTDIncompleto(PTDIncompleto ptdIncompleto) {
         Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
         ptdIncompletoDAO.excluir(ptdIncompleto);
@@ -136,7 +175,7 @@ public class PTDIncompletoMB {
     public void setPtdIncompleto(PTDIncompleto ptdIncompleto) {
         this.ptdIncompleto = ptdIncompleto;
     }
-    
+
     public Administracao getAdministracao() {
         return administracao;
     }
@@ -279,6 +318,20 @@ public class PTDIncompletoMB {
 
     public void setProjetosEnsino(List<ProjetoEnsino> projetosEnsino) {
         this.projetosEnsino = projetosEnsino;
+    }
+
+    /**
+     * @return the ptdsIncompletos
+     */
+    public List<PTDIncompleto> getPtdsIncompletos() {
+        return ptdsIncompletos;
+    }
+
+    /**
+     * @param ptdsIncompletos the ptdsIncompletos to set
+     */
+    public void setPtdsIncompletos(List<PTDIncompleto> ptdsIncompletos) {
+        this.ptdsIncompletos = ptdsIncompletos;
     }
 
 }
