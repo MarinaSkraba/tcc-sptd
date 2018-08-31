@@ -15,6 +15,7 @@ public class ManutencaoDAO implements IManutencaoDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from manutencao, professor where estadoManutencaoEnsino = 'Ativo' and idUsuario = ? ";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();
@@ -22,10 +23,11 @@ public class ManutencaoDAO implements IManutencaoDao {
     }
 
     @Override
-    public List<ManutencaoEnsino> buscarManutencoesPorProfessor(Serializable professor) {
+    public List<ManutencaoEnsino> buscarManutencoesPorProfessor(Serializable idUsuario) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from manutencao, professor where idUsuario = ? ";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();

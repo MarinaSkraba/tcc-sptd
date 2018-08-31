@@ -15,6 +15,7 @@ public class ProjetoEnsinoDAO implements IProjetoEnsinoDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from projetoensino, professor where estadoProjetoEnsino = 'Ativo' and idUsuario = ?";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();
@@ -22,10 +23,11 @@ public class ProjetoEnsinoDAO implements IProjetoEnsinoDao {
     }
 
     @Override
-    public List<ProjetoEnsino> buscarProjetosEnsinoPorProfessor(Serializable professor) {
+    public List<ProjetoEnsino> buscarProjetosEnsinoPorProfessor(Serializable idUsuario) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from projetoensino, professor where idUsuario = ?";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();

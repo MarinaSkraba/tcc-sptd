@@ -15,6 +15,7 @@ public class ApoioDAO implements IApoioDao{
        Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from apoio, professor where estadoApoio = 'Ativo' and idUsuario = ?";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();
@@ -22,11 +23,12 @@ public class ApoioDAO implements IApoioDao{
     }
 
     @Override
-    public List<Apoio> buscarApoiosPorProfessor(Serializable professor) {
+    public List<Apoio> buscarApoiosPorProfessor(Serializable idUsuario) {
         
      Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from apoio, professor where idUsuario = ?";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();

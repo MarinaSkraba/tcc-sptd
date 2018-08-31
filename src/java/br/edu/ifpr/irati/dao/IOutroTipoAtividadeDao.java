@@ -8,8 +8,8 @@ import java.util.List;
 public interface IOutroTipoAtividadeDao {
  
     
-     public List<OutroTipoAtividade> buscarOutrosTipoAtividadesAtivas(Serializable professor);
+     public List<OutroTipoAtividade> buscarOutrosTipoAtividadesAtivas(Serializable idUsuario);
      
-     public List<OutroTipoAtividade> buscarOutrosTipoAtividadesPorProfessor(Serializable professor);
+     public List<OutroTipoAtividade> buscarOutrosTipoAtividadesPorProfessor(Serializable idUsuario);
     
 }
