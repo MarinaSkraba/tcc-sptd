@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface IProjetoEnsinoDao {
 
-    public List<ProjetoEnsino> buscarProjetosEnsinoAtivos(Serializable professor);
+    public List<ProjetoEnsino> buscarProjetosEnsinoAtivos(Serializable idUsuario);
 
-    public List<ProjetoEnsino> buscarProjetosEnsinoPorProfessor(Serializable professor);
+    public List<ProjetoEnsino> buscarProjetosEnsinoPorProfessor(Serializable idUsuario);
+    
+    
 
 }

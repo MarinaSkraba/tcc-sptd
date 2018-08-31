@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IApoioDao {
     
-     public List<Apoio> buscarApoiosAtivos(Serializable professor);
+     public List<Apoio> buscarApoiosAtivos(Serializable idUsuario);
 
-     public List<Apoio> buscarApoiosPorProfessor(Serializable professor);
+     public List<Apoio> buscarApoiosPorProfessor(Serializable idUsuario);
 }

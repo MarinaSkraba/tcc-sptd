@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface IAtividadeASerPropostaDao {
 
-    public List<AtividadeASerProposta> buscarAtividadesAtivas(Serializable professor);
+    public List<AtividadeASerProposta> buscarAtividadesAtivas(Serializable idUsuario);
 
-    public List<AtividadeASerProposta> buscarAtividadesPorProfessor(Serializable professor);
+    public List<AtividadeASerProposta> buscarAtividadesPorProfessor(Serializable idUsuario);
 
 }

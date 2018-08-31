@@ -15,6 +15,7 @@ public class AdministracaoDAO implements IAdministracaoDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from administracao, professor where estadoAtividadeAdministracao = 'Ativo' and idUsuario = ? ";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();
@@ -26,6 +27,7 @@ public class AdministracaoDAO implements IAdministracaoDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from administracao,professor where idUsuario = ? ";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();

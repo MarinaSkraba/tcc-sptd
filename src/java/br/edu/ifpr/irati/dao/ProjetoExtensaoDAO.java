@@ -16,6 +16,7 @@ public class ProjetoExtensaoDAO implements IProjetoExtensaoDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from projetextensao, professor where estadoProjetoExtensao = 'Ativo' and idUsuario = ?";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();
@@ -27,6 +28,7 @@ public class ProjetoExtensaoDAO implements IProjetoExtensaoDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from projetextensao, professor where idUsuario = ?";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();  
@@ -40,6 +42,7 @@ public class ProjetoExtensaoDAO implements IProjetoExtensaoDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from projetextensao, professor, participacao where idUsuario = ? and rotulo = 'Colaborador'";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();

@@ -15,6 +15,7 @@ public class AtividadeASerPropostaDAO implements IAtividadeASerPropostaDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from atividadeaserproposta, professor where estadoAtividadeASerProposta = 'Ativo' and idUsuario = ? ";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();
@@ -22,10 +23,11 @@ public class AtividadeASerPropostaDAO implements IAtividadeASerPropostaDao {
     }
 
     @Override
-    public List<AtividadeASerProposta> buscarAtividadesPorProfessor(Serializable professor) {
+    public List<AtividadeASerProposta> buscarAtividadesPorProfessor(Serializable idUsuario) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from atividadeaserproposta, professor where idUsuario = ? ";
         Query query = session.createQuery(hql);
+        query.setSerializable(0, idUsuario);
         List results = query.list();
         session.clear();
         session.close();
