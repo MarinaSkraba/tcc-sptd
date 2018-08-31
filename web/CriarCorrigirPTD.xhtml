@@ -167,7 +167,9 @@
                         </p:selectOneMenu>
 
                         <br/>
-                        <h:commandButton value="Salvar" action="#{aulaMB.salvarAula(usuarioMB.usuarioLogado.idUsuario)}" styleClass="botaoAzul"/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{aulaMB.salvarAula(usuarioMB.usuarioLogado.idUsuario)}" 
+                                         styleClass="botaoAzul"/>
 
                     </p:dialog>
 
@@ -339,7 +341,9 @@
                             <br> <p:calendar id="horaTermino" value="#{horarioMB.horario.horaTermino}" pattern="HH:mm" timeOnly="true"/></br>
                         </font>
                         <br/>
-                        <h:commandButton value="Salvar" action="#{horarioMB.salvar(aulaMB.aulaSelecionada)}"/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{horarioMB.salvar(aulaMB.aulaSelecionada)}"
+                                         style="botaoAzul"/>
 
                     </p:dialog>
 
