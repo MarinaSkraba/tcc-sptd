@@ -21,7 +21,7 @@ public class PTDIncompletoDAO implements IPTDIncompletoDAO{
     @Override
     public List<PTDIncompleto> buscarPTDsIncompletosPorProfessor(Professor professor) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptdincompleto, professor where professor.idUsuario = ? ";
+        String hql = "from PTDIncompleto, professor where professor.idUsuario = ? ";
         Query query = session.createQuery(hql);
         query.setSerializable(0, professor.getIdUsuario());
         List results = query.list();
