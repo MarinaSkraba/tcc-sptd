@@ -34,6 +34,7 @@ import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
 import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
 import br.edu.ifpr.irati.modelo.PTDIncompleto;
+import br.edu.ifpr.irati.modelo.PTDSubmetido;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.ProjetoEnsino;
 import br.edu.ifpr.irati.modelo.ProjetoExtensao;
@@ -46,6 +47,7 @@ import javax.faces.bean.ManagedBean;
 public class PTDIncompletoMB {
 
     private PTDIncompleto ptdIncompleto;
+    private List<PTDSubmetido> ptdsAprovados;
     private List<PTDIncompleto> ptdsIncompletos;
     private Administracao administracao;
     private List<Administracao> administracoes;
@@ -69,6 +71,7 @@ public class PTDIncompletoMB {
     public PTDIncompletoMB() {
         ptdIncompleto = new PTDIncompleto();
         ptdsIncompletos = new ArrayList<>();
+        ptdsAprovados = new ArrayList<>();
         administracao = new Administracao();
         apoio = new Apoio();
         atividadeASerProposta = new AtividadeASerProposta();
@@ -97,19 +100,37 @@ public class PTDIncompletoMB {
         }
         ptdIncompleto.setProfessor(professor);
         ptdIncompletoDAO.salvar(ptdIncompleto);
+        ptdsIncompletos = ptdIncompletoDAO.buscarTodos(PTDIncompleto.class);
+        ptdIncompleto = ptdsIncompletos.get(0);
         return "/CriarCorrigirPTD";
     }
 
-    public String abrirCriarCorrigirPTDAPartirDoUltimo(Professor professor) {
+    public String abrirCriarCorrigirPTDAPartirDoUltimoAprovado(Professor professor) {
         Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
         IPTDIncompletoDAO ptdIDAO = new PTDIncompletoDAO();
-        IPTDSubmetidoDAO ptdSDAO = new PTDSubmetidoDAO();
+        IPTDSubmetidoDAO ptdSubmetidoDAO = new PTDSubmetidoDAO();
         ptdsIncompletos = ptdIDAO.buscarPTDsIncompletosPorProfessor(professor);
         if (ptdsIncompletos.isEmpty() != true) {
             ptdIncompletoDAO.excluir(ptdsIncompletos.get(0));
         }
-        ptdIncompleto = ptdsIncompletos.get(ptdsIncompletos.size() - 1);
+        ptdsAprovados = ptdSubmetidoDAO.buscarPTDsSubmetidosAprovadosPorProfessor(professor);
+        PTDSubmetido ptdAprovado = ptdsAprovados.get(ptdsAprovados.size() - 1);
+
+        //Preenchimento do incompleto a partir do aprovado;
+        ptdIncompleto.setProfessor(professor);
+        ptdIncompleto.setAulas(ptdAprovado.getAulas());
+        ptdIncompleto.setApoios(ptdAprovado.getApoios());
+        ptdIncompleto.setManutencoesEnsino(ptdAprovado.getManutencoesEnsino());
+        ptdIncompleto.setAdministrativas(ptdAprovado.getAdministrativas());
+        ptdIncompleto.setProjetosEnsino(ptdAprovado.getProjetosEnsino());
+        ptdIncompleto.setProjetosExtensao(ptdAprovado.getProjetosExtensao());
+        ptdIncompleto.setProjetosPesquisa(ptdAprovado.getProjetosPesquisa());
+        ptdIncompleto.setAtividadesASeremPropostas(ptdAprovado.getAtividadesASeremPropostas());
+        ptdIncompleto.setOutrosTiposAtividades(ptdAprovado.getOutrosTiposAtividades());
+
         ptdIncompletoDAO.salvar(ptdIncompleto);
+        ptdsIncompletos = ptdIncompletoDAO.buscarTodos(PTDIncompleto.class);
+        ptdIncompleto = ptdsIncompletos.get(0);
         return "/CriarCorrigirPTD";
     }
 
@@ -332,6 +353,20 @@ public class PTDIncompletoMB {
      */
     public void setPtdsIncompletos(List<PTDIncompleto> ptdsIncompletos) {
         this.ptdsIncompletos = ptdsIncompletos;
+    }
+
+    /**
+     * @return the ptdsAprovados
+     */
+    public List<PTDSubmetido> getPtdsAprovados() {
+        return ptdsAprovados;
+    }
+
+    /**
+     * @param ptdsAprovados the ptdsAprovados to set
+     */
+    public void setPtdsAprovados(List<PTDSubmetido> ptdsAprovados) {
+        this.ptdsAprovados = ptdsAprovados;
     }
 
 }

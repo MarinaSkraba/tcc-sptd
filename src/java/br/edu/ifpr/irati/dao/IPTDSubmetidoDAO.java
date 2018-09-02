@@ -5,13 +5,14 @@
  */
 package br.edu.ifpr.irati.dao;
 
+import br.edu.ifpr.irati.modelo.PTDSubmetido;
 import br.edu.ifpr.irati.modelo.Professor;
 import java.util.List;
 
 public interface IPTDSubmetidoDAO {
     
-    public List<PTDSubmetidoDAO> buscarPTDsTodosSubmetidosPorProfessor(Professor professor);
+    public List<PTDSubmetido> buscarPTDsTodosSubmetidosPorProfessor(Professor professor);
     
-    public List<PTDSubmetidoDAO> buscarPTDsSubmetidosAprovadosPorProfessor(Professor professor);
+    public List<PTDSubmetido> buscarPTDsSubmetidosAprovadosPorProfessor(Professor professor);
     
 }
