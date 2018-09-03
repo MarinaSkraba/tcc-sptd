@@ -9,9 +9,12 @@ import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Horario;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.print.attribute.standard.DateTimeAtCompleted;
 
 @ManagedBean
 public class HorarioMB {
@@ -31,7 +34,7 @@ public class HorarioMB {
         diasSemana.add("Quinta");
         diasSemana.add("Sexta");
         diasSemana.add("Sábado");
-        
+
     }
 
     public void salvar(Aula aula) {
@@ -55,6 +58,7 @@ public class HorarioMB {
         horarioDAO.alterar(horario);
         return "/adicionar html aqui";
     }
+
     public String excluir(Horario horario) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.excluir(horario);
@@ -62,6 +66,7 @@ public class HorarioMB {
         return "/adicionar aqui";
     }
 
+    
     public Horario getHorario() {
         return horario;
     }

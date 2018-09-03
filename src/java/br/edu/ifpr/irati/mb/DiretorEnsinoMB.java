@@ -7,54 +7,53 @@ package br.edu.ifpr.irati.mb;
 
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
-import br.edu.ifpr.irati.modelo.PTDSubmetido;
+import br.edu.ifpr.irati.modelo.PTD;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean
 public class DiretorEnsinoMB {
 
-    private PTDSubmetido ptdSubmetido;
-    private List<PTDSubmetido> ptdsSubmetidos;
+    private PTD ptd;
+    private List<PTD> ptds;
 
     public DiretorEnsinoMB() {
 
-        ptdSubmetido = new PTDSubmetido();
-        Dao<PTDSubmetido> ptdSubmetidoDAO = new GenericDAO<>(PTDSubmetido.class);
-        ptdsSubmetidos = ptdSubmetidoDAO.buscarTodos(PTDSubmetido.class);
+        ptd = new PTD();
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptds = ptdDAO.buscarTodos(PTD.class);
 
     }
 
-    public void aprovarPTD(PTDSubmetido ptdSubmetido) {
+    public void aprovarPTD(PTD ptd) {
 
-        Dao<PTDSubmetido> ptdSubmetidoDAO = new GenericDAO<>(PTDSubmetido.class);
-        ptdSubmetido.setEstado("Aprovado");
-        ptdSubmetidoDAO.alterar(ptdSubmetido);
-
-    }
-
-    public void reprovarPTD(PTDSubmetido ptdSubmetido) {
-
-        Dao<PTDSubmetido> ptdSubmetidoDAO = new GenericDAO<>(PTDSubmetido.class);
-        ptdSubmetido.setEstado("Reprovado");
-        ptdSubmetidoDAO.alterar(ptdSubmetido);
+        Dao<PTD> ptdSubmetidoDAO = new GenericDAO<>(PTD.class);
+        ptd.setEstadoPTD("Aprovado");
+        ptdSubmetidoDAO.alterar(ptd);
 
     }
 
-    public PTDSubmetido getPtdSubmetido() {
-        return ptdSubmetido;
+    public void reprovarPTD(PTD ptd) {
+
+        Dao<PTD> ptdSubmetidoDAO = new GenericDAO<>(PTD.class);
+        ptd.setEstadoPTD("Reprovado");
+        ptdSubmetidoDAO.alterar(ptd);
+
     }
 
-    public void setPtdSubmetido(PTDSubmetido ptdSubmetido) {
-        this.ptdSubmetido = ptdSubmetido;
+    public PTD getPtd() {
+        return ptd;
     }
 
-    public List<PTDSubmetido> getPtdsSubmetidos() {
-        return ptdsSubmetidos;
+    public void setPtd(PTD ptd) {
+        this.ptd = ptd;
     }
 
-    public void setPtdsSubmetidos(List<PTDSubmetido> ptdsSubmetidos) {
-        this.ptdsSubmetidos = ptdsSubmetidos;
+    public List<PTD> getPtds() {
+        return ptds;
     }
 
+    public void setPtds(List<PTD> ptds) {
+        this.ptds = ptds;
+    }
 }

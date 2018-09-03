@@ -34,8 +34,7 @@
         <mapping class="br.edu.ifpr.irati.modelo.DiretorEnsino"/>
         <mapping class="br.edu.ifpr.irati.modelo.Aula"/>  
         <mapping class="br.edu.ifpr.irati.modelo.Curso"/>  
-        <mapping class="br.edu.ifpr.irati.modelo.PTDSubmetido"/>
-        <mapping class="br.edu.ifpr.irati.modelo.PTDIncompleto"/>  
+          
           
         
         

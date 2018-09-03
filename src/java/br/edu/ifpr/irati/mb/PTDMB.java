@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifpr.irati.mb;
 
 import br.edu.ifpr.irati.dao.AdministracaoDAO;
@@ -29,7 +24,7 @@ import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
 import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
-import br.edu.ifpr.irati.modelo.PTDIncompleto;
+import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.ProjetoEnsino;
 import br.edu.ifpr.irati.modelo.ProjetoExtensao;
@@ -39,9 +34,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean
-public class PTDIncompletoMB {
+public class PTDMB {
 
-    private PTDIncompleto ptdIncompleto;
+    private PTD ptd;
     private Administracao administracao;
     private List<Administracao> administracoes;
     private Apoio apoio;
@@ -61,8 +56,9 @@ public class PTDIncompletoMB {
     private ProjetoPesquisa projetoPesquisa;
     private List<ProjetoPesquisa> projetosPesquisa;
 
-    public PTDIncompletoMB() {
-        ptdIncompleto = new PTDIncompleto();
+    public PTDMB() {
+        
+        ptd = new PTD();
         administracao = new Administracao();
         apoio = new Apoio();
         atividadeASerProposta = new AtividadeASerProposta();
@@ -82,67 +78,74 @@ public class PTDIncompletoMB {
         projetosExtensao = new ArrayList();
         projetosPesquisa = new ArrayList();
     }
+      public void salvarPTD(Professor professor) {
 
-    public void salvarPTDIncompleto(Professor professor) {
-
-        Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
-        ptdIncompleto.setProfessor(professor);
-        ptdIncompletoDAO.salvar(ptdIncompleto);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptd.setProfessor(professor);
+        ptdDAO.salvar(ptd);
 
     }
 
     public void alterarPTDIncompleto(Professor professor) {
 
-        Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
-        ptdIncompleto.setProfessor(professor);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptd.setProfessor(professor);
         IAdministracaoDao administracaoDAO = new AdministracaoDAO();
         administracoes = administracaoDAO.buscarAdministracoesAtivas(professor);
-        ptdIncompleto.setAdministrativas(administracoes);
+        ptd.setAdministrativas(administracoes);
         IApoioDao apoioDAO = new ApoioDAO();
         apoios = apoioDAO.buscarApoiosAtivos(professor);
-        ptdIncompleto.setApoios(apoios);
+        ptd.setApoios(apoios);
         IAtividadeASerPropostaDao atividadeASerPropostaDAO = new AtividadeASerPropostaDAO();
         atividadesASeremPropostas = atividadeASerPropostaDAO.buscarAtividadesAtivas(professor);
-        ptdIncompleto.setAtividadesASeremPropostas(atividadesASeremPropostas);
+        ptd.setAtividadesASeremPropostas(atividadesASeremPropostas);
         IAulaDao aulaDAO = new AulaDAO();
         aulas = aulaDAO.buscarAulasAtivas(professor);
-        ptdIncompleto.setAulas(aulas);
+        ptd.setAulas(aulas);
         IManutencaoDao manutencaoDAO = new ManutencaoDAO();
         manutencoesEnsino = manutencaoDAO.buscarManutencoesAtivas(professor);
-        ptdIncompleto.setManutencoesEnsino(manutencoesEnsino);
+        ptd.setManutencoesEnsino(manutencoesEnsino);
         IProjetoEnsinoDao projetoEnsinoDAO = new ProjetoEnsinoDAO();
         projetosEnsino = projetoEnsinoDAO.buscarProjetosEnsinoAtivos(professor);
-        ptdIncompleto.setProjetosEnsino(projetosEnsino);
+        ptd.setProjetosEnsino(projetosEnsino);
         IProjetoExtensaoDao projetoExtensaoDAO = new ProjetoExtensaoDAO();
         projetosExtensao = projetoExtensaoDAO.buscarProjetosExtensaoAtivos(professor);
-        ptdIncompleto.setProjetosExtensao(projetosExtensao);
+        ptd.setProjetosExtensao(projetosExtensao);
         IProjetoPesquisaDao projetoPesquisaDAO = new ProjetoPesquisaDAO();
         projetosPesquisa = projetoPesquisaDAO.buscarProjetosPesquisaAtivos(professor);
-        ptdIncompleto.setProjetosPesquisa(projetosPesquisa);
-        PTDIncompleto ptdIncom = new PTDIncompleto();
-        ptdIncompletoDAO.alterar(ptdIncom);
+        ptd.setProjetosPesquisa(projetosPesquisa);
+        PTD optd= new PTD();
+        ptdDAO.alterar(optd);
     }
     
-    public String excluirPTDIncompleto(PTDIncompleto ptdIncompleto) {
-        Dao<PTDIncompleto> ptdIncompletoDAO = new GenericDAO<>(PTDIncompleto.class);
-        ptdIncompletoDAO.excluir(ptdIncompleto);
+    public String excluirPTDIncompleto(PTD ptd) {
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptdDAO.excluir(ptd);
         return "/adicionar html aqui";
     }
 
-    public PTDIncompleto getPtdIncompleto() {
-        return ptdIncompleto;
+    public PTD getPtd() {
+        return ptd;
     }
 
-    public void setPtdIncompleto(PTDIncompleto ptdIncompleto) {
-        this.ptdIncompleto = ptdIncompleto;
+    public void setPtd(PTD ptd) {
+        this.ptd = ptd;
     }
-    
+
     public Administracao getAdministracao() {
         return administracao;
     }
 
     public void setAdministracao(Administracao administracao) {
         this.administracao = administracao;
+    }
+
+    public List<Administracao> getAdministracoes() {
+        return administracoes;
+    }
+
+    public void setAdministracoes(List<Administracao> administracoes) {
+        this.administracoes = administracoes;
     }
 
     public Apoio getApoio() {
@@ -233,6 +236,14 @@ public class PTDIncompletoMB {
         this.projetoEnsino = projetoEnsino;
     }
 
+    public List<ProjetoEnsino> getProjetosEnsino() {
+        return projetosEnsino;
+    }
+
+    public void setProjetosEnsino(List<ProjetoEnsino> projetosEnsino) {
+        this.projetosEnsino = projetosEnsino;
+    }
+
     public ProjetoExtensao getProjetoExtensao() {
         return projetoExtensao;
     }
@@ -264,21 +275,4 @@ public class PTDIncompletoMB {
     public void setProjetosPesquisa(List<ProjetoPesquisa> projetosPesquisa) {
         this.projetosPesquisa = projetosPesquisa;
     }
-
-    public List<Administracao> getAdministracoes() {
-        return administracoes;
-    }
-
-    public void setAdministracoes(List<Administracao> administracoes) {
-        this.administracoes = administracoes;
-    }
-
-    public List<ProjetoEnsino> getProjetosEnsino() {
-        return projetosEnsino;
-    }
-
-    public void setProjetosEnsino(List<ProjetoEnsino> projetosEnsino) {
-        this.projetosEnsino = projetosEnsino;
-    }
-
 }

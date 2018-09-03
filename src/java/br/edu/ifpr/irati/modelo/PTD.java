@@ -2,20 +2,20 @@ package br.edu.ifpr.irati.modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name = "PTD")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class PTD implements Serializable {
 
     @Id
@@ -48,6 +48,16 @@ public class PTD implements Serializable {
 
     @Column(name = "campoJustificativaProjetoExtensao", nullable = true, length = 500)
     private String campoJustificativaProjetoExtensao;
+
+    @Column(name = "estadoPTD", nullable = false, length = 20)
+    private String estadoPTD;
+
+    @Temporal(TemporalType.DATE)
+    private Date dataAvaliacaoPTD;
+
+    @ManyToOne
+    @JoinColumn(name = "diretorEnsino_idUsuario")
+    private DiretorEnsino diretorEnsino;
 
     @ManyToOne
     @JoinColumn(name = "professor_idUsuario")
@@ -101,10 +111,13 @@ public class PTD implements Serializable {
         projetosPesquisa = new ArrayList();
         atividadesASeremPropostas = new ArrayList();
         outrosTiposAtividades = new ArrayList();
+        estadoPTD = "";
+        dataAvaliacaoPTD = new Date();
+        diretorEnsino = new DiretorEnsino();
 
     }
 
-    public PTD(int idPTD, String campoJustificativaAtividadeEnsino, String campoJustificativaManutencaoEnsino, String campoJustificativaApoioEnsino, String campoJustificativaAdministracao, String campoJustificativaProjetoEnsino, String campoJustificativaSeremPropostas, String campoJustificativaOutrasAtividades, String campoJustificativaProjetoPesquisa, String campoJustificativaProjetoExtensao) {
+    public PTD(int idPTD, String campoJustificativaAtividadeEnsino, String campoJustificativaManutencaoEnsino, String campoJustificativaApoioEnsino, String campoJustificativaAdministracao, String campoJustificativaProjetoEnsino, String campoJustificativaSeremPropostas, String campoJustificativaOutrasAtividades, String campoJustificativaProjetoPesquisa, String campoJustificativaProjetoExtensao, String estadoPTD) {
         this.idPTD = idPTD;
         this.campoJustificativaAtividadeEnsino = campoJustificativaAtividadeEnsino;
         this.campoJustificativaManutencaoEnsino = campoJustificativaManutencaoEnsino;
@@ -115,6 +128,9 @@ public class PTD implements Serializable {
         this.campoJustificativaOutrasAtividades = campoJustificativaOutrasAtividades;
         this.campoJustificativaProjetoPesquisa = campoJustificativaProjetoPesquisa;
         this.campoJustificativaProjetoExtensao = campoJustificativaProjetoExtensao;
+        this.estadoPTD = estadoPTD;
+        this.dataAvaliacaoPTD = new Date();
+        this.diretorEnsino = new DiretorEnsino();
         professor = new Professor();
         aulas = new ArrayList();
         apoios = new ArrayList();
@@ -127,7 +143,7 @@ public class PTD implements Serializable {
         outrosTiposAtividades = new ArrayList();
     }
 
-    public PTD(int idPTD, String campoJustificativaAtividadeEnsino, String campoJustificativaManutencaoEnsino, String campoJustificativaApoioEnsino, String campoJustificativaAdministracao, String campoJustificativaProjetoEnsino, String campoJustificativaSeremPropostas, String campoJustificativaOutrasAtividades, String campoJustificativaProjetoPesquisa, String campoJustificativaProjetoExtensao, Professor professor, List<Aula> aulas, List<Apoio> apoios, List<ManutencaoEnsino> manutencoesEnsino, List<Administracao> administrativas, List<ProjetoEnsino> projetosEnsino, List<ProjetoExtensao> projetosExtensao, List<ProjetoPesquisa> projetosPesquisa, List<AtividadeASerProposta> atividadesASeremPropostas, List<OutroTipoAtividade> outrosTiposAtividades) {
+    public PTD(int idPTD, String campoJustificativaAtividadeEnsino, String campoJustificativaManutencaoEnsino, String campoJustificativaApoioEnsino, String campoJustificativaAdministracao, String campoJustificativaProjetoEnsino, String campoJustificativaSeremPropostas, String campoJustificativaOutrasAtividades, String campoJustificativaProjetoPesquisa, String campoJustificativaProjetoExtensao, String estadoPTD, Date dataAvaliacaoPTD, DiretorEnsino diretorEnsino, Professor professor, List<Aula> aulas, List<Apoio> apoios, List<ManutencaoEnsino> manutencoesEnsino, List<Administracao> administrativas, List<ProjetoEnsino> projetosEnsino, List<ProjetoExtensao> projetosExtensao, List<ProjetoPesquisa> projetosPesquisa, List<AtividadeASerProposta> atividadesASeremPropostas, List<OutroTipoAtividade> outrosTiposAtividades) {
         this.idPTD = idPTD;
         this.campoJustificativaAtividadeEnsino = campoJustificativaAtividadeEnsino;
         this.campoJustificativaManutencaoEnsino = campoJustificativaManutencaoEnsino;
@@ -138,6 +154,9 @@ public class PTD implements Serializable {
         this.campoJustificativaOutrasAtividades = campoJustificativaOutrasAtividades;
         this.campoJustificativaProjetoPesquisa = campoJustificativaProjetoPesquisa;
         this.campoJustificativaProjetoExtensao = campoJustificativaProjetoExtensao;
+        this.estadoPTD = estadoPTD;
+        this.dataAvaliacaoPTD = dataAvaliacaoPTD;
+        this.diretorEnsino = diretorEnsino;
         this.professor = professor;
         this.aulas = aulas;
         this.apoios = apoios;
@@ -149,7 +168,6 @@ public class PTD implements Serializable {
         this.atividadesASeremPropostas = atividadesASeremPropostas;
         this.outrosTiposAtividades = outrosTiposAtividades;
     }
-
 
     public int getIdPTD() {
         return idPTD;
@@ -309,6 +327,30 @@ public class PTD implements Serializable {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public String getEstadoPTD() {
+        return estadoPTD;
+    }
+
+    public void setEstadoPTD(String estadoPTD) {
+        this.estadoPTD = estadoPTD;
+    }
+
+    public Date getDataAvaliacaoPTD() {
+        return dataAvaliacaoPTD;
+    }
+
+    public void setDataAvaliacaoPTD(Date dataAvaliacaoPTD) {
+        this.dataAvaliacaoPTD = dataAvaliacaoPTD;
+    }
+
+    public DiretorEnsino getDiretorEnsino() {
+        return diretorEnsino;
+    }
+
+    public void setDiretorEnsino(DiretorEnsino diretorEnsino) {
+        this.diretorEnsino = diretorEnsino;
     }
 
 }

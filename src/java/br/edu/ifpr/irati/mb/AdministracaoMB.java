@@ -13,7 +13,9 @@ import br.edu.ifpr.irati.modelo.Administracao;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.TipoAdministracao;
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 
@@ -68,6 +70,30 @@ public class AdministracaoMB {
         administracaoDAO.excluir(administracao);
         administracoes = administracaoDAO.buscarTodos(Administracao.class);
         return "/adicionar aqui";
+    }
+
+    public Date calcularCargaHorariaAdministracao() {
+        int minTotal = 0;
+        int horaTotal = 0;
+        for (Administracao adm : administracoes) {
+            for (Horario h : horarios) {
+                int minInicio = h.getHoraInicio().getMinutes();
+                int minTermino = h.getHoraTermino().getMinutes();
+                int horaInicio = h.getHoraInicio().getHours();
+                int horaTermino = h.getHoraTermino().getHours();
+
+                minTotal = minTotal + (minTermino - minInicio);
+                horaTotal = horaTotal + (horaTermino - horaInicio);
+                
+                int minConvertidos = 0;
+                // while
+                
+            }
+        }
+
+        Date cargaHorariaAdministracao = new Time(horaTotal, minTotal, 0);
+        return cargaHorariaAdministracao;
+
     }
 
     public void adicionarHorarioAdministracao() {

@@ -12,17 +12,19 @@ public class DiretorEnsino extends Usuario implements Serializable {
 
     @OneToMany(mappedBy = "diretorEnsino")
     private List<Curso> cursos;
-    
+
     @OneToMany(mappedBy = "diretorEnsino")
-    private List<PTDSubmetido> PTDsSubmetidos;
-        
+    private List<PTD> PTDs;
+
     public DiretorEnsino() {
         super();
-        
+
     }
 
-    public DiretorEnsino(int idUsuario, String nomeCompleto, String email, String imagemPerfil, String senhaAlfanumerica) {
-        super(idUsuario, nomeCompleto, email, imagemPerfil, senhaAlfanumerica, email);
+    public DiretorEnsino(List<Curso> cursos, List<PTD> PTDs, int idUsuario, String nomeCompleto, String email, String imagemPerfil, String senhaAlfanumerica, String estadoUsuario) {
+        super(idUsuario, nomeCompleto, email, imagemPerfil, senhaAlfanumerica, estadoUsuario);
+        this.cursos = cursos;
+        this.PTDs = PTDs;
     }
 
     public List<Curso> getCursos() {
@@ -33,11 +35,11 @@ public class DiretorEnsino extends Usuario implements Serializable {
         this.cursos = cursos;
     }
 
-    public List<PTDSubmetido> getPTDsSubmetidos() {
-        return PTDsSubmetidos;
+    public List<PTD> getPTDs() {
+        return PTDs;
     }
 
-    public void setPTDsSubmetidos(List<PTDSubmetido> PTDsSubmetidos) {
-        this.PTDsSubmetidos = PTDsSubmetidos;
+    public void setPTDs(List<PTD> PTDs) {
+        this.PTDs = PTDs;
     }
 }
