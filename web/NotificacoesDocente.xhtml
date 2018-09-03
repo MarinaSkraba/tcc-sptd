@@ -64,13 +64,19 @@
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
-                                     action="#{professorMB.criarCorrigirPTD()}"/>
+                                     action="#{pTDIncompletoMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
                     <br/>
                     <p:commandButton value="Recuperar último"
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
-                                     action="#{professorMB.criarCorrigirPTD()}"/>
+                                     action="#{pTDIncompletoMB.abrirCriarCorrigirPTDAPartirDoUltimoAprovado(usuarioMB.usuarioLogado)}"/>
+                    <br/>
+                    <p:commandButton value="Continuar editando"
+                                     styleClass="opMenu"
+                                     ajax="false" 
+                                     immediate="true"
+                                     action="#{pTDIncompletoMB.abrirCriarCorrigirPTDAPartirDePTDImcompleto(usuarioMB.usuarioLogado)}"/>
                 </p:overlayPanel>
 
                 <p:commandButton styleClass="opMenu"
