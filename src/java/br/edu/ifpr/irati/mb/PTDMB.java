@@ -140,32 +140,15 @@ public class PTDMB {
 
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptd.setProfessor(professor);
-        IAdministracaoDao administracaoDAO = new AdministracaoDAO();
-        administracoes = administracaoDAO.buscarAdministracoesAtivas(professor);
         ptd.setAdministrativas(administracoes);
-        IApoioDao apoioDAO = new ApoioDAO();
-        apoios = apoioDAO.buscarApoiosAtivos(professor);
         ptd.setApoios(apoios);
-        IAtividadeASerPropostaDao atividadeASerPropostaDAO = new AtividadeASerPropostaDAO();
-        atividadesASeremPropostas = atividadeASerPropostaDAO.buscarAtividadesAtivas(professor);
         ptd.setAtividadesASeremPropostas(atividadesASeremPropostas);
-        IAulaDao aulaDAO = new AulaDAO();
-        aulas = aulaDAO.buscarAulasAtivas(professor);
         ptd.setAulas(aulas);
-        IManutencaoDao manutencaoDAO = new ManutencaoDAO();
-        manutencoesEnsino = manutencaoDAO.buscarManutencoesAtivas(professor);
         ptd.setManutencoesEnsino(manutencoesEnsino);
-        IProjetoEnsinoDao projetoEnsinoDAO = new ProjetoEnsinoDAO();
-        projetosEnsino = projetoEnsinoDAO.buscarProjetosEnsinoAtivos(professor);
         ptd.setProjetosEnsino(projetosEnsino);
-        IProjetoExtensaoDao projetoExtensaoDAO = new ProjetoExtensaoDAO();
-        projetosExtensao = projetoExtensaoDAO.buscarProjetosExtensaoAtivos(professor);
         ptd.setProjetosExtensao(projetosExtensao);
-        IProjetoPesquisaDao projetoPesquisaDAO = new ProjetoPesquisaDAO();
-        projetosPesquisa = projetoPesquisaDAO.buscarProjetosPesquisaAtivos(professor);
         ptd.setProjetosPesquisa(projetosPesquisa);
-        PTD optd = new PTD();
-        ptdDAO.alterar(optd);
+        ptdDAO.alterar(ptd);
     }
 
     public String excluirPTDIncompleto(PTD ptd) {
