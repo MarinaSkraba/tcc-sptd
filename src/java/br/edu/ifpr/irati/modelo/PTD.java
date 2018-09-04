@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity(name = "PTD")
+@Entity(name = "ptd")
 public class PTD implements Serializable {
 
     @Id

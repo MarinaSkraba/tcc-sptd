@@ -22,7 +22,7 @@ public class PTDDAO implements IPTDDAO {
     @Override
     public List<PTD> buscarPTDsEmEdicao(Professor professor) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from PTD where professor_idUsuario = ? and estadoPTD = ?";
+        String hql = "from ptd where professor_idUsuario = ? and estadoPTD = ?";
         Query query = session.createQuery(hql);
         query.setSerializable(0, professor.getIdUsuario());
         query.setString(1, "EDICAO");
@@ -35,7 +35,7 @@ public class PTDDAO implements IPTDDAO {
     @Override
     public List<PTD> buscarPTDEmAvaliacao(Professor professor) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from PTD where professor_idUsuario = ? and estadoPTD = ?";
+        String hql = "from ptd where professor_idUsuario = ? and estadoPTD = ?";
         Query query = session.createQuery(hql);
         query.setSerializable(0, professor.getIdUsuario());
         query.setSerializable(1, "AVALIACAO");
