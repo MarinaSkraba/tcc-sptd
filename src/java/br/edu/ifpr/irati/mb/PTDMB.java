@@ -134,14 +134,6 @@ public class PTDMB {
         return "/CriarCorrigirPTD";
     }
 
-    public void salvarPTD(Professor professor) {
-
-        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-        ptd.setProfessor(professor);
-        ptdDAO.salvar(ptd);
-
-    }
-
     public void atualizarPTDEmEdicao(Professor professor) {
 
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
