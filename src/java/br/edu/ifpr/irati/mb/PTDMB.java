@@ -40,6 +40,7 @@ import javax.faces.bean.ManagedBean;
 public class PTDMB {
 
     private PTD ptd;
+    private List<PTD> pdtsEmAvaliacao;
     private Administracao administracao;
     private List<Administracao> administracoes;
     private Apoio apoio;
@@ -62,6 +63,7 @@ public class PTDMB {
     public PTDMB() {
 
         ptd = new PTD();
+        pdtsEmAvaliacao = new ArrayList<>();
         administracao = new Administracao();
         apoio = new Apoio();
         atividadeASerProposta = new AtividadeASerProposta();
@@ -328,5 +330,19 @@ public class PTDMB {
 
     public void setProjetosPesquisa(List<ProjetoPesquisa> projetosPesquisa) {
         this.projetosPesquisa = projetosPesquisa;
+    }
+
+    /**
+     * @return the pdtsEmAvaliacao
+     */
+    public List<PTD> getPdtsEmAvaliacao() {
+        return pdtsEmAvaliacao;
+    }
+
+    /**
+     * @param pdtsEmAvaliacao the pdtsEmAvaliacao to set
+     */
+    public void setPdtsEmAvaliacao(List<PTD> pdtsEmAvaliacao) {
+        this.pdtsEmAvaliacao = pdtsEmAvaliacao;
     }
 }
