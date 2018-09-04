@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
@@ -27,7 +28,7 @@ public class Professor extends Usuario implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataContratacao;
 
-    @OneToMany(mappedBy = "professor")
+    @OneToMany(mappedBy = "professor", fetch = FetchType.EAGER)
     private List<PTD> PTDs;
 
     public Professor() {
