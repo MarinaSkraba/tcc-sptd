@@ -90,7 +90,8 @@
 
             </h:form>
         </div>
-
+       
+        
         <!-- Conteúdo da Tela -->
         <font face="Calibri" 
               size="6" 
@@ -104,6 +105,11 @@
             <div id="content">
 
                 <h:form id="PTD">
+                    
+        <!-- Temporizador -->
+        <h:form>
+                <p:poll interval="300" listener="#{counterView.increment}" update="#{pTDMB.atualizarPTDEmEdicao(professor)}" />
+       </h:form>
 
                     <!-- Atividades de Ensino -->
                     <h:outputText value="Atividades de Ensino" 
