@@ -90,6 +90,8 @@ public class PTDMB {
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
         }
+        ptd.setDiretorEnsino(null);
+        ptd.setEstadoPTD("EDICAO");
         ptdDAOGenerico.salvar(ptd);
         ptd = ptdDAOEspecifico.buscarPTDsEmEdicao(professor).get(0);
         return "/CriarCorrigirPTD";
