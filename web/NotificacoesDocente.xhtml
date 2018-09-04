@@ -64,19 +64,19 @@
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
-                                     action="#{pTDIncompletoMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
+                                     action="#{pTDMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
                     <br/>
                     <p:commandButton value="Recuperar último"
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
-                                     action="#{pTDIncompletoMB.abrirCriarCorrigirPTDAPartirDoUltimoAprovado(usuarioMB.usuarioLogado)}"/>
+                                     action="#{pTDMB.abrirCriarCorrigirPTDAPartirDoUltimoArquivado(usuarioMB.usuarioLogado)}"/>
                     <br/>
                     <p:commandButton value="Continuar editando"
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
-                                     action="#{pTDIncompletoMB.abrirCriarCorrigirPTDAPartirDePTDImcompleto(usuarioMB.usuarioLogado)}"/>
+                                     action="#{pTDMB.abrirCriarCorrigirPTDContinuarEdicao(usuarioMB.usuarioLogado)}"/>
                 </p:overlayPanel>
 
                 <p:commandButton styleClass="opMenu"

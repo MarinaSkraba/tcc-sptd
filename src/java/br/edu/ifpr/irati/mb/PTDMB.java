@@ -11,10 +11,12 @@ import br.edu.ifpr.irati.dao.IApoioDao;
 import br.edu.ifpr.irati.dao.IAtividadeASerPropostaDao;
 import br.edu.ifpr.irati.dao.IAulaDao;
 import br.edu.ifpr.irati.dao.IManutencaoDao;
+import br.edu.ifpr.irati.dao.IPTDDAO;
 import br.edu.ifpr.irati.dao.IProjetoEnsinoDao;
 import br.edu.ifpr.irati.dao.IProjetoExtensaoDao;
 import br.edu.ifpr.irati.dao.IProjetoPesquisaDao;
 import br.edu.ifpr.irati.dao.ManutencaoDAO;
+import br.edu.ifpr.irati.dao.PTDDAO;
 import br.edu.ifpr.irati.dao.ProjetoEnsinoDAO;
 import br.edu.ifpr.irati.dao.ProjetoExtensaoDAO;
 import br.edu.ifpr.irati.dao.ProjetoPesquisaDAO;
@@ -57,7 +59,7 @@ public class PTDMB {
     private List<ProjetoPesquisa> projetosPesquisa;
 
     public PTDMB() {
-        
+
         ptd = new PTD();
         administracao = new Administracao();
         apoio = new Apoio();
@@ -78,7 +80,46 @@ public class PTDMB {
         projetosExtensao = new ArrayList();
         projetosPesquisa = new ArrayList();
     }
-      public void salvarPTD(Professor professor) {
+    
+    public String abrirCriarCorrigirPTDEmBranco(Professor professor){
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        ptd.setProfessor(professor);
+        List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(professor);
+        for(PTD ptdE: ptdEmEdicao){
+            ptdE.setEstadoPTD("CANCELADO");
+            ptdDAOGenerico.alterar(ptdE);
+        }
+        ptdDAOGenerico.salvar(ptd);
+        ptd = ptdDAOEspecifico.buscarPTDsEmEdicao(professor).get(0);
+        return "/CriarCorrigirPTD";
+    }
+    
+    public String abrirCriarCorrigirPTDContinuarEdicao(Professor professor){
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(professor);
+        ptd = ptdEmEdicao.get(0);
+        return "/CriarCorrigirPTD";
+    }
+    
+    public String abrirCriarCorrigirPTDAPartirDoUltimoArquivado(Professor professor){
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(professor);
+        for(PTD ptdE: ptdsEmEdicao){
+            ptdE.setEstadoPTD("CANCELADO");
+            ptdDAOGenerico.alterar(ptdE);
+        }
+        List<PTD> ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(professor);
+        ptd = ptdsAprovados.get(ptdsAprovados.size()-1);
+        ptd.setIdPTD(0);
+        ptdDAOGenerico.salvar(ptd);
+        ptd = ptdDAOEspecifico.buscarPTDsEmEdicao(professor).get(0);
+        return "/CriarCorrigirPTD";
+    }
+
+    public void salvarPTD(Professor professor) {
 
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptd.setProfessor(professor);
@@ -86,7 +127,7 @@ public class PTDMB {
 
     }
 
-    public void alterarPTDIncompleto(Professor professor) {
+    public void atualizarPTDEmEdicao(Professor professor) {
 
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptd.setProfessor(professor);
@@ -114,10 +155,10 @@ public class PTDMB {
         IProjetoPesquisaDao projetoPesquisaDAO = new ProjetoPesquisaDAO();
         projetosPesquisa = projetoPesquisaDAO.buscarProjetosPesquisaAtivos(professor);
         ptd.setProjetosPesquisa(projetosPesquisa);
-        PTD optd= new PTD();
+        PTD optd = new PTD();
         ptdDAO.alterar(optd);
     }
-    
+
     public String excluirPTDIncompleto(PTD ptd) {
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.excluir(ptd);

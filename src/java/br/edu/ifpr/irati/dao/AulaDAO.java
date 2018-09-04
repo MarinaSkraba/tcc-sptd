@@ -26,7 +26,7 @@ public class AulaDAO implements IAulaDao {
     @Override
     public List<Aula> buscarAulasPorProfessor(Serializable idUsuario) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from aula, professor where professor.idUsuario = ? ";
+        String hql = "from aula where aula.idAula = ptd_aula.idAula professor.idUsuario = ? ";
         Query query = session.createQuery(hql);
         query.setSerializable(0, idUsuario);
         List results = query.list();
