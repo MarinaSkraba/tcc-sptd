@@ -29,7 +29,6 @@ public class AulaMB {
     private List<Horario> horarios;
     private Curso cursoSelecionado;
     private TipoOferta tipoOfertaSelecionado;
-    private List<Aula> aulas;
 
     public AulaMB() {
 
@@ -39,7 +38,6 @@ public class AulaMB {
         horarios = new ArrayList<>();
         cursoSelecionado = new Curso();
         tipoOfertaSelecionado = new TipoOferta();
-        aulas = new ArrayList();
     }
 
     public String salvarAula(Serializable idUsuario) {
@@ -49,8 +47,6 @@ public class AulaMB {
         aula.setCurso(cursoSelecionado);
         aula.setEstadoAula("Ativo");
         aulaDAO.salvar(aula);
-        IAulaDao aDAO = new AulaDAO();
-        aulas = aDAO.buscarAulasPorProfessor(idUsuario);
         aula = new Aula();
         return "CriarCorrigirPTD";
 
@@ -73,7 +69,6 @@ public class AulaMB {
     public String excluirAula(Aula aula) {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aulaDAO.excluir(aula);
-        aulas = aulaDAO.buscarTodos(Aula.class);
         return "/adicionar aqui";
     }
 
@@ -95,14 +90,6 @@ public class AulaMB {
 
     public void setAula(Aula aula) {
         this.aula = aula;
-    }
-
-    public List<Aula> getAulas() {
-        return aulas;
-    }
-
-    public void setAulas(List<Aula> aulas) {
-        this.aulas = aulas;
     }
 
     public Curso getCursoSelecionado() {

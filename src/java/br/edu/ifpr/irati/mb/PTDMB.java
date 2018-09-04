@@ -149,6 +149,9 @@ public class PTDMB {
         ptd.setProjetosExtensao(projetosExtensao);
         ptd.setProjetosPesquisa(projetosPesquisa);
         ptdDAO.alterar(ptd);
+        System.out.println("PTD Atualizado");
+        // Atualizar a váriavel ptd a partir do valor dela no banco
+        
     }
 
     public String excluirPTDIncompleto(PTD ptd) {
