@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
- 
+
     <h:head>
         <title>Tela Inicial</title>
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
@@ -38,7 +38,9 @@
                                 for="logout" 
                                 hideEffect="fade" 
                                 style="padding: 0px;">
-                    
+                    <h:outputText value="#{usuarioMB.usuarioLogado.email}" 
+                                  styleClass="text01"
+                                  style="color: #1785ad; font-weight: normal; font-size: large;"/>
                     <br/>
                     <p:commandButton value="Sair"
                                      styleClass="opMenu"
@@ -59,7 +61,16 @@
 
             </h:form>
         </div>
-
+        
+        <!-- Conteúdo da Tela -->
+        <font face="Calibri" 
+              size="6" 
+              color="#A8A8A8" 
+              style="margin: 10px; font-weight: 100;" 
+              styleClass="text">
+            Notificações
+        </font>
+        
     </h:body>
 </html>
 

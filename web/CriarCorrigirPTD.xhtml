@@ -39,7 +39,9 @@
                                 for="logout" 
                                 hideEffect="fade" 
                                 style="padding: 0px;">
-
+                    <h:outputText value="#{usuarioMB.usuarioLogado.email}" 
+                                  styleClass="text01"
+                                  style="color: #1785ad; font-weight: normal; font-size: large;"/>
                     <br/>
                     <p:commandButton value="Sair"
                                      styleClass="opMenu"
@@ -134,7 +136,7 @@
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        
+
                         <p:selectOneMenu id="selectCurso" 
                                          value="#{aulaMB.cursoSelecionado}"
                                          converter="cursoConverter">
@@ -236,7 +238,7 @@
 
                                 </h:panelGrid>
                             </f:facet>
-                            
+
                             <!-- Tabela para os títulos de horário -->
                             <h:dataTable  value="#{aula.horariosAula}" 
                                           var="horario" 
@@ -548,47 +550,47 @@
                     <br> </br>
                     <!-- Tabela de resultados de horários -->
                     <center>
-                    <h:panelGrid columns="2" 
-                                 style="align-items: center;"
-                                 border="0">
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8;float:left; font-weight: 500; font-size: 15pt;" value="ATIVIDADES">  </h:outputText>
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 500; font-size: 15pt;" value="HORÁRIOS">  </h:outputText>
-                   
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Aulas">  </h:outputText>
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horarioaqui">  </h:outputText>
-                        
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Manutenção Ensino">  </h:outputText>
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
-                      
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Apoio ao Ensino">  </h:outputText>
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
-                       
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Atividade de Pesquisa e Extensao (autor)"> </h:outputText>
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
-                       
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Atividade de Pesquisa e Extensão (colaborador)"> </h:outputText>
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
-                       
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Atividades Administrativas"> </h:outputText>
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario"> </h:outputText>
-                       
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Outras atividades realizadas no Campus">  </h:outputText>
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
-                        
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Atividades que pretendo propor">  </h:outputText> 
-                        <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario"> </h:outputText>
+                        <h:panelGrid columns="2" 
+                                     style="align-items: center;"
+                                     border="0">
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8;float:left; font-weight: 500; font-size: 15pt;" value="ATIVIDADES">  </h:outputText>
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 500; font-size: 15pt;" value="HORÁRIOS">  </h:outputText>
 
-                    </h:panelGrid>
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Aulas">  </h:outputText>
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horarioaqui">  </h:outputText>
+
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Manutenção Ensino">  </h:outputText>
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
+
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Apoio ao Ensino">  </h:outputText>
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
+
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Atividade de Pesquisa e Extensao (autor)"> </h:outputText>
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
+
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Atividade de Pesquisa e Extensão (colaborador)"> </h:outputText>
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
+
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Atividades Administrativas"> </h:outputText>
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario"> </h:outputText>
+
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Outras atividades realizadas no Campus">  </h:outputText>
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
+
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Atividades que pretendo propor">  </h:outputText> 
+                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario"> </h:outputText>
+
+                        </h:panelGrid>
                     </center>
                     <br/>
-                    
+
                     <p:commandButton styleClass="botaoAzul" 
                                      style="float: right; border-radius: 30px; font-size: large; margin-left: 10px;" 
                                      value="Submeter"/>
                     <p:commandButton styleClass="botao" 
                                      style="float: right; border-radius: 30px; font-size: large;" 
                                      value="Salvar"/>
-                    
+
                     <br/>
 
                 </h:form>
