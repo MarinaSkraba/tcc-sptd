@@ -10,5 +10,7 @@ public interface IAulaDao {
     public List<Aula> buscarAulasAtivas(Serializable idUsuario);
     
     public List<Aula> buscarAulasPorProfessor(Serializable idUsuario);
+    
+    public List<Aula> buscarAulasPorPTD(Serializable idPTD);
 
 }

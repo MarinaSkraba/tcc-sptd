@@ -35,4 +35,16 @@ public class AulaDAO implements IAulaDao {
         return results;
     }
 
+    @Override
+    public List<Aula> buscarAulasPorPTD(Serializable idPTD) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "from aula, ptd_aula where aula.idAula = ptd_aula.aulas_idAula and ptd_aula.PTD_idPTD = ?";
+        Query query = session.createQuery(hql);
+        query.setSerializable(0, idPTD);
+        List results = query.list();
+        session.clear();
+        session.close();
+        return results;
+    }
+
 }
