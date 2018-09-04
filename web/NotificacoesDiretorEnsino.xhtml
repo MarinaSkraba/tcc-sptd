@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <title>Tela Inicial</title>
@@ -77,38 +78,26 @@
                 <br/>
                 <h:form>
 
+                    <h:dataTable  value="#{aulaMB.aulas}" 
+                                  var="aula" 
+                                  style="border-spacing: 0pt;"
+                                  headerClass="text-center"
+                                  footerClass="text-center">
 
-                    <hr size="1px"/>
-                    <p:commandButton id="logout"
-                                     image="img/fundo_login.png" 
-                                     styleClass="imgLogado"/>
-
-                    <!-- Caixa para seleção de ação referente à  -->
-                    <p:overlayPanel id="Usuário" 
-                                    for="logout" 
-                                    hideEffect="fade" >
-                        <p:commandButton value="Adicionar"
-                                         styleClass="opMenuCRUD"
-                                         ajax="false" 
-                                         immediate="true"
-                                         action="#{usuarioMB.realizarLogout()}"
-                                         style="margin: 0px -10px;"/>
-                        <br/>
-                        <p:commandButton value="Atualizar"
-                                         styleClass="opMenuCRUD"
-                                         ajax="false" 
-                                         immediate="true"
-                                         action="#{usuarioMB.realizarLogout()}"
-                                         style="margin: 5px -10px 0px;"/>
-                        <br/>
-                        <p:commandButton value="Deletar"
-                                         styleClass="opMenuCRUD"
-                                         ajax="false" 
-                                         immediate="true"
-                                         action="#{usuarioMB.realizarLogout()}"
-                                         style="margin: 5px -10px 0px;"/>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="CURSO" 
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+                            </f:facet>
+                            <h:outputText value="#{aula.curso.nomeCurso}" 
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                        </h:column>
                         
-                    </p:overlayPanel>
+                    </h:dataTable>
+                    <hr size="1px"/>
+                    
 
                 </h:form>
                 <br/>
