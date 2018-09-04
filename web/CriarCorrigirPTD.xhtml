@@ -59,11 +59,6 @@
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Novo PTD"/>
 
-                <!-- Salvar automatico -->
-                <h:form>
-                    <h:outputText id="txt_count" value="#{counterView.number}" />
-                    <p:poll interval="3000" listener="#{counterView.increment}" update="txt_count" />
-                </h:form>
                 <!-- Caixa de "novo" PTD -->
                 <p:overlayPanel id="addPanel" 
                                 for="addPTD" 
@@ -73,13 +68,19 @@
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
-                                     action="#{professorMB.criarCorrigirPTD()}"/>
+                                     action="#{pTDMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
                     <br/>
                     <p:commandButton value="Recuperar último"
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
-                                     action="#{professorMB.criarCorrigirPTD()}"/>
+                                     action="#{pTDMB.abrirCriarCorrigirPTDAPartirDoUltimoArquivado(usuarioMB.usuarioLogado)}"/>
+                    <br/>
+                    <p:commandButton value="Continuar editando"
+                                     styleClass="opMenu"
+                                     ajax="false" 
+                                     immediate="true"
+                                     action="#{pTDMB.abrirCriarCorrigirPTDContinuarEdicao(usuarioMB.usuarioLogado)}"/>
                 </p:overlayPanel>
 
                 <p:commandButton styleClass="opMenu"

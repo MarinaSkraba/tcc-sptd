@@ -38,7 +38,7 @@ public class PTDDAO implements IPTDDAO {
         String hql = "from ptd where professor_idUsuario = ? and estadoPTD = ?";
         Query query = session.createQuery(hql);
         query.setSerializable(0, professor.getIdUsuario());
-        query.setSerializable(1, "AVALIACAO");
+        query.setString(1, "AVALIACAO");
         List results = query.list();
         session.clear();
         session.close();
