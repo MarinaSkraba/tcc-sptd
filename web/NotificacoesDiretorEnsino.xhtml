@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
         <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     </h:head>
-    <h:body>
+    <h:body style="background-image: url(img/fundo_notificacoes.png)">
 
         <!-- Barra de menu -->
         <div id="barraMenu">
@@ -61,7 +61,7 @@
 
             </h:form>
         </div>
-        
+
         <!-- Conteúdo da Tela -->
         <font face="Calibri" 
               size="6" 
@@ -70,7 +70,52 @@
               styleClass="text">
             Notificações
         </font>
-        
+
+        <div id="screen">
+
+            <div id="content">
+                <br/>
+                <h:form>
+
+
+                    <hr size="1px"/>
+                    <p:commandButton id="logout"
+                                     image="img/fundo_login.png" 
+                                     styleClass="imgLogado"/>
+
+                    <!-- Caixa para seleção de ação referente à  -->
+                    <p:overlayPanel id="Usuário" 
+                                    for="logout" 
+                                    hideEffect="fade" >
+                        <p:commandButton value="Adicionar"
+                                         styleClass="opMenuCRUD"
+                                         ajax="false" 
+                                         immediate="true"
+                                         action="#{usuarioMB.realizarLogout()}"
+                                         style="margin: 0px -10px;"/>
+                        <br/>
+                        <p:commandButton value="Atualizar"
+                                         styleClass="opMenuCRUD"
+                                         ajax="false" 
+                                         immediate="true"
+                                         action="#{usuarioMB.realizarLogout()}"
+                                         style="margin: 5px -10px 0px;"/>
+                        <br/>
+                        <p:commandButton value="Deletar"
+                                         styleClass="opMenuCRUD"
+                                         ajax="false" 
+                                         immediate="true"
+                                         action="#{usuarioMB.realizarLogout()}"
+                                         style="margin: 5px -10px 0px;"/>
+                        
+                    </p:overlayPanel>
+
+                </h:form>
+                <br/>
+            </div>
+
+        </div>
+
     </h:body>
 </html>
 

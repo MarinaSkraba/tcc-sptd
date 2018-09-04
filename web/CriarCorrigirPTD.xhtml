@@ -192,7 +192,6 @@
                                   headerClass="text-center"
                                   footerClass="text-center">
 
-
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="CURSO" 
@@ -266,10 +265,38 @@
                                                   style="font-size: large;"/>
                                 </h:column>
                                 <f:facet name="footer">
+                                    
                                     <p:commandButton styleClass="botao" 
-                                                     value="+ horário" 
+                                                     value="..." 
                                                      action="#{aulaMB.setAulaSelecionada(aula)}"
-                                                     onclick="PF('addHorarioDialog').show();"/>
+                                                     id="opPHorario"/>
+
+                                    <!-- Caixa para seleção de ação referente à Horário -->
+                                    <p:overlayPanel id="opcoesHorario" 
+                                                    for="opPHorario" 
+                                                    hideEffect="fade" >
+                                        <p:commandButton value="Adicionar"
+                                                         styleClass="opMenuCRUD"
+                                                         ajax="false" 
+                                                         immediate="true"
+                                                         onclick="PF('').show();"
+                                                         style="margin: 0px -10px;"/>
+                                        <br/>
+                                        <p:commandButton value="Atualizar"
+                                                         styleClass="opMenuCRUD"
+                                                         ajax="false" 
+                                                         immediate="true"
+                                                         onclick="PF('').show();"
+                                                         style="margin: 5px -10px 0px;"/>
+                                        <br/>
+                                        <p:commandButton value="Deletar"
+                                                         styleClass="opMenuCRUD"
+                                                         ajax="false" 
+                                                         immediate="true"
+                                                         onclick="PF('').show();"
+                                                         style="margin: 5px -10px 0px;"/>
+
+                                    </p:overlayPanel>
                                 </f:facet>
 
                             </h:dataTable>
