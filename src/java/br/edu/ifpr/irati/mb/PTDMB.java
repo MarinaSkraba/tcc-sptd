@@ -31,6 +31,7 @@ import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.ProjetoEnsino;
 import br.edu.ifpr.irati.modelo.ProjetoExtensao;
 import br.edu.ifpr.irati.modelo.ProjetoPesquisa;
+import br.edu.ifpr.irati.modelo.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -81,11 +82,13 @@ public class PTDMB {
         projetosPesquisa = new ArrayList();
     }
     
-    public String abrirCriarCorrigirPTDEmBranco(Professor professor){
+    public String abrirCriarCorrigirPTDEmBranco(Usuario usuario){
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        Dao<Professor> professorDAOGenerico = new GenericDAO<>(Professor.class);
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        ptd.setProfessor(professor);
-        List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(professor);
+        Professor p = professorDAOGenerico.buscarPorId(usuario.getIdUsuario());
+        ptd.setProfessor(p);
+        List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(p);
         for(PTD ptdE: ptdEmEdicao){
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
@@ -93,7 +96,10 @@ public class PTDMB {
         ptd.setDiretorEnsino(null);
         ptd.setEstadoPTD("EDICAO");
         ptdDAOGenerico.salvar(ptd);
-        ptd = ptdDAOEspecifico.buscarPTDsEmEdicao(professor).get(0);
+        if(!ptdDAOEspecifico.buscarPTDsEmEdicao(p).isEmpty()){
+            ptd = ptdDAOEspecifico.buscarPTDsEmEdicao(p).get(0);
+        }
+        
         return "/CriarCorrigirPTD";
     }
     
