@@ -59,6 +59,11 @@
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Novo PTD"/>
 
+                <!-- Salvar automatico -->
+                <h:form>
+                    <h:outputText id="txt_count" value="#{counterView.number}" />
+                    <p:poll interval="3000" listener="#{counterView.increment}" update="txt_count" />
+                </h:form>
                 <!-- Caixa de "novo" PTD -->
                 <p:overlayPanel id="addPanel" 
                                 for="addPTD" 

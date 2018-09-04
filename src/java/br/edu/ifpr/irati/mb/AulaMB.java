@@ -77,6 +77,13 @@ public class AulaMB {
         return "/adicionar aqui";
     }
 
+    public double calcularCargaHorariaTotalAula() {
+        double cargaHorariaTotalAula = 0;
+        cargaHorariaTotalAula = aula.getHorasAulaTotal() / aula.getNumeroSemanas();
+        return cargaHorariaTotalAula;
+
+    }
+
     public void adicionarHorarioAula() {
         horarios.add(horario);
         horario = new Horario();
