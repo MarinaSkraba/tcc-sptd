@@ -9,6 +9,7 @@ import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Horario;
+import br.edu.ifpr.irati.modelo.PTD;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;

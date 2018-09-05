@@ -12,6 +12,7 @@ import br.edu.ifpr.irati.dao.IAulaDao;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Curso;
 import br.edu.ifpr.irati.modelo.Horario;
+import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.TipoOferta;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,13 +41,17 @@ public class AulaMB {
         tipoOfertaSelecionado = new TipoOferta();
     }
 
-    public String salvarAula(Serializable idUsuario) {
+    public String salvarAula(Serializable idUsuario, PTD ptd) {
 
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aula.setTipoOferta(tipoOfertaSelecionado);
         aula.setCurso(cursoSelecionado);
         aula.setEstadoAula("Ativo");
         aulaDAO.salvar(aula);
+        aula = aulaDAO.buscarTodos(Aula.class).get(aulaDAO.buscarTodos(Aula.class).size()-1);
+        ptd.getAulas().add(aula);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptdDAO.alterar(ptd);
         aula = new Aula();
         return "CriarCorrigirPTD";
 

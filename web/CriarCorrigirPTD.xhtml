@@ -180,7 +180,7 @@
 
                         <br/>
                         <h:commandButton value="Salvar" 
-                                         action="#{aulaMB.salvarAula(usuarioMB.usuarioLogado.idUsuario)}" 
+                                         action="#{aulaMB.salvarAula(usuarioMB.usuarioLogado.idUsuario, pTDMB.ptd)}" 
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -282,22 +282,16 @@
                                                     hideEffect="fade" >
                                         <p:commandButton value="Adicionar"
                                                          styleClass="opMenuCRUD"
-                                                         ajax="false" 
-                                                         immediate="true"
-                                                         onclick="PF('').show();"
+                                                         onclick="PF('addHorarioDialog').show();"
                                                          style="margin: 0px -10px;"/>
                                         <br/>
                                         <p:commandButton value="Atualizar"
                                                          styleClass="opMenuCRUD"
-                                                         ajax="false" 
-                                                         immediate="true"
                                                          onclick="PF('').show();"
                                                          style="margin: 5px -10px 0px;"/>
                                         <br/>
                                         <p:commandButton value="Deletar"
                                                          styleClass="opMenuCRUD"
-                                                         ajax="false" 
-                                                         immediate="true"
                                                          onclick="PF('').show();"
                                                          style="margin: 5px -10px 0px;"/>
 
@@ -322,12 +316,12 @@
                         </h:column>
                         <h:column>
 
-                            <p:commandButton styleClass="botao" 
+                            <p:commandButton styleClass="botaoAzul" 
                                              value="..." 
                                              action="#{aulaMB.setAulaSelecionada(aula)}"
                                              id="opPAtividadeAula"/>
 
-                            <!-- Caixa para seleção de ação referente à Horário -->
+                            <!-- Caixa para seleção de ação referente à Aula -->
                             <p:overlayPanel id="opcoesAula" 
                                             for="opPAtividadeAula" 
                                             hideEffect="fade">
@@ -630,7 +624,7 @@
                                      value="Submeter"/>
                     <p:commandButton styleClass="botao" 
                                      style="float: right; border-radius: 30px; font-size: large;" 
-                                     value="Salvar"/>
+                                     value="Cancelar"/>
 
                     <br/>
 
