@@ -11,6 +11,7 @@ import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.dao.IAdministracaoDao;
 import br.edu.ifpr.irati.modelo.Administracao;
 import br.edu.ifpr.irati.modelo.Horario;
+import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.TipoAdministracao;
 import java.io.Serializable;
 import java.sql.Time;
@@ -37,7 +38,7 @@ public class AdministracaoMB {
 
     }
 
-    public void salvarAdministracao(Serializable idUsuario) {
+    public String salvarAdministracao(Serializable idUsuario, PTD ptd) {
         Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
         Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
         tipoAdministracaoDAO.salvar(tipoAdministracao);
@@ -47,8 +48,13 @@ public class AdministracaoMB {
         administracao.getHorariosAdministracao().add(horario);
         administracao.setEstadoAtividadeAdministracao("Ativo");
         administracaoDAO.salvar(administracao);
-        IAdministracaoDao admDAO = new AdministracaoDAO();
-        administracoes = admDAO.buscarAdministracoesPorProfessor(idUsuario);
+        administracao = administracaoDAO.buscarTodos(Administracao.class).get(administracaoDAO.buscarTodos(Administracao.class).size()-1);
+        ptd.getAdministrativas().add(administracao);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptdDAO.alterar(ptd);
+        administracao = new Administracao();
+        return "CriarCorrigirPTD";
+       
     }
 
     public String alterarAdministracao(Administracao administracao) {
