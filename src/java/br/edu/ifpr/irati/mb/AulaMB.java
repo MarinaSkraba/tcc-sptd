@@ -8,7 +8,9 @@ package br.edu.ifpr.irati.mb;
 import br.edu.ifpr.irati.dao.AulaDAO;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
+import br.edu.ifpr.irati.dao.HorarioDAO;
 import br.edu.ifpr.irati.dao.IAulaDao;
+import br.edu.ifpr.irati.dao.IHorarioDao;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Curso;
 import br.edu.ifpr.irati.modelo.Horario;
@@ -48,7 +50,7 @@ public class AulaMB {
         aula.setCurso(cursoSelecionado);
         aula.setEstadoAula("Ativo");
         aulaDAO.salvar(aula);
-        aula = aulaDAO.buscarTodos(Aula.class).get(aulaDAO.buscarTodos(Aula.class).size()-1);
+        aula = aulaDAO.buscarTodos(Aula.class).get(aulaDAO.buscarTodos(Aula.class).size() - 1);
         ptd.getAulas().add(aula);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
@@ -71,9 +73,20 @@ public class AulaMB {
         return "/adicionar html aqui";
     }
 
-    public String excluirAula(Aula aula) {
+    public String excluirAula(Aula aula, PTD ptd) {
+
+        IHorarioDao hDAO = new HorarioDAO();
+        horarios = hDAO.buscarHorariosPorAula(aula.getIdAula());
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+
+        for (int i = 0; i <= horarios.size(); i++) {
+            horarioDAO.excluir(horario);
+            aula.getHorariosAula().remove(horario);
+        }
         aulaDAO.excluir(aula);
+        ptd.getAulas().remove(aula);
+
         return "/adicionar aqui";
     }
 

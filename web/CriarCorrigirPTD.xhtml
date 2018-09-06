@@ -336,6 +336,7 @@
                                                  styleClass="opMenuCRUD"
                                                  ajax="false" 
                                                  immediate="true"
+                                                 action="#{aulaMB.excluirAula(aulaMB.aulaSelecionada, pTDMB.ptd)}"
                                                  onclick="PF('').show();"
                                                  style="margin: 5px -10px 0px;"/>
 
@@ -378,7 +379,7 @@
                         </font>
                         <br/>
                         <h:commandButton value="Salvar" 
-                                         action="#{horarioMB.salvar(aulaMB.aulaSelecionada)}"
+                                         action="#{horarioMB.salvarHorarioAula(aulaMB.aulaSelecionada,usuarioMB.usuarioLogado)}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>

@@ -10,6 +10,8 @@ import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.PTD;
+import br.edu.ifpr.irati.modelo.Professor;
+import br.edu.ifpr.irati.modelo.Usuario;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,9 +40,12 @@ public class HorarioMB {
 
     }
 
-    public void salvar(Aula aula) {
+    public void salvarHorarioAula(Aula aula, Usuario usuario) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
+        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
+        Professor p = professorDAO.buscarPorId(usuario.getIdUsuario());
+        horario.setProfessor(p);
         horario.setEstadoHorario("Ativo");
         aula.getHorariosAula().add(horario);
         horarioDAO.salvar(aula.getHorariosAula().get(aula.getHorariosAula().size() - 1));
