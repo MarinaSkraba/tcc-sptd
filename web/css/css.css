@@ -145,7 +145,7 @@ body{
     justify-content: center;
     align-items: center;
 }
-.botao{
+.botaoCinza{
     width: auto;
     height: auto;
     font-size: medium;
@@ -159,7 +159,7 @@ body{
     background-image: linear-gradient(to right, #FFFFFF, #FFFFFF);
     transition: background-color 0.3s;
 }
-.botao:hover{
+.botaoCinza:hover{
     color: white;
     font-weight: normal;
     background-color: #7497A3;
@@ -209,6 +209,31 @@ body{
     font-weight: normal;
     background-color: #A8A8A8;
     background-image: linear-gradient(to right, #1785ad, #1785ad);
+}
+
+.ui-dialog .botaoCinza{
+    width: auto;
+    height: auto;
+    margin: 15px;
+    padding: 5px 10px;
+    font-size: large;
+    font-family: calibri, sans-serif;
+    font-weight: normal;
+    color: #7497A3;
+    border-color: #7497A3;
+    border-width: thin;
+    border-radius: 50px;
+    border-style: solid;
+    background-color: white;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    background-image: linear-gradient(to right, #FFFFFF, #FFFFFF);
+    transition: background-color 0.3s;
+}
+.ui-dialog .botaoCinza:hover{
+    color: white;
+    font-weight: normal;
+    background-color: #7497A3;
+    background-image: linear-gradient(to right, #7497A3, #7497A3);
 }
 
 #loginForm{
@@ -314,4 +339,5 @@ body{
     padding: 0em .5em;
     position: relative;
     font-size: 1.3em;
+    width: 500px;
 }
