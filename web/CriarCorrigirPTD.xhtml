@@ -163,6 +163,18 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:inputText value="#{aulaMB.aula.componenteCurricular}"/>
+                        
+                        <h:outputText value="NÚMERO TOTAL DE HORAS AULA" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{aulaMB.aula.horasAulaTotal}"/>
+                        
+                        <h:outputText value="NÚMERO TOTAL DE SEMANAS" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{aulaMB.aula.numeroSemanas}"/>
 
                         <h:outputText value="ORGANIZAÇÃO" 
                                       styleClass="text01"
@@ -272,7 +284,7 @@
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
                             </f:facet>
-                            <h:outputText value="à implementar"
+                            <h:outputText value="#{aulaMB.cargaHorariaTotalAula}"
                                           styleClass="text01"
                                           style="font-size: large;"/>
                         </h:column>

@@ -5,12 +5,8 @@
  */
 package br.edu.ifpr.irati.mb;
 
-import br.edu.ifpr.irati.dao.AulaDAO;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
-import br.edu.ifpr.irati.dao.HorarioDAO;
-import br.edu.ifpr.irati.dao.IAulaDao;
-import br.edu.ifpr.irati.dao.IHorarioDao;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Curso;
 import br.edu.ifpr.irati.modelo.Horario;
@@ -32,6 +28,7 @@ public class AulaMB {
     private List<Horario> horarios;
     private Curso cursoSelecionado;
     private TipoOferta tipoOfertaSelecionado;
+    private double cargaHorariaTotalAula;
 
     public AulaMB() {
 
@@ -41,6 +38,11 @@ public class AulaMB {
         horarios = new ArrayList<>();
         cursoSelecionado = new Curso();
         tipoOfertaSelecionado = new TipoOferta();
+        cargaHorariaTotalAula = 0;
+    }
+
+    AulaMB(double cargaHorariaTotalAula) {
+        this.cargaHorariaTotalAula = cargaHorariaTotalAula;
     }
 
     public String salvarAula(Serializable idUsuario, PTD ptd) {
@@ -55,6 +57,7 @@ public class AulaMB {
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         aula = new Aula();
+        calcularCargaHorariaTotalAula();
         return "CriarCorrigirPTD";
 
     }
@@ -74,16 +77,16 @@ public class AulaMB {
     }
 
     public String excluirAula(Aula aula, PTD ptd) {
-        
+
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-        
-        for(Horario h: aula.getHorariosAula()){
-            horarioDAO.excluir(h);
-            aula.getHorariosAula().remove(h);
+
+        for (int i = 0; i <= aula.getHorariosAula().size(); i++) {
+            horarioDAO.excluir(horario);
+            aula.getHorariosAula().remove(horario);
         }
-        
+
         ptd.getAulas().remove(aula);
         ptdDAO.alterar(ptd);
         aulaDAO.excluir(aula);
@@ -91,10 +94,10 @@ public class AulaMB {
         return "/adicionar aqui";
     }
 
-    public double calcularCargaHorariaTotalAula() {
-        double cargaHorariaTotalAula = 0;
+    public void calcularCargaHorariaTotalAula() {
+
         cargaHorariaTotalAula = aula.getHorasAulaTotal() / aula.getNumeroSemanas();
-        return cargaHorariaTotalAula;
+        setCargaHorariaTotalAula(cargaHorariaTotalAula);
 
     }
 
@@ -167,6 +170,14 @@ public class AulaMB {
 
     public void setTipoOfertaSelecionado(TipoOferta tipoOfertaSelecionado) {
         this.tipoOfertaSelecionado = tipoOfertaSelecionado;
+    }
+
+    public double getCargaHorariaTotalAula() {
+        return cargaHorariaTotalAula;
+    }
+
+    public void setCargaHorariaTotalAula(double cargaHorariaTotalAula) {
+        this.cargaHorariaTotalAula = cargaHorariaTotalAula;
     }
 
 }
