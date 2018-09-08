@@ -68,8 +68,7 @@ public class HorarioMB {
     public String excluir(Horario horario) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.excluir(horario);
-        setHorarios(horarioDAO.buscarTodos(Horario.class));
-        return "/adicionar aqui";
+        return "/CriarCorrigirPTD";
     }
 
     

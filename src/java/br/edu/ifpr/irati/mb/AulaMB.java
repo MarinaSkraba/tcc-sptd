@@ -59,10 +59,10 @@ public class AulaMB {
 
     }
 
-    public String alterarAula(Aula aula) {
+    public String alterarAula() {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-        this.aula = aula;
-        aulaDAO.alterar(aula);
+        aulaDAO.alterar(aulaSelecionada);
+        aulaSelecionada = new Aula();
         return "/adicionar aqui";
     }
 
@@ -74,18 +74,19 @@ public class AulaMB {
     }
 
     public String excluirAula(Aula aula, PTD ptd) {
-
-        IHorarioDao hDAO = new HorarioDAO();
-        horarios = hDAO.buscarHorariosPorAula(aula.getIdAula());
+        
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-
-        for (int i = 0; i <= horarios.size(); i++) {
-            horarioDAO.excluir(horario);
-            aula.getHorariosAula().remove(horario);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        
+        for(Horario h: aula.getHorariosAula()){
+            horarioDAO.excluir(h);
+            aula.getHorariosAula().remove(h);
         }
-        aulaDAO.excluir(aula);
+        
         ptd.getAulas().remove(aula);
+        ptdDAO.alterar(ptd);
+        aulaDAO.excluir(aula);
 
         return "/adicionar aqui";
     }

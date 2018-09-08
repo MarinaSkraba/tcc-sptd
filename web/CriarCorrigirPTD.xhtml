@@ -89,6 +89,7 @@
                                  action="/pesquisa"/>
 
             </h:form>
+
         </div>
 
 
@@ -186,7 +187,55 @@
                     </p:dialog>
 
                     <!-- Caixa de edição de aulas -->
-                    <!-- Implementar... -->
+                    <p:dialog header="Atualizar aula" 
+                              widgetVar="edtAulaDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="CURSO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+
+                        <p:selectOneMenu id="selectCursoEdicao" 
+                                         value="#{aulaMB.aulaSelecionada.curso}"
+                                         converter="cursoConverter">
+
+                            <f:selectItems value="#{cursoMB.cursos}" 
+                                           var="curso" 
+                                           itemValue="#{curso}"
+                                           itemLabel="#{curso}" />
+                        </p:selectOneMenu>
+
+                        <h:outputText value="COMPONENTE CURRICULAR" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{aulaMB.aulaSelecionada.componenteCurricular}"/>
+
+                        <h:outputText value="ORGANIZAÇÃO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:selectOneMenu id="selectTipoOfertaEdicao" 
+                                         value="#{aulaMB.aulaSelecionada.tipoOferta}"
+                                         converter="tipoOfertaConverter">
+
+                            <f:selectItems value="#{tipoOfertaMB.tiposOferta}" 
+                                           var="tipoOferta" 
+                                           itemValue="#{tipoOferta}"
+                                           itemLabel="#{tipoOferta}" />
+
+                        </p:selectOneMenu>
+
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{aulaMB.alterarAula()}" 
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
 
                     <br/>
 
@@ -313,7 +362,6 @@
 
                             <p:commandButton styleClass="botaoAzul" 
                                              value="..." 
-                                             action="#{aulaMB.setAulaSelecionada(aula)}"
                                              id="opPAtividadeAula"/>
 
                             <!-- Caixa para seleção de ação referente à Aula -->
@@ -322,17 +370,15 @@
                                             hideEffect="fade">
                                 <p:commandButton value="Atualizar"
                                                  styleClass="opMenuCRUD"
-                                                 ajax="false" 
-                                                 immediate="true"
-                                                 onclick="PF('').show();"
+                                                 action="#{aulaMB.setAulaSelecionada(aula)}"
+                                                 onclick="PF('edtAulaDialog').show();"
                                                  style="margin: 0px -10px;"/>
                                 <br/>
                                 <p:commandButton value="Deletar"
                                                  styleClass="opMenuCRUD"
                                                  ajax="false" 
                                                  immediate="true"
-                                                 action="#{aulaMB.excluirAula(aulaMB.aulaSelecionada, pTDMB.ptd)}"
-                                                 onclick="PF('').show();"
+                                                 action="#{aulaMB.excluirAula(aula, pTDMB.ptd)}"
                                                  style="margin: 5px -10px 0px;"/>
 
                             </p:overlayPanel>
@@ -410,7 +456,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="DIA" 
                                                   styleClass="text01"
-                                                  style="margin: 10px 25px -30px 25px;"/>
+                                                  style="margin: 10px 25px -10px 25px;"/>
                                 </f:facet>
 
                                 <p:selectOneMenu id="selectDiaSemanaEdicao" 
@@ -430,7 +476,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="HORÁRIO INÍCIO" 
                                                   styleClass="text01"
-                                                  style="margin: 10px 25px -30px 25px;"/>
+                                                  style="margin: 10px 25px -10px 25px;"/>
                                 </f:facet>
 
                                 <p:calendar id="horaInicioEdicao" 
@@ -445,7 +491,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="HORÁRIO TÉRMINO" 
                                                   styleClass="text01"
-                                                  style="font-size: large; font-weight: bold;"/>
+                                                  style="margin: 10px 25px -10px 25px;"/>
                                 </f:facet>
 
                                 <p:calendar id="horaTerminooEdicao" 
@@ -466,7 +512,7 @@
                                 <p:commandButton styleClass="botaoCinza" 
                                                  style="float: left; font-size: 12pt;" 
                                                  value="X" 
-                                                 />
+                                                 action="#{horarioMB.excluir(horarioDaAulaSelecionada)}"/>
 
                             </h:column>
 
@@ -491,7 +537,7 @@
                                   styleClass="text">
                                 Manutenção de ensino
                             </font>
-                            <p:commandButton styleClass="botao" 
+                            <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar" 
                                              onclick="PF('addManutencaoDialog').show();"/>
@@ -514,7 +560,7 @@
                                   styleClass="text">
                                 Apoio ao ensino
                             </font>
-                            <p:commandButton styleClass="botao" 
+                            <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar" 
                                              onclick="PF('addApoioEnsinoDialog').show();"/>
@@ -546,7 +592,7 @@
                                   styleClass="text">
                                 Pesquisa e/ou extensão cadastradas no COPE (Autor)
                             </font>
-                            <p:commandButton styleClass="botao" 
+                            <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar" 
                                              onclick="PF('addPesquisaExtensaoAutorDialog').show();"/>
@@ -569,7 +615,7 @@
                                   styleClass="text">
                                 Pesquisa e/ou extensão cadastradas no COPE (Colaborador)
                             </font>
-                            <p:commandButton styleClass="botao" 
+                            <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar"
                                              onclick="PF('addPesquisaExtensaoColabDialog').show();"/>
@@ -601,7 +647,7 @@
                                   styleClass="text">
                                 Atividades administrativas
                             </font>
-                            <p:commandButton styleClass="botao" 
+                            <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar"
                                              onclick="PF('addAdministrativasDialog').show();"/>
@@ -634,7 +680,7 @@
                                   styleClass="text">
                                 Outras atividades desenvolvidas no campus
                             </font>
-                            <p:commandButton styleClass="botao" 
+                            <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar"
                                              onclick="PF('addOutrasAtividadesDialog').show();"/>
@@ -667,7 +713,7 @@
                                   styleClass="text">
                                 Outras atividades que pretendo propor no semestre
                             </font>
-                            <p:commandButton styleClass="botao" 
+                            <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar"
                                              onclick="PF('addAtividadesProporDialog').show();"/>
