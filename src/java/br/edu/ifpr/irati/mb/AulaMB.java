@@ -29,6 +29,8 @@ public class AulaMB {
     private List<Horario> horarios;
     private Curso cursoSelecionado;
     private TipoOferta tipoOfertaSelecionado;
+    private double HorasAulaTotal;
+    private int NumeroSemanas;
     private double cargaHorariaTotalAula;
 
     public AulaMB() {
@@ -52,13 +54,13 @@ public class AulaMB {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aula.setTipoOferta(tipoOfertaSelecionado);
         aula.setCurso(cursoSelecionado);
+        aula.setCargaHorariaTotal(HorasAulaTotal / NumeroSemanas);
         aula.setEstadoAula("Ativo");
         aulaDAO.salvar(aula);
         aula = aulaDAO.buscarTodos(Aula.class).get(aulaDAO.buscarTodos(Aula.class).size() - 1);
         ptd.getAulas().add(aula);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
-        calcularCargaHorariaTotalAula();
         aula = new Aula();
         return "CriarCorrigirPTD";
 
@@ -68,7 +70,7 @@ public class AulaMB {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aulaDAO.alterar(aulaSelecionadaParaAula);
         aulaSelecionadaParaAula = new Aula();
-        return "/adicionar aqui";
+        return "/CriarCorrigirPTD";
     }
 
     public String desabilitarAula(Aula aula) {
@@ -93,14 +95,7 @@ public class AulaMB {
         ptdDAO.alterar(ptd);
         aulaDAO.excluir(aula);
 
-        return "/adicionar aqui";
-    }
-
-    public void calcularCargaHorariaTotalAula() {
-
-        cargaHorariaTotalAula = aula.getHorasAulaTotal() / aula.getNumeroSemanas();
-        setCargaHorariaTotalAula(cargaHorariaTotalAula);
-
+        return "/CriarCorrigirPTD";
     }
 
     public void adicionarHorarioAula() {
@@ -194,6 +189,34 @@ public class AulaMB {
      */
     public void setAulaSelecionadaParaHorario(Aula aulaSelecionadaParaHorario) {
         this.aulaSelecionadaParaHorario = aulaSelecionadaParaHorario;
+    }
+
+    /**
+     * @return the HorasAulaTotal
+     */
+    public double getHorasAulaTotal() {
+        return HorasAulaTotal;
+    }
+
+    /**
+     * @param HorasAulaTotal the HorasAulaTotal to set
+     */
+    public void setHorasAulaTotal(double HorasAulaTotal) {
+        this.HorasAulaTotal = HorasAulaTotal;
+    }
+
+    /**
+     * @return the NumeroSemanas
+     */
+    public int getNumeroSemanas() {
+        return NumeroSemanas;
+    }
+
+    /**
+     * @param NumeroSemanas the NumeroSemanas to set
+     */
+    public void setNumeroSemanas(int NumeroSemanas) {
+        this.NumeroSemanas = NumeroSemanas;
     }
 
 }
