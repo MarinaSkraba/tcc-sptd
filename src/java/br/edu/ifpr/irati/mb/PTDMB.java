@@ -61,6 +61,7 @@ public class PTDMB {
     private List<ProjetoExtensao> projetosExtensao;
     private ProjetoPesquisa projetoPesquisa;
     private List<ProjetoPesquisa> projetosPesquisa;
+    private List<PTD> ptdsEmEdicao;
 
     public PTDMB() {
 
@@ -84,6 +85,7 @@ public class PTDMB {
         projetosEnsino = new ArrayList();
         projetosExtensao = new ArrayList();
         projetosPesquisa = new ArrayList();
+        ptdsEmEdicao = new ArrayList();
     }
 
     public String abrirCriarCorrigirPTDEmBranco(Usuario usuario) {
@@ -92,8 +94,8 @@ public class PTDMB {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         Professor p = professorDAOGenerico.buscarPorId(usuario.getIdUsuario());
         ptd.setProfessor(p);
-        List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario());
-        for (PTD ptdE : ptdEmEdicao) {
+        ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario());
+        for (PTD ptdE : ptdsEmEdicao) {
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
         }
@@ -313,5 +315,13 @@ public class PTDMB {
      */
     public void setPdtsEmAvaliacao(List<PTD> pdtsEmAvaliacao) {
         this.pdtsEmAvaliacao = pdtsEmAvaliacao;
+    }
+
+    public List<PTD> getPtdsEmEdicao() {
+        return ptdsEmEdicao;
+    }
+
+    public void setPtdsEmEdicao(List<PTD> ptdsEmEdicao) {
+        this.ptdsEmEdicao = ptdsEmEdicao;
     }
 }
