@@ -71,10 +71,21 @@ public class AdministracaoMB {
         return "/adicionar html aqui";
     }
 
-    public String excluirAdministracao(Administracao administracao) {
+    public String excluirAdministracao(Administracao administracao, PTD ptd) {
+     
         Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+
+        for (int i = 0; i <= administracao.getHorariosAdministracao().size(); i++) {
+            horarioDAO.excluir(horario);
+            administracao.getHorariosAdministracao().remove(horario);
+        }
+
+        ptd.getAdministrativas().remove(administracao);
+        ptdDAO.alterar(ptd);
         administracaoDAO.excluir(administracao);
-        administracoes = administracaoDAO.buscarTodos(Administracao.class);
+
         return "/adicionar aqui";
     }
 

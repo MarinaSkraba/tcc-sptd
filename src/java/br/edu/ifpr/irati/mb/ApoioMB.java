@@ -11,6 +11,7 @@ import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.dao.IApoioDao;
 import br.edu.ifpr.irati.modelo.Apoio;
 import br.edu.ifpr.irati.modelo.Horario;
+import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.TipoApoio;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class ApoioMB {
 
     }
 
-    public void salvarApoio(Serializable idUsuario) {
+    public void salvarApoio(Serializable idUsuario, PTD ptd) {
 
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         Dao<TipoApoio> tipoApoioDAO = new GenericDAO<>(TipoApoio.class);
@@ -46,8 +47,12 @@ public class ApoioMB {
         apoio.getHorariosApoio().add(horario);
         apoio.setEstadoAtividadeApoio("Ativo");
         apoioDAO.salvar(apoio);
-        IApoioDao apDAO = new ApoioDAO();
-        apoios = apDAO.buscarApoiosPorProfessor(idUsuario);
+        apoio = apoioDAO.buscarTodos(Apoio.class).get(apoioDAO.buscarTodos(Apoio.class).size()-1);
+        ptd.getApoios().add(apoio);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptdDAO.alterar(ptd);
+        apoio = new Apoio();
+        
 
     }
 
@@ -65,10 +70,20 @@ public class ApoioMB {
         return "/adicionar html aqui";
     }
 
-    public String excluirApoio(Apoio apoio) {
+    public String excluirApoio(Apoio apoio, PTD ptd) {
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+
+        for (int i = 0; i <= apoio.getHorariosApoio().size(); i++) {
+            horarioDAO.excluir(horario);
+            apoio.getHorariosApoio().remove(horario);
+        }
+
+        ptd.getApoios().remove(apoio);
+        ptdDAO.alterar(ptd);
         apoioDAO.excluir(apoio);
-        apoios = apoioDAO.buscarTodos(Apoio.class);
+
         return "/adicionar aqui";
     }
 

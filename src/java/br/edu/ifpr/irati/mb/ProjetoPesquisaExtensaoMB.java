@@ -7,6 +7,7 @@ import br.edu.ifpr.irati.dao.IProjetoPesquisaDao;
 import br.edu.ifpr.irati.dao.ProjetoExtensaoDAO;
 import br.edu.ifpr.irati.dao.ProjetoPesquisaDAO;
 import br.edu.ifpr.irati.modelo.Horario;
+import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.Participacao;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.ProjetoExtensao;
@@ -54,7 +55,7 @@ public class ProjetoPesquisaExtensaoMB {
         this.tipoProjetoColab = tipoProjetoColab;
     }
 
-    public void salvarProjetoExtensaoAutor(Professor professorAutor) {
+    public void salvarProjetoExtensaoAutor(Professor professorAutor, PTD ptd) {
 
         Dao<ProjetoExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
@@ -67,12 +68,14 @@ public class ProjetoPesquisaExtensaoMB {
         projetoExtensao.getParticipacoes().add(participacao);
         projetoExtensao.getHorariosProjetoExtensao().add(horario);
         projetoExtensaoDAO.salvar(projetoExtensao);
-        IProjetoExtensaoDao peDAO = new ProjetoExtensaoDAO();
-        projetosExtensao = peDAO.buscarProjetosExtensaoPorProfessor(professorAutor.getIdUsuario());
-
+        projetoExtensao = projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class).get(projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class).size() - 1);
+        ptd.getProjetosExtensao().add(projetoExtensao);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptdDAO.alterar(ptd);
+        projetoExtensao = new ProjetoExtensao();
     }
 
-    public void salvarProjetoPesquisaAutor(Professor professorAutor) {
+    public void salvarProjetoPesquisaAutor(Professor professorAutor, PTD ptd) {
         Dao<ProjetoPesquisa> projetoPesquisaDAO = new GenericDAO<>(ProjetoPesquisa.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         participacao.setRotulo("Autor");
@@ -84,8 +87,11 @@ public class ProjetoPesquisaExtensaoMB {
         projetoPesquisa.getParticipacoes().add(participacao);
         projetoPesquisa.getHorariosProjetoPesquisa().add(horario);
         projetoPesquisaDAO.salvar(projetoPesquisa);
-        IProjetoPesquisaDao ppDAO = new ProjetoPesquisaDAO();
-        projetosPesquisa = ppDAO.buscarProjetosPesquisaPorProfessor(professorAutor.getIdUsuario());
+        projetoPesquisa = projetoPesquisaDAO.buscarTodos(ProjetoPesquisa.class).get(projetoPesquisaDAO.buscarTodos(ProjetoPesquisa.class).size() - 1);
+        ptd.getProjetosPesquisa().add(projetoPesquisa);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptdDAO.alterar(ptd);
+        projetoPesquisa = new ProjetoPesquisa();
     }
 
     public void salvarColaboracaoExtensao(Professor professorColaborador) {
@@ -101,8 +107,6 @@ public class ProjetoPesquisaExtensaoMB {
         projetoExtensaoSelecionado.getParticipacoes().add(participacao);
         projetoExtensaoSelecionado.getHorariosProjetoExtensao().add(horario);
         projetoExtensaoDAO.alterar(projetoExtensaoSelecionado);
-        IProjetoExtensaoDao peDAO = new ProjetoExtensaoDAO();
-        projetosExtensaoColab = peDAO.buscarProjetosExtensaoColabPorProfessor(professorColaborador.getIdUsuario());
 
     }
 
@@ -136,10 +140,20 @@ public class ProjetoPesquisaExtensaoMB {
         return "/adicionar html aqui";
     }
 
-    public String excluirProjetoExtensao(ProjetoExtensao projetoExtensao) {
+    public String excluirProjetoExtensao(ProjetoExtensao projetoExtensao, PTD ptd) {
         Dao<ProjetoExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+
+        for (int i = 0; i <= projetoExtensao.getHorariosProjetoExtensao().size(); i++) {
+            horarioDAO.excluir(horario);
+            projetoExtensao.getHorariosProjetoExtensao().remove(horario);
+        }
+
+        ptd.getProjetosExtensao().remove(projetoExtensao);
+        ptdDAO.alterar(ptd);
         projetoExtensaoDAO.excluir(projetoExtensao);
-        projetosExtensao = projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class);
+
         return "/adicionar aqui";
     }
 
@@ -157,10 +171,20 @@ public class ProjetoPesquisaExtensaoMB {
         return "/adicionar html aqui";
     }
 
-    public String excluirProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
+    public String excluirProjetoPesquisa(ProjetoPesquisa projetoPesquisa, PTD ptd) {
         Dao<ProjetoPesquisa> projetoPesquisaDAO = new GenericDAO<>(ProjetoPesquisa.class);
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+
+        for (int i = 0; i <= projetoPesquisa.getHorariosProjetoPesquisa().size(); i++) {
+            horarioDAO.excluir(horario);
+            projetoPesquisa.getHorariosProjetoPesquisa().remove(horario);
+        }
+
+        ptd.getProjetosPesquisa().remove(projetoPesquisa);
+        ptdDAO.alterar(ptd);
         projetoPesquisaDAO.excluir(projetoPesquisa);
-        projetosPesquisa = projetoPesquisaDAO.buscarTodos(ProjetoPesquisa.class);
+
         return "/adicionar aqui";
     }
 
