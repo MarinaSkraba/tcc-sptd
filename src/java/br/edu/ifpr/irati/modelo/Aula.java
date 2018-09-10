@@ -27,11 +27,8 @@ public class Aula implements Serializable {
     @Column(name = "estadoAula", nullable = false, length = 10)
     private String estadoAula;
 
-    @Column(name = "horasAulaTotal", nullable = false, length = 50)
-    private double horasAulaTotal;
-
-    @Column(name = "numeroSemanas", nullable = false, length = 50)
-    private int numeroSemanas;
+    @Column(name = "cargaHorariaTotal", nullable = false)
+    private double cargaHorariaTotal;
 
     @ManyToOne
     @JoinColumn(name = "curso_idCurso")
@@ -47,31 +44,28 @@ public class Aula implements Serializable {
         this.idAula = 0;
         this.estadoAula = "";
         this.componenteCurricular = "";
-        this.horasAulaTotal = 0;
-        this.numeroSemanas = 0;
+        this.cargaHorariaTotal = 0;
         this.curso = new Curso();
         this.tipoOferta = new TipoOferta();
         this.horariosAula = new ArrayList<>();
 
     }
 
-    public Aula(int idAula, String componenteCurricular, String estadoAula, double horasAulaTotal, int numeroSemanas) {
+    public Aula(int idAula, String componenteCurricular, String estadoAula, double cargaHorariaTotal) {
         this.idAula = idAula;
         this.componenteCurricular = componenteCurricular;
         this.estadoAula = estadoAula;
-        this.horasAulaTotal = horasAulaTotal;
-        this.numeroSemanas = numeroSemanas;
+        this.cargaHorariaTotal = cargaHorariaTotal;
         this.curso = new Curso();
         this.tipoOferta = new TipoOferta();
         this.horariosAula = new ArrayList();
     }
 
-    public Aula(int idAula, String componenteCurricular, String estadoAula, double horasAulaTotal, int numeroSemanas, Curso curso, TipoOferta tipoOferta, List<Horario> horariosAula) {
+    public Aula(int idAula, String componenteCurricular, String estadoAula, double cargaHorariaTotal, Curso curso, TipoOferta tipoOferta, List<Horario> horariosAula) {
         this.idAula = idAula;
         this.componenteCurricular = componenteCurricular;
         this.estadoAula = estadoAula;
-        this.horasAulaTotal = horasAulaTotal;
-        this.numeroSemanas = numeroSemanas;
+        this.cargaHorariaTotal = cargaHorariaTotal;
         this.curso = curso;
         this.tipoOferta = tipoOferta;
         this.horariosAula = horariosAula;
@@ -125,20 +119,12 @@ public class Aula implements Serializable {
         this.estadoAula = estadoAula;
     }
 
-    public double getHorasAulaTotal() {
-        return horasAulaTotal;
+    public double getCargaHorariaTotal() {
+        return cargaHorariaTotal;
     }
 
-    public void setHorasAulaTotal(double horasAulaTotal) {
-        this.horasAulaTotal = horasAulaTotal;
-    }
-
-    public int getNumeroSemanas() {
-        return numeroSemanas;
-    }
-
-    public void setNumeroSemanas(int numeroSemanas) {
-        this.numeroSemanas = numeroSemanas;
+    public void setCargaHorariaTotal(double cargaHorariaTotal) {
+        this.cargaHorariaTotal = cargaHorariaTotal;
     }
 
 }
