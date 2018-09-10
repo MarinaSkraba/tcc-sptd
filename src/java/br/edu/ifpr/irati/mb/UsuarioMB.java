@@ -55,7 +55,7 @@ public class UsuarioMB {
         if (usuario.getIdUsuario() == 0) {
             setUsuarioLogado(new Usuario());
             System.out.println("Chegou object");
-            System.out.println(getUsuarioLogado());
+            System.out.println("Acesso negado");
             return "/Login";
         } else {
             setUsuarioLogado(usuario);
@@ -64,7 +64,8 @@ public class UsuarioMB {
             if (getUsuarioLogado() instanceof Professor) {
                 return "/NotificacoesDocente";
             } else {
-                return "/NotificacoesDiretorEnsino";
+                PTDMB ptdmb = new PTDMB();
+                return ptdmb.abrirNotificacoesDiretorEnsino(usuario.getIdUsuario());
             }
         }
     }

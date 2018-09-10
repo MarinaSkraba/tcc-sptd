@@ -23,7 +23,8 @@ import javax.faces.bean.SessionScoped;
 public class AulaMB {
 
     private Aula aula;
-    private Aula aulaSelecionada;
+    private Aula aulaSelecionadaParaAula;
+    private Aula aulaSelecionadaParaHorario;
     private Horario horario;
     private List<Horario> horarios;
     private Curso cursoSelecionado;
@@ -34,7 +35,8 @@ public class AulaMB {
 
         aula = new Aula();
         horario = new Horario();
-        aulaSelecionada = new Aula();
+        aulaSelecionadaParaAula = new Aula();
+        aulaSelecionadaParaHorario = new Aula();
         horarios = new ArrayList<>();
         cursoSelecionado = new Curso();
         tipoOfertaSelecionado = new TipoOferta();
@@ -64,8 +66,8 @@ public class AulaMB {
 
     public String alterarAula() {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-        aulaDAO.alterar(aulaSelecionada);
-        aulaSelecionada = new Aula();
+        aulaDAO.alterar(aulaSelecionadaParaAula);
+        aulaSelecionadaParaAula = new Aula();
         return "/adicionar aqui";
     }
 
@@ -150,20 +152,6 @@ public class AulaMB {
         this.horario = horario;
     }
 
-    /**
-     * @return the aulaSelecionada
-     */
-    public Aula getAulaSelecionada() {
-        return aulaSelecionada;
-    }
-
-    /**
-     * @param aulaSelecionada the aulaSelecionada to set
-     */
-    public void setAulaSelecionada(Aula aulaSelecionada) {
-        this.aulaSelecionada = aulaSelecionada;
-    }
-
     public TipoOferta getTipoOfertaSelecionado() {
         return tipoOfertaSelecionado;
     }
@@ -178,6 +166,34 @@ public class AulaMB {
 
     public void setCargaHorariaTotalAula(double cargaHorariaTotalAula) {
         this.cargaHorariaTotalAula = cargaHorariaTotalAula;
+    }
+
+    /**
+     * @return the aulaSelecionadaParaAula
+     */
+    public Aula getAulaSelecionadaParaAula() {
+        return aulaSelecionadaParaAula;
+    }
+
+    /**
+     * @param aulaSelecionadaParaAula the aulaSelecionadaParaAula to set
+     */
+    public void setAulaSelecionadaParaAula(Aula aulaSelecionadaParaAula) {
+        this.aulaSelecionadaParaAula = aulaSelecionadaParaAula;
+    }
+
+    /**
+     * @return the aulaSelecionadaParaHorario
+     */
+    public Aula getAulaSelecionadaParaHorario() {
+        return aulaSelecionadaParaHorario;
+    }
+
+    /**
+     * @param aulaSelecionadaParaHorario the aulaSelecionadaParaHorario to set
+     */
+    public void setAulaSelecionadaParaHorario(Aula aulaSelecionadaParaHorario) {
+        this.aulaSelecionadaParaHorario = aulaSelecionadaParaHorario;
     }
 
 }

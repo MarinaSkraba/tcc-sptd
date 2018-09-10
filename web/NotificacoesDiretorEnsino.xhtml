@@ -78,19 +78,19 @@
                 <br/>
                 <h:form>
 
-                    <h:dataTable  value="#{aulaMB.aulas}" 
-                                  var="aula" 
+                    <h:dataTable  value="#{pTDMB.pdtsEmAvaliacao}" 
+                                  var="ptd" 
                                   style="border-spacing: 0pt;"
                                   headerClass="text-center"
                                   footerClass="text-center">
 
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="CURSO" 
+                                <h:outputText value="Professor" 
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
                             </f:facet>
-                            <h:outputText value="#{aula.curso.nomeCurso}" 
+                            <h:outputText value="#{ptd.professor.nomeCompleto}" 
                                           styleClass="text01"
                                           style="font-size: large;"/>
                         </h:column>

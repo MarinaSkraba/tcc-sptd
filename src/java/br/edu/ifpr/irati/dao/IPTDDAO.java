@@ -7,14 +7,15 @@ package br.edu.ifpr.irati.dao;
 
 import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.Professor;
+import java.io.Serializable;
 import java.util.List;
 
 public interface IPTDDAO {
     
-    public List<PTD> buscarPTDsAprovados(Professor professor);
+    public List<PTD> buscarPTDsAprovados(Serializable idUsuario);
     
-    public List<PTD> buscarPTDsEmEdicao(Professor professor);
+    public List<PTD> buscarPTDsEmEdicao(Serializable idUsuario);
     
-    public List<PTD> buscarPTDEmAvaliacao(Professor professor);
+    public List<PTD> buscarPTDEmAvaliacao(Serializable idUsuario);
     
 }

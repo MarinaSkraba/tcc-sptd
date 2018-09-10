@@ -212,7 +212,7 @@
                         <br/>
 
                         <p:selectOneMenu id="selectCursoEdicao" 
-                                         value="#{aulaMB.aulaSelecionada.curso}"
+                                         value="#{aulaMB.aulaSelecionadaParaAula.curso}"
                                          converter="cursoConverter">
 
                             <f:selectItems value="#{cursoMB.cursos}" 
@@ -225,14 +225,14 @@
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:inputText value="#{aulaMB.aulaSelecionada.componenteCurricular}"/>
+                        <p:inputText value="#{aulaMB.aulaSelecionadaParaAula.componenteCurricular}"/>
 
                         <h:outputText value="ORGANIZAÇÃO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:selectOneMenu id="selectTipoOfertaEdicao" 
-                                         value="#{aulaMB.aulaSelecionada.tipoOferta}"
+                                         value="#{aulaMB.aulaSelecionadaParaAula.tipoOferta}"
                                          converter="tipoOfertaConverter">
 
                             <f:selectItems value="#{tipoOfertaMB.tiposOferta}" 
@@ -334,7 +334,7 @@
 
                                     <p:commandButton styleClass="botaoCinza" 
                                                      value="..." 
-                                                     action="#{aulaMB.setAulaSelecionada(aula)}"
+                                                     action="#{aulaMB.setAulaSelecionadaParaHorario(aula)}"
                                                      id="opPHorario"/>
 
                                     <!-- Caixa para seleção de ação referente à Horário -->
@@ -382,7 +382,7 @@
                                             hideEffect="fade">
                                 <p:commandButton value="Atualizar"
                                                  styleClass="opMenuCRUD"
-                                                 action="#{aulaMB.setAulaSelecionada(aula)}"
+                                                 action="#{aulaMB.setAulaSelecionadaParaAula(aula)}"
                                                  onclick="PF('edtAulaDialog').show();"
                                                  style="margin: 0px -10px;"/>
                                 <br/>
@@ -441,7 +441,7 @@
 
                         <br/>
                         <h:commandButton value="Salvar" 
-                                         action="#{horarioMB.salvarHorarioAula(aulaMB.aulaSelecionada,usuarioMB.usuarioLogado)}"
+                                         action="#{horarioMB.salvarHorarioAula(aulaMB.aulaSelecionadaParaHorario,usuarioMB.usuarioLogado)}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -454,7 +454,7 @@
                               hideEffect="fade" 
                               resizable="false">
 
-                        <h:dataTable  value="#{aulaMB.aulaSelecionada.horariosAula}" 
+                        <h:dataTable  value="#{aulaMB.aulaSelecionadaParaHorario.horariosAula}" 
                                       var="horarioDaAulaSelecionada" 
                                       style="border-spacing: 0pt;"
                                       headerClass="text-center"
@@ -532,7 +532,7 @@
 
                         <br/>
                         <h:commandButton value="Salvar edição" 
-                                         action="#{horarioMB.salvarHorarioAula(aulaMB.aulaSelecionada,usuarioMB.usuarioLogado)}"
+                                         action="#{horarioMB.salvarHorarioAula(aulaMB.aulaSelecionadaParaHorario,usuarioMB.usuarioLogado)}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>

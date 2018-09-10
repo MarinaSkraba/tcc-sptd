@@ -92,7 +92,7 @@ public class PTDMB {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         Professor p = professorDAOGenerico.buscarPorId(usuario.getIdUsuario());
         ptd.setProfessor(p);
-        List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(p);
+        List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario());
         for (PTD ptdE : ptdEmEdicao) {
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
@@ -100,58 +100,47 @@ public class PTDMB {
         ptd.setDiretorEnsino(null);
         ptd.setEstadoPTD("EDICAO");
         ptdDAOGenerico.salvar(ptd);
-        if (!ptdDAOEspecifico.buscarPTDsEmEdicao(p).isEmpty()) {
-            ptd = ptdDAOEspecifico.buscarPTDsEmEdicao(p).get(0);
+        if (!ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()).isEmpty()) {
+            ptd = ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()).get(0);
         }
 
         return "/CriarCorrigirPTD";
     }
 
     public String abrirCriarCorrigirPTDContinuarEdicao(Usuario usuario) {
-        
-        Dao<Professor> professorDAOGenerico = new GenericDAO<>(Professor.class);
-        IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        Professor p = professorDAOGenerico.buscarPorId(usuario.getIdUsuario());
 
-        List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(p);
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario());
         ptd = ptdEmEdicao.get(0);
         return "/CriarCorrigirPTD";
     }
 
     public String abrirCriarCorrigirPTDAPartirDoUltimoArquivado(Usuario usuario) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-        Dao<Professor> professorDAOGenerico = new GenericDAO<>(Professor.class);
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        Professor p = professorDAOGenerico.buscarPorId(usuario.getIdUsuario());
-        List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(p);
+        List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario());
         for (PTD ptdE : ptdsEmEdicao) {
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
         }
-        List<PTD> ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(p);
-        ptd = ptdsAprovados.get(ptdsAprovados.size() - 1);
-        ptd.setIdPTD(0);
-        ptdDAOGenerico.salvar(ptd);
-        ptd = ptdDAOEspecifico.buscarPTDsEmEdicao(p).get(0);
-        return "/CriarCorrigirPTD";
+        List<PTD> ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(usuario.getIdUsuario());
+        if (ptdsAprovados.isEmpty() != true) {
+            ptd = ptdsAprovados.get(ptdsAprovados.size() - 1);
+            ptd.setIdPTD(0);
+            ptd.setEstadoPTD("EDICAO");
+            ptdDAOGenerico.salvar(ptd);
+            ptd = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario()).get(0);
+            return "/CriarCorrigirPTD";
+        } else {
+
+            return "/NotificacoesDocente";
+        }
     }
 
-    public void atualizarPTDEmEdicao(Professor professor) {
-
-        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-        ptd.setProfessor(professor);
-        ptd.setAdministrativas(administracoes);
-        ptd.setApoios(apoios);
-        ptd.setAtividadesASeremPropostas(atividadesASeremPropostas);
-        ptd.setAulas(aulas);
-        ptd.setManutencoesEnsino(manutencoesEnsino);
-        ptd.setProjetosEnsino(projetosEnsino);
-        ptd.setProjetosExtensao(projetosExtensao);
-        ptd.setProjetosPesquisa(projetosPesquisa);
-        ptdDAO.alterar(ptd);
-        System.out.println("PTD Atualizado");
-        // Atualizar a váriavel ptd a partir do valor dela no banco
-        
+    public String abrirNotificacoesDiretorEnsino(int idUsuario) {
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        pdtsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao(idUsuario);
+        return "/NotificacoesDiretorEnsino";
     }
 
     public String excluirPTDIncompleto(PTD ptd) {

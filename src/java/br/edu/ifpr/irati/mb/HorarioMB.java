@@ -55,7 +55,7 @@ public class HorarioMB {
 
     public String alterar(Horario horario) {
         this.horario = horario;
-        return "/adicionar aqui";
+        return "CriarCorrigirPTD";
     }
 
     public String desabilitar(Horario horario) {
