@@ -58,8 +58,8 @@ public class AulaMB {
         ptd.getAulas().add(aula);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
-        aula = new Aula();
         calcularCargaHorariaTotalAula();
+        aula = new Aula();
         return "CriarCorrigirPTD";
 
     }
