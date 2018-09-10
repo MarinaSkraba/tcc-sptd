@@ -11,6 +11,7 @@ import br.edu.ifpr.irati.dao.IManutencaoDao;
 import br.edu.ifpr.irati.dao.ManutencaoDAO;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
+import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.TipoManutencao;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class ManutencaoMB {
         manutencoesEnsino = new ArrayList();
     }
 
-    public void salvarManutencao(Serializable idUsuario) {
+    public void salvarManutencao(Serializable idUsuario, PTD ptd) {
 
         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
         Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class);
@@ -45,9 +46,11 @@ public class ManutencaoMB {
         manutencaoEnsino.getHorariosManutecao().add(horario);
         manutencaoEnsino.setEstadoManutencaoEnsino("Ativo");
         manutencaoEnsinoDAO.salvar(manutencaoEnsino);
-        IManutencaoDao mDAO = new ManutencaoDAO();
-        manutencoesEnsino = mDAO.buscarManutencoesPorProfessor(idUsuario);
-
+        manutencaoEnsino = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class).get(manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class).size() - 1);
+        ptd.getManutencoesEnsino().add(manutencaoEnsino);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptdDAO.alterar(ptd);
+        manutencaoEnsino = new ManutencaoEnsino();
     }
 
     public String alterarManutencao(ManutencaoEnsino manutencaoEnsino) {
@@ -64,10 +67,20 @@ public class ManutencaoMB {
         return "/adicionar html aqui";
     }
 
-    public String excluirManutencao(ManutencaoEnsino manutencaoEnsino) {
-        Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+    public String excluirManutencao(ManutencaoEnsino manutencaoEnsino, PTD ptd) {
+         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+
+        for (int i = 0; i <= manutencaoEnsino.getHorariosManutecao().size(); i++) {
+            horarioDAO.excluir(horario);
+            manutencaoEnsino.getHorariosManutecao().remove(horario);
+        }
+
+        ptd.getManutencoesEnsino().remove(manutencaoEnsino);
+        ptdDAO.alterar(ptd);
         manutencaoEnsinoDAO.excluir(manutencaoEnsino);
-        manutencoesEnsino = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class);
+
         return "/adicionar aqui";
     }
 

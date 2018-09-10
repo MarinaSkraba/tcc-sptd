@@ -6,6 +6,7 @@ import br.edu.ifpr.irati.dao.IOutroTipoAtividadeDao;
 import br.edu.ifpr.irati.dao.OutroTipoAtividadeDAO;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
+import br.edu.ifpr.irati.modelo.PTD;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,16 +27,18 @@ public class OutroTipoAtividadeMB {
         outrosTiposAtividades = new ArrayList();
     }
 
-    public void salvarOutroTipoAtividade(Serializable idUsuario) {
+    public void salvarOutroTipoAtividade(Serializable idUsuario, PTD ptd) {
         Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.salvar(horario);
         outroTipoAtividade.getHorariosOutroTipoAtividade().add(horario);
         outroTipoAtividade.setEstadoOutroTipoAtividade("Ativo");
         outroTipoAtividadeDAO.salvar(outroTipoAtividade);
-        IOutroTipoAtividadeDao oDAO = new OutroTipoAtividadeDAO();
-        outrosTiposAtividades = oDAO.buscarOutrosTipoAtividadesPorProfessor(idUsuario);
-
+        outroTipoAtividade = outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class).get(outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class).size()-1);
+        ptd.getOutrosTiposAtividades().add(outroTipoAtividade);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptdDAO.alterar(ptd);
+        outroTipoAtividade = new OutroTipoAtividade();
     }
 
     public String alterarOutroTipoAtividade(OutroTipoAtividade outroTipoAtividade) {
@@ -52,10 +55,20 @@ public class OutroTipoAtividadeMB {
         return "/adicionar html aqui";
     }
 
-    public String excluirOutroTipoAtividade(OutroTipoAtividade outroTipoAtividade) {
+    public String excluirOutroTipoAtividade(OutroTipoAtividade outroTipoAtividade, PTD ptd) {
         Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+
+        for (int i = 0; i <= outroTipoAtividade.getHorariosOutroTipoAtividade().size(); i++) {
+            horarioDAO.excluir(horario);
+            outroTipoAtividade.getHorariosOutroTipoAtividade().remove(horario);
+        }
+
+        ptd.getOutrosTiposAtividades().remove(outroTipoAtividade);
+        ptdDAO.alterar(ptd);
         outroTipoAtividadeDAO.excluir(outroTipoAtividade);
-        outrosTiposAtividades = outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class);
+
         return "/adicionar aqui";
     }
 
