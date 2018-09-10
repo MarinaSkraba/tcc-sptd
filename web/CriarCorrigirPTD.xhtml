@@ -163,13 +163,13 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:inputText value="#{aulaMB.aula.componenteCurricular}"/>
-                        
+
                         <h:outputText value="NÚMERO TOTAL DE HORAS AULA" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:inputText value="#{aulaMB.aula.horasAulaTotal}"/>
-                        
+
                         <h:outputText value="NÚMERO TOTAL DE SEMANAS" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
@@ -524,6 +524,8 @@
                                 <p:commandButton styleClass="botaoCinza" 
                                                  style="float: left; font-size: 12pt;" 
                                                  value="X" 
+                                                 ajax="false" 
+                                                 immediate="true"
                                                  action="#{horarioMB.excluir(horarioDaAulaSelecionada)}"/>
 
                             </h:column>
@@ -742,8 +744,13 @@
                         <h:panelGrid columns="2" 
                                      style="align-items: center;"
                                      border="0">
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8;float:left; font-weight: 500; font-size: 15pt;" value="ATIVIDADES">  </h:outputText>
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 500; font-size: 15pt;" value="HORÁRIOS">  </h:outputText>
+
+                            <h:outputText value="ATIVIDADES" 
+                                          styleClass="text01"
+                                          style="font-size: large; font-weight: bold;"/>
+                            <h:outputText value="CARGA HORÁRIA" 
+                                          styleClass="text01"
+                                          style="font-size: large; font-weight: bold;"/>
 
                             <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Aulas">  </h:outputText>
                             <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horarioaqui">  </h:outputText>
