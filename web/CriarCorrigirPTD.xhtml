@@ -351,10 +351,10 @@
                                                          styleClass="opMenuCRUD"
                                                          onclick="PF('addHorarioDialog').show();"
                                                          style="margin: 0px -10px;"/>
+                                        #{horarioMB.setHorariosAulaSelecionada(aula.getHorariosAula())}
                                         <br/>
                                         <p:commandButton value="Editar"
                                                          styleClass="opMenuCRUD"
-                                                         action="#{horarioMB.setHorariosAulaSelecionada(aulaMB.getAulaSelecionadaParaHorario.getHorariosAula())}"
                                                          onclick="PF('edtHorariosDialog').show();"
                                                          style="margin: 5px -10px 0px;"/>
 

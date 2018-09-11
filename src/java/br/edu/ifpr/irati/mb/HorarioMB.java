@@ -50,7 +50,6 @@ public class HorarioMB {
         Professor p = professorDAO.buscarPorId(usuario.getIdUsuario());
         horario.setProfessor(p);
         horario.setEstadoHorario("Ativo");
-//        horario.setHoraInicio();
         aula.getHorariosAula().add(horario);
         horarioDAO.salvar(aula.getHorariosAula().get(aula.getHorariosAula().size() - 1));
         aulaDAO.alterar(aula);
