@@ -31,7 +31,6 @@ public class AulaMB {
     private TipoOferta tipoOfertaSelecionado;
     private double HorasAulaTotal;
     private int NumeroSemanas;
-    private double cargaHorariaTotalAula;
 
     public AulaMB() {
 
@@ -42,11 +41,8 @@ public class AulaMB {
         horarios = new ArrayList<>();
         cursoSelecionado = new Curso();
         tipoOfertaSelecionado = new TipoOferta();
-        cargaHorariaTotalAula = 0;
-    }
-
-    AulaMB(double cargaHorariaTotalAula) {
-        this.cargaHorariaTotalAula = cargaHorariaTotalAula;
+        HorasAulaTotal = 0;
+        NumeroSemanas = 0;
     }
 
     public String salvarAula(Serializable idUsuario, PTD ptd) {
@@ -153,14 +149,6 @@ public class AulaMB {
 
     public void setTipoOfertaSelecionado(TipoOferta tipoOfertaSelecionado) {
         this.tipoOfertaSelecionado = tipoOfertaSelecionado;
-    }
-
-    public double getCargaHorariaTotalAula() {
-        return cargaHorariaTotalAula;
-    }
-
-    public void setCargaHorariaTotalAula(double cargaHorariaTotalAula) {
-        this.cargaHorariaTotalAula = cargaHorariaTotalAula;
     }
 
     /**

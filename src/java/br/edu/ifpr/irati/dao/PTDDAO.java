@@ -30,11 +30,12 @@ public class PTDDAO implements IPTDDAO {
 
     @Override
     public List<PTD> buscarPTDsEmEdicao(Serializable idUsuario) {
+        String estado = "EDICAO";
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from ptd where professor_idUsuario = ? and estadoPTD = ?";
         Query query = session.createQuery(hql);
         query.setSerializable(0, idUsuario);
-        query.setString(1, "EDICAO");
+        query.setString(1, estado);
         List results = query.list();
         session.clear();
         session.close();

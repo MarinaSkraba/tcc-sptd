@@ -50,7 +50,6 @@ public class HorarioMB {
         aula.getHorariosAula().add(horario);
         horarioDAO.salvar(aula.getHorariosAula().get(aula.getHorariosAula().size() - 1));
         aulaDAO.alterar(aula);
-        aula = aulaDAO.buscarPorId(aula.getIdAula());
     }
 
     public String alterar(Horario horario) {

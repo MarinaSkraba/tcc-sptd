@@ -43,6 +43,7 @@ public class PTDMB {
 
     private PTD ptd;
     private List<PTD> pdtsEmAvaliacao;
+    private List<PTD> ptdsEmEdicao;
     private Administracao administracao;
     private List<Administracao> administracoes;
     private Apoio apoio;
@@ -61,7 +62,6 @@ public class PTDMB {
     private List<ProjetoExtensao> projetosExtensao;
     private ProjetoPesquisa projetoPesquisa;
     private List<ProjetoPesquisa> projetosPesquisa;
-    private List<PTD> ptdsEmEdicao;
 
     public PTDMB() {
 
