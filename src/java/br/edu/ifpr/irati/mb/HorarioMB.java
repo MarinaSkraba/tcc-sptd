@@ -24,14 +24,14 @@ import javax.print.attribute.standard.DateTimeAtCompleted;
 public class HorarioMB {
 
     private Horario horario;
-    private Horario horarioSelecionado;
+    private List<Horario> horariosAulaSelecionada;
     private List<Horario> horarios;
     private List<String> diasSemana;
 
     public HorarioMB() {
 
         horario = new Horario();
-        horarioSelecionado = new Horario();
+        horariosAulaSelecionada = new ArrayList<>();
         horarios = new ArrayList<>();
         diasSemana = new ArrayList<>();
         diasSemana.add("Segunda");
@@ -50,15 +50,17 @@ public class HorarioMB {
         Professor p = professorDAO.buscarPorId(usuario.getIdUsuario());
         horario.setProfessor(p);
         horario.setEstadoHorario("Ativo");
+//        horario.setHoraInicio();
         aula.getHorariosAula().add(horario);
         horarioDAO.salvar(aula.getHorariosAula().get(aula.getHorariosAula().size() - 1));
         aulaDAO.alterar(aula);
     }
 
-    public String alterar(Horario horario) {
+    public String alterar() {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        this.horario = horario;
-        horarioDAO.alterar(horario);
+        for(Horario h: horariosAulaSelecionada){
+            horarioDAO.alterar(h);
+        }
         return "CriarCorrigirPTD";
     }
 
@@ -75,7 +77,6 @@ public class HorarioMB {
         return "/CriarCorrigirPTD";
     }
 
-    
     public Horario getHorario() {
         return horario;
     }
@@ -113,16 +114,19 @@ public class HorarioMB {
     }
 
     /**
-     * @return the horarioSelecionado
+     * @return the horariosAulaSelecionada
      */
-    public Horario getHorarioSelecionado() {
-        return horarioSelecionado;
+    public List<Horario> getHorariosAulaSelecionada() {
+        return horariosAulaSelecionada;
     }
 
     /**
-     * @param horarioSelecionado the horarioSelecionado to set
+     * @param horariosAulaSelecionada the horariosAulaSelecionada to set
      */
-    public void setHorarioSelecionado(Horario horarioSelecionado) {
-        this.horarioSelecionado = horarioSelecionado;
+    public void setHorariosAulaSelecionada(List<Horario> horariosAulaSelecionada) {
+        this.horariosAulaSelecionada = horariosAulaSelecionada;
     }
+    
+    
+    
 }
