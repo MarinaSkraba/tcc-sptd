@@ -1,6 +1,7 @@
 package br.edu.ifpr.irati.modelo;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,12 +39,12 @@ public class Horario implements Serializable {
     public Horario() {
 
         this.idHorario = 0;
-        this.horaInicio = new Date();
-        this.horaTermino = new Date();
+        this.horaInicio = new Time(0, 0, 0);
+        this.horaTermino = new Time(0, 0, 0);
         this.diaSemana = "";
     }
 
-    public Horario(int idHorario, Date horaInicio, Date horaTermino, String diaSemana, String estadoHorario, Professor professor) {
+    public Horario(int idHorario, Time horaInicio, Time horaTermino, String diaSemana, String estadoHorario, Professor professor) {
         this.idHorario = idHorario;
         this.horaInicio = horaInicio;
         this.horaTermino = horaTermino;

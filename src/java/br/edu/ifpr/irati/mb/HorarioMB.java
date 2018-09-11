@@ -13,6 +13,7 @@ import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.Usuario;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,12 +24,14 @@ import javax.print.attribute.standard.DateTimeAtCompleted;
 public class HorarioMB {
 
     private Horario horario;
+    private Horario horarioSelecionado;
     private List<Horario> horarios;
     private List<String> diasSemana;
 
     public HorarioMB() {
 
         horario = new Horario();
+        horarioSelecionado = new Horario();
         horarios = new ArrayList<>();
         diasSemana = new ArrayList<>();
         diasSemana.add("Segunda");
@@ -53,7 +56,9 @@ public class HorarioMB {
     }
 
     public String alterar(Horario horario) {
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         this.horario = horario;
+        horarioDAO.alterar(horario);
         return "CriarCorrigirPTD";
     }
 
@@ -105,5 +110,19 @@ public class HorarioMB {
      */
     public void setDiasSemana(List<String> diasSemana) {
         this.diasSemana = diasSemana;
+    }
+
+    /**
+     * @return the horarioSelecionado
+     */
+    public Horario getHorarioSelecionado() {
+        return horarioSelecionado;
+    }
+
+    /**
+     * @param horarioSelecionado the horarioSelecionado to set
+     */
+    public void setHorarioSelecionado(Horario horarioSelecionado) {
+        this.horarioSelecionado = horarioSelecionado;
     }
 }
