@@ -314,7 +314,8 @@
                             <h:dataTable  value="#{aula.horariosAula}" 
                                           var="horario" 
                                           headerClass="text-center"
-                                          footerClass="text-center">
+                                          footerClass="text-center"
+                                          style="width: 100%;">
 
                                 <h:column>
                                     <h:outputText value="#{horario.diaSemana}" 
@@ -353,7 +354,7 @@
                                         <br/>
                                         <p:commandButton value="Editar"
                                                          styleClass="opMenuCRUD"
-                                                         action="#{horarioMB.setHorariosAulaSelecionada(aula.horariosAula)}"
+                                                         action="#{horarioMB.setHorariosAulaSelecionada(aulaMB.getAulaSelecionadaParaHorario.getHorariosAula())}"
                                                          onclick="PF('edtHorariosDialog').show();"
                                                          style="margin: 5px -10px 0px;"/>
 
