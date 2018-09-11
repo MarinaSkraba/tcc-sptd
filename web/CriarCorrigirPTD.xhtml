@@ -323,13 +323,17 @@
                                 </h:column>
                                 <h:column>
                                     <h:outputText value="#{horario.horaInicio}"
-                                                  styleClass="text01" 
-                                                  style="font-size: large;"/>
+                                                  styleClass="text01"
+                                                  style="font-size: large">
+                                        <f:convertDateTime pattern="HH:mm" />
+                                    </h:outputText>
                                 </h:column>
                                 <h:column>
                                     <h:outputText value="#{horario.horaTermino}"
-                                                  styleClass="text01" 
-                                                  style="font-size: large;"/>
+                                                  styleClass="text01"
+                                                  style="font-size: large">
+                                        <f:convertDateTime pattern="HH:mm" />
+                                    </h:outputText>
                                 </h:column>
                                 <f:facet name="footer">
 
