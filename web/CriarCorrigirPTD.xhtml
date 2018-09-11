@@ -409,10 +409,11 @@
                     <!-- Caixa para adicionar horário à aula -->
                     <p:dialog header="Adicionar Horario" 
                               widgetVar="addHorarioDialog" 
-                              modal="true" 
+                              modal="true"                              
                               showEffect="fade" 
                               hideEffect="fade" 
-                              resizable="false">
+                              resizable="false"
+                              >
 
                         <h:outputText value="DIA" 
                                       styleClass="text01"
@@ -435,6 +436,7 @@
                         <br> <p:calendar id="horaInicio" 
                                          value="#{horarioMB.horario.horaInicio}" 
                                          pattern="HH:mm" 
+                                         size="5"
                                          timeOnly="true"/></br>
 
                         <h:outputText value="HORÁRIO TÉRMINO" 
@@ -443,7 +445,8 @@
                         <br/>
                         <br> <p:calendar id="horaTermino" 
                                          value="#{horarioMB.horario.horaTermino}" 
-                                         pattern="HH:mm" 
+                                         pattern="HH:mm"
+                                         size="5"
                                          timeOnly="true"/></br>
 
                         <br/>
