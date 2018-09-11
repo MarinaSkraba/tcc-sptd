@@ -44,47 +44,12 @@ public class PTDMB {
     private PTD ptd;
     private List<PTD> pdtsEmAvaliacao;
     private List<PTD> ptdsEmEdicao;
-    private Administracao administracao;
-    private List<Administracao> administracoes;
-    private Apoio apoio;
-    private List<Apoio> apoios;
-    private AtividadeASerProposta atividadeASerProposta;
-    private List<AtividadeASerProposta> atividadesASeremPropostas;
-    private Aula aula;
-    private List<Aula> aulas;
-    private ManutencaoEnsino manutencaoEnsino;
-    private List<ManutencaoEnsino> manutencoesEnsino;
-    private OutroTipoAtividade outroTipoAtividade;
-    private List<OutroTipoAtividade> outrosTiposAtividades;
-    private ProjetoEnsino projetoEnsino;
-    private List<ProjetoEnsino> projetosEnsino;
-    private ProjetoExtensao projetoExtensao;
-    private List<ProjetoExtensao> projetosExtensao;
-    private ProjetoPesquisa projetoPesquisa;
-    private List<ProjetoPesquisa> projetosPesquisa;
+    
 
     public PTDMB() {
 
         ptd = new PTD();
         pdtsEmAvaliacao = new ArrayList<>();
-        administracao = new Administracao();
-        apoio = new Apoio();
-        atividadeASerProposta = new AtividadeASerProposta();
-        aula = new Aula();
-        manutencaoEnsino = new ManutencaoEnsino();
-        outroTipoAtividade = new OutroTipoAtividade();
-        projetoEnsino = new ProjetoEnsino();
-        projetoExtensao = new ProjetoExtensao();
-        projetoPesquisa = new ProjetoPesquisa();
-        administracoes = new ArrayList();
-        apoios = new ArrayList();
-        atividadesASeremPropostas = new ArrayList();
-        aulas = new ArrayList();
-        manutencoesEnsino = new ArrayList();
-        outrosTiposAtividades = new ArrayList();
-        projetosEnsino = new ArrayList();
-        projetosExtensao = new ArrayList();
-        projetosPesquisa = new ArrayList();
         ptdsEmEdicao = new ArrayList();
     }
 
@@ -157,150 +122,6 @@ public class PTDMB {
 
     public void setPtd(PTD ptd) {
         this.ptd = ptd;
-    }
-
-    public Administracao getAdministracao() {
-        return administracao;
-    }
-
-    public void setAdministracao(Administracao administracao) {
-        this.administracao = administracao;
-    }
-
-    public List<Administracao> getAdministracoes() {
-        return administracoes;
-    }
-
-    public void setAdministracoes(List<Administracao> administracoes) {
-        this.administracoes = administracoes;
-    }
-
-    public Apoio getApoio() {
-        return apoio;
-    }
-
-    public void setApoio(Apoio apoio) {
-        this.apoio = apoio;
-    }
-
-    public List<Apoio> getApoios() {
-        return apoios;
-    }
-
-    public void setApoios(List<Apoio> apoios) {
-        this.apoios = apoios;
-    }
-
-    public AtividadeASerProposta getAtividadeASerProposta() {
-        return atividadeASerProposta;
-    }
-
-    public void setAtividadeASerProposta(AtividadeASerProposta atividadeASerProposta) {
-        this.atividadeASerProposta = atividadeASerProposta;
-    }
-
-    public List<AtividadeASerProposta> getAtividadesASeremPropostas() {
-        return atividadesASeremPropostas;
-    }
-
-    public void setAtividadesASeremPropostas(List<AtividadeASerProposta> atividadesASeremPropostas) {
-        this.atividadesASeremPropostas = atividadesASeremPropostas;
-    }
-
-    public Aula getAula() {
-        return aula;
-    }
-
-    public void setAula(Aula aula) {
-        this.aula = aula;
-    }
-
-    public List<Aula> getAulas() {
-        return aulas;
-    }
-
-    public void setAulas(List<Aula> aulas) {
-        this.aulas = aulas;
-    }
-
-    public ManutencaoEnsino getManutencaoEnsino() {
-        return manutencaoEnsino;
-    }
-
-    public void setManutencaoEnsino(ManutencaoEnsino manutencaoEnsino) {
-        this.manutencaoEnsino = manutencaoEnsino;
-    }
-
-    public List<ManutencaoEnsino> getManutencoesEnsino() {
-        return manutencoesEnsino;
-    }
-
-    public void setManutencoesEnsino(List<ManutencaoEnsino> manutencoesEnsino) {
-        this.manutencoesEnsino = manutencoesEnsino;
-    }
-
-    public OutroTipoAtividade getOutroTipoAtividade() {
-        return outroTipoAtividade;
-    }
-
-    public void setOutroTipoAtividade(OutroTipoAtividade outroTipoAtividade) {
-        this.outroTipoAtividade = outroTipoAtividade;
-    }
-
-    public List<OutroTipoAtividade> getOutrosTiposAtividades() {
-        return outrosTiposAtividades;
-    }
-
-    public void setOutrosTiposAtividades(List<OutroTipoAtividade> outrosTiposAtividades) {
-        this.outrosTiposAtividades = outrosTiposAtividades;
-    }
-
-    public ProjetoEnsino getProjetoEnsino() {
-        return projetoEnsino;
-    }
-
-    public void setProjetoEnsino(ProjetoEnsino projetoEnsino) {
-        this.projetoEnsino = projetoEnsino;
-    }
-
-    public List<ProjetoEnsino> getProjetosEnsino() {
-        return projetosEnsino;
-    }
-
-    public void setProjetosEnsino(List<ProjetoEnsino> projetosEnsino) {
-        this.projetosEnsino = projetosEnsino;
-    }
-
-    public ProjetoExtensao getProjetoExtensao() {
-        return projetoExtensao;
-    }
-
-    public void setProjetoExtensao(ProjetoExtensao projetoExtensao) {
-        this.projetoExtensao = projetoExtensao;
-    }
-
-    public List<ProjetoExtensao> getProjetosExtensao() {
-        return projetosExtensao;
-    }
-
-    public void setProjetosExtensao(List<ProjetoExtensao> projetosExtensao) {
-        this.projetosExtensao = projetosExtensao;
-    }
-
-    public ProjetoPesquisa getProjetoPesquisa() {
-        return projetoPesquisa;
-    }
-
-    public void setProjetoPesquisa(ProjetoPesquisa projetoPesquisa) {
-        this.projetoPesquisa = projetoPesquisa;
-    }
-
-    public List<ProjetoPesquisa> getProjetosPesquisa() {
-        return projetosPesquisa;
-    }
-
-    public void setProjetosPesquisa(List<ProjetoPesquisa> projetosPesquisa) {
-        this.projetosPesquisa = projetosPesquisa;
     }
 
     /**
