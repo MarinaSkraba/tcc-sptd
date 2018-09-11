@@ -18,9 +18,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
 @ManagedBean
+@SessionScoped
 public class HorarioMB {
 
     private Horario horario;
@@ -53,6 +55,7 @@ public class HorarioMB {
         aula.getHorariosAula().add(horario);
         horarioDAO.salvar(aula.getHorariosAula().get(aula.getHorariosAula().size() - 1));
         aulaDAO.alterar(aula);
+        horario = new Horario();
     }
 
     public String alterar() {

@@ -101,7 +101,7 @@
               styleClass="text">
             Criação e edição de planos de trabalho
         </font>
-        
+
         <div id="screen">
 
             <div id="content">
@@ -227,7 +227,7 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:inputText value="#{aulaMB.aulaSelecionadaParaAula.componenteCurricular}"/>
-
+                        
                         <h:outputText value="ORGANIZAÇÃO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
@@ -381,6 +381,7 @@
 
                             <p:commandButton styleClass="botaoAzul" 
                                              value="..." 
+                                             action="#{aulaMB.setAulaSelecionadaParaAula(aula)}"
                                              id="opPAtividadeAula"/>
 
                             <!-- Caixa para seleção de ação referente à Aula -->
@@ -477,8 +478,7 @@
 
                                 <f:facet name="header">
                                     <h:outputText value="DIA" 
-                                                  styleClass="text01"
-                                                  style="margin: 10px 25px -10px 25px;"/>
+                                                  styleClass="text01"/>
                                 </f:facet>
 
                                 <p:selectOneMenu id="selectDiaSemanaEdicao" 
@@ -497,13 +497,13 @@
 
                                 <f:facet name="header">
                                     <h:outputText value="HORÁRIO INÍCIO" 
-                                                  styleClass="text01"
-                                                  style="margin: 10px 25px -10px 25px;"/>
+                                                  styleClass="text01"/>
                                 </f:facet>
 
                                 <p:calendar id="horaInicioEdicao" 
                                             value="#{horarioSelecionadoEdicao.horaInicio}" 
                                             pattern="HH:mm" 
+                                            size="5"
                                             timeOnly="true"/>
 
                             </h:column>
@@ -512,13 +512,13 @@
 
                                 <f:facet name="header">
                                     <h:outputText value="HORÁRIO TÉRMINO" 
-                                                  styleClass="text01"
-                                                  style="margin: 10px 25px -10px 25px;"/>
+                                                  styleClass="text01"/>
                                 </f:facet>
 
                                 <p:calendar id="horaTerminooEdicao" 
                                             value="#{horarioSelecionadoEdicao.horaTermino}" 
                                             pattern="HH:mm" 
+                                            size="5"
                                             timeOnly="true"/>
 
                             </h:column>
@@ -536,7 +536,7 @@
                                                  value="X" 
                                                  ajax="false" 
                                                  immediate="true"
-                                                 action="#{horarioMB.excluir(horarioDaAulaSelecionada)}"/>
+                                                 action="#{horarioMB.excluir(horarioSelecionadoEdicao)}"/>
 
                             </h:column>
 
