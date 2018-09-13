@@ -18,22 +18,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class HorarioMB {
 
     private Horario horario;
-    private List<Horario> horariosAulaSelecionada;
     private List<Horario> horarios;
     private List<String> diasSemana;
 
     public HorarioMB() {
 
         horario = new Horario();
-        horariosAulaSelecionada = new ArrayList<>();
         horarios = new ArrayList<>();
         diasSemana = new ArrayList<>();
         diasSemana.add("Segunda");
@@ -58,7 +56,7 @@ public class HorarioMB {
         horario = new Horario();
     }
 
-    public String alterar() {
+    public String alterar(List<Horario> horariosAulaSelecionada) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         for(Horario h: horariosAulaSelecionada){
             horarioDAO.alterar(h);
@@ -114,21 +112,5 @@ public class HorarioMB {
     public void setDiasSemana(List<String> diasSemana) {
         this.diasSemana = diasSemana;
     }
-
-    /**
-     * @return the horariosAulaSelecionada
-     */
-    public List<Horario> getHorariosAulaSelecionada() {
-        return horariosAulaSelecionada;
-    }
-
-    /**
-     * @param horariosAulaSelecionada the horariosAulaSelecionada to set
-     */
-    public void setHorariosAulaSelecionada(List<Horario> horariosAulaSelecionada) {
-        this.horariosAulaSelecionada = horariosAulaSelecionada;
-    }
-    
-    
     
 }

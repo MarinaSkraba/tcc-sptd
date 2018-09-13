@@ -16,10 +16,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class AulaMB {
 
     private Aula aula;
@@ -58,6 +58,8 @@ public class AulaMB {
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         aula = new Aula();
+        HorasAulaTotal = 0;
+        NumeroSemanas = 0;
         return "CriarCorrigirPTD";
 
     }
