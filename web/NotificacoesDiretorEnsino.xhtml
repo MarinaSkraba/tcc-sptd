@@ -78,26 +78,34 @@
                 <br/>
                 <h:form>
 
-                    <h:dataTable  value="#{pTDMB.pdtsEmAvaliacao}" 
-                                  var="ptd" 
-                                  style="border-spacing: 0pt;"
-                                  headerClass="text-center"
-                                  footerClass="text-center">
+                    <p:dataScroller value="#{pTDMB.pdtsEmAvaliacao}" 
+                                    var="ptdEsperando" 
+                                    chunkSize="10">
 
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Professor" 
+                        <f:facet name="header" />
+                        <h:panelGrid columns="2" 
+                                     style="width:100%" >
+
+                            <p:commandLink action="" title="Ver PTD">
+                                <h:outputText value="#{ptdEsperando.professor.nomeCompleto}"  
                                               styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
-                            <h:outputText value="#{ptd.professor.nomeCompleto}" 
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                        </h:column>
-                        
-                    </h:dataTable>
-                    <hr size="1px"/>
-                    
+                                              style="font-size: large;"/>
+                            </p:commandLink>
+
+                            <h:panelGrid columns="2" 
+                                         style="width:100%" >
+                                <p:graphicImage name="#{pTDMB.verificacaoIrregularidadesNotificacoesDiretorEnsino}" 
+                                                style="width: 25px; height: 25px;" 
+                                                alt="Certo?"/> 
+                                <p:commandLink action="" title="Ver PTD">
+                                    <p:graphicImage name="img/abrir.png" 
+                                                    style="width: 25px; height: 25px;" /> 
+                                </p:commandLink>
+                            </h:panelGrid>
+
+                        </h:panelGrid>
+
+                    </p:dataScroller>
 
                 </h:form>
                 <br/>

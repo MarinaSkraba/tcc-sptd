@@ -106,14 +106,16 @@ public class PTDMB {
 
     public String abrirNotificacoesDiretorEnsino(int idUsuario) {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        pdtsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao(idUsuario);
+        pdtsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         return "/NotificacoesDiretorEnsino";
     }
-
-    public String excluirPTDIncompleto(PTD ptd) {
-        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-        ptdDAO.excluir(ptd);
-        return "/adicionar html aqui";
+    
+    public String verificacaoIrregularidadesNotificacoesDiretorEnsino(){
+        if(true){
+            return "img/irregularidade.png";
+        }else{
+            return "img/certinho.png";
+        }
     }
 
     public PTD getPtd() {

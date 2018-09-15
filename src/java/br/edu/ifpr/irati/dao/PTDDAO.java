@@ -9,6 +9,7 @@ import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.util.HibernateUtil;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -17,42 +18,62 @@ public class PTDDAO implements IPTDDAO {
 
     @Override
     public List<PTD> buscarPTDsAprovados(Serializable idUsuario) {
+        int id = (int) idUsuario;
+        String estado = "APROVADO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd where professor_idUsuario = ? and estadoPTD = ?";
+        String hql = "from ptd";
         Query query = session.createQuery(hql);
-        query.setSerializable(0, idUsuario);
-        query.setString(1, "APROVADO");
-        List results = query.list();
+        List<PTD> results = query.list();
+        List<PTD> filtrados = new ArrayList<>();
+        for (PTD ptd : results) {
+            if (ptd.getProfessor().getIdUsuario() == id) {
+                if (ptd.getEstadoPTD().equals(estado)) {
+                    filtrados.add(ptd);
+                }
+            }
+        }
         session.clear();
         session.close();
-        return results;
+        return filtrados;
     }
 
     @Override
     public List<PTD> buscarPTDsEmEdicao(Serializable idUsuario) {
+        int id = (int) idUsuario;
         String estado = "EDICAO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd where professor_idUsuario = ? and estadoPTD = ?";
+        String hql = "from ptd";
         Query query = session.createQuery(hql);
-        query.setSerializable(0, idUsuario);
-        query.setString(1, estado);
-        List results = query.list();
+        List<PTD> results = query.list();
+        List<PTD> filtrados = new ArrayList<>();
+        for (PTD ptd : results) {
+            if (ptd.getProfessor().getIdUsuario() == id) {
+                if (ptd.getEstadoPTD().equals(estado)) {
+                    filtrados.add(ptd);
+                }
+            }
+        }
         session.clear();
         session.close();
-        return results;
+        return filtrados;
     }
 
     @Override
-    public List<PTD> buscarPTDEmAvaliacao(Serializable idUsuario) {
+    public List<PTD> buscarPTDEmAvaliacao() {
+        String estado = "AVALIACAO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd where professor_idUsuario = ? and estadoPTD = ?";
+        String hql = "from ptd";
         Query query = session.createQuery(hql);
-        query.setSerializable(0, idUsuario);
-        query.setString(1, "AVALIACAO");
-        List results = query.list();
+        List<PTD> results = query.list();
+        List<PTD> filtrados = new ArrayList<>();
+        for (PTD ptd : results) {
+            if (ptd.getEstadoPTD().equals(estado)) {
+                filtrados.add(ptd);
+            }
+        }
         session.clear();
         session.close();
-        return results;
+        return filtrados;
     }
-    
+
 }

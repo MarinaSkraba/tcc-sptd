@@ -16,6 +16,6 @@ public interface IPTDDAO {
     
     public List<PTD> buscarPTDsEmEdicao(Serializable idUsuario);
     
-    public List<PTD> buscarPTDEmAvaliacao(Serializable idUsuario);
+    public List<PTD> buscarPTDEmAvaliacao();
     
 }
