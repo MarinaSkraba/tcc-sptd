@@ -319,7 +319,8 @@
                                         <p:commandButton value="Editar"
                                                          styleClass="opMenuCRUD"
                                                          onclick="PF('edtHorariosDialog').show();"
-                                                         style="margin: 5px -10px 0px;"/>
+                                                         style="margin: 5px -10px 0px;"
+                                                         />
 
                                     </p:overlayPanel>
 
@@ -428,11 +429,12 @@
                               modal="true" 
                               showEffect="fade" 
                               hideEffect="fade" 
-                              resizable="false">
+                              resizable="false"
+                              >
 
-                        <h:dataTable  value="#{aula.horariosAula}" 
+                        <h:dataTable  value="#{aulaMB.aulaSelecionadaParaHorario.horariosAula}" 
                                       var="horarioSelecionadoEdicao" 
-                                      style="border-spacing: 0pt;"
+                                      style="width: 100%;"
                                       headerClass="text-center"
                                       footerClass="text-center">
                             <f:facet name="header">
@@ -461,7 +463,7 @@
                             <h:column>
 
                                 <f:facet name="header">
-                                    <h:outputText value="HORÁRIO INÍCIO" 
+                                    <h:outputText value="INÍCIO" 
                                                   styleClass="text01"/>
                                 </f:facet>
 
@@ -476,7 +478,7 @@
                             <h:column>
 
                                 <f:facet name="header">
-                                    <h:outputText value="HORÁRIO TÉRMINO" 
+                                    <h:outputText value="TÉRMINO" 
                                                   styleClass="text01"/>
                                 </f:facet>
 
@@ -509,7 +511,7 @@
 
                         <br/>
                         <h:commandButton value="Salvar edição" 
-                                         action="#{horarioMB.alterar(aula.horariosAula)}"
+                                         action="#{horarioMB.alterar(aulaMB.aulaSelecionadaParaHorario.horariosAula)}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -764,7 +766,8 @@
                                      value="Submeter"/>
                     <p:commandButton styleClass="botaoCinza" 
                                      style="float: right; border-radius: 30px; font-size: large;" 
-                                     value="Cancelar"/>
+                                     value="Cancelar"
+                                     action="#{pTDMB.cancelarPTD()}"/>
 
                     <br/>
 

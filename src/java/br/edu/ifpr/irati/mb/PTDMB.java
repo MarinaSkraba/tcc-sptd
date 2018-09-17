@@ -72,6 +72,8 @@ public class PTDMB {
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
         }
+        ptd = new PTD();
+        ptd.setProfessor(p);
         ptd.setDiretorEnsino(null);
         ptd.setEstadoPTD("EDICAO");
         ptdDAOGenerico.salvar(ptd);
@@ -114,6 +116,7 @@ public class PTDMB {
 
     public String cancelarPTD() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ManagerBean", new PTDMB());
+        
         Dao<Administracao> adminstracaoDAO = new GenericDAO<>(PTD.class);
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         Dao<AtividadeASerProposta> aASPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
@@ -130,6 +133,7 @@ public class PTDMB {
         Dao<ProjetoExtensao> pExtensao = new GenericDAO<>(ProjetoExtensao.class);
         Dao<TipoOferta> tipoOferta = new GenericDAO<>(TipoOferta.class);
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
+        
         return "NotificacoesDocente";
     }
 

@@ -60,7 +60,7 @@ public class AulaMB {
         aula = new Aula();
         HorasAulaTotal = 0;
         NumeroSemanas = 0;
-        return "CriarCorrigirPTD";
+        return "CriarCorrigirPTD?faces-redirect=true";
 
     }
 
