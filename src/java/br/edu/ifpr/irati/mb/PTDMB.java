@@ -24,18 +24,24 @@ import br.edu.ifpr.irati.modelo.Administracao;
 import br.edu.ifpr.irati.modelo.Apoio;
 import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
 import br.edu.ifpr.irati.modelo.Aula;
+import br.edu.ifpr.irati.modelo.Curso;
+import br.edu.ifpr.irati.modelo.DiretorEnsino;
+import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
 import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
 import br.edu.ifpr.irati.modelo.PTD;
+import br.edu.ifpr.irati.modelo.Participacao;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.ProjetoEnsino;
 import br.edu.ifpr.irati.modelo.ProjetoExtensao;
 import br.edu.ifpr.irati.modelo.ProjetoPesquisa;
+import br.edu.ifpr.irati.modelo.TipoOferta;
 import br.edu.ifpr.irati.modelo.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
@@ -44,7 +50,6 @@ public class PTDMB {
     private PTD ptd;
     private List<PTD> pdtsEmAvaliacao;
     private List<PTD> ptdsEmEdicao;
-    
 
     public PTDMB() {
 
@@ -53,7 +58,7 @@ public class PTDMB {
         ptdsEmEdicao = new ArrayList();
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         pdtsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
-        
+
     }
 
     public String abrirCriarCorrigirPTDEmBranco(Usuario usuario) {
@@ -107,20 +112,41 @@ public class PTDMB {
         }
     }
 
+    public String cancelarPTD() {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ManagerBean", new PTDMB());
+        Dao<Administracao> adminstracaoDAO = new GenericDAO<>(PTD.class);
+        Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
+        Dao<AtividadeASerProposta> aASPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
+        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
+        Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class);
+        Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<ManutencaoEnsino> manutencaoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+        Dao<OutroTipoAtividade> oTAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
+        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
+        Dao<ProjetoPesquisa> pPesquisa = new GenericDAO<>(ProjetoPesquisa.class);
+        Dao<ProjetoExtensao> pExtensao = new GenericDAO<>(ProjetoExtensao.class);
+        Dao<TipoOferta> tipoOferta = new GenericDAO<>(TipoOferta.class);
+        Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
+        return "NotificacoesDocente";
+    }
+
     public String abrirNotificacoesDiretorEnsino(int idUsuario) {
-        
+
         return "/NotificacoesDiretorEnsino";
     }
-    
-    public String verificacaoIrregularidadesNotificacoesDiretorEnsino(){
-        if(ptd.getApoios().isEmpty()){
+
+    public String verificacaoIrregularidadesNotificacoesDiretorEnsino() {
+        if (ptd.getApoios().isEmpty()) {
             return "Possui irregularidades";
-        }else{
+        } else {
             return "Correto";
         }
     }
-    
-    public String abrirPTDEmAvaliacao(){
+
+    public String abrirPTDEmAvaliacao() {
         return "PTDEmAvaliacao";
     }
 

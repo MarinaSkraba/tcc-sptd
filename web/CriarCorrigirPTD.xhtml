@@ -54,40 +54,6 @@
                               styleClass="text01"
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
-                <p:commandButton id="addPTD"
-                                 styleClass="opMenu"
-                                 icon="/img/Search/searchLarger_24.png"
-                                 value="Novo PTD"/>
-
-                <!-- Caixa de "novo" PTD -->
-                <p:overlayPanel id="addPanel" 
-                                for="addPTD" 
-                                hideEffect="fade" 
-                                style="padding: 0px;">
-                    <p:commandButton value="PTD em branco"
-                                     styleClass="opMenu"
-                                     ajax="false" 
-                                     immediate="true"
-                                     action="#{pTDMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
-                    <br/>
-                    <p:commandButton value="Recuperar último"
-                                     styleClass="opMenu"
-                                     ajax="false" 
-                                     immediate="true"
-                                     action="#{pTDMB.abrirCriarCorrigirPTDAPartirDoUltimoArquivado(usuarioMB.usuarioLogado)}"/>
-                    <br/>
-                    <p:commandButton value="Continuar editando"
-                                     styleClass="opMenu"
-                                     ajax="false" 
-                                     immediate="true"
-                                     action="#{pTDMB.abrirCriarCorrigirPTDContinuarEdicao(usuarioMB.usuarioLogado)}"/>
-                </p:overlayPanel>
-
-                <p:commandButton styleClass="opMenu"
-                                 icon="/img/Search/searchLarger_24.png"
-                                 value="Pesquisa"
-                                 action="/pesquisa"/>
-
             </h:form>
 
         </div>
@@ -324,21 +290,22 @@
                                     <h:outputText value="#{horario.horaInicio}"
                                                   styleClass="text01"
                                                   style="font-size: large">
-                                        <f:convertDateTime pattern="HH:mm" />
+                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                     </h:outputText>
                                 </h:column>
                                 <h:column>
                                     <h:outputText value="#{horario.horaTermino}"
                                                   styleClass="text01"
                                                   style="font-size: large">
-                                        <f:convertDateTime pattern="HH:mm" timeZone="UTC-3"/>
+                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                     </h:outputText>
                                 </h:column>
                                 <f:facet name="footer">
 
                                     <p:commandButton styleClass="botaoCinza" 
                                                      value="..."
-                                                     id="opPHorario"/>
+                                                     id="opPHorario"
+                                                     action="#{aulaMB.setAulaSelecionadaParaHorario(aula)}"/>
 
                                     <!-- Caixa para seleção de ação referente à Horário -->
                                     <p:overlayPanel id="opcoesHorario" 
@@ -359,7 +326,7 @@
                                 </f:facet>
 
                             </h:dataTable>
-                            #{aulaMB.setAulaSelecionadaParaHorario(aula)}
+                            
 
                         </h:column>
                         <h:column>
@@ -789,6 +756,7 @@
                                           style="font-size: large;"/>
                         </p:column>
                     </center>
+                    
                     <br/>
 
                     <p:commandButton styleClass="botaoAzul" 
