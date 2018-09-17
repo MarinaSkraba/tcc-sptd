@@ -83,57 +83,60 @@
                                   style="border-spacing: 0pt; width: 100%;"
                                   headerClass="text-center"
                                   footerClass="text-center">
+                        <f:facet name="header">
+                            <h:panelGrid columns="3" 
+                                         style="width:100%" >
+
+                                <h:outputText value="Professor" 
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+                                <h:outputText value="Status" 
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+                                <h:outputText value="Opções" 
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+
+                            </h:panelGrid>
+                        </f:facet>
 
                         <h:column>
                             <f:facet name="header">
                                 <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                             </f:facet>
+                            <div id="linha">
+                                <h:panelGrid columns="3" 
+                                             style="width:100%" >
 
-                            <h:panelGrid columns="3" 
-                                         style="width:100%" >
-
-
-
-                            </h:panelGrid>
-
-                            <h:panelGrid columns="3" 
-                                         style="width:100%" >
-
-                                <p:commandLink action="#{pTDMB.abrirPTDEmAvaliacao()}" title="Ver PTD">
-                                    <h:outputText value="#{ptdEsperando.professor.nomeCompleto}"  
+                                    <p:commandLink action="#{pTDMB.abrirPTDEmAvaliacao()}" title="Ver PTD">
+                                        <h:outputText value="#{ptdEsperando.professor.nomeCompleto}"  
+                                                      styleClass="text01"
+                                                      style="font-size: large;"/>
+                                    </p:commandLink>
+                                    <h:outputText value="#{pTDMB.verificacaoIrregularidadesNotificacoesDiretorEnsino()}"  
                                                   styleClass="text01"
                                                   style="font-size: large;"/>
-                                </p:commandLink>
+                                    <p:commandButton styleClass="botaoAzul" 
+                                                     style="margin: 5px 0px 5px;" 
+                                                     value="Abrir PTD"
+                                                     action="#{pTDMB.abrirPTDEmAvaliacao()}"/>
 
-                                <h:panelGrid columns="2" >
-                                    <h:outputText value="Correto"  
-                                                  styleClass="text01"
-                                                  style="font-size: large;"/>
-                                    <p:graphicImage name="#{pTDMB.verificacaoIrregularidadesNotificacoesDiretorEnsino()}" 
-                                                    style="width: 25px; height: 25px; background-image: url(img/irregularidade.png); border-style: none;" 
-                                                    alt=""/>
                                 </h:panelGrid>
-
-                                <p:commandButton styleClass="botaoAzul" 
-                                                 style="float: left;" 
-                                                 value="Abrir PTD"
-                                                 action="#{pTDMB.abrirPTDEmAvaliacao()}"/>
-
-                            </h:panelGrid>
-
-                            <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                            </div>
+                            <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.2; margin: 0;"/>
 
                         </h:column>
+
                     </h:dataTable>
 
-                   
 
-                         </h:form>
-                         <br/>
-                         </div>
 
-                         </div>
+                </h:form>
+                <br/>
+            </div>
 
-                         </h:body>
-                         </html>
+        </div>
+
+    </h:body>
+</html>
 

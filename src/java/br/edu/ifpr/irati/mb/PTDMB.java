@@ -35,10 +35,10 @@ import br.edu.ifpr.irati.modelo.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class PTDMB {
 
     private PTD ptd;
@@ -114,9 +114,9 @@ public class PTDMB {
     
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino(){
         if(ptd.getApoios().isEmpty()){
-            return "img/irregularidade.png";
+            return "Possui irregularidades";
         }else{
-            return "img/certinho.png";
+            return "Correto";
         }
     }
     

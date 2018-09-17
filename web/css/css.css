@@ -300,11 +300,6 @@ body{
     box-shadow: 0 0px 0px 0 rgba(0,0,0,0);
 }
 
-
-
-
-
-
 .ui-dialog {
     left: 0;
     outline: 0 none;
@@ -340,4 +335,11 @@ body{
     position: relative;
     font-size: 1.3em;
     width: 500px;
+}
+
+#linha{
+    transition: background-color 0.3s;
+}
+#linha:hover {
+    background-color: #f2f2f2;
 }
