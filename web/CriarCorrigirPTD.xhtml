@@ -288,6 +288,7 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <!-- Tabela para títulos de horários -->
                                 <h:outputText value="HORÁRIO"
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
@@ -307,7 +308,7 @@
                                 </h:panelGrid>
                             </f:facet>
 
-                            <!-- Tabela para os títulos de horário -->
+                            <!-- Tabela para o conteúdo de horários -->
                             <h:dataTable  value="#{aula.horariosAula}" 
                                           var="horario" 
                                           headerClass="text-center"
@@ -334,7 +335,7 @@
                                     </h:outputText>
                                 </h:column>
                                 <f:facet name="footer">
-                                    
+
                                     <p:commandButton styleClass="botaoCinza" 
                                                      value="..."
                                                      id="opPHorario"/>
@@ -358,9 +359,8 @@
                                 </f:facet>
 
                             </h:dataTable>
-                            
                             #{aulaMB.setAulaSelecionadaParaHorario(aula)}
-                            
+
                         </h:column>
                         <h:column>
 
@@ -555,12 +555,9 @@
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                Manutenção de ensino
-                            </font>
+                            <h:outputText value="Manutenção de ensino" 
+                                          styleClass="text01" />
+
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar" 
@@ -578,12 +575,9 @@
                     <!-- Subtítulo: Apoio ao ensino -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" style="align-items: center;">
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                Apoio ao ensino
-                            </font>
+                            <h:outputText value="Apoio ao ensino" 
+                                          styleClass="text01" />
+
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar" 
@@ -597,12 +591,9 @@
                     <br/>
 
                     <!-- Atividades de Pesquisa e Extensão -->
-                    <font face="Calibri" 
-                          color="black" 
-                          style="margin: 5px 35px; font-weight: 100; font-size: 22pt;" 
-                          styleClass="text">
-                        Atividades de Pesquisa e Extensão
-                    </font>
+                    <h:outputText value="Atividades de Pesquisa e Extensão" 
+                                  styleClass="text01" 
+                                  style="font-size: 22pt;"/>
 
                     <br/>
                     <br/>
@@ -610,12 +601,9 @@
                     <!-- Subtítulo: Pesquisa e/ou extensão (Autor) -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" style="align-items: center;">
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                Pesquisa e/ou extensão cadastradas no COPE (Autor)
-                            </font>
+                            <h:outputText value="Pesquisa e/ou extensão cadastradas no COPE (Autor)" 
+                                          styleClass="text01" />
+
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar" 
@@ -633,12 +621,9 @@
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                Pesquisa e/ou extensão cadastradas no COPE (Colaborador)
-                            </font>
+                            <h:outputText value="Pesquisa e/ou extensão cadastradas no COPE (Colaborador)" 
+                                          styleClass="text01" />
+
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar"
@@ -652,12 +637,9 @@
                     <br/>
 
                     <!-- Atividades Administrativas -->
-                    <font face="Calibri" 
-                          color="black" 
-                          style="margin: 5px 35px; font-weight: 100; font-size: 22pt;" 
-                          styleClass="text">
-                        Atividades administrativas
-                    </font>
+                    <h:outputText value="Atividades administrativas" 
+                                  styleClass="text01" 
+                                  style="font-size: 22pt;"/>
 
                     <br/>
                     <br/>
@@ -665,12 +647,9 @@
                     <!-- Subtítulo de Atividades administrativas -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" style="align-items: center;">
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;"
-                                  styleClass="text">
-                                Atividades administrativas
-                            </font>
+                            <h:outputText value="Atividades administrativas" 
+                                          styleClass="text01" />
+
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar"
@@ -684,12 +663,9 @@
                     <br/>
 
                     <!-- Outras atividades desenvolvidas no campus -->
-                    <font face="Calibri" 
-                          color="black" 
-                          style="margin: 5px 35px; font-weight: 100; font-size: 22pt;" 
-                          styleClass="text">
-                        Outras atividades desenvolvidas no campus
-                    </font>
+                    <h:outputText value="Outras atividades desenvolvidas no campus" 
+                                  styleClass="text01" 
+                                  style="font-size: 22pt;"/>
 
                     <br/>
                     <br/>
@@ -698,12 +674,9 @@
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                Outras atividades desenvolvidas no campus
-                            </font>
+                            <h:outputText value="Outras atividades desenvolvidas no campus" 
+                                          styleClass="text01" />
+
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar"
@@ -717,12 +690,9 @@
                     <br/>
 
                     <!-- Outras atividades que pretendo propor no semestre -->
-                    <font face="Calibri" 
-                          color="black" 
-                          style="margin: 5px 35px; font-weight: 100; font-size: 22pt;" 
-                          styleClass="text">
-                        Outras atividades que pretendo propor no semestre
-                    </font>
+                    <h:outputText value="Outras atividades que pretendo propor no semestre" 
+                                  styleClass="text01" 
+                                  style="font-size: 22pt;"/>
 
                     <br/>
                     <br/>
@@ -731,12 +701,9 @@
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
-                            <font face="Calibri" 
-                                  color="black" 
-                                  style="margin: 5px 35px; float:left; font-weight: 100; font-size: 17pt;" 
-                                  styleClass="text">
-                                Outras atividades que pretendo propor no semestre
-                            </font>
+                            <h:outputText value="Outras atividades que pretendo propor no semestre" 
+                                          styleClass="text01" />
+
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar"
@@ -751,42 +718,76 @@
 
                     <!-- Tabela de resultados de horários -->
                     <center>
-                        <h:panelGrid columns="2" 
-                                     style="align-items: center;"
-                                     border="0">
-
-                            <h:outputText value="ATIVIDADES" 
+                        <h:panelGrid columns="2" style="border-style: solid; border-width: thin;">
+                            <h:outputText value="ATIVIDADES"  
                                           styleClass="text01"
-                                          style="font-size: large; font-weight: bold;"/>
-                            <h:outputText value="CARGA HORÁRIA" 
+                                          style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
+                            <h:outputText value="CARGA HORÁRIA"  
                                           styleClass="text01"
-                                          style="font-size: large; font-weight: bold;"/>
-
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Aulas">  </h:outputText>
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horarioaqui">  </h:outputText>
-
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Manutenção Ensino">  </h:outputText>
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
-
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Apoio ao Ensino">  </h:outputText>
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
-
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Atividade de Pesquisa e Extensao (autor)"> </h:outputText>
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
-
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Atividade de Pesquisa e Extensão (colaborador)"> </h:outputText>
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
-
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Atividades Administrativas"> </h:outputText>
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario"> </h:outputText>
-
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Outras atividades realizadas no Campus">  </h:outputText>
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario">  </h:outputText>
-
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="Atividades que pretendo propor">  </h:outputText> 
-                            <h:outputText style="margin: 5px 35px; color: #A8A8A8; float:left; font-weight: 8000; font-size: 15pt;" value="//horario"> </h:outputText>
-
+                                          style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
+                            <h:outputText value="ATIVIDADE 2.1"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 2.2"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 2.3"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 3.1"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 3.2"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 4"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 5"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 6"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="TOTAL"  
+                                          styleClass="text01"
+                                          style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
                         </h:panelGrid>
+
+                        <p:column headerText="Brand"
+                                  styleClass="text01"
+                                  style="font-size: large; font-weight: bold;">
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                        </p:column>
                     </center>
                     <br/>
 
