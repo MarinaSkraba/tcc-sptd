@@ -51,6 +51,9 @@ public class PTDMB {
         ptd = new PTD();
         pdtsEmAvaliacao = new ArrayList<>();
         ptdsEmEdicao = new ArrayList();
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        pdtsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
+        
     }
 
     public String abrirCriarCorrigirPTDEmBranco(Usuario usuario) {
@@ -105,17 +108,20 @@ public class PTDMB {
     }
 
     public String abrirNotificacoesDiretorEnsino(int idUsuario) {
-        IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        pdtsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
+        
         return "/NotificacoesDiretorEnsino";
     }
     
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino(){
-        if(true){
+        if(ptd.getApoios().isEmpty()){
             return "img/irregularidade.png";
         }else{
             return "img/certinho.png";
         }
+    }
+    
+    public String abrirPTDEmAvaliacao(){
+        return "PTDEmAvaliacao";
     }
 
     public PTD getPtd() {

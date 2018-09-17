@@ -74,45 +74,66 @@
 
         <div id="screen">
 
-            <div id="content">
+            <div id="content" style="width: 70%;">
                 <br/>
                 <h:form>
 
-                    <p:dataScroller value="#{pTDMB.pdtsEmAvaliacao}" 
-                                    var="ptdEsperando" 
-                                    chunkSize="10">
+                    <h:dataTable  value="#{pTDMB.pdtsEmAvaliacao}" 
+                                  var="ptdEsperando"
+                                  style="border-spacing: 0pt; width: 100%;"
+                                  headerClass="text-center"
+                                  footerClass="text-center">
 
-                        <f:facet name="header" />
-                        <h:panelGrid columns="2" 
-                                     style="width:100%" >
+                        <h:column>
+                            <f:facet name="header">
+                                <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                            </f:facet>
 
-                            <p:commandLink action="" title="Ver PTD">
-                                <h:outputText value="#{ptdEsperando.professor.nomeCompleto}"  
-                                              styleClass="text01"
-                                              style="font-size: large;"/>
-                            </p:commandLink>
-
-                            <h:panelGrid columns="2" 
+                            <h:panelGrid columns="3" 
                                          style="width:100%" >
-                                <p:graphicImage name="#{pTDMB.verificacaoIrregularidadesNotificacoesDiretorEnsino}" 
-                                                style="width: 25px; height: 25px;" 
-                                                alt="Certo?"/> 
-                                <p:commandLink action="" title="Ver PTD">
-                                    <p:graphicImage name="img/abrir.png" 
-                                                    style="width: 25px; height: 25px;" /> 
-                                </p:commandLink>
+
+
+
                             </h:panelGrid>
 
-                        </h:panelGrid>
+                            <h:panelGrid columns="3" 
+                                         style="width:100%" >
 
-                    </p:dataScroller>
+                                <p:commandLink action="#{pTDMB.abrirPTDEmAvaliacao()}" title="Ver PTD">
+                                    <h:outputText value="#{ptdEsperando.professor.nomeCompleto}"  
+                                                  styleClass="text01"
+                                                  style="font-size: large;"/>
+                                </p:commandLink>
 
-                </h:form>
-                <br/>
-            </div>
+                                <h:panelGrid columns="2" >
+                                    <h:outputText value="Correto"  
+                                                  styleClass="text01"
+                                                  style="font-size: large;"/>
+                                    <p:graphicImage name="#{pTDMB.verificacaoIrregularidadesNotificacoesDiretorEnsino()}" 
+                                                    style="width: 25px; height: 25px; background-image: url(img/irregularidade.png); border-style: none;" 
+                                                    alt=""/>
+                                </h:panelGrid>
 
-        </div>
+                                <p:commandButton styleClass="botaoAzul" 
+                                                 style="float: left;" 
+                                                 value="Abrir PTD"
+                                                 action="#{pTDMB.abrirPTDEmAvaliacao()}"/>
 
-    </h:body>
-</html>
+                            </h:panelGrid>
+
+                            <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+
+                        </h:column>
+                    </h:dataTable>
+
+                   
+
+                         </h:form>
+                         <br/>
+                         </div>
+
+                         </div>
+
+                         </h:body>
+                         </html>
 
