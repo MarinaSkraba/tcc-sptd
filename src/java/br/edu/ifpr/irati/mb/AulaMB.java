@@ -101,7 +101,16 @@ public class AulaMB {
         ptdDAO.alterar(ptd);
         aulaDAO.excluir(aula);
 
-        return "/CriarCorrigirPTD";
+        return "CriarCorrigirPTD?faces-redirect=true";
+    }
+    
+    public String excluirHorarioAula(Horario horario){
+        HorarioMB horarioMB = new HorarioMB();
+        horarioMB.excluir(horario);
+        aulaSelecionadaParaHorario.getHorariosAula().remove(horario);
+        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
+        aulaDAO.alterar(aulaSelecionadaParaHorario);
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public void adicionarHorarioAula() {
