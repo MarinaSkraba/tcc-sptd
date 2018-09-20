@@ -305,7 +305,8 @@
                                     <p:commandButton styleClass="botaoCinza" 
                                                      value="..."
                                                      id="opPHorario"
-                                                     action="#{aulaMB.setAulaSelecionadaParaHorario(aula)}"/>
+                                                     action="#{aulaMB.setAulaSelecionadaParaHorario(aula)}"
+                                                     update="tabelaEdicaoHorario"/>
 
                                     <!-- Caixa para seleção de ação referente à Horário -->
                                     <p:overlayPanel id="opcoesHorario" 
@@ -327,7 +328,7 @@
                                 </f:facet>
 
                             </h:dataTable>
-                            
+
 
                         </h:column>
                         <h:column>
@@ -430,15 +431,14 @@
                               showEffect="fade" 
                               hideEffect="fade" 
                               resizable="false"
-                              >
-                        
-                        <div id="">
-                        
+                              id="tabelaEdicaoHorario">
+
                         <h:dataTable  value="#{aulaMB.aulaSelecionadaParaHorario.horariosAula}" 
                                       var="horarioSelecionadoEdicao" 
                                       style="width: 100%;"
                                       headerClass="text-center"
                                       footerClass="text-center">
+
                             <f:facet name="header">
                                 <h:outputText value="" />
                             </f:facet>
@@ -685,7 +685,7 @@
                         </h:panelGrid>
                     </h:panelGrid>
                     <br/>
-                    
+
                     <!-- Mostrar atividades que pretende propor -->
                     <h:dataTable  value="#{pTDMB.ptd.atividadesASeremPropostas}" 
                                   var="atividadeAPropor" 
@@ -699,7 +699,7 @@
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
                             </f:facet>
-                            
+
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -707,13 +707,13 @@
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
                             </f:facet>
-                            
+
                         </h:column>
 
                     </h:dataTable>
-                    
+
                     <br/>
-                    
+
                     <!-- Tabela de resultados de horários -->
                     <h:outputText value="Quadro geral das atividades - Carga Horaria Semanal" 
                                   styleClass="text01" 
@@ -787,7 +787,7 @@
                         </h:panelGrid>
 
                     </center>
-                    
+
                     <br/>
 
                     <p:commandButton styleClass="botaoAzul" 
