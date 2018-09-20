@@ -68,7 +68,7 @@ public class AulaMB {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aulaDAO.alterar(aulaSelecionadaParaAula);
         aulaSelecionadaParaAula = new Aula();
-        return "/CriarCorrigirPTD";
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public String desabilitarAula(Aula aula) {

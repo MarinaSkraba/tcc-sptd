@@ -108,16 +108,18 @@
                                 <h:panelGrid columns="3" 
                                              style="width:100%" >
 
-                                    <p:commandLink action="#{pTDMB.abrirPTDEmAvaliacao()}" title="Ver PTD">
+                                    <p:commandLink action="#{pTDMB.abrirPTDEmAvaliacao()}" 
+                                                   title="Ver PTD" 
+                                                   style="width: 200px;">
                                         <h:outputText value="#{ptdEsperando.professor.nomeCompleto}"  
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
                                     </p:commandLink>
                                     <h:outputText value="#{pTDMB.verificacaoIrregularidadesNotificacoesDiretorEnsino()}"  
                                                   styleClass="text01"
-                                                  style="font-size: large;"/>
+                                                  style="font-size: large; width: 200px;"/>
                                     <p:commandButton styleClass="botaoAzul" 
-                                                     style="margin: 5px 0px 5px;" 
+                                                     style="margin: 5px 0px 5px; float: left;" 
                                                      value="Abrir PTD"
                                                      action="#{pTDMB.abrirPTDEmAvaliacao()}"/>
 

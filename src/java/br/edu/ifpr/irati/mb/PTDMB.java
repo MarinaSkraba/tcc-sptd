@@ -143,7 +143,7 @@ public class PTDMB {
     }
 
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino() {
-        if (ptd.getApoios().isEmpty()) {
+        if (ptd.getApoios().isEmpty() != true) {
             return "Possui irregularidades";
         } else {
             return "Correto";

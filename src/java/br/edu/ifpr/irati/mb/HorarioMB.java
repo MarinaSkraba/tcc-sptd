@@ -43,7 +43,7 @@ public class HorarioMB {
 
     }
 
-    public void salvarHorarioAula(Aula aula, Usuario usuario) {
+    public String salvarHorarioAula(Aula aula, Usuario usuario) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
@@ -54,6 +54,7 @@ public class HorarioMB {
         horarioDAO.salvar(aula.getHorariosAula().get(aula.getHorariosAula().size() - 1));
         aulaDAO.alterar(aula);
         horario = new Horario();
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public String alterar(List<Horario> horariosAulaSelecionada) {
@@ -61,7 +62,7 @@ public class HorarioMB {
         for(Horario h: horariosAulaSelecionada){
             horarioDAO.alterar(h);
         }
-        return "CriarCorrigirPTD";
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public String desabilitar(Horario horario) {

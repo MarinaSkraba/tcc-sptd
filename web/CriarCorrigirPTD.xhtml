@@ -431,7 +431,9 @@
                               hideEffect="fade" 
                               resizable="false"
                               >
-
+                        
+                        <div id="">
+                        
                         <h:dataTable  value="#{aulaMB.aulaSelecionadaParaHorario.horariosAula}" 
                                       var="horarioSelecionadoEdicao" 
                                       style="width: 100%;"
@@ -682,10 +684,44 @@
                                              value="?"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    <br> </br>
-                    <br> </br>
+                    <br/>
+                    
+                    <!-- Mostrar atividades que pretende propor -->
+                    <h:dataTable  value="#{pTDMB.ptd.atividadesASeremPropostas}" 
+                                  var="atividadeAPropor" 
+                                  style="border-spacing: 0pt;"
+                                  headerClass="text-center"
+                                  footerClass="text-center">
 
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ATIVIDADE" 
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+                            </f:facet>
+                            
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="PERIODICIDADE" 
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+                            </f:facet>
+                            
+                        </h:column>
+
+                    </h:dataTable>
+                    
+                    <br/>
+                    
                     <!-- Tabela de resultados de horários -->
+                    <h:outputText value="Quadro geral das atividades - Carga Horaria Semanal" 
+                                  styleClass="text01" 
+                                  style="font-size: 22pt;"/>
+
+                    <br/>
+                    <br/>
+
                     <center>
                         <h:panelGrid columns="2" style="border-style: solid; border-width: thin;">
                             <h:outputText value="ATIVIDADES"  
@@ -750,13 +786,6 @@
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
                         </h:panelGrid>
 
-                        <p:column headerText="Brand"
-                                  styleClass="text01"
-                                  style="font-size: large; font-weight: bold;">
-                            <h:outputText value=""  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                        </p:column>
                     </center>
                     
                     <br/>
