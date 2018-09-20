@@ -31,6 +31,8 @@ public class AulaMB {
     private TipoOferta tipoOfertaSelecionado;
     private double HorasAulaTotal;
     private int NumeroSemanas;
+    private double HorasAulaTotalEdicao;
+    private int NumeroSemanasEdicao;
 
     public AulaMB() {
 
@@ -43,6 +45,9 @@ public class AulaMB {
         tipoOfertaSelecionado = new TipoOferta();
         HorasAulaTotal = 0;
         NumeroSemanas = 0;
+        HorasAulaTotalEdicao = 0;
+        NumeroSemanasEdicao = 0;
+        
     }
 
     public String salvarAula(Serializable idUsuario, PTD ptd) {
@@ -66,8 +71,11 @@ public class AulaMB {
 
     public String alterarAula() {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
+        aulaSelecionadaParaAula.setCargaHorariaTotal(HorasAulaTotalEdicao / NumeroSemanasEdicao);
         aulaDAO.alterar(aulaSelecionadaParaAula);
         aulaSelecionadaParaAula = new Aula();
+        HorasAulaTotalEdicao = 0;
+        NumeroSemanasEdicao = 0;
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
@@ -207,6 +215,34 @@ public class AulaMB {
      */
     public void setNumeroSemanas(int NumeroSemanas) {
         this.NumeroSemanas = NumeroSemanas;
+    }
+
+    /**
+     * @return the HorasAulaTotalEdicao
+     */
+    public double getHorasAulaTotalEdicao() {
+        return HorasAulaTotalEdicao;
+    }
+
+    /**
+     * @param HorasAulaTotalEdicao the HorasAulaTotalEdicao to set
+     */
+    public void setHorasAulaTotalEdicao(double HorasAulaTotalEdicao) {
+        this.HorasAulaTotalEdicao = HorasAulaTotalEdicao;
+    }
+
+    /**
+     * @return the NumeroSemanasEdicao
+     */
+    public int getNumeroSemanasEdicao() {
+        return NumeroSemanasEdicao;
+    }
+
+    /**
+     * @param NumeroSemanasEdicao the NumeroSemanasEdicao to set
+     */
+    public void setNumeroSemanasEdicao(int NumeroSemanasEdicao) {
+        this.NumeroSemanasEdicao = NumeroSemanasEdicao;
     }
 
 }
