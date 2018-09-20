@@ -317,7 +317,8 @@
                                     <p:commandButton styleClass="botaoCinza" 
                                                      value="..."
                                                      id="opPHorario"
-                                                     action="#{aulaMB.setAulaSelecionadaParaHorario(aula)}"/>
+                                                     action="#{aulaMB.setAulaSelecionadaParaHorario(aula)}"
+                                                     update="@(.ui-dialog)"/>
 
                                     <!-- Caixa para seleção de ação referente à Horário -->
                                     <p:overlayPanel id="opcoesHorario" 
@@ -359,7 +360,8 @@
                             <p:commandButton styleClass="botaoAzul" 
                                              value="..." 
                                              action="#{aulaMB.setAulaSelecionadaParaAula(aula)}"
-                                             id="opPAtividadeAula"/>
+                                             id="opPAtividadeAula"
+                                             update="@(.ui-dialog)"/>
 
                             <!-- Caixa para seleção de ação referente à Aula -->
                             <p:overlayPanel id="opcoesAula" 
