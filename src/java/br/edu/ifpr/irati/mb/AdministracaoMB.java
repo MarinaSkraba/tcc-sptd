@@ -48,13 +48,13 @@ public class AdministracaoMB {
         administracao.getHorariosAdministracao().add(horario);
         administracao.setEstadoAtividadeAdministracao("Ativo");
         administracaoDAO.salvar(administracao);
-        administracao = administracaoDAO.buscarTodos(Administracao.class).get(administracaoDAO.buscarTodos(Administracao.class).size()-1);
+        administracao = administracaoDAO.buscarTodos(Administracao.class).get(administracaoDAO.buscarTodos(Administracao.class).size() - 1);
         ptd.getAdministrativas().add(administracao);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         administracao = new Administracao();
         return "CriarCorrigirPTD";
-       
+
     }
 
     public String alterarAdministracao(Administracao administracao) {
@@ -72,7 +72,7 @@ public class AdministracaoMB {
     }
 
     public String excluirAdministracao(Administracao administracao, PTD ptd) {
-     
+
         Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
@@ -99,21 +99,30 @@ public class AdministracaoMB {
                 int horaInicio = h.getHoraInicio().getHours();
                 int horaTermino = h.getHoraTermino().getHours();
 
-                minTotal = minTotal + (minTermino - minInicio);
-                horaTotal = horaTotal + (horaTermino - horaInicio);
-                
-                int minConvertidos = 0;
-                // while
-                
+                if (minTermino > horaTermino) {
+                    minTotal = minTotal + (minTermino - minInicio);
+                    horaTotal = horaTotal + (horaTermino - horaInicio);
+
+                    for (int i = 0; minTotal >= 60; i++) {
+                        minTotal = minTotal - 60;
+                        horaTotal = horaTotal + 1;
+                    }
+
+                }else{
+                    
+                    minTotal = (60- minInicio) + minTermino;
+                    horaTotal = horaTotal + (horaTermino - horaInicio);
+                    
+                }
             }
         }
+    
+    Date cargaHorariaAdministracao = new Time(horaTotal, minTotal, 0);
+    return cargaHorariaAdministracao ;
 
-        Date cargaHorariaAdministracao = new Time(horaTotal, minTotal, 0);
-        return cargaHorariaAdministracao;
+}
 
-    }
-
-    public void adicionarHorarioAdministracao() {
+public void adicionarHorarioAdministracao() {
         horarios.add(horario);
         horario = new Horario();
     }
