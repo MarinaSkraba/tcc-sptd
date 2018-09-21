@@ -79,22 +79,15 @@ public class AulaMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public String desabilitarAula(Aula aula) {
-        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-        aula.setEstadoAula("Desativado");
-        aulaDAO.alterar(aula);
-        return "/adicionar html aqui";
-    }
-
     public String excluirAula(Aula aula, PTD ptd) {
 
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
 
-        for (int i = 0; i <= aula.getHorariosAula().size(); i++) {
-            horarioDAO.excluir(horario);
-            aula.getHorariosAula().remove(horario);
+        for (Horario h: aula.getHorariosAula()) {
+            horarioDAO.excluir(h);
+            aula.getHorariosAula().remove(h);
         }
 
         ptd.getAulas().remove(aula);
@@ -102,20 +95,6 @@ public class AulaMB {
         aulaDAO.excluir(aula);
 
         return "CriarCorrigirPTD?faces-redirect=true";
-    }
-    
-    public String excluirHorarioAula(Horario horario){
-        HorarioMB horarioMB = new HorarioMB();
-        horarioMB.excluir(horario);
-        aulaSelecionadaParaHorario.getHorariosAula().remove(horario);
-        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-        aulaDAO.alterar(aulaSelecionadaParaHorario);
-        return "CriarCorrigirPTD?faces-redirect=true";
-    }
-
-    public void adicionarHorarioAula() {
-        horarios.add(horario);
-        horario = new Horario();
     }
 
     public Aula getAula() {
