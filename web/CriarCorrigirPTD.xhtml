@@ -202,7 +202,7 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:inputText value="#{aulaMB.numeroSemanasEdicao}"/>
-                        
+
                         <h:outputText value="ORGANIZAÇÃO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
@@ -217,7 +217,7 @@
                                            itemLabel="#{tipoOferta}" />
 
                         </p:selectOneMenu>
-                        
+
                         <br/>
                         <h:commandButton value="Salvar" 
                                          action="#{aulaMB.alterarAula()}" 
@@ -445,87 +445,83 @@
                               hideEffect="fade" 
                               resizable="false">
 
-                        <div id="tabelaEdicaoHorario">
+                        <h:dataTable  value="#{aulaMB.aulaSelecionadaParaHorario.horariosAula}" 
+                                      var="horarioSelecionadoEdicao" 
+                                      style="width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
 
-                            <h:dataTable  value="#{aulaMB.aulaSelecionadaParaHorario.horariosAula}" 
-                                          var="horarioSelecionadoEdicao" 
-                                          style="width: 100%;"
-                                          headerClass="text-center"
-                                          footerClass="text-center">
+                            <f:facet name="header">
+                                <h:outputText value="" />
+                            </f:facet>
+
+                            <h:column>
 
                                 <f:facet name="header">
-                                    <h:outputText value="" />
+                                    <h:outputText value="DIA" 
+                                                  styleClass="text01"/>
                                 </f:facet>
 
-                                <h:column>
+                                <p:selectOneMenu id="selectDiaSemanaEdicao" 
+                                                 value="#{horarioSelecionadoEdicao.diaSemana}">
 
-                                    <f:facet name="header">
-                                        <h:outputText value="DIA" 
-                                                      styleClass="text01"/>
-                                    </f:facet>
+                                    <f:selectItems value="#{horarioMB.diasSemana}" 
+                                                   var="diaSemana" 
+                                                   itemValue="#{diaSemana}"
+                                                   itemLabel="#{diaSemana}" />
 
-                                    <p:selectOneMenu id="selectDiaSemanaEdicao" 
-                                                     value="#{horarioSelecionadoEdicao.diaSemana}">
+                                </p:selectOneMenu>
 
-                                        <f:selectItems value="#{horarioMB.diasSemana}" 
-                                                       var="diaSemana" 
-                                                       itemValue="#{diaSemana}"
-                                                       itemLabel="#{diaSemana}" />
+                            </h:column>
 
-                                    </p:selectOneMenu>
+                            <h:column>
 
-                                </h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="INÍCIO" 
+                                                  styleClass="text01"/>
+                                </f:facet>
 
-                                <h:column>
+                                <p:calendar id="horaInicioEdicao" 
+                                            value="#{horarioSelecionadoEdicao.horaInicio}" 
+                                            pattern="HH:mm" 
+                                            size="5"
+                                            timeOnly="true"/>
 
-                                    <f:facet name="header">
-                                        <h:outputText value="INÍCIO" 
-                                                      styleClass="text01"/>
-                                    </f:facet>
+                            </h:column>
 
-                                    <p:calendar id="horaInicioEdicao" 
-                                                value="#{horarioSelecionadoEdicao.horaInicio}" 
-                                                pattern="HH:mm" 
-                                                size="5"
-                                                timeOnly="true"/>
+                            <h:column>
 
-                                </h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="TÉRMINO" 
+                                                  styleClass="text01"/>
+                                </f:facet>
 
-                                <h:column>
+                                <p:calendar id="horaTerminooEdicao" 
+                                            value="#{horarioSelecionadoEdicao.horaTermino}" 
+                                            pattern="HH:mm" 
+                                            size="5"
+                                            timeOnly="true"/>
 
-                                    <f:facet name="header">
-                                        <h:outputText value="TÉRMINO" 
-                                                      styleClass="text01"/>
-                                    </f:facet>
+                            </h:column>
 
-                                    <p:calendar id="horaTerminooEdicao" 
-                                                value="#{horarioSelecionadoEdicao.horaTermino}" 
-                                                pattern="HH:mm" 
-                                                size="5"
-                                                timeOnly="true"/>
+                            <h:column>
 
-                                </h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
 
-                                <h:column>
+                                <p:commandButton styleClass="botaoCinza" 
+                                                 style="float: left; font-size: 12pt;" 
+                                                 value="X" 
+                                                 ajax="false" 
+                                                 immediate="true"
+                                                 action="#{aulaMB.excluirHorarioAula(horarioSelecionadoEdicao)}"/>
 
-                                    <f:facet name="header">
-                                        <h:outputText value="" 
-                                                      styleClass="text01"
-                                                      style="font-size: large; font-weight: bold;"/>
-                                    </f:facet>
+                            </h:column>
 
-                                    <p:commandButton styleClass="botaoCinza" 
-                                                     style="float: left; font-size: 12pt;" 
-                                                     value="X" 
-                                                     ajax="false" 
-                                                     immediate="true"
-                                                     action="#{aulaMB.excluirHorarioAula(horarioSelecionadoEdicao)}"/>
-
-                                </h:column>
-
-                            </h:dataTable>
-
-                        </div>
+                        </h:dataTable>
 
                         <br/>
                         <h:commandButton value="Salvar edição" 
@@ -739,7 +735,8 @@
                     <br/>
 
                     <center>
-                        <h:panelGrid columns="2" style="border-style: solid; border-width: thin;">
+                        <h:panelGrid columns="2" 
+                                     style="border-style: solid; border-width: thin;">
                             <h:outputText value="ATIVIDADES"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
@@ -808,13 +805,37 @@
 
                     <p:commandButton styleClass="botaoAzul" 
                                      style="float: right; border-radius: 30px; font-size: large; margin-left: 10px;" 
-                                     value="Submeter"/>
+                                     value="Submeter"
+                                     action="#{pTDMB.submeterPTD()}"/>
                     <p:commandButton styleClass="botaoCinza" 
                                      style="float: right; border-radius: 30px; font-size: large;" 
                                      value="Cancelar"
-                                     action="#{pTDMB.cancelarPTD()}"/>
+                                     onclick="PF('cancelarPTD').show();"/>
 
                     <br/>
+
+                    <!-- Caixa de confirmação para cancelar PTD -->
+                    <p:dialog header="Cancelar PTD" 
+                              widgetVar="cancelarPTD" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Cancelando esse documento você perderá todas as informações preenchidas" 
+                                      styleClass="text01"
+                                      style="font-size: large; font-weight: bold; width: 400px;"/>
+                        <p:commandButton styleClass="botaoCinza" 
+                                         value="Salvar e sair" 
+                                         ajax="false" 
+                                         immediate="true"
+                                         action="/NotificacoesDocente"/>
+
+                        <h:commandButton value="Sair" 
+                                         action="#{pTDMB.cancelarPTD()}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
 
                 </h:form>
 

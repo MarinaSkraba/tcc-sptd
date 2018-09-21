@@ -59,6 +59,7 @@ public class PTDMB {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         pdtsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
 
+
     }
 
     public String abrirCriarCorrigirPTDEmBranco(Usuario usuario) {
@@ -163,9 +164,16 @@ public class PTDMB {
         
         return "NotificacoesDocente";
     }
+    
+    public String submeterPTD(){
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        ptd.setEstadoPTD("AVALIACAO");
+        ptdDAOGenerico.alterar(ptd);
+        return "/NotificacoesDocente";
+    }
 
     public String abrirNotificacoesDiretorEnsino(int idUsuario) {
-
+        
         return "/NotificacoesDiretorEnsino";
     }
 
