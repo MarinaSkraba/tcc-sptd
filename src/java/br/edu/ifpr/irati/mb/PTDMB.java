@@ -115,7 +115,6 @@ public class PTDMB {
     }
 
     public String cancelarPTD() {
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("ManagerBean", new PTDMB());
         
         Dao<Administracao> adminstracaoDAO = new GenericDAO<>(PTD.class);
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
@@ -129,10 +128,38 @@ public class PTDMB {
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
-        Dao<ProjetoPesquisa> pPesquisa = new GenericDAO<>(ProjetoPesquisa.class);
-        Dao<ProjetoExtensao> pExtensao = new GenericDAO<>(ProjetoExtensao.class);
-        Dao<TipoOferta> tipoOferta = new GenericDAO<>(TipoOferta.class);
+        Dao<ProjetoPesquisa> pPesquisaDAO = new GenericDAO<>(ProjetoPesquisa.class);
+        Dao<ProjetoExtensao> pExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
+        Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
+        
+        for(Administracao adm: ptd.getAdministrativas()){
+            
+        }
+        for(Apoio apoio: ptd.getApoios()){
+            
+        }
+        for(AtividadeASerProposta aASP: ptd.getAtividadesASeremPropostas()){
+            
+        }
+        for(Aula aula: ptd.getAulas()){
+            for(Horario h: aula.getHorariosAula()){
+                
+            }
+        }
+        for(ManutencaoEnsino mEnsino: ptd.getManutencoesEnsino()){
+            
+        }
+        for(OutroTipoAtividade oTA: ptd.getOutrosTiposAtividades()){
+            
+        }
+        for(ProjetoExtensao pExtensao: ptd.getProjetosExtensao()){
+            
+        }
+        for(ProjetoPesquisa pPesquisa: ptd.getProjetosPesquisa()){
+            
+        }
+        
         
         return "NotificacoesDocente";
     }

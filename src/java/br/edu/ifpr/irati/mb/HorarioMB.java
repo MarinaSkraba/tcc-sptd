@@ -57,22 +57,15 @@ public class HorarioMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public String alterar(List<Horario> horariosAulaSelecionada) {
+    public String alterarHorario(List<Horario> horariosAulaSelecionada) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         for(Horario h: horariosAulaSelecionada){
             horarioDAO.alterar(h);
         }
         return "CriarCorrigirPTD?faces-redirect=true";
     }
-
-    public String desabilitar(Horario horario) {
-        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        horario.setEstadoHorario("Desativado");
-        horarioDAO.alterar(horario);
-        return "/adicionar html aqui";
-    }
-
-    public String excluir(Horario horario) {
+    
+    public String excluirHorario(Horario horario) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.excluir(horario);
         return "CriarCorrigirPTD?faces-redirect=true";
