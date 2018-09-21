@@ -230,7 +230,7 @@
                     <!-- Mostrar atividades aulas -->
                     <h:dataTable  value="#{pTDMB.ptd.aulas}" 
                                   var="aula" 
-                                  style="border-spacing: 0pt;"
+                                  style="border-spacing: 0pt; width: 100%;"
                                   headerClass="text-center"
                                   footerClass="text-center">
 
@@ -250,9 +250,12 @@
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
                             </f:facet>
-                            <h:outputText value="#{aula.componenteCurricular}"
-                                          styleClass="text01"
-                                          style="font-size: large;" />
+
+                            <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
+                                <h:outputText value="#{aula.componenteCurricular}"
+                                              styleClass="text01"
+                                              style="font-size: large; width: 100%;" />
+                            </p:scrollPanel>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
