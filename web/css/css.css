@@ -145,6 +145,27 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+.botaoVermelho{
+    width: auto;
+    height: auto;
+    font-size: medium;
+    font-family: calibri, sans-serif;
+    font-weight: normal;
+    color: #C92345;
+    border-color: #C92345;
+    border-radius: 50px;
+    background-color: white;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+    background-image: linear-gradient(to right, #FFFFFF, #FFFFFF);
+    transition: background-color 0.3s;
+}
+.botaoVermelho:hover{
+    color: white;
+    font-weight: normal;
+    background-color: #C92345;
+    background-image: linear-gradient(to right, #C92345, #C92345);
+}
 .botaoCinza{
     width: auto;
     height: auto;
