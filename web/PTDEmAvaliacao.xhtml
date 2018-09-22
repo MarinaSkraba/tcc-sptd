@@ -310,7 +310,7 @@
                                               style="font-size: large; font-weight: bold;"/>
                             </f:facet>
                             <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                <h:outputText value="#{aula.componenteCurricular}"
+                                <h:outputText value="#{manutencao.tipoManutencao}"
                                               styleClass="text01"
                                               style="font-size: large; width: 100%;" />
                             </p:scrollPanel>
@@ -321,7 +321,7 @@
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
                             </f:facet>
-                            <h:outputText value="#{aula.curso.nomeCurso}" 
+                            <h:outputText value="" 
                                           styleClass="text01"
                                           style="font-size: large;"/>
                         </h:column>
@@ -348,7 +348,7 @@
                             </f:facet>
 
                             <!-- Tabela para o conteúdo de horários -->
-                            <h:dataTable  value="#{aula.horariosAula}" 
+                            <h:dataTable  value="#{manutencao.horariosManutecao}" 
                                           var="horario" 
                                           headerClass="text-center"
                                           footerClass="text-center"
