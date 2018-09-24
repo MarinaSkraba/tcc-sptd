@@ -61,17 +61,16 @@ public class HorarioMB {
 
     public String salvarManutencaoEnsino(ManutencaoEnsino manutencaoEnsino, Usuario usuario) {
 
-        int minTotal = 0;
-        int horaTotal = 0;
+        int cargaHoraNovoHorario = 0;
 
         int minInicio = horario.getHoraInicio().getMinutes();
         int minTermino = horario.getHoraTermino().getMinutes();
         int horaInicio = horario.getHoraInicio().getHours();
         int horaTermino = horario.getHoraTermino().getHours();
         
+        cargaHoraNovoHorario = horaTermino - horaInicio;
         
-        
-        manutencaoEnsino.s
+        manutencaoEnsino.setCargaHorariaSemanalManutencaoEnsino(manutencaoEnsino.getCargaHorariaSemanalManutencaoEnsino() + cargaHoraNovoHorario);
 
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
@@ -87,31 +86,31 @@ public class HorarioMB {
 
     }
 
-    public Double calcularCargaHoraria() {
-
-        for (Horario h : horarios) {
-
-            if (minTermino > horaTermino) {
-                minTotal = minTotal + (minTermino - minInicio);
-                horaTotal = horaTotal + (horaTermino - horaInicio);
-
-                for (int i = 0; minTotal >= 60; i++) {
-                    minTotal = minTotal - 60;
-                    horaTotal = horaTotal + 1;
-                }
-
-            } else {
-
-                minTotal = (60 - minInicio) + minTermino;
-                horaTotal = horaTotal + (horaTermino - horaInicio);
-
-            }
-        }
-
-        Date cargaHorariaAdministracao = new Time(horaTotal, minTotal, 0);
-        return cargaHorariaAdministracao;
-
-    }
+//    public Double calcularCargaHoraria() {
+//
+//        for (Horario h : horarios) {
+//
+//            if (minTermino > horaTermino) {
+//                minTotal = minTotal + (minTermino - minInicio);
+//                
+//
+//                for (int i = 0; minTotal >= 60; i++) {
+//                    minTotal = minTotal - 60;
+//                    horaTotal = horaTotal + 1;
+//                }
+//
+//            } else {
+//
+//                minTotal = (60 - minInicio) + minTermino;
+//                horaTotal = horaTotal + (horaTermino - horaInicio);
+//
+//            }
+//        }
+//
+//        Date cargaHorariaAdministracao = new Time(horaTotal, minTotal, 0);
+//        return cargaHorariaAdministracao;
+//
+//    }
 
     public String alterarHorario(List<Horario> horariosAulaSelecionada) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
