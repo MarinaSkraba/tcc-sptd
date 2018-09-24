@@ -81,40 +81,7 @@ public class AdministracaoMB {
         return "/adicionar aqui";
     }
 
-    public Date calcularCargaHorariaAdministracao() {
-        int minTotal = 0;
-        int horaTotal = 0;
-        for (Administracao adm : administracoes) {
-            for (Horario h : horarios) {
-                int minInicio = h.getHoraInicio().getMinutes();
-                int minTermino = h.getHoraTermino().getMinutes();
-                int horaInicio = h.getHoraInicio().getHours();
-                int horaTermino = h.getHoraTermino().getHours();
-
-                if (minTermino > horaTermino) {
-                    minTotal = minTotal + (minTermino - minInicio);
-                    horaTotal = horaTotal + (horaTermino - horaInicio);
-
-                    for (int i = 0; minTotal >= 60; i++) {
-                        minTotal = minTotal - 60;
-                        horaTotal = horaTotal + 1;
-                    }
-
-                }else{
-                    
-                    minTotal = (60- minInicio) + minTermino;
-                    horaTotal = horaTotal + (horaTermino - horaInicio);
-                    
-                }
-            }
-        }
-    
-    Date cargaHorariaAdministracao = new Time(horaTotal, minTotal, 0);
-    return cargaHorariaAdministracao ;
-
-}
-
-public void adicionarHorarioAdministracao() {
+    public void adicionarHorarioAdministracao() {
         horarios.add(horario);
         horario = new Horario();
     }
