@@ -21,6 +21,9 @@ public class Apoio implements Serializable {
     @Column(name = "estadoAtividadeApoio", nullable = false, length = 10)
     private String estadoAtividadeApoio;
 
+    @Column(name = "cargaHorariaSemanalApoio", nullable = false)
+    private double cargaHorariaSemanalApoio;
+
     @OneToOne
     private TipoApoio tipoApoio;
 
@@ -31,21 +34,24 @@ public class Apoio implements Serializable {
 
         this.idApoio = 0;
         this.estadoAtividadeApoio = "";
+        this.cargaHorariaSemanalApoio = 0;
         this.tipoApoio = new TipoApoio();
         this.horariosApoio = new ArrayList<>();
 
     }
 
-    public Apoio(int idApoio, String estadoAtividadeApoio) {
+    public Apoio(int idApoio, String estadoAtividadeApoio, double cargaHorariaSemanalApoio) {
         this.idApoio = idApoio;
         this.estadoAtividadeApoio = estadoAtividadeApoio;
+        this.cargaHorariaSemanalApoio = cargaHorariaSemanalApoio;
         this.tipoApoio = new TipoApoio();
         this.horariosApoio = new ArrayList();
     }
 
-    public Apoio(int idApoio, String estadoAtividadeApoio, TipoApoio tipoApoio, List<Horario> horariosApoio) {
+    public Apoio(int idApoio, String estadoAtividadeApoio, double cargaHorariaSemanalApoio, TipoApoio tipoApoio, List<Horario> horariosApoio) {
         this.idApoio = idApoio;
         this.estadoAtividadeApoio = estadoAtividadeApoio;
+        this.cargaHorariaSemanalApoio = cargaHorariaSemanalApoio;
         this.tipoApoio = tipoApoio;
         this.horariosApoio = horariosApoio;
     }
@@ -80,6 +86,14 @@ public class Apoio implements Serializable {
 
     public void setEstadoAtividadeApoio(String estadoAtividadeApoio) {
         this.estadoAtividadeApoio = estadoAtividadeApoio;
+    }
+
+    public double getCargaHorariaSemanalApoio() {
+        return cargaHorariaSemanalApoio;
+    }
+
+    public void setCargaHorariaSemanalApoio(double cargaHorariaSemanalApoio) {
+        this.cargaHorariaSemanalApoio = cargaHorariaSemanalApoio;
     }
 
 }

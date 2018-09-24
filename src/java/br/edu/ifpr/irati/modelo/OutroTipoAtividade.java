@@ -26,6 +26,9 @@ public class OutroTipoAtividade implements Serializable {
     @Column(name = "periodicidade", nullable = false, length = 20)
     private String periodicidade;
 
+    @Column(name = "cargaHorariaSemanalOutroTipoAtividade", nullable = false)
+    private double cargaHorariaSemanalOutroTipoAtividade;
+
     @OneToMany
     private List<Horario> horariosOutroTipoAtividade;
 
@@ -34,22 +37,25 @@ public class OutroTipoAtividade implements Serializable {
         this.estadoOutroTipoAtividade = "";
         this.rotulo = "";
         this.periodicidade = "";
+        this.cargaHorariaSemanalOutroTipoAtividade = 0;
         this.horariosOutroTipoAtividade = new ArrayList<>();
     }
 
-    public OutroTipoAtividade(int idOutroTipoAtividade, String estadoOutroTipoAtividade, String rotulo, String periodicidade) {
+    public OutroTipoAtividade(int idOutroTipoAtividade, String estadoOutroTipoAtividade, String rotulo, String periodicidade, double cargaHorariaSemanalOutroTipoAtividade) {
         this.idOutroTipoAtividade = idOutroTipoAtividade;
         this.estadoOutroTipoAtividade = estadoOutroTipoAtividade;
         this.rotulo = rotulo;
         this.periodicidade = periodicidade;
+        this.cargaHorariaSemanalOutroTipoAtividade = cargaHorariaSemanalOutroTipoAtividade;
         this.horariosOutroTipoAtividade = new ArrayList();
     }
 
-    public OutroTipoAtividade(int idOutroTipoAtividade, String estadoOutroTipoAtividade, String rotulo, String periodicidade, List<Horario> horariosOutroTipoAtividade) {
+    public OutroTipoAtividade(int idOutroTipoAtividade, String estadoOutroTipoAtividade, String rotulo, String periodicidade, double cargaHorariaSemanalOutroTipoAtividade, List<Horario> horariosOutroTipoAtividade) {
         this.idOutroTipoAtividade = idOutroTipoAtividade;
         this.estadoOutroTipoAtividade = estadoOutroTipoAtividade;
         this.rotulo = rotulo;
         this.periodicidade = periodicidade;
+        this.cargaHorariaSemanalOutroTipoAtividade = cargaHorariaSemanalOutroTipoAtividade;
         this.horariosOutroTipoAtividade = horariosOutroTipoAtividade;
     }
 
@@ -91,6 +97,14 @@ public class OutroTipoAtividade implements Serializable {
 
     public void setHorariosOutroTipoAtividade(List<Horario> horariosOutroTipoAtividade) {
         this.horariosOutroTipoAtividade = horariosOutroTipoAtividade;
+    }
+
+    public double getCargaHorariaSemanalOutroTipoAtividade() {
+        return cargaHorariaSemanalOutroTipoAtividade;
+    }
+
+    public void setCargaHorariaSemanalOutroTipoAtividade(double cargaHorariaSemanalOutroTipoAtividade) {
+        this.cargaHorariaSemanalOutroTipoAtividade = cargaHorariaSemanalOutroTipoAtividade;
     }
 
 }

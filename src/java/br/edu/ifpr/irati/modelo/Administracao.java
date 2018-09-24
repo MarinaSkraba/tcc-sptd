@@ -21,6 +21,9 @@ public class Administracao implements Serializable {
     @Column(name = "estadoAtividadeAdministracao", nullable = false, length = 10)
     private String estadoAtividadeAdministracao;
 
+    @Column(name = "cargaHorariaSemanalAdministracao", nullable = false)
+    private double cargaHorariaSemanalAdministracao;
+
     @OneToOne
     private TipoAdministracao tipoAdministracao;
 
@@ -33,22 +36,26 @@ public class Administracao implements Serializable {
         this.estadoAtividadeAdministracao = "";
         this.tipoAdministracao = new TipoAdministracao();
         this.horariosAdministracao = new ArrayList<>();
+        this.cargaHorariaSemanalAdministracao = 0;
 
     }
 
-    public Administracao(int idAdministracao, String estadoAtividadeAdministracao) {
+    public Administracao(int idAdministracao, String estadoAtividadeAdministracao, double cargaHorariaSemanalAdministracao) {
         this.idAdministracao = idAdministracao;
         this.estadoAtividadeAdministracao = estadoAtividadeAdministracao;
+        this.cargaHorariaSemanalAdministracao = cargaHorariaSemanalAdministracao;
         this.tipoAdministracao = new TipoAdministracao();
         this.horariosAdministracao = new ArrayList();
     }
 
-    public Administracao(int idAdministracao, String estadoAtividadeAdministracao, TipoAdministracao tipoAdministracao, List<Horario> horariosAdministracao) {
+    public Administracao(int idAdministracao, String estadoAtividadeAdministracao, double cargaHorariaSemanalAdministracao, TipoAdministracao tipoAdministracao, List<Horario> horariosAdministracao) {
         this.idAdministracao = idAdministracao;
         this.estadoAtividadeAdministracao = estadoAtividadeAdministracao;
+        this.cargaHorariaSemanalAdministracao = cargaHorariaSemanalAdministracao;
         this.tipoAdministracao = tipoAdministracao;
         this.horariosAdministracao = horariosAdministracao;
     }
+
 
     public int getIdAdministracao() {
         return idAdministracao;
@@ -80,6 +87,14 @@ public class Administracao implements Serializable {
 
     public void setEstadoAtividadeAdministracao(String estadoAtividadeAdministracao) {
         this.estadoAtividadeAdministracao = estadoAtividadeAdministracao;
+    }
+
+    public double getCargaHorariaSemanalAdministracao() {
+        return cargaHorariaSemanalAdministracao;
+    }
+
+    public void setCargaHorariaSemanalAdministracao(double cargaHorariaSemanalAdministracao) {
+        this.cargaHorariaSemanalAdministracao = cargaHorariaSemanalAdministracao;
     }
 
 }

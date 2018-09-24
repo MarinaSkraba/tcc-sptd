@@ -26,6 +26,9 @@ public class AtividadeASerProposta implements Serializable {
     @Column(name = "periodicidade", nullable = false, length = 20)
     private String periodicidade;
 
+    @Column(name = "cargaHorariaSemanalAtividadeASerProposta", nullable = false)
+    private double cargaHorariaSemanalAtividadeASerProposta;
+
     @OneToMany
     private List<Horario> horariosAtividadesASerProposta;
 
@@ -35,23 +38,26 @@ public class AtividadeASerProposta implements Serializable {
         this.estadoAtividadeASerProposta = "";
         this.periodicidade = "";
         this.rotulo = "";
+        this.cargaHorariaSemanalAtividadeASerProposta = 0;
         this.horariosAtividadesASerProposta = new ArrayList();
 
     }
 
-    public AtividadeASerProposta(int idAtividadeASerProposta, String estadoAtividadeASerProposta, String rotulo, String periodicidade) {
+    public AtividadeASerProposta(int idAtividadeASerProposta, String estadoAtividadeASerProposta, String rotulo, String periodicidade, double cargaHorariaSemanalAtividadeASerProposta) {
         this.idAtividadeASerProposta = idAtividadeASerProposta;
         this.estadoAtividadeASerProposta = estadoAtividadeASerProposta;
         this.rotulo = rotulo;
         this.periodicidade = periodicidade;
+        this.cargaHorariaSemanalAtividadeASerProposta = cargaHorariaSemanalAtividadeASerProposta;
         this.horariosAtividadesASerProposta = new ArrayList();
     }
 
-    public AtividadeASerProposta(int idAtividadeASerProposta, String estadoAtividadeASerProposta, String rotulo, String periodicidade, List<Horario> horariosAtividadesASerProposta) {
+    public AtividadeASerProposta(int idAtividadeASerProposta, String estadoAtividadeASerProposta, String rotulo, String periodicidade, double cargaHorariaSemanalAtividadeASerProposta, List<Horario> horariosAtividadesASerProposta) {
         this.idAtividadeASerProposta = idAtividadeASerProposta;
         this.estadoAtividadeASerProposta = estadoAtividadeASerProposta;
         this.rotulo = rotulo;
         this.periodicidade = periodicidade;
+        this.cargaHorariaSemanalAtividadeASerProposta = cargaHorariaSemanalAtividadeASerProposta;
         this.horariosAtividadesASerProposta = horariosAtividadesASerProposta;
     }
 
@@ -94,4 +100,13 @@ public class AtividadeASerProposta implements Serializable {
     public void setEstadoAtividadeASerProposta(String estadoAtividadeASerProposta) {
         this.estadoAtividadeASerProposta = estadoAtividadeASerProposta;
     }
+
+    public double getCargaHorariaSemanalAtividadeASerProposta() {
+        return cargaHorariaSemanalAtividadeASerProposta;
+    }
+
+    public void setCargaHorariaSemanalAtividadeASerProposta(double cargaHorariaSemanalAtividadeASerProposta) {
+        this.cargaHorariaSemanalAtividadeASerProposta = cargaHorariaSemanalAtividadeASerProposta;
+    }
+
 }

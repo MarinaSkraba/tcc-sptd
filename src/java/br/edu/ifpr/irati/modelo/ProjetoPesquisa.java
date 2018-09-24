@@ -27,6 +27,9 @@ public class ProjetoPesquisa implements Serializable {
     @Column(name = "tituloProcesso", nullable = false, length = 300)
     private String tituloProcesso;
 
+    @Column(name = "cargaHorariaSemanalProjetoPesquisa", nullable = false)
+    private double cargaHorariaSemanalProjetoPesquisa;
+
     @Temporal(TemporalType.DATE)
     private Date previsaoConclusao;
 
@@ -47,14 +50,16 @@ public class ProjetoPesquisa implements Serializable {
         this.estadoProjetoPesquisa = "";
         this.numeroProcesso = "";
         this.tituloProcesso = "";
+        this.cargaHorariaSemanalProjetoPesquisa = 0;
         this.previsaoConclusao = new Date();
         this.instituicaoPesquisa = "";
     }
 
-    public ProjetoPesquisa(int idProjetoPesquisa, String numeroProcesso, String tituloProcesso, String instituicaoPesquisa, String estadoProjetoPesquisa) {
+    public ProjetoPesquisa(int idProjetoPesquisa, String numeroProcesso, String tituloProcesso, double cargaHorariaSemanalProjetoPesquisa, String instituicaoPesquisa, String estadoProjetoPesquisa) {
         this.idProjetoPesquisa = idProjetoPesquisa;
         this.numeroProcesso = numeroProcesso;
         this.tituloProcesso = tituloProcesso;
+        this.cargaHorariaSemanalProjetoPesquisa = cargaHorariaSemanalProjetoPesquisa;
         this.previsaoConclusao = new Date();
         this.instituicaoPesquisa = instituicaoPesquisa;
         this.estadoProjetoPesquisa = estadoProjetoPesquisa;
@@ -62,10 +67,11 @@ public class ProjetoPesquisa implements Serializable {
         this.participacoes = new ArrayList();
     }
 
-    public ProjetoPesquisa(int idProjetoPesquisa, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa, String estadoProjetoPesquisa, List<Horario> horariosProjetoPesquisa, List<Participacao> participacoes) {
+    public ProjetoPesquisa(int idProjetoPesquisa, String numeroProcesso, String tituloProcesso, double cargaHorariaSemanalProjetoPesquisa, Date previsaoConclusao, String instituicaoPesquisa, String estadoProjetoPesquisa, List<Horario> horariosProjetoPesquisa, List<Participacao> participacoes) {
         this.idProjetoPesquisa = idProjetoPesquisa;
         this.numeroProcesso = numeroProcesso;
         this.tituloProcesso = tituloProcesso;
+        this.cargaHorariaSemanalProjetoPesquisa = cargaHorariaSemanalProjetoPesquisa;
         this.previsaoConclusao = previsaoConclusao;
         this.instituicaoPesquisa = instituicaoPesquisa;
         this.estadoProjetoPesquisa = estadoProjetoPesquisa;
@@ -150,5 +156,13 @@ public class ProjetoPesquisa implements Serializable {
 
     public void setEstadoProjetoPesquisa(String estadoProjetoPesquisa) {
         this.estadoProjetoPesquisa = estadoProjetoPesquisa;
+    }
+
+    public double getCargaHorariaSemanalProjetoPesquisa() {
+        return cargaHorariaSemanalProjetoPesquisa;
+    }
+
+    public void setCargaHorariaSemanalProjetoPesquisa(double cargaHorariaSemanalProjetoPesquisa) {
+        this.cargaHorariaSemanalProjetoPesquisa = cargaHorariaSemanalProjetoPesquisa;
     }
 }

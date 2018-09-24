@@ -22,6 +22,9 @@ public class ManutencaoEnsino implements Serializable {
     @Column(name = "estadoManutecaoEnsino", nullable = false, length = 10)
     private String estadoManutencaoEnsino;
 
+    @Column(name = "cargaHorariaSemanalManutencaoEnsino", nullable = false)
+    private double cargaHorariaSemanalManutencaoEnsino;
+    
     @OneToOne
     private TipoManutencao tipoManutencao;
 
@@ -32,24 +35,28 @@ public class ManutencaoEnsino implements Serializable {
 
         this.idManutencao = 0;
         this.estadoManutencaoEnsino = "";
+        this.cargaHorariaSemanalManutencaoEnsino = 0;
         this.tipoManutencao = new TipoManutencao();
         this.horariosManutecao = new ArrayList<>();
 
     }
 
-    public ManutencaoEnsino(int idManutencao, String estadoManutencaoEnsino) {
+    public ManutencaoEnsino(int idManutencao, String estadoManutencaoEnsino, double cargaHorariaSemanalManutencaoEnsino) {
         this.idManutencao = idManutencao;
         this.estadoManutencaoEnsino = estadoManutencaoEnsino;
+        this.cargaHorariaSemanalManutencaoEnsino = cargaHorariaSemanalManutencaoEnsino;
         this.tipoManutencao = new TipoManutencao();
         this.horariosManutecao = new ArrayList();
     }
 
-    public ManutencaoEnsino(int idManutencao, String estadoManutencaoEnsino, TipoManutencao tipoManutencao, List<Horario> horariosManutecao) {
+    public ManutencaoEnsino(int idManutencao, String estadoManutencaoEnsino, double cargaHorariaSemanalManutencaoEnsino, TipoManutencao tipoManutencao, List<Horario> horariosManutecao) {
         this.idManutencao = idManutencao;
         this.estadoManutencaoEnsino = estadoManutencaoEnsino;
+        this.cargaHorariaSemanalManutencaoEnsino = cargaHorariaSemanalManutencaoEnsino;
         this.tipoManutencao = tipoManutencao;
         this.horariosManutecao = horariosManutecao;
     }
+
 
     public int getIdManutencao() {
         return idManutencao;
@@ -81,5 +88,13 @@ public class ManutencaoEnsino implements Serializable {
 
     public void setEstadoManutencaoEnsino(String estadoManutencaoEnsino) {
         this.estadoManutencaoEnsino = estadoManutencaoEnsino;
+    }
+
+    public double getCargaHorariaSemanalManutencaoEnsino() {
+        return cargaHorariaSemanalManutencaoEnsino;
+    }
+
+    public void setCargaHorariaSemanalManutencaoEnsino(double cargaHorariaSemanalManutencaoEnsino) {
+        this.cargaHorariaSemanalManutencaoEnsino = cargaHorariaSemanalManutencaoEnsino;
     }
 }
