@@ -227,167 +227,167 @@
 
                     <br/>
 
-                    <!-- Mostrar atividades aulas -->
-                    <h:dataTable  value="#{pTDMB.ptd.aulas}" 
-                                  var="aula" 
-                                  style="border-spacing: 0pt; width: 100%;"
-                                  headerClass="text-center"
-                                  footerClass="text-center">
+                    <div id="mostrarTabela">
+                        <!-- Mostrar atividades aulas -->
+                        <h:dataTable  value="#{pTDMB.ptd.aulas}" 
+                                      var="aula" 
+                                      style="border-spacing: 0pt;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
 
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="CURSO" 
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
-                            <h:outputText value="#{aula.curso.nomeCurso}" 
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="COMPONENTE CURRICULAR" 
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
-
-                            <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                <h:outputText value="#{aula.componenteCurricular}"
-                                              styleClass="text01"
-                                              style="font-size: large; width: 100%;" />
-                            </p:scrollPanel>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="CARGA HORÁRIA TOTAL" 
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
-                            <h:outputText value="#{aula.cargaHorariaTotal}"
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <!-- Tabela para títulos de horários -->
-                                <h:outputText value="HORÁRIO"
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                                <h:panelGrid border="0"
-                                             columns="3">
-
-                                    <h:outputText value="dia da semana" 
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="CURSO" 
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
-                                    <h:outputText value="horário início" 
+                                </f:facet>
+                                <h:outputText value="#{aula.curso.nomeCurso}" 
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="COMPONENTE CURRICULAR" 
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
-                                    <h:outputText value="horário término" 
-                                                  styleClass="text01"
-                                                  style="font-size: large; font-weight: bold;"/>
-
-                                </h:panelGrid>
-                            </f:facet>
-
-                            <!-- Tabela para o conteúdo de horários -->
-                            <h:dataTable  value="#{aula.horariosAula}" 
-                                          var="horario" 
-                                          headerClass="text-center"
-                                          footerClass="text-center"
-                                          style="width: 100%;">
-
-                                <h:column>
-                                    <h:outputText value="#{horario.diaSemana}" 
-                                                  styleClass="text01"
-                                                  style="font-size: large;"/>
-                                </h:column>
-                                <h:column>
-                                    <h:outputText value="#{horario.horaInicio}"
-                                                  styleClass="text01"
-                                                  style="font-size: large">
-                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
-                                    </h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <h:outputText value="#{horario.horaTermino}"
-                                                  styleClass="text01"
-                                                  style="font-size: large">
-                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
-                                    </h:outputText>
-                                </h:column>
-                                <f:facet name="footer">
-
-                                    <p:commandButton styleClass="botaoCinza" 
-                                                     value="..."
-                                                     id="opPHorario"
-                                                     action="#{aulaMB.setAulaSelecionadaParaHorario(aula)}"
-                                                     update="@(.ui-dialog)"/>
-
-                                    <!-- Caixa para seleção de ação referente à Horário -->
-                                    <p:overlayPanel id="opcoesHorario" 
-                                                    for="opPHorario" 
-                                                    hideEffect="fade" >
-                                        <p:commandButton value="Adicionar"
-                                                         styleClass="opMenuCRUD"
-                                                         onclick="PF('addHorarioDialog').show();"
-                                                         style="margin: 0px -10px;"/>
-                                        <br/>
-                                        <p:commandButton value="Editar"
-                                                         styleClass="opMenuCRUD"
-                                                         onclick="PF('edtHorariosDialog').show();"
-                                                         style="margin: 5px -10px 0px;"
-                                                         />
-
-                                    </p:overlayPanel>
-
                                 </f:facet>
 
-                            </h:dataTable>
-
-
-                        </h:column>
-                        <h:column>
-
-                            <f:facet name="header">
-                                <h:outputText value="ORGANIZAÇÃO" 
+                                <h:outputText value="#{aula.componenteCurricular}"
                                               styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
-                            <h:outputText value="#{aula.tipoOferta.rotulo}"
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
+                                              style="font-size: large;" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="CARGA HORÁRIA TOTAL" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{aula.cargaHorariaTotal}"
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <!-- Tabela para títulos de horários -->
+                                    <h:outputText value="HORÁRIO"
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                    <h:panelGrid border="0"
+                                                 columns="3">
 
-                        </h:column>
-                        <h:column>
+                                        <h:outputText value="dia da semana" 
+                                                      styleClass="text01"
+                                                      style="font-size: large; font-weight: bold;"/>
+                                        <h:outputText value="horário início" 
+                                                      styleClass="text01"
+                                                      style="font-size: large; font-weight: bold;"/>
+                                        <h:outputText value="horário término" 
+                                                      styleClass="text01"
+                                                      style="font-size: large; font-weight: bold;"/>
 
-                            <p:commandButton styleClass="botaoAzul" 
-                                             value="..." 
-                                             action="#{aulaMB.setAulaSelecionadaParaAula(aula)}"
-                                             id="opPAtividadeAula"
-                                             update="@(.ui-dialog)"/>
+                                    </h:panelGrid>
+                                </f:facet>
 
-                            <!-- Caixa para seleção de ação referente à Aula -->
-                            <p:overlayPanel id="opcoesAula" 
-                                            for="opPAtividadeAula" 
-                                            hideEffect="fade">
-                                <p:commandButton value="Atualizar"
-                                                 styleClass="opMenuCRUD"
+                                <!-- Tabela para o conteúdo de horários -->
+                                <h:dataTable  value="#{aula.horariosAula}" 
+                                              var="horario" 
+                                              headerClass="text-center"
+                                              footerClass="text-center"
+                                              style="width: 100%;">
+
+                                    <h:column>
+                                        <h:outputText value="#{horario.diaSemana}" 
+                                                      styleClass="text01"
+                                                      style="font-size: large;"/>
+                                    </h:column>
+                                    <h:column>
+                                        <h:outputText value="#{horario.horaInicio}"
+                                                      styleClass="text01"
+                                                      style="font-size: large">
+                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <h:outputText value="#{horario.horaTermino}"
+                                                      styleClass="text01"
+                                                      style="font-size: large">
+                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                        </h:outputText>
+                                    </h:column>
+                                    <f:facet name="footer">
+
+                                        <p:commandButton styleClass="botaoCinza" 
+                                                         value="..."
+                                                         id="opPHorario"
+                                                         action="#{aulaMB.setAulaSelecionadaParaHorario(aula)}"
+                                                         update="@(.ui-dialog)"/>
+
+                                        <!-- Caixa para seleção de ação referente à Horário -->
+                                        <p:overlayPanel id="opcoesHorario" 
+                                                        for="opPHorario" 
+                                                        hideEffect="fade" >
+                                            <p:commandButton value="Adicionar"
+                                                             styleClass="opMenuCRUD"
+                                                             onclick="PF('addHorarioDialog').show();"
+                                                             style="margin: 0px -10px;"/>
+                                            <br/>
+                                            <p:commandButton value="Editar"
+                                                             styleClass="opMenuCRUD"
+                                                             onclick="PF('edtHorariosDialog').show();"
+                                                             style="margin: 5px -10px 0px;"
+                                                             />
+
+                                        </p:overlayPanel>
+
+                                    </f:facet>
+
+                                </h:dataTable>
+
+
+                            </h:column>
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="ORGANIZAÇÃO" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{aula.tipoOferta.rotulo}"
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+
+                            </h:column>
+                            <h:column>
+
+                                <p:commandButton styleClass="botaoAzul" 
+                                                 value="..." 
                                                  action="#{aulaMB.setAulaSelecionadaParaAula(aula)}"
-                                                 onclick="PF('edtAulaDialog').show();"
-                                                 style="margin: 0px -10px;"/>
-                                <br/>
-                                <p:commandButton value="Deletar"
-                                                 styleClass="opMenuCRUD"
-                                                 ajax="false" 
-                                                 immediate="true"
-                                                 action="#{aulaMB.excluirAula(aula, pTDMB.ptd)}"
-                                                 style="margin: 5px -10px 0px;"/>
+                                                 id="opPAtividadeAula"
+                                                 update="@(.ui-dialog)"/>
 
-                            </p:overlayPanel>
+                                <!-- Caixa para seleção de ação referente à Aula -->
+                                <p:overlayPanel id="opcoesAula" 
+                                                for="opPAtividadeAula" 
+                                                hideEffect="fade">
+                                    <p:commandButton value="Atualizar"
+                                                     styleClass="opMenuCRUD"
+                                                     action="#{aulaMB.setAulaSelecionadaParaAula(aula)}"
+                                                     onclick="PF('edtAulaDialog').show();"
+                                                     style="margin: 0px -10px;"/>
+                                    <br/>
+                                    <p:commandButton value="Deletar"
+                                                     styleClass="opMenuCRUD"
+                                                     ajax="false" 
+                                                     immediate="true"
+                                                     action="#{aulaMB.excluirAula(aula, pTDMB.ptd)}"
+                                                     style="margin: 5px -10px 0px;"/>
 
-                        </h:column>
+                                </p:overlayPanel>
 
-                    </h:dataTable>
+                            </h:column>
+
+                        </h:dataTable>
+                    </div>
 
 
                     <!-- Caixa para adicionar horário à aula -->
@@ -520,7 +520,7 @@
                                                  value="X" 
                                                  ajax="false" 
                                                  immediate="true"
-                                                 action="#{aulaMB.excluirHorarioAula(horarioSelecionadoEdicao)}"/>
+                                                 action="#{horarioMB.excluirHorario(horarioSelecionadoEdicao, aulaMB.aulaSelecionadaParaHorario)}"/>
 
                             </h:column>
 
@@ -532,8 +532,6 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
-
-
 
                     <br/>
 

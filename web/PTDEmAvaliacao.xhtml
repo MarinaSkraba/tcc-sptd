@@ -477,6 +477,58 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <!-- Tabela para títulos de horários -->
+                                <h:outputText value="HORÁRIO"
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+                                <h:panelGrid border="0"
+                                             columns="3">
+
+                                    <h:outputText value="dia da semana" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                    <h:outputText value="horário início" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                    <h:outputText value="horário término" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+
+                                </h:panelGrid>
+                            </f:facet>
+
+                            <!-- Tabela para o conteúdo de horários -->
+                            <h:dataTable  value="#{aula.horariosAula}" 
+                                          var="horario" 
+                                          headerClass="text-center"
+                                          footerClass="text-center"
+                                          style="width: 100%;">
+
+                                <h:column>
+                                    <h:outputText value="#{horario.diaSemana}" 
+                                                  styleClass="text01"
+                                                  style="font-size: large;"/>
+                                </h:column>
+                                <h:column>
+                                    <h:outputText value="#{horario.horaInicio}"
+                                                  styleClass="text01"
+                                                  style="font-size: large">
+                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <h:outputText value="#{horario.horaTermino}"
+                                                  styleClass="text01"
+                                                  style="font-size: large">
+                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                    </h:outputText>
+                                </h:column>
+
+                            </h:dataTable>
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="PREVISÃO DE CONCLUSÃO" 
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
@@ -534,6 +586,58 @@
                             <h:outputText value="#{aula.cargaHorariaTotal}"
                                           styleClass="text01"
                                           style="font-size: large;"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <!-- Tabela para títulos de horários -->
+                                <h:outputText value="HORÁRIO"
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+                                <h:panelGrid border="0"
+                                             columns="3">
+
+                                    <h:outputText value="dia da semana" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                    <h:outputText value="horário início" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                    <h:outputText value="horário término" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+
+                                </h:panelGrid>
+                            </f:facet>
+
+                            <!-- Tabela para o conteúdo de horários -->
+                            <h:dataTable  value="#{aula.horariosAula}" 
+                                          var="horario" 
+                                          headerClass="text-center"
+                                          footerClass="text-center"
+                                          style="width: 100%;">
+
+                                <h:column>
+                                    <h:outputText value="#{horario.diaSemana}" 
+                                                  styleClass="text01"
+                                                  style="font-size: large;"/>
+                                </h:column>
+                                <h:column>
+                                    <h:outputText value="#{horario.horaInicio}"
+                                                  styleClass="text01"
+                                                  style="font-size: large">
+                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <h:outputText value="#{horario.horaTermino}"
+                                                  styleClass="text01"
+                                                  style="font-size: large">
+                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                    </h:outputText>
+                                </h:column>
+
+                            </h:dataTable>
+
                         </h:column>
                         <h:column>
                             <f:facet name="header">

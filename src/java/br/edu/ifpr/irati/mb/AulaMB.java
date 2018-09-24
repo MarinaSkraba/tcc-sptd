@@ -84,9 +84,11 @@ public class AulaMB {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
 
-        for (Horario h: aula.getHorariosAula()) {
-            horarioDAO.excluir(h);
+        List<Horario> aux = new ArrayList<>(aula.getHorariosAula());
+        for (Horario h: aux) {
             aula.getHorariosAula().remove(h);
+            aulaDAO.alterar(aula);
+            horarioDAO.excluir(h);
         }
 
         ptd.getAulas().remove(aula);

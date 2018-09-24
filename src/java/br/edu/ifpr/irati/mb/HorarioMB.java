@@ -62,13 +62,20 @@ public class HorarioMB {
     public String salvarManutencaoEnsino(ManutencaoEnsino manutencaoEnsino, Usuario usuario) {
 
         int cargaHoraNovoHorario = 0;
+        int minTotal = 0;
 
         int minInicio = horario.getHoraInicio().getMinutes();
         int minTermino = horario.getHoraTermino().getMinutes();
         int horaInicio = horario.getHoraInicio().getHours();
         int horaTermino = horario.getHoraTermino().getHours();
-        
+
         cargaHoraNovoHorario = horaTermino - horaInicio;
+        if (minTermino > horaTermino) {
+            minTotal = minTotal + (minTermino - minInicio);
+        } else {
+            minTotal = (60 - minInicio) + minTermino;
+        }
+        cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal/60);
         
         manutencaoEnsino.setCargaHorariaSemanalManutencaoEnsino(manutencaoEnsino.getCargaHorariaSemanalManutencaoEnsino() + cargaHoraNovoHorario);
 
@@ -120,8 +127,11 @@ public class HorarioMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public String excluirHorario(Horario horario) {
+    public String excluirHorario(Horario horario, Aula aula) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
+        aula.getHorariosAula().remove(horario);
+        aulaDAO.alterar(aula);
         horarioDAO.excluir(horario);
         return "CriarCorrigirPTD?faces-redirect=true";
     }
