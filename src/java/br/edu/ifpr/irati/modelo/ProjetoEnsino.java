@@ -21,6 +21,9 @@ public class ProjetoEnsino implements Serializable {
     @Column(name = "estadoProjetoEnsino", nullable = false, length = 10)
     private String estadoProjetoEnsino;
 
+    @Column(name = "cargaHorariaSemanalProjetoEnsino", nullable = false)
+    private double cargaHorariaSemanalProjetoEnsino;
+
     @OneToOne
     private TipoProjetoEnsino tipoProjetoEnsino;
 
@@ -31,25 +34,27 @@ public class ProjetoEnsino implements Serializable {
 
         this.idProjetoEnsino = 0;
         this.estadoProjetoEnsino = "";
+        this.cargaHorariaSemanalProjetoEnsino = 0;
         this.tipoProjetoEnsino = new TipoProjetoEnsino();
         this.horariosProjetoEnsino = new ArrayList<>();
 
     }
 
-    public ProjetoEnsino(int idProjetoEnsino, String estadoProjetoEnsino, TipoProjetoEnsino tipoProjetoEnsino) {
+    public ProjetoEnsino(int idProjetoEnsino, String estadoProjetoEnsino, double cargaHorariaSemanalProjetoEnsino, TipoProjetoEnsino tipoProjetoEnsino) {
         this.idProjetoEnsino = idProjetoEnsino;
         this.estadoProjetoEnsino = estadoProjetoEnsino;
+        this.cargaHorariaSemanalProjetoEnsino = cargaHorariaSemanalProjetoEnsino;
         this.tipoProjetoEnsino = tipoProjetoEnsino;
-        this.horariosProjetoEnsino = new ArrayList();
+        this.horariosProjetoEnsino = new ArrayList<>();
     }
 
-    public ProjetoEnsino(int idProjetoEnsino, String estadoProjetoEnsino, TipoProjetoEnsino tipoProjetoEnsino, List<Horario> horariosProjetoEnsino) {
+    public ProjetoEnsino(int idProjetoEnsino, String estadoProjetoEnsino, double cargaHorariaSemanalProjetoEnsino, TipoProjetoEnsino tipoProjetoEnsino, List<Horario> horariosProjetoEnsino) {
         this.idProjetoEnsino = idProjetoEnsino;
         this.estadoProjetoEnsino = estadoProjetoEnsino;
+        this.cargaHorariaSemanalProjetoEnsino = cargaHorariaSemanalProjetoEnsino;
         this.tipoProjetoEnsino = tipoProjetoEnsino;
         this.horariosProjetoEnsino = horariosProjetoEnsino;
     }
-
 
     public int getIdProjetoEnsino() {
         return idProjetoEnsino;
@@ -81,6 +86,14 @@ public class ProjetoEnsino implements Serializable {
 
     public void setEstadoProjetoEnsino(String estadoProjetoEnsino) {
         this.estadoProjetoEnsino = estadoProjetoEnsino;
+    }
+
+    public double getCargaHorariaSemanalProjetoEnsino() {
+        return cargaHorariaSemanalProjetoEnsino;
+    }
+
+    public void setCargaHorariaSemanalProjetoEnsino(double cargaHorariaSemanalProjetoEnsino) {
+        this.cargaHorariaSemanalProjetoEnsino = cargaHorariaSemanalProjetoEnsino;
     }
 
 }
