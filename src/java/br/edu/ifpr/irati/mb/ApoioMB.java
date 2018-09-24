@@ -45,7 +45,6 @@ public class ApoioMB {
         horarioDAO.salvar(horario);
         apoio.setTipoApoio(tipoApoio);
         apoio.getHorariosApoio().add(horario);
-        apoio.setEstadoAtividadeApoio("Ativo");
         apoioDAO.salvar(apoio);
         apoio = apoioDAO.buscarTodos(Apoio.class).get(apoioDAO.buscarTodos(Apoio.class).size()-1);
         ptd.getApoios().add(apoio);
@@ -61,13 +60,6 @@ public class ApoioMB {
         this.apoio = apoio;
         apoioDAO.alterar(apoio);
         return "/adicionar aqui";
-    }
-
-    public String desabilitarApoio(Apoio apoio) {
-        Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
-        apoio.setEstadoAtividadeApoio("Desativado");
-        apoioDAO.alterar(apoio);
-        return "/adicionar html aqui";
     }
 
     public String excluirApoio(Apoio apoio, PTD ptd) {

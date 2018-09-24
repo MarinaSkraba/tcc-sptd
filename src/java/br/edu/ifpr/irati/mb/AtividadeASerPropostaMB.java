@@ -33,7 +33,6 @@ public class AtividadeASerPropostaMB {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.salvar(horario);
         atividadeASerProposta.getHorariosAtividadesASerProposta().add(horario);
-        atividadeASerProposta.setEstadoAtividadeASerProposta("Ativo");
         atividadeASerPropostaDAO.salvar(atividadeASerProposta);
         atividadeASerProposta = atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class).get(atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class).size()-1);
         ptd.getAtividadesASeremPropostas().add(atividadeASerProposta);
@@ -48,13 +47,6 @@ public class AtividadeASerPropostaMB {
         this.atividadeASerProposta = atividadeASerProposta;
         atividadeASerPropostaDAO.alterar(atividadeASerProposta);
         return "/adicionar aqui";
-    }
-
-    public String desabilitarAtividadeASerProposta(AtividadeASerProposta atividadeASerProposta) {
-        Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
-        atividadeASerProposta.setEstadoAtividadeASerProposta("Desativado");
-        atividadeASerPropostaDAO.alterar(atividadeASerProposta);
-        return "/adicionar html aqui";
     }
 
     public String excluirAtividadeASerProposta(AtividadeASerProposta atividadeASerProposta, PTD ptd) {

@@ -18,9 +18,6 @@ public class Administracao implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idAdministracao;
 
-    @Column(name = "estadoAtividadeAdministracao", nullable = false, length = 10)
-    private String estadoAtividadeAdministracao;
-
     @Column(name = "cargaHorariaSemanalAdministracao", nullable = false)
     private double cargaHorariaSemanalAdministracao;
 
@@ -33,24 +30,21 @@ public class Administracao implements Serializable {
     public Administracao() {
 
         this.idAdministracao = 0;
-        this.estadoAtividadeAdministracao = "";
         this.tipoAdministracao = new TipoAdministracao();
         this.horariosAdministracao = new ArrayList<>();
         this.cargaHorariaSemanalAdministracao = 0;
 
     }
 
-    public Administracao(int idAdministracao, String estadoAtividadeAdministracao, double cargaHorariaSemanalAdministracao) {
+    public Administracao(int idAdministracao, double cargaHorariaSemanalAdministracao) {
         this.idAdministracao = idAdministracao;
-        this.estadoAtividadeAdministracao = estadoAtividadeAdministracao;
         this.cargaHorariaSemanalAdministracao = cargaHorariaSemanalAdministracao;
         this.tipoAdministracao = new TipoAdministracao();
         this.horariosAdministracao = new ArrayList();
     }
 
-    public Administracao(int idAdministracao, String estadoAtividadeAdministracao, double cargaHorariaSemanalAdministracao, TipoAdministracao tipoAdministracao, List<Horario> horariosAdministracao) {
+    public Administracao(int idAdministracao, double cargaHorariaSemanalAdministracao, TipoAdministracao tipoAdministracao, List<Horario> horariosAdministracao) {
         this.idAdministracao = idAdministracao;
-        this.estadoAtividadeAdministracao = estadoAtividadeAdministracao;
         this.cargaHorariaSemanalAdministracao = cargaHorariaSemanalAdministracao;
         this.tipoAdministracao = tipoAdministracao;
         this.horariosAdministracao = horariosAdministracao;
@@ -79,14 +73,6 @@ public class Administracao implements Serializable {
 
     public void setHorariosAdministracao(List<Horario> horariosAdministracao) {
         this.horariosAdministracao = horariosAdministracao;
-    }
-
-    public String getEstadoAtividadeAdministracao() {
-        return estadoAtividadeAdministracao;
-    }
-
-    public void setEstadoAtividadeAdministracao(String estadoAtividadeAdministracao) {
-        this.estadoAtividadeAdministracao = estadoAtividadeAdministracao;
     }
 
     public double getCargaHorariaSemanalAdministracao() {

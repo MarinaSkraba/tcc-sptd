@@ -44,7 +44,6 @@ public class ManutencaoMB {
         horarioDAO.salvar(horario);
         manutencaoEnsino.setTipoManutencao(tipoManutencao);
         manutencaoEnsino.getHorariosManutecao().add(horario);
-        manutencaoEnsino.setEstadoManutencaoEnsino("Ativo");
         manutencaoEnsinoDAO.salvar(manutencaoEnsino);
         manutencaoEnsino = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class).get(manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class).size() - 1);
         ptd.getManutencoesEnsino().add(manutencaoEnsino);
@@ -60,15 +59,8 @@ public class ManutencaoMB {
         return "/adicionar aqui";
     }
 
-    public String desabilitarManutencao(ManutencaoEnsino manutencaoEnsino) {
-        Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
-        manutencaoEnsino.setEstadoManutencaoEnsino("Desativado");
-        manutencaoEnsinoDAO.alterar(manutencaoEnsino);
-        return "/adicionar html aqui";
-    }
-
     public String excluirManutencao(ManutencaoEnsino manutencaoEnsino, PTD ptd) {
-         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+        Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
 
