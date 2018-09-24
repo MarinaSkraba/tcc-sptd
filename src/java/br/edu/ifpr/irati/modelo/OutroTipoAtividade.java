@@ -17,9 +17,6 @@ public class OutroTipoAtividade implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int idOutroTipoAtividade;
 
-    @Column(name = "estadoOutroTipoAtividade", nullable = false, length = 10)
-    private String estadoOutroTipoAtividade;
-
     @Column(name = "rotulo", nullable = false, length = 250)
     private String rotulo;
 
@@ -34,25 +31,22 @@ public class OutroTipoAtividade implements Serializable {
 
     public OutroTipoAtividade() {
         this.idOutroTipoAtividade = 0;
-        this.estadoOutroTipoAtividade = "";
         this.rotulo = "";
         this.periodicidade = "";
         this.cargaHorariaSemanalOutroTipoAtividade = 0;
         this.horariosOutroTipoAtividade = new ArrayList<>();
     }
 
-    public OutroTipoAtividade(int idOutroTipoAtividade, String estadoOutroTipoAtividade, String rotulo, String periodicidade, double cargaHorariaSemanalOutroTipoAtividade) {
+    public OutroTipoAtividade(int idOutroTipoAtividade, String rotulo, String periodicidade, double cargaHorariaSemanalOutroTipoAtividade) {
         this.idOutroTipoAtividade = idOutroTipoAtividade;
-        this.estadoOutroTipoAtividade = estadoOutroTipoAtividade;
         this.rotulo = rotulo;
         this.periodicidade = periodicidade;
         this.cargaHorariaSemanalOutroTipoAtividade = cargaHorariaSemanalOutroTipoAtividade;
         this.horariosOutroTipoAtividade = new ArrayList();
     }
 
-    public OutroTipoAtividade(int idOutroTipoAtividade, String estadoOutroTipoAtividade, String rotulo, String periodicidade, double cargaHorariaSemanalOutroTipoAtividade, List<Horario> horariosOutroTipoAtividade) {
+    public OutroTipoAtividade(int idOutroTipoAtividade, String rotulo, String periodicidade, double cargaHorariaSemanalOutroTipoAtividade, List<Horario> horariosOutroTipoAtividade) {
         this.idOutroTipoAtividade = idOutroTipoAtividade;
-        this.estadoOutroTipoAtividade = estadoOutroTipoAtividade;
         this.rotulo = rotulo;
         this.periodicidade = periodicidade;
         this.cargaHorariaSemanalOutroTipoAtividade = cargaHorariaSemanalOutroTipoAtividade;
@@ -81,14 +75,6 @@ public class OutroTipoAtividade implements Serializable {
 
     public void setRotulo(String rotulo) {
         this.rotulo = rotulo;
-    }
-
-    public String getEstadoOutroTipoAtividade() {
-        return estadoOutroTipoAtividade;
-    }
-
-    public void setEstadoOutroTipoAtividade(String estadoOutroTipoAtividade) {
-        this.estadoOutroTipoAtividade = estadoOutroTipoAtividade;
     }
 
     public List<Horario> getHorariosOutroTipoAtividade() {

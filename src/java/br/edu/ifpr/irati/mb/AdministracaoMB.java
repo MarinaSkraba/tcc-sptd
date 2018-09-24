@@ -46,7 +46,6 @@ public class AdministracaoMB {
         horarioDAO.salvar(horario);
         administracao.setTipoAdministracao(tipoAdministracao);
         administracao.getHorariosAdministracao().add(horario);
-        administracao.setEstadoAtividadeAdministracao("Ativo");
         administracaoDAO.salvar(administracao);
         administracao = administracaoDAO.buscarTodos(Administracao.class).get(administracaoDAO.buscarTodos(Administracao.class).size() - 1);
         ptd.getAdministrativas().add(administracao);
@@ -60,13 +59,6 @@ public class AdministracaoMB {
     public String alterarAdministracao(Administracao administracao) {
         Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
         this.administracao = administracao;
-        administracaoDAO.alterar(administracao);
-        return "/adicionar html aqui";
-    }
-
-    public String desabilitarAdministracao(Administracao administracao) {
-        Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
-        administracao.setEstadoAtividadeAdministracao("Desativado");
         administracaoDAO.alterar(administracao);
         return "/adicionar html aqui";
     }

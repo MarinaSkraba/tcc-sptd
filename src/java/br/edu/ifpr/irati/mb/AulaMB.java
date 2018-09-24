@@ -56,7 +56,6 @@ public class AulaMB {
         aula.setTipoOferta(tipoOfertaSelecionado);
         aula.setCurso(cursoSelecionado);
         aula.setCargaHorariaTotal(HorasAulaTotal / NumeroSemanas);
-        aula.setEstadoAula("Ativo");
         aulaDAO.salvar(aula);
         aula = aulaDAO.buscarTodos(Aula.class).get(aulaDAO.buscarTodos(Aula.class).size() - 1);
         ptd.getAulas().add(aula);

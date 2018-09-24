@@ -24,9 +24,6 @@ public class Aula implements Serializable {
     @Column(name = "componenteCurricular", nullable = false, length = 50)
     private String componenteCurricular;
 
-    @Column(name = "estadoAula", nullable = false, length = 10)
-    private String estadoAula;
-
     @Column(name = "cargaHorariaTotal", nullable = false)
     private double cargaHorariaTotal;
 
@@ -42,7 +39,6 @@ public class Aula implements Serializable {
 
     public Aula() {
         this.idAula = 0;
-        this.estadoAula = "";
         this.componenteCurricular = "";
         this.cargaHorariaTotal = 0;
         this.curso = new Curso();
@@ -54,7 +50,6 @@ public class Aula implements Serializable {
     public Aula(int idAula, String componenteCurricular, String estadoAula, double cargaHorariaTotal) {
         this.idAula = idAula;
         this.componenteCurricular = componenteCurricular;
-        this.estadoAula = estadoAula;
         this.cargaHorariaTotal = cargaHorariaTotal;
         this.curso = new Curso();
         this.tipoOferta = new TipoOferta();
@@ -64,7 +59,6 @@ public class Aula implements Serializable {
     public Aula(int idAula, String componenteCurricular, String estadoAula, double cargaHorariaTotal, Curso curso, TipoOferta tipoOferta, List<Horario> horariosAula) {
         this.idAula = idAula;
         this.componenteCurricular = componenteCurricular;
-        this.estadoAula = estadoAula;
         this.cargaHorariaTotal = cargaHorariaTotal;
         this.curso = curso;
         this.tipoOferta = tipoOferta;
@@ -109,14 +103,6 @@ public class Aula implements Serializable {
 
     public void setHorariosAula(List<Horario> horariosAula) {
         this.horariosAula = horariosAula;
-    }
-
-    public String getEstadoAula() {
-        return estadoAula;
-    }
-
-    public void setEstadoAula(String estadoAula) {
-        this.estadoAula = estadoAula;
     }
 
     public double getCargaHorariaTotal() {

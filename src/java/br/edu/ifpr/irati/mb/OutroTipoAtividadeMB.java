@@ -32,7 +32,6 @@ public class OutroTipoAtividadeMB {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.salvar(horario);
         outroTipoAtividade.getHorariosOutroTipoAtividade().add(horario);
-        outroTipoAtividade.setEstadoOutroTipoAtividade("Ativo");
         outroTipoAtividadeDAO.salvar(outroTipoAtividade);
         outroTipoAtividade = outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class).get(outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class).size()-1);
         ptd.getOutrosTiposAtividades().add(outroTipoAtividade);
@@ -50,7 +49,6 @@ public class OutroTipoAtividadeMB {
 
     public String desabilitarOutroTipoAtividade(OutroTipoAtividade outroTipoAtividade) {
         Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
-        outroTipoAtividade.setEstadoOutroTipoAtividade("Desativado");
         outroTipoAtividadeDAO.alterar(outroTipoAtividade);
         return "/adicionar html aqui";
     }
