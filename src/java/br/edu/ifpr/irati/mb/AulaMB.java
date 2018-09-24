@@ -47,7 +47,7 @@ public class AulaMB {
         NumeroSemanas = 0;
         HorasAulaTotalEdicao = 0;
         NumeroSemanasEdicao = 0;
-        
+
     }
 
     public String salvarAula(Serializable idUsuario, PTD ptd) {
@@ -84,7 +84,7 @@ public class AulaMB {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
 
-        for (Horario h: aula.getHorariosAula()) {
+        for (Horario h : aula.getHorariosAula()) {
             horarioDAO.excluir(h);
             aula.getHorariosAula().remove(h);
         }
