@@ -7,8 +7,10 @@ package br.edu.ifpr.irati.mb;
 
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
+import br.edu.ifpr.irati.modelo.Administracao;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Horario;
+import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
 import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.Usuario;
@@ -57,14 +59,68 @@ public class HorarioMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
+    public String salvarManutencaoEnsino(ManutencaoEnsino manutencaoEnsino, Usuario usuario) {
+
+        int minTotal = 0;
+        int horaTotal = 0;
+
+        int minInicio = horario.getHoraInicio().getMinutes();
+        int minTermino = horario.getHoraTermino().getMinutes();
+        int horaInicio = horario.getHoraInicio().getHours();
+        int horaTermino = horario.getHoraTermino().getHours();
+        
+        
+        
+        manutencaoEnsino.s
+
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
+        Professor p = professorDAO.buscarPorId(usuario.getIdUsuario());
+        horario.setProfessor(p);
+        horario.setEstadoHorario("Ativo");
+        manutencaoEnsino.getHorariosManutecao().add(horario);
+        horarioDAO.salvar(manutencaoEnsino.getHorariosManutecao().get(manutencaoEnsino.getHorariosManutecao().size() - 1));
+        manutencaoEnsinoDAO.alterar(manutencaoEnsino);
+        horario = new Horario();
+        return "CriarCorrigirPTD?faces-redirect=true";
+
+    }
+
+    public Double calcularCargaHoraria() {
+
+        for (Horario h : horarios) {
+
+            if (minTermino > horaTermino) {
+                minTotal = minTotal + (minTermino - minInicio);
+                horaTotal = horaTotal + (horaTermino - horaInicio);
+
+                for (int i = 0; minTotal >= 60; i++) {
+                    minTotal = minTotal - 60;
+                    horaTotal = horaTotal + 1;
+                }
+
+            } else {
+
+                minTotal = (60 - minInicio) + minTermino;
+                horaTotal = horaTotal + (horaTermino - horaInicio);
+
+            }
+        }
+
+        Date cargaHorariaAdministracao = new Time(horaTotal, minTotal, 0);
+        return cargaHorariaAdministracao;
+
+    }
+
     public String alterarHorario(List<Horario> horariosAulaSelecionada) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        for(Horario h: horariosAulaSelecionada){
+        for (Horario h : horariosAulaSelecionada) {
             horarioDAO.alterar(h);
         }
         return "CriarCorrigirPTD?faces-redirect=true";
     }
-    
+
     public String excluirHorario(Horario horario) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         horarioDAO.excluir(horario);
@@ -106,5 +162,5 @@ public class HorarioMB {
     public void setDiasSemana(List<String> diasSemana) {
         this.diasSemana = diasSemana;
     }
-    
+
 }

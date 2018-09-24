@@ -48,17 +48,18 @@ import javax.faces.context.FacesContext;
 public class PTDMB {
 
     private PTD ptd;
+    private PTD ptdEmAvaliacao;
     private List<PTD> pdtsEmAvaliacao;
     private List<PTD> ptdsEmEdicao;
 
     public PTDMB() {
 
         ptd = new PTD();
+        ptdEmAvaliacao = new PTD();
         pdtsEmAvaliacao = new ArrayList<>();
         ptdsEmEdicao = new ArrayList();
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         pdtsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
-
 
     }
 
@@ -172,8 +173,7 @@ public class PTDMB {
         return "/NotificacoesDocente";
     }
 
-    public String abrirNotificacoesDiretorEnsino(int idUsuario) {
-        
+    public String abrirNotificacoesDiretorEnsino(int idUsuario) {        
         return "/NotificacoesDiretorEnsino";
     }
 
@@ -185,7 +185,8 @@ public class PTDMB {
         }
     }
 
-    public String abrirPTDEmAvaliacao() {
+    public String abrirPTDEmAvaliacao(PTD ptd) {
+        ptdEmAvaliacao = ptd;
         return "PTDEmAvaliacao";
     }
 
@@ -217,5 +218,19 @@ public class PTDMB {
 
     public void setPtdsEmEdicao(List<PTD> ptdsEmEdicao) {
         this.ptdsEmEdicao = ptdsEmEdicao;
+    }
+
+    /**
+     * @return the ptdEmAvaliacao
+     */
+    public PTD getPtdEmAvaliacao() {
+        return ptdEmAvaliacao;
+    }
+
+    /**
+     * @param ptdEmAvaliacao the ptdEmAvaliacao to set
+     */
+    public void setPtdEmAvaliacao(PTD ptdEmAvaliacao) {
+        this.ptdEmAvaliacao = ptdEmAvaliacao;
     }
 }

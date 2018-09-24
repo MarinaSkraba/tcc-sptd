@@ -108,7 +108,7 @@
                                 <h:panelGrid columns="3" 
                                              style="width:100%;" >
 
-                                    <p:commandLink action="#{pTDMB.abrirPTDEmAvaliacao()}" 
+                                    <p:commandLink action="#{pTDMB.abrirPTDEmAvaliacao(ptdEsperando)}" 
                                                    title="Ver PTD" 
                                                    ajax="false" 
                                                    immediate="true"
@@ -125,7 +125,7 @@
                                                      value="Abrir PTD"
                                                      ajax="false" 
                                                      immediate="true"
-                                                     action="#{pTDMB.abrirPTDEmAvaliacao()}"/>
+                                                     action="#{pTDMB.abrirPTDEmAvaliacao(ptdEsperando)}"/>
 
                                 </h:panelGrid>
                             </div>
