@@ -391,7 +391,7 @@
 
 
                     <!-- Caixa para adicionar horário à aula -->
-                    <p:dialog header="Adicionar Horario" 
+                    <p:dialog header="Adicionar Horario à Aula" 
                               widgetVar="addHorarioDialog" 
                               modal="true"                              
                               showEffect="fade" 
@@ -441,7 +441,7 @@
                     </p:dialog>
 
                     <!-- Caixa para editar horário adicionado à aula -->
-                    <p:dialog header="Editar Horarios" 
+                    <p:dialog header="Editar Horarios de Aula" 
                               widgetVar="edtHorariosDialog" 
                               modal="true" 
                               showEffect="fade" 
@@ -520,7 +520,7 @@
                                                  value="X" 
                                                  ajax="false" 
                                                  immediate="true"
-                                                 action="#{horarioMB.excluirHorario(horarioSelecionadoEdicao, aulaMB.aulaSelecionadaParaHorario)}"/>
+                                                 action="#{horarioMB.excluirHorarioAula(horarioSelecionadoEdicao, aulaMB.aulaSelecionadaParaHorario)}"/>
 
                             </h:column>
 
@@ -573,7 +573,7 @@
 
                     </p:dialog>
                     
-                    <!-- Caixa de edição de aulas -->
+                    <!-- Caixa de edição de Manutenção de ensino -->
                     <p:dialog header="Atualizar Manutenção" 
                               widgetVar="edtManuEnsinoDialog" 
                               modal="true" 
@@ -684,12 +684,12 @@
                                                         hideEffect="fade" >
                                             <p:commandButton value="Adicionar"
                                                              styleClass="opMenuCRUD"
-                                                             onclick="PF('').show();"
+                                                             onclick="PF('addHorarioManuEnsinoDialog').show();"
                                                              style="margin: 0px -10px;"/>
                                             <br/>
                                             <p:commandButton value="Editar"
                                                              styleClass="opMenuCRUD"
-                                                             onclick="PF('').show();"
+                                                             onclick="PF('edtHorarioManuEnsinoDialog').show();"
                                                              style="margin: 5px -10px 0px;"
                                                              />
 
@@ -708,7 +708,7 @@
                                                  id="opPAtividadeManuEnsino"
                                                  update="@(.ui-dialog)"/>
 
-                                <!-- Caixa para seleção de ação referente à Aula -->
+                                <!-- Caixa para seleção de ação referente à Manutenção Ensino -->
                                 <p:overlayPanel id="opcoesManuEnsino" 
                                                 for="opPAtividadeManuEnsino" 
                                                 hideEffect="fade">
@@ -731,6 +731,149 @@
 
                         </h:dataTable>
                     </div>
+                    
+                    <!-- Caixa para adicionar horário à Manutenção ensino -->
+                    <p:dialog header="Adicionar Horario à Manutenção de Ensino" 
+                              widgetVar="addHorarioManuEnsinoDialog" 
+                              modal="true"                              
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false"
+                              >
+
+                        <h:outputText value="DIA" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+
+                        <p:selectOneMenu id="selectDiaSemanaManuEnsino" 
+                                         value="#{horarioMB.horario.diaSemana}">
+
+                            <f:selectItems value="#{horarioMB.diasSemana}" 
+                                           var="diaSemana" 
+                                           itemValue="#{diaSemana}"
+                                           itemLabel="#{diaSemana}" />
+                        </p:selectOneMenu>
+
+                        <h:outputText value="HORÁRIO INÍCIO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -30px 25px;"/>
+                        <br/>
+                        <br> <p:calendar id="horaInicioManuEnsino" 
+                                         value="#{horarioMB.horario.horaInicio}" 
+                                         pattern="HH:mm" 
+                                         size="5"
+                                         timeOnly="true"/></br>
+
+                        <h:outputText value="HORÁRIO TÉRMINO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -30px 25px;"/>
+                        <br/>
+                        <br> <p:calendar id="horaTerminoManuEnsino" 
+                                         value="#{horarioMB.horario.horaTermino}" 
+                                         pattern="HH:mm"
+                                         size="5"
+                                         timeOnly="true"/></br>
+
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{horarioMB.salvarManutencaoEnsino(manutencaoMB.manutencaoEnsinoSelecionadoParaHorário, usuarioMB.usuarioLogado)}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa para editar horário adicionado à Manutenção ensino -->
+                    <p:dialog header="Editar Horarios de Manutenção de Ensino" 
+                              widgetVar="edtHorariosManuEnsinoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:dataTable  value="#{manutencaoMB.manutencaoEnsinoSelecionadoParaHorário.horariosManutecao}" 
+                                      var="horarioSelecionadoEdicaoManuEnsino" 
+                                      style="width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <f:facet name="header">
+                                <h:outputText value="" />
+                            </f:facet>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="DIA" 
+                                                  styleClass="text01"/>
+                                </f:facet>
+
+                                <p:selectOneMenu id="selectDiaSemanaEdicaoManuEnsino" 
+                                                 value="#{horarioSelecionadoEdicaoManuEnsino.diaSemana}">
+
+                                    <f:selectItems value="#{horarioMB.diasSemana}" 
+                                                   var="diaSemana" 
+                                                   itemValue="#{diaSemana}"
+                                                   itemLabel="#{diaSemana}" />
+
+                                </p:selectOneMenu>
+
+                            </h:column>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="INÍCIO" 
+                                                  styleClass="text01"/>
+                                </f:facet>
+
+                                <p:calendar id="horaInicioEdicaoManuEnsino" 
+                                            value="#{horarioSelecionadoEdicaoManuEnsino.horaInicio}" 
+                                            pattern="HH:mm" 
+                                            size="5"
+                                            timeOnly="true"/>
+
+                            </h:column>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="TÉRMINO" 
+                                                  styleClass="text01"/>
+                                </f:facet>
+
+                                <p:calendar id="horaTerminooEdicaoManuEnsino" 
+                                            value="#{horarioSelecionadoEdicaoManuEnsino.horaTermino}" 
+                                            pattern="HH:mm" 
+                                            size="5"
+                                            timeOnly="true"/>
+
+                            </h:column>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+
+                                <p:commandButton styleClass="botaoCinza" 
+                                                 style="float: left; font-size: 12pt;" 
+                                                 value="X" 
+                                                 ajax="false" 
+                                                 immediate="true"
+                                                 action="#{horarioMB.excluirHorarioManuEnsino(horarioSelecionadoEdicao, manutencaoMB.manutencaoEnsinoSelecionadoParaHorário)}"/>
+
+                            </h:column>
+
+                        </h:dataTable>
+
+                        <br/>
+                        <h:commandButton value="Salvar edição" 
+                                         action="#{horarioMB.alterar(manutencaoMB.manutencaoEnsinoSelecionadoParaHorário.horariosManutecao)}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
                     
                     <br/>
 

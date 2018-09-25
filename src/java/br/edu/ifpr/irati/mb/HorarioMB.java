@@ -70,12 +70,13 @@ public class HorarioMB {
         int horaTermino = horario.getHoraTermino().getHours();
 
         cargaHoraNovoHorario = horaTermino - horaInicio;
-        if (minTermino > horaTermino) {
-            minTotal = minTotal + (minTermino - minInicio);
-        } else {
+        if (minTermino > minTermino) {
+            minTotal = minTermino - minInicio;
+            cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal/60);
+        } if (minTermino < minTermino) {
             minTotal = (60 - minInicio) + minTermino;
+            cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal/60);
         }
-        cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal/60);
         
         manutencaoEnsino.setCargaHorariaSemanalManutencaoEnsino(manutencaoEnsino.getCargaHorariaSemanalManutencaoEnsino() + cargaHoraNovoHorario);
 
@@ -93,19 +94,28 @@ public class HorarioMB {
 
     }
 
-    public String alterarHorario(List<Horario> horariosAulaSelecionada) {
+    public String alterarHorario(List<Horario> horariosSelecionada) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        for (Horario h : horariosAulaSelecionada) {
+        for (Horario h : horariosSelecionada) {
             horarioDAO.alterar(h);
         }
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public String excluirHorario(Horario horario, Aula aula) {
+    public String excluirHorarioAula(Horario horario, Aula aula) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aula.getHorariosAula().remove(horario);
         aulaDAO.alterar(aula);
+        horarioDAO.excluir(horario);
+        return "CriarCorrigirPTD?faces-redirect=true";
+    }
+    
+    public String excluirHorarioManuEnsino(Horario horario, ManutencaoEnsino manutencaoEnsino) {
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+        manutencaoEnsino.getHorariosManutecao().remove(horario);
+        manutencaoEnsinoDAO.alterar(manutencaoEnsino);
         horarioDAO.excluir(horario);
         return "CriarCorrigirPTD?faces-redirect=true";
     }

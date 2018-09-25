@@ -64,7 +64,7 @@ public class ManutencaoMB {
         Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class);
         tipoManutencaoDAO.alterar(getManutencaoEnsinoSelecionadoParaManutencaoEnsino().getTipoManutencao());
         manutencaoEnsinoDAO.alterar(manutencaoEnsinoSelecionadoParaManutencaoEnsino);
-        setManutencaoEnsinoSelecionadoParaManutencaoEnsino(new ManutencaoEnsino());
+        manutencaoEnsinoSelecionadoParaManutencaoEnsino = new ManutencaoEnsino();
         
         return "CriarCorrigirPTD?faces-redirect=true";
     }
