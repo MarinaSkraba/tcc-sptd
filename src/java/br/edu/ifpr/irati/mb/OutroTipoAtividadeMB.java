@@ -47,12 +47,6 @@ public class OutroTipoAtividadeMB {
         return "/adicionar aqui";
     }
 
-    public String desabilitarOutroTipoAtividade(OutroTipoAtividade outroTipoAtividade) {
-        Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
-        outroTipoAtividadeDAO.alterar(outroTipoAtividade);
-        return "/adicionar html aqui";
-    }
-
     public String excluirOutroTipoAtividade(OutroTipoAtividade outroTipoAtividade, PTD ptd) {
         Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
