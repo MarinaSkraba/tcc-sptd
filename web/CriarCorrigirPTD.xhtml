@@ -564,11 +564,11 @@
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:inputText value="#{aulaMB.aula.componenteCurricular}"/>
+                        <p:inputText value="#{manutencaoMB.tipoManutencao.rotulo}"/>
                         
                         <br/>
                         <h:commandButton value="Salvar" 
-                                         action="#{aulaMB.salvarAula(usuarioMB.usuarioLogado.idUsuario, pTDMB.ptd)}" 
+                                         action="#{manutencaoMB.salvarManutencao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -653,22 +653,22 @@
 
                                         <p:commandButton styleClass="botaoCinza" 
                                                          value="..."
-                                                         id="opPHorario"
-                                                         action="#{manuEnsino.setAulaSelecionadaParaHorario(aula)}"
+                                                         id="opPHorarioManuEnsino"
+                                                         action="#{manutencaoMB.setManutencaoEnsinoSelecionadoParaHorário(manuEnsino)}"
                                                          update="@(.ui-dialog)"/>
 
                                         <!-- Caixa para seleção de ação referente à Horário -->
-                                        <p:overlayPanel id="opcoesHorario" 
-                                                        for="opPHorario" 
+                                        <p:overlayPanel id="opcoesHorarioManuEnsino" 
+                                                        for="opPHorarioManuEnsino" 
                                                         hideEffect="fade" >
                                             <p:commandButton value="Adicionar"
                                                              styleClass="opMenuCRUD"
-                                                             onclick="PF('addHorarioDialog').show();"
+                                                             onclick="PF('').show();"
                                                              style="margin: 0px -10px;"/>
                                             <br/>
                                             <p:commandButton value="Editar"
                                                              styleClass="opMenuCRUD"
-                                                             onclick="PF('edtHorariosDialog').show();"
+                                                             onclick="PF('').show();"
                                                              style="margin: 5px -10px 0px;"
                                                              />
 
@@ -682,39 +682,27 @@
                             </h:column>
                             <h:column>
 
-                                <f:facet name="header">
-                                    <h:outputText value="ORGANIZAÇÃO" 
-                                                  styleClass="text01"
-                                                  style="font-size: large; font-weight: bold;"/>
-                                </f:facet>
-                                <h:outputText value="#{aula.tipoOferta.rotulo}"
-                                              styleClass="text01"
-                                              style="font-size: large;"/>
-
-                            </h:column>
-                            <h:column>
-
                                 <p:commandButton styleClass="botaoAzul" 
                                                  value="..." 
-                                                 action="#{aulaMB.setAulaSelecionadaParaAula(aula)}"
-                                                 id="opPAtividadeAula"
+                                                 action="#{manutencaoMB.setManutencaoEnsinoSelecionadoParaManutencaoEnsino(manuEnsino)}"
+                                                 id="opPAtividadeManuEnsino"
                                                  update="@(.ui-dialog)"/>
 
                                 <!-- Caixa para seleção de ação referente à Aula -->
-                                <p:overlayPanel id="opcoesAula" 
-                                                for="opPAtividadeAula" 
+                                <p:overlayPanel id="opcoesManuEnsino" 
+                                                for="opPAtividadeManuEnsino" 
                                                 hideEffect="fade">
                                     <p:commandButton value="Atualizar"
                                                      styleClass="opMenuCRUD"
-                                                     action="#{aulaMB.setAulaSelecionadaParaAula(aula)}"
-                                                     onclick="PF('edtAulaDialog').show();"
+                                                     action="#{manutencaoMB.setManutencaoEnsinoSelecionadoParaManutencaoEnsino(manuEnsino)}"
+                                                     onclick="PF('').show();"
                                                      style="margin: 0px -10px;"/>
                                     <br/>
                                     <p:commandButton value="Deletar"
                                                      styleClass="opMenuCRUD"
                                                      ajax="false" 
                                                      immediate="true"
-                                                     action="#{aulaMB.excluirAula(aula, pTDMB.ptd)}"
+                                                     action="#{manutencaoMB.excluirManutencao(manutencaoEnsino, ptd)}"
                                                      style="margin: 5px -10px 0px;"/>
 
                                 </p:overlayPanel>

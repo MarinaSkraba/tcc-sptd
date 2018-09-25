@@ -79,7 +79,6 @@ public class AulaMB {
     }
 
     public String excluirAula(Aula aula, PTD ptd) {
-
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);

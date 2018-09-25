@@ -9,6 +9,7 @@ import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.dao.IManutencaoDao;
 import br.edu.ifpr.irati.dao.ManutencaoDAO;
+import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
 import br.edu.ifpr.irati.modelo.PTD;
@@ -22,6 +23,8 @@ import javax.faces.bean.ManagedBean;
 public class ManutencaoMB {
 
     private ManutencaoEnsino manutencaoEnsino;
+    private ManutencaoEnsino manutencaoEnsinoSelecionadoParaManutencaoEnsino;
+    private ManutencaoEnsino manutencaoEnsinoSelecionadoParaHorário;
     private List<ManutencaoEnsino> manutencoesEnsino;
     private Horario horario;
     private List<Horario> horarios;
@@ -32,6 +35,8 @@ public class ManutencaoMB {
         horario = new Horario();
         tipoManutencao = new TipoManutencao();
         manutencaoEnsino = new ManutencaoEnsino();
+        manutencaoEnsinoSelecionadoParaHorário = new ManutencaoEnsino();
+        manutencaoEnsinoSelecionadoParaManutencaoEnsino = new ManutencaoEnsino();
         manutencoesEnsino = new ArrayList();
     }
 
@@ -52,33 +57,35 @@ public class ManutencaoMB {
         
     }
 
-    public String alterarManutencao(ManutencaoEnsino manutencaoEnsino) {
+    public String alterarManutencao() {
         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
-        this.manutencaoEnsino = manutencaoEnsino;
+        Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class);
+        getManutencaoEnsinoSelecionadoParaManutencaoEnsino().getTipoManutencao().setRotulo(manutencaoEnsino.getTipoManutencao().getRotulo());
+        tipoManutencaoDAO.alterar(getManutencaoEnsinoSelecionadoParaManutencaoEnsino().getTipoManutencao());
         manutencaoEnsinoDAO.alterar(manutencaoEnsino);
-        return "/adicionar aqui";
+        setManutencaoEnsinoSelecionadoParaManutencaoEnsino(new ManutencaoEnsino());
+        
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public String excluirManutencao(ManutencaoEnsino manutencaoEnsino, PTD ptd) {
         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+        Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
 
-        for (int i = 0; i <= manutencaoEnsino.getHorariosManutecao().size(); i++) {
-            horarioDAO.excluir(horario);
-            manutencaoEnsino.getHorariosManutecao().remove(horario);
+        List<Horario> aux = new ArrayList<>(manutencaoEnsino.getHorariosManutecao());
+        for (Horario h: aux) {
+            manutencaoEnsino.getHorariosManutecao().remove(h);
+            manutencaoEnsinoDAO.alterar(manutencaoEnsino);
+            horarioDAO.excluir(h);
         }
 
         ptd.getManutencoesEnsino().remove(manutencaoEnsino);
         ptdDAO.alterar(ptd);
         manutencaoEnsinoDAO.excluir(manutencaoEnsino);
 
-        return "/adicionar aqui";
-    }
-
-    public void adicionarHorarioManutencao() {
-        horarios.add(horario);
-        horario = new Horario();
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public ManutencaoEnsino getManutencaoEnsino() {
@@ -119,5 +126,33 @@ public class ManutencaoMB {
 
     public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
+    }
+
+    /**
+     * @return the manutencaoEnsinoSelecionadoParaManutencaoEnsino
+     */
+    public ManutencaoEnsino getManutencaoEnsinoSelecionadoParaManutencaoEnsino() {
+        return manutencaoEnsinoSelecionadoParaManutencaoEnsino;
+    }
+
+    /**
+     * @param manutencaoEnsinoSelecionadoParaManutencaoEnsino the manutencaoEnsinoSelecionadoParaManutencaoEnsino to set
+     */
+    public void setManutencaoEnsinoSelecionadoParaManutencaoEnsino(ManutencaoEnsino manutencaoEnsinoSelecionadoParaManutencaoEnsino) {
+        this.manutencaoEnsinoSelecionadoParaManutencaoEnsino = manutencaoEnsinoSelecionadoParaManutencaoEnsino;
+    }
+
+    /**
+     * @return the manutencaoEnsinoSelecionadoParaHorário
+     */
+    public ManutencaoEnsino getManutencaoEnsinoSelecionadoParaHorário() {
+        return manutencaoEnsinoSelecionadoParaHorário;
+    }
+
+    /**
+     * @param manutencaoEnsinoSelecionadoParaHorário the manutencaoEnsinoSelecionadoParaHorário to set
+     */
+    public void setManutencaoEnsinoSelecionadoParaHorário(ManutencaoEnsino manutencaoEnsinoSelecionadoParaHorário) {
+        this.manutencaoEnsinoSelecionadoParaHorário = manutencaoEnsinoSelecionadoParaHorário;
     }
 }
