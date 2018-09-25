@@ -18,8 +18,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean
+@SessionScoped
 public class ManutencaoMB {
 
     private ManutencaoEnsino manutencaoEnsino;
@@ -60,9 +62,8 @@ public class ManutencaoMB {
     public String alterarManutencao() {
         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
         Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class);
-        getManutencaoEnsinoSelecionadoParaManutencaoEnsino().getTipoManutencao().setRotulo(manutencaoEnsino.getTipoManutencao().getRotulo());
         tipoManutencaoDAO.alterar(getManutencaoEnsinoSelecionadoParaManutencaoEnsino().getTipoManutencao());
-        manutencaoEnsinoDAO.alterar(manutencaoEnsino);
+        manutencaoEnsinoDAO.alterar(manutencaoEnsinoSelecionadoParaManutencaoEnsino);
         setManutencaoEnsinoSelecionadoParaManutencaoEnsino(new ManutencaoEnsino());
         
         return "CriarCorrigirPTD?faces-redirect=true";

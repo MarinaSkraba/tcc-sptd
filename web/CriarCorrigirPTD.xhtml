@@ -573,6 +573,27 @@
 
                     </p:dialog>
                     
+                    <!-- Caixa de edição de aulas -->
+                    <p:dialog header="Atualizar Manutenção" 
+                              widgetVar="edtManuEnsinoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="TIPO ATIVIDADE" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{manutencaoMB.manutencaoEnsinoSelecionadoParaManutencaoEnsino.tipoManutencao.rotulo}"/>
+
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{manutencaoMB.alterarManutencao()}" 
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
                     <div id="mostrarTabela">
                         <!-- Mostrar atividades Manutenção de ensino -->
                         <h:dataTable  value="#{pTDMB.ptd.manutencoesEnsino}" 
@@ -678,7 +699,6 @@
 
                                 </h:dataTable>
 
-
                             </h:column>
                             <h:column>
 
@@ -695,14 +715,14 @@
                                     <p:commandButton value="Atualizar"
                                                      styleClass="opMenuCRUD"
                                                      action="#{manutencaoMB.setManutencaoEnsinoSelecionadoParaManutencaoEnsino(manuEnsino)}"
-                                                     onclick="PF('').show();"
+                                                     onclick="PF('edtManuEnsinoDialog').show();"
                                                      style="margin: 0px -10px;"/>
                                     <br/>
                                     <p:commandButton value="Deletar"
                                                      styleClass="opMenuCRUD"
                                                      ajax="false" 
                                                      immediate="true"
-                                                     action="#{manutencaoMB.excluirManutencao(manutencaoEnsino, ptd)}"
+                                                     action="#{manutencaoMB.excluirManutencao(manuEnsino, pTDMB.ptd)}"
                                                      style="margin: 5px -10px 0px;"/>
 
                                 </p:overlayPanel>
