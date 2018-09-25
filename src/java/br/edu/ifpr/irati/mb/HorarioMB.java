@@ -93,32 +93,6 @@ public class HorarioMB {
 
     }
 
-//    public Double calcularCargaHoraria() {
-//
-//        for (Horario h : horarios) {
-//
-//            if (minTermino > horaTermino) {
-//                minTotal = minTotal + (minTermino - minInicio);
-//                
-//
-//                for (int i = 0; minTotal >= 60; i++) {
-//                    minTotal = minTotal - 60;
-//                    horaTotal = horaTotal + 1;
-//                }
-//
-//            } else {
-//
-//                minTotal = (60 - minInicio) + minTermino;
-//                horaTotal = horaTotal + (horaTermino - horaInicio);
-//
-//            }
-//        }
-//
-//        Date cargaHorariaAdministracao = new Time(horaTotal, minTotal, 0);
-//        return cargaHorariaAdministracao;
-//
-//    }
-
     public String alterarHorario(List<Horario> horariosAulaSelecionada) {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         for (Horario h : horariosAulaSelecionada) {
