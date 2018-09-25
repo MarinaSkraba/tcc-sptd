@@ -15,6 +15,8 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class OutroTipoAtividadeMB {
 
+    private OutroTipoAtividade outroTipoAtividadeSelecionadaParaOutroTipoAtividade;
+    private OutroTipoAtividade outroTipoAtividadeSelecionadaParaHorario;
     private OutroTipoAtividade outroTipoAtividade;
     private List<OutroTipoAtividade> outrosTiposAtividades;
     private Horario horario;
@@ -22,6 +24,8 @@ public class OutroTipoAtividadeMB {
 
     public OutroTipoAtividadeMB() {
 
+        outroTipoAtividadeSelecionadaParaOutroTipoAtividade = new OutroTipoAtividade();
+        outroTipoAtividadeSelecionadaParaHorario = new OutroTipoAtividade();
         outroTipoAtividade = new OutroTipoAtividade();
         horario = new Horario();
         outrosTiposAtividades = new ArrayList();
@@ -29,11 +33,8 @@ public class OutroTipoAtividadeMB {
 
     public void salvarOutroTipoAtividade(Serializable idUsuario, PTD ptd) {
         Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
-        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        horarioDAO.salvar(horario);
-        outroTipoAtividade.getHorariosOutroTipoAtividade().add(horario);
         outroTipoAtividadeDAO.salvar(outroTipoAtividade);
-        outroTipoAtividade = outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class).get(outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class).size()-1);
+        outroTipoAtividade = outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class).get(outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class).size() - 1);
         ptd.getOutrosTiposAtividades().add(outroTipoAtividade);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
@@ -42,9 +43,9 @@ public class OutroTipoAtividadeMB {
 
     public String alterarOutroTipoAtividade(OutroTipoAtividade outroTipoAtividade) {
         Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
-        this.outroTipoAtividade = outroTipoAtividade;
-        outroTipoAtividadeDAO.alterar(outroTipoAtividade);
-        return "/adicionar aqui";
+        outroTipoAtividadeDAO.alterar(outroTipoAtividadeSelecionadaParaOutroTipoAtividade);
+        outroTipoAtividadeSelecionadaParaOutroTipoAtividade = new OutroTipoAtividade();
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public String excluirOutroTipoAtividade(OutroTipoAtividade outroTipoAtividade, PTD ptd) {
@@ -52,16 +53,18 @@ public class OutroTipoAtividadeMB {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
 
-        for (int i = 0; i <= outroTipoAtividade.getHorariosOutroTipoAtividade().size(); i++) {
-            horarioDAO.excluir(horario);
-            outroTipoAtividade.getHorariosOutroTipoAtividade().remove(horario);
+        List<Horario> aux = new ArrayList<>(outroTipoAtividade.getHorariosOutroTipoAtividade());
+        for (Horario h : aux) {
+            outroTipoAtividade.getHorariosOutroTipoAtividade().remove(h);
+            outroTipoAtividadeDAO.alterar(outroTipoAtividade);
+            horarioDAO.excluir(h);
         }
 
         ptd.getOutrosTiposAtividades().remove(outroTipoAtividade);
         ptdDAO.alterar(ptd);
         outroTipoAtividadeDAO.excluir(outroTipoAtividade);
 
-        return "/adicionar aqui";
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public void adicionarHorarioOutroTipoAtividade() {
@@ -99,6 +102,22 @@ public class OutroTipoAtividadeMB {
 
     public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
+    }
+
+    public OutroTipoAtividade getOutroTipoAtividadeSelecionadaParaOutroTipoAtividade() {
+        return outroTipoAtividadeSelecionadaParaOutroTipoAtividade;
+    }
+
+    public void setOutroTipoAtividadeSelecionadaParaOutroTipoAtividade(OutroTipoAtividade outroTipoAtividadeSelecionadaParaOutroTipoAtividade) {
+        this.outroTipoAtividadeSelecionadaParaOutroTipoAtividade = outroTipoAtividadeSelecionadaParaOutroTipoAtividade;
+    }
+
+    public OutroTipoAtividade getOutroTipoAtividadeSelecionadaParaHorario() {
+        return outroTipoAtividadeSelecionadaParaHorario;
+    }
+
+    public void setOutroTipoAtividadeSelecionadaParaHorario(OutroTipoAtividade outroTipoAtividadeSelecionadaParaHorario) {
+        this.outroTipoAtividadeSelecionadaParaHorario = outroTipoAtividadeSelecionadaParaHorario;
     }
 
 }

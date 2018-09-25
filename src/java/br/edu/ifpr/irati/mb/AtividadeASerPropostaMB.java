@@ -15,6 +15,8 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class AtividadeASerPropostaMB {
 
+    private AtividadeASerProposta atividadeASerPropostaSelecionadaParaAtividadeASerProposta;
+    private AtividadeASerProposta atividadeASerPropostaSelecionadaParaHorario;
     private AtividadeASerProposta atividadeASerProposta;
     private List<AtividadeASerProposta> atividadesASeremPropostas;
     private Horario horario;
@@ -22,6 +24,8 @@ public class AtividadeASerPropostaMB {
 
     public AtividadeASerPropostaMB() {
 
+        atividadeASerPropostaSelecionadaParaAtividadeASerProposta = new AtividadeASerProposta();
+        atividadeASerPropostaSelecionadaParaHorario = new AtividadeASerProposta();
         atividadeASerProposta = new AtividadeASerProposta();
         horario = new Horario();
         atividadesASeremPropostas = new ArrayList();
@@ -30,11 +34,8 @@ public class AtividadeASerPropostaMB {
     public void salvarAtividadeASerProposta(Serializable idUsuario, PTD ptd) {
 
         Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
-        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        horarioDAO.salvar(horario);
-        atividadeASerProposta.getHorariosAtividadesASerProposta().add(horario);
         atividadeASerPropostaDAO.salvar(atividadeASerProposta);
-        atividadeASerProposta = atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class).get(atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class).size()-1);
+        atividadeASerProposta = atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class).get(atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class).size() - 1);
         ptd.getAtividadesASeremPropostas().add(atividadeASerProposta);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
@@ -44,26 +45,28 @@ public class AtividadeASerPropostaMB {
 
     public String alterarAtividadeASerProposta(AtividadeASerProposta atividadeASerProposta) {
         Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
-        this.atividadeASerProposta = atividadeASerProposta;
-        atividadeASerPropostaDAO.alterar(atividadeASerProposta);
-        return "/adicionar aqui";
+        atividadeASerPropostaDAO.alterar(atividadeASerPropostaSelecionadaParaAtividadeASerProposta);
+        atividadeASerPropostaSelecionadaParaAtividadeASerProposta = new AtividadeASerProposta();
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public String excluirAtividadeASerProposta(AtividadeASerProposta atividadeASerProposta, PTD ptd) {
-         Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
+        Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
 
-        for (int i = 0; i <= atividadeASerProposta.getHorariosAtividadesASerProposta().size(); i++) {
-            horarioDAO.excluir(horario);
-            atividadeASerProposta.getHorariosAtividadesASerProposta().remove(horario);
+        List<Horario> aux = new ArrayList<>(atividadeASerProposta.getHorariosAtividadesASerProposta());
+        for (Horario h : aux) {
+            atividadeASerProposta.getHorariosAtividadesASerProposta().remove(h);
+            atividadeASerPropostaDAO.alterar(atividadeASerProposta);
+            horarioDAO.excluir(h);
         }
 
         ptd.getAtividadesASeremPropostas().remove(atividadeASerProposta);
         ptdDAO.alterar(ptd);
         atividadeASerPropostaDAO.excluir(atividadeASerProposta);
 
-        return "/adicionar aqui";
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public void adicionarHorarioAtividadeASerProposta() {
@@ -101,6 +104,22 @@ public class AtividadeASerPropostaMB {
 
     public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
+    }
+
+    public AtividadeASerProposta getAtividadeASerPropostaSelecionadaParaAtividadeASerProposta() {
+        return atividadeASerPropostaSelecionadaParaAtividadeASerProposta;
+    }
+
+    public void setAtividadeASerPropostaSelecionadaParaAtividadeASerProposta(AtividadeASerProposta atividadeASerPropostaSelecionadaParaAtividadeASerProposta) {
+        this.atividadeASerPropostaSelecionadaParaAtividadeASerProposta = atividadeASerPropostaSelecionadaParaAtividadeASerProposta;
+    }
+
+    public AtividadeASerProposta getAtividadeASerPropostaSelecionadaParaHorario() {
+        return atividadeASerPropostaSelecionadaParaHorario;
+    }
+
+    public void setAtividadeASerPropostaSelecionadaParaHorario(AtividadeASerProposta atividadeASerPropostaSelecionadaParaHorario) {
+        this.atividadeASerPropostaSelecionadaParaHorario = atividadeASerPropostaSelecionadaParaHorario;
     }
 
 }
