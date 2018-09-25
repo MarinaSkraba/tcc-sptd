@@ -65,6 +65,7 @@ public class ApoioMB {
     public String excluirApoio(Apoio apoio, PTD ptd) {
 
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
+        Dao<TipoApoio> tipoApoioDAO = new GenericDAO<>(TipoApoio.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
 
@@ -74,7 +75,7 @@ public class ApoioMB {
             apoioDAO.alterar(apoio);
             horarioDAO.excluir(h);
         }
-
+        tipoApoioDAO.excluir(apoio.getTipoApoio());
         ptd.getApoios().remove(apoio);
         ptdDAO.alterar(ptd);
         apoioDAO.excluir(apoio);

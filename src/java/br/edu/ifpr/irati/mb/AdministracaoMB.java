@@ -68,6 +68,7 @@ public class AdministracaoMB {
 
         Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
 
         List<Horario> aux = new ArrayList<>(administracao.getHorariosAdministracao());
@@ -76,7 +77,7 @@ public class AdministracaoMB {
             administracaoDAO.alterar(administracao);
             horarioDAO.excluir(h);
         }
-
+        tipoAdministracaoDAO.excluir(administracao.getTipoAdministracao());
         ptd.getAdministrativas().remove(administracao);
         ptdDAO.alterar(ptd);
         administracaoDAO.excluir(administracao);
