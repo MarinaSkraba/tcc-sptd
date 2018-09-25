@@ -35,15 +35,12 @@ public class ManutencaoMB {
         manutencoesEnsino = new ArrayList();
     }
 
-    public void salvarManutencao(Serializable idUsuario, PTD ptd) {
+    public String salvarManutencao(Serializable idUsuario, PTD ptd) {
 
         Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
         Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class);
-        tipoManutencaoDAO.salvar(tipoManutencao);
-        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        horarioDAO.salvar(horario);
         manutencaoEnsino.setTipoManutencao(tipoManutencao);
-        manutencaoEnsino.getHorariosManutecao().add(horario);
+        tipoManutencaoDAO.salvar(tipoManutencao);
         manutencaoEnsinoDAO.salvar(manutencaoEnsino);
         manutencaoEnsino = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class).get(manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class).size() - 1);
         ptd.getManutencoesEnsino().add(manutencaoEnsino);
@@ -51,19 +48,8 @@ public class ManutencaoMB {
         ptdDAO.alterar(ptd);
         manutencaoEnsino = new ManutencaoEnsino();
         
-        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-        aula.setTipoOferta(tipoOfertaSelecionado);
-        aula.setCurso(cursoSelecionado);
-        aula.setCargaHorariaTotal(HorasAulaTotal / NumeroSemanas);
-        aulaDAO.salvar(aula);
-        aula = aulaDAO.buscarTodos(Aula.class).get(aulaDAO.buscarTodos(Aula.class).size() - 1);
-        ptd.getAulas().add(aula);
-        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-        ptdDAO.alterar(ptd);
-        aula = new Aula();
-        HorasAulaTotal = 0;
-        NumeroSemanas = 0;
         return "CriarCorrigirPTD?faces-redirect=true";
+        
     }
 
     public String alterarManutencao(ManutencaoEnsino manutencaoEnsino) {

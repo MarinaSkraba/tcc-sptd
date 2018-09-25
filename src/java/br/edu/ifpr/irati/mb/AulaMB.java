@@ -47,7 +47,7 @@ public class AulaMB {
         NumeroSemanas = 0;
         HorasAulaTotalEdicao = 0;
         NumeroSemanasEdicao = 0;
-        
+
     }
 
     public String salvarAula(Serializable idUsuario, PTD ptd) {
