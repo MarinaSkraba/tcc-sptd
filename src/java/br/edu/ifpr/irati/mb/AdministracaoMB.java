@@ -24,6 +24,8 @@ import javax.faces.bean.ManagedBean;
 public class AdministracaoMB {
 
     private Administracao administracao;
+    private Administracao administracaoSelecionadaParaAdministracao;
+    private Administracao administracaoSelecionadaParaHorario;
     private List<Administracao> administracoes;
     private Horario horario;
     private List<Horario> horarios;
@@ -33,6 +35,8 @@ public class AdministracaoMB {
 
         horario = new Horario();
         tipoAdministracao = new TipoAdministracao();
+        administracaoSelecionadaParaAdministracao = new Administracao();
+        administracaoSelecionadaParaHorario = new Administracao();
         administracao = new Administracao();
         administracoes = new ArrayList();
 
@@ -42,25 +46,22 @@ public class AdministracaoMB {
         Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
         Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
         tipoAdministracaoDAO.salvar(tipoAdministracao);
-        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        horarioDAO.salvar(horario);
         administracao.setTipoAdministracao(tipoAdministracao);
-        administracao.getHorariosAdministracao().add(horario);
         administracaoDAO.salvar(administracao);
         administracao = administracaoDAO.buscarTodos(Administracao.class).get(administracaoDAO.buscarTodos(Administracao.class).size() - 1);
         ptd.getAdministrativas().add(administracao);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         administracao = new Administracao();
-        return "CriarCorrigirPTD";
+        return "CriarCorrigirPTD?faces-redirect=true";
 
     }
 
     public String alterarAdministracao(Administracao administracao) {
         Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
-        this.administracao = administracao;
-        administracaoDAO.alterar(administracao);
-        return "/adicionar html aqui";
+        administracaoDAO.alterar(administracaoSelecionadaParaAdministracao);
+        administracaoSelecionadaParaAdministracao = new Administracao();
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public String excluirAdministracao(Administracao administracao, PTD ptd) {
@@ -69,16 +70,18 @@ public class AdministracaoMB {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
 
-        for (int i = 0; i <= administracao.getHorariosAdministracao().size(); i++) {
-            horarioDAO.excluir(horario);
-            administracao.getHorariosAdministracao().remove(horario);
+        List<Horario> aux = new ArrayList<>(administracao.getHorariosAdministracao());
+        for (Horario h : aux) {
+            administracao.getHorariosAdministracao().remove(h);
+            administracaoDAO.alterar(administracao);
+            horarioDAO.excluir(h);
         }
 
         ptd.getAdministrativas().remove(administracao);
         ptdDAO.alterar(ptd);
         administracaoDAO.excluir(administracao);
 
-        return "/adicionar aqui";
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public void adicionarHorarioAdministracao() {
@@ -124,6 +127,22 @@ public class AdministracaoMB {
 
     public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
+    }
+
+    public Administracao getAdministracaoSelecionadaParaAdministracao() {
+        return administracaoSelecionadaParaAdministracao;
+    }
+
+    public void setAdministracaoSelecionadaParaAdministracao(Administracao administracaoSelecionadaParaAdministracao) {
+        this.administracaoSelecionadaParaAdministracao = administracaoSelecionadaParaAdministracao;
+    }
+
+    public Administracao getAdministracaoSelecionadaParaHorario() {
+        return administracaoSelecionadaParaHorario;
+    }
+
+    public void setAdministracaoSelecionadaParaHorario(Administracao administracaoSelecionadaParaHorario) {
+        this.administracaoSelecionadaParaHorario = administracaoSelecionadaParaHorario;
     }
 
 }

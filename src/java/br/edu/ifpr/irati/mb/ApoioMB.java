@@ -22,6 +22,8 @@ import javax.faces.bean.ManagedBean;
 public class ApoioMB {
 
     private Apoio apoio;
+    private Apoio apoioSelecionadoParaApoio;
+    private Apoio apoioSelecionadoParaHorario;
     private List<Apoio> apoios;
     private Horario horario;
     private List<Horario> horarios;
@@ -29,6 +31,8 @@ public class ApoioMB {
 
     public ApoioMB() {
 
+        apoioSelecionadoParaApoio = new Apoio();
+        apoioSelecionadoParaHorario = new Apoio();
         horario = new Horario();
         tipoApoio = new TipoApoio();
         apoio = new Apoio();
@@ -41,42 +45,41 @@ public class ApoioMB {
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         Dao<TipoApoio> tipoApoioDAO = new GenericDAO<>(TipoApoio.class);
         tipoApoioDAO.salvar(tipoApoio);
-        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        horarioDAO.salvar(horario);
         apoio.setTipoApoio(tipoApoio);
-        apoio.getHorariosApoio().add(horario);
         apoioDAO.salvar(apoio);
-        apoio = apoioDAO.buscarTodos(Apoio.class).get(apoioDAO.buscarTodos(Apoio.class).size()-1);
+        apoio = apoioDAO.buscarTodos(Apoio.class).get(apoioDAO.buscarTodos(Apoio.class).size() - 1);
         ptd.getApoios().add(apoio);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         apoio = new Apoio();
-        
 
     }
 
     public String alterarApoio(Apoio apoio) {
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
-        this.apoio = apoio;
-        apoioDAO.alterar(apoio);
-        return "/adicionar aqui";
+        apoioDAO.alterar(apoioSelecionadoParaApoio);
+        apoioSelecionadoParaApoio = new Apoio();
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public String excluirApoio(Apoio apoio, PTD ptd) {
+
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
 
-        for (int i = 0; i <= apoio.getHorariosApoio().size(); i++) {
-            horarioDAO.excluir(horario);
-            apoio.getHorariosApoio().remove(horario);
+        List<Horario> aux = new ArrayList<>(apoio.getHorariosApoio());
+        for (Horario h : aux) {
+            apoio.getHorariosApoio().remove(h);
+            apoioDAO.alterar(apoio);
+            horarioDAO.excluir(h);
         }
 
         ptd.getApoios().remove(apoio);
         ptdDAO.alterar(ptd);
         apoioDAO.excluir(apoio);
 
-        return "/adicionar aqui";
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public void adicionarHorarioApoio() {
@@ -122,5 +125,21 @@ public class ApoioMB {
 
     public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
+    }
+
+    public Apoio getApoioSelecionadoParaApoio() {
+        return apoioSelecionadoParaApoio;
+    }
+
+    public void setApoioSelecionadoParaApoio(Apoio apoioSelecionadoParaApoio) {
+        this.apoioSelecionadoParaApoio = apoioSelecionadoParaApoio;
+    }
+
+    public Apoio getApoioSelecionadoParaHorario() {
+        return apoioSelecionadoParaHorario;
+    }
+
+    public void setApoioSelecionadoParaHorario(Apoio apoioSelecionadoParaHorario) {
+        this.apoioSelecionadoParaHorario = apoioSelecionadoParaHorario;
     }
 }
