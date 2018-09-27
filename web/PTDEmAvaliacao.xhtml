@@ -442,8 +442,8 @@
 
                     <div id="mostrarTabela">
                         <!-- Mostrar atividades pesquisa e/ou extensão (Autor) -->
-                        <h:dataTable  value="#{pTDMB.ptd.aulas}" 
-                                      var="aula" 
+                        <h:dataTable  value="#{pTDMB.ptd.projetosPesquisaExtensao}" 
+                                      var="projetoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
                                       footerClass="text-center">
@@ -454,7 +454,7 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{aula.curso.nomeCurso}" 
+                                <h:outputText value="#{p}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
