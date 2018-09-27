@@ -55,7 +55,7 @@ public class ApoioMB {
 
     }
 
-    public String alterarApoio(Apoio apoio) {
+    public String alterarApoio() {
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         apoioDAO.alterar(apoioSelecionadoParaApoio);
         apoioSelecionadoParaApoio = new Apoio();
