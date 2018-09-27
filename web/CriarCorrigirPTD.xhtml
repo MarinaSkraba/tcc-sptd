@@ -777,7 +777,7 @@
 
                         <br/>
                         <h:commandButton value="Salvar" 
-                                         action="#{horarioMB.salvarHorarioManutencaoEnsino(manutencaoMB.manutencaoEnsinoSelecionadoParaHorário, usuarioMB.usuarioLogado)}"
+                                         action="#{horarioMB.salvarHorarioAtividade(manutencaoMB.manutencaoEnsinoSelecionadoParaHorário, usuarioMB.usuarioLogado)}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -995,19 +995,19 @@
                                               style="width: 100%;">
 
                                     <h:column>
-                                        <h:outputText value="#{horarioManuEnsino.diaSemana}" 
+                                        <h:outputText value="#{horarioApoioEnsino.diaSemana}" 
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
                                     </h:column>
                                     <h:column>
-                                        <h:outputText value="#{horarioManuEnsino.horaInicio}"
+                                        <h:outputText value="#{horarioApoioEnsino.horaInicio}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
                                     </h:column>
                                     <h:column>
-                                        <h:outputText value="#{horarioManuEnsino.horaTermino}"
+                                        <h:outputText value="#{horarioApoioEnsino.horaTermino}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>

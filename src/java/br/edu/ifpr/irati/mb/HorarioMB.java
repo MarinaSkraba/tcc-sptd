@@ -9,9 +9,11 @@ import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.modelo.Administracao;
 import br.edu.ifpr.irati.modelo.Apoio;
+import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
+import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
 import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.Usuario;
@@ -31,6 +33,9 @@ public class HorarioMB {
     private Horario horarioAula;
     private Horario horarioManuEnsino;
     private Horario horarioApoioEnsino;
+    private Horario horarioAdministracao;
+    private Horario horarioOutroTipoAtividade;
+    private Horario horarioAtividadeASerProposta;
     private List<Horario> horarios;
     private List<String> diasSemana;
 
@@ -39,6 +44,9 @@ public class HorarioMB {
         horarioAula = new Horario();
         horarioManuEnsino = new Horario();
         horarioApoioEnsino = new Horario();
+        horarioAdministracao = new Horario();
+        horarioOutroTipoAtividade = new Horario();
+        horarioAtividadeASerProposta = new Horario();
         horarios = new ArrayList<>();
         diasSemana = new ArrayList<>();
         diasSemana.add("Segunda");
@@ -55,6 +63,7 @@ public class HorarioMB {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
         Professor p = professorDAO.buscarPorId(usuario.getIdUsuario());
+        horarioAula.setEstadoHorario("Ativo");
         horarioAula.setProfessor(p);
         aula.getHorariosAula().add(horarioAula);
         horarioDAO.salvar(aula.getHorariosAula().get(aula.getHorariosAula().size() - 1));
@@ -71,18 +80,40 @@ public class HorarioMB {
 
         double cargaHoraNovoHorario = 0;
         double minTotal = 0;
+        Horario horarioAtividade = new Horario();
 
-        double minInicio = getHorarioManuEnsino().getHoraInicio().getMinutes();
-        double minTermino = getHorarioManuEnsino().getHoraTermino().getMinutes();
-        double horaInicio = getHorarioManuEnsino().getHoraInicio().getHours();
-        double horaTermino = getHorarioManuEnsino().getHoraTermino().getHours();
-        double sessenta = 60;
+        if (object instanceof ManutencaoEnsino) {
+            horarioAtividade = horarioManuEnsino;
+        }
+        if (object instanceof Apoio) {
+            horarioAtividade = horarioApoioEnsino;
+        }
+//        if (object instanceof ) {
+//            
+//        }
+        if (object instanceof Administracao) {
+            horarioAtividade = horarioAdministracao;
+        }
+        if (object instanceof OutroTipoAtividade) {
+            horarioAtividade = horarioOutroTipoAtividade;
+        }
+        if (object instanceof AtividadeASerProposta) {
+            horarioAtividade = horarioAtividadeASerProposta;
+        }
+
+        horarioAtividade.setProfessor(p);
+        horarioAtividade.setEstadoHorario("Ativo");
+
+        double minInicio = horarioAtividade.getHoraInicio().getMinutes();
+        double minTermino = horarioAtividade.getHoraTermino().getMinutes();
+        double horaInicio = horarioAtividade.getHoraInicio().getHours();
+        double horaTermino = horarioAtividade.getHoraTermino().getHours();
 
         cargaHoraNovoHorario = horaTermino - horaInicio;
         if (minTermino > minInicio) {
             minTotal = minTermino - minInicio;
             System.out.println(minTotal / 60);
-            cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / sessenta);
+            cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
         }
         if (minTermino < minTermino) {
             minTotal = (60 - minInicio) + minTermino;
@@ -92,19 +123,30 @@ public class HorarioMB {
         if (object instanceof ManutencaoEnsino) {
             Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
             ((ManutencaoEnsino) object).setCargaHorariaSemanalManutencaoEnsino(((ManutencaoEnsino) object).getCargaHorariaSemanalManutencaoEnsino() + cargaHoraNovoHorario);
-            horarioManuEnsino.setProfessor(p);
-            ((ManutencaoEnsino) object).getHorariosManutecao().add(getHorarioManuEnsino());
+            ((ManutencaoEnsino) object).getHorariosManutecao().add(horarioAtividade);
             horarioDAO.salvar(((ManutencaoEnsino) object).getHorariosManutecao().get(((ManutencaoEnsino) object).getHorariosManutecao().size() - 1));
             manutencaoEnsinoDAO.alterar(((ManutencaoEnsino) object));
             setHorarioManuEnsino(new Horario());
-        } if (object instanceof Apoio) {
-            Dao<Apoio> apoioEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+        }
+        if (object instanceof Apoio) {
+            Dao<Apoio> apoioEnsinoDAO = new GenericDAO<>(Apoio.class);
             ((Apoio) object).setCargaHorariaSemanalApoio(((Apoio) object).getCargaHorariaSemanalApoio() + cargaHoraNovoHorario);
-            horarioApoioEnsino.setProfessor(p);
-            ((Apoio) object).getHorariosApoio().add(getHorarioManuEnsino());
-            horarioDAO.salvar(((ManutencaoEnsino) object).getHorariosManutecao().get(((Apoio) object).getHorariosApoio().size() - 1));
+            ((Apoio) object).getHorariosApoio().add(horarioAtividade);
+            horarioDAO.salvar(((Apoio) object).getHorariosApoio().get(((Apoio) object).getHorariosApoio().size() - 1));
             apoioEnsinoDAO.alterar(((Apoio) object));
-            setHorarioManuEnsino(new Horario());
+            setHorarioApoioEnsino(new Horario());
+        }
+//        if (object instanceof ) {
+//            
+//        }
+        if (object instanceof Administracao) {
+            
+        }
+        if (object instanceof OutroTipoAtividade) {
+            
+        }
+        if (object instanceof AtividadeASerProposta) {
+            
         }
 
         return "CriarCorrigirPTD?faces-redirect=true";
@@ -148,6 +190,23 @@ public class HorarioMB {
             ((ManutencaoEnsino) object).setCargaHorariaSemanalManutencaoEnsino(cargaHoraNovoHorario);
             manutencaoEnsinoDAO.alterar((ManutencaoEnsino) object);
         }
+        if (object instanceof Apoio) {
+            Dao<Apoio> apoioEnsinoDAO = new GenericDAO<>(Apoio.class);
+            ((Apoio) object).setCargaHorariaSemanalApoio(cargaHoraNovoHorario);
+            apoioEnsinoDAO.alterar((Apoio) object);
+        }
+//        if (object instanceof ) {
+//            
+//        }
+        if (object instanceof Administracao) {
+            
+        }
+        if (object instanceof OutroTipoAtividade) {
+            
+        }
+        if (object instanceof AtividadeASerProposta) {
+            
+        }
 
         return "CriarCorrigirPTD?faces-redirect=true";
     }
@@ -187,6 +246,25 @@ public class HorarioMB {
             manutencaoEnsinoDAO.alterar((ManutencaoEnsino) object);
             ((ManutencaoEnsino) object).getHorariosManutecao().remove(horario);
             manutencaoEnsinoDAO.alterar(((ManutencaoEnsino) object));
+        }
+        if (object instanceof Apoio) {
+            Dao<Apoio> apoioEnsinoDAO = new GenericDAO<>(Apoio.class);
+            ((Apoio) object).setCargaHorariaSemanalApoio(((Apoio) object).getCargaHorariaSemanalApoio() - cargaHoraNovoHorario);
+            apoioEnsinoDAO.alterar((Apoio) object);
+            ((Apoio) object).getHorariosApoio().remove(horario);
+            apoioEnsinoDAO.alterar(((Apoio) object));
+        }
+//        if (object instanceof ) {
+//            
+//        }
+        if (object instanceof Administracao) {
+            
+        }
+        if (object instanceof OutroTipoAtividade) {
+            
+        }
+        if (object instanceof AtividadeASerProposta) {
+            
         }
 
         horarioDAO.excluir(horario);
@@ -261,6 +339,49 @@ public class HorarioMB {
      */
     public void setHorarioApoioEnsino(Horario horarioApoioEnsino) {
         this.horarioApoioEnsino = horarioApoioEnsino;
+    }
+
+    /**
+     * @return the horarioAdministracao
+     */
+    public Horario getHorarioAdministracao() {
+        return horarioAdministracao;
+    }
+
+    /**
+     * @param horarioAdministracao the horarioAdministracao to set
+     */
+    public void setHorarioAdministracao(Horario horarioAdministracao) {
+        this.horarioAdministracao = horarioAdministracao;
+    }
+
+    /**
+     * @return the horarioOutroTipoAtividade
+     */
+    public Horario getHorarioOutroTipoAtividade() {
+        return horarioOutroTipoAtividade;
+    }
+
+    /**
+     * @param horarioOutroTipoAtividade the horarioOutroTipoAtividade to set
+     */
+    public void setHorarioOutroTipoAtividade(Horario horarioOutroTipoAtividade) {
+        this.horarioOutroTipoAtividade = horarioOutroTipoAtividade;
+    }
+
+    /**
+     * @return the horarioAtividadeASerProposta
+     */
+    public Horario getHorarioAtividadeASerProposta() {
+        return horarioAtividadeASerProposta;
+    }
+
+    /**
+     * @param horarioAtividadeASerProposta the horarioAtividadeASerProposta to
+     * set
+     */
+    public void setHorarioAtividadeASerProposta(Horario horarioAtividadeASerProposta) {
+        this.horarioAtividadeASerProposta = horarioAtividadeASerProposta;
     }
 
 }
