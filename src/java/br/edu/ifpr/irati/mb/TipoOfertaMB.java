@@ -5,8 +5,10 @@ import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.modelo.TipoOferta;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean
+@SessionScoped
 public class TipoOfertaMB {
 
     private TipoOferta tipoOferta;
