@@ -57,7 +57,7 @@ public class ApoioMB {
 
     }
 
-    public String alterarApoio(Apoio apoio) {
+    public String alterarApoio() {
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         apoioDAO.alterar(apoioSelecionadoParaApoio);
         apoioSelecionadoParaApoio = new Apoio();
@@ -77,10 +77,10 @@ public class ApoioMB {
             apoioDAO.alterar(apoio);
             horarioDAO.excluir(h);
         }
-        tipoApoioDAO.excluir(apoio.getTipoApoio());
         ptd.getApoios().remove(apoio);
         ptdDAO.alterar(ptd);
         apoioDAO.excluir(apoio);
+        tipoApoioDAO.excluir(apoio.getTipoApoio());
 
         return "CriarCorrigirPTD?faces-redirect=true";
     }
