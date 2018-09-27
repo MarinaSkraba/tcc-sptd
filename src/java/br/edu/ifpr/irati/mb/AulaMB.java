@@ -80,7 +80,6 @@ public class AulaMB {
 
     public String excluirAula(Aula aula, PTD ptd) {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-        Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
 
@@ -90,7 +89,6 @@ public class AulaMB {
             aulaDAO.alterar(aula);
             horarioDAO.excluir(h);
         }
-        tipoOfertaDAO.excluir(aula.getTipoOferta());
         ptd.getAulas().remove(aula);
         ptdDAO.alterar(ptd);
         aulaDAO.excluir(aula);

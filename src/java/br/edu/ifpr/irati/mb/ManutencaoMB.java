@@ -53,6 +53,7 @@ public class ManutencaoMB {
         ptd.getManutencoesEnsino().add(manutencaoEnsino);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
+        tipoManutencao = new TipoManutencao();
         manutencaoEnsino = new ManutencaoEnsino();
         
         return "CriarCorrigirPTD?faces-redirect=true";
@@ -81,10 +82,10 @@ public class ManutencaoMB {
             manutencaoEnsinoDAO.alterar(manutencaoEnsino);
             horarioDAO.excluir(h);
         }
-
         ptd.getManutencoesEnsino().remove(manutencaoEnsino);
         ptdDAO.alterar(ptd);
         manutencaoEnsinoDAO.excluir(manutencaoEnsino);
+        tipoManutencaoDAO.excluir(manutencaoEnsino.getTipoManutencao());
 
         return "CriarCorrigirPTD?faces-redirect=true";
     }
