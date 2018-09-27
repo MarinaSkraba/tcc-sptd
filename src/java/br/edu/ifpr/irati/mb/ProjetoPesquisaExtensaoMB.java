@@ -16,8 +16,10 @@ import br.edu.ifpr.irati.modelo.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean
+@SessionScoped
 public class ProjetoPesquisaExtensaoMB {
 
     private ProjetoPesquisa projetoPesquisa;
@@ -37,6 +39,7 @@ public class ProjetoPesquisaExtensaoMB {
     private ProjetoExtensao projetoExtensaoSelecionado;
     private String tipoProjetoAutor;
     private String tipoProjetoColab;
+    private List<Object> projetosPesquisaExtensao;
 
     public ProjetoPesquisaExtensaoMB() {
 
@@ -56,6 +59,7 @@ public class ProjetoPesquisaExtensaoMB {
         projetosPesquisaColab = projetoPesquisaDAO.buscarTodos(ProjetoPesquisa.class);
         Dao<ProjetoExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
         projetosExtensaoColab = projetoExtensaoDAO.buscarTodos(ProjetoExtensao.class);
+        projetosPesquisaExtensao = new ArrayList();
     }
 
     public ProjetoPesquisaExtensaoMB(String tipoProjetoAutor, String tipoProjetoColab) {
@@ -346,5 +350,13 @@ public class ProjetoPesquisaExtensaoMB {
 
     public void setProjetoExtensaoSelecionadoParaHorario(ProjetoExtensao projetoExtensaoSelecionadoParaHorario) {
         this.projetoExtensaoSelecionadoParaHorario = projetoExtensaoSelecionadoParaHorario;
+    }
+
+    public List<Object> getProjetosPesquisaExtensao() {
+        return projetosPesquisaExtensao;
+    }
+
+    public void setProjetosPesquisaExtensao(List<Object> projetosPesquisaExtensao) {
+        this.projetosPesquisaExtensao = projetosPesquisaExtensao;
     }
 }

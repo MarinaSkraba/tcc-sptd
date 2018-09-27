@@ -4,8 +4,10 @@ import br.edu.ifpr.irati.modelo.Professor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean
+@SessionScoped
 public class ProfessorMB {
 
     private Professor professor;
