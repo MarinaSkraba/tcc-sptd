@@ -8,6 +8,7 @@ package br.edu.ifpr.irati.mb;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.modelo.Administracao;
+import br.edu.ifpr.irati.modelo.Apoio;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
@@ -29,6 +30,7 @@ public class HorarioMB {
 
     private Horario horarioAula;
     private Horario horarioManuEnsino;
+    private Horario horarioApoioEnsino;
     private List<Horario> horarios;
     private List<String> diasSemana;
 
@@ -36,6 +38,7 @@ public class HorarioMB {
 
         horarioAula = new Horario();
         horarioManuEnsino = new Horario();
+        horarioApoioEnsino = new Horario();
         horarios = new ArrayList<>();
         diasSemana = new ArrayList<>();
         diasSemana.add("Segunda");
@@ -53,7 +56,6 @@ public class HorarioMB {
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
         Professor p = professorDAO.buscarPorId(usuario.getIdUsuario());
         horarioAula.setProfessor(p);
-        horarioAula.setEstadoHorario("Ativo");
         aula.getHorariosAula().add(horarioAula);
         horarioDAO.salvar(aula.getHorariosAula().get(aula.getHorariosAula().size() - 1));
         aulaDAO.alterar(aula);
@@ -61,7 +63,11 @@ public class HorarioMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public String salvarHorarioManutencaoEnsino(ManutencaoEnsino manutencaoEnsino, Usuario usuario) {
+    public String salvarHorarioAtividade(Object object, Usuario usuario) {
+
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
+        Professor p = professorDAO.buscarPorId(usuario.getIdUsuario());
 
         double cargaHoraNovoHorario = 0;
         double minTotal = 0;
@@ -83,18 +89,24 @@ public class HorarioMB {
             cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
         }
 
-        manutencaoEnsino.setCargaHorariaSemanalManutencaoEnsino(manutencaoEnsino.getCargaHorariaSemanalManutencaoEnsino() + cargaHoraNovoHorario);
+        if (object instanceof ManutencaoEnsino) {
+            Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+            ((ManutencaoEnsino) object).setCargaHorariaSemanalManutencaoEnsino(((ManutencaoEnsino) object).getCargaHorariaSemanalManutencaoEnsino() + cargaHoraNovoHorario);
+            horarioManuEnsino.setProfessor(p);
+            ((ManutencaoEnsino) object).getHorariosManutecao().add(getHorarioManuEnsino());
+            horarioDAO.salvar(((ManutencaoEnsino) object).getHorariosManutecao().get(((ManutencaoEnsino) object).getHorariosManutecao().size() - 1));
+            manutencaoEnsinoDAO.alterar(((ManutencaoEnsino) object));
+            setHorarioManuEnsino(new Horario());
+        } if (object instanceof Apoio) {
+            Dao<Apoio> apoioEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+            ((Apoio) object).setCargaHorariaSemanalApoio(((Apoio) object).getCargaHorariaSemanalApoio() + cargaHoraNovoHorario);
+            horarioApoioEnsino.setProfessor(p);
+            ((Apoio) object).getHorariosApoio().add(getHorarioManuEnsino());
+            horarioDAO.salvar(((ManutencaoEnsino) object).getHorariosManutecao().get(((Apoio) object).getHorariosApoio().size() - 1));
+            apoioEnsinoDAO.alterar(((Apoio) object));
+            setHorarioManuEnsino(new Horario());
+        }
 
-        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
-        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
-        Professor p = professorDAO.buscarPorId(usuario.getIdUsuario());
-        getHorarioManuEnsino().setProfessor(p);
-        getHorarioManuEnsino().setEstadoHorario("Ativo");
-        manutencaoEnsino.getHorariosManutecao().add(getHorarioManuEnsino());
-        horarioDAO.salvar(manutencaoEnsino.getHorariosManutecao().get(manutencaoEnsino.getHorariosManutecao().size() - 1));
-        manutencaoEnsinoDAO.alterar(manutencaoEnsino);
-        setHorarioManuEnsino(new Horario());
         return "CriarCorrigirPTD?faces-redirect=true";
 
     }
@@ -235,6 +247,20 @@ public class HorarioMB {
      */
     public void setHorarioManuEnsino(Horario horarioManuEnsino) {
         this.horarioManuEnsino = horarioManuEnsino;
+    }
+
+    /**
+     * @return the horarioApoioEnsino
+     */
+    public Horario getHorarioApoioEnsino() {
+        return horarioApoioEnsino;
+    }
+
+    /**
+     * @param horarioApoioEnsino the horarioApoioEnsino to set
+     */
+    public void setHorarioApoioEnsino(Horario horarioApoioEnsino) {
+        this.horarioApoioEnsino = horarioApoioEnsino;
     }
 
 }
