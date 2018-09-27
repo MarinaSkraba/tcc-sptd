@@ -13,13 +13,11 @@ import br.edu.ifpr.irati.dao.IAulaDao;
 import br.edu.ifpr.irati.dao.IManutencaoDao;
 import br.edu.ifpr.irati.dao.IPTDDAO;
 import br.edu.ifpr.irati.dao.IProjetoEnsinoDao;
-import br.edu.ifpr.irati.dao.IProjetoExtensaoDao;
-import br.edu.ifpr.irati.dao.IProjetoPesquisaDao;
+import br.edu.ifpr.irati.dao.IProjetoPesquisaExtensaoDao;
 import br.edu.ifpr.irati.dao.ManutencaoDAO;
 import br.edu.ifpr.irati.dao.PTDDAO;
 import br.edu.ifpr.irati.dao.ProjetoEnsinoDAO;
-import br.edu.ifpr.irati.dao.ProjetoExtensaoDAO;
-import br.edu.ifpr.irati.dao.ProjetoPesquisaDAO;
+import br.edu.ifpr.irati.dao.ProjetoPesquisaExtensaoDAO;
 import br.edu.ifpr.irati.modelo.Administracao;
 import br.edu.ifpr.irati.modelo.Apoio;
 import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
@@ -32,8 +30,7 @@ import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
 import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.Participacao;
 import br.edu.ifpr.irati.modelo.Professor;
-import br.edu.ifpr.irati.modelo.ProjetoExtensao;
-import br.edu.ifpr.irati.modelo.ProjetoPesquisa;
+import br.edu.ifpr.irati.modelo.ProjetoPesquisaExtensao;
 import br.edu.ifpr.irati.modelo.TipoOferta;
 import br.edu.ifpr.irati.modelo.Usuario;
 import java.util.ArrayList;
@@ -56,14 +53,18 @@ public class PTDMB {
     private double cargaHorariaTotalAulas;
     private double cargaHorariaTotalManutencoesEnsino;
     private double cargaHorariaTotalOutroTiposAtividade;
-    private double cargaHorariaTotalProjetosExtensao;
-    private double cargaHorariaTotalProjetosPesquisa;
+    private double cargaHorariaTotalProjetosPesquisaExtensao;
     private double cargaHorariaTotalPTD;
     private boolean obrigatoriedadeJustificativaAula;
     private boolean obrigatoriedadeJustificativaApoio;
     private boolean obrigatoriedadeJustificativaManutencaoEnsino;
     private boolean obrigatoriedadeJustificativaPesquisaExtensao;
     private String estadoCargaHorariaPTD;
+    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAutor;
+    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoColab;
+    
+    
+    
     
     public PTDMB() {
         
@@ -79,14 +80,15 @@ public class PTDMB {
         this.cargaHorariaTotalAulas = 0;
         this.cargaHorariaTotalManutencoesEnsino = 0;
         this.cargaHorariaTotalOutroTiposAtividade = 0;
-        this.cargaHorariaTotalProjetosExtensao = 0;
-        this.cargaHorariaTotalProjetosPesquisa = 0;
+        this.cargaHorariaTotalProjetosPesquisaExtensao = 0;
         this.cargaHorariaTotalPTD = 0;
         this.obrigatoriedadeJustificativaApoio = false;
         this.obrigatoriedadeJustificativaAula = false;
         this.obrigatoriedadeJustificativaManutencaoEnsino = false;
         this.obrigatoriedadeJustificativaPesquisaExtensao = false;
         this.estadoCargaHorariaPTD = "";
+        this.projetosPesquisaExtensaoAutor = new ArrayList();
+        this.projetosPesquisaExtensaoColab = new ArrayList();
         
     }
     
@@ -133,17 +135,15 @@ public class PTDMB {
         for (OutroTipoAtividade ota : ptd.getOutrosTiposAtividades()) {
             cargaHorariaTotalOutroTiposAtividade = cargaHorariaTotalOutroTiposAtividade + ota.getCargaHorariaSemanalOutroTipoAtividade();
         }
-        for (ProjetoExtensao pe : ptd.getProjetosExtensao()) {
-            cargaHorariaTotalProjetosExtensao = cargaHorariaTotalProjetosExtensao + pe.getCargaHorariaSemanalProjetoExtensao();
+        for (ProjetoPesquisaExtensao pe : ptd.getProjetosPesquisaExtensao()) {
+            cargaHorariaTotalProjetosPesquisaExtensao = cargaHorariaTotalProjetosPesquisaExtensao + pe.getCargaHorariaSemanalProjetoExtensao();
         }
-        for (ProjetoPesquisa pp : ptd.getProjetosPesquisa()) {
-            cargaHorariaTotalProjetosPesquisa = cargaHorariaTotalProjetosPesquisa + pp.getCargaHorariaSemanalProjetoPesquisa();
-        }
-        if ((cargaHorariaTotalProjetosExtensao + cargaHorariaTotalProjetosPesquisa) != 16) {
+       
+        if ((cargaHorariaTotalProjetosPesquisaExtensao) != 16) {
             obrigatoriedadeJustificativaPesquisaExtensao = true;
         }
         
-        cargaHorariaTotalPTD = cargaHorariaTotalAdministracoes + cargaHorariaTotalApoios + cargaHorariaTotalAulas + cargaHorariaTotalManutencoesEnsino + cargaHorariaTotalOutroTiposAtividade + cargaHorariaTotalProjetosExtensao + cargaHorariaTotalProjetosPesquisa;
+        cargaHorariaTotalPTD = cargaHorariaTotalAdministracoes + cargaHorariaTotalApoios + cargaHorariaTotalAulas + cargaHorariaTotalManutencoesEnsino + cargaHorariaTotalOutroTiposAtividade  + cargaHorariaTotalProjetosPesquisaExtensao;
         if (Double.parseDouble(ptd.getProfessor().getRegimeTrabalho()) == cargaHorariaTotalPTD) {
             
             estadoCargaHorariaPTD = "CORRETO";
@@ -235,8 +235,7 @@ public class PTDMB {
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
-        Dao<ProjetoPesquisa> pPesquisaDAO = new GenericDAO<>(ProjetoPesquisa.class);
-        Dao<ProjetoExtensao> pExtensaoDAO = new GenericDAO<>(ProjetoExtensao.class);
+        Dao<ProjetoPesquisaExtensao> pPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
         
@@ -266,12 +265,8 @@ public class PTDMB {
                 : ptd.getOutrosTiposAtividades()) {
             
         }
-        for (ProjetoExtensao pExtensao
-                : ptd.getProjetosExtensao()) {
-            
-        }
-        for (ProjetoPesquisa pPesquisa
-                : ptd.getProjetosPesquisa()) {
+        for (ProjetoPesquisaExtensao pPesquisaExtensao
+                : ptd.getProjetosPesquisaExtensao()) {
             
         }
         
@@ -303,6 +298,11 @@ public class PTDMB {
     
     public String abrirPTDEmAvaliacao(PTD ptd) {
         ptdEmAvaliacao = ptd;
+        
+//        if(){
+//            
+//        }
+        
         return "PTDEmAvaliacao";
     }
     
@@ -398,22 +398,6 @@ public class PTDMB {
         this.cargaHorariaTotalOutroTiposAtividade = cargaHorariaTotalOutroTiposAtividade;
     }
     
-    public double getCargaHorariaTotalProjetosExtensao() {
-        return cargaHorariaTotalProjetosExtensao;
-    }
-    
-    public void setCargaHorariaTotalProjetosExtensao(double cargaHorariaTotalProjetosExtensao) {
-        this.cargaHorariaTotalProjetosExtensao = cargaHorariaTotalProjetosExtensao;
-    }
-    
-    public double getCargaHorariaTotalProjetosPesquisa() {
-        return cargaHorariaTotalProjetosPesquisa;
-    }
-    
-    public void setCargaHorariaTotalProjetosPesquisa(double cargaHorariaTotalProjetosPesquisa) {
-        this.cargaHorariaTotalProjetosPesquisa = cargaHorariaTotalProjetosPesquisa;
-    }
-    
     public boolean isObrigatoriedadeJustificativaAula() {
         return obrigatoriedadeJustificativaAula;
     }
@@ -460,5 +444,29 @@ public class PTDMB {
     
     public void setEstadoCargaHorariaPTD(String estadoCargaHorariaPTD) {
         this.estadoCargaHorariaPTD = estadoCargaHorariaPTD;
+    }
+
+    public double getCargaHorariaTotalProjetosPesquisaExtensao() {
+        return cargaHorariaTotalProjetosPesquisaExtensao;
+    }
+
+    public void setCargaHorariaTotalProjetosPesquisaExtensao(double cargaHorariaTotalProjetosPesquisaExtensao) {
+        this.cargaHorariaTotalProjetosPesquisaExtensao = cargaHorariaTotalProjetosPesquisaExtensao;
+    }
+
+    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoAutor() {
+        return projetosPesquisaExtensaoAutor;
+    }
+
+    public void setProjetosPesquisaExtensaoAutor(List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAutor) {
+        this.projetosPesquisaExtensaoAutor = projetosPesquisaExtensaoAutor;
+    }
+
+    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoColab() {
+        return projetosPesquisaExtensaoColab;
+    }
+
+    public void setProjetosPesquisaExtensaoColab(List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoColab) {
+        this.projetosPesquisaExtensaoColab = projetosPesquisaExtensaoColab;
     }
 }

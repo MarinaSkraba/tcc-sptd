@@ -442,8 +442,8 @@
 
                     <div id="mostrarTabela">
                         <!-- Mostrar atividades pesquisa e/ou extensão (Autor) -->
-                        <h:dataTable  value="#{pTDMB.ptd.aulas}" 
-                                      var="aula" 
+                        <h:dataTable  value="#{pTDMB.projetosPesquisaExtensaoAutor}" 
+                                      var="projetoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
                                       footerClass="text-center">
@@ -454,7 +454,7 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{aula.curso.nomeCurso}" 
+                                <h:outputText value="#{projetoPesquisaExtensaoAutor.numeroProcesso}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -466,7 +466,7 @@
                                 </f:facet>
 
                                 <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{aula.componenteCurricular}"
+                                    <h:outputText value="#{projetoPesquisaExtensaoAutor.tituloProcesso}"
                                                   styleClass="text01"
                                                   style="font-size: large; width: 100%;" />
                                 </p:scrollPanel>
@@ -477,7 +477,7 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{aula.cargaHorariaTotal}"
+                                <h:outputText value="#{projetoPesquisaExtensaoAutor.cargaHorariaSemanalProjetoExtensao}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -504,7 +504,7 @@
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{aula.horariosAula}" 
+                                <h:dataTable  value="#{projetoPesquisaExtensaoAutor.horariosProjetoExtensao}" 
                                               var="horario" 
                                               headerClass="text-center"
                                               footerClass="text-center"
@@ -539,7 +539,7 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{aula.cargaHorariaTotal}"
+                                <h:outputText value="#{projetoPesquisaExtensaoAutor.previsaoConclusao}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -555,8 +555,8 @@
 
                     <div id="mostrarTabela">
                     <!-- Mostrar atividades pesquisa e/ou extensão (Colaborador) -->
-                    <h:dataTable  value="#{pTDMB.ptd.aulas}" 
-                                  var="aula" 
+                    <h:dataTable  value="#{pTDMB.projetosPesquisaExtensaoColab}" 
+                                  var="projetoPesquisaExtensaoColab" 
                                   style="border-spacing: 0pt; width: 100%;"
                                   headerClass="text-center"
                                   footerClass="text-center">
@@ -567,7 +567,7 @@
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
                             </f:facet>
-                            <h:outputText value="#{aula.curso.nomeCurso}" 
+                            <h:outputText value="#{projetoPesquisaExtensaoColab.numeroProcesso}" 
                                           styleClass="text01"
                                           style="font-size: large;"/>
                         </h:column>
@@ -579,7 +579,7 @@
                             </f:facet>
 
                             <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                <h:outputText value="#{aula.componenteCurricular}"
+                                <h:outputText value="#{projetoPesquisaExtensaoColab.tituloProcesso}"
                                               styleClass="text01"
                                               style="font-size: large; width: 100%;" />
                             </p:scrollPanel>
@@ -590,7 +590,7 @@
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
                             </f:facet>
-                            <h:outputText value="#{aula.cargaHorariaTotal}"
+                            <h:outputText value="#{projetoPesquisaExtensaoColab.cargaHorariaSemanalProjetoExtensao}"
                                           styleClass="text01"
                                           style="font-size: large;"/>
                         </h:column>

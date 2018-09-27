@@ -2,7 +2,7 @@ package br.edu.ifpr.irati.util;
 
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
-import br.edu.ifpr.irati.modelo.ProjetoExtensao;
+import br.edu.ifpr.irati.modelo.ProjetoPesquisaExtensao;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -10,8 +10,8 @@ import javax.faces.convert.FacesConverter;
 
 
 
-@FacesConverter(forClass = ProjetoExtensao.class, value = "projetoExtensaoConverter")
-public class ProjetoExtensaoConverter implements Converter {
+@FacesConverter(forClass = ProjetoPesquisaExtensao.class, value = "projetoExtensaoConverter")
+public class ProjetoPesquisaExtensaoConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component,
@@ -20,18 +20,18 @@ public class ProjetoExtensaoConverter implements Converter {
             return null;
         } else {
             Integer id = Integer.parseInt(value);
-            Dao <ProjetoExtensao> peDAO = new GenericDAO<>(ProjetoExtensao.class);
-            ProjetoExtensao projetoExtensao  = peDAO.buscarPorId(id);
-            return projetoExtensao;
+            Dao <ProjetoPesquisaExtensao> peDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
+            ProjetoPesquisaExtensao projetoPesquisaExtensao  = peDAO.buscarPorId(id);
+            return projetoPesquisaExtensao;
         }
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component,
             Object value) {
-        ProjetoExtensao projetoExtensao = (ProjetoExtensao) value;
-        if (projetoExtensao != null) {
-            return String.valueOf(projetoExtensao.getIdProjetoExtensao());
+        ProjetoPesquisaExtensao projetoPesquisaExtensao = (ProjetoPesquisaExtensao) value;
+        if (projetoPesquisaExtensao != null) {
+            return String.valueOf(projetoPesquisaExtensao.getIdProjetoExtensao());
         } else {
             return null;
         }

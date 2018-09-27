@@ -26,8 +26,7 @@
         <mapping class="br.edu.ifpr.irati.modelo.ManutencaoEnsino"/>
         <mapping class="br.edu.ifpr.irati.modelo.OutroTipoAtividade"/>
         <mapping class="br.edu.ifpr.irati.modelo.ProjetoEnsino"/>
-        <mapping class="br.edu.ifpr.irati.modelo.ProjetoExtensao"/>
-        <mapping class="br.edu.ifpr.irati.modelo.ProjetoPesquisa"/>
+        <mapping class="br.edu.ifpr.irati.modelo.ProjetoPesquisaExtensao"/>
         <mapping class="br.edu.ifpr.irati.modelo.Participacao"/>        
         <mapping class="br.edu.ifpr.irati.modelo.Professor"/>   
         <mapping class="br.edu.ifpr.irati.modelo.PTD"/>   
