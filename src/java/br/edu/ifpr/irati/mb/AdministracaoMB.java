@@ -59,7 +59,7 @@ public class AdministracaoMB {
 
     }
 
-    public String alterarAdministracao(Administracao administracao) {
+    public String alterarAdministracao() {
         Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
         administracaoDAO.alterar(administracaoSelecionadaParaAdministracao);
         administracaoSelecionadaParaAdministracao = new Administracao();
@@ -79,10 +79,10 @@ public class AdministracaoMB {
             administracaoDAO.alterar(administracao);
             horarioDAO.excluir(h);
         }
-        tipoAdministracaoDAO.excluir(administracao.getTipoAdministracao());
         ptd.getAdministrativas().remove(administracao);
         ptdDAO.alterar(ptd);
         administracaoDAO.excluir(administracao);
+        tipoAdministracaoDAO.excluir(administracao.getTipoAdministracao());
 
         return "CriarCorrigirPTD?faces-redirect=true";
     }

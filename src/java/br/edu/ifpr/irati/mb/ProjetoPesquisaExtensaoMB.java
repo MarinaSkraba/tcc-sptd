@@ -82,7 +82,7 @@ public class ProjetoPesquisaExtensaoMB {
 
     }
 
-    public String alterarProjetoPesquisaExtensao(ProjetoPesquisaExtensao projetoPesquisaExtensao) {
+    public String alterarProjetoPesquisaExtensao() {
         Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         projetoPesquisaExtensaoDAO.alterar(projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao);
         projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao = new ProjetoPesquisaExtensao();

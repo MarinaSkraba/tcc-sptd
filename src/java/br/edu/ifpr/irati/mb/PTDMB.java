@@ -136,9 +136,9 @@ public class PTDMB {
         }
         for (ProjetoPesquisaExtensao ppe : ptd.getProjetosPesquisaExtensao()) {
             for (Participacao part : ppe.getParticipacoes()) {
-                if(part.getRotulo().equals("AUTOR")){
-                cargaHorariaTotalProjetosPesquisaExtensaoAutor = cargaHorariaTotalProjetosPesquisaExtensaoAutor + ppe.getCargaHorariaSemanalProjetoPesquisaExtensao();
-                }else if(part.getRotulo().equals("COLABORADOR")){
+                if (part.getRotulo().equals("AUTOR")) {
+                    cargaHorariaTotalProjetosPesquisaExtensaoAutor = cargaHorariaTotalProjetosPesquisaExtensaoAutor + ppe.getCargaHorariaSemanalProjetoPesquisaExtensao();
+                } else if (part.getRotulo().equals("COLABORADOR")) {
                     cargaHorariaTotalProjetosPesquisaExtensaoColab = cargaHorariaTotalProjetosPesquisaExtensaoColab + ppe.getCargaHorariaSemanalProjetoPesquisaExtensao();
                 }
             }
@@ -158,8 +158,7 @@ public class PTDMB {
         }
     }
 
-    public String
-            abrirCriarCorrigirPTDEmBranco(Usuario usuario) {
+    public String abrirCriarCorrigirPTDEmBranco(Usuario usuario) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
         );
         Dao<Professor> professorDAOGenerico = new GenericDAO<>(Professor.class);
@@ -223,11 +222,9 @@ public class PTDMB {
         }
     }
 
-    public String
-            cancelarPTD() {
+    public String cancelarPTD() {
 
-        Dao<Administracao> adminstracaoDAO = new GenericDAO<>(PTD.class
-        );
+        Dao<Administracao> adminstracaoDAO = new GenericDAO<>(PTD.class);
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         Dao<AtividadeASerProposta> aASPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
@@ -243,46 +240,36 @@ public class PTDMB {
         Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
 
-        for (Administracao adm
-                : ptd.getAdministrativas()) {
+        for (Administracao adm : ptd.getAdministrativas()) {
 
         }
-        for (Apoio apoio
-                : ptd.getApoios()) {
+        for (Apoio apoio : ptd.getApoios()) {
 
         }
-        for (AtividadeASerProposta aASP
-                : ptd.getAtividadesASeremPropostas()) {
+        for (AtividadeASerProposta aASP : ptd.getAtividadesASeremPropostas()) {
 
         }
-        for (Aula aula
-                : ptd.getAulas()) {
+        for (Aula aula : ptd.getAulas()) {
             for (Horario h : aula.getHorariosAula()) {
 
             }
         }
-        for (ManutencaoEnsino mEnsino
-                : ptd.getManutencoesEnsino()) {
+        for (ManutencaoEnsino mEnsino : ptd.getManutencoesEnsino()) {
 
         }
-        for (OutroTipoAtividade oTA
-                : ptd.getOutrosTiposAtividades()) {
+        for (OutroTipoAtividade oTA : ptd.getOutrosTiposAtividades()) {
 
         }
-        for (ProjetoPesquisaExtensao pPesquisaExtensao
-                : ptd.getProjetosPesquisaExtensao()) {
+        for (ProjetoPesquisaExtensao pPesquisaExtensao : ptd.getProjetosPesquisaExtensao()) {
 
         }
 
         return "NotificacoesDocente";
     }
 
-    public String
-            submeterPTD() {
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
-        );
-        ptd.setEstadoPTD(
-                "AVALIACAO");
+    public String submeterPTD() {
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        ptd.setEstadoPTD("AVALIACAO");
         ptdDAOGenerico.alterar(ptd);
 
         return "/NotificacoesDocente";

@@ -1076,7 +1076,7 @@
                     </div>
 
                     <!-- Caixa para adicionar horário à Apoio Ensino -->
-                    <p:dialog header="Adicionar Horario à Manutenção de Ensino" 
+                    <p:dialog header="Adicionar Horario à Apoio ao Ensino" 
                               widgetVar="addHorarioApoioEnsinoDialog" 
                               modal="true"                              
                               showEffect="fade" 
@@ -1127,7 +1127,7 @@
                     </p:dialog>
 
                     <!-- Caixa para editar horário adicionado à Apoio Ensino -->
-                    <p:dialog header="Editar Horarios de Manutenção de Ensino" 
+                    <p:dialog header="Editar Horarios de Apoio ao Ensino" 
                               widgetVar="edtHorariosApoioEnsinoDialog" 
                               modal="true" 
                               showEffect="fade" 
@@ -1271,7 +1271,7 @@
                     <h:outputText value="Atividades administrativas" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
-
+                    
                     <br/>
                     <br/>
 
@@ -1284,12 +1284,336 @@
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar"
-                                             onclick="PF('addAdministrativasDialog').show();"/>
+                                             onclick="PF('addAdministracaoDialog').show();"/>
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"/>
                         </h:panelGrid>
                     </h:panelGrid>
+                    
+                    <!-- Caixa de adição de Administrativas -->
+                    <p:dialog header="Adicionar Atividade Administrativa" 
+                              widgetVar="addAdministracaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="TIPO DE ATIVIDADE" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{administracaoMB.tipoAdministracao.rotulo}"/>
+
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{administracaoMB.salvarAdministracao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de edição de Administrativas -->
+                    <p:dialog header="Atualizar Atividade Administrativa" 
+                              widgetVar="edtAdministracaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="TIPO ATIVIDADE" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{administracaoMB.administracaoSelecionadaParaAdministracao.tipoAdministracao.rotulo}"/>
+
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{administracaoMB.alterarAdministracao()}" 
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <div id="mostrarTabela">
+                        <!-- Mostrar atividades Administrativas -->
+                        <h:dataTable  value="#{pTDMB.ptd.administrativas}" 
+                                      var="administracao" 
+                                      style="border-spacing: 0pt;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="TIPO DE ATIVIDADE" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{administracao.tipoAdministracao.rotulo}" 
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="CARGA HORÁRIA SEMANAL" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{administracao.cargaHorariaSemanalAdministracao}"
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <!-- Tabela para títulos de horários -->
+                                    <h:outputText value="HORÁRIO"
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                    <h:panelGrid border="0"
+                                                 columns="3">
+
+                                        <h:outputText value="dia da semana" 
+                                                      styleClass="text01"
+                                                      style="font-size: large; font-weight: bold;"/>
+                                        <h:outputText value="horário início" 
+                                                      styleClass="text01"
+                                                      style="font-size: large; font-weight: bold;"/>
+                                        <h:outputText value="horário término" 
+                                                      styleClass="text01"
+                                                      style="font-size: large; font-weight: bold;"/>
+
+                                    </h:panelGrid>
+                                </f:facet>
+
+                                <!-- Tabela para o conteúdo de horários -->
+                                <h:dataTable  value="#{administracao.horariosAdministracao}" 
+                                              var="horarioAdministracao" 
+                                              headerClass="text-center"
+                                              footerClass="text-center"
+                                              style="width: 100%;">
+
+                                    <h:column>
+                                        <h:outputText value="#{horarioAdministracao.diaSemana}" 
+                                                      styleClass="text01"
+                                                      style="font-size: large;"/>
+                                    </h:column>
+                                    <h:column>
+                                        <h:outputText value="#{horarioAdministracao.horaInicio}"
+                                                      styleClass="text01"
+                                                      style="font-size: large">
+                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <h:outputText value="#{horarioAdministracao.horaTermino}"
+                                                      styleClass="text01"
+                                                      style="font-size: large">
+                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                        </h:outputText>
+                                    </h:column>
+                                    <f:facet name="footer">
+
+                                        <p:commandButton styleClass="botaoCinza" 
+                                                         value="..."
+                                                         id="opPHorarioAdministracao"
+                                                         action="#{administracaoMB.setAdministracaoSelecionadaParaHorario(administracao)}"
+                                                         update="@(.ui-dialog)"/>
+
+                                        <!-- Caixa para seleção de ação referente à Horário -->
+                                        <p:overlayPanel id="opcoesHorarioAdministracao" 
+                                                        for="opPHorarioAdministracao" 
+                                                        hideEffect="fade" >
+                                            <p:commandButton value="Adicionar"
+                                                             styleClass="opMenuCRUD"
+                                                             onclick="PF('addHorarioAdministracaoDialog').show();"
+                                                             style="margin: 0px -10px;"/>
+                                            <br/>
+                                            <p:commandButton value="Editar"
+                                                             styleClass="opMenuCRUD"
+                                                             onclick="PF('edtHorariosAdministracaoDialog').show();"
+                                                             style="margin: 5px -10px 0px;"
+                                                             />
+
+                                        </p:overlayPanel>
+
+                                    </f:facet>
+
+                                </h:dataTable>
+
+                            </h:column>
+                            <h:column>
+
+                                <p:commandButton styleClass="botaoAzul" 
+                                                 value="..." 
+                                                 action="#{administracaoMB.setAdministracaoSelecionadaParaAdministracao(administracao)}"
+                                                 id="opPAtividadeAdministraca0"
+                                                 update="@(.ui-dialog)"/>
+
+                                <!-- Caixa para seleção de ação referente à Administracao -->
+                                <p:overlayPanel id="opcoesAdiministracao" 
+                                                for="opPAtividadeAdministraca0" 
+                                                hideEffect="fade">
+                                    <p:commandButton value="Atualizar"
+                                                     styleClass="opMenuCRUD"
+                                                     action="#{administracaoMB.setAdministracaoSelecionadaParaAdministracao(administracao)}"
+                                                     onclick="PF('edtAdministracaoDialog').show();"
+                                                     style="margin: 0px -10px;"/>
+                                    <br/>
+                                    <p:commandButton value="Deletar"
+                                                     styleClass="opMenuCRUD"
+                                                     ajax="false" 
+                                                     immediate="true"
+                                                     action="#{administracaoMB.excluirAdministracao(administracao, pTDMB.ptd)}"
+                                                     style="margin: 5px -10px 0px;"/>
+
+                                </p:overlayPanel>
+
+                            </h:column>
+
+                        </h:dataTable>
+                    </div>
+                    
+                    <!-- Caixa para adicionar horário à Administracao -->
+                    <p:dialog header="Adicionar Horario à Administração" 
+                              widgetVar="addHorarioAdministracaoDialog" 
+                              modal="true"                              
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false"
+                              >
+
+                        <h:outputText value="DIA" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+
+                        <p:selectOneMenu id="selectDiaSemanaAdministracao" 
+                                         value="#{horarioMB.horarioAdministracao.diaSemana}">
+
+                            <f:selectItems value="#{horarioMB.diasSemana}" 
+                                           var="diaSemanaAdministracao" 
+                                           itemValue="#{diaSemanaAdministracao}"
+                                           itemLabel="#{diaSemanaAdministracao}" />
+                        </p:selectOneMenu>
+
+                        <h:outputText value="HORÁRIO INÍCIO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -30px 25px;"/>
+                        <br/>
+                        <br> <p:calendar id="horaInicioAdministracao" 
+                                         value="#{horarioMB.horarioAdministracao.horaInicio}" 
+                                         pattern="HH:mm" 
+                                         size="5"
+                                         timeOnly="true"/></br>
+
+                        <h:outputText value="HORÁRIO TÉRMINO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -30px 25px;"/>
+                        <br/>
+                        <br> <p:calendar id="horaTerminoAdministracao" 
+                                         value="#{horarioMB.horarioAdministracao.horaTermino}" 
+                                         pattern="HH:mm"
+                                         size="5"
+                                         timeOnly="true"/>
+                        </br>
+
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{horarioMB.salvarHorarioAtividade(administracaoMB.administracaoSelecionadaParaHorario, usuarioMB.usuarioLogado)}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa para editar horário adicionado à Administracao -->
+                    <p:dialog header="Editar Horarios de Administracao" 
+                              widgetVar="edtHorariosAdministracaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:dataTable  value="#{administracaoMB.administracaoSelecionadaParaHorario.horariosAdministracao}" 
+                                      var="horarioSelecionadoEdicaoAdministracao" 
+                                      style="width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <f:facet name="header">
+                                <h:outputText value="" />
+                            </f:facet>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="DIA" 
+                                                  styleClass="text01"/>
+                                </f:facet>
+
+                                <p:selectOneMenu id="selectDiaSemanaEdicaoAdministracao" 
+                                                 value="#{horarioSelecionadoEdicaoAdministracao.diaSemana}">
+
+                                    <f:selectItems value="#{horarioMB.diasSemana}" 
+                                                   var="diaSemana" 
+                                                   itemValue="#{diaSemana}"
+                                                   itemLabel="#{diaSemana}" />
+
+                                </p:selectOneMenu>
+
+                            </h:column>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="INÍCIO" 
+                                                  styleClass="text01"/>
+                                </f:facet>
+
+                                <p:calendar id="horaInicioEdicaoAdministracao" 
+                                            value="#{horarioSelecionadoEdicaoAdministracao.horaInicio}" 
+                                            pattern="HH:mm" 
+                                            size="5"
+                                            timeOnly="true"/>
+
+                            </h:column>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="TÉRMINO" 
+                                                  styleClass="text01"/>
+                                </f:facet>
+
+                                <p:calendar id="horaTerminoEdicaoAdministracao" 
+                                            value="#{horarioSelecionadoEdicaoAdministracao.horaTermino}" 
+                                            pattern="HH:mm" 
+                                            size="5"
+                                            timeOnly="true"/>
+
+                            </h:column>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+
+                                <p:commandButton styleClass="botaoCinza" 
+                                                 style="float: left; font-size: 12pt;" 
+                                                 value="X" 
+                                                 ajax="false" 
+                                                 immediate="true"
+                                                 action="#{horarioMB.excluirHorarioAtividade(horarioSelecionadoEdicaoAdministracao, administracaoMB.administracaoSelecionadaParaHorario)}"/>
+
+                            </h:column>
+
+                        </h:dataTable>
+
+                        <br/>
+                        <h:commandButton value="Salvar edição" 
+                                         action="#{horarioMB.alterarHorarioAtividade(administracaoMB.administracaoSelecionadaParaHorario.horariosAdministracao, administracaoMB.administracaoSelecionadaParaHorario)}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
 
                     <br/>
 
@@ -1345,32 +1669,6 @@
                         </h:panelGrid>
                     </h:panelGrid>
                     <br/>
-
-                    <!-- Mostrar atividades que pretende propor -->
-                    <h:dataTable  value="#{pTDMB.ptd.atividadesASeremPropostas}" 
-                                  var="atividadeAPropor" 
-                                  style="border-spacing: 0pt;"
-                                  headerClass="text-center"
-                                  footerClass="text-center">
-
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="ATIVIDADE" 
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
-
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="PERIODICIDADE" 
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
-
-                        </h:column>
-
-                    </h:dataTable>
 
                     <br/>
 
@@ -1481,7 +1779,7 @@
 
                         <h:commandButton value="Sair" 
                                          action="#{pTDMB.cancelarPTD()}"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoVermelho"/>
 
                     </p:dialog>
 

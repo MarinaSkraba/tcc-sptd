@@ -43,7 +43,7 @@ public class OutroTipoAtividadeMB {
         outroTipoAtividade = new OutroTipoAtividade();
     }
 
-    public String alterarOutroTipoAtividade(OutroTipoAtividade outroTipoAtividade) {
+    public String alterarOutroTipoAtividade() {
         Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
         outroTipoAtividadeDAO.alterar(outroTipoAtividadeSelecionadaParaOutroTipoAtividade);
         outroTipoAtividadeSelecionadaParaOutroTipoAtividade = new OutroTipoAtividade();

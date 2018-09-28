@@ -45,7 +45,7 @@ public class AtividadeASerPropostaMB {
 
     }
 
-    public String alterarAtividadeASerProposta(AtividadeASerProposta atividadeASerProposta) {
+    public String alterarAtividadeASerProposta() {
         Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
         atividadeASerPropostaDAO.alterar(atividadeASerPropostaSelecionadaParaAtividadeASerProposta);
         atividadeASerPropostaSelecionadaParaAtividadeASerProposta = new AtividadeASerProposta();
