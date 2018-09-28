@@ -31,7 +31,7 @@ public class ProjetoPesquisaExtensaoConverter implements Converter {
             Object value) {
         ProjetoPesquisaExtensao projetoPesquisaExtensao = (ProjetoPesquisaExtensao) value;
         if (projetoPesquisaExtensao != null) {
-            return String.valueOf(projetoPesquisaExtensao.getIdProjetoExtensao());
+            return String.valueOf(projetoPesquisaExtensao.getIdProjetoPesquisaExtensao());
         } else {
             return null;
         }
