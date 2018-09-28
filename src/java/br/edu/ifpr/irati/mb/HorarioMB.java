@@ -147,7 +147,7 @@ public class HorarioMB {
         }
         if (object instanceof ProjetoPesquisaExtensao) {
             Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-            ((ProjetoPesquisaExtensao) object).setCargaHorariaSemanalProjetoExtensao(((ProjetoPesquisaExtensao) object).getCargaHorariaSemanalProjetoExtensao() + cargaHoraNovoHorario);
+            ((ProjetoPesquisaExtensao) object).setCargaHorariaSemanalProjetoPesquisaExtensao(((ProjetoPesquisaExtensao) object).getCargaHorariaSemanalProjetoPesquisaExtensao()+ cargaHoraNovoHorario);
             ((ProjetoPesquisaExtensao) object).getHorariosProjetoExtensao().add(horarioAtividade);
             horarioDAO.salvar(((ProjetoPesquisaExtensao) object).getHorariosProjetoExtensao().get(((ProjetoPesquisaExtensao) object).getHorariosProjetoExtensao().size() - 1));
             projetoPesquisaExtensaoDAO.alterar(((ProjetoPesquisaExtensao) object));
@@ -226,7 +226,7 @@ public class HorarioMB {
         }
         if (object instanceof ProjetoPesquisaExtensao) {
             Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-            ((ProjetoPesquisaExtensao) object).setCargaHorariaSemanalProjetoExtensao(cargaHoraNovoHorario);
+            ((ProjetoPesquisaExtensao) object).setCargaHorariaSemanalProjetoPesquisaExtensao(cargaHoraNovoHorario);
             projetoPesquisaExtensaoDAO.alterar((ProjetoPesquisaExtensao) object);
         }
         if (object instanceof Administracao) {
@@ -293,7 +293,7 @@ public class HorarioMB {
         }
         if (object instanceof ProjetoPesquisaExtensao) {
             Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-            ((ProjetoPesquisaExtensao) object).setCargaHorariaSemanalProjetoExtensao(((ProjetoPesquisaExtensao) object).getCargaHorariaSemanalProjetoExtensao() - cargaHoraNovoHorario);
+            ((ProjetoPesquisaExtensao) object).setCargaHorariaSemanalProjetoPesquisaExtensao(((ProjetoPesquisaExtensao) object).getCargaHorariaSemanalProjetoPesquisaExtensao()- cargaHoraNovoHorario);
             projetoPesquisaExtensaoDAO.alterar((ProjetoPesquisaExtensao) object);
             ((ProjetoPesquisaExtensao) object).getHorariosProjetoExtensao().remove(horario);
             projetoPesquisaExtensaoDAO.alterar(((ProjetoPesquisaExtensao) object));
