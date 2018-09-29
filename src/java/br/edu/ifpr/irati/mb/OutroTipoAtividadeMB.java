@@ -23,6 +23,7 @@ public class OutroTipoAtividadeMB {
     private List<OutroTipoAtividade> outrosTiposAtividades;
     private Horario horario;
     private List<Horario> horarios;
+    private List<String> periodicidade;
 
     public OutroTipoAtividadeMB() {
 
@@ -30,7 +31,12 @@ public class OutroTipoAtividadeMB {
         outroTipoAtividadeSelecionadaParaHorario = new OutroTipoAtividade();
         outroTipoAtividade = new OutroTipoAtividade();
         horario = new Horario();
-        outrosTiposAtividades = new ArrayList();
+        outrosTiposAtividades = new ArrayList<>();
+        periodicidade = new ArrayList<>();
+        periodicidade.add("Diariamente");
+        periodicidade.add("Semanalmente");
+        periodicidade.add("Mensalmente");
+        
     }
 
     public void salvarOutroTipoAtividade(Serializable idUsuario, PTD ptd) {
@@ -67,11 +73,6 @@ public class OutroTipoAtividadeMB {
         outroTipoAtividadeDAO.excluir(outroTipoAtividade);
 
         return "CriarCorrigirPTD?faces-redirect=true";
-    }
-
-    public void adicionarHorarioOutroTipoAtividade() {
-        horarios.add(horario);
-        horario = new Horario();
     }
 
     public OutroTipoAtividade getOutroTipoAtividade() {
@@ -120,6 +121,20 @@ public class OutroTipoAtividadeMB {
 
     public void setOutroTipoAtividadeSelecionadaParaHorario(OutroTipoAtividade outroTipoAtividadeSelecionadaParaHorario) {
         this.outroTipoAtividadeSelecionadaParaHorario = outroTipoAtividadeSelecionadaParaHorario;
+    }
+
+    /**
+     * @return the periodicidade
+     */
+    public List<String> getPeriodicidade() {
+        return periodicidade;
+    }
+
+    /**
+     * @param periodicidade the periodicidade to set
+     */
+    public void setPeriodicidade(List<String> periodicidade) {
+        this.periodicidade = periodicidade;
     }
 
 }
