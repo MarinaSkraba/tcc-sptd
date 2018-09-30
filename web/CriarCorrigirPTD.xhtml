@@ -1238,13 +1238,71 @@
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar" 
-                                             onclick="PF('addPesquisaExtensaoAutorDialog').show();"/>
+                                             onclick="PF('diferenciacaoCadastroAtividadeProjetoPesquisaExtensao').show();"/>
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"/>
 
                         </h:panelGrid>
                     </h:panelGrid>
+                    
+                    <!-- Caixa de diferenciação do tipo de criação de atividade de projeto (autor): Com um novo projeto ou com um ja cadastrado -->
+                    <p:dialog header="Adicionar Atividade de Projeto" 
+                              widgetVar="diferenciacaoCadastroAtividadeProjetoPesquisaExtensao" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Deseja cadastrar uma nova atividade com um projeto de pesquisa e/ou extensão" 
+                                      styleClass="text01"
+                                      style="font-size: large; width: 400px;"/>
+                        <p:commandButton styleClass="botaoCinza" 
+                                         value="já cadastrado nesse sistema"
+                                         action="#{projetoPesquisaExtensaoMB.atualizarListaProjetosCadastradosPorProfessor(usuarioMB.usuarioLogado.idUsuario)}"
+                                         onclick="PF('').show();"/>
+
+                        <p:commandButton styleClass="botaoCinza" 
+                                         value="novo nesse sistema"
+                                         onclick="PF('').show();"/>
+
+                    </p:dialog>
+                    
+                    <!-- Caixa de adição de Projeto Pesquisa Extensão (Autor) com Projeto Novo -->
+                    <!--
+                    <p:dialog header="Adicionar Projeto Pesquisa Extensão" 
+                              widgetVar="addProjetoPesquisaExtensaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="PROCESSO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensao}"/>
+                        <br/>
+                        <h:outputText value="TÍTULO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensao.tituloProcesso}"/>
+                        <br/>
+                        <h:outputText value="PREVISÃO DE CONCLUSÃO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:calendar value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensao.previsaoConclusao}" mode="popup" />
+                        <br/>
+
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{projetoPesquisaExtensaoMB.salvarAtividadeProjetoNovoPesquisaExtensaoAutor(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    -->
 
                     <br/>
 

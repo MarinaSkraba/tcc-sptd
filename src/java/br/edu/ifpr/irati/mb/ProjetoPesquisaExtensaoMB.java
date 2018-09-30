@@ -10,6 +10,7 @@ import br.edu.ifpr.irati.modelo.Participacao;
 import br.edu.ifpr.irati.modelo.Professor;
 import br.edu.ifpr.irati.modelo.ProjetoPesquisaExtensao;
 import br.edu.ifpr.irati.modelo.Usuario;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -23,7 +24,8 @@ public class ProjetoPesquisaExtensaoMB {
     private ProjetoPesquisaExtensao projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao;
     private ProjetoPesquisaExtensao projetoPesquisaExtensaoSelecionadoParaHorario;
     private ProjetoPesquisaExtensao projetoPesquisaExtensao;
-    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensao;
+    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoCadastrados;
+    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoCadastradosPorProfessor;
     private Horario horario;
     private List<Horario> horarios;
     private Participacao participacao;
@@ -41,9 +43,11 @@ public class ProjetoPesquisaExtensaoMB {
         projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         horario = new Horario();
         participacao = new Participacao();
-        projetosPesquisaExtensao = new ArrayList();
+        projetosPesquisaExtensaoCadastrados = new ArrayList();
         Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-        projetosPesquisaExtensao= projetoPesquisaExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class);        
+        projetosPesquisaExtensaoCadastrados = projetoPesquisaExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class); 
+        projetosPesquisaExtensaoCadastradosPorProfessor = new ArrayList();
+        
     }
 
     public ProjetoPesquisaExtensaoMB(String tipoProjetoAutor, String tipoProjetoColab) {
@@ -52,7 +56,7 @@ public class ProjetoPesquisaExtensaoMB {
         this.tipoProjetoColab = tipoProjetoColab;
     }
 
-    public void salvarProjetoPesquisaExtensaoAutor(Professor professorAutor, PTD ptd) {
+    public void salvarAtividadeProjetoNovoPesquisaExtensaoAutor(Professor professorAutor, PTD ptd) {
 
         Dao<ProjetoPesquisaExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
@@ -67,6 +71,7 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
+        
     }
     
     public void salvarColaboracaoPesquisaExtensao(Professor professorColaborador) {
@@ -119,6 +124,11 @@ public class ProjetoPesquisaExtensaoMB {
         projetoPesquisaExtensaoDAO.excluir(projetoPesquisaExtensao);
 
         return "CriarCorrigirPTD?faces-redirect=true";
+    }
+    
+    public void atualizarListaProjetosCadastradosPorProfessor(Serializable idUsuario){
+        IProjetoPesquisaExtensaoDao projetoPesquisaExtensaoDAO = new ProjetoPesquisaExtensaoDAO();
+        projetosPesquisaExtensaoCadastradosPorProfessor = projetoPesquisaExtensaoDAO.buscarProjetosExtensaoPorProfessor(idUsuario);
     }
 
     public Horario getHorario() {
@@ -193,12 +203,12 @@ public class ProjetoPesquisaExtensaoMB {
         this.projetoPesquisaExtensao = projetoPesquisaExtensao;
     }
 
-    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensao() {
-        return projetosPesquisaExtensao;
+    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoCadastrados() {
+        return projetosPesquisaExtensaoCadastrados;
     }
 
-    public void setProjetosPesquisaExtensao(List<ProjetoPesquisaExtensao> projetosPesquisaExtensao) {
-        this.projetosPesquisaExtensao = projetosPesquisaExtensao;
+    public void setProjetosPesquisaExtensaoCadastrados(List<ProjetoPesquisaExtensao> projetosPesquisaExtensao) {
+        this.projetosPesquisaExtensaoCadastrados = projetosPesquisaExtensao;
     }
 
     public ProjetoPesquisaExtensao getProjetoPesquisaExtensaoSelecionado() {
@@ -207,5 +217,19 @@ public class ProjetoPesquisaExtensaoMB {
 
     public void setProjetoPesquisaExtensaoSelecionado(ProjetoPesquisaExtensao projetoPesquisaExtensaoSelecionado) {
         this.projetoPesquisaExtensaoSelecionado = projetoPesquisaExtensaoSelecionado;
+    }
+
+    /**
+     * @return the projetosPesquisaExtensaoCadastradosPorProfessor
+     */
+    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoCadastradosPorProfessor() {
+        return projetosPesquisaExtensaoCadastradosPorProfessor;
+    }
+
+    /**
+     * @param projetosPesquisaExtensaoCadastradosPorProfessor the projetosPesquisaExtensaoCadastradosPorProfessor to set
+     */
+    public void setProjetosPesquisaExtensaoCadastradosPorProfessor(List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoCadastradosPorProfessor) {
+        this.projetosPesquisaExtensaoCadastradosPorProfessor = projetosPesquisaExtensaoCadastradosPorProfessor;
     }
 }
