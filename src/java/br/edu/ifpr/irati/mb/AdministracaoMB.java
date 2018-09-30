@@ -87,11 +87,6 @@ public class AdministracaoMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public void adicionarHorarioAdministracao() {
-        horarios.add(horario);
-        horario = new Horario();
-    }
-
     public Horario getHorario() {
         return horario;
     }

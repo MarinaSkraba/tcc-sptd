@@ -121,11 +121,6 @@ public class ProjetoPesquisaExtensaoMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public void adicionarHorario() {
-        horarios.add(horario);
-        horario = new Horario();
-    }
-
     public Horario getHorario() {
         return horario;
     }

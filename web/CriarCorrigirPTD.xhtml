@@ -2023,12 +2023,374 @@
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar"
-                                             onclick="PF('addAtividadesProporDialog').show();"/>
+                                             onclick="PF('addAtividadesAProporDialog').show();"/>
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"/>
                         </h:panelGrid>
                     </h:panelGrid>
+                    
+                    <!-- Caixa de adição de Atividade à Propor -->
+                    <p:dialog header="Adicionar Atividade à Propor" 
+                              widgetVar="addAtividadesAProporDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="ATIVIDADE" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{atividadeASerPropostaMB.atividadeASerProposta.rotulo}"/>
+                        
+                        <h:outputText value="PERIODICIDADE" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:selectOneMenu id="selectPeriodicidadeAtividadeAPropor" 
+                                         value="#{atividadeASerPropostaMB.atividadeASerProposta.periodicidade}">
+
+                            <f:selectItems value="#{outroTipoAtividadeMB.periodicidade}" 
+                                           var="periodicidadeAtividadeAPropor" 
+                                           itemValue="#{periodicidadeAtividadeAPropor}"
+                                           itemLabel="#{periodicidadeAtividadeAPropor}" />
+
+                        </p:selectOneMenu>
+
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{atividadeASerPropostaMB.salvarAtividadeASerProposta(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de edição de Atividades à Propor -->
+                    <p:dialog header="Atualizar Atividade à Propor" 
+                              widgetVar="edtAtividadesAProporDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="ATIVIDADE" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaAtividadeASerProposta.rotulo}"/>
+                        
+                        <h:outputText value="PERIODICIDADE" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:selectOneMenu id="selectEdicaoPeriodicidadeAtividadeAPropor" 
+                                         value="#{atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaAtividadeASerProposta.periodicidade}">
+
+                            <f:selectItems value="#{atividadeASerPropostaMB.periodicidade}" 
+                                           var="periodicidadeAtividadeAPropor" 
+                                           itemValue="#{periodicidadeAtividadeAPropor}"
+                                           itemLabel="#{periodicidadeAtividadeAPropor}" />
+
+                        </p:selectOneMenu>
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{atividadeASerPropostaMB.alterarAtividadeASerProposta()}" 
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <div id="mostrarTabela">
+                        <!-- Mostrar atividades Atividades à Propor -->
+                        <h:dataTable  value="#{pTDMB.ptd.atividadesASeremPropostas}" 
+                                      var="atividadeAPropor" 
+                                      style="border-spacing: 0pt;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ATIVIDADE" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{atividadeAPropor.rotulo}" 
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PERIODICIDADE" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{atividadeAPropor.periodicidade}" 
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="CARGA HORÁRIA SEMANAL" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{atividadeAPropor.cargaHorariaSemanalAtividadeASerProposta}"
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <!-- Tabela para títulos de horários -->
+                                    <h:outputText value="HORÁRIO"
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                    <h:panelGrid border="0"
+                                                 columns="3">
+
+                                        <h:outputText value="dia da semana" 
+                                                      styleClass="text01"
+                                                      style="font-size: large; font-weight: bold;"/>
+                                        <h:outputText value="horário início" 
+                                                      styleClass="text01"
+                                                      style="font-size: large; font-weight: bold;"/>
+                                        <h:outputText value="horário término" 
+                                                      styleClass="text01"
+                                                      style="font-size: large; font-weight: bold;"/>
+
+                                    </h:panelGrid>
+                                </f:facet>
+
+                                <!-- Tabela para o conteúdo de horários -->
+                                <h:dataTable  value="#{atividadeAPropor.horariosAtividadesASerProposta}" 
+                                              var="horarioAtividadeAPropor" 
+                                              headerClass="text-center"
+                                              footerClass="text-center"
+                                              style="width: 100%;">
+
+                                    <h:column>
+                                        <h:outputText value="#{horarioAtividadeAPropor.diaSemana}" 
+                                                      styleClass="text01"
+                                                      style="font-size: large;"/>
+                                    </h:column>
+                                    <h:column>
+                                        <h:outputText value="#{horarioAtividadeAPropor.horaInicio}"
+                                                      styleClass="text01"
+                                                      style="font-size: large">
+                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <h:outputText value="#{horarioAtividadeAPropor.horaTermino}"
+                                                      styleClass="text01"
+                                                      style="font-size: large">
+                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                        </h:outputText>
+                                    </h:column>
+                                    <f:facet name="footer">
+
+                                        <p:commandButton styleClass="botaoCinza" 
+                                                         value="..."
+                                                         id="opPHorarioAtividadeAPropor"
+                                                         action="#{atividadeASerPropostaMB.setAtividadeASerPropostaSelecionadaParaHorario(atividadeAPropor)}"
+                                                         update="@(.ui-dialog)"/>
+
+                                        <!-- Caixa para seleção de ação referente à Horário -->
+                                        <p:overlayPanel id="opcoesHorarioAtividadeAPropor" 
+                                                        for="opPHorarioAtividadeAPropor" 
+                                                        hideEffect="fade" >
+                                            <p:commandButton value="Adicionar"
+                                                             styleClass="opMenuCRUD"
+                                                             onclick="PF('addHorariosAtividadesAProporDialog').show();"
+                                                             style="margin: 0px -10px;"/>
+                                            <br/>
+                                            <p:commandButton value="Editar"
+                                                             styleClass="opMenuCRUD"
+                                                             onclick="PF('edtHorariosAtividadesAProporDialog').show();"
+                                                             style="margin: 5px -10px 0px;"
+                                                             />
+
+                                        </p:overlayPanel>
+
+                                    </f:facet>
+
+                                </h:dataTable>
+
+                            </h:column>
+                            <h:column>
+
+                                <p:commandButton styleClass="botaoAzul" 
+                                                 value="..." 
+                                                 action="#{atividadeASerPropostaMB.setAtividadeASerPropostaSelecionadaParaAtividadeASerProposta(atividadeAPropor)}"
+                                                 id="opPAtividadeAPropor"
+                                                 update="@(.ui-dialog)"/>
+
+                                <!-- Caixa para seleção de ação referente à Atividade à Propor -->
+                                <p:overlayPanel id="opcoesAtividadeAPropor" 
+                                                for="opPAtividadeAPropor" 
+                                                hideEffect="fade">
+                                    <p:commandButton value="Atualizar"
+                                                     styleClass="opMenuCRUD"
+                                                     action="#{atividadeASerPropostaMB.setAtividadeASerPropostaSelecionadaParaAtividadeASerProposta(atividadeAPropor)}"
+                                                     onclick="PF('edtAtividadesAProporDialog').show();"
+                                                     style="margin: 0px -10px;"/>
+                                    <br/>
+                                    <p:commandButton value="Deletar"
+                                                     styleClass="opMenuCRUD"
+                                                     ajax="false" 
+                                                     immediate="true"
+                                                     action="#{atividadeASerPropostaMB.excluirAtividadeASerProposta(atividadeAPropor, pTDMB.ptd)}"
+                                                     style="margin: 5px -10px 0px;"/>
+
+                                </p:overlayPanel>
+
+                            </h:column>
+
+                        </h:dataTable>
+                    </div>
+
+                    <!-- Caixa para adicionar horário à Atividades a propor -->
+                    <p:dialog header="Adicionar Horario à Atividades à Propor" 
+                              widgetVar="addHorariosAtividadesAProporDialog" 
+                              modal="true"                              
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false"
+                              >
+
+                        <h:outputText value="DIA" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+
+                        <p:selectOneMenu id="selectDiaSemanaAtividadeAPropor" 
+                                         value="#{horarioMB.horarioAtividadeASerProposta.diaSemana}">
+
+                            <f:selectItems value="#{horarioMB.diasSemana}" 
+                                           var="diaSemanaAtividadeAPropor" 
+                                           itemValue="#{diaSemanaAtividadeAPropor}"
+                                           itemLabel="#{diaSemanaAtividadeAPropor}" />
+                        </p:selectOneMenu>
+
+                        <h:outputText value="HORÁRIO INÍCIO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -30px 25px;"/>
+                        <br/>
+                        <br> <p:calendar id="horaInicioAtividadeAPropor" 
+                                         value="#{horarioMB.horarioAtividadeASerProposta.horaInicio}" 
+                                         pattern="HH:mm" 
+                                         size="5"
+                                         timeOnly="true"/></br>
+
+                        <h:outputText value="HORÁRIO TÉRMINO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -30px 25px;"/>
+                        <br/>
+                        <br> <p:calendar id="horaTerminoAtividadeAPropor" 
+                                         value="#{horarioMB.horarioAtividadeASerProposta.horaTermino}" 
+                                         pattern="HH:mm"
+                                         size="5"
+                                         timeOnly="true"/>
+                        </br>
+
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{horarioMB.salvarHorarioAtividade(atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaHorario, usuarioMB.usuarioLogado)}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa para editar horário adicionado à Atividades à Propor -->
+                    <p:dialog header="Editar Horarios de Atividades à Propor" 
+                              widgetVar="edtHorariosAtividadesAProporDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:dataTable  value="#{atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaHorario.horariosAtividadesASerProposta}" 
+                                      var="horarioSelecionadoEdicaoAtividadeAPropor" 
+                                      style="width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <f:facet name="header">
+                                <h:outputText value="" />
+                            </f:facet>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="DIA" 
+                                                  styleClass="text01"/>
+                                </f:facet>
+
+                                <p:selectOneMenu id="selectDiaSemanaEdicaoAtividadeAPropor" 
+                                                 value="#{horarioSelecionadoEdicaoAtividadeAPropor.diaSemana}">
+
+                                    <f:selectItems value="#{horarioMB.diasSemana}" 
+                                                   var="diaSemana" 
+                                                   itemValue="#{diaSemana}"
+                                                   itemLabel="#{diaSemana}" />
+
+                                </p:selectOneMenu>
+
+                            </h:column>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="INÍCIO" 
+                                                  styleClass="text01"/>
+                                </f:facet>
+
+                                <p:calendar id="horaInicioEdicaoAtividadeAPropor" 
+                                            value="#{horarioSelecionadoEdicaoAtividadeAPropor.horaInicio}" 
+                                            pattern="HH:mm" 
+                                            size="5"
+                                            timeOnly="true"/>
+
+                            </h:column>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="TÉRMINO" 
+                                                  styleClass="text01"/>
+                                </f:facet>
+
+                                <p:calendar id="horaTerminoEdicaoAtividadeAPropor" 
+                                            value="#{horarioSelecionadoEdicaoAtividadeAPropor.horaTermino}" 
+                                            pattern="HH:mm" 
+                                            size="5"
+                                            timeOnly="true"/>
+
+                            </h:column>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+
+                                <p:commandButton styleClass="botaoCinza" 
+                                                 style="float: left; font-size: 12pt;" 
+                                                 value="X" 
+                                                 ajax="false" 
+                                                 immediate="true"
+                                                 action="#{horarioMB.excluirHorarioAtividade(horarioSelecionadoEdicaoAtividadeAPropor, atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaHorario)}"/>
+
+                            </h:column>
+
+                        </h:dataTable>
+
+                        <br/>
+                        <h:commandButton value="Salvar edição" 
+                                         action="#{horarioMB.alterarHorarioAtividade(atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaHorario.horariosAtividadesASerProposta, atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaHorario)}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
                     <br/>
 
                     <br/>
@@ -2133,7 +2495,7 @@
                                       styleClass="text01"
                                       style="font-size: large; font-weight: bold; width: 400px;"/>
                         <p:commandButton styleClass="botaoCinza" 
-                                         value="Salvar e sair" 
+                                         value="Manter e sair" 
                                          ajax="false" 
                                          immediate="true"
                                          action="/NotificacoesDocente"/>

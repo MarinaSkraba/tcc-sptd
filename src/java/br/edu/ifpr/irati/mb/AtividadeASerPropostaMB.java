@@ -23,6 +23,7 @@ public class AtividadeASerPropostaMB {
     private List<AtividadeASerProposta> atividadesASeremPropostas;
     private Horario horario;
     private List<Horario> horarios;
+    private List<String> periodicidade;
 
     public AtividadeASerPropostaMB() {
 
@@ -31,6 +32,10 @@ public class AtividadeASerPropostaMB {
         atividadeASerProposta = new AtividadeASerProposta();
         horario = new Horario();
         atividadesASeremPropostas = new ArrayList();
+        periodicidade = new ArrayList<>();
+        periodicidade.add("Diariamente");
+        periodicidade.add("Semanalmente");
+        periodicidade.add("Mensalmente");
     }
 
     public void salvarAtividadeASerProposta(Serializable idUsuario, PTD ptd) {
@@ -69,11 +74,6 @@ public class AtividadeASerPropostaMB {
         atividadeASerPropostaDAO.excluir(atividadeASerProposta);
 
         return "CriarCorrigirPTD?faces-redirect=true";
-    }
-
-    public void adicionarHorarioAtividadeASerProposta() {
-        horarios.add(horario);
-        horario = new Horario();
     }
 
     public AtividadeASerProposta getAtividadeASerProposta() {
@@ -122,6 +122,20 @@ public class AtividadeASerPropostaMB {
 
     public void setAtividadeASerPropostaSelecionadaParaHorario(AtividadeASerProposta atividadeASerPropostaSelecionadaParaHorario) {
         this.atividadeASerPropostaSelecionadaParaHorario = atividadeASerPropostaSelecionadaParaHorario;
+    }
+
+    /**
+     * @return the periodicidade
+     */
+    public List<String> getPeriodicidade() {
+        return periodicidade;
+    }
+
+    /**
+     * @param periodicidade the periodicidade to set
+     */
+    public void setPeriodicidade(List<String> periodicidade) {
+        this.periodicidade = periodicidade;
     }
 
 }

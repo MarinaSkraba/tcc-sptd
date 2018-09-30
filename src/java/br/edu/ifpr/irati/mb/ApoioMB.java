@@ -85,11 +85,6 @@ public class ApoioMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public void adicionarHorarioApoio() {
-        horarios.add(horario);
-        horario = new Horario();
-    }
-
     public Apoio getApoio() {
         return apoio;
     }
