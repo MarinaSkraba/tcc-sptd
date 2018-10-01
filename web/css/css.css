@@ -145,6 +145,14 @@ body{
     justify-content: center;
     align-items: center;
 }
+#erros{
+    width: auto;
+    border-radius: 10px;
+    border-color: #C92345;
+    border-style: solid;
+    border-width: thin;
+    background-color: #E3BCBC;
+}
 #mostrarTabela{
     overflow-x: auto;
 }

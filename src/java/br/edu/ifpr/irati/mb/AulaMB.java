@@ -33,6 +33,7 @@ public class AulaMB {
     private int NumeroSemanas;
     private double HorasAulaTotalEdicao;
     private int NumeroSemanasEdicao;
+    private List<String> errosTabelaAula;
 
     public AulaMB() {
 
@@ -47,6 +48,7 @@ public class AulaMB {
         NumeroSemanas = 0;
         HorasAulaTotalEdicao = 0;
         NumeroSemanasEdicao = 0;
+        errosTabelaAula = new ArrayList<>();
 
     }
 
@@ -55,7 +57,12 @@ public class AulaMB {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aula.setTipoOferta(tipoOfertaSelecionado);
         aula.setCurso(cursoSelecionado);
-        aula.setCargaHorariaTotal(HorasAulaTotal / NumeroSemanas);
+        if (NumeroSemanas != 0) {
+            aula.setCargaHorariaTotal(HorasAulaTotal / NumeroSemanas);
+        } else {
+            aula.setCargaHorariaTotal(0);
+            errosTabelaAula.add("Um valor fornecido para o número de semanas está incorreto");
+        }
         aulaDAO.salvar(aula);
         aula = aulaDAO.buscarTodos(Aula.class).get(aulaDAO.buscarTodos(Aula.class).size() - 1);
         ptd.getAulas().add(aula);
@@ -94,6 +101,18 @@ public class AulaMB {
         aulaDAO.excluir(aula);
 
         return "CriarCorrigirPTD?faces-redirect=true";
+    }
+
+    public void verificarErrosAula() {
+
+    }
+
+    public int verificarListaErros(List<String> erros) {
+        if (erros.isEmpty()) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     public Aula getAula() {
@@ -230,6 +249,20 @@ public class AulaMB {
      */
     public void setNumeroSemanasEdicao(int NumeroSemanasEdicao) {
         this.NumeroSemanasEdicao = NumeroSemanasEdicao;
+    }
+
+    /**
+     * @return the errosTabelaAula
+     */
+    public List<String> getErrosTabelaAula() {
+        return errosTabelaAula;
+    }
+
+    /**
+     * @param errosTabelaAula the errosTabelaAula to set
+     */
+    public void setErrosTabelaAula(List<String> errosTabelaAula) {
+        this.errosTabelaAula = errosTabelaAula;
     }
 
 }

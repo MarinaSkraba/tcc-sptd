@@ -87,7 +87,7 @@
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
                             <h:outputText value="Aulas" 
-                                          styleClass="text01"/>
+                                          styleClass="text01" />
 
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
@@ -388,6 +388,27 @@
 
                         </h:dataTable>
                     </div>
+                    <br/>
+
+                    <center>
+                        <div id="erros" style="opacity: #{aulaMB.verificarListaErros(aulaMB.errosTabelaAula)};">
+                            <h:dataTable  value="#{aulaMB.errosTabelaAula}" 
+                                          var="erroAula" 
+                                          style="width: auto;"
+                                          headerClass="text-center"
+                                          footerClass="text-center">
+
+                                <h:column>
+                                    <f:facet name="header">
+
+                                    </f:facet>
+                                    <h:outputText value="#{erroAula}" 
+                                                  styleClass="text01"
+                                                  style="font-size: small; color: #C92345;"/>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                    </center>
 
                     <!-- Caixa para adicionar horário à aula -->
                     <p:dialog header="Adicionar Horario à Aula" 
@@ -1245,7 +1266,7 @@
 
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Caixa de diferenciação do tipo de criação de atividade de projeto (autor): Com um novo projeto ou com um ja cadastrado -->
                     <p:dialog header="Adicionar Atividade de Projeto" 
                               widgetVar="diferenciacaoCadastroAtividadeProjetoPesquisaExtensao" 
@@ -1267,42 +1288,6 @@
                                          onclick="PF('').show();"/>
 
                     </p:dialog>
-                    
-                    <!-- Caixa de adição de Projeto Pesquisa Extensão (Autor) com Projeto Novo -->
-                    <!--
-                    <p:dialog header="Adicionar Projeto Pesquisa Extensão" 
-                              widgetVar="addProjetoPesquisaExtensaoDialog" 
-                              modal="true" 
-                              showEffect="fade" 
-                              hideEffect="fade" 
-                              resizable="false">
-
-                        <h:outputText value="PROCESSO" 
-                                      styleClass="text01"
-                                      style="margin: 10px 25px -10px 25px;"/>
-                        <br/>
-                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensao}"/>
-                        <br/>
-                        <h:outputText value="TÍTULO" 
-                                      styleClass="text01"
-                                      style="margin: 10px 25px -10px 25px;"/>
-                        <br/>
-                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensao.tituloProcesso}"/>
-                        <br/>
-                        <h:outputText value="PREVISÃO DE CONCLUSÃO" 
-                                      styleClass="text01"
-                                      style="margin: 10px 25px -10px 25px;"/>
-                        <br/>
-                        <p:calendar value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensao.previsaoConclusao}" mode="popup" />
-                        <br/>
-
-                        <br/>
-                        <h:commandButton value="Salvar" 
-                                         action="#{projetoPesquisaExtensaoMB.salvarAtividadeProjetoNovoPesquisaExtensaoAutor(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
-                                         styleClass="botaoAzul"/>
-
-                    </p:dialog>
-                    -->
 
                     <br/>
 
@@ -1713,7 +1698,7 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:inputText value="#{outroTipoAtividadeMB.outroTipoAtividade.rotulo}"/>
-                        
+
                         <h:outputText value="PERIODICIDADE" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
@@ -1748,7 +1733,7 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:inputText value="#{outroTipoAtividadeMB.outroTipoAtividadeSelecionadaParaOutroTipoAtividade.rotulo}"/>
-                        
+
                         <h:outputText value="PERIODICIDADE" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
@@ -2087,7 +2072,7 @@
                                              value="?"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Caixa de adição de Atividade à Propor -->
                     <p:dialog header="Adicionar Atividade à Propor" 
                               widgetVar="addAtividadesAProporDialog" 
@@ -2101,7 +2086,7 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:inputText value="#{atividadeASerPropostaMB.atividadeASerProposta.rotulo}"/>
-                        
+
                         <h:outputText value="PERIODICIDADE" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
@@ -2136,7 +2121,7 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:inputText value="#{atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaAtividadeASerProposta.rotulo}"/>
-                        
+
                         <h:outputText value="PERIODICIDADE" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
@@ -2448,7 +2433,7 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
-                    
+
                     <br/>
 
                     <br/>
