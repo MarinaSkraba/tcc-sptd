@@ -56,15 +56,9 @@ public class ProjetoPesquisaExtensaoMB {
         this.tipoProjetoColab = tipoProjetoColab;
     }
 
-    public void salvarAtividadeProjetoNovoPesquisaExtensaoAutor(Professor professorAutor, PTD ptd) {
+    public void salvarProjetoPesquisaExtensao(Professor professorAutor, PTD ptd) {
 
         Dao<ProjetoPesquisaExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-        participacao.setRotulo("Autor");
-        participacao.setEstadoParticipacao("Ativo");
-        participacao.setProfessor(professorAutor);
-        participacaoDAO.salvar(participacao);
-        projetoPesquisaExtensao.getParticipacoes().add(participacao);
         projetoExtensaoDAO.salvar(projetoPesquisaExtensao);
         projetoPesquisaExtensao = projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).get(projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).size() - 1);
         ptd.getProjetosPesquisaExtensao().add(projetoPesquisaExtensao);
@@ -72,19 +66,6 @@ public class ProjetoPesquisaExtensaoMB {
         ptdDAO.alterar(ptd);
         projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         
-    }
-    
-    public void salvarColaboracaoPesquisaExtensao(Professor professorColaborador) {
-
-        Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-        participacao.setRotulo("Colaborador");
-        participacao.setEstadoParticipacao("Ativo");
-        participacao.setProfessor(professorColaborador);
-        participacaoDAO.salvar(participacao);
-        projetoPesquisaExtensaoSelecionado.getParticipacoes().add(participacao);
-        projetoPesquisaExtensaoDAO.alterar(projetoPesquisaExtensaoSelecionado);
-
     }
 
     public String alterarProjetoPesquisaExtensao() {
@@ -98,27 +79,12 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         projetoPesquisaExtensao.setEstadoProjetoPesquisaExtensao("Desativado");
         projetoPesquisaExtensaoDAO.alterar(projetoPesquisaExtensao);
-        return "/adicionar html aqui";
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public String excluirProjetoPesquisaExtensao(ProjetoPesquisaExtensao projetoPesquisaExtensao, PTD ptd) {
         Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-
-        List<Horario> aux = new ArrayList<>(projetoPesquisaExtensao.getHorariosProjetoExtensao());
-        for (Horario h : aux) {
-            projetoPesquisaExtensao.getHorariosProjetoExtensao().remove(h);
-            projetoPesquisaExtensaoDAO.alterar(projetoPesquisaExtensao);
-            horarioDAO.excluir(h);
-        }
-        List<Participacao> aux2 = new ArrayList<>(projetoPesquisaExtensao.getParticipacoes());
-        for (Participacao p : aux2) {
-            projetoPesquisaExtensao.getParticipacoes().remove(p);
-            projetoPesquisaExtensaoDAO.alterar(projetoPesquisaExtensao);
-            participacaoDAO.excluir(p);
-        }
         ptd.getProjetosPesquisaExtensao().remove(projetoPesquisaExtensao);
         ptdDAO.alterar(ptd);
         projetoPesquisaExtensaoDAO.excluir(projetoPesquisaExtensao);
