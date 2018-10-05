@@ -27,7 +27,7 @@
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Notificações"
-                                 action="/NotificacoesDocente"
+                                 onclick="PF('sairTelaPTDDialog').show();"
                                  style="float: left;"/>
 
                 <p:commandButton id="logout"
@@ -45,9 +45,7 @@
                     <br/>
                     <p:commandButton value="Sair"
                                      styleClass="opMenu"
-                                     ajax="false" 
-                                     immediate="true"
-                                     action="#{usuarioMB.realizarLogout()}"/>
+                                     onclick="PF('logoutSairTelaPTDDialog').show();"/>
                 </p:overlayPanel>
 
                 <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
@@ -57,7 +55,6 @@
             </h:form>
 
         </div>
-
 
         <!-- Conteúdo da Tela -->
         <font face="Calibri" 
@@ -73,6 +70,53 @@
             <div id="content">
 
                 <h:form id="PTD">
+
+
+                    <!-- Caixa de confirmação sair de PTD -->
+                    <p:dialog header="Cancelar PTD" 
+                              widgetVar="sairTelaPTDDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Deseja manter as informações inseridas nesse documento?" 
+                                      styleClass="text01"
+                                      style="font-size: large; width: 400px;"/>
+                        <p:commandButton styleClass="botaoCinza" 
+                                         value="Manter e sair" 
+                                         ajax="false" 
+                                         immediate="true"
+                                         action="/NotificacoesDocente"/>
+
+                        <h:commandButton value="Descartar e sair" 
+                                         action="#{pTDMB.cancelarPTD()}"
+                                         styleClass="botaoVermelho"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de confirmação sair de PTD deslogando -->
+                    <p:dialog header="Efetuar logout" 
+                              widgetVar="logoutSairTelaPTDDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Deseja manter as informações inseridas nesse documento?" 
+                                      styleClass="text01"
+                                      style="font-size: large; width: 400px;"/>
+                        <p:commandButton styleClass="botaoCinza" 
+                                         value="Manter e sair" 
+                                         ajax="false" 
+                                         immediate="true"
+                                         action="#{pTDMB.cancelarPTDEfetuandoLogout()}"/>
+
+                        <h:commandButton value="Descartar e sair" 
+                                         action="#{pTDMB.cancelarPTD()}"
+                                         styleClass="botaoVermelho"/>
+
+                    </p:dialog>
 
                     <!-- Atividades de Ensino -->
                     <h:outputText value="1. Atividades de Ensino" 
@@ -390,6 +434,7 @@
                     </div>
                     <br/>
 
+                    <!-- Mostrar erro na tabela aulas -->
                     <center>
                         <div id="erros" style="opacity: #{aulaMB.verificarListaErros(aulaMB.errosTabelaAula)};">
                             <h:dataTable  value="#{aulaMB.errosTabelaAula}" 
@@ -614,8 +659,8 @@
 
                     </p:dialog>
 
+                    <!-- Mostrar atividades Manutenção de ensino -->
                     <div id="mostrarTabela">
-                        <!-- Mostrar atividades Manutenção de ensino -->
                         <h:dataTable  value="#{pTDMB.ptd.manutencoesEnsino}" 
                                       var="manuEnsino" 
                                       style="border-spacing: 0pt;"
@@ -958,8 +1003,8 @@
 
                     </p:dialog>
 
+                    <!-- Mostrar atividades Apoio Ensino -->
                     <div id="mostrarTabela">
-                        <!-- Mostrar atividades Apoio Ensino -->
                         <h:dataTable  value="#{pTDMB.ptd.apoios}" 
                                       var="apoioEnsino" 
                                       style="border-spacing: 0pt;"
@@ -1609,8 +1654,8 @@
 
                     </p:dialog>
 
+                    <!-- Mostrar atividades Administrativas -->
                     <div id="mostrarTabela">
-                        <!-- Mostrar atividades Administrativas -->
                         <h:dataTable  value="#{pTDMB.ptd.administrativas}" 
                                       var="administracao" 
                                       style="border-spacing: 0pt;"
@@ -1987,8 +2032,8 @@
 
                     </p:dialog>
 
+                    <!-- Mostrar atividades Outras Atividades -->
                     <div id="mostrarTabela">
-                        <!-- Mostrar atividades Outras Atividades -->
                         <h:dataTable  value="#{pTDMB.ptd.outrosTiposAtividades}" 
                                       var="outraAtividade" 
                                       style="border-spacing: 0pt;"
@@ -2375,8 +2420,8 @@
 
                     </p:dialog>
 
+                    <!-- Mostrar atividades Atividades à Propor -->
                     <div id="mostrarTabela">
-                        <!-- Mostrar atividades Atividades à Propor -->
                         <h:dataTable  value="#{pTDMB.ptd.atividadesASeremPropostas}" 
                                       var="atividadeAPropor" 
                                       style="border-spacing: 0pt;"

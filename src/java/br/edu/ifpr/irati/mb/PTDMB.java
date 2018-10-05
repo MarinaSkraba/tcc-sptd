@@ -266,6 +266,13 @@ public class PTDMB {
 
         return "NotificacoesDocente";
     }
+    
+    public String cancelarPTDEfetuandoLogout(){
+        String variavelDescartavel = cancelarPTD();
+        variavelDescartavel = "";
+        UsuarioMB usuarioMB = new UsuarioMB();
+        return usuarioMB.realizarLogout();
+    }
 
     public String submeterPTD() {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
