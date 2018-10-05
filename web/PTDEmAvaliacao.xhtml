@@ -117,7 +117,7 @@
                     <br> </br>  
                     
                     <!-- Atividades de Ensino -->
-                    <h:outputText value="Atividades de Ensino" 
+                    <h:outputText value="1. Atividades de Ensino" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -126,13 +126,13 @@
 
                     <!-- Subtítulo: Aulas -->
                     <h:panelGrid columns="1" >
-                        <h:outputText value="Aulas" 
+                        <h:outputText value="1.1 Aulas" 
                                       styleClass="text01"/>
                     </h:panelGrid>
 
                     <div id="mostrarTabela">
                         <!-- Mostrar atividades aulas -->
-                        <h:dataTable  value="#{pTDMB.ptd.aulas}" 
+                        <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.aulas}" 
                                       var="aula" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -242,14 +242,14 @@
 
                     <!-- Subtítulo: Manutenção de ensino -->
                     <h:panelGrid columns="1" >
-                        <h:outputText value="Manutenção de ensino" 
+                        <h:outputText value="1.2 Manutenção de ensino" 
                                       styleClass="text01" />
                     </h:panelGrid>
 
 
                     <div id="mostrarTabela">
                         <!-- Mostrar atividades manutenção de ensino -->
-                        <h:dataTable  value="#{pTDMB.ptd.manutencoesEnsino}" 
+                        <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.manutencoesEnsino}" 
                                       var="manutencao" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -337,13 +337,13 @@
 
                     <!-- Subtítulo: Apoio ao ensino -->
                     <h:panelGrid columns="1" >
-                        <h:outputText value="Apoio ao ensino" 
+                        <h:outputText value="1.3 Apoio ao ensino" 
                                       styleClass="text01" />
                     </h:panelGrid>
 
                     <div id="mostrarTabela">
                         <!-- Mostrar atividades apoio ao ensino -->
-                        <h:dataTable  value="#{pTDMB.ptd.apoios}" 
+                        <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.apoios}" 
                                       var="apoio" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -429,7 +429,7 @@
                     <br/>
 
                     <!-- Atividades de Pesquisa e Extensão -->
-                    <h:outputText value="Atividades de Pesquisa e Extensão" 
+                    <h:outputText value="2. Atividades de Pesquisa e Extensão" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -438,7 +438,7 @@
 
                     <!-- Subtítulo: Pesquisa e/ou extensão (Autor) -->
                     <h:panelGrid columns="1" >
-                        <h:outputText value="Pesquisa e/ou extensão cadastradas no COPE (Autor)" 
+                        <h:outputText value="2.1 Pesquisa e/ou extensão cadastradas no COPE (Autor)" 
                                       styleClass="text01" />
                     </h:panelGrid>
 
@@ -545,13 +545,23 @@
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
+                            <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+                            </f:facet>
+                                <h:outputText value="#{projetoPesquisaExtensaoAutor.instituicaoPesquisa}"
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                        </h:column>
                         </h:dataTable>
                     </div>
                     <br/>
 
                     <!-- Subtítulo: Pesquisa e/ou extensão (Colaborador) -->
                     <h:panelGrid columns="1" >
-                        <h:outputText value="Pesquisa e/ou extensão cadastradas no COPE (Colaborador)" 
+                        <h:outputText value="2.2 Pesquisa e/ou extensão cadastradas no COPE (Colaborador)" 
                                       styleClass="text01" />
                     </h:panelGrid>
 
@@ -619,7 +629,7 @@
                             </f:facet>
 
                             <!-- Tabela para o conteúdo de horários -->
-                            <h:dataTable  value="#{aula.horariosAula}" 
+                            <h:dataTable  value="#{projetoPesquisaExtensaoColab.horariosProjetoExtensao}" 
                                           var="horario" 
                                           headerClass="text-center"
                                           footerClass="text-center"
@@ -654,7 +664,7 @@
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
                             </f:facet>
-                            <h:outputText value="#{aula.cargaHorariaTotal}"
+                            <h:outputText value="#{projetoPesquisaExtensaoColab.previsaoConclusao}"
                                           styleClass="text01"
                                           style="font-size: large;"/>
                         </h:column>
@@ -664,7 +674,7 @@
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
                             </f:facet>
-                            <h:outputText value="#{aula.cargaHorariaTotal}"
+                            <h:outputText value="#{projetoPesquisaExtensaoColab.instituicaoPesquisa}"
                                           styleClass="text01"
                                           style="font-size: large;"/>
                         </h:column>
@@ -673,7 +683,7 @@
                     <br/>
 
                     <!-- Atividades Administrativas -->
-                    <h:outputText value="Atividades administrativas" 
+                    <h:outputText value="3. Atividades administrativas" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -687,7 +697,7 @@
                     </h:panelGrid>
                     <div id="mostrarTabela">
                     <!-- Mostrar atividades administrativas -->
-                    <h:dataTable  value="#{pTDMB.ptd.administrativas}" 
+                    <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.administrativas}" 
                                   var="administracao" 
                                   style="border-spacing: 0pt; width: 100%;"
                                   headerClass="text-center"
@@ -772,7 +782,7 @@
                     <br/>
 
                     <!-- Outras atividades desenvolvidas no campus -->
-                    <h:outputText value="Outras atividades desenvolvidas no campus" 
+                    <h:outputText value="4. Outras atividades desenvolvidas no campus" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -787,7 +797,7 @@
                     
                     <div id="mostrarTabela">
                     <!-- Mostrar outras atividades desenvolvidas no campus -->
-                    <h:dataTable  value="#{pTDMB.ptd.outrosTiposAtividades}" 
+                    <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.outrosTiposAtividades}" 
                                   var="outrasAtividades" 
                                   style="border-spacing: 0pt; width: 100%;"
                                   headerClass="text-center"
@@ -884,7 +894,7 @@
                     <br/>
                     
                     <!-- Outras atividades que pretendo propor no semestre -->
-                    <h:outputText value="Outras atividades que pretendo propor no semestre" 
+                    <h:outputText value="5. Outras atividades que pretendo propor no semestre" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -898,7 +908,7 @@
                     </h:panelGrid>
                     <div id="mostrarTabela">
                     <!-- Mostrar atividades que pretende propor -->
-                    <h:dataTable  value="#{pTDMB.ptd.atividadesASeremPropostas}" 
+                    <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.atividadesASeremPropostas}" 
                                   var="atividadeASerProposta" 
                                   style="border-spacing: 0pt; width: 100%;"
                                   headerClass="text-center"
@@ -927,12 +937,75 @@
                                           style="font-size: large;"/>
 
                         </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="CARGA HORÁRIA SEMANAL" 
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+                            </f:facet>
+                            <h:outputText value="#{atividadeASerProposta.cargaHorariaSemanalAtividadeASerProposta}"
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                        </h:column>
+                        
+                    <h:column>
+                            <f:facet name="header">
+                                <!-- Tabela para títulos de horários -->
+                                <h:outputText value="HORÁRIO"
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+                                <h:panelGrid border="0"
+                                             columns="3">
+
+                                    <h:outputText value="dia da semana" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                    <h:outputText value="horário início" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                    <h:outputText value="horário término" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+
+                                </h:panelGrid>
+                            </f:facet>
+
+                            <!-- Tabela para o conteúdo de horários -->
+                            <h:dataTable  value="#{atividadeASerProposta.horariosAtividadesASerProposta}" 
+                                          var="horario" 
+                                          headerClass="text-center"
+                                          footerClass="text-center"
+                                          style="width: 100%;">
+
+                                <h:column>
+                                    <h:outputText value="#{horario.diaSemana}" 
+                                                  styleClass="text01"
+                                                  style="font-size: large;"/>
+                                </h:column>
+                                <h:column>
+                                    <h:outputText value="#{horario.horaInicio}"
+                                                  styleClass="text01"
+                                                  style="font-size: large">
+                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <h:outputText value="#{horario.horaTermino}"
+                                                  styleClass="text01"
+                                                  style="font-size: large">
+                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                    </h:outputText>
+                                </h:column>
+
+                            </h:dataTable>
+
+                        </h:column>
                     </h:dataTable>
                     </div>
                     <br/>
 
                     <!-- Tabela de resultados de horários -->
-                    <h:outputText value="Quadro geral das atividades - Carga Horaria Semanal" 
+                    <h:outputText value="6. Quadro geral das atividades - Carga Horaria Semanal" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -948,6 +1021,24 @@
                             <h:outputText value="CARGA HORÁRIA"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
+                            <h:outputText value="ATIVIDADE 1.1"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 1.2"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 1.3"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value=""  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 2.1"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
@@ -960,19 +1051,7 @@
                             <h:outputText value=""  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 2.3"  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value=""  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 3.1"  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value=""  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 3.2"  
+                            <h:outputText value="ATIVIDADE 3"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value=""  
@@ -985,12 +1064,6 @@
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 5"  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value=""  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 6"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value=""  
