@@ -41,6 +41,8 @@ public class ProjetoPesquisaExtensao implements Serializable {
     @Column(name = "cargaHorariaSemanalProjetoPesquisaExtensao", nullable = false)
     private double cargaHorariaSemanalProjetoPesquisaExtensao;
 
+    @OneToMany(mappedBy = "projetopesquisaextensao")
+    private List<Participacao> participacoes;
 
     public ProjetoPesquisaExtensao() {
 
@@ -51,6 +53,7 @@ public class ProjetoPesquisaExtensao implements Serializable {
         this.previsaoConclusao = new Date();
         this.instituicaoPesquisa = "";
         this.cargaHorariaSemanalProjetoPesquisaExtensao = 0;
+        this.participacoes = new ArrayList();
 
     }
 
@@ -61,10 +64,11 @@ public class ProjetoPesquisaExtensao implements Serializable {
         this.tituloProcesso = tituloProcesso;
         this.previsaoConclusao = new Date();
         this.instituicaoPesquisa = instituicaoPesquisa;
+        this.participacoes = new ArrayList();
         this.cargaHorariaSemanalProjetoPesquisaExtensao = cargaHorariaSemanalProjetoPesquisaExtensao;
     }
 
-    public ProjetoPesquisaExtensao(int idProjetoPesquisaExtensao, String estadoProjetoPesquisaExtensao, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa, double cargaHorariaSemanalProjetoPesquisaExtensao, List<Horario> horariosProjetoPesquisaExtensao, List<Participacao> participacoes) {
+    public ProjetoPesquisaExtensao(int idProjetoPesquisaExtensao, String estadoProjetoPesquisaExtensao, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa, double cargaHorariaSemanalProjetoPesquisaExtensao, List<Participacao> participacoes) {
         this.idProjetoPesquisaExtensao = idProjetoPesquisaExtensao;
         this.estadoProjetoPesquisaExtensao = estadoProjetoPesquisaExtensao;
         this.numeroProcesso = numeroProcesso;
@@ -72,6 +76,7 @@ public class ProjetoPesquisaExtensao implements Serializable {
         this.previsaoConclusao = previsaoConclusao;
         this.instituicaoPesquisa = instituicaoPesquisa;
         this.cargaHorariaSemanalProjetoPesquisaExtensao = cargaHorariaSemanalProjetoPesquisaExtensao;
+        this.participacoes = participacoes;
     }
 
     public int getIdProjetoPesquisaExtensao() {
@@ -143,5 +148,13 @@ public class ProjetoPesquisaExtensao implements Serializable {
 
     public void setCargaHorariaSemanalProjetoPesquisaExtensao(double cargaHorariaSemanalProjetoPesquisaExtensao) {
         this.cargaHorariaSemanalProjetoPesquisaExtensao = cargaHorariaSemanalProjetoPesquisaExtensao;
+    }
+
+    public List<Participacao> getParticipacoes() {
+        return participacoes;
+    }
+
+    public void setParticipacoes(List<Participacao> participacoes) {
+        this.participacoes = participacoes;
     }
 }

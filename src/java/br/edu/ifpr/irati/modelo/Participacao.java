@@ -31,7 +31,7 @@ public class Participacao implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "projetopesquisaextensao_idProjetoPesquisaExtensao")
-    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensao;
+    private ProjetoPesquisaExtensao projetoPesquisaExtensao;
 
     @OneToMany
     private List<Horario> horariosParticipacao;
@@ -42,7 +42,7 @@ public class Participacao implements Serializable {
         this.estadoParticipacao = "";
         this.professor = new Professor();
         this.horariosParticipacao = new ArrayList();
-        this.projetosPesquisaExtensao = new ArrayList();
+        this.projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
 
     }
 
@@ -52,15 +52,15 @@ public class Participacao implements Serializable {
         this.estadoParticipacao = estadoParticipacao;
         this.professor = new Professor();
         this.horariosParticipacao = new ArrayList();
-        this.projetosPesquisaExtensao = new ArrayList();
+        this.projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
     }
 
-    public Participacao(int idParticipacao, String rotulo, String estadoParticipacao, Professor professor, List<ProjetoPesquisaExtensao> projetosPesquisaExtensao, List<Horario> horariosParticipacao) {
+    public Participacao(int idParticipacao, String rotulo, String estadoParticipacao, Professor professor, ProjetoPesquisaExtensao projetoPesquisaExtensao, List<Horario> horariosParticipacao) {
         this.idParticipacao = idParticipacao;
         this.rotulo = rotulo;
         this.estadoParticipacao = estadoParticipacao;
         this.professor = professor;
-        this.projetosPesquisaExtensao = projetosPesquisaExtensao;
+        this.projetoPesquisaExtensao = projetoPesquisaExtensao;
         this.horariosParticipacao = horariosParticipacao;
     }
 
@@ -108,12 +108,12 @@ public class Participacao implements Serializable {
         this.horariosParticipacao = horariosParticipacao;
     }
 
-    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensao() {
-        return projetosPesquisaExtensao;
+    public ProjetoPesquisaExtensao getProjetoPesquisaExtensao() {
+        return projetoPesquisaExtensao;
     }
 
-    public void setProjetosPesquisaExtensao(List<ProjetoPesquisaExtensao> projetosPesquisaExtensao) {
-        this.projetosPesquisaExtensao = projetosPesquisaExtensao;
+    public void setProjetoPesquisaExtensao(ProjetoPesquisaExtensao projetoPesquisaExtensao) {
+        this.projetoPesquisaExtensao = projetoPesquisaExtensao;
     }
 
 }
