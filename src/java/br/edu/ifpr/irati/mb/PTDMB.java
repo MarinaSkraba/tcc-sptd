@@ -63,6 +63,7 @@ public class PTDMB {
     private String estadoCargaHorariaPTD;
     private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAutor;
     private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoColab;
+    private List<String> errosTabelaAula;
 
     public PTDMB() {
 
@@ -88,6 +89,7 @@ public class PTDMB {
         this.estadoCargaHorariaPTD = "";
         this.projetosPesquisaExtensaoAutor = new ArrayList();
         this.projetosPesquisaExtensaoColab = new ArrayList();
+        errosTabelaAula = new ArrayList<>();
 
     }
 
@@ -281,6 +283,18 @@ public class PTDMB {
 
         return "/NotificacoesDocente";
     }
+    
+    public void verificarErros() {
+
+    }
+
+    public int verificarListaErros(List<String> erros) {
+        if (erros.isEmpty()) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
 
     public String abrirNotificacoesDiretorEnsino(int idUsuario) {
         return "/NotificacoesDiretorEnsino";
@@ -473,5 +487,19 @@ public class PTDMB {
 
     public void setCargaHorariaTotalProjetosPesquisaExtensaoColab(double cargaHorariaTotalProjetosPesquisaExtensaoColab) {
         this.cargaHorariaTotalProjetosPesquisaExtensaoColab = cargaHorariaTotalProjetosPesquisaExtensaoColab;
+    }
+
+    /**
+     * @return the errosTabelaAula
+     */
+    public List<String> getErrosTabelaAula() {
+        return errosTabelaAula;
+    }
+
+    /**
+     * @param errosTabelaAula the errosTabelaAula to set
+     */
+    public void setErrosTabelaAula(List<String> errosTabelaAula) {
+        this.errosTabelaAula = errosTabelaAula;
     }
 }
