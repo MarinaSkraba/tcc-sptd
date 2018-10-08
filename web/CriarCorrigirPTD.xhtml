@@ -270,9 +270,8 @@
                     </p:dialog>
 
                     <br/>
-
+                    <!-- Mostrar atividades aulas -->
                     <div id="mostrarTabela">
-                        <!-- Mostrar atividades aulas -->
                         <h:dataTable  value="#{pTDMB.ptd.aulas}" 
                                       var="aula" 
                                       style="border-spacing: 0pt;"
@@ -1333,9 +1332,9 @@
                                          onclick="PF('').show();"/>
 
                     </p:dialog>
-                    
+
+                    <!-- Mostrar tabela atividades pesquisa e/ou extensão (Autor) -->
                     <div id="mostrarTabela">
-                        <!-- Mostrar tabela atividades pesquisa e/ou extensão (Autor) -->
                         <h:dataTable  value="#{pTDMB.projetosPesquisaExtensaoAutor}" 
                                       var="projetoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
@@ -1438,18 +1437,18 @@
                                               style="font-size: large;"/>
                             </h:column>
                             <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
+                                <f:facet name="header">
+                                    <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
                                 <h:outputText value="#{projetoPesquisaExtensaoAutor.instituicaoPesquisa}"
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                        </h:column>
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </h:column>
                         </h:dataTable>
                     </div>
-                    
+
                     <br/>
                     <br/>
 
@@ -1469,122 +1468,121 @@
                                              value="?"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
-                    <div id="mostrarTabela">
-                        
+
                     <!-- Mostrar tabela atividades pesquisa e/ou extensão (Colaborador) -->
-                    <h:dataTable  value="#{pTDMB.projetosPesquisaExtensaoColab}" 
-                                  var="projetoPesquisaExtensaoColab" 
-                                  style="border-spacing: 0pt; width: 100%;"
-                                  headerClass="text-center"
-                                  footerClass="text-center">
+                    <div id="mostrarTabela">
+                        <h:dataTable  value="#{pTDMB.projetosPesquisaExtensaoColab}" 
+                                      var="projetoPesquisaExtensaoColab" 
+                                      style="border-spacing: 0pt; width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
 
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="PROCESSO" 
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
-                            <h:outputText value="#{projetoPesquisaExtensaoColab.numeroProcesso}" 
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="TÍTULO" 
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
-
-                            <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                <h:outputText value="#{projetoPesquisaExtensaoColab.tituloProcesso}"
-                                              styleClass="text01"
-                                              style="font-size: large; width: 100%;" />
-                            </p:scrollPanel>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="CARGA HORÁRIA SEMANAL" 
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
-                            <h:outputText value="#{projetoPesquisaExtensaoColab.cargaHorariaSemanalProjetoExtensao}"
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <!-- Tabela para títulos de horários -->
-                                <h:outputText value="HORÁRIO"
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                                <h:panelGrid border="0"
-                                             columns="3">
-
-                                    <h:outputText value="dia da semana" 
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PROCESSO" 
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
-                                    <h:outputText value="horário início" 
+                                </f:facet>
+                                <h:outputText value="#{projetoPesquisaExtensaoColab.numeroProcesso}" 
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="TÍTULO" 
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
-                                    <h:outputText value="horário término" 
+                                </f:facet>
+
+                                <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
+                                    <h:outputText value="#{projetoPesquisaExtensaoColab.tituloProcesso}"
+                                                  styleClass="text01"
+                                                  style="font-size: large; width: 100%;" />
+                                </p:scrollPanel>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="CARGA HORÁRIA SEMANAL" 
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
-
-                                </h:panelGrid>
-                            </f:facet>
-
-                            <!-- Tabela para o conteúdo de horários -->
-                            <h:dataTable  value="#{projetoPesquisaExtensaoColab.horariosProjetoExtensao}" 
-                                          var="horario" 
-                                          headerClass="text-center"
-                                          footerClass="text-center"
-                                          style="width: 100%;">
-
-                                <h:column>
-                                    <h:outputText value="#{horario.diaSemana}" 
-                                                  styleClass="text01"
-                                                  style="font-size: large;"/>
-                                </h:column>
-                                <h:column>
-                                    <h:outputText value="#{horario.horaInicio}"
-                                                  styleClass="text01"
-                                                  style="font-size: large">
-                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
-                                    </h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <h:outputText value="#{horario.horaTermino}"
-                                                  styleClass="text01"
-                                                  style="font-size: large">
-                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
-                                    </h:outputText>
-                                </h:column>
-
-                            </h:dataTable>
-
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="PREVISÃO DE CONCLUSÃO" 
+                                </f:facet>
+                                <h:outputText value="#{projetoPesquisaExtensaoColab.cargaHorariaSemanalProjetoExtensao}"
                                               styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
-                            <h:outputText value="#{projetoPesquisaExtensaoColab.previsaoConclusao}"
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
+                                              style="font-size: large;"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <!-- Tabela para títulos de horários -->
+                                    <h:outputText value="HORÁRIO"
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                    <h:panelGrid border="0"
+                                                 columns="3">
+
+                                        <h:outputText value="dia da semana" 
+                                                      styleClass="text01"
+                                                      style="font-size: large; font-weight: bold;"/>
+                                        <h:outputText value="horário início" 
+                                                      styleClass="text01"
+                                                      style="font-size: large; font-weight: bold;"/>
+                                        <h:outputText value="horário término" 
+                                                      styleClass="text01"
+                                                      style="font-size: large; font-weight: bold;"/>
+
+                                    </h:panelGrid>
+                                </f:facet>
+
+                                <!-- Tabela para o conteúdo de horários -->
+                                <h:dataTable  value="#{projetoPesquisaExtensaoColab.horariosProjetoExtensao}" 
+                                              var="horario" 
+                                              headerClass="text-center"
+                                              footerClass="text-center"
+                                              style="width: 100%;">
+
+                                    <h:column>
+                                        <h:outputText value="#{horario.diaSemana}" 
+                                                      styleClass="text01"
+                                                      style="font-size: large;"/>
+                                    </h:column>
+                                    <h:column>
+                                        <h:outputText value="#{horario.horaInicio}"
+                                                      styleClass="text01"
+                                                      style="font-size: large">
+                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <h:outputText value="#{horario.horaTermino}"
+                                                      styleClass="text01"
+                                                      style="font-size: large">
+                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
+                                        </h:outputText>
+                                    </h:column>
+
+                                </h:dataTable>
+
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PREVISÃO DE CONCLUSÃO" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{projetoPesquisaExtensaoColab.previsaoConclusao}"
                                               styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
-                            </f:facet>
-                            <h:outputText value="#{projetoPesquisaExtensaoColab.instituicaoPesquisa}"
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                        </h:column>
-                    </h:dataTable>
+                                              style="font-size: large;"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+                                <h:outputText value="#{projetoPesquisaExtensaoColab.instituicaoPesquisa}"
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </h:column>
+                        </h:dataTable>
                     </div>
                     <br/>
 
@@ -2720,10 +2718,7 @@
                     <h:outputText value="6. Quadro geral das atividades - Carga Horaria Semanal" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
-
-                    <br/>
-                    <br/>
-
+                    <br/><br/>
                     <center>
                         <h:panelGrid columns="2" 
                                      style="border-style: solid; border-width: thin;">
