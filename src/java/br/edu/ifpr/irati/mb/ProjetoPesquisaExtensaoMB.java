@@ -69,7 +69,6 @@ public class ProjetoPesquisaExtensaoMB {
         participacao.setProjetoPesquisaExtensao(projetoPesquisaExtensao);
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
-        projetoPesquisaExtensao.getParticipacoes().add(participacao);
         projetoExtensaoDAO.alterar(projetoPesquisaExtensao);
         ptdDAO.alterar(ptd);
         projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
