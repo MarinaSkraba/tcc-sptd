@@ -435,8 +435,8 @@
 
                     <!-- Mostrar erro na tabela aulas -->
                     <center>
-                        <div id="erros" style="opacity: #{aulaMB.verificarListaErros(aulaMB.errosTabelaAula)};">
-                            <h:dataTable  value="#{aulaMB.errosTabelaAula}" 
+                        <div id="erros" style="opacity: #{pTDMB.verificarErros(pTDMB.errosTabelaAula)};">
+                            <h:dataTable  value="#{pTDMB.errosTabelaAula}" 
                                           var="erroAula" 
                                           style="width: auto;"
                                           headerClass="text-center"
@@ -1325,11 +1325,11 @@
                         <p:commandButton styleClass="botaoCinza" 
                                          value="Já cadastrado nesse sistema"
                                          action="#{projetoPesquisaExtensaoMB.atualizarListaProjetosCadastradosPorProfessor(usuarioMB.usuarioLogado.idUsuario)}"
-                                         onclick="PF('').show();"/>
+                                         onclick="PF('addAtividadePesquisaExtensaoDialog').show();"/>
 
                         <p:commandButton styleClass="botaoCinza" 
                                          value="Novo nesse sistema"
-                                         onclick="PF('').show();"/>
+                                         onclick="PF('addProjetoPesquisaExtensaoDialog').show();"/>
 
                     </p:dialog>
                     
@@ -1345,7 +1345,7 @@
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensao}"/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensao.numeroProcesso}"/>
                         <br/>
                         <h:outputText value="TÍTULO" 
                                       styleClass="text01"
@@ -1363,6 +1363,76 @@
                         <br/>
                         <h:commandButton value="Salvar" 
                                          action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <!-- Caixa de adição de uma atividade de um Projeto Pesquisa Extensão -->
+                    <p:dialog header="Adicionar Atividade de Pesquisa e Extensão" 
+                              widgetVar="addAtividadePesquisaExtensaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="SEUS PROJETOS" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+
+                        <p:selectOneMenu id="selectProjetoSeu" 
+                                         value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensao}"
+                                         converter="projetoExtensaoConverter">
+
+                            <f:selectItems value="#{projetoPesquisaExtensaoMB.projetosPesquisaExtensaoCadastradosPorProfessor}" 
+                                           var="projetoSeu" 
+                                           itemValue="#{projetoSeu.tituloProcesso}"
+                                           itemLabel="#{projetoSeu.tituloProcesso}" />
+                        </p:selectOneMenu>
+
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensaoJaCadastradoAutor(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <!-- Caixa de edição de Apoio Ensino -->
+                    <p:dialog header="Atualizar Atividade de Pesquisa e Extensão" 
+                              widgetVar="edtAtividadePesquisaExtensao" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="PROJETO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{apoioMB.apoioSelecionadoParaApoio.tipoApoio.rotulo}"/>
+                        
+                        <h:outputText value="PROCESSO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao.numeroProcesso}"/>
+                        <br/>
+                        <h:outputText value="TÍTULO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao.tituloProcesso}"/>
+                        <br/>
+                        <h:outputText value="PREVISÃO DE CONCLUSÃO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:calendar value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao.previsaoConclusao}" mode="popup" />
+                        <br/>
+                        
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{projetoPesquisaExtensaoMB.alterarProjetoPesquisaExtensao()}" 
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>

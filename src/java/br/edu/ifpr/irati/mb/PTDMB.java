@@ -72,6 +72,13 @@ public class PTDMB {
     private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAutor;
     private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoColab;
     private List<String> errosTabelaAula;
+    private List<String> errosTabelaManuEnsino;
+    private List<String> errosTabelaApoioEnsino;
+    private List<String> errosTabelaPesquisaExtensaoAutor;
+    private List<String> errosTabelaPesquisaExtensaoColaborador;
+    private List<String> errosTabelaAdministrativas;
+    private List<String> errosTabelaOutrasAtividades;
+    private List<String> errosTabelaAtividadesASeremPropostas;
 
     public PTDMB() {
 
@@ -98,73 +105,80 @@ public class PTDMB {
         this.projetosPesquisaExtensaoAutor = new ArrayList();
         this.projetosPesquisaExtensaoColab = new ArrayList();
         errosTabelaAula = new ArrayList<>();
+        errosTabelaManuEnsino = new ArrayList<>();
+        errosTabelaApoioEnsino = new ArrayList<>();
+        errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
+        errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
+        errosTabelaAdministrativas = new ArrayList<>();
+        errosTabelaOutrasAtividades = new ArrayList<>();
+        errosTabelaAtividadesASeremPropostas = new ArrayList<>();
 
     }
 
     public void verificarCargaHorariaPTD() {
 
-        for (Administracao adm : ptd.getAdministrativas()) {
-            cargaHorariaTotalAdministracoes = cargaHorariaTotalAdministracoes + adm.getCargaHorariaSemanalAdministracao();
+        for (Administracao adm : getPtd().getAdministrativas()) {
+            setCargaHorariaTotalAdministracoes(getCargaHorariaTotalAdministracoes() + adm.getCargaHorariaSemanalAdministracao());
         }
 
-        for (Apoio ap : ptd.getApoios()) {
-            cargaHorariaTotalApoios = cargaHorariaTotalApoios + ap.getCargaHorariaSemanalApoio();
+        for (Apoio ap : getPtd().getApoios()) {
+            setCargaHorariaTotalApoios(getCargaHorariaTotalApoios() + ap.getCargaHorariaSemanalApoio());
         }
-        if (cargaHorariaTotalApoios != 4) {
-            obrigatoriedadeJustificativaApoio = true;
-        }
-
-        for (Aula a : ptd.getAulas()) {
-            cargaHorariaTotalAulas = cargaHorariaTotalAulas + a.getCargaHorariaTotal();
+        if (getCargaHorariaTotalApoios() != 4) {
+            setObrigatoriedadeJustificativaApoio(true);
         }
 
-        if (ptd.getProfessor().getRegimeTrabalho().equals("20h")) {
+        for (Aula a : getPtd().getAulas()) {
+            setCargaHorariaTotalAulas(getCargaHorariaTotalAulas() + a.getCargaHorariaTotal());
+        }
 
-            if (cargaHorariaTotalAulas < 8 && cargaHorariaTotalAulas > 12) {
+        if (getPtd().getProfessor().getRegimeTrabalho().equals("20h")) {
 
-                obrigatoriedadeJustificativaAula = true;
+            if (getCargaHorariaTotalAulas() < 8 && getCargaHorariaTotalAulas() > 12) {
+
+                setObrigatoriedadeJustificativaAula(true);
 
             }
 
-        } else if (ptd.getProfessor().getRegimeTrabalho().equals("40h")) {
-            if (cargaHorariaTotalAulas < 12 && cargaHorariaTotalAulas > 16) {
+        } else if (getPtd().getProfessor().getRegimeTrabalho().equals("40h")) {
+            if (getCargaHorariaTotalAulas() < 12 && getCargaHorariaTotalAulas() > 16) {
 
-                obrigatoriedadeJustificativaAula = true;
+                setObrigatoriedadeJustificativaAula(true);
             }
         }
 
-        for (ManutencaoEnsino me : ptd.getManutencoesEnsino()) {
-            cargaHorariaTotalManutencoesEnsino = cargaHorariaTotalManutencoesEnsino + me.getCargaHorariaSemanalManutencaoEnsino();
+        for (ManutencaoEnsino me : getPtd().getManutencoesEnsino()) {
+            setCargaHorariaTotalManutencoesEnsino(getCargaHorariaTotalManutencoesEnsino() + me.getCargaHorariaSemanalManutencaoEnsino());
         }
 
-        if (cargaHorariaTotalManutencoesEnsino != 4) {
-            obrigatoriedadeJustificativaManutencaoEnsino = true;
+        if (getCargaHorariaTotalManutencoesEnsino() != 4) {
+            setObrigatoriedadeJustificativaManutencaoEnsino(true);
         }
 
-        for (OutroTipoAtividade ota : ptd.getOutrosTiposAtividades()) {
-            cargaHorariaTotalOutroTiposAtividade = cargaHorariaTotalOutroTiposAtividade + ota.getCargaHorariaSemanalOutroTipoAtividade();
+        for (OutroTipoAtividade ota : getPtd().getOutrosTiposAtividades()) {
+            setCargaHorariaTotalOutroTiposAtividade(getCargaHorariaTotalOutroTiposAtividade() + ota.getCargaHorariaSemanalOutroTipoAtividade());
         }
-        for (ProjetoPesquisaExtensao ppe : ptd.getProjetosPesquisaExtensao()) {
+        for (ProjetoPesquisaExtensao ppe : getPtd().getProjetosPesquisaExtensao()) {
             for (Participacao part : ppe.getParticipacoes()) {
                 if (part.getRotulo().equals("AUTOR")) {
-                    cargaHorariaTotalProjetosPesquisaExtensaoAutor = cargaHorariaTotalProjetosPesquisaExtensaoAutor + ppe.getCargaHorariaSemanalProjetoPesquisaExtensao();
+                    setCargaHorariaTotalProjetosPesquisaExtensaoAutor(getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + ppe.getCargaHorariaSemanalProjetoPesquisaExtensao());
                 } else if (part.getRotulo().equals("COLABORADOR")) {
-                    cargaHorariaTotalProjetosPesquisaExtensaoColab = cargaHorariaTotalProjetosPesquisaExtensaoColab + ppe.getCargaHorariaSemanalProjetoPesquisaExtensao();
+                    setCargaHorariaTotalProjetosPesquisaExtensaoColab(getCargaHorariaTotalProjetosPesquisaExtensaoColab() + ppe.getCargaHorariaSemanalProjetoPesquisaExtensao());
                 }
             }
         }
-        if ((cargaHorariaTotalProjetosPesquisaExtensaoAutor + cargaHorariaTotalProjetosPesquisaExtensaoColab) != 16) {
-            obrigatoriedadeJustificativaPesquisaExtensao = true;
+        if ((getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 16) {
+            setObrigatoriedadeJustificativaPesquisaExtensao(true);
         }
 
-        cargaHorariaTotalPTD = cargaHorariaTotalAdministracoes + cargaHorariaTotalApoios + cargaHorariaTotalAulas + cargaHorariaTotalManutencoesEnsino + cargaHorariaTotalOutroTiposAtividade + cargaHorariaTotalProjetosPesquisaExtensaoAutor + cargaHorariaTotalProjetosPesquisaExtensaoColab;
-        if (Double.parseDouble(ptd.getProfessor().getRegimeTrabalho()) == cargaHorariaTotalPTD) {
+        setCargaHorariaTotalPTD(getCargaHorariaTotalAdministracoes() + getCargaHorariaTotalApoios() + getCargaHorariaTotalAulas() + getCargaHorariaTotalManutencoesEnsino() + getCargaHorariaTotalOutroTiposAtividade() + getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab());
+        if (Double.parseDouble(getPtd().getProfessor().getRegimeTrabalho()) == getCargaHorariaTotalPTD()) {
 
-            estadoCargaHorariaPTD = "CORRETO";
+            setEstadoCargaHorariaPTD("CORRETO");
 
         } else {
 
-            estadoCargaHorariaPTD = "INCORRETO";
+            setEstadoCargaHorariaPTD("INCORRETO");
         }
     }
 
@@ -175,24 +189,22 @@ public class PTDMB {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         Professor p = professorDAOGenerico.buscarPorId(usuario.getIdUsuario());
 
-        ptd.setProfessor(p);
-        ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario());
-        for (PTD ptdE : ptdsEmEdicao) {
+        getPtd().setProfessor(p);
+        setPtdsEmEdicao(ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()));
+        for (PTD ptdE : getPtdsEmEdicao()) {
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
         }
-        ptd = new PTD();
+        setPtd(new PTD());
 
-        ptd.setProfessor(p);
+        getPtd().setProfessor(p);
 
-        ptd.setDiretorEnsino(
-                null);
-        ptd.setEstadoPTD(
-                "EDICAO");
-        ptdDAOGenerico.salvar(ptd);
+        getPtd().setDiretorEnsino(null);
+        getPtd().setEstadoPTD("EDICAO");
+        ptdDAOGenerico.salvar(getPtd());
 
         if (!ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()).isEmpty()) {
-            ptd = ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()).get(0);
+            setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()).get(0));
         }
 
         return "/CriarCorrigirPTD";
@@ -202,13 +214,12 @@ public class PTDMB {
 
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario());
-        ptd = ptdEmEdicao.get(0);
+        setPtd(ptdEmEdicao.get(0));
         return "/CriarCorrigirPTD";
     }
 
     public String abrirCriarCorrigirPTDAPartirDoUltimoArquivado(Usuario usuario) {
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
-        );
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario());
         for (PTD ptdE : ptdsEmEdicao) {
@@ -219,11 +230,11 @@ public class PTDMB {
 
         if (ptdsAprovados.isEmpty()
                 != true) {
-            ptd = ptdsAprovados.get(ptdsAprovados.size() - 1);
-            ptd.setIdPTD(0);
-            ptd.setEstadoPTD("EDICAO");
-            ptdDAOGenerico.salvar(ptd);
-            ptd = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario()).get(0);
+            setPtd(ptdsAprovados.get(ptdsAprovados.size() - 1));
+            getPtd().setIdPTD(0);
+            getPtd().setEstadoPTD("EDICAO");
+            ptdDAOGenerico.salvar(getPtd());
+            setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario()).get(0));
             return "/CriarCorrigirPTD";
         } else {
 
@@ -252,7 +263,7 @@ public class PTDMB {
         Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
 
-        for (Administracao adm : ptd.getAdministrativas()) {
+        for (Administracao adm : getPtd().getAdministrativas()) {
 
             List<Horario> aux = new ArrayList<>(adm.getHorariosAdministracao());
             for (Horario h : aux) {
@@ -260,27 +271,27 @@ public class PTDMB {
                 administracaoDAO.alterar(adm);
                 horarioDAO.excluir(h);
             }
-            ptd.getAdministrativas().remove(adm);
-            ptdDAO.alterar(ptd);
+            getPtd().getAdministrativas().remove(adm);
+            ptdDAO.alterar(getPtd());
             administracaoDAO.excluir(adm);
             tipoAdministracaoDAO.excluir(adm.getTipoAdministracao());
 
         }
 
-        for (Apoio apoio : ptd.getApoios()) {
+        for (Apoio apoio : getPtd().getApoios()) {
             List<Horario> aux = new ArrayList<>(apoio.getHorariosApoio());
             for (Horario h : aux) {
                 apoio.getHorariosApoio().remove(h);
                 apoioDAO.alterar(apoio);
                 horarioDAO.excluir(h);
             }
-            ptd.getApoios().remove(apoio);
-            ptdDAO.alterar(ptd);
+            getPtd().getApoios().remove(apoio);
+            ptdDAO.alterar(getPtd());
             apoioDAO.excluir(apoio);
             tipoApoioDAO.excluir(apoio.getTipoApoio());
         }
 
-        for (AtividadeASerProposta aASP : ptd.getAtividadesASeremPropostas()) {
+        for (AtividadeASerProposta aASP : getPtd().getAtividadesASeremPropostas()) {
             List<Horario> aux = new ArrayList<>(aASP.getHorariosAtividadesASerProposta());
             for (Horario h : aux) {
                 aASP.getHorariosAtividadesASerProposta().remove(h);
@@ -288,38 +299,38 @@ public class PTDMB {
                 horarioDAO.excluir(h);
             }
 
-            ptd.getAtividadesASeremPropostas().remove(aASP);
-            ptdDAO.alterar(ptd);
+            getPtd().getAtividadesASeremPropostas().remove(aASP);
+            ptdDAO.alterar(getPtd());
             aASPropostaDAO.excluir(aASP);
         }
 
-        for (Aula aula : ptd.getAulas()) {
+        for (Aula aula : getPtd().getAulas()) {
             List<Horario> aux = new ArrayList<>(aula.getHorariosAula());
             for (Horario h : aux) {
                 aula.getHorariosAula().remove(h);
                 aulaDAO.alterar(aula);
                 horarioDAO.excluir(h);
             }
-            ptd.getAulas().remove(aula);
-            ptdDAO.alterar(ptd);
+            getPtd().getAulas().remove(aula);
+            ptdDAO.alterar(getPtd());
             aulaDAO.excluir(aula);
             tipoOfertaDAO.excluir(aula.getTipoOferta());
         }
 
-        for (ManutencaoEnsino mEnsino : ptd.getManutencoesEnsino()) {
+        for (ManutencaoEnsino mEnsino : getPtd().getManutencoesEnsino()) {
             List<Horario> aux = new ArrayList<>(mEnsino.getHorariosManutecao());
             for (Horario h : aux) {
                 mEnsino.getHorariosManutecao().remove(h);
                 manutencaoDAO.alterar(mEnsino);
                 horarioDAO.excluir(h);
             }
-            ptd.getManutencoesEnsino().remove(mEnsino);
-            ptdDAO.alterar(ptd);
+            getPtd().getManutencoesEnsino().remove(mEnsino);
+            ptdDAO.alterar(getPtd());
             manutencaoDAO.excluir(mEnsino);
             tipoManutencaoDAO.excluir(mEnsino.getTipoManutencao());
         }
 
-        for (OutroTipoAtividade oTA : ptd.getOutrosTiposAtividades()) {
+        for (OutroTipoAtividade oTA : getPtd().getOutrosTiposAtividades()) {
             List<Horario> aux = new ArrayList<>(oTA.getHorariosOutroTipoAtividade());
             for (Horario h : aux) {
                 oTA.getHorariosOutroTipoAtividade().remove(h);
@@ -327,12 +338,12 @@ public class PTDMB {
                 horarioDAO.excluir(h);
             }
 
-            ptd.getOutrosTiposAtividades().remove(oTA);
-            ptdDAO.alterar(ptd);
+            getPtd().getOutrosTiposAtividades().remove(oTA);
+            ptdDAO.alterar(getPtd());
             oTAtividadeDAO.excluir(oTA);
         }
 
-        for (ProjetoPesquisaExtensao pPesquisaExtensao : ptd.getProjetosPesquisaExtensao()) {
+        for (ProjetoPesquisaExtensao pPesquisaExtensao : getPtd().getProjetosPesquisaExtensao()) {
 
         }
 
@@ -348,8 +359,8 @@ public class PTDMB {
 
     public String submeterPTD() {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-        ptd.setEstadoPTD("AVALIACAO");
-        ptdDAOGenerico.alterar(ptd);
+        getPtd().setEstadoPTD("AVALIACAO");
+        ptdDAOGenerico.alterar(getPtd());
 
         return "/NotificacoesDocente";
     }
@@ -381,7 +392,7 @@ public class PTDMB {
     }
 
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino() {
-        if (ptd.getApoios().isEmpty() != true) {
+        if (getPtd().getApoios().isEmpty() != true) {
             return "Possui irregularidades";
         } else {
             return "Correto";
@@ -389,7 +400,7 @@ public class PTDMB {
     }
 
     public String abrirPTDEmAvaliacao(PTD ptd) {
-        ptdEmAvaliacao = ptd;
+        setPtdEmAvaliacao(ptd);
 
 //        if(){
 //            
@@ -582,5 +593,103 @@ public class PTDMB {
      */
     public void setErrosTabelaAula(List<String> errosTabelaAula) {
         this.errosTabelaAula = errosTabelaAula;
+    }
+
+    /**
+     * @return the errosTabelaManuEnsino
+     */
+    public List<String> getErrosTabelaManuEnsino() {
+        return errosTabelaManuEnsino;
+    }
+
+    /**
+     * @param errosTabelaManuEnsino the errosTabelaManuEnsino to set
+     */
+    public void setErrosTabelaManuEnsino(List<String> errosTabelaManuEnsino) {
+        this.errosTabelaManuEnsino = errosTabelaManuEnsino;
+    }
+
+    /**
+     * @return the errosTabelaApoioEnsino
+     */
+    public List<String> getErrosTabelaApoioEnsino() {
+        return errosTabelaApoioEnsino;
+    }
+
+    /**
+     * @param errosTabelaApoioEnsino the errosTabelaApoioEnsino to set
+     */
+    public void setErrosTabelaApoioEnsino(List<String> errosTabelaApoioEnsino) {
+        this.errosTabelaApoioEnsino = errosTabelaApoioEnsino;
+    }
+
+    /**
+     * @return the errosTabelaPesquisaExtensaoAutor
+     */
+    public List<String> getErrosTabelaPesquisaExtensaoAutor() {
+        return errosTabelaPesquisaExtensaoAutor;
+    }
+
+    /**
+     * @param errosTabelaPesquisaExtensaoAutor the errosTabelaPesquisaExtensaoAutor to set
+     */
+    public void setErrosTabelaPesquisaExtensaoAutor(List<String> errosTabelaPesquisaExtensaoAutor) {
+        this.errosTabelaPesquisaExtensaoAutor = errosTabelaPesquisaExtensaoAutor;
+    }
+
+    /**
+     * @return the errosTabelaPesquisaExtensaoColaborador
+     */
+    public List<String> getErrosTabelaPesquisaExtensaoColaborador() {
+        return errosTabelaPesquisaExtensaoColaborador;
+    }
+
+    /**
+     * @param errosTabelaPesquisaExtensaoColaborador the errosTabelaPesquisaExtensaoColaborador to set
+     */
+    public void setErrosTabelaPesquisaExtensaoColaborador(List<String> errosTabelaPesquisaExtensaoColaborador) {
+        this.errosTabelaPesquisaExtensaoColaborador = errosTabelaPesquisaExtensaoColaborador;
+    }
+
+    /**
+     * @return the errosTabelaAdministrativas
+     */
+    public List<String> getErrosTabelaAdministrativas() {
+        return errosTabelaAdministrativas;
+    }
+
+    /**
+     * @param errosTabelaAdministrativas the errosTabelaAdministrativas to set
+     */
+    public void setErrosTabelaAdministrativas(List<String> errosTabelaAdministrativas) {
+        this.errosTabelaAdministrativas = errosTabelaAdministrativas;
+    }
+
+    /**
+     * @return the errosTabelaOutrasAtividades
+     */
+    public List<String> getErrosTabelaOutrasAtividades() {
+        return errosTabelaOutrasAtividades;
+    }
+
+    /**
+     * @param errosTabelaOutrasAtividades the errosTabelaOutrasAtividades to set
+     */
+    public void setErrosTabelaOutrasAtividades(List<String> errosTabelaOutrasAtividades) {
+        this.errosTabelaOutrasAtividades = errosTabelaOutrasAtividades;
+    }
+
+    /**
+     * @return the errosTabelaAtividadesASeremPropostas
+     */
+    public List<String> getErrosTabelaAtividadesASeremPropostas() {
+        return errosTabelaAtividadesASeremPropostas;
+    }
+
+    /**
+     * @param errosTabelaAtividadesASeremPropostas the errosTabelaAtividadesASeremPropostas to set
+     */
+    public void setErrosTabelaAtividadesASeremPropostas(List<String> errosTabelaAtividadesASeremPropostas) {
+        this.errosTabelaAtividadesASeremPropostas = errosTabelaAtividadesASeremPropostas;
     }
 }
