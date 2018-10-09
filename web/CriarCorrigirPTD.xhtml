@@ -1612,8 +1612,8 @@
                               hideEffect="fade" 
                               resizable="false">
 
-                        <h:dataTable  value="#{apoioMB.apoioSelecionadoParaHorario.horariosApoio}" 
-                                      var="horarioSelecionadoEdicaoApoioEnsino" 
+                        <h:dataTable  value="#{projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario.horariosParticipacao}" 
+                                      var="horarioSelecionadoEdicaoPesquisaExtensao" 
                                       style="width: 100%;"
                                       headerClass="text-center"
                                       footerClass="text-center">
@@ -1629,8 +1629,8 @@
                                                   styleClass="text01"/>
                                 </f:facet>
 
-                                <p:selectOneMenu id="selectDiaSemanaEdicaoApoioEnsino" 
-                                                 value="#{horarioSelecionadoEdicaoApoioEnsino.diaSemana}">
+                                <p:selectOneMenu id="selectDiaSemanaEdicaoPesquisaExtensao" 
+                                                 value="#{horarioSelecionadoEdicaoPesquisaExtensao.diaSemana}">
 
                                     <f:selectItems value="#{horarioMB.diasSemana}" 
                                                    var="diaSemana" 
@@ -1648,8 +1648,8 @@
                                                   styleClass="text01"/>
                                 </f:facet>
 
-                                <p:calendar id="horaInicioEdicaoApoioEnsino" 
-                                            value="#{horarioSelecionadoEdicaoApoioEnsino.horaInicio}" 
+                                <p:calendar id="horaInicioEdicaoPesquisaExtensao" 
+                                            value="#{horarioSelecionadoEdicaoPesquisaExtensao.horaInicio}" 
                                             pattern="HH:mm" 
                                             size="5"
                                             timeOnly="true"/>
@@ -1663,8 +1663,8 @@
                                                   styleClass="text01"/>
                                 </f:facet>
 
-                                <p:calendar id="horaTerminooEdicaoApoioEnsino" 
-                                            value="#{horarioSelecionadoEdicaoApoioEnsino.horaTermino}" 
+                                <p:calendar id="horaTerminooEdicaoPesquisaExtensao" 
+                                            value="#{horarioSelecionadoEdicaoPesquisaExtensao.horaTermino}" 
                                             pattern="HH:mm" 
                                             size="5"
                                             timeOnly="true"/>
@@ -1684,7 +1684,7 @@
                                                  value="X" 
                                                  ajax="false" 
                                                  immediate="true"
-                                                 action="#{horarioMB.excluirHorarioAtividade(horarioSelecionadoEdicaoApoioEnsino, apoioMB.apoioSelecionadoParaHorario)}"/>
+                                                 action="#{horarioMB.excluirHorarioAtividade(horarioSelecionadoEdicaoPesquisaExtensao, projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario)}"/>
 
                             </h:column>
 
@@ -1692,7 +1692,7 @@
 
                         <br/>
                         <h:commandButton value="Salvar edição" 
-                                         action="#{horarioMB.alterarHorarioAtividade(apoioMB.apoioSelecionadoParaHorario.horariosApoio, apoioMB.apoioSelecionadoParaHorario)}"
+                                         action="#{horarioMB.alterarHorarioAtividade(projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario.horariosParticipacao, projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario)}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
