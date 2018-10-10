@@ -55,6 +55,11 @@ public class AulaMB {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aula.setTipoOferta(tipoOfertaSelecionado);
         aula.setCurso(cursoSelecionado);
+        if (NumeroSemanas != 0) {
+            aula.setCargaHorariaTotal(HorasAulaTotal / NumeroSemanas);
+        } else {
+            aula.setCargaHorariaTotal(0);
+        }
         aulaDAO.salvar(aula);
         aula = aulaDAO.buscarTodos(Aula.class).get(aulaDAO.buscarTodos(Aula.class).size() - 1);
         ptd.getAulas().add(aula);
@@ -92,7 +97,6 @@ public class AulaMB {
         ptd.getAulas().remove(aula);
         ptdDAO.alterar(ptd);
         aulaDAO.excluir(aula);
-        tipoOfertaDAO.excluir(aula.getTipoOferta());
 
         return "CriarCorrigirPTD?faces-redirect=true";
     }
