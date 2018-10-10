@@ -435,8 +435,8 @@
 
                     <!-- Mostrar erro na tabela aulas -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaAula)};">
-                            <h:dataTable  value="#{pTDMB.errosTabelaAula}" 
+                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.ptd.aulas)};">
+                            <h:dataTable  value="#{pTDMB.ptd.aulas}" 
                                           var="erroAula" 
                                           style="width: auto;"
                                           headerClass="text-center"
@@ -446,7 +446,7 @@
                                     <f:facet name="header">
 
                                     </f:facet>
-                                    <h:outputText value="#{erroAula}" 
+                                    <h:outputText value="#{erroAula.componenteCurricular}" 
                                                   styleClass="text01"
                                                   style="font-size: small; color: #C92345;"/>
                                 </h:column>
@@ -1323,14 +1323,13 @@
                                       styleClass="text01"
                                       style="font-size: large; width: 400px;"/>
                         <p:commandButton styleClass="botaoCinza" 
+                                         value="Novo nesse sistema"
+                                         onclick="PF('addProjetoPesquisaExtensaoDialog').show();"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoCinza" 
                                          value="Já cadastrado nesse sistema"
                                          action="#{projetoPesquisaExtensaoMB.atualizarListaProjetosCadastradosPorProfessor(usuarioMB.usuarioLogado.idUsuario)}"
                                          onclick="PF('addAtividadePesquisaExtensaoDialog').show();"/>
-
-                        <p:commandButton styleClass="botaoCinza" 
-                                         value="Novo nesse sistema"
-                                         onclick="PF('addProjetoPesquisaExtensaoDialog').show();"/>
-
                     </p:dialog>
                     
                     <!-- Caixa de adição de um Novo Projeto Pesquisa Extensão -->

@@ -159,11 +159,11 @@ public class PTDMB {
             setCargaHorariaTotalOutroTiposAtividade(getCargaHorariaTotalOutroTiposAtividade() + ota.getCargaHorariaSemanalOutroTipoAtividade());
         }
         for (ProjetoPesquisaExtensao ppe : getPtd().getProjetosPesquisaExtensao()) {
-            for (Participacao part : ppe.getParticipacoes()) {
+            for (Participacao part : ppe.getParticipacoesProjetoPesquisaExtensao()) {
                 if (part.getRotulo().equals("AUTOR")) {
-                    setCargaHorariaTotalProjetosPesquisaExtensaoAutor(getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + ppe.getCargaHorariaSemanalProjetoPesquisaExtensao());
+                    setCargaHorariaTotalProjetosPesquisaExtensaoAutor(getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + part.getCargaHorariaSemanalParticipacao());
                 } else if (part.getRotulo().equals("COLABORADOR")) {
-                    setCargaHorariaTotalProjetosPesquisaExtensaoColab(getCargaHorariaTotalProjetosPesquisaExtensaoColab() + ppe.getCargaHorariaSemanalProjetoPesquisaExtensao());
+                    setCargaHorariaTotalProjetosPesquisaExtensaoColab(getCargaHorariaTotalProjetosPesquisaExtensaoColab() + part.getCargaHorariaSemanalParticipacao());
                 }
             }
         }
