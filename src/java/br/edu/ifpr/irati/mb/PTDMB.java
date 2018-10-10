@@ -364,9 +364,105 @@ public class PTDMB {
 
         return "/NotificacoesDocente";
     }
-    
-    public void verificarErros() {
 
+    public void verificarErros() {
+        errosTabelaAdministrativas = new ArrayList();
+        errosTabelaApoioEnsino = new ArrayList();
+        errosTabelaAtividadesASeremPropostas = new ArrayList();
+        errosTabelaAula = new ArrayList();
+        errosTabelaManuEnsino = new ArrayList();
+        errosTabelaOutrasAtividades = new ArrayList();
+        errosTabelaPesquisaExtensaoAutor = new ArrayList();
+        errosTabelaPesquisaExtensaoColaborador = new ArrayList();
+
+        // erro horaInício > horaTérmino
+        for (Administracao adm : getPtd().getAdministrativas()) {
+            for (Horario h : adm.getHorariosAdministracao()) {
+
+                if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+                    errosTabelaAdministrativas.add("erroInTerm");
+                }else if (h.getHoraInicio() == null) {
+                    errosTabelaAdministrativas.add("Innull");
+                } else if (h.getHoraTermino() == null) {
+                    errosTabelaAdministrativas.add("Termnull");
+                }
+            }
+        }
+
+        for (Apoio apoio : getPtd().getApoios()) {
+            for (Horario h : apoio.getHorariosApoio()) {
+
+                if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+                    errosTabelaApoioEnsino.add("erroInTerm");
+                }else if (h.getHoraInicio() == null) {
+                    errosTabelaApoioEnsino.add("Innull");
+                } else if (h.getHoraTermino() == null) {
+                    errosTabelaApoioEnsino.add("Termnull");
+                }
+            }
+        }
+
+        for (AtividadeASerProposta aSP : getPtd().getAtividadesASeremPropostas()) {
+            for (Horario h : aSP.getHorariosAtividadesASerProposta()) {
+
+                if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+                    errosTabelaAtividadesASeremPropostas.add("erroInTerm");
+                }else if (h.getHoraInicio() == null) {
+                    errosTabelaAtividadesASeremPropostas.add("Innull");
+                } else if (h.getHoraTermino() == null) {
+                    errosTabelaAtividadesASeremPropostas.add("Termnull");
+                }
+            }
+        }
+
+        for (Aula aula : getPtd().getAulas()) {
+            for (Horario h : aula.getHorariosAula()) {
+
+                if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+                    errosTabelaAula.add("erroInTerm");
+
+                } else if (h.getHoraInicio() == null) {
+                    errosTabelaAula.add("Innull");
+                } else if (h.getHoraTermino() == null) {
+                    errosTabelaAula.add("Termnull");
+                }
+            }
+
+            for (ManutencaoEnsino mE : getPtd().getManutencoesEnsino()) {
+                for (Horario h : mE.getHorariosManutecao()) {
+
+                    if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+                        errosTabelaManuEnsino.add("erroInTerm");
+                    } else if (h.getHoraInicio() == null) {
+                        errosTabelaManuEnsino.add("Innull");
+                    } else if (h.getHoraTermino() == null) {
+                        errosTabelaManuEnsino.add("Termnull");
+                    }
+                }
+            }
+
+            for (OutroTipoAtividade oTA : getPtd().getOutrosTiposAtividades()) {
+                for (Horario h : oTA.getHorariosOutroTipoAtividade()) {
+
+                    if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+                        errosTabelaOutrasAtividades.add("erroInTerm");
+                    } else if (h.getHoraInicio() == null) {
+                        errosTabelaOutrasAtividades.add("Innull");
+                    } else if (h.getHoraTermino() == null) {
+                        errosTabelaOutrasAtividades.add("Termnull");
+                    }
+                }
+            }
+
+//           for (ProjetoPesquisaExtensao pPE : getPtd().getProjetosPesquisaExtensao()) {
+//             for(Horario h : pPE.getHorariosAula()){
+//                 
+//                 if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+//                     
+//                 }
+//             }
+//           }
+        }
     }
 
     public int verificarListaErros(List<String> erros) {
@@ -380,7 +476,8 @@ public class PTDMB {
     public String abrirNotificacoesDiretorEnsino(int idUsuario) {
         return "/NotificacoesDiretorEnsino";
     }
-
+    
+    
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino() {
         if (getPtd().getApoios().isEmpty() != true) {
             return "Possui irregularidades";
@@ -395,7 +492,6 @@ public class PTDMB {
 //        if(){
 //            
 //        }
-        
         return "PTDEmAvaliacao";
     }
 
@@ -621,7 +717,8 @@ public class PTDMB {
     }
 
     /**
-     * @param errosTabelaPesquisaExtensaoAutor the errosTabelaPesquisaExtensaoAutor to set
+     * @param errosTabelaPesquisaExtensaoAutor the
+     * errosTabelaPesquisaExtensaoAutor to set
      */
     public void setErrosTabelaPesquisaExtensaoAutor(List<String> errosTabelaPesquisaExtensaoAutor) {
         this.errosTabelaPesquisaExtensaoAutor = errosTabelaPesquisaExtensaoAutor;
@@ -635,7 +732,8 @@ public class PTDMB {
     }
 
     /**
-     * @param errosTabelaPesquisaExtensaoColaborador the errosTabelaPesquisaExtensaoColaborador to set
+     * @param errosTabelaPesquisaExtensaoColaborador the
+     * errosTabelaPesquisaExtensaoColaborador to set
      */
     public void setErrosTabelaPesquisaExtensaoColaborador(List<String> errosTabelaPesquisaExtensaoColaborador) {
         this.errosTabelaPesquisaExtensaoColaborador = errosTabelaPesquisaExtensaoColaborador;
@@ -677,7 +775,8 @@ public class PTDMB {
     }
 
     /**
-     * @param errosTabelaAtividadesASeremPropostas the errosTabelaAtividadesASeremPropostas to set
+     * @param errosTabelaAtividadesASeremPropostas the
+     * errosTabelaAtividadesASeremPropostas to set
      */
     public void setErrosTabelaAtividadesASeremPropostas(List<String> errosTabelaAtividadesASeremPropostas) {
         this.errosTabelaAtividadesASeremPropostas = errosTabelaAtividadesASeremPropostas;
