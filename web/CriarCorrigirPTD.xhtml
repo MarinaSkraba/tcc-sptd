@@ -435,22 +435,28 @@
 
                     <!-- Mostrar erros na tabela aulas -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.ptd.aulas)};">
-                            <h:dataTable  value="#{pTDMB.ptd.aulas}" 
-                                          var="erroAula" 
-                                          style="width: auto;"
-                                          headerClass="text-center"
-                                          footerClass="text-center">
+                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaAula)};">
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="!" 
+                                                  styleClass="exclamacaoErro"/>
+                                </h:panelGrid>
+                                <h:dataTable  value="#{pTDMB.errosTabelaAula}" 
+                                              var="erroAula" 
+                                              style="width: auto;"
+                                              headerClass="text-center"
+                                              footerClass="text-center">
 
                                     <h:column>
                                         <f:facet name="header">
 
-                                    </f:facet>
-                                    <h:outputText value="#{erroAula.componenteCurricular}" 
-                                                  styleClass="text01"
-                                                  style="font-size: small; color: #C92345;"/>
-                                </h:column>
-                            </h:dataTable>
+                                        </f:facet>
+                                        <h:outputText value="#{erroAula}" 
+                                                      styleClass="text01"
+                                                      style="font-size: small; color: #C92345;"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGrid>
                         </div>
                     </center>
 
@@ -814,7 +820,7 @@
                                         <f:facet name="header">
 
                                         </f:facet>
-                                        <h:outputText value="#{erroAula.componenteCurricular}" 
+                                        <h:outputText value="#{erroManuEnsino}" 
                                                       styleClass="text01"
                                                       style="font-size: small; color: #C92345;"/>
                                     </h:column>
@@ -1185,7 +1191,7 @@
                                         <f:facet name="header">
 
                                         </f:facet>
-                                        <h:outputText value="#{erroAula.componenteCurricular}" 
+                                        <h:outputText value="#{erroApoioEnsino}" 
                                                       styleClass="text01"
                                                       style="font-size: small; color: #C92345;"/>
                                     </h:column>
@@ -1573,7 +1579,34 @@
                             </h:column>
                         </h:dataTable>
                     </div>
+                    
+                    <!-- Mostrar erros na tabela pesquisa e/ou extensão (Autor) -->
+                    <center>
+                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaPesquisaExtensaoAutor)};">
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="!" 
+                                                  styleClass="exclamacaoErro"/>
+                                </h:panelGrid>
+                                <h:dataTable  value="#{pTDMB.errosTabelaPesquisaExtensaoAutor}" 
+                                              var="erroPesquisaExtensaoAutor" 
+                                              style="width: auto;"
+                                              headerClass="text-center"
+                                              footerClass="text-center">
 
+                                    <h:column>
+                                        <f:facet name="header">
+
+                                        </f:facet>
+                                        <h:outputText value="#{erroPesquisaExtensaoAutor}" 
+                                                      styleClass="text01"
+                                                      style="font-size: small; color: #C92345;"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGrid>
+                        </div>
+                    </center>
+                    
                     <!-- Caixa para adicionar horário à Atividade de Pesquisa e Extensão -->
                     <p:dialog header="Adicionar Horario à Atividade de Pesquisa e Extensão" 
                               widgetVar="addHorarioPesquisaExtensaoDialog" 
@@ -1854,6 +1887,33 @@
                         </h:dataTable>
                     </div>
                     <br/>
+                    
+                    <!-- Mostrar erros na tabela pesquisa e/ou extensão (Colaborador) -->
+                    <center>
+                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaPesquisaExtensaoColaborador)};">
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="!" 
+                                                  styleClass="exclamacaoErro"/>
+                                </h:panelGrid>
+                                <h:dataTable  value="#{pTDMB.errosTabelaPesquisaExtensaoColaborador}" 
+                                              var="erroPesquisaExtensaoColab" 
+                                              style="width: auto;"
+                                              headerClass="text-center"
+                                              footerClass="text-center">
+
+                                    <h:column>
+                                        <f:facet name="header">
+
+                                        </f:facet>
+                                        <h:outputText value="#{erroPesquisaExtensaoColab}" 
+                                                      styleClass="text01"
+                                                      style="font-size: small; color: #C92345;"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGrid>
+                        </div>
+                    </center>
 
                     <!-- Atividades Administrativas -->
                     <h:outputText value="3. Atividades administrativas" 
@@ -2058,6 +2118,33 @@
 
                         </h:dataTable>
                     </div>
+                    
+                    <!-- Mostrar erros na tabela administrativas -->
+                    <center>
+                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaAdministrativas)};">
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="!" 
+                                                  styleClass="exclamacaoErro"/>
+                                </h:panelGrid>
+                                <h:dataTable  value="#{pTDMB.errosTabelaAdministrativas}" 
+                                              var="erroAdministrativa" 
+                                              style="width: auto;"
+                                              headerClass="text-center"
+                                              footerClass="text-center">
+
+                                    <h:column>
+                                        <f:facet name="header">
+
+                                        </f:facet>
+                                        <h:outputText value="#{erroAdministrativa}" 
+                                                      styleClass="text01"
+                                                      style="font-size: small; color: #C92345;"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGrid>
+                        </div>
+                    </center>
 
                     <!-- Caixa para adicionar horário à Administracao -->
                     <p:dialog header="Adicionar Horario à Administração" 
@@ -2446,6 +2533,33 @@
 
                         </h:dataTable>
                     </div>
+                    
+                    <!-- Mostrar erros na tabela outras atividades -->
+                    <center>
+                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaOutrasAtividades)};">
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="!" 
+                                                  styleClass="exclamacaoErro"/>
+                                </h:panelGrid>
+                                <h:dataTable  value="#{pTDMB.errosTabelaOutrasAtividades}" 
+                                              var="erroOutrasAtividades" 
+                                              style="width: auto;"
+                                              headerClass="text-center"
+                                              footerClass="text-center">
+
+                                    <h:column>
+                                        <f:facet name="header">
+
+                                        </f:facet>
+                                        <h:outputText value="#{erroOutrasAtividades}" 
+                                                      styleClass="text01"
+                                                      style="font-size: small; color: #C92345;"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGrid>
+                        </div>
+                    </center>
 
                     <!-- Caixa para adicionar horário à Outras Atividades -->
                     <p:dialog header="Adicionar Horario à Outras Atividades" 
@@ -2834,6 +2948,33 @@
 
                         </h:dataTable>
                     </div>
+                    
+                    <!-- Mostrar erros na tabela atividades a serem propostas -->
+                    <center>
+                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaAtividadesASeremPropostas)};">
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="!" 
+                                                  styleClass="exclamacaoErro"/>
+                                </h:panelGrid>
+                                <h:dataTable  value="#{pTDMB.errosTabelaAtividadesASeremPropostas}" 
+                                              var="erroAtividadesASeremPropostas" 
+                                              style="width: auto;"
+                                              headerClass="text-center"
+                                              footerClass="text-center">
+
+                                    <h:column>
+                                        <f:facet name="header">
+
+                                        </f:facet>
+                                        <h:outputText value="#{erroAtividadesASeremPropostas}" 
+                                                      styleClass="text01"
+                                                      style="font-size: small; color: #C92345;"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGrid>
+                        </div>
+                    </center>
 
                     <!-- Caixa para adicionar horário à Atividades a propor -->
                     <p:dialog header="Adicionar Horario à Atividades à Propor" 
