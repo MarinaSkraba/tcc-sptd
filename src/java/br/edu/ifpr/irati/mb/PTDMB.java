@@ -381,23 +381,31 @@ public class PTDMB {
 
                 if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
                     errosTabelaAdministrativas.add("erroInTerm");
-                }else if (h.getHoraInicio() == null) {
+                } else if (h.getHoraInicio() == null) {
                     errosTabelaAdministrativas.add("Innull");
                 } else if (h.getHoraTermino() == null) {
                     errosTabelaAdministrativas.add("Termnull");
+                } else if (adm.getCargaHorariaSemanalAdministracao() == 0) {
+                    errosTabelaAdministrativas.add("CargZero");
+                } else if (adm.getTipoAdministracao().equals("")) {
+                    errosTabelaAdministrativas.add("SemTitulo");
+
                 }
             }
         }
-
         for (Apoio apoio : getPtd().getApoios()) {
             for (Horario h : apoio.getHorariosApoio()) {
 
                 if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
                     errosTabelaApoioEnsino.add("erroInTerm");
-                }else if (h.getHoraInicio() == null) {
+                } else if (h.getHoraInicio() == null) {
                     errosTabelaApoioEnsino.add("Innull");
                 } else if (h.getHoraTermino() == null) {
                     errosTabelaApoioEnsino.add("Termnull");
+                } else if (apoio.getCargaHorariaSemanalApoio() == 0) {
+                    errosTabelaApoioEnsino.add("CargZero");
+                } else if (apoio.getTipoApoio().equals("")) {
+                    errosTabelaApoioEnsino.add("SemTitulo");
                 }
             }
         }
@@ -407,10 +415,14 @@ public class PTDMB {
 
                 if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
                     errosTabelaAtividadesASeremPropostas.add("erroInTerm");
-                }else if (h.getHoraInicio() == null) {
+                } else if (h.getHoraInicio() == null) {
                     errosTabelaAtividadesASeremPropostas.add("Innull");
                 } else if (h.getHoraTermino() == null) {
                     errosTabelaAtividadesASeremPropostas.add("Termnull");
+                } else if (aSP.getCargaHorariaSemanalAtividadeASerProposta() == 0) {
+                    errosTabelaAtividadesASeremPropostas.add("CargZero");
+                } else if (aSP.getRotulo().equals("")) {
+                    errosTabelaAtividadesASeremPropostas.add("SemTitulo");
                 }
             }
         }
@@ -425,6 +437,10 @@ public class PTDMB {
                     errosTabelaAula.add("Innull");
                 } else if (h.getHoraTermino() == null) {
                     errosTabelaAula.add("Termnull");
+                } else if (aula.getCargaHorariaTotal() == 0) {
+                    errosTabelaAula.add("CargZero");
+                } else if (aula.getTipoOferta().getRotulo().equals("")) {
+                    errosTabelaAula.add("SemTitulo");
                 }
             }
 
@@ -437,7 +453,12 @@ public class PTDMB {
                         errosTabelaManuEnsino.add("Innull");
                     } else if (h.getHoraTermino() == null) {
                         errosTabelaManuEnsino.add("Termnull");
+                    } else if (mE.getCargaHorariaSemanalManutencaoEnsino() == 0) {
+                        errosTabelaManuEnsino.add("CargZero");
+                    } else if (mE.getTipoManutencao().equals("")) {
+                        errosTabelaManuEnsino.add("SemTitulo");
                     }
+
                 }
             }
 
@@ -450,18 +471,14 @@ public class PTDMB {
                         errosTabelaOutrasAtividades.add("Innull");
                     } else if (h.getHoraTermino() == null) {
                         errosTabelaOutrasAtividades.add("Termnull");
+                    } else if (oTA.getRotulo().equals("")) {
+                        errosTabelaOutrasAtividades.add("CargZero");
+                    } else if (oTA.getRotulo().equals("")) {
+                        errosTabelaOutrasAtividades.add("SemTitulo");
                     }
                 }
             }
-
-//           for (ProjetoPesquisaExtensao pPE : getPtd().getProjetosPesquisaExtensao()) {
-//             for(Horario h : pPE.getHorariosAula()){
-//                 
-//                 if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
-//                     
-//                 }
-//             }
-//           }
+            // fazer para Projeto Pesquisa e Extensão
         }
     }
 
@@ -476,8 +493,7 @@ public class PTDMB {
     public String abrirNotificacoesDiretorEnsino(int idUsuario) {
         return "/NotificacoesDiretorEnsino";
     }
-    
-    
+
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino() {
         if (getPtd().getApoios().isEmpty() != true) {
             return "Possui irregularidades";
