@@ -96,12 +96,13 @@ public class HorarioMB {
             horarioAtividade = horarioApoioEnsino;
             horarioApoioEnsino = new Horario();
         }
-        if (object instanceof ProjetoPesquisaExtensao) {
-            horarioAtividade = horarioPesquisaExtensao;
-            horarioPesquisaExtensao = new Horario();
-        }
         if (object instanceof Participacao) {
-            horarioAtividade = horarioPesquisaExtensaoParticipacao;
+            if(horarioPesquisaExtensao.getDiaSemana().equalsIgnoreCase("")){
+                horarioAtividade = horarioPesquisaExtensaoParticipacao;
+            } else {
+                horarioAtividade = horarioPesquisaExtensao;
+            }
+            horarioPesquisaExtensao = new Horario();
             horarioPesquisaExtensaoParticipacao = new Horario();
         }
         if (object instanceof Administracao) {
@@ -149,21 +150,6 @@ public class HorarioMB {
             ((Apoio) object).getHorariosApoio().add(horarioAtividade);
             horarioDAO.salvar(((Apoio) object).getHorariosApoio().get(((Apoio) object).getHorariosApoio().size() - 1));
             apoioEnsinoDAO.alterar(((Apoio) object));
-        }
-        if (object instanceof ProjetoPesquisaExtensao) {
-            Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-            Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-            Participacao participacaoAutoria = new Participacao();
-            for (Participacao participacao : ((ProjetoPesquisaExtensao) object).getParticipacoesProjetoPesquisaExtensao()) {
-                if (participacao.getRotulo().equalsIgnoreCase("Autor")) {
-                    participacaoAutoria = participacao;
-                }
-            }
-            participacaoAutoria.setCargaHorariaSemanalParticipacao(participacaoAutoria.getCargaHorariaSemanalParticipacao() + cargaHoraNovoHorario);
-            participacaoAutoria.getHorariosParticipacao().add(horarioAtividade);
-            participacaoDAO.alterar(participacaoAutoria);
-            horarioDAO.salvar(participacaoAutoria.getHorariosParticipacao().get(participacaoAutoria.getHorariosParticipacao().size() - 1));
-            projetoPesquisaExtensaoDAO.alterar(((ProjetoPesquisaExtensao) object));
         }
         if(object instanceof Participacao){
             Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
@@ -240,17 +226,6 @@ public class HorarioMB {
             ((Apoio) object).setCargaHorariaSemanalApoio(cargaHoraNovoHorario);
             apoioEnsinoDAO.alterar((Apoio) object);
         }
-        if (object instanceof ProjetoPesquisaExtensao) {
-            Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-            Participacao participacaoAutoria = new Participacao();
-            for (Participacao participacao : ((ProjetoPesquisaExtensao) object).getParticipacoesProjetoPesquisaExtensao()) {
-                if (participacao.getRotulo().equalsIgnoreCase("Autor")) {
-                    participacaoAutoria = participacao;
-                }
-            }
-            participacaoAutoria.setCargaHorariaSemanalParticipacao(participacaoAutoria.getCargaHorariaSemanalParticipacao() + cargaHoraNovoHorario);
-            participacaoDAO.alterar(participacaoAutoria);
-        }
         if(object instanceof Participacao){
             Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
             ((Participacao) object).setCargaHorariaSemanalParticipacao(cargaHoraNovoHorario);
@@ -317,18 +292,6 @@ public class HorarioMB {
             apoioEnsinoDAO.alterar((Apoio) object);
             ((Apoio) object).getHorariosApoio().remove(horario);
             apoioEnsinoDAO.alterar(((Apoio) object));
-        }
-        if (object instanceof ProjetoPesquisaExtensao) {
-            Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-            Participacao participacaoAutoria = new Participacao();
-            for (Participacao participacao : ((ProjetoPesquisaExtensao) object).getParticipacoesProjetoPesquisaExtensao()) {
-                if (participacao.getRotulo().equalsIgnoreCase("Autor")) {
-                    participacaoAutoria = participacao;
-                }
-            }
-            participacaoAutoria.setCargaHorariaSemanalParticipacao(participacaoAutoria.getCargaHorariaSemanalParticipacao() - cargaHoraNovoHorario);
-            participacaoAutoria.getHorariosParticipacao().remove(horario);
-            participacaoDAO.alterar(participacaoAutoria);
         }
         if(object instanceof Participacao){
             Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
