@@ -435,8 +435,8 @@
 
                     <!-- Mostrar erro na tabela aulas -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarErros(pTDMB.errosTabelaAula)};">
-                            <h:dataTable  value="#{pTDMB.errosTabelaAula}" 
+                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.ptd.aulas)};">
+                            <h:dataTable  value="#{pTDMB.ptd.aulas}" 
                                           var="erroAula" 
                                           style="width: auto;"
                                           headerClass="text-center"
@@ -446,7 +446,7 @@
                                     <f:facet name="header">
 
                                     </f:facet>
-                                    <h:outputText value="#{erroAula}" 
+                                    <h:outputText value="#{erroAula.componenteCurricular}" 
                                                   styleClass="text01"
                                                   style="font-size: small; color: #C92345;"/>
                                 </h:column>
@@ -1323,14 +1323,13 @@
                                       styleClass="text01"
                                       style="font-size: large; width: 400px;"/>
                         <p:commandButton styleClass="botaoCinza" 
+                                         value="Novo nesse sistema"
+                                         onclick="PF('addProjetoPesquisaExtensaoDialog').show();"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoCinza" 
                                          value="Já cadastrado nesse sistema"
                                          action="#{projetoPesquisaExtensaoMB.atualizarListaProjetosCadastradosPorProfessor(usuarioMB.usuarioLogado.idUsuario)}"
                                          onclick="PF('addAtividadePesquisaExtensaoDialog').show();"/>
-
-                        <p:commandButton styleClass="botaoCinza" 
-                                         value="Novo nesse sistema"
-                                         onclick="PF('addProjetoPesquisaExtensaoDialog').show();"/>
-
                     </p:dialog>
                     
                     <!-- Caixa de adição de um Novo Projeto Pesquisa Extensão -->
@@ -1612,8 +1611,8 @@
                               hideEffect="fade" 
                               resizable="false">
 
-                        <h:dataTable  value="#{apoioMB.apoioSelecionadoParaHorario.horariosApoio}" 
-                                      var="horarioSelecionadoEdicaoApoioEnsino" 
+                        <h:dataTable  value="#{projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario.horariosParticipacao}" 
+                                      var="horarioSelecionadoEdicaoPesquisaExtensao" 
                                       style="width: 100%;"
                                       headerClass="text-center"
                                       footerClass="text-center">
@@ -1629,8 +1628,8 @@
                                                   styleClass="text01"/>
                                 </f:facet>
 
-                                <p:selectOneMenu id="selectDiaSemanaEdicaoApoioEnsino" 
-                                                 value="#{horarioSelecionadoEdicaoApoioEnsino.diaSemana}">
+                                <p:selectOneMenu id="selectDiaSemanaEdicaoPesquisaExtensao" 
+                                                 value="#{horarioSelecionadoEdicaoPesquisaExtensao.diaSemana}">
 
                                     <f:selectItems value="#{horarioMB.diasSemana}" 
                                                    var="diaSemana" 
@@ -1648,8 +1647,8 @@
                                                   styleClass="text01"/>
                                 </f:facet>
 
-                                <p:calendar id="horaInicioEdicaoApoioEnsino" 
-                                            value="#{horarioSelecionadoEdicaoApoioEnsino.horaInicio}" 
+                                <p:calendar id="horaInicioEdicaoPesquisaExtensao" 
+                                            value="#{horarioSelecionadoEdicaoPesquisaExtensao.horaInicio}" 
                                             pattern="HH:mm" 
                                             size="5"
                                             timeOnly="true"/>
@@ -1663,8 +1662,8 @@
                                                   styleClass="text01"/>
                                 </f:facet>
 
-                                <p:calendar id="horaTerminooEdicaoApoioEnsino" 
-                                            value="#{horarioSelecionadoEdicaoApoioEnsino.horaTermino}" 
+                                <p:calendar id="horaTerminooEdicaoPesquisaExtensao" 
+                                            value="#{horarioSelecionadoEdicaoPesquisaExtensao.horaTermino}" 
                                             pattern="HH:mm" 
                                             size="5"
                                             timeOnly="true"/>
@@ -1684,7 +1683,7 @@
                                                  value="X" 
                                                  ajax="false" 
                                                  immediate="true"
-                                                 action="#{horarioMB.excluirHorarioAtividade(horarioSelecionadoEdicaoApoioEnsino, apoioMB.apoioSelecionadoParaHorario)}"/>
+                                                 action="#{horarioMB.excluirHorarioAtividade(horarioSelecionadoEdicaoPesquisaExtensao, projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario)}"/>
 
                             </h:column>
 
@@ -1692,7 +1691,7 @@
 
                         <br/>
                         <h:commandButton value="Salvar edição" 
-                                         action="#{horarioMB.alterarHorarioAtividade(apoioMB.apoioSelecionadoParaHorario.horariosApoio, apoioMB.apoioSelecionadoParaHorario)}"
+                                         action="#{horarioMB.alterarHorarioAtividade(projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario.horariosParticipacao, projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario)}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>

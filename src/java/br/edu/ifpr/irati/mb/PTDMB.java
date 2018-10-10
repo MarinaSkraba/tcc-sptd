@@ -159,11 +159,11 @@ public class PTDMB {
             setCargaHorariaTotalOutroTiposAtividade(getCargaHorariaTotalOutroTiposAtividade() + ota.getCargaHorariaSemanalOutroTipoAtividade());
         }
         for (ProjetoPesquisaExtensao ppe : getPtd().getProjetosPesquisaExtensao()) {
-            for (Participacao part : ppe.getParticipacoes()) {
+            for (Participacao part : ppe.getParticipacoesProjetoPesquisaExtensao()) {
                 if (part.getRotulo().equals("AUTOR")) {
-                    setCargaHorariaTotalProjetosPesquisaExtensaoAutor(getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + ppe.getCargaHorariaSemanalProjetoPesquisaExtensao());
+                    setCargaHorariaTotalProjetosPesquisaExtensaoAutor(getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + part.getCargaHorariaSemanalParticipacao());
                 } else if (part.getRotulo().equals("COLABORADOR")) {
-                    setCargaHorariaTotalProjetosPesquisaExtensaoColab(getCargaHorariaTotalProjetosPesquisaExtensaoColab() + ppe.getCargaHorariaSemanalProjetoPesquisaExtensao());
+                    setCargaHorariaTotalProjetosPesquisaExtensaoColab(getCargaHorariaTotalProjetosPesquisaExtensaoColab() + part.getCargaHorariaSemanalParticipacao());
                 }
             }
         }
@@ -463,12 +463,7 @@ public class PTDMB {
 //             }
 //           }
         }
-
-    
-
-    
-
-    
+    }
 
     public int verificarListaErros(List<String> erros) {
         if (erros.isEmpty()) {
@@ -478,19 +473,11 @@ public class PTDMB {
         }
     }
 
-//     public void gerarPDF(Object document) throws IOException, BadElementException, DocumentException {
-//        Document pdf = (Document) document;
-//        pdf.open();
-//        pdf.setPageSize(PageSize.A4);
-// 
-//        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-//        String logo = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo" + File.separator + "images" + File.separator + "prime_logo.png";
-//         
-//        pdf.add(Image.getInstance(logo));
-//     }
-//    public String abrirNotificacoesDiretorEnsino(int idUsuario) {
-//        return "/NotificacoesDiretorEnsino";
-//    }
+    public String abrirNotificacoesDiretorEnsino(int idUsuario) {
+        return "/NotificacoesDiretorEnsino";
+    }
+    
+    
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino() {
         if (getPtd().getApoios().isEmpty() != true) {
             return "Possui irregularidades";

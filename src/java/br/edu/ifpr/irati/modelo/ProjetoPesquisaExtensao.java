@@ -38,9 +38,8 @@ public class ProjetoPesquisaExtensao implements Serializable {
     @Column(name = "instituicaoPesquisa", nullable = false, length = 150)
     private String instituicaoPesquisa;
 
-    @Column(name = "cargaHorariaSemanalProjetoPesquisaExtensao", nullable = false)
-    private double cargaHorariaSemanalProjetoPesquisaExtensao;
-
+    @OneToMany
+    private List<Participacao> participacoesProjetoPesquisaExtensao;
 
     public ProjetoPesquisaExtensao() {
 
@@ -50,8 +49,7 @@ public class ProjetoPesquisaExtensao implements Serializable {
         this.tituloProcesso = "";
         this.previsaoConclusao = new Date();
         this.instituicaoPesquisa = "";
-        this.cargaHorariaSemanalProjetoPesquisaExtensao = 0;
-
+        this.participacoesProjetoPesquisaExtensao = new ArrayList();
     }
 
     public ProjetoPesquisaExtensao(int idProjetoPesquisaExtensao, String estadoProjetoPesquisaExtensao, String numeroProcesso, String tituloProcesso, String instituicaoPesquisa, double cargaHorariaSemanalProjetoPesquisaExtensao) {
@@ -61,17 +59,17 @@ public class ProjetoPesquisaExtensao implements Serializable {
         this.tituloProcesso = tituloProcesso;
         this.previsaoConclusao = new Date();
         this.instituicaoPesquisa = instituicaoPesquisa;
-        this.cargaHorariaSemanalProjetoPesquisaExtensao = cargaHorariaSemanalProjetoPesquisaExtensao;
+        this.participacoesProjetoPesquisaExtensao = new ArrayList();
     }
 
-    public ProjetoPesquisaExtensao(int idProjetoPesquisaExtensao, String estadoProjetoPesquisaExtensao, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa, double cargaHorariaSemanalProjetoPesquisaExtensao, List<Participacao> participacoes) {
+    public ProjetoPesquisaExtensao(int idProjetoPesquisaExtensao, String estadoProjetoPesquisaExtensao, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa, double cargaHorariaSemanalProjetoPesquisaExtensao, List<Participacao> participacoesProjetoPesquisaExtensao) {
         this.idProjetoPesquisaExtensao = idProjetoPesquisaExtensao;
         this.estadoProjetoPesquisaExtensao = estadoProjetoPesquisaExtensao;
         this.numeroProcesso = numeroProcesso;
         this.tituloProcesso = tituloProcesso;
         this.previsaoConclusao = previsaoConclusao;
         this.instituicaoPesquisa = instituicaoPesquisa;
-        this.cargaHorariaSemanalProjetoPesquisaExtensao = cargaHorariaSemanalProjetoPesquisaExtensao;
+        this.participacoesProjetoPesquisaExtensao = participacoesProjetoPesquisaExtensao;
     }
 
     public int getIdProjetoPesquisaExtensao() {
@@ -124,25 +122,31 @@ public class ProjetoPesquisaExtensao implements Serializable {
 
     @Override
     public String toString() {
-        return tituloProcesso;
+        return getTituloProcesso();
     }
 
     @Override
     public boolean equals(Object obj) {
         ProjetoPesquisaExtensao pE = (ProjetoPesquisaExtensao) obj;
-        if (this.idProjetoPesquisaExtensao == pE.getIdProjetoPesquisaExtensao()) {
+        if (this.getIdProjetoPesquisaExtensao() == pE.getIdProjetoPesquisaExtensao()) {
             return true;
         } else {
             return false;
         }
     }
 
-    public double getCargaHorariaSemanalProjetoPesquisaExtensao() {
-        return cargaHorariaSemanalProjetoPesquisaExtensao;
+    /**
+     * @return the participacoesProjetoPesquisaExtensao
+     */
+    public List<Participacao> getParticipacoesProjetoPesquisaExtensao() {
+        return participacoesProjetoPesquisaExtensao;
     }
 
-    public void setCargaHorariaSemanalProjetoPesquisaExtensao(double cargaHorariaSemanalProjetoPesquisaExtensao) {
-        this.cargaHorariaSemanalProjetoPesquisaExtensao = cargaHorariaSemanalProjetoPesquisaExtensao;
+    /**
+     * @param participacoesProjetoPesquisaExtensao the participacoesProjetoPesquisaExtensao to set
+     */
+    public void setParticipacoesProjetoPesquisaExtensao(List<Participacao> participacoesProjetoPesquisaExtensao) {
+        this.participacoesProjetoPesquisaExtensao = participacoesProjetoPesquisaExtensao;
     }
 
 }
