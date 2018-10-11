@@ -381,120 +381,145 @@ public class PTDMB {
 
                 if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
                     errosTabelaAdministrativas.add("erroInTerm");
-                } else if (h.getHoraInicio() == null) {
+
+                } else if (h.getHoraInicio().getTime() == 0) {
                     errosTabelaAdministrativas.add("Innull");
-                } else if (h.getHoraTermino() == null) {
+
+                } else if (h.getHoraTermino().getTime() == 0) {
                     errosTabelaAdministrativas.add("Termnull");
+
                 } else if (adm.getCargaHorariaSemanalAdministracao() == 0) {
                     errosTabelaAdministrativas.add("CargZero");
+
                 } else if (adm.getTipoAdministracao().equals("")) {
                     errosTabelaAdministrativas.add("SemTitulo");
 
                 }
             }
-        }
-        for (Apoio apoio : getPtd().getApoios()) {
-            for (Horario h : apoio.getHorariosApoio()) {
-
-                if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
-                    errosTabelaApoioEnsino.add("erroInTerm");
-                } else if (h.getHoraInicio() == null) {
-                    errosTabelaApoioEnsino.add("Innull");
-                } else if (h.getHoraTermino() == null) {
-                    errosTabelaApoioEnsino.add("Termnull");
-                } else if (apoio.getCargaHorariaSemanalApoio() == 0) {
-                    errosTabelaApoioEnsino.add("CargZero");
-                } else if (apoio.getTipoApoio().equals("")) {
-                    errosTabelaApoioEnsino.add("SemTitulo");
-                }
-            }
-        }
-
-        for (AtividadeASerProposta aSP : getPtd().getAtividadesASeremPropostas()) {
-            for (Horario h : aSP.getHorariosAtividadesASerProposta()) {
-
-                if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
-                    errosTabelaAtividadesASeremPropostas.add("erroInTerm");
-                } else if (h.getHoraInicio() == null) {
-                    errosTabelaAtividadesASeremPropostas.add("Innull");
-                } else if (h.getHoraTermino() == null) {
-                    errosTabelaAtividadesASeremPropostas.add("Termnull");
-                } else if (aSP.getCargaHorariaSemanalAtividadeASerProposta() == 0) {
-                    errosTabelaAtividadesASeremPropostas.add("CargZero");
-                } else if (aSP.getRotulo().equals("")) {
-                    errosTabelaAtividadesASeremPropostas.add("SemTitulo");
-                }
-            }
-        }
-
-        for (Aula aula : getPtd().getAulas()) {
-            for (Horario h : aula.getHorariosAula()) {
-
-                if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
-                    errosTabelaAula.add("erroInTerm");
-
-                } else if (h.getHoraInicio() == null) {
-                    errosTabelaAula.add("Innull");
-                } else if (h.getHoraTermino() == null) {
-                    errosTabelaAula.add("Termnull");
-                } else if (aula.getCargaHorariaTotal() == 0) {
-                    errosTabelaAula.add("CargZero");
-                } else if (aula.getTipoOferta().getRotulo().equals("")) {
-                    errosTabelaAula.add("SemTitulo");
-                }
-            }
-
-            for (ManutencaoEnsino mE : getPtd().getManutencoesEnsino()) {
-                for (Horario h : mE.getHorariosManutecao()) {
+            for (Apoio apoio : getPtd().getApoios()) {
+                for (Horario h : apoio.getHorariosApoio()) {
 
                     if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
-                        errosTabelaManuEnsino.add("erroInTerm");
-                    } else if (h.getHoraInicio() == null) {
-                        errosTabelaManuEnsino.add("Innull");
-                    } else if (h.getHoraTermino() == null) {
-                        errosTabelaManuEnsino.add("Termnull");
-                    } else if (mE.getCargaHorariaSemanalManutencaoEnsino() == 0) {
-                        errosTabelaManuEnsino.add("CargZero");
-                    } else if (mE.getTipoManutencao().equals("")) {
-                        errosTabelaManuEnsino.add("SemTitulo");
+                        errosTabelaApoioEnsino.add("erroInTerm");
+                    } else if (h.getHoraInicio().getTime() == 0) {
+                        errosTabelaApoioEnsino.add("Innull");
+                    } else if (h.getHoraTermino().getTime() == 0) {
+                        errosTabelaApoioEnsino.add("Termnull");
+                    } else if (apoio.getCargaHorariaSemanalApoio() == 0) {
+                        errosTabelaApoioEnsino.add("CargZero");
+                    } else if (apoio.getTipoApoio().equals("")) {
+                        errosTabelaApoioEnsino.add("SemTitulo");
                     }
-
                 }
             }
 
-            for (OutroTipoAtividade oTA : getPtd().getOutrosTiposAtividades()) {
-                for (Horario h : oTA.getHorariosOutroTipoAtividade()) {
+            for (AtividadeASerProposta aSP : getPtd().getAtividadesASeremPropostas()) {
+                for (Horario h : aSP.getHorariosAtividadesASerProposta()) {
 
                     if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
-                        errosTabelaOutrasAtividades.add("erroInTerm");
-                    } else if (h.getHoraInicio() == null) {
-                        errosTabelaOutrasAtividades.add("Innull");
-                    } else if (h.getHoraTermino() == null) {
-                        errosTabelaOutrasAtividades.add("Termnull");
-                    } else if (oTA.getRotulo().equals("")) {
-                        errosTabelaOutrasAtividades.add("CargZero");
-                    } else if (oTA.getRotulo().equals("")) {
-                        errosTabelaOutrasAtividades.add("SemTitulo");
+                        errosTabelaAtividadesASeremPropostas.add("erroInTerm");
+                    } else if (h.getHoraInicio().getTime() == 0) {
+                        errosTabelaAtividadesASeremPropostas.add("Innull");
+                    } else if (h.getHoraTermino().getTime() == 0) {
+                        errosTabelaAtividadesASeremPropostas.add("Termnull");
+                    } else if (aSP.getCargaHorariaSemanalAtividadeASerProposta() == 0) {
+                        errosTabelaAtividadesASeremPropostas.add("CargZero");
+                    } else if (aSP.getRotulo().equals("")) {
+                        errosTabelaAtividadesASeremPropostas.add("SemTitulo");
                     }
                 }
             }
-            // fazer para Projeto Pesquisa e Extensão
-            for (Participacao p : getPtd().getParticipacoes()) {
-                for (Horario h : p.getHorariosParticipacao()) {
-                    if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Autor")) {
-                        errosTabelaPesquisaExtensaoAutor.add("");
 
-                    } else if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Colaborador")) {
-                        errosTabelaPesquisaExtensaoColaborador.add("");
+            for (Aula aula : getPtd().getAulas()) {
+                for (Horario h : aula.getHorariosAula()) {
 
-                    } else if (h.getHoraInicio() == null && p.getRotulo().equals("Autor")) {
-                        errosTabelaPesquisaExtensaoAutor.add("");
+                    if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+                        errosTabelaAula.add("erroInTerm");
 
-                    } else if (h.getHoraInicio() == null && p.getRotulo().equals("Colaborador")) {
-                        errosTabelaPesquisaExtensaoColaborador.add("");
+                    } else if (h.getHoraInicio().getTime() == 0) {
+                        errosTabelaAula.add("Innull");
+                    } else if (h.getHoraTermino().getTime() == 0) {
+                        errosTabelaAula.add("Termnull");
+                    } else if (aula.getCargaHorariaTotal() == 0) {
+                        errosTabelaAula.add("CargZero");
+                    } else if (aula.getTipoOferta().getRotulo().equals("")) {
+                        errosTabelaAula.add("SemTitulo");
                     }
                 }
+
+                for (ManutencaoEnsino mE : getPtd().getManutencoesEnsino()) {
+                    for (Horario h : mE.getHorariosManutecao()) {
+
+                        if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+                            errosTabelaManuEnsino.add("erroInTerm");
+                        } else if (h.getHoraInicio().getTime() == 0) {
+                            errosTabelaManuEnsino.add("Innull");
+                        } else if (h.getHoraTermino().getTime() == 0) {
+                            errosTabelaManuEnsino.add("Termnull");
+                        } else if (mE.getCargaHorariaSemanalManutencaoEnsino() == 0) {
+                            errosTabelaManuEnsino.add("CargZero");
+                        } else if (mE.getTipoManutencao().equals("")) {
+                            errosTabelaManuEnsino.add("SemTitulo");
+                        }
+
+                    }
+                }
+
+                for (OutroTipoAtividade oTA : getPtd().getOutrosTiposAtividades()) {
+                    for (Horario h : oTA.getHorariosOutroTipoAtividade()) {
+
+                        if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+                            errosTabelaOutrasAtividades.add("erroInTerm");
+                        } else if (h.getHoraInicio().getTime() == 0) {
+                            errosTabelaOutrasAtividades.add("Innull");
+                        } else if (h.getHoraTermino().getTime() == 0) {
+                            errosTabelaOutrasAtividades.add("Termnull");
+                        } else if (oTA.getCargaHorariaSemanalOutroTipoAtividade() == 0) {
+                            errosTabelaOutrasAtividades.add("CargZero");
+                        } else if (oTA.getRotulo().equals("")) {
+                            errosTabelaOutrasAtividades.add("SemTitulo");
+                        }
+                    }
+                }
+                // fazer para Projeto Pesquisa e Extensão
+                for (Participacao p : getPtd().getParticipacoes()) {
+                    for (Horario h : p.getHorariosParticipacao()) {
+                        if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Autor")) {
+                            errosTabelaPesquisaExtensaoAutor.add("");
+
+                        } else if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Colaborador")) {
+                            errosTabelaPesquisaExtensaoColaborador.add("");
+
+                        } else if (h.getHoraInicio().getTime() == 0 && p.getRotulo().equals("Autor")) {
+                            errosTabelaPesquisaExtensaoAutor.add("");
+
+                        } else if (h.getHoraInicio().getTime() == 0 && p.getRotulo().equals("Colaborador")) {
+                            errosTabelaPesquisaExtensaoColaborador.add("");
+
+                        } else if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals("") && p.getRotulo().equals("Autor")) {
+                            errosTabelaPesquisaExtensaoAutor.add("");
+
+                        } else if (p.getCargaHorariaSemanalParticipacao() == 0 && p.getRotulo().equals("Autor")) {
+                            errosTabelaPesquisaExtensaoAutor.add("");
+
+                        } else if (p.getCargaHorariaSemanalParticipacao() == 0 && p.getRotulo().equals("Colaborador")) {
+                            errosTabelaPesquisaExtensaoColaborador.add("");
+                        }
+
+                    }
+                    for (Participacao p2 : getPtd().getParticipacoes()) {
+                        if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals(p2.getProjetoPesquisaExtensao().getTituloProcesso()) && p.getRotulo().equals("Autor")) {
+                            errosTabelaPesquisaExtensaoAutor.add("");
+
+                        } else if (p.getProjetoPesquisaExtensao().getNumeroProcesso().equals(p2.getProjetoPesquisaExtensao().getNumeroProcesso()) && p.getRotulo().equals("Autor")) {
+                            errosTabelaPesquisaExtensaoAutor.add("");
+
+                        }
+                    }
+                }
+
             }
+
         }
     }
 
@@ -506,9 +531,12 @@ public class PTDMB {
         }
     }
 
-    public String salvarComentários() {
-        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+    public String
+            salvarComentários() {
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class
+        );
         ptdDAO.alterar(ptd);
+
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
