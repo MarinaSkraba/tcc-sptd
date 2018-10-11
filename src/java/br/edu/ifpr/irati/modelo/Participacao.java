@@ -32,6 +32,10 @@ public class Participacao implements Serializable {
     @JoinColumn(name = "professor_idUsuario")
     private Professor professor;
 
+    @ManyToOne
+    @JoinColumn(name = "projetopesquisaextensao_idProjetoPesquisaExtensao")
+    private ProjetoPesquisaExtensao projetoPesquisaExtensao;
+
     @OneToMany
     private List<Horario> horariosParticipacao;
 
@@ -42,6 +46,7 @@ public class Participacao implements Serializable {
         this.cargaHorariaSemanalParticipacao = 0;
         this.professor = new Professor();
         this.horariosParticipacao = new ArrayList();
+        this.projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
 
     }
 
@@ -52,14 +57,16 @@ public class Participacao implements Serializable {
         this.cargaHorariaSemanalParticipacao = cargaHorariaSemanalParticipacao;
         this.professor = new Professor();
         this.horariosParticipacao = new ArrayList();
+        this.projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
     }
 
-    public Participacao(int idParticipacao, String rotulo, String estadoParticipacao, double cargaHorariaSemanalParticipacao, Professor professor, List<Horario> horariosParticipacao) {
+    public Participacao(int idParticipacao, String rotulo, String estadoParticipacao, double cargaHorariaSemanalParticipacao, Professor professor, ProjetoPesquisaExtensao projetoPesquisaExtensao, List<Horario> horariosParticipacao) {
         this.idParticipacao = idParticipacao;
         this.rotulo = rotulo;
         this.estadoParticipacao = estadoParticipacao;
         this.cargaHorariaSemanalParticipacao = cargaHorariaSemanalParticipacao;
         this.professor = professor;
+        this.projetoPesquisaExtensao = projetoPesquisaExtensao;
         this.horariosParticipacao = horariosParticipacao;
     }
 

@@ -38,8 +38,6 @@ public class ProjetoPesquisaExtensao implements Serializable {
     @Column(name = "instituicaoPesquisa", nullable = false, length = 150)
     private String instituicaoPesquisa;
 
-    @OneToMany
-    private List<Participacao> participacoesProjetoPesquisaExtensao;
 
     public ProjetoPesquisaExtensao() {
 
@@ -49,7 +47,6 @@ public class ProjetoPesquisaExtensao implements Serializable {
         this.tituloProcesso = "";
         this.previsaoConclusao = new Date();
         this.instituicaoPesquisa = "";
-        this.participacoesProjetoPesquisaExtensao = new ArrayList();
     }
 
     public ProjetoPesquisaExtensao(int idProjetoPesquisaExtensao, String estadoProjetoPesquisaExtensao, String numeroProcesso, String tituloProcesso, String instituicaoPesquisa, double cargaHorariaSemanalProjetoPesquisaExtensao) {
@@ -59,7 +56,6 @@ public class ProjetoPesquisaExtensao implements Serializable {
         this.tituloProcesso = tituloProcesso;
         this.previsaoConclusao = new Date();
         this.instituicaoPesquisa = instituicaoPesquisa;
-        this.participacoesProjetoPesquisaExtensao = new ArrayList();
     }
 
     public ProjetoPesquisaExtensao(int idProjetoPesquisaExtensao, String estadoProjetoPesquisaExtensao, String numeroProcesso, String tituloProcesso, Date previsaoConclusao, String instituicaoPesquisa, double cargaHorariaSemanalProjetoPesquisaExtensao, List<Participacao> participacoesProjetoPesquisaExtensao) {
@@ -69,7 +65,6 @@ public class ProjetoPesquisaExtensao implements Serializable {
         this.tituloProcesso = tituloProcesso;
         this.previsaoConclusao = previsaoConclusao;
         this.instituicaoPesquisa = instituicaoPesquisa;
-        this.participacoesProjetoPesquisaExtensao = participacoesProjetoPesquisaExtensao;
     }
 
     public int getIdProjetoPesquisaExtensao() {
@@ -133,20 +128,6 @@ public class ProjetoPesquisaExtensao implements Serializable {
         } else {
             return false;
         }
-    }
-
-    /**
-     * @return the participacoesProjetoPesquisaExtensao
-     */
-    public List<Participacao> getParticipacoesProjetoPesquisaExtensao() {
-        return participacoesProjetoPesquisaExtensao;
-    }
-
-    /**
-     * @param participacoesProjetoPesquisaExtensao the participacoesProjetoPesquisaExtensao to set
-     */
-    public void setParticipacoesProjetoPesquisaExtensao(List<Participacao> participacoesProjetoPesquisaExtensao) {
-        this.participacoesProjetoPesquisaExtensao = participacoesProjetoPesquisaExtensao;
     }
 
 }
