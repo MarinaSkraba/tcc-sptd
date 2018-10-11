@@ -3120,9 +3120,149 @@
 
                     </p:dialog>
 
-                    <br/>
+                    <br/><br/>
+                    
+                    <!-- Caixas para Justivicativas Irregularidades -->
+                    
+                    <!-- Justificativa Aulas -->
+                    <p:dialog header="Justificativas para aulas" 
+                              widgetVar="justificarAulasDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
 
-                    <br/>
+                        <h:outputText value="Escreva comentários ou justificativas para as irregularidades nas atividades de aula" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaAtividadeEnsino}"/>
+                        <br/>
+                        <h:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarComentários()}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <!-- Justificativa Manutenção Ensino -->
+                    <p:dialog header="Justificativas para manutenção" 
+                              widgetVar="justificarManuEnsinoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Escreva comentários ou justificativas para as irregularidades nas atividades de manutenção de ensino" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaManutencaoEnsino}"/>
+                        <br/>
+                        <h:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarComentários()}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <!-- Justificativa Apoio ao Ensino -->
+                    <p:dialog header="Justificativas para apoio ao ensino" 
+                              widgetVar="justificarApoioEnsinoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Escreva comentários ou justificativas para as irregularidades nas atividades de apoio ao ensino" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaApoioEnsino}"/>
+                        <br/>
+                        <h:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarComentários()}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <!-- Justificativa Pesquisa Extensão -->
+                    <p:dialog header="Justificativas para projetos" 
+                              widgetVar="justificarPesquisaExtensaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Escreva comentários ou justificativas para as irregularidades nas atividades de projetos de pesquisa e/ou extensão" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaProjetoPesquisaExtensao}"/>
+                        <br/>
+                        <h:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarComentários()}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <!-- Justificativa Administrativas -->
+                    <p:dialog header="Justificativas para atividades administrativas" 
+                              widgetVar="justificarAdministrativasDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Escreva comentários ou justificativas para as irregularidades nas atividades administrativas" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaAdministracao}"/>
+                        <br/>
+                        <h:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarComentários()}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <!-- Justificativa Outras Atividades -->
+                    <p:dialog header="Justificativas para outras atividades" 
+                              widgetVar="justificarAdministrativasDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Escreva comentários ou justificativas para as irregularidades em outras atividades desenvolvidas no campus" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaOutrasAtividades}"/>
+                        <br/>
+                        <h:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarComentários()}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <!-- Justificativa Outras Atividades -->
+                    <p:dialog header="Justificativas para atividades a propor" 
+                              widgetVar="justificarAdministrativasDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Escreva comentários ou justificativas para as irregularidades em atividades a serem propostas" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaSeremPropostas}"/>
+                        <br/>
+                        <h:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarComentários()}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
 
                     <!-- Tabela de resultados de horários -->
                     <h:outputText value="6. Quadro geral das atividades - Carga Horaria Semanal" 

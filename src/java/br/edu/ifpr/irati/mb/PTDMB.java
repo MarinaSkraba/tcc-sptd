@@ -489,11 +489,17 @@ public class PTDMB {
             return 1;
         }
     }
+    
+    public String salvarComentários(){
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptdDAO.alterar(ptd);
+        return "CriarCorrigirPTD?faces-redirect=true";
+    }
 
     public String abrirNotificacoesDiretorEnsino(int idUsuario) {
         return "/NotificacoesDiretorEnsino";
     }
-
+    
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino() {
         if (getPtd().getApoios().isEmpty() != true) {
             return "Possui irregularidades";
