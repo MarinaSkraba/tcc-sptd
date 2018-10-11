@@ -139,9 +139,19 @@
                                              onclick="PF('addAulaDialog').show();"/>
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
-                                             value="?"/>
+                                             value="?"
+                                             id="ajudaAula"/>
                         </h:panelGrid>
                     </h:panelGrid>
+
+                    <!-- Informações ajuda Aula -->
+                    <p:overlayPanel for="ajudaAula" 
+                                    hideEffect="fade" 
+                                    style="padding: 0px;">
+                        <h:outputText value="" 
+                                      styleClass="text01"
+                                      style="font-weight: normal; font-size: large; width: 100px;"/>
+                    </p:overlayPanel>
 
                     <!-- Caixa de adição de aulas -->
                     <p:dialog header="Adicionar aula" 
@@ -618,9 +628,19 @@
                                              onclick="PF('addManuEnsinoDialog').show();"/>
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
-                                             value="?"/>
+                                             value="?"
+                                             id="ajudaManuEnsino"/>
                         </h:panelGrid>
                     </h:panelGrid>
+                    
+                    <!-- Informações ajuda Manutenção de ensino -->
+                    <p:overlayPanel for="ajudaManuEnsino" 
+                                    hideEffect="fade" 
+                                    style="padding: 0px;">
+                        <h:outputText value="" 
+                                      styleClass="text01"
+                                      style="font-weight: normal; font-size: large;"/>
+                    </p:overlayPanel>
 
                     <!-- Caixa de adição de Manutenção de ensino -->
                     <p:dialog header="Adicionar Manutenção de Ensino" 
@@ -989,9 +1009,19 @@
                                              onclick="PF('addApoioEnsinoDialog').show();"/>
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
-                                             value="?"/>
+                                             value="?"
+                                             id="ajudaApoioEnsino"/>
                         </h:panelGrid>
                     </h:panelGrid>
+                    
+                    <!-- Informações ajuda Apoio ao ensino -->
+                    <p:overlayPanel for="ajudaApoioEnsino" 
+                                    hideEffect="fade" 
+                                    style="padding: 0px;">
+                        <h:outputText value="" 
+                                      styleClass="text01"
+                                      style="font-weight: normal; font-size: large;"/>
+                    </p:overlayPanel>
 
                     <!-- Caixa de adição de Apoio Ensino -->
                     <p:dialog header="Adicionar Apoio ao Ensino" 
@@ -1366,10 +1396,20 @@
                                              onclick="PF('diferenciacaoCadastroAtividadeProjetoPesquisaExtensao').show();"/>
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
-                                             value="?"/>
+                                             value="?"
+                                             id="ajudaPesquisaExtensaoAutor"/>
 
                         </h:panelGrid>
                     </h:panelGrid>
+                    
+                    <!-- Informações ajuda Pesquisa e/ou extensão (Autor) -->
+                    <p:overlayPanel for="ajudaPesquisaExtensaoAutor" 
+                                    hideEffect="fade" 
+                                    style="padding: 0px;">
+                        <h:outputText value="" 
+                                      styleClass="text01"
+                                      style="font-weight: normal; font-size: large;"/>
+                    </p:overlayPanel>
 
                     <!-- Caixa de diferenciação do tipo de criação de atividade de projeto (autor): Com um novo projeto ou com um ja cadastrado -->
                     <p:dialog header="Adicionar Atividade de Projeto" 
@@ -1579,7 +1619,7 @@
                             </h:column>
                         </h:dataTable>
                     </div>
-                    
+
                     <!-- Mostrar erros na tabela pesquisa e/ou extensão (Autor) -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaPesquisaExtensaoAutor)};">
@@ -1606,7 +1646,7 @@
                             </h:panelGrid>
                         </div>
                     </center>
-                    
+
                     <!-- Caixa para adicionar horário à Atividade de Pesquisa e Extensão -->
                     <p:dialog header="Adicionar Horario à Atividade de Pesquisa e Extensão" 
                               widgetVar="addHorarioPesquisaExtensaoDialog" 
@@ -1767,9 +1807,19 @@
                                              onclick="PF('addPesquisaExtensaoColabDialog').show();"/>
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
-                                             value="?"/>
+                                             value="?"
+                                             id="ajudaPesquisaExtensaoColab"/>
                         </h:panelGrid>
                     </h:panelGrid>
+                    
+                    <!-- Informações ajuda Pesquisa e/ou extensao (Colaborador) -->
+                    <p:overlayPanel for="ajudaPesquisaExtensaoColab" 
+                                    hideEffect="fade" 
+                                    style="padding: 0px;">
+                        <h:outputText value="" 
+                                      styleClass="text01"
+                                      style="font-weight: normal; font-size: large;"/>
+                    </p:overlayPanel>
 
                     <!-- Mostrar tabela atividades pesquisa e/ou extensão (Colaborador) -->
                     <div id="mostrarTabela">
@@ -1887,7 +1937,7 @@
                         </h:dataTable>
                     </div>
                     <br/>
-                    
+
                     <!-- Mostrar erros na tabela pesquisa e/ou extensão (Colaborador) -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaPesquisaExtensaoColaborador)};">
@@ -1935,9 +1985,19 @@
                                              onclick="PF('addAdministracaoDialog').show();"/>
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
-                                             value="?"/>
+                                             value="?"
+                                             id="ajudaAdministrativas"/>
                         </h:panelGrid>
                     </h:panelGrid>
+                    
+                    <!-- Informações ajuda Administrativas -->
+                    <p:overlayPanel for="ajudaAdministrativas" 
+                                    hideEffect="fade" 
+                                    style="padding: 0px;">
+                        <h:outputText value="" 
+                                      styleClass="text01"
+                                      style="font-weight: normal; font-size: large;"/>
+                    </p:overlayPanel>
 
                     <!-- Caixa de adição de Administrativas -->
                     <p:dialog header="Adicionar Atividade Administrativa" 
@@ -2118,7 +2178,7 @@
 
                         </h:dataTable>
                     </div>
-                    
+
                     <!-- Mostrar erros na tabela administrativas -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaAdministrativas)};">
@@ -2313,9 +2373,19 @@
                                              onclick="PF('addOutrasAtividadesDialog').show();"/>
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
-                                             value="?"/>
+                                             value="?"
+                                             id="ajudaOutrasAtividades"/>
                         </h:panelGrid>
                     </h:panelGrid>
+                    
+                    <!-- Informações ajuda Outras Atividades -->
+                    <p:overlayPanel for="ajudaOutrasAtividades" 
+                                    hideEffect="fade" 
+                                    style="padding: 0px;">
+                        <h:outputText value="" 
+                                      styleClass="text01"
+                                      style="font-weight: normal; font-size: large;"/>
+                    </p:overlayPanel>
 
                     <!-- Caixa de adição de Outras Atividades -->
                     <p:dialog header="Adicionar Outra Atividade" 
@@ -2533,7 +2603,7 @@
 
                         </h:dataTable>
                     </div>
-                    
+
                     <!-- Mostrar erros na tabela outras atividades -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaOutrasAtividades)};">
@@ -2728,9 +2798,19 @@
                                              onclick="PF('addAtividadesAProporDialog').show();"/>
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
-                                             value="?"/>
+                                             value="?"
+                                             id="ajudaAtividadesAPropor"/>
                         </h:panelGrid>
                     </h:panelGrid>
+                    
+                    <!-- Informações ajuda Atividades a propor -->
+                    <p:overlayPanel for="ajudaAtividadesAPropor" 
+                                    hideEffect="fade" 
+                                    style="padding: 0px;">
+                        <h:outputText value="" 
+                                      styleClass="text01"
+                                      style="font-weight: normal; font-size: large;"/>
+                    </p:overlayPanel>
 
                     <!-- Caixa de adição de Atividade à Propor -->
                     <p:dialog header="Adicionar Atividade à Propor" 
@@ -2948,7 +3028,7 @@
 
                         </h:dataTable>
                     </div>
-                    
+
                     <!-- Mostrar erros na tabela atividades a serem propostas -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaAtividadesASeremPropostas)};">
@@ -3121,9 +3201,9 @@
                     </p:dialog>
 
                     <br/><br/>
-                    
+
                     <!-- Caixas para Justivicativas Irregularidades -->
-                    
+
                     <!-- Justificativa Aulas -->
                     <p:dialog header="Justificativas para aulas" 
                               widgetVar="justificarAulasDialog" 
@@ -3143,7 +3223,7 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
-                    
+
                     <!-- Justificativa Manutenção Ensino -->
                     <p:dialog header="Justificativas para manutenção" 
                               widgetVar="justificarManuEnsinoDialog" 
@@ -3163,7 +3243,7 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
-                    
+
                     <!-- Justificativa Apoio ao Ensino -->
                     <p:dialog header="Justificativas para apoio ao ensino" 
                               widgetVar="justificarApoioEnsinoDialog" 
@@ -3183,7 +3263,7 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
-                    
+
                     <!-- Justificativa Pesquisa Extensão -->
                     <p:dialog header="Justificativas para projetos" 
                               widgetVar="justificarPesquisaExtensaoDialog" 
@@ -3203,7 +3283,7 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
-                    
+
                     <!-- Justificativa Administrativas -->
                     <p:dialog header="Justificativas para atividades administrativas" 
                               widgetVar="justificarAdministrativasDialog" 
@@ -3223,7 +3303,7 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
-                    
+
                     <!-- Justificativa Outras Atividades -->
                     <p:dialog header="Justificativas para outras atividades" 
                               widgetVar="justificarAdministrativasDialog" 
@@ -3243,7 +3323,7 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
-                    
+
                     <!-- Justificativa Outras Atividades -->
                     <p:dialog header="Justificativas para atividades a propor" 
                               widgetVar="justificarAdministrativasDialog" 
