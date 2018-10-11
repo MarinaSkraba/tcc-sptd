@@ -128,4 +128,18 @@ public class Participacao implements Serializable {
     public void setCargaHorariaSemanalParticipacao(double cargaHorariaSemanalParticipacao) {
         this.cargaHorariaSemanalParticipacao = cargaHorariaSemanalParticipacao;
     }
+
+    /**
+     * @return the projetoPesquisaExtensao
+     */
+    public ProjetoPesquisaExtensao getProjetoPesquisaExtensao() {
+        return projetoPesquisaExtensao;
+    }
+
+    /**
+     * @param projetoPesquisaExtensao the projetoPesquisaExtensao to set
+     */
+    public void setProjetoPesquisaExtensao(ProjetoPesquisaExtensao projetoPesquisaExtensao) {
+        this.projetoPesquisaExtensao = projetoPesquisaExtensao;
+    }
 }

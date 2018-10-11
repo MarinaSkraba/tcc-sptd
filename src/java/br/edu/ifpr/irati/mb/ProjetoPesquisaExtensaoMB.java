@@ -71,10 +71,11 @@ public class ProjetoPesquisaExtensaoMB {
         ptd.getProjetosPesquisaExtensao().add(projetoPesquisaExtensao);
         participacao.setRotulo("Autor");
         participacao.setProfessor(professorAutor);
+        participacao.setProjetoPesquisaExtensao(projetoPesquisaExtensao);
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
-        projetoPesquisaExtensao.getParticipacoesProjetoPesquisaExtensao().add(participacao);
         projetoExtensaoDAO.alterar(projetoPesquisaExtensao);
+        ptd.getp ;
         ptdDAO.alterar(ptd);
         projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         participacao = new Participacao();
@@ -90,10 +91,11 @@ public class ProjetoPesquisaExtensaoMB {
         ptd.getProjetosPesquisaExtensao().add(projetoPesquisaExtensao);
         participacao.setRotulo("Autor");
         participacao.setProfessor(professorAutor);
+        participacao.setProjetoPesquisaExtensao(projetoPesquisaExtensao);
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
-        projetoPesquisaExtensao.getParticipacoesProjetoPesquisaExtensao().add(participacao);
         projetoExtensaoDAO.alterar(projetoPesquisaExtensao);
+        ptd. ;
         ptdDAO.alterar(ptd);
         projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         participacao = new Participacao();
@@ -109,10 +111,11 @@ public class ProjetoPesquisaExtensaoMB {
         ptd.getProjetosPesquisaExtensao().add(projetoPesquisaExtensao);
         participacao.setRotulo("Colaborador");
         participacao.setProfessor(professorAutor);
+        participacao.setProjetoPesquisaExtensao(projetoPesquisaExtensao);
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
-        projetoPesquisaExtensao.getParticipacoesProjetoPesquisaExtensao().add(participacao);
         projetoExtensaoDAO.alterar(projetoPesquisaExtensao);
+        ptd. ;
         ptdDAO.alterar(ptd);
         projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         participacao = new Participacao();
