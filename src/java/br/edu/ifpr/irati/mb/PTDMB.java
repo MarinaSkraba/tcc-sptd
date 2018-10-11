@@ -479,6 +479,22 @@ public class PTDMB {
                 }
             }
             // fazer para Projeto Pesquisa e Extensão
+            for (Participacao p : getPtd().getParticipacoes()) {
+                for (Horario h : p.getHorariosParticipacao()) {
+                    if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Autor")) {
+                        errosTabelaPesquisaExtensaoAutor.add("");
+
+                    } else if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Colaborador")) {
+                        errosTabelaPesquisaExtensaoColaborador.add("");
+
+                    } else if (h.getHoraInicio() == null && p.getRotulo().equals("Autor")) {
+                        errosTabelaPesquisaExtensaoAutor.add("");
+
+                    } else if (h.getHoraInicio() == null && p.getRotulo().equals("Colaborador")) {
+                        errosTabelaPesquisaExtensaoColaborador.add("");
+                    }
+                }
+            }
         }
     }
 
@@ -489,8 +505,8 @@ public class PTDMB {
             return 1;
         }
     }
-    
-    public String salvarComentários(){
+
+    public String salvarComentários() {
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         return "CriarCorrigirPTD?faces-redirect=true";
@@ -499,7 +515,7 @@ public class PTDMB {
     public String abrirNotificacoesDiretorEnsino(int idUsuario) {
         return "/NotificacoesDiretorEnsino";
     }
-    
+
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino() {
         if (getPtd().getApoios().isEmpty() != true) {
             return "Possui irregularidades";
