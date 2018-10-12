@@ -69,8 +69,6 @@ public class PTDMB {
     private boolean obrigatoriedadeJustificativaManutencaoEnsino;
     private boolean obrigatoriedadeJustificativaPesquisaExtensao;
     private String estadoCargaHorariaPTD;
-    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAutor;
-    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoColab;
     private List<String> errosTabelaAula;
     private List<String> errosTabelaManuEnsino;
     private List<String> errosTabelaApoioEnsino;
@@ -102,8 +100,6 @@ public class PTDMB {
         this.obrigatoriedadeJustificativaManutencaoEnsino = false;
         this.obrigatoriedadeJustificativaPesquisaExtensao = false;
         this.estadoCargaHorariaPTD = "";
-        this.projetosPesquisaExtensaoAutor = new ArrayList();
-        this.projetosPesquisaExtensaoColab = new ArrayList();
         errosTabelaAula = new ArrayList<>();
         errosTabelaManuEnsino = new ArrayList<>();
         errosTabelaApoioEnsino = new ArrayList<>();
@@ -731,22 +727,6 @@ public class PTDMB {
 
     public void setEstadoCargaHorariaPTD(String estadoCargaHorariaPTD) {
         this.estadoCargaHorariaPTD = estadoCargaHorariaPTD;
-    }
-
-    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoAutor() {
-        return projetosPesquisaExtensaoAutor;
-    }
-
-    public void setProjetosPesquisaExtensaoAutor(List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAutor) {
-        this.projetosPesquisaExtensaoAutor = projetosPesquisaExtensaoAutor;
-    }
-
-    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoColab() {
-        return projetosPesquisaExtensaoColab;
-    }
-
-    public void setProjetosPesquisaExtensaoColab(List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoColab) {
-        this.projetosPesquisaExtensaoColab = projetosPesquisaExtensaoColab;
     }
 
     public double getCargaHorariaTotalProjetosPesquisaExtensaoAutor() {

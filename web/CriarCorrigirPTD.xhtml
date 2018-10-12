@@ -1432,9 +1432,41 @@
                                          onclick="PF('addAtividadePesquisaExtensaoDialog').show();"/>
                     </p:dialog>
 
+                    <!-- Caixa de adição de um Novo Projeto Pesquisa Extensão -->
+                    <p:dialog header="Adicionar Projeto Pesquisa Extensão" 
+                              widgetVar="addProjetoPesquisaExtensaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
 
+                        <h:outputText value="PROCESSO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.participacao.projetoPesquisaExtensao.numeroProcesso}"/>
+                        <br/>
+                        <h:outputText value="TÍTULO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.participacao.projetoPesquisaExtensao.tituloProcesso}"/>
+                        <br/>
+                        <h:outputText value="PREVISÃO DE CONCLUSÃO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:calendar value="#{projetoPesquisaExtensaoMB.participacao.projetoPesquisaExtensao.previsaoConclusao}" mode="popup" />
+                        <br/>
 
-                    <!-- Caixa de adição de uma atividade de um Projeto Pesquisa Extensão -->
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de adição de uma atividade de um Projeto Pesquisa Extensão (Autor) -->
                     <p:dialog header="Adicionar Atividade de Pesquisa e Extensão" 
                               widgetVar="addAtividadePesquisaExtensaoDialog" 
                               modal="true" 
@@ -1448,7 +1480,7 @@
                         <br/>
 
                         <p:selectOneMenu id="selectProjetoSeu" 
-                                         value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensao}"
+                                         value="#{projetoPesquisaExtensaoMB.participacao.projetoPesquisaExtensao}"
                                          converter="projetoExtensaoConverter">
 
                             <f:selectItems value="#{projetoPesquisaExtensaoMB.projetosPesquisaExtensaoCadastradosPorProfessor}" 
@@ -1464,7 +1496,7 @@
 
                     </p:dialog>
 
-                    <!-- Caixa de edição de Atividade de Pesquisa e Extensão -->
+                    <!-- Caixa de edição de Atividade de Pesquisa e Extensão (Autor) -->
                     <p:dialog header="Atualizar Atividade de Pesquisa e Extensão" 
                               widgetVar="edtAtividadePesquisaExtensao" 
                               modal="true" 
@@ -1472,29 +1504,23 @@
                               hideEffect="fade" 
                               resizable="false">
 
-                        <h:outputText value="PROJETO" 
-                                      styleClass="text01"
-                                      style="margin: 10px 25px -10px 25px;"/>
-                        <br/>
-                        <p:inputText value="#{apoioMB.apoioSelecionadoParaApoio.tipoApoio.rotulo}"/>
-
                         <h:outputText value="PROCESSO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao.numeroProcesso}"/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaParticipacaoAutor.projetoPesquisaExtensao.numeroProcesso}"/>
                         <br/>
                         <h:outputText value="TÍTULO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao.tituloProcesso}"/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaParticipacaoAutor.projetoPesquisaExtensao.tituloProcesso}"/>
                         <br/>
                         <h:outputText value="PREVISÃO DE CONCLUSÃO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:calendar value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao.previsaoConclusao}" mode="popup" />
+                        <p:calendar value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaParticipacaoAutor.projetoPesquisaExtensao.previsaoConclusao}" mode="popup" />
                         <br/>
 
                         <br/>
@@ -1506,8 +1532,8 @@
 
                     <!-- Mostrar tabela atividades pesquisa e/ou extensão (Autor) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.projetosPesquisaExtensaoAutor}" 
-                                      var="projetoPesquisaExtensaoAutor" 
+                        <h:dataTable  value="#{pTDMB.ptd.participacoesAutor}" 
+                                      var="participacaoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
                                       footerClass="text-center">
@@ -1518,7 +1544,7 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoAutor.numeroProcesso}" 
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.numeroProcesso}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1530,7 +1556,7 @@
                                 </f:facet>
 
                                 <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{projetoPesquisaExtensaoAutor.tituloProcesso}"
+                                    <h:outputText value="#{participacaoPesquisaExtensaoAutor.tituloProcesso}"
                                                   styleClass="text01"
                                                   style="font-size: large; width: 100%;" />
                                 </p:scrollPanel>
@@ -1541,7 +1567,7 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoAutor.cargaHorariaSemanalProjetoExtensao}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.cargaHorariaSemanalProjetoExtensao}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1568,31 +1594,58 @@
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{projetoPesquisaExtensaoAutor.horariosProjetoExtensao}" 
-                                              var="horario" 
+                                <h:dataTable  value="#{participacaoPesquisaExtensaoAutor.horariosProjetoExtensao}" 
+                                              var="horarioParticipacaoProjeto" 
                                               headerClass="text-center"
                                               footerClass="text-center"
                                               style="width: 100%;">
 
                                     <h:column>
-                                        <h:outputText value="#{horario.diaSemana}" 
+                                        <h:outputText value="#{horarioParticipacaoProjeto.diaSemana}" 
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
                                     </h:column>
                                     <h:column>
-                                        <h:outputText value="#{horario.horaInicio}"
+                                        <h:outputText value="#{horarioParticipacaoProjeto.horaInicio}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
                                     </h:column>
                                     <h:column>
-                                        <h:outputText value="#{horario.horaTermino}"
+                                        <h:outputText value="#{horarioParticipacaoProjeto.horaTermino}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
                                     </h:column>
+                                    
+                                    <f:facet name="footer">
+
+                                        <p:commandButton styleClass="botaoCinza" 
+                                                         value="..."
+                                                         id="opPHorarioParticipacaoPesquisaExtensaoAutor"
+                                                         action="#{projetoPesquisaExtensaoMB.setParticipacaoAutorSelecionadoParaHorario(participacaoPesquisaExtensaoAutor)}"
+                                                         update="@(.ui-dialog)"/>
+
+                                        <!-- Caixa para seleção de ação referente à Horário -->
+                                        <p:overlayPanel id="opcoesHorarioParticipacaoPesquisaExtensaoAutor" 
+                                                        for="opPHorarioParticipacaoPesquisaExtensaoAutor" 
+                                                        hideEffect="fade" >
+                                            <p:commandButton value="Adicionar"
+                                                             styleClass="opMenuCRUD"
+                                                             onclick="PF('addHorarioPesquisaExtensaoDialog').show();"
+                                                             style="margin: 0px -10px;"/>
+                                            <br/>
+                                            <p:commandButton value="Editar"
+                                                             styleClass="opMenuCRUD"
+                                                             onclick="PF('edtHorariosPesquisaExtensaoDialog').show();"
+                                                             style="margin: 5px -10px 0px;"
+                                                             />
+
+                                        </p:overlayPanel>
+
+                                    </f:facet>
 
                                 </h:dataTable>
 
@@ -1603,7 +1656,7 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoAutor.previsaoConclusao}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.previsaoConclusao}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1613,10 +1666,39 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoAutor.instituicaoPesquisa}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.instituicaoPesquisa}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
+                            <h:column>
+
+                                <p:commandButton styleClass="botaoAzul" 
+                                                 value="..." 
+                                                 action="#{projetoPesquisaExtensaoMB.setParticipacaoAutorSelecionadoParaParticipacaoAutor(participacaoPesquisaExtensaoAutor)}"
+                                                 id="opPAtividadeApoioEnsino"
+                                                 update="@(.ui-dialog)"/>
+
+                                <!-- Caixa para seleção de ação referente à Manutenção Ensino -->
+                                <p:overlayPanel id="opcoesApoioEnsino" 
+                                                for="opPAtividadeApoioEnsino" 
+                                                hideEffect="fade">
+                                    <p:commandButton value="Atualizar"
+                                                     styleClass="opMenuCRUD"
+                                                     action="#{projetoPesquisaExtensaoMB.setParticipacaoAutorSelecionadoParaParticipacaoAutor(participacaoPesquisaExtensaoAutor)}"
+                                                     onclick="PF('edtApoioEnsinoDialog').show();"
+                                                     style="margin: 0px -10px;"/>
+                                    <br/>
+                                    <p:commandButton value="Deletar"
+                                                     styleClass="opMenuCRUD"
+                                                     ajax="false" 
+                                                     immediate="true"
+                                                     action="#{projetoPesquisaExtensaoMB.excluirParticipacaoPesquisaExtensao(participacaoPesquisaExtensaoAutor, pTDMB.ptd)}"
+                                                     style="margin: 5px -10px 0px;"/>
+
+                                </p:overlayPanel>
+
+                            </h:column>
+                            
                         </h:dataTable>
                     </div>
 
@@ -1822,121 +1904,7 @@
                     </p:overlayPanel>
 
                     <!-- Mostrar tabela atividades pesquisa e/ou extensão (Colaborador) -->
-                    <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.projetosPesquisaExtensaoColab}" 
-                                      var="projetoPesquisaExtensaoColab" 
-                                      style="border-spacing: 0pt; width: 100%;"
-                                      headerClass="text-center"
-                                      footerClass="text-center">
-
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="PROCESSO" 
-                                                  styleClass="text01"
-                                                  style="font-size: large; font-weight: bold;"/>
-                                </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoColab.numeroProcesso}" 
-                                              styleClass="text01"
-                                              style="font-size: large;"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="TÍTULO" 
-                                                  styleClass="text01"
-                                                  style="font-size: large; font-weight: bold;"/>
-                                </f:facet>
-
-                                <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{projetoPesquisaExtensaoColab.tituloProcesso}"
-                                                  styleClass="text01"
-                                                  style="font-size: large; width: 100%;" />
-                                </p:scrollPanel>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="CARGA HORÁRIA SEMANAL" 
-                                                  styleClass="text01"
-                                                  style="font-size: large; font-weight: bold;"/>
-                                </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoColab.cargaHorariaSemanalProjetoExtensao}"
-                                              styleClass="text01"
-                                              style="font-size: large;"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <!-- Tabela para títulos de horários -->
-                                    <h:outputText value="HORÁRIO"
-                                                  styleClass="text01"
-                                                  style="font-size: large; font-weight: bold;"/>
-                                    <h:panelGrid border="0"
-                                                 columns="3">
-
-                                        <h:outputText value="dia da semana" 
-                                                      styleClass="text01"
-                                                      style="font-size: large; font-weight: bold;"/>
-                                        <h:outputText value="horário início" 
-                                                      styleClass="text01"
-                                                      style="font-size: large; font-weight: bold;"/>
-                                        <h:outputText value="horário término" 
-                                                      styleClass="text01"
-                                                      style="font-size: large; font-weight: bold;"/>
-
-                                    </h:panelGrid>
-                                </f:facet>
-
-                                <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{projetoPesquisaExtensaoColab.horariosProjetoExtensao}" 
-                                              var="horario" 
-                                              headerClass="text-center"
-                                              footerClass="text-center"
-                                              style="width: 100%;">
-
-                                    <h:column>
-                                        <h:outputText value="#{horario.diaSemana}" 
-                                                      styleClass="text01"
-                                                      style="font-size: large;"/>
-                                    </h:column>
-                                    <h:column>
-                                        <h:outputText value="#{horario.horaInicio}"
-                                                      styleClass="text01"
-                                                      style="font-size: large">
-                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
-                                        </h:outputText>
-                                    </h:column>
-                                    <h:column>
-                                        <h:outputText value="#{horario.horaTermino}"
-                                                      styleClass="text01"
-                                                      style="font-size: large">
-                                            <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
-                                        </h:outputText>
-                                    </h:column>
-
-                                </h:dataTable>
-
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="PREVISÃO DE CONCLUSÃO" 
-                                                  styleClass="text01"
-                                                  style="font-size: large; font-weight: bold;"/>
-                                </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoColab.previsaoConclusao}"
-                                              styleClass="text01"
-                                              style="font-size: large;"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
-                                                  styleClass="text01"
-                                                  style="font-size: large; font-weight: bold;"/>
-                                </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoColab.instituicaoPesquisa}"
-                                              styleClass="text01"
-                                              style="font-size: large;"/>
-                            </h:column>
-                        </h:dataTable>
-                    </div>
-                    <br/>
+                    
 
                     <!-- Mostrar erros na tabela pesquisa e/ou extensão (Colaborador) -->
                     <center>

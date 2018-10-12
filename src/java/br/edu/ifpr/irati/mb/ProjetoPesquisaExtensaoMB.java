@@ -24,7 +24,6 @@ public class ProjetoPesquisaExtensaoMB {
     private Participacao participacaoAutorSelecionadoParaHorario;
     private Participacao participacaoColabSelecionadoParaParticipacaoColab;
     private Participacao participacaoSelecionadoParaHorarioColab;
-    private ProjetoPesquisaExtensao projetoPesquisaExtensao;
     private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoCadastrados;
     private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoCadastradosPorProfessor;
     private Horario horario;
@@ -43,7 +42,6 @@ public class ProjetoPesquisaExtensaoMB {
         participacaoSelecionadoParaHorarioColab = new Participacao();
         tipoProjetoAutor = "";
         tipoProjetoColab = "";
-        projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         horario = new Horario();
         participacao = new Participacao();
         projetosPesquisaExtensaoCadastrados = new ArrayList();
@@ -66,17 +64,15 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         participacao = new Participacao();
-        projetoExtensaoDAO.salvar(projetoPesquisaExtensao);
-        projetoPesquisaExtensao = projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).get(projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).size() - 1);
+        projetoExtensaoDAO.salvar(participacao.getProjetoPesquisaExtensao());
+        participacao.setProjetoPesquisaExtensao(projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).get(projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).size() - 1));
         participacao.setRotulo("Autor");
         participacao.setProfessor(professorAutor);
-        participacao.setProjetoPesquisaExtensao(projetoPesquisaExtensao);
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
-        projetoExtensaoDAO.alterar(projetoPesquisaExtensao);
+        projetoExtensaoDAO.alterar(participacao.getProjetoPesquisaExtensao());
         ptd.getParticipacoesAutor().add(participacao);
         ptdDAO.alterar(ptd);
-        projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         participacao = new Participacao();
 
     }
@@ -89,13 +85,11 @@ public class ProjetoPesquisaExtensaoMB {
         participacao = new Participacao();
         participacao.setRotulo("Autor");
         participacao.setProfessor(professorAutor);
-        participacao.setProjetoPesquisaExtensao(projetoPesquisaExtensao);
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
-        projetoExtensaoDAO.alterar(projetoPesquisaExtensao);
+        projetoExtensaoDAO.alterar(participacao.getProjetoPesquisaExtensao());
         ptd.getParticipacoesAutor().add(participacao);
         ptdDAO.alterar(ptd);
-        projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         participacao = new Participacao();
 
     }
@@ -108,13 +102,11 @@ public class ProjetoPesquisaExtensaoMB {
         participacao = new Participacao();
         participacao.setRotulo("Colaborador");
         participacao.setProfessor(professorAutor);
-        participacao.setProjetoPesquisaExtensao(projetoPesquisaExtensao);
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
-        projetoExtensaoDAO.alterar(projetoPesquisaExtensao);
+        projetoExtensaoDAO.alterar(participacao.getProjetoPesquisaExtensao());
         ptd.getParticipacoesColab().add(participacao);
         ptdDAO.alterar(ptd);
-        projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         participacao = new Participacao();
         
     }
@@ -209,14 +201,6 @@ public class ProjetoPesquisaExtensaoMB {
 
     public void setPtdmb(PTDMB ptdmb) {
         this.ptdmb = ptdmb;
-    }
-    
-    public ProjetoPesquisaExtensao getProjetoPesquisaExtensao() {
-        return projetoPesquisaExtensao;
-    }
-
-    public void setProjetoPesquisaExtensao(ProjetoPesquisaExtensao projetoPesquisaExtensao) {
-        this.projetoPesquisaExtensao = projetoPesquisaExtensao;
     }
 
     public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoCadastrados() {
