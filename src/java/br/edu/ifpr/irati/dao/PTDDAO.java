@@ -75,5 +75,26 @@ public class PTDDAO implements IPTDDAO {
         session.close();
         return filtrados;
     }
+    
+    @Override
+    public List<PTD> buscarPTDsReprovados(Serializable idUsuario) {
+        int id = (int) idUsuario;
+        String estado = "REPROVADO";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "from ptd";
+        Query query = session.createQuery(hql);
+        List<PTD> results = query.list();
+        List<PTD> filtrados = new ArrayList<>();
+        for (PTD ptd : results) {
+            if (ptd.getProfessor().getIdUsuario() == id) {
+                if (ptd.getEstadoPTD().equals(estado)) {
+                    filtrados.add(ptd);
+                }
+            }
+        }
+        session.clear();
+        session.close();
+        return filtrados;
+    }
 
 }

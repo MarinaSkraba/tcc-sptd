@@ -53,7 +53,8 @@ public class PTDMB {
 
     private PTD ptd;
     private PTD ptdEmAvaliacao;
-    private List<PTD> pdtsEmAvaliacao;
+    private List<PTD> ptdsEmAvaliacao;
+    private List<PTD> ptdsReprovados;
     private List<PTD> ptdsEmEdicao;
     private List<Participacao> participacoesAutor;
     private List<Participacao> participacoesColab;
@@ -84,10 +85,12 @@ public class PTDMB {
 
         ptd = new PTD();
         ptdEmAvaliacao = new PTD();
-        pdtsEmAvaliacao = new ArrayList<>();
-        ptdsEmEdicao = new ArrayList();
+        ptdsEmAvaliacao = new ArrayList<>();
+        ptdsReprovados = new ArrayList<>();
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        pdtsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
+//        ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados(ptd);
+        ptdsEmEdicao = new ArrayList();
+        ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         participacoesAutor = new ArrayList<>();
         participacoesColab = new ArrayList<>();
         this.cargaHorariaTotalAdministracoes = 0;
@@ -190,32 +193,66 @@ public class PTDMB {
         }
     }
 
+    public String abrirCriarCorrigirPTDAPartirDeUmReprovado(PTD ptdReprovado) {
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(ptdReprovado.getProfessor().getIdUsuario());
+        for (PTD ptdE : ptdsEmEdicao) {
+            ptdE.setEstadoPTD("CANCELADO");
+            ptdDAOGenerico.alterar(ptdE);
+        }
+        ptdReprovado.setEstadoPTD("EDICAO");
+        ptdReprovado.setIdPTD(0);
+        ptdDAOGenerico.salvar(ptdReprovado);
+        setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(ptdReprovado.getProfessor().getIdUsuario()).get(0));
+        return "/CriarCorrigirPTD";
+    }
+
     public void recarregarTelaCriarCorrigirPTD() {
         atualizarListasParticipacoes(ptd);
 //        verificarErros();
 //        verificarCargaHorariaPTD();
     }
 
-    public String cancelarPTD() {
+    public String
+            cancelarPTD() {
 
-        Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class);
-        Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
-        Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
-        Dao<TipoApoio> tipoApoioDAO = new GenericDAO<>(TipoApoio.class);
-        Dao<AtividadeASerProposta> aASPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
-        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-        Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class);
-        Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
-        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        Dao<ManutencaoEnsino> manutencaoDAO = new GenericDAO<>(ManutencaoEnsino.class);
-        Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class);
-        Dao<OutroTipoAtividade> oTAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
-        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
-        Dao<ProjetoPesquisaExtensao> pPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-        Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
-        Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
+        Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class
+        );
+        Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class
+        );
+        Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class
+        );
+        Dao<TipoApoio> tipoApoioDAO = new GenericDAO<>(TipoApoio.class
+        );
+        Dao<AtividadeASerProposta> aASPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class
+        );
+        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class
+        );
+        Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class
+        );
+        Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class
+        );
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class
+        );
+        Dao<ManutencaoEnsino> manutencaoDAO = new GenericDAO<>(ManutencaoEnsino.class
+        );
+        Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class
+        );
+        Dao<OutroTipoAtividade> oTAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class
+        );
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class
+        );
+        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class
+        );
+        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class
+        );
+        Dao<ProjetoPesquisaExtensao> pPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class
+        );
+        Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class
+        );
+        Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class
+        );
 
         for (Administracao adm : getPtd().getAdministrativas()) {
 
@@ -313,10 +350,9 @@ public class PTDMB {
 
     public String submeterPTD() {
         // Conferência da existência de erros
-        
+
         verificarErros();
-        
-        
+
         if (errosTabelaAdministrativas.isEmpty() != true) {
             return "avisoErrosDialog";
         }
@@ -340,17 +376,18 @@ public class PTDMB {
         }
         if (errosTabelaPesquisaExtensaoColaborador.isEmpty() != true) {
             return "avisoErrosDialog";
-        } 
+
+        } // Conferência da existência de irregularidades
+        //        if () {
+        //            return "avisoIrregularidadeDialog";
+        //        }
         // Conferência da existência de irregularidades
-//        if () {
-//            return "avisoIrregularidadeDialog";
-//        }
-        // Conferência da existência de irregularidades
-//        if () {
-//            return "confirmacaoIrregularidadeDialog";
-//        }
+        //        if () {
+        //            return "confirmacaoIrregularidadeDialog";
+        //        }
         else {
-            Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+            Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
+            );
             getPtd().setEstadoPTD("AVALIACAO");
             ptdDAOGenerico.alterar(getPtd());
             return "conclusãoDialog";
@@ -358,8 +395,10 @@ public class PTDMB {
 
     }
 
-    public String submeterPTDIrregular() {
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+    public String
+            submeterPTDIrregular() {
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
+        );
         getPtd().setEstadoPTD("AVALIACAO");
         ptdDAOGenerico.alterar(getPtd());
 
@@ -538,8 +577,10 @@ public class PTDMB {
         }
     }
 
-    public String salvarJustificativasEComentários() {
-        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+    public String
+            salvarJustificativasEComentários() {
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class
+        );
         ptdDAO.alterar(ptd);
 
         return "CriarCorrigirPTD?faces-redirect=true";
@@ -686,8 +727,10 @@ public class PTDMB {
         return "PTDEmAvaliacao";
     }
 
-    public String reprovarPTD() {
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+    public String
+            reprovarPTD() {
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
+        );
         getPtdEmAvaliacao().setEstadoPTD("REPROVADO");
         getPtdEmAvaliacao().setDiretorEnsino(null);
         ptdDAOGenerico.alterar(getPtdEmAvaliacao());
@@ -704,19 +747,19 @@ public class PTDMB {
     }
 
     /**
-     * @return the pdtsEmAvaliacao
+     * @return the ptdsEmAvaliacao
      */
-    public List<PTD> getPdtsEmAvaliacao() {
+    public List<PTD> getPtdsEmAvaliacao() {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        pdtsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
-        return pdtsEmAvaliacao;
+        ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
+        return ptdsEmAvaliacao;
     }
 
     /**
-     * @param pdtsEmAvaliacao the pdtsEmAvaliacao to set
+     * @param ptdsEmAvaliacao the pdtsEmAvaliacao to set
      */
-    public void setPdtsEmAvaliacao(List<PTD> pdtsEmAvaliacao) {
-        this.pdtsEmAvaliacao = pdtsEmAvaliacao;
+    public void setPtdsEmAvaliacao(List<PTD> ptdsEmAvaliacao) {
+        this.ptdsEmAvaliacao = ptdsEmAvaliacao;
     }
 
     public List<PTD> getPtdsEmEdicao() {
@@ -996,5 +1039,19 @@ public class PTDMB {
      */
     public void setParticipacoesColab(List<Participacao> participacoesColab) {
         this.participacoesColab = participacoesColab;
+    }
+
+    /**
+     * @return the ptdsReprovados
+     */
+    public List<PTD> getPtdsReprovados() {
+        return ptdsReprovados;
+    }
+
+    /**
+     * @param ptdsReprovados the ptdsReprovados to set
+     */
+    public void setPtdsReprovados(List<PTD> ptdsReprovados) {
+        this.ptdsReprovados = ptdsReprovados;
     }
 }

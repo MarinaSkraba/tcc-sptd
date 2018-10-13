@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Tela Inicial</title>
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
@@ -88,7 +89,7 @@
 
             </h:form>
         </div>
-        
+
         <!-- Conteúdo da Tela -->
         <font face="Calibri" 
               size="6" 
@@ -97,8 +98,43 @@
               styleClass="text">
             Notificações
         </font>
-        
-        
+
+        <div id="screen">
+
+            <div id="content" style="width: 50%; border-radius: 10px; border-top-style: solid; border-top-width: medium; border-top-color: #1785ad;">
+                <br/>
+                <h:form>
+
+                    <h:outputText value="PTDs Reprovados" 
+                                  styleClass="text01" 
+                                  style="margin: 0px 0px 0px -50px;"/>
+                    <br/>
+                    <h:dataTable  value="#{pTDMB.ptdsReprovados}" 
+                                  var="ptdReprovado"
+                                  style="border-spacing: 0pt; width: 100%;"
+                                  headerClass="text-center"
+                                  footerClass="text-center">
+                        <h:column>
+                            <f:facet name="header">
+                                <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                            </f:facet>
+                            <h:panelGrid columns="1" 
+                                         style="width:100%" >
+                                <h:outputText value="#{ptdReprovado.campoObservacoesDiretorEnsino}" 
+                                              styleClass="text01"
+                                              style="font-size: large; width: 90%;"/>
+                                <br/>
+                                <p:commandButton styleClass="botaoAzul" 
+                                         value="Colocar em edição"
+                                         action="#{pTDMB.abrirCriarCorrigirPTDAPartirDeUmReprovado(ptdReprovado)}"/>
+                                <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                            </h:panelGrid>
+                        </h:column>
+                    </h:dataTable>
+
+                </h:form>
+            </div>
+        </div>
 
     </h:body>
 </html>
