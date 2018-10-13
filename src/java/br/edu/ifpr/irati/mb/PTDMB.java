@@ -606,12 +606,12 @@ public class PTDMB {
         if ((getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 16) {
             if (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab() > 16) {
 
-                getIrregularidades().add("Erro! A carga horária de projetos de pesquisa e/ou extensão"
+                getIrregularidades().add("A carga horária de projetos de pesquisa e/ou extensão"
                         + " como colaborador e autor é superior à 16 horas!");
 
             } else if (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab() < 16 && getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab() > 1) {
 
-                getIrregularidades().add("Erro! A carga horária de projetos de pesquisa e/ou extensão"
+                getIrregularidades().add("A carga horária de projetos de pesquisa e/ou extensão"
                         + " como colaborador e autor é inferior à 16 horas!");
 
             }
@@ -623,9 +623,9 @@ public class PTDMB {
         if (getCargaHorariaTotalApoios() != 4) {
 
             if (getCargaHorariaTotalApoios() > 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 0) {
-                getIrregularidades().add("Erro! A carga horária é superior à 4 horas em Apoio ao Ensino!");
+                getIrregularidades().add("A carga horária é superior à 4 horas em Apoio ao Ensino!");
             } else {
-                getIrregularidades().add("Erro! A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
+                getIrregularidades().add("A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
             }
 
         }
@@ -638,18 +638,18 @@ public class PTDMB {
 
             if (getCargaHorariaTotalAulas() < 8) {
 
-                getIrregularidades().add("Erro! A carga horária é inferior à 8 horas em Aula!");
+                getIrregularidades().add(" A carga horária é inferior à 8 horas em Aula!");
 
             } else if (getCargaHorariaTotalAulas() > 12) {
 
-                getIrregularidades().add("Erro! A carga horária é superior à 12 horas em Aula!");
+                getIrregularidades().add(" A carga horária é superior à 12 horas em Aula!");
 
             }
 
         } else if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h")) {
             if (getCargaHorariaTotalAulas() < 12) {
 
-                getIrregularidades().add("Erro! A carga horária é inferior à 12 horas em Aula!");
+                getIrregularidades().add(" A carga horária é inferior à 12 horas em Aula!");
 
             } else if (getCargaHorariaTotalAulas() > 16) {
 
@@ -660,7 +660,7 @@ public class PTDMB {
 
                     if ((getCargaHorariaTotalAulas() - excessoEsperadoAula) > 16) {
 
-                        getIrregularidades().add(" Erro! Mesmo descontando a carga horária redistribuída de projeto de pesquisa"
+                        getIrregularidades().add(" Mesmo descontando a carga horária redistribuída de projeto de pesquisa"
                                 + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
                                 + "superior à 16 horas");
 
@@ -675,7 +675,7 @@ public class PTDMB {
 
                     if ((getCargaHorariaTotalAulas() - excessoEsperadoAula) < 12) {
 
-                        getIrregularidades().add(" Erro! Descontando a carga horária redistribuída de projeto de pesquisa"
+                        getIrregularidades().add(" Descontando a carga horária redistribuída de projeto de pesquisa"
                                 + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
                                 + "inferior à 12 horas");
 
@@ -690,12 +690,12 @@ public class PTDMB {
         if (getCargaHorariaTotalManutencoesEnsino() != 4) {
             if (getCargaHorariaTotalManutencoesEnsino() < 4) {
 
-                getIrregularidades().add("Erro! A carga horária é inferior"
+                getIrregularidades().add(" A carga horária é inferior"
                         + " à 4 horas em Manutenção ao Ensino");
 
             } else {
 
-                getIrregularidades().add("Erro! A carga horária é superior "
+                getIrregularidades().add(" A carga horária é superior "
                         + "à 4 horas em Manutenção ao Ensino!");
 
             }
