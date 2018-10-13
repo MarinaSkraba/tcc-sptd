@@ -352,6 +352,7 @@ public class PTDMB {
 
         // Conferência da existência de erros
         verificarErros();
+        verificarCargaHorariaPTD();
 
         if (errosTabelaAdministrativas.isEmpty() != true) {
             return "avisoErrosDialog";
@@ -386,10 +387,6 @@ public class PTDMB {
         //            return "confirmacaoIrregularidadeDialog";
         //        }
         else {
-            Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
-            );
-            getPtd().setEstadoPTD("AVALIACAO");
-            ptdDAOGenerico.alterar(getPtd());
             return "conclusãoDialog";
         }
 
@@ -594,7 +591,7 @@ public class PTDMB {
         }
     }
 
-    public void verificarCargaHorariaPTD(PTD ptd) {
+    public void verificarCargaHorariaPTD() {
 
         for (Administracao adm : getPtd().getAdministrativas()) {
             setCargaHorariaTotalAdministracoes(getCargaHorariaTotalAdministracoes() + adm.getCargaHorariaSemanalAdministracao());
