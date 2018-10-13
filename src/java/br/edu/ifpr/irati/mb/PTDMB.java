@@ -55,6 +55,8 @@ public class PTDMB {
     private PTD ptdEmAvaliacao;
     private List<PTD> pdtsEmAvaliacao;
     private List<PTD> ptdsEmEdicao;
+    private Participacao participacoesAutor;
+    private Participacao participacoesColab;
     private double cargaHorariaTotalAdministracoes;
     private double cargaHorariaTotalApoios;
     private double cargaHorariaTotalAtividadesASeremPropostas;
@@ -858,5 +860,33 @@ public class PTDMB {
      */
     public void setErrosTabelaAtividadesASeremPropostas(List<String> errosTabelaAtividadesASeremPropostas) {
         this.errosTabelaAtividadesASeremPropostas = errosTabelaAtividadesASeremPropostas;
+    }
+
+    /**
+     * @return the participacoesAutor
+     */
+    public Participacao getParticipacoesAutor() {
+        return participacoesAutor;
+    }
+
+    /**
+     * @param participacoesAutor the participacoesAutor to set
+     */
+    public void setParticipacoesAutor(Participacao participacoesAutor) {
+        this.participacoesAutor = participacoesAutor;
+    }
+
+    /**
+     * @return the participacoesColab
+     */
+    public Participacao getParticipacoesColab() {
+        return participacoesColab;
+    }
+
+    /**
+     * @param participacoesColab the participacoesColab to set
+     */
+    public void setParticipacoesColab(Participacao participacoesColab) {
+        this.participacoesColab = participacoesColab;
     }
 }

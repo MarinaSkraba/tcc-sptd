@@ -29,6 +29,7 @@ public class ProjetoPesquisaExtensaoMB {
     private Horario horario;
     private List<Horario> horarios;
     private Participacao participacao;
+    private ProjetoPesquisaExtensao projetoAutorNovo;
     private ProjetoPesquisaExtensao projetoPesquisaExtensaoSelecionado;
     private String tipoProjetoAutor;
     private String tipoProjetoColab;
@@ -44,6 +45,7 @@ public class ProjetoPesquisaExtensaoMB {
         tipoProjetoColab = "";
         horario = new Horario();
         participacao = new Participacao();
+        projetoAutorNovo = new ProjetoPesquisaExtensao();
         projetosPesquisaExtensaoCadastrados = new ArrayList();
         Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         projetosPesquisaExtensaoCadastrados = projetoPesquisaExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class);
@@ -51,27 +53,23 @@ public class ProjetoPesquisaExtensaoMB {
 
     }
 
-    public ProjetoPesquisaExtensaoMB(String tipoProjetoAutor, String tipoProjetoColab) {
-
-        this.tipoProjetoAutor = tipoProjetoAutor;
-        this.tipoProjetoColab = tipoProjetoColab;
-        
-    }
-
     public void salvarProjetoPesquisaExtensao(Professor professorAutor, PTD ptd) {
 
         Dao<ProjetoPesquisaExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-        participacao = new Participacao();
+        projetoAutorNovo.setEstadoProjetoPesquisaExtensao("Ativo");
+        participacao.setProjetoPesquisaExtensao(projetoAutorNovo);
         projetoExtensaoDAO.salvar(participacao.getProjetoPesquisaExtensao());
         participacao.setProjetoPesquisaExtensao(projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).get(projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).size() - 1));
         participacao.setRotulo("Autor");
+        participacao.setEstadoParticipacao("Ativo");
         participacao.setProfessor(professorAutor);
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
         projetoExtensaoDAO.alterar(participacao.getProjetoPesquisaExtensao());
         ptd.getParticipacoesAutor().add(participacao);
+        System.out.println("");
         ptdDAO.alterar(ptd);
         participacao = new Participacao();
 
@@ -82,7 +80,6 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<ProjetoPesquisaExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-        participacao = new Participacao();
         participacao.setRotulo("Autor");
         participacao.setProfessor(professorAutor);
         participacaoDAO.salvar(participacao);
@@ -99,7 +96,6 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<ProjetoPesquisaExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-        participacao = new Participacao();
         participacao.setRotulo("Colaborador");
         participacao.setProfessor(professorAutor);
         participacaoDAO.salvar(participacao);
@@ -288,6 +284,20 @@ public class ProjetoPesquisaExtensaoMB {
      */
     public void setParticipacaoColabSelecionadoParaParticipacaoColab(Participacao participacaoColabSelecionadoParaParticipacaoColab) {
         this.participacaoColabSelecionadoParaParticipacaoColab = participacaoColabSelecionadoParaParticipacaoColab;
+    }
+
+    /**
+     * @return the projetoAutorNovo
+     */
+    public ProjetoPesquisaExtensao getProjetoAutorNovo() {
+        return projetoAutorNovo;
+    }
+
+    /**
+     * @param projetoAutorNovo the projetoAutorNovo to set
+     */
+    public void setProjetoAutorNovo(ProjetoPesquisaExtensao projetoAutorNovo) {
+        this.projetoAutorNovo = projetoAutorNovo;
     }
 
 }

@@ -632,7 +632,7 @@
                                              id="ajudaManuEnsino"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Manutenção de ensino -->
                     <p:overlayPanel for="ajudaManuEnsino" 
                                     hideEffect="fade" 
@@ -1013,7 +1013,7 @@
                                              id="ajudaApoioEnsino"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Apoio ao ensino -->
                     <p:overlayPanel for="ajudaApoioEnsino" 
                                     hideEffect="fade" 
@@ -1401,7 +1401,7 @@
 
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Pesquisa e/ou extensão (Autor) -->
                     <p:overlayPanel for="ajudaPesquisaExtensaoAutor" 
                                     hideEffect="fade" 
@@ -1444,20 +1444,25 @@
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:inputText value="#{projetoPesquisaExtensaoMB.participacao.projetoPesquisaExtensao.numeroProcesso}"/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoAutorNovo.numeroProcesso}"/>
                         <br/>
                         <h:outputText value="TÍTULO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:inputText value="#{projetoPesquisaExtensaoMB.participacao.projetoPesquisaExtensao.tituloProcesso}"/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoAutorNovo.tituloProcesso}"/>
                         <br/>
                         <h:outputText value="PREVISÃO DE CONCLUSÃO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:calendar value="#{projetoPesquisaExtensaoMB.participacao.projetoPesquisaExtensao.previsaoConclusao}" mode="popup" />
+                        <p:calendar value="#{projetoPesquisaExtensaoMB.projetoAutorNovo.previsaoConclusao}" mode="popup" />
                         <br/>
+                        <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoAutorNovo.instituicaoPesquisa}"/>
 
                         <br/>
                         <h:commandButton value="Salvar" 
@@ -1522,6 +1527,11 @@
                         <br/>
                         <p:calendar value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaParticipacaoAutor.projetoPesquisaExtensao.previsaoConclusao}" mode="popup" />
                         <br/>
+                        <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaParticipacaoAutor.projetoPesquisaExtensao.instituicaoPesquisa}"/>
 
                         <br/>
                         <h:commandButton value="Salvar" 
@@ -1619,7 +1629,7 @@
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
                                     </h:column>
-                                    
+
                                     <f:facet name="footer">
 
                                         <p:commandButton styleClass="botaoCinza" 
@@ -1678,7 +1688,7 @@
                                                  id="opPAtividadeApoioEnsino"
                                                  update="@(.ui-dialog)"/>
 
-                                <!-- Caixa para seleção de ação referente à Manutenção Ensino -->
+                                <!-- Caixa para seleção de ação referente à Pesquisa Extenção (Autor) -->
                                 <p:overlayPanel id="opcoesApoioEnsino" 
                                                 for="opPAtividadeApoioEnsino" 
                                                 hideEffect="fade">
@@ -1698,7 +1708,7 @@
                                 </p:overlayPanel>
 
                             </h:column>
-                            
+
                         </h:dataTable>
                     </div>
 
@@ -1788,7 +1798,7 @@
                               hideEffect="fade" 
                               resizable="false">
 
-                        <h:dataTable  value="#{projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario.horariosParticipacao}" 
+                        <h:dataTable  value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaHorario.horariosParticipacao}" 
                                       var="horarioSelecionadoEdicaoPesquisaExtensao" 
                                       style="width: 100%;"
                                       headerClass="text-center"
@@ -1893,7 +1903,7 @@
                                              id="ajudaPesquisaExtensaoColab"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Pesquisa e/ou extensao (Colaborador) -->
                     <p:overlayPanel for="ajudaPesquisaExtensaoColab" 
                                     hideEffect="fade" 
@@ -1904,7 +1914,7 @@
                     </p:overlayPanel>
 
                     <!-- Mostrar tabela atividades pesquisa e/ou extensão (Colaborador) -->
-                    
+
 
                     <!-- Mostrar erros na tabela pesquisa e/ou extensão (Colaborador) -->
                     <center>
@@ -1957,7 +1967,7 @@
                                              id="ajudaAdministrativas"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Administrativas -->
                     <p:overlayPanel for="ajudaAdministrativas" 
                                     hideEffect="fade" 
@@ -2345,7 +2355,7 @@
                                              id="ajudaOutrasAtividades"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Outras Atividades -->
                     <p:overlayPanel for="ajudaOutrasAtividades" 
                                     hideEffect="fade" 
@@ -2770,7 +2780,7 @@
                                              id="ajudaAtividadesAPropor"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Atividades a propor -->
                     <p:overlayPanel for="ajudaAtividadesAPropor" 
                                     hideEffect="fade" 
