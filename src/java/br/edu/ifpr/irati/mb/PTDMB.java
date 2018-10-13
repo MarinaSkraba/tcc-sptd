@@ -646,7 +646,7 @@ public class PTDMB {
 
             }
 
-        } else if (getPtd().getProfessor().getRegimeTrabalho().equals("40h")) {
+        } else if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h")) {
             if (getCargaHorariaTotalAulas() < 12) {
 
                 getIrregularidades().add("Erro! A carga horária é inferior à 12 horas em Aula!");
@@ -706,7 +706,11 @@ public class PTDMB {
         }
 
         setCargaHorariaTotalPTD(getCargaHorariaTotalAdministracoes() + getCargaHorariaTotalApoios() + getCargaHorariaTotalAulas() + getCargaHorariaTotalManutencoesEnsino() + getCargaHorariaTotalOutroTiposAtividade() + getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab());
-        if (Double.parseDouble(getPtd().getProfessor().getRegimeTrabalho()) == getCargaHorariaTotalPTD()) {
+        double regime = 20;
+        if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h")|getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
+            regime = 40;
+        }
+        if (regime == getCargaHorariaTotalPTD()) {
 
             setEstadoCargaHorariaPTD("CORRETO");
 
