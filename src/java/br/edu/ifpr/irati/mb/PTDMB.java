@@ -322,10 +322,20 @@ public class PTDMB {
             ptdDAO.alterar(getPtd());
             oTAtividadeDAO.excluir(oTA);
         }
-        // fazer exclui PPE
-//        for (ProjetoPesquisaExtensao pPesquisaExtensao : getPtd().getProjetosPesquisaExtensao()) {
-//
-//        }
+
+        for (Participacao p : getPtd().getParticipacoes()) {
+
+            if (p.getRotulo().equals("Autor")) {
+
+                pPesquisaExtensaoDAO.excluir(p.getProjetoPesquisaExtensao());
+
+            }
+
+            getPtd().getParticipacoes().remove(p);
+            ptdDAO.alterar(getPtd());
+            participacaoDAO.excluir(p);
+
+        }
 
         return "NotificacoesDocente";
     }
@@ -402,7 +412,6 @@ public class PTDMB {
         errosTabelaPesquisaExtensaoAutor = new ArrayList();
         errosTabelaPesquisaExtensaoColaborador = new ArrayList();
 
-        
         for (Administracao adm : getPtd().getAdministrativas()) {
             for (Horario h : adm.getHorariosAdministracao()) {
 
@@ -707,7 +716,7 @@ public class PTDMB {
 
         setCargaHorariaTotalPTD(getCargaHorariaTotalAdministracoes() + getCargaHorariaTotalApoios() + getCargaHorariaTotalAulas() + getCargaHorariaTotalManutencoesEnsino() + getCargaHorariaTotalOutroTiposAtividade() + getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab());
         double regime = 20;
-        if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h")|getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
+        if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
             regime = 40;
         }
         if (regime == getCargaHorariaTotalPTD()) {
