@@ -147,11 +147,12 @@ body{
 }
 #erros{
     width: 400px;
+    margin: 15px 0px;
     border-radius: 10px;
     border-color: #C92345;
     border-style: solid;
     border-width: thin;
-    background-color: #FAE1CD;
+    background-color: #FFBEC1;
     text-align: left;
 }
 .exclamacaoErro{
