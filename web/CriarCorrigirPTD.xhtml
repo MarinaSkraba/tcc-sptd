@@ -444,7 +444,7 @@
 
                     <!-- Mostrar erros na tabela aulas -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaAula)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaAula)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -823,7 +823,7 @@
 
                     <!-- Mostrar erros na tabela manutenção de ensino -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaManuEnsino)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaManuEnsino)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -1204,7 +1204,7 @@
 
                     <!-- Mostrar erros na tabela apoio ao ensino -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaApoioEnsino)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaApoioEnsino)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -1710,7 +1710,7 @@
 
                     <!-- Mostrar erros na tabela pesquisa e/ou extensão (Autor) -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaPesquisaExtensaoAutor)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaPesquisaExtensaoAutor)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -1914,7 +1914,7 @@
 
                     <!-- Mostrar erros na tabela pesquisa e/ou extensão (Colaborador) -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaPesquisaExtensaoColaborador)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaPesquisaExtensaoColaborador)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -2155,7 +2155,7 @@
 
                     <!-- Mostrar erros na tabela administrativas -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaAdministrativas)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaAdministrativas)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -2580,7 +2580,7 @@
 
                     <!-- Mostrar erros na tabela outras atividades -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaOutrasAtividades)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaOutrasAtividades)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -3005,7 +3005,7 @@
 
                     <!-- Mostrar erros na tabela atividades a serem propostas -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaAtividadesASeremPropostas)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaAtividadesASeremPropostas)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -3380,7 +3380,7 @@
                         <br/>
                         <p:commandButton styleClass="botaoAzul" 
                                          value="Enviar mesmo assim!"
-                                         action="#{pTDMB.submeterPTDIrregular()}"/>
+                                         action="#{pTDMB.submeterPTD()}"/>
 
                     </p:dialog>
                     
@@ -3394,7 +3394,7 @@
 
                         <p:commandButton styleClass="botaoAzul" 
                                          value="Concluído"
-                                         action="/NotificacoesDocente"/>
+                                         action="#{pTDMB.submeterPTD()}"/>
 
                     </p:dialog>
 
@@ -3473,7 +3473,7 @@
                     <br/>
                     <!-- Mostrar irregularidades -->
                     <center>
-                        <div id="irregularidades" style="opacity: 1">
+                        <div id="irregularidades" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.irregularidades)}">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -3502,7 +3502,7 @@
                     <p:commandButton styleClass="botaoAzul" 
                                      style="float: right; border-radius: 30px; font-size: large; margin-left: 10px;" 
                                      value="Submeter"
-                                     onclick="PF('#{pTDMB.submeterPTD()}').show();"/>
+                                     onclick="PF('#{pTDMB.verificarPossibilidadeSubmissao()}').show();"/>
                     <p:commandButton styleClass="botaoCinza" 
                                      style="float: right; border-radius: 30px; font-size: large;" 
                                      value="Cancelar"

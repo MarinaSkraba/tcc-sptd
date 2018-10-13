@@ -212,12 +212,6 @@ public class PTDMB {
         return "/CriarCorrigirPTD";
     }
 
-    public void recarregarTelaCriarCorrigirPTD() {
-        atualizarListasParticipacoes(ptd);
-//        verificarErros();
-//        verificarCargaHorariaPTD();
-    }
-
     public String cancelarPTD() {
 
         Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class
@@ -352,6 +346,15 @@ public class PTDMB {
     }
 
     public String submeterPTD() {
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
+        );
+        getPtd().setEstadoPTD("AVALIACAO");
+        ptdDAOGenerico.alterar(getPtd());
+
+        return "/NotificacoesDocente";
+    }
+
+    public String verificarPossibilidadeSubmissao() {
         // Conferência da existência de erros
 
         verificarErros();
@@ -396,15 +399,6 @@ public class PTDMB {
             return "conclusãoDialog";
         }
 
-    }
-
-    public String submeterPTDIrregular() {
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
-        );
-        getPtd().setEstadoPTD("AVALIACAO");
-        ptdDAOGenerico.alterar(getPtd());
-
-        return "/NotificacoesDocente";
     }
 
     public void verificarErros() {
@@ -571,8 +565,8 @@ public class PTDMB {
         }
     }
 
-    public int verificarListaErros(List<String> erros) {
-        if (erros.isEmpty()) {
+    public int verificarConteúdoListaParaOpacidade(List<String> lista) {
+        if (lista.isEmpty()) {
             return 0;
         } else {
             return 1;
@@ -657,67 +651,7 @@ public class PTDMB {
 
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino(PTD ptd) {
         String resposta = "Correto";
-//        for (Administracao adm : getPtd().getAdministrativas()) {
-//            setCargaHorariaTotalAdministracoes(getCargaHorariaTotalAdministracoes() + adm.getCargaHorariaSemanalAdministracao());
-//        }
-//
-//        for (Apoio ap : getPtd().getApoios()) {
-//            setCargaHorariaTotalApoios(getCargaHorariaTotalApoios() + ap.getCargaHorariaSemanalApoio());
-//        }
-//        if (getCargaHorariaTotalApoios() != 4) {
-//            setObrigatoriedadeJustificativaApoio(true);
-//        }
-//
-//        for (Aula a : getPtd().getAulas()) {
-//            setCargaHorariaTotalAulas(getCargaHorariaTotalAulas() + a.getCargaHorariaTotal());
-//        }
-//
-//        if (getPtd().getProfessor().getRegimeTrabalho().equals("20h")) {
-//
-//            if (getCargaHorariaTotalAulas() < 8 && getCargaHorariaTotalAulas() > 12) {
-//
-//                setObrigatoriedadeJustificativaAula(true);
-//
-//            }
-//
-//        } else if (getPtd().getProfessor().getRegimeTrabalho().equals("40h")) {
-//            if (getCargaHorariaTotalAulas() < 12 && getCargaHorariaTotalAulas() > 16) {
-//
-//                setObrigatoriedadeJustificativaAula(true);
-//            }
-//        }
-//
-//        for (ManutencaoEnsino me : getPtd().getManutencoesEnsino()) {
-//            setCargaHorariaTotalManutencoesEnsino(getCargaHorariaTotalManutencoesEnsino() + me.getCargaHorariaSemanalManutencaoEnsino());
-//        }
-//
-//        if (getCargaHorariaTotalManutencoesEnsino() != 4) {
-//            setObrigatoriedadeJustificativaManutencaoEnsino(true);
-//        }
-//
-//        for (OutroTipoAtividade ota : getPtd().getOutrosTiposAtividades()) {
-//            setCargaHorariaTotalOutroTiposAtividade(getCargaHorariaTotalOutroTiposAtividade() + ota.getCargaHorariaSemanalOutroTipoAtividade());
-//        }
-//        for (Participacao part : getPtd().getParticipacoes()) {
-//            if (part.getRotulo().equals("AUTOR")) {
-//                setCargaHorariaTotalProjetosPesquisaExtensaoAutor(getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + part.getCargaHorariaSemanalParticipacao());
-//            } else if (part.getRotulo().equals("COLABORADOR")) {
-//                setCargaHorariaTotalProjetosPesquisaExtensaoColab(getCargaHorariaTotalProjetosPesquisaExtensaoColab() + part.getCargaHorariaSemanalParticipacao());
-//            }
-//        }
-//        if ((getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 16) {
-//            setObrigatoriedadeJustificativaPesquisaExtensao(true);
-//        }
-//
-//        setCargaHorariaTotalPTD(getCargaHorariaTotalAdministracoes() + getCargaHorariaTotalApoios() + getCargaHorariaTotalAulas() + getCargaHorariaTotalManutencoesEnsino() + getCargaHorariaTotalOutroTiposAtividade() + getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab());
-//        if (Double.parseDouble(getPtd().getProfessor().getRegimeTrabalho()) == getCargaHorariaTotalPTD()) {
-//
-//            setEstadoCargaHorariaPTD("Correto");
-//
-//        } else {
-//
-//            setEstadoCargaHorariaPTD("INCORRETO");
-//        }
+        
         return resposta;
     }
 
@@ -1014,7 +948,6 @@ public class PTDMB {
      * @return the participacoesAutor
      */
     public List<Participacao> getParticipacoesAutor() {
-        recarregarTelaCriarCorrigirPTD();
         return participacoesAutor;
     }
 
@@ -1029,7 +962,6 @@ public class PTDMB {
      * @return the participacoesColab
      */
     public List<Participacao> getParticipacoesColab() {
-        recarregarTelaCriarCorrigirPTD();
         return participacoesColab;
     }
 
