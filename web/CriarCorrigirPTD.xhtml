@@ -71,7 +71,8 @@
 
                 <h:form id="PTD">
 
-
+                    #{pTDMB.recarregarTelaCriarCorrigirPTD()}
+                    
                     <!-- Caixa de confirmação sair de PTD -->
                     <p:dialog header="Cancelar PTD" 
                               widgetVar="sairTelaPTDDialog" 
@@ -110,10 +111,10 @@
                                          value="Manter e sair" 
                                          ajax="false" 
                                          immediate="true"
-                                         action="#{pTDMB.cancelarPTDEfetuandoLogout()}"/>
+                                         action="#{usuarioMB.realizarLogout()}"/>
 
                         <h:commandButton value="Descartar e sair" 
-                                         action="#{pTDMB.cancelarPTD()}"
+                                         action="#{pTDMB.cancelarPTDEfetuandoLogout()}"
                                          styleClass="botaoVermelho"/>
 
                     </p:dialog>
@@ -211,7 +212,7 @@
 
                         <br/>
                         <h:commandButton value="Salvar" 
-                                         action="#{aulaMB.salvarAula(usuarioMB.usuarioLogado.idUsuario, pTDMB.ptd)}" 
+                                         action="#{aulaMB.salvarAula(usuarioMB.usuarioLogado.idUsuario, pTDMB.ptd)}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1542,7 +1543,7 @@
 
                     <!-- Mostrar tabela atividades pesquisa e/ou extensão (Autor) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptd.participacoesAutor}" 
+                        <h:dataTable  value="#{pTDMB.participacoesAutor}" 
                                       var="participacaoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"

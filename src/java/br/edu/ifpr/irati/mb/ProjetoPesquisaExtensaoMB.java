@@ -68,8 +68,7 @@ public class ProjetoPesquisaExtensaoMB {
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
         projetoExtensaoDAO.alterar(participacao.getProjetoPesquisaExtensao());
-        ptd.getParticipacoesAutor().add(participacao);
-        System.out.println("");
+        ptd.getParticipacoes().add(participacao);
         ptdDAO.alterar(ptd);
         participacao = new Participacao();
 
@@ -82,29 +81,31 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         participacao.setRotulo("Autor");
         participacao.setProfessor(professorAutor);
+        participacao.setEstadoParticipacao("Ativo");
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
         projetoExtensaoDAO.alterar(participacao.getProjetoPesquisaExtensao());
-        ptd.getParticipacoesAutor().add(participacao);
+        ptd.getParticipacoes().add(participacao);
         ptdDAO.alterar(ptd);
         participacao = new Participacao();
 
     }
 
     public void salvarProjetoPesquisaExtensaoJaCadastradoColaboracao(Professor professorAutor, PTD ptd) {
-        
+
         Dao<ProjetoPesquisaExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         participacao.setRotulo("Colaborador");
         participacao.setProfessor(professorAutor);
+        participacao.setEstadoParticipacao("Ativo");
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
         projetoExtensaoDAO.alterar(participacao.getProjetoPesquisaExtensao());
-        ptd.getParticipacoesColab().add(participacao);
+        ptd.getParticipacoes().add(participacao);
         ptdDAO.alterar(ptd);
         participacao = new Participacao();
-        
+
     }
 
     public String alterarParticipacaoAutor() {
@@ -115,7 +116,7 @@ public class ProjetoPesquisaExtensaoMB {
         participacaoAutorSelecionadoParaParticipacaoAutor = new Participacao();
         return "CriarCorrigirPTD?faces-redirect=true";
     }
-    
+
     public String alterarParticipacaoColab() {
         Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
@@ -136,11 +137,7 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-        if(ptd.getParticipacoesAutor().contains(participacao)){
-            ptd.getParticipacoesAutor().remove(participacao);
-        } else {
-             ptd.getParticipacoesColab().remove(participacao);
-        }
+        ptd.getParticipacoes().remove(participacao);
         ptdDAO.alterar(ptd);
         participacaoDAO.excluir(participacao);
         return "CriarCorrigirPTD?faces-redirect=true";
@@ -238,7 +235,8 @@ public class ProjetoPesquisaExtensaoMB {
     }
 
     /**
-     * @param participacaoSelecionadoParaHorarioColab the participacaoSelecionadoParaHorarioColab to set
+     * @param participacaoSelecionadoParaHorarioColab the
+     * participacaoSelecionadoParaHorarioColab to set
      */
     public void setParticipacaoSelecionadoParaHorarioColab(Participacao participacaoSelecionadoParaHorarioColab) {
         this.participacaoSelecionadoParaHorarioColab = participacaoSelecionadoParaHorarioColab;
@@ -252,7 +250,8 @@ public class ProjetoPesquisaExtensaoMB {
     }
 
     /**
-     * @param participacaoAutorSelecionadoParaParticipacaoAutor the participacaoAutorSelecionadoParaParticipacaoAutor to set
+     * @param participacaoAutorSelecionadoParaParticipacaoAutor the
+     * participacaoAutorSelecionadoParaParticipacaoAutor to set
      */
     public void setParticipacaoAutorSelecionadoParaParticipacaoAutor(Participacao participacaoAutorSelecionadoParaParticipacaoAutor) {
         this.participacaoAutorSelecionadoParaParticipacaoAutor = participacaoAutorSelecionadoParaParticipacaoAutor;
@@ -266,7 +265,8 @@ public class ProjetoPesquisaExtensaoMB {
     }
 
     /**
-     * @param participacaoAutorSelecionadoParaHorario the participacaoAutorSelecionadoParaHorario to set
+     * @param participacaoAutorSelecionadoParaHorario the
+     * participacaoAutorSelecionadoParaHorario to set
      */
     public void setParticipacaoAutorSelecionadoParaHorario(Participacao participacaoAutorSelecionadoParaHorario) {
         this.participacaoAutorSelecionadoParaHorario = participacaoAutorSelecionadoParaHorario;
@@ -280,7 +280,8 @@ public class ProjetoPesquisaExtensaoMB {
     }
 
     /**
-     * @param participacaoColabSelecionadoParaParticipacaoColab the participacaoColabSelecionadoParaParticipacaoColab to set
+     * @param participacaoColabSelecionadoParaParticipacaoColab the
+     * participacaoColabSelecionadoParaParticipacaoColab to set
      */
     public void setParticipacaoColabSelecionadoParaParticipacaoColab(Participacao participacaoColabSelecionadoParaParticipacaoColab) {
         this.participacaoColabSelecionadoParaParticipacaoColab = participacaoColabSelecionadoParaParticipacaoColab;

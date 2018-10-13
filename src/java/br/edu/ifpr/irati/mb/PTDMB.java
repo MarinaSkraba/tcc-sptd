@@ -55,8 +55,8 @@ public class PTDMB {
     private PTD ptdEmAvaliacao;
     private List<PTD> pdtsEmAvaliacao;
     private List<PTD> ptdsEmEdicao;
-    private Participacao participacoesAutor;
-    private Participacao participacoesColab;
+    private List<Participacao> participacoesAutor;
+    private List<Participacao> participacoesColab;
     private double cargaHorariaTotalAdministracoes;
     private double cargaHorariaTotalApoios;
     private double cargaHorariaTotalAtividadesASeremPropostas;
@@ -88,6 +88,7 @@ public class PTDMB {
         ptdsEmEdicao = new ArrayList();
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         pdtsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
+        participacoesAutor = new ArrayList<>();
         this.cargaHorariaTotalAdministracoes = 0;
         this.cargaHorariaTotalApoios = 0;
         this.cargaHorariaTotalAtividadesASeremPropostas = 0;
@@ -111,6 +112,22 @@ public class PTDMB {
         errosTabelaOutrasAtividades = new ArrayList<>();
         errosTabelaAtividadesASeremPropostas = new ArrayList<>();
 
+    }
+
+    public void atualizarListasParticipacoes(PTD ptd) {
+        if (ptd.getIdPTD() != 0) {
+            Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+            List<Participacao> participacaoAux = ptdDAOGenerico.buscarPorId(ptd.getIdPTD()).getParticipacoes();
+            participacoesAutor = new ArrayList<>();
+            participacoesColab = new ArrayList<>();
+            for (Participacao p : participacaoAux) {
+                if (p.getRotulo().equalsIgnoreCase("Autor")) {
+                    participacoesAutor.add(p);
+                } else {
+                    participacoesColab.add(p);
+                }
+            }
+        }
     }
 
     public void verificarCargaHorariaPTD() {
@@ -156,13 +173,11 @@ public class PTDMB {
         for (OutroTipoAtividade ota : getPtd().getOutrosTiposAtividades()) {
             setCargaHorariaTotalOutroTiposAtividade(getCargaHorariaTotalOutroTiposAtividade() + ota.getCargaHorariaSemanalOutroTipoAtividade());
         }
-        for (ProjetoPesquisaExtensao ppe : getPtd().getProjetosPesquisaExtensao()) {
-            for (Participacao part : ppe.getParticipacoesProjetoPesquisaExtensao()) {
-                if (part.getRotulo().equals("AUTOR")) {
-                    setCargaHorariaTotalProjetosPesquisaExtensaoAutor(getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + part.getCargaHorariaSemanalParticipacao());
-                } else if (part.getRotulo().equals("COLABORADOR")) {
-                    setCargaHorariaTotalProjetosPesquisaExtensaoColab(getCargaHorariaTotalProjetosPesquisaExtensaoColab() + part.getCargaHorariaSemanalParticipacao());
-                }
+        for (Participacao part : getPtd().getParticipacoes()) {
+            if (part.getRotulo().equals("AUTOR")) {
+                setCargaHorariaTotalProjetosPesquisaExtensaoAutor(getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + part.getCargaHorariaSemanalParticipacao());
+            } else if (part.getRotulo().equals("COLABORADOR")) {
+                setCargaHorariaTotalProjetosPesquisaExtensaoColab(getCargaHorariaTotalProjetosPesquisaExtensaoColab() + part.getCargaHorariaSemanalParticipacao());
             }
         }
         if ((getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 16) {
@@ -181,8 +196,7 @@ public class PTDMB {
     }
 
     public String abrirCriarCorrigirPTDEmBranco(Usuario usuario) {
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
-        );
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         Dao<Professor> professorDAOGenerico = new GenericDAO<>(Professor.class);
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         Professor p = professorDAOGenerico.buscarPorId(usuario.getIdUsuario());
@@ -238,6 +252,12 @@ public class PTDMB {
 
             return "/NotificacoesDocente";
         }
+    }
+
+    public void recarregarTelaCriarCorrigirPTD() {
+        atualizarListasParticipacoes(ptd);
+//        verificarErros();
+//        verificarCargaHorariaPTD();
     }
 
     public String cancelarPTD() {
@@ -493,7 +513,7 @@ public class PTDMB {
                     }
                 }
 
-                for (Participacao p : getPtd().getParticipacoesAutor()) {
+                for (Participacao p : getPtd().getParticipacoes()) {
                     for (Horario h : p.getHorariosParticipacao()) {
                         if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Autor")) {
                             errosTabelaPesquisaExtensaoAutor.add("Erro! Você inseriu um horário de início posterior ao de término!");
@@ -511,7 +531,7 @@ public class PTDMB {
                             errosTabelaPesquisaExtensaoAutor.add("Erro! Carga Horária Nula!");
 
                         }
-                        for (Participacao p2 : getPtd().getParticipacoesAutor()) {
+                        for (Participacao p2 : getPtd().getParticipacoes()) {
                             if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals(p2.getProjetoPesquisaExtensao().getTituloProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
                                 errosTabelaPesquisaExtensaoAutor.add("Erro! Você tem mais de uma participação no mesmo projeto, caso trabalhe nvo horário!ele em mais de um dia, adicione um novo horário!");
 
@@ -521,32 +541,6 @@ public class PTDMB {
                         }
                     }
 
-                }
-
-                for (Participacao p : getPtd().getParticipacoesColab()) {
-                    for (Horario h : p.getHorariosParticipacao()) {
-                        if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Autor")) {
-                            errosTabelaPesquisaExtensaoAutor.add("Erro! Você inseriu um horário de início posterior ao de término!");
-
-                        } else if (h.getHoraInicio().getTime() == 0) {
-                            errosTabelaPesquisaExtensaoAutor.add("Erro! Insira um Horário de Início!");
-
-                        } else if (h.getHoraTermino().getTime() == 0) {
-                            errosTabelaPesquisaExtensaoAutor.add("Erro! Insira um Horário de Término!");
-
-                        } else if (p.getCargaHorariaSemanalParticipacao() == 0) {
-                            errosTabelaPesquisaExtensaoAutor.add("Erro! Carga Horária Nula!");
-
-                        }
-                        for (Participacao p2 : getPtd().getParticipacoesColab()) {
-                            if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals(p2.getProjetoPesquisaExtensao().getTituloProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
-                                errosTabelaPesquisaExtensaoAutor.add("Erro! Você tem mais de uma participação no mesmo projeto, caso trabalhe nvo horário!ele em mais de um dia, adicione um novo horário!");
-
-                            } else if (p.getProjetoPesquisaExtensao().getNumeroProcesso().equals(p2.getProjetoPesquisaExtensao().getNumeroProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
-                                errosTabelaPesquisaExtensaoAutor.add("Erro! Você tem mais de uma participação no mesmo projeto, caso trabalhe nele em mais de um dia, adicione um novo horário!");
-                            }
-                        }
-                    }
                 }
 
             }
@@ -865,28 +859,28 @@ public class PTDMB {
     /**
      * @return the participacoesAutor
      */
-    public Participacao getParticipacoesAutor() {
+    public List<Participacao> getParticipacoesAutor() {
         return participacoesAutor;
     }
 
     /**
      * @param participacoesAutor the participacoesAutor to set
      */
-    public void setParticipacoesAutor(Participacao participacoesAutor) {
+    public void setParticipacoesAutor(List<Participacao> participacoesAutor) {
         this.participacoesAutor = participacoesAutor;
     }
 
     /**
      * @return the participacoesColab
      */
-    public Participacao getParticipacoesColab() {
+    public List<Participacao> getParticipacoesColab() {
         return participacoesColab;
     }
 
     /**
      * @param participacoesColab the participacoesColab to set
      */
-    public void setParticipacoesColab(Participacao participacoesColab) {
+    public void setParticipacoesColab(List<Participacao> participacoesColab) {
         this.participacoesColab = participacoesColab;
     }
 }

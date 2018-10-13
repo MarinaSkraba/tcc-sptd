@@ -99,4 +99,18 @@ public class Usuario implements Serializable {
             return false;
         }
     }
+
+    /**
+     * @return the estadoUsuario
+     */
+    public String getEstadoUsuario() {
+        return estadoUsuario;
+    }
+
+    /**
+     * @param estadoUsuario the estadoUsuario to set
+     */
+    public void setEstadoUsuario(String estadoUsuario) {
+        this.estadoUsuario = estadoUsuario;
+    }
 }
