@@ -39,16 +39,8 @@ public class UsuarioMB {
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
         List<Usuario> usuariosCadastrados = usuarioDAO.buscarTodos(Usuario.class);
         if(usuariosCadastrados.isEmpty()){
-//            Usuario u01 = new Usuario();
-//            Usuario u02 = new Usuario();
             Professor p01 = new Professor();
             DiretorEnsino de01 = new DiretorEnsino();
-            
-            
-//            usuarioDAO.salvar(u01);
-//            u01 = usuarioDAO.buscarTodos(Usuario.class).get(usuarioDAO.buscarTodos(Usuario.class).size() - 1);
-//            usuarioDAO.salvar(u02);
-//            u02 = usuarioDAO.buscarTodos(Usuario.class).get(usuarioDAO.buscarTodos(Usuario.class).size() - 1);
             p01.setDataContratacao(new Date());
             p01.setEmail("adm");
             p01.setMatriculaSIAPE("000000");
@@ -65,7 +57,6 @@ public class UsuarioMB {
             
             professorDAO.salvar(p01);
             diretorEnsinoDAO.salvar(de01);
-            
         }
     }
 

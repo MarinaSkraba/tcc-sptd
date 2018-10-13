@@ -53,7 +53,7 @@ public class ProjetoPesquisaExtensaoMB {
 
     }
 
-    public void salvarProjetoPesquisaExtensao(Professor professorAutor, PTD ptd) {
+    public String salvarProjetoPesquisaExtensao(Professor professorAutor, PTD ptd) {
 
         Dao<ProjetoPesquisaExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
@@ -71,10 +71,11 @@ public class ProjetoPesquisaExtensaoMB {
         ptd.getParticipacoes().add(participacao);
         ptdDAO.alterar(ptd);
         participacao = new Participacao();
+        return "CriarCorrigirPTD?faces-redirect=true";
 
     }
 
-    public void salvarProjetoPesquisaExtensaoJaCadastradoAutor(Professor professorAutor, PTD ptd) {
+    public String salvarProjetoPesquisaExtensaoJaCadastradoAutor(Professor professorAutor, PTD ptd) {
 
         Dao<ProjetoPesquisaExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
@@ -88,10 +89,11 @@ public class ProjetoPesquisaExtensaoMB {
         ptd.getParticipacoes().add(participacao);
         ptdDAO.alterar(ptd);
         participacao = new Participacao();
+        return "CriarCorrigirPTD?faces-redirect=true";
 
     }
 
-    public void salvarProjetoPesquisaExtensaoJaCadastradoColaboracao(Professor professorAutor, PTD ptd) {
+    public String salvarProjetoPesquisaExtensaoJaCadastradoColaboracao(Professor professorAutor, PTD ptd) {
 
         Dao<ProjetoPesquisaExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
@@ -105,6 +107,7 @@ public class ProjetoPesquisaExtensaoMB {
         ptd.getParticipacoes().add(participacao);
         ptdDAO.alterar(ptd);
         participacao = new Participacao();
+        return "CriarCorrigirPTD?faces-redirect=true";
 
     }
 
@@ -134,7 +137,6 @@ public class ProjetoPesquisaExtensaoMB {
     }
 
     public String excluirParticipacaoPesquisaExtensao(Participacao participacao, PTD ptd) {
-        Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptd.getParticipacoes().remove(participacao);

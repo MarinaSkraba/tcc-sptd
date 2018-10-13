@@ -72,7 +72,7 @@
                 <h:form id="PTD">
 
                     #{pTDMB.recarregarTelaCriarCorrigirPTD()}
-                    
+
                     <!-- Caixa de confirmação sair de PTD -->
                     <p:dialog header="Cancelar PTD" 
                               widgetVar="sairTelaPTDDialog" 
@@ -1555,7 +1555,7 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.numeroProcesso}" 
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.numeroProcesso}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1565,12 +1565,9 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-
-                                <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{participacaoPesquisaExtensaoAutor.tituloProcesso}"
-                                                  styleClass="text01"
-                                                  style="font-size: large; width: 100%;" />
-                                </p:scrollPanel>
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.tituloProcesso}"
+                                              styleClass="text01"
+                                              style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -1578,7 +1575,7 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.cargaHorariaSemanalProjetoExtensao}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.cargaHorariaSemanalParticipacao}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1605,7 +1602,7 @@
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{participacaoPesquisaExtensaoAutor.horariosProjetoExtensao}" 
+                                <h:dataTable  value="#{participacaoPesquisaExtensaoAutor.horariosParticipacao}" 
                                               var="horarioParticipacaoProjeto" 
                                               headerClass="text-center"
                                               footerClass="text-center"
@@ -1667,7 +1664,7 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.previsaoConclusao}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.previsaoConclusao}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1677,7 +1674,7 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.instituicaoPesquisa}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.instituicaoPesquisa}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1686,17 +1683,17 @@
                                 <p:commandButton styleClass="botaoAzul" 
                                                  value="..." 
                                                  action="#{projetoPesquisaExtensaoMB.setParticipacaoAutorSelecionadoParaParticipacaoAutor(participacaoPesquisaExtensaoAutor)}"
-                                                 id="opPAtividadeApoioEnsino"
+                                                 id="opPAtividadePesquisaExtensaoAutor"
                                                  update="@(.ui-dialog)"/>
 
                                 <!-- Caixa para seleção de ação referente à Pesquisa Extenção (Autor) -->
                                 <p:overlayPanel id="opcoesApoioEnsino" 
-                                                for="opPAtividadeApoioEnsino" 
+                                                for="opPAtividadePesquisaExtensaoAutor" 
                                                 hideEffect="fade">
                                     <p:commandButton value="Atualizar"
                                                      styleClass="opMenuCRUD"
                                                      action="#{projetoPesquisaExtensaoMB.setParticipacaoAutorSelecionadoParaParticipacaoAutor(participacaoPesquisaExtensaoAutor)}"
-                                                     onclick="PF('edtApoioEnsinoDialog').show();"
+                                                     onclick="PF('edtAtividadePesquisaExtensao').show();"
                                                      style="margin: 0px -10px;"/>
                                     <br/>
                                     <p:commandButton value="Deletar"
