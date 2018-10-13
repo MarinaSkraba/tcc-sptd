@@ -34,6 +34,8 @@ public class ProjetoPesquisaExtensaoMB {
     private String tipoProjetoAutor;
     private String tipoProjetoColab;
     private PTDMB ptdmb;
+    private List<Participacao> participacoesAutor;
+    private List<Participacao> participacoesColab;
 
     public ProjetoPesquisaExtensaoMB() {
 
@@ -50,7 +52,25 @@ public class ProjetoPesquisaExtensaoMB {
         Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         projetosPesquisaExtensaoCadastrados = projetoPesquisaExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class);
         projetosPesquisaExtensaoCadastradosPorProfessor = new ArrayList();
+        participacoesAutor = new ArrayList<>();
+        participacoesColab = new ArrayList<>();
 
+    }
+    
+    public void atualizarListasParticipacoes(PTD ptd) {
+        if (ptd.getIdPTD() != 0) {
+            Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+            List<Participacao> participacaoAux = ptdDAOGenerico.buscarPorId(ptd.getIdPTD()).getParticipacoes();
+            setParticipacoesAutor(new ArrayList<>());
+            setParticipacoesColab(new ArrayList<>());
+            for (Participacao p : participacaoAux) {
+                if (p.getRotulo().equalsIgnoreCase("Autor")) {
+                    getParticipacoesAutor().add(p);
+                } else {
+                    getParticipacoesColab().add(p);
+                }
+            }
+        }
     }
 
     public String salvarProjetoPesquisaExtensao(Professor professorAutor, PTD ptd) {
@@ -71,6 +91,7 @@ public class ProjetoPesquisaExtensaoMB {
         ptd.getParticipacoes().add(participacao);
         ptdDAO.alterar(ptd);
         participacao = new Participacao();
+        projetoAutorNovo = new ProjetoPesquisaExtensao();
         return "CriarCorrigirPTD?faces-redirect=true";
 
     }
@@ -301,6 +322,34 @@ public class ProjetoPesquisaExtensaoMB {
      */
     public void setProjetoAutorNovo(ProjetoPesquisaExtensao projetoAutorNovo) {
         this.projetoAutorNovo = projetoAutorNovo;
+    }
+
+    /**
+     * @return the participacoesAutor
+     */
+    public List<Participacao> getParticipacoesAutor() {
+        return participacoesAutor;
+    }
+
+    /**
+     * @param participacoesAutor the participacoesAutor to set
+     */
+    public void setParticipacoesAutor(List<Participacao> participacoesAutor) {
+        this.participacoesAutor = participacoesAutor;
+    }
+
+    /**
+     * @return the participacoesColab
+     */
+    public List<Participacao> getParticipacoesColab() {
+        return participacoesColab;
+    }
+
+    /**
+     * @param participacoesColab the participacoesColab to set
+     */
+    public void setParticipacoesColab(List<Participacao> participacoesColab) {
+        this.participacoesColab = participacoesColab;
     }
 
 }

@@ -71,8 +71,6 @@
 
                 <h:form id="PTD">
 
-                    #{pTDMB.recarregarTelaCriarCorrigirPTD()}
-
                     <!-- Caixa de confirmação sair de PTD -->
                     <p:dialog header="Cancelar PTD" 
                               widgetVar="sairTelaPTDDialog" 
@@ -1536,7 +1534,7 @@
 
                         <br/>
                         <h:commandButton value="Salvar" 
-                                         action="#{projetoPesquisaExtensaoMB.alterarProjetoPesquisaExtensao()}" 
+                                         action="#{projetoPesquisaExtensaoMB.alterarParticipacaoAutor()}" 
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1752,20 +1750,20 @@
                         <br/>
 
                         <p:selectOneMenu id="selectDiaSemanaPesquisaExtensao" 
-                                         value="#{horarioMB.horarioApoioEnsino.diaSemana}">
+                                         value="#{horarioMB.horarioPesquisaExtensaoAutor.diaSemana}">
 
                             <f:selectItems value="#{horarioMB.diasSemana}" 
-                                           var="diaSemanaPesquisaExtensao" 
-                                           itemValue="#{diaSemanaPesquisaExtensao}"
-                                           itemLabel="#{diaSemanaPesquisaExtensao}" />
+                                           var="diaSemanaPesquisaExtensaoAutor" 
+                                           itemValue="#{diaSemanaPesquisaExtensaoAutor}"
+                                           itemLabel="#{diaSemanaPesquisaExtensaoAutor}" />
                         </p:selectOneMenu>
 
                         <h:outputText value="HORÁRIO INÍCIO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -30px 25px;"/>
                         <br/>
-                        <br> <p:calendar id="horaInicioPesquisaExtensao" 
-                                         value="#{horarioMB.horarioApoioEnsino.horaInicio}" 
+                        <br> <p:calendar id="horaInicioPesquisaExtensaoAutor" 
+                                         value="#{horarioMB.horarioPesquisaExtensaoAutor.horaInicio}" 
                                          pattern="HH:mm" 
                                          size="5"
                                          timeOnly="true"/></br>
@@ -1774,8 +1772,8 @@
                                       styleClass="text01"
                                       style="margin: 10px 25px -30px 25px;"/>
                         <br/>
-                        <br> <p:calendar id="horaTerminoPesquisaExtensao" 
-                                         value="#{horarioMB.horarioApoioEnsino.horaTermino}" 
+                        <br> <p:calendar id="horaTerminoPesquisaExtensaoAutor" 
+                                         value="#{horarioMB.horarioPesquisaExtensaoAutor.horaTermino}" 
                                          pattern="HH:mm"
                                          size="5"
                                          timeOnly="true"/>
@@ -1783,7 +1781,7 @@
 
                         <br/>
                         <h:commandButton value="Salvar" 
-                                         action="#{horarioMB.salvarHorarioAtividade(projetoPesquisaExtensaoMB.projetoPesquisaExtensaoSelecionadoParaHorario, usuarioMB.usuarioLogado)}"
+                                         action="#{horarioMB.salvarHorarioAtividade(projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaHorario, usuarioMB.usuarioLogado)}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3195,7 +3193,7 @@
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaAtividadeEnsino}"/>
                         <br/>
                         <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3215,7 +3213,7 @@
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaManutencaoEnsino}"/>
                         <br/>
                         <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3235,7 +3233,7 @@
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaApoioEnsino}"/>
                         <br/>
                         <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3255,7 +3253,7 @@
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaProjetoPesquisaExtensao}"/>
                         <br/>
                         <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3275,7 +3273,7 @@
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaAdministracao}"/>
                         <br/>
                         <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3295,7 +3293,7 @@
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaOutrasAtividades}"/>
                         <br/>
                         <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3315,8 +3313,92 @@
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaSeremPropostas}"/>
                         <br/>
                         <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <!-- Caixa de aviso de erros de preenchimento -->
+                    <p:dialog header="Há erros nos dados fornecidos" 
+                              widgetVar="avisoErrosDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="O documento ainda não pode ser submetido devido ao(s) erro(s) nos dados fornecidos" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaSeremPropostas}"/>
+                        <br/>
+                        <h:commandButton value="Corrigir"
+                                         action="CriarCorrigirPTD?faces-redirect=true"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <!-- Caixa de aviso de irregularidades -->
+                    <p:dialog header="Há irregularidades no documento" 
+                              widgetVar="avisoIrregularidadeDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="O documento não esta completamente de acordo com a legislação, para enviar você deve corrigí-lo ou justificar as irregularidades." 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <h:outputText value="Irregularidades:" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaSeremPropostas}"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="Corrigir"
+                                         action="CriarCorrigirPTD?faces-redirect=true"/>
+
+                    </p:dialog>
+                    
+                    <!-- Caixa de confirmaçao de submissão com irregularidades -->
+                    <p:dialog header="Há irregularidades no documento" 
+                              widgetVar="confirmacaoIrregularidadeDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="O documento não esta completamente de acordo com a legislação" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="Corrigir"
+                                         action="CriarCorrigirPTD?faces-redirect=true"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="Enviar mesmo assim!"
+                                         action="#{pTDMB.submeterPTDIrregular()}"/>
+
+                    </p:dialog>
+                    
+                    <!-- Caixa de confirmaçao de conclusão -->
+                    <p:dialog header="Há irregularidades no documento" 
+                              widgetVar="conclusãoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Concluído!" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="OK"
+                                         action="/NotificacoesDocente"/>
 
                     </p:dialog>
 
@@ -3397,7 +3479,7 @@
                     <p:commandButton styleClass="botaoAzul" 
                                      style="float: right; border-radius: 30px; font-size: large; margin-left: 10px;" 
                                      value="Submeter"
-                                     action="#{pTDMB.submeterPTD()}"/>
+                                     onclick="PF('#{pTDMB.submeterPTD()}').show();"/>
                     <p:commandButton styleClass="botaoCinza" 
                                      style="float: right; border-radius: 30px; font-size: large;" 
                                      value="Cancelar"

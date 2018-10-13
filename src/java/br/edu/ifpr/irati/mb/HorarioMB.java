@@ -35,8 +35,8 @@ public class HorarioMB {
     private Horario horarioAula;
     private Horario horarioManuEnsino;
     private Horario horarioApoioEnsino;
-    private Horario horarioPesquisaExtensao;
-    private Horario horarioPesquisaExtensaoParticipacao;
+    private Horario horarioPesquisaExtensaoAutor;
+    private Horario horarioPesquisaExtensaoColab;
     private Horario horarioAdministracao;
     private Horario horarioOutroTipoAtividade;
     private Horario horarioAtividadeASerProposta;
@@ -48,8 +48,8 @@ public class HorarioMB {
         horarioAula = new Horario();
         horarioManuEnsino = new Horario();
         horarioApoioEnsino = new Horario();
-        horarioPesquisaExtensao = new Horario();
-        horarioPesquisaExtensaoParticipacao = new Horario();
+        horarioPesquisaExtensaoAutor = new Horario();
+        horarioPesquisaExtensaoColab = new Horario();
         horarioAdministracao = new Horario();
         horarioOutroTipoAtividade = new Horario();
         horarioAtividadeASerProposta = new Horario();
@@ -97,13 +97,13 @@ public class HorarioMB {
             horarioApoioEnsino = new Horario();
         }
         if (object instanceof Participacao) {
-            if(horarioPesquisaExtensao.getDiaSemana().equalsIgnoreCase("")){
-                horarioAtividade = horarioPesquisaExtensaoParticipacao;
+            if(horarioPesquisaExtensaoAutor.getDiaSemana().equalsIgnoreCase("")){
+                horarioAtividade = horarioPesquisaExtensaoColab;
             } else {
-                horarioAtividade = horarioPesquisaExtensao;
+                horarioAtividade = horarioPesquisaExtensaoAutor;
             }
-            horarioPesquisaExtensao = new Horario();
-            horarioPesquisaExtensaoParticipacao = new Horario();
+            horarioPesquisaExtensaoAutor = new Horario();
+            horarioPesquisaExtensaoColab = new Horario();
         }
         if (object instanceof Administracao) {
             horarioAtividade = horarioAdministracao;
@@ -442,29 +442,29 @@ public class HorarioMB {
     /**
      * @return the horarioPesquisaExtensao
      */
-    public Horario getHorarioPesquisaExtensao() {
-        return horarioPesquisaExtensao;
+    public Horario getHorarioPesquisaExtensaoAutor() {
+        return horarioPesquisaExtensaoAutor;
     }
 
     /**
-     * @param horarioPesquisaExtensao the horarioPesquisaExtensao to set
+     * @param horarioPesquisaExtensaoAutor the horarioPesquisaExtensao to set
      */
-    public void setHorarioPesquisaExtensao(Horario horarioPesquisaExtensao) {
-        this.horarioPesquisaExtensao = horarioPesquisaExtensao;
+    public void setHorarioPesquisaExtensaoAutor(Horario horarioPesquisaExtensaoAutor) {
+        this.horarioPesquisaExtensaoAutor = horarioPesquisaExtensaoAutor;
     }
 
     /**
      * @return the horarioPesquisaExtensaoParticipacao
      */
     public Horario getHorarioPesquisaExtensaoParticipacao() {
-        return horarioPesquisaExtensaoParticipacao;
+        return horarioPesquisaExtensaoColab;
     }
 
     /**
-     * @param horarioPesquisaExtensaoParticipacao the horarioPesquisaExtensaoParticipacao to set
+     * @param horarioPesquisaExtensaoColab the horarioPesquisaExtensaoParticipacao to set
      */
-    public void setHorarioPesquisaExtensaoParticipacao(Horario horarioPesquisaExtensaoParticipacao) {
-        this.horarioPesquisaExtensaoParticipacao = horarioPesquisaExtensaoParticipacao;
+    public void setHorarioPesquisaExtensaoColab(Horario horarioPesquisaExtensaoColab) {
+        this.horarioPesquisaExtensaoColab = horarioPesquisaExtensaoColab;
     }
 
 }

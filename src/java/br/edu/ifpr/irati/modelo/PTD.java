@@ -56,7 +56,7 @@ public class PTD implements Serializable {
     private Date dataAvaliacaoPTD;
 
     @ManyToOne
-    @JoinColumn(name = "diretorEnsino_idUsuario")
+    @JoinColumn(name = "diretorEnsino_idUsuario", nullable = true)
     private DiretorEnsino diretorEnsino;
 
     @ManyToOne

@@ -93,8 +93,7 @@ public class UsuarioMB {
             if (getUsuarioLogado() instanceof Professor) {
                 return "/NotificacoesDocente";
             } else {
-                PTDMB ptdmb = new PTDMB();
-                return ptdmb.abrirNotificacoesDiretorEnsino(usuario.getIdUsuario());
+                return "/NotificacoesDiretorEnsino";
             }
         }
     }
