@@ -3471,6 +3471,33 @@
                     </center>
 
                     <br/>
+                    <!-- Mostrar irregularidades -->
+                    <center>
+                        <div id="irregularidades" style="opacity: 1">
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="!" 
+                                                  styleClass="exclamacaoIrregularidade"/>
+                                </h:panelGrid>
+                                <h:dataTable  value="#{pTDMB.irregularidades}" 
+                                              var="irregularidade" 
+                                              style="width: auto;"
+                                              headerClass="text-center"
+                                              footerClass="text-center">
+
+                                    <h:column>
+                                        <f:facet name="header">
+
+                                        </f:facet>
+                                        <h:outputText value="#{irregularidade}" 
+                                                      styleClass="text01"
+                                                      style="font-size: small; color: #C92345;"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGrid>
+                        </div>
+                    </center>
+                    <br/>
 
                     <p:commandButton styleClass="botaoAzul" 
                                      style="float: right; border-radius: 30px; font-size: large; margin-left: 10px;" 

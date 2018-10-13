@@ -56,6 +56,7 @@ public class PTDMB {
     private List<PTD> ptdsEmAvaliacao;
     private List<PTD> ptdsReprovados;
     private List<PTD> ptdsEmEdicao;
+    private List<PTD> ptdsAprovados;
     private List<Participacao> participacoesAutor;
     private List<Participacao> participacoesColab;
     private double cargaHorariaTotalAdministracoes;
@@ -80,15 +81,17 @@ public class PTDMB {
     private List<String> errosTabelaAdministrativas;
     private List<String> errosTabelaOutrasAtividades;
     private List<String> errosTabelaAtividadesASeremPropostas;
+    private List<String> irregularidades;
 
     public PTDMB() {
 
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptd = new PTD();
         ptdEmAvaliacao = new PTD();
         ptdsEmAvaliacao = new ArrayList<>();
         ptdsReprovados = new ArrayList<>();
-        IPTDDAO ptdDAOEspecifico = new PTDDAO();
-//        ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados(ptd);
+//        ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados();
+//        ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados();
         ptdsEmEdicao = new ArrayList();
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         participacoesAutor = new ArrayList<>();
@@ -115,6 +118,7 @@ public class PTDMB {
         errosTabelaAdministrativas = new ArrayList<>();
         errosTabelaOutrasAtividades = new ArrayList<>();
         errosTabelaAtividadesASeremPropostas = new ArrayList<>();
+        irregularidades = new ArrayList<>();
 
     }
 
@@ -214,8 +218,7 @@ public class PTDMB {
 //        verificarCargaHorariaPTD();
     }
 
-    public String
-            cancelarPTD() {
+    public String cancelarPTD() {
 
         Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class
         );
@@ -395,8 +398,7 @@ public class PTDMB {
 
     }
 
-    public String
-            submeterPTDIrregular() {
+    public String submeterPTDIrregular() {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
         );
         getPtd().setEstadoPTD("AVALIACAO");
@@ -577,10 +579,8 @@ public class PTDMB {
         }
     }
 
-    public String
-            salvarJustificativasEComentários() {
-        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class
-        );
+    public String salvarJustificativasEComentários() {
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
 
         return "CriarCorrigirPTD?faces-redirect=true";
@@ -727,8 +727,7 @@ public class PTDMB {
         return "PTDEmAvaliacao";
     }
 
-    public String
-            reprovarPTD() {
+    public String reprovarPTD() {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
         );
         getPtdEmAvaliacao().setEstadoPTD("REPROVADO");
@@ -1053,5 +1052,33 @@ public class PTDMB {
      */
     public void setPtdsReprovados(List<PTD> ptdsReprovados) {
         this.ptdsReprovados = ptdsReprovados;
+    }
+
+    /**
+     * @return the ptdsAprovados
+     */
+    public List<PTD> getPtdsAprovados() {
+        return ptdsAprovados;
+    }
+
+    /**
+     * @param ptdsAprovados the ptdsAprovados to set
+     */
+    public void setPtdsAprovados(List<PTD> ptdsAprovados) {
+        this.ptdsAprovados = ptdsAprovados;
+    }
+
+    /**
+     * @return the irregularidades
+     */
+    public List<String> getIrregularidades() {
+        return irregularidades;
+    }
+
+    /**
+     * @param irregularidades the irregularidades to set
+     */
+    public void setIrregularidades(List<String> irregularidades) {
+        this.irregularidades = irregularidades;
     }
 }
