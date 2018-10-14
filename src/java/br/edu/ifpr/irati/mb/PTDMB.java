@@ -96,15 +96,6 @@ public class PTDMB {
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         participacoesAutor = new ArrayList<>();
         participacoesColab = new ArrayList<>();
-        this.cargaHorariaTotalAdministracoes = 0;
-        this.cargaHorariaTotalApoios = 0;
-        this.cargaHorariaTotalAtividadesASeremPropostas = 0;
-        this.cargaHorariaTotalAulas = 0;
-        this.cargaHorariaTotalManutencoesEnsino = 0;
-        this.cargaHorariaTotalOutroTiposAtividade = 0;
-        this.cargaHorariaTotalProjetosPesquisaExtensaoAutor = 0;
-        this.cargaHorariaTotalProjetosPesquisaExtensaoColab = 0;
-        this.cargaHorariaTotalPTD = 0;
         this.estadoCargaHorariaPTD = "";
         errosTabelaAula = new ArrayList<>();
         errosTabelaManuEnsino = new ArrayList<>();
@@ -601,7 +592,15 @@ public class PTDMB {
     }
 
     public void verificarCargaHorariaPTD() {
-
+        
+        irregularidades = new ArrayList<>();
+        cargaHorariaTotalAdministracoes = 0;
+        cargaHorariaTotalApoios = 0;
+        cargaHorariaTotalAtividadesASeremPropostas = 0;
+        cargaHorariaTotalAulas = 0;
+        cargaHorariaTotalManutencoesEnsino = 0;
+        cargaHorariaTotalOutroTiposAtividade = 0;
+        
         for (Administracao adm : getPtd().getAdministrativas()) {
             setCargaHorariaTotalAdministracoes(getCargaHorariaTotalAdministracoes() + adm.getCargaHorariaSemanalAdministracao());
         }
@@ -625,69 +624,72 @@ public class PTDMB {
 
             }
         }
-
-        for (Apoio ap : getPtd().getApoios()) {
-            setCargaHorariaTotalApoios(getCargaHorariaTotalApoios() + ap.getCargaHorariaSemanalApoio());
-        }
-        if (getCargaHorariaTotalApoios() != 4) {
-
-            if (getCargaHorariaTotalApoios() > 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 0) {
-                getIrregularidades().add("A carga horária é superior à 4 horas em Apoio ao Ensino!");
-            } else {
-                getIrregularidades().add("A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
+        if (!getPtd().getApoios().isEmpty()) {
+            for (Apoio ap : getPtd().getApoios()) {
+                setCargaHorariaTotalApoios(getCargaHorariaTotalApoios() + ap.getCargaHorariaSemanalApoio());
             }
+            if (getCargaHorariaTotalApoios() != 4) {
 
-        }
-
-        for (Aula a : getPtd().getAulas()) {
-            setCargaHorariaTotalAulas(getCargaHorariaTotalAulas() + a.getCargaHorariaTotal());
-        }
-
-        if (getPtd().getProfessor().getRegimeTrabalho().equals("20h")) {
-
-            if (getCargaHorariaTotalAulas() < 8) {
-
-                getIrregularidades().add(" A carga horária é inferior à 8 horas em Aula!");
-
-            } else if (getCargaHorariaTotalAulas() > 12) {
-
-                getIrregularidades().add(" A carga horária é superior à 12 horas em Aula!");
+                if (getCargaHorariaTotalApoios() > 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 0) {
+                    getIrregularidades().add("A carga horária é superior à 4 horas em Apoio ao Ensino!");
+                } else {
+                    getIrregularidades().add("A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
+                }
 
             }
+        }
+        if (!getPtd().getAulas().isEmpty()) {
+            for (Aula a : getPtd().getAulas()) {
+                setCargaHorariaTotalAulas(getCargaHorariaTotalAulas() + a.getCargaHorariaTotal());
+               
+            }
 
-        } else if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h")) {
-            if (getCargaHorariaTotalAulas() < 12) {
+            if (getPtd().getProfessor().getRegimeTrabalho().equals("20h")) {
 
-                getIrregularidades().add(" A carga horária é inferior à 12 horas em Aula!");
+                if (getCargaHorariaTotalAulas() < 8) {
 
-            } else if (getCargaHorariaTotalAulas() > 16) {
+                    getIrregularidades().add(" A carga horária é inferior à 8 horas em Aula!");
 
-                if (getCargaHorariaTotalApoios() > 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) == 0) {
+                } else if (getCargaHorariaTotalAulas() > 12) {
 
-                    double excessoApoio = getCargaHorariaTotalApoios() - 4;
-                    double excessoEsperadoAula = 16 - excessoApoio;
-
-                    if ((getCargaHorariaTotalAulas() - excessoEsperadoAula) > 16) {
-
-                        getIrregularidades().add(" Mesmo descontando a carga horária redistribuída de projeto de pesquisa"
-                                + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
-                                + "superior à 16 horas");
-
-                    }
+                    getIrregularidades().add(" A carga horária é superior à 12 horas em Aula!");
 
                 }
-            } else if (getCargaHorariaTotalAulas() >= 12 && getCargaHorariaTotalAulas() <= 16) {
-                if ((getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) == 0) {
 
-                    double excessoApoio = getCargaHorariaTotalApoios() - 4;
-                    double excessoEsperadoAula = 16 - excessoApoio;
+            } else if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h")) {
+                if (getCargaHorariaTotalAulas() < 12) {
 
-                    if ((getCargaHorariaTotalAulas() - excessoEsperadoAula) < 12) {
+                    getIrregularidades().add(" A carga horária é inferior à 12 horas em Aula!");
 
-                        getIrregularidades().add(" Descontando a carga horária redistribuída de projeto de pesquisa"
-                                + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
-                                + "inferior à 12 horas");
+                } else if (getCargaHorariaTotalAulas() > 16) {
 
+                    if (getCargaHorariaTotalApoios() > 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) == 0) {
+
+                        double excessoApoio = getCargaHorariaTotalApoios() - 4;
+                        double excessoEsperadoAula = 16 - excessoApoio;
+
+                        if ((getCargaHorariaTotalAulas() - excessoEsperadoAula) > 16) {
+
+                            getIrregularidades().add(" Mesmo descontando a carga horária redistribuída de projeto de pesquisa"
+                                    + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
+                                    + "superior à 16 horas");
+
+                        }
+
+                    }
+                } else if (getCargaHorariaTotalAulas() >= 12 && getCargaHorariaTotalAulas() <= 16) {
+                    if ((getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) == 0) {
+
+                        double excessoApoio = getCargaHorariaTotalApoios() - 4;
+                        double excessoEsperadoAula = 16 - excessoApoio;
+
+                        if ((getCargaHorariaTotalAulas() - excessoEsperadoAula) < 12) {
+
+                            getIrregularidades().add(" Descontando a carga horária redistribuída de projeto de pesquisa"
+                                    + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
+                                    + "inferior à 12 horas");
+
+                        }
                     }
                 }
             }

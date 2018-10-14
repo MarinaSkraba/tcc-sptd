@@ -42,6 +42,7 @@ public class HorarioMB {
     private Horario horarioAtividadeASerProposta;
     private List<Horario> horarios;
     private List<String> diasSemana;
+    private PTDMB ptdmb;
 
     public HorarioMB() {
 
@@ -97,7 +98,7 @@ public class HorarioMB {
             horarioApoioEnsino = new Horario();
         }
         if (object instanceof Participacao) {
-            if(horarioPesquisaExtensaoAutor.getDiaSemana().equalsIgnoreCase("")){
+            if (horarioPesquisaExtensaoAutor.getDiaSemana().equalsIgnoreCase("")) {
                 horarioAtividade = horarioPesquisaExtensaoColab;
             } else {
                 horarioAtividade = horarioPesquisaExtensaoAutor;
@@ -151,7 +152,7 @@ public class HorarioMB {
             horarioDAO.salvar(((Apoio) object).getHorariosApoio().get(((Apoio) object).getHorariosApoio().size() - 1));
             apoioEnsinoDAO.alterar(((Apoio) object));
         }
-        if(object instanceof Participacao){
+        if (object instanceof Participacao) {
             Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
             ((Participacao) object).setCargaHorariaSemanalParticipacao(((Participacao) object).getCargaHorariaSemanalParticipacao() + cargaHoraNovoHorario);
             ((Participacao) object).getHorariosParticipacao().add(horarioAtividade);
@@ -226,7 +227,7 @@ public class HorarioMB {
             ((Apoio) object).setCargaHorariaSemanalApoio(cargaHoraNovoHorario);
             apoioEnsinoDAO.alterar((Apoio) object);
         }
-        if(object instanceof Participacao){
+        if (object instanceof Participacao) {
             Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
             ((Participacao) object).setCargaHorariaSemanalParticipacao(cargaHoraNovoHorario);
             participacaoDAO.alterar(((Participacao) object));
@@ -293,7 +294,7 @@ public class HorarioMB {
             ((Apoio) object).getHorariosApoio().remove(horario);
             apoioEnsinoDAO.alterar(((Apoio) object));
         }
-        if(object instanceof Participacao){
+        if (object instanceof Participacao) {
             Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
             ((Participacao) object).setCargaHorariaSemanalParticipacao(((Participacao) object).getCargaHorariaSemanalParticipacao() - cargaHoraNovoHorario);
             participacaoDAO.alterar(((Participacao) object));
@@ -461,7 +462,8 @@ public class HorarioMB {
     }
 
     /**
-     * @param horarioPesquisaExtensaoColab the horarioPesquisaExtensaoParticipacao to set
+     * @param horarioPesquisaExtensaoColab the
+     * horarioPesquisaExtensaoParticipacao to set
      */
     public void setHorarioPesquisaExtensaoColab(Horario horarioPesquisaExtensaoColab) {
         this.horarioPesquisaExtensaoColab = horarioPesquisaExtensaoColab;
