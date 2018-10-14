@@ -27,7 +27,7 @@
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Notificações"
-                                 action="/NotificacoesDocente"
+                                 action="/NotificacoesDiretorEnsino"
                                  style="float: left;"/>
 
                 <p:commandButton id="logout"
@@ -258,11 +258,9 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{manutencao.tipoManutencao.rotulo}"
+                                <h:outputText value="#{manutencao.tipoManutencao.rotulo}"
                                                   styleClass="text01"
-                                                  style="font-size: large; width: 100%;" />
-                                </p:scrollPanel>
+                                                  style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -464,11 +462,9 @@
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
 
-                                <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.tituloProcesso}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.tituloProcesso}"
                                                   styleClass="text01"
-                                                  style="font-size: large; width: 100%;" />
-                                </p:scrollPanel>
+                                                  style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -703,11 +699,9 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{administracao.tipoAdministracao.rotulo}"
+                                <h:outputText value="#{administracao.tipoAdministracao.rotulo}"
                                                   styleClass="text01"
-                                                  style="font-size: large; width: 100%;" />
-                                </p:scrollPanel>
+                                                  style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -803,11 +797,9 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{outrasAtividades.rotulo}"
+                                <h:outputText value="#{outrasAtividades.rotulo}"
                                                   styleClass="text01"
-                                                  style="font-size: large; width: 100%;" />
-                                </p:scrollPanel>
+                                                  style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -914,11 +906,9 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{atividadeASerProposta.rotulo}"
+                                <h:outputText value="#{atividadeASerProposta.rotulo}"
                                                   styleClass="text01"
-                                                  style="font-size: large; width: 100%;" />
-                                </p:scrollPanel>
+                                                  style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -1072,13 +1062,40 @@
                         </h:panelGrid>
 
                     </center>
+                    
+                    <!-- Mostrar irregularidades -->
+                    <center>
+                        <div id="irregularidades" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.irregularidades)}">
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="!" 
+                                                  styleClass="exclamacaoIrregularidade"/>
+                                </h:panelGrid>
+                                <h:dataTable  value="#{pTDMB.irregularidades}" 
+                                              var="irregularidade" 
+                                              style="width: auto;"
+                                              headerClass="text-center"
+                                              footerClass="text-center">
+
+                                    <h:column>
+                                        <f:facet name="header">
+
+                                        </f:facet>
+                                        <h:outputText value="#{irregularidade}" 
+                                                      styleClass="text01"
+                                                      style="font-size: small; color: #C92345;"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGrid>
+                        </div>
+                    </center>
 
                     <br/>
 
                     <p:commandButton styleClass="botaoAzul" 
                                      style="float: right; border-radius: 30px; font-size: large; margin-left: 10px;" 
                                      value="Aprovar"
-                                     action="#{pTDMB.submeterPTD()}"/>
+                                     action="#{pTDMB.aprovarPTD(usuarioMB.usuario)}"/>
                     <p:commandButton styleClass="botaoVermelho" 
                                      style="float: right; border-radius: 30px; font-size: large;" 
                                      value="Reprovar PTD"

@@ -146,9 +146,10 @@ public class ProjetoPesquisaExtensaoMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public void atualizarListaProjetosCadastradosPorProfessor(Serializable idUsuario) {
+    public List<ProjetoPesquisaExtensao> atualizarListaProjetosCadastradosPorProfessor(Serializable idUsuario) {
         IProjetoPesquisaExtensaoDao projetoPesquisaExtensaoDAO = new ProjetoPesquisaExtensaoDAO();
         setProjetosPesquisaExtensaoCadastradosPorProfessor(projetoPesquisaExtensaoDAO.buscarProjetosExtensaoPorProfessor(idUsuario));
+        return projetosPesquisaExtensaoCadastradosPorProfessor;
     }
 
     public Horario getHorario() {
@@ -219,6 +220,7 @@ public class ProjetoPesquisaExtensaoMB {
      * @return the projetosPesquisaExtensaoCadastradosPorProfessor
      */
     public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoCadastradosPorProfessor() {
+        
         return projetosPesquisaExtensaoCadastradosPorProfessor;
     }
 

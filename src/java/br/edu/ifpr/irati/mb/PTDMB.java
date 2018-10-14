@@ -338,8 +338,7 @@ public class PTDMB {
     }
 
     public String submeterPTD() {
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
-        );
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         getPtd().setEstadoPTD("AVALIACAO");
         ptdDAOGenerico.alterar(getPtd());
 
@@ -378,7 +377,8 @@ public class PTDMB {
         if (errosTabelaPesquisaExtensaoColaborador.isEmpty() != true) {
             return "avisoErrosDialog";
 
-        } // Conferência da existência de irregularidades
+        }
+        // Conferência da existência de irregularidades
         //        if () {
         //            return "avisoIrregularidadeDialog";
         //        }
@@ -707,7 +707,7 @@ public class PTDMB {
 
         setCargaHorariaTotalPTD(getCargaHorariaTotalAdministracoes() + getCargaHorariaTotalApoios() + getCargaHorariaTotalAulas() + getCargaHorariaTotalManutencoesEnsino() + getCargaHorariaTotalOutroTiposAtividade() + getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab());
         double regime = 20;
-        if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h")|getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
+        if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
             regime = 40;
         }
         if (regime == getCargaHorariaTotalPTD()) {
@@ -727,30 +727,38 @@ public class PTDMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public String abrirNotificacoesDiretorEnsino(int idUsuario) {
-        return "/NotificacoesDiretorEnsino";
-    }
-
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino(PTD ptd) {
         String resposta = "Correto";
-
+        verificarCargaHorariaPTD();
+        if(irregularidades.isEmpty() != true){
+            resposta = "Incorreto";
+        }
         return resposta;
     }
 
     public String abrirPTDEmAvaliacao(PTD ptd) {
         setPtdEmAvaliacao(ptd);
+        verificarCargaHorariaPTD();
         return "PTDEmAvaliacao";
     }
 
-    public String
-            reprovarPTD() {
+    public String reprovarPTD() {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
         );
         getPtdEmAvaliacao().setEstadoPTD("REPROVADO");
         getPtdEmAvaliacao().setDiretorEnsino(null);
         ptdDAOGenerico.alterar(getPtdEmAvaliacao());
 
-        return "/NotificacoesDocente";
+        return "/NotificacoesDiretorEnsino";
+    }
+
+    public String aprovarPTD(DiretorEnsino diretorEnsino) {
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        getPtdEmAvaliacao().setEstadoPTD("APROVADO");
+        getPtdEmAvaliacao().setDiretorEnsino(diretorEnsino);
+        ptdDAOGenerico.alterar(getPtdEmAvaliacao());
+
+        return "/NotificacoesDiretorEnsino";
     }
 
     public PTD getPtd() {
