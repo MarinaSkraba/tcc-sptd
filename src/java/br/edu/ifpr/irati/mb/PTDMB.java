@@ -670,6 +670,7 @@ public class PTDMB {
         cargaHorariaTotalAulas = 0;
         cargaHorariaTotalManutencoesEnsino = 0;
         cargaHorariaTotalOutroTiposAtividade = 0;
+        cargaHorariaTotalPTD = 0;
         for (Administracao adm : getPtd().getAdministrativas()) {
             setCargaHorariaTotalAdministracoes(getCargaHorariaTotalAdministracoes() + adm.getCargaHorariaSemanalAdministracao());
         }
@@ -824,7 +825,28 @@ public class PTDMB {
         if (ptd.getCampoJustificativaAdministracao().isEmpty() != true) {
             resposta = "Incorreto";
         }
-        //repetir para os outros campos de justificativa
+        if (ptd.getCampoJustificativaApoioEnsino().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaAtividadeEnsino().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaManutencaoEnsino().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaOutrasAtividades().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaProjetoEnsino().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaProjetoPesquisaExtensao().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaSeremPropostas().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+     
         return resposta;
     }
 
