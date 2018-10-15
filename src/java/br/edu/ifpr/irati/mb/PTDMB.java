@@ -647,7 +647,7 @@ public class PTDMB {
 
                 if (getCargaHorariaTotalApoios() > 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 0) {
                     getIrregularidades().add("A carga horária é superior à 4 horas em Apoio ao Ensino!");
-                } else {
+                } else if (getCargaHorariaTotalApoios() < 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 0) {
                     getIrregularidades().add("A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
                 }
 
@@ -725,7 +725,7 @@ public class PTDMB {
                         getIrregularidades().add("A carga horária é inferior"
                                 + " à 4 horas em Manutenção ao Ensino");
 
-                    } else {
+                    } else if (getCargaHorariaTotalManutencoesEnsino() > 4){
 
                         getIrregularidades().add("A carga horária é superior "
                                 + "à 4 horas em Manutenção ao Ensino!");
