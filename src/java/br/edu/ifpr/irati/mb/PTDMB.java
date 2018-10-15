@@ -346,78 +346,83 @@ public class PTDMB {
     }
 
     public String verificarPossibilidadeSubmissao() {
-
+        
+        String nomeCaixaDialogo = "";
         atualizarListasParticipacoes();
 
         // Conferência da existência de erros
         realizarConferencias();
-
+        
+//        if(){
+//            nomeCaixaDialogo = "documentoVazioDialog";
+//        }
         if (errosTabelaAdministrativas.isEmpty() != true) {
-            return "avisoErrosDialog";
+            nomeCaixaDialogo = "avisoErrosDialog";
         }
         if (errosTabelaApoioEnsino.isEmpty() != true) {
-            return "avisoErrosDialog";
+            nomeCaixaDialogo = "avisoErrosDialog";
         }
         if (errosTabelaAtividadesASeremPropostas.isEmpty() != true) {
-            return "avisoErrosDialog";
+            nomeCaixaDialogo = "avisoErrosDialog";
         }
         if (errosTabelaAula.isEmpty() != true) {
-            return "avisoErrosDialog";
+            nomeCaixaDialogo = "avisoErrosDialog";
         }
         if (errosTabelaManuEnsino.isEmpty() != true) {
-            return "avisoErrosDialog";
+            nomeCaixaDialogo = "avisoErrosDialog";
         }
         if (errosTabelaOutrasAtividades.isEmpty() != true) {
-            return "avisoErrosDialog";
+            nomeCaixaDialogo = "avisoErrosDialog";
         }
         if (errosTabelaPesquisaExtensaoAutor.isEmpty() != true) {
-            return "avisoErrosDialog";
+            nomeCaixaDialogo = "avisoErrosDialog";
         }
         if (errosTabelaPesquisaExtensaoColaborador.isEmpty() != true) {
-            return "avisoErrosDialog";
-
+            nomeCaixaDialogo = "avisoErrosDialog";
         }
         if (irregularidades.isEmpty() != true) {
-            for (int i = 0; i <= irregularidades.size(); i++) {
-                if ((irregularidades.get(i).equals("A carga horária é superior "
-                        + "à 4 horas em Apoio ao Ensino!") | irregularidades.get(i).equals("A carga horária é inferior à 4 horas em Apoio ao Ensino!")) && ptd.getCampoJustificativaApoioEnsino().isEmpty() != true) {
-                    return "avisoIrregularidadeDialog";
+            for (String irregularidade: irregularidades) {
+                if ((irregularidade.equals("A carga horária é superior "
+                        + "à 4 horas em Apoio ao Ensino!") | irregularidade.equals("A carga horária é inferior à 4 horas em Apoio ao Ensino!")) && ptd.getCampoJustificativaApoioEnsino().isEmpty() != true) {
+                    nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
-                } else if ((irregularidades.get(i).equals("A carga horária de projetos de pesquisa "
+                } if ((irregularidade.equals("A carga horária de projetos de pesquisa "
                         + "e/ou extensão como colaborador "
-                        + "e autor é superior à 16 horas!") | irregularidades.get(i).equals("A carga horária de projetos"
+                        + "e autor é superior à 16 horas!") | irregularidade.equals("A carga horária de projetos"
                                 + "de pesquisa e/ou extensão como "
                                 + "colaborador e autor é inferior à 16 horas!")) && ptd.getCampoJustificativaProjetoPesquisaExtensao().isEmpty() != true) {
 
-                    return "avisoIrregularidadeDialog";
+                    nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
-                } else if ((irregularidades.get(i).equals("A carga horária é inferior à 4 horas"
-                        + " em Manutenção ao Ensino") | irregularidades.get(i).equals("A carga horária é superior à 4"
+                } if ((irregularidade.equals("A carga horária é inferior à 4 horas"
+                        + " em Manutenção ao Ensino") | irregularidade.equals("A carga horária é superior à 4"
                                 + " horas em Manutenção ao Ensino")) && ptd.getCampoJustificativaManutencaoEnsino().isEmpty() != true) {
 
-                    return "avisoIrregularidadeDialog";
+                    nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
-                } else if ((irregularidades.get(i).equals("A carga horária é inferior "
-                        + "à 8 horas em Aula!") | irregularidades.get(i).equals("A carga horária é superior "
-                                + "à 12 horas em Aula!") | irregularidades.get(i).equals("A carga horária é inferior "
-                                + "à 12 horas em Aula!") | irregularidades.get(i).equals("A carga horária é superior"
-                                + " à 16 horas em Aula!") | irregularidades.get(i).equals("Mesmo descontando a carga horária redistribuída"
+                } if ((irregularidade.equals("A carga horária é inferior "
+                        + "à 8 horas em Aula!") | irregularidade.equals("A carga horária é superior "
+                                + "à 12 horas em Aula!") | irregularidade.equals("A carga horária é inferior "
+                                + "à 12 horas em Aula!") | irregularidade.equals("A carga horária é superior"
+                                + " à 16 horas em Aula!") | irregularidade.equals("Mesmo descontando a carga horária redistribuída"
                                 + "de projeto de pesquisa e/ou extensão para aula"
                                 + " e apoio ao ensino, o componente aula apresenta"
-                                + " carga horária superior à 16 horas") | irregularidades.get(i).equals("Descontando a carga horária redistribuída de projeto de pesquisa"
+                                + " carga horária superior à 16 horas") | irregularidade.equals("Descontando a carga horária redistribuída de projeto de pesquisa"
                                 + " e/ou extensão para aula e apoio ao ensino,"
                                 + " o componente aula apresenta carga horária inferior à 12 horas")) && ptd.getCampoJustificativaAtividadeEnsino().isEmpty() != true) {
 
-                    return "avisoIrregularidadeDialog";
+                    nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
                 } else {
-                    return "conclusãoDialog";
+                    nomeCaixaDialogo = "confirmacaoIrregularidadeDialog";
                 }
-
             }
-
+        } else {
+            nomeCaixaDialogo = "conclusãoDialog";
         }
-        return "confirmacaoIrregularidadeDialog";
+        
+        return nomeCaixaDialogo;
+        
     }
 
     public void verificarErros() {

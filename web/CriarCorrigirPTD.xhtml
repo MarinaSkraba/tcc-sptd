@@ -3780,6 +3780,25 @@
 
                     </p:dialog>
 
+                    <!-- Caixa de aviso de impedimento por tentativa de envio de documento vazio -->
+                    <p:dialog header="Confirmar submissão" 
+                              widgetVar="documentoVazioDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+                        
+                        <h:outputText value="O documento documento está vazio" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="Corrigir"
+                                         action="#{pTDMB.submeterPTD()}"/>
+
+                    </p:dialog>
+                    
                     <!-- Caixa de confirmaçao de conclusão -->
                     <p:dialog header="Confirmar submissão" 
                               widgetVar="conclusãoDialog" 
