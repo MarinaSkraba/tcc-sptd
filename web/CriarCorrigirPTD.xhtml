@@ -209,7 +209,7 @@
                         </p:selectOneMenu>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{aulaMB.salvarAula(usuarioMB.usuarioLogado.idUsuario, pTDMB.ptd)}"
                                          styleClass="botaoAzul"/>
 
@@ -513,8 +513,9 @@
                                          timeOnly="true"/></br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAula(aulaMB.aulaSelecionadaParaHorario,usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -606,8 +607,9 @@
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAula(aulaMB.aulaSelecionadaParaHorario.horariosAula)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -656,8 +658,9 @@
                         <p:inputText value="#{manutencaoMB.tipoManutencao.rotulo}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{manutencaoMB.salvarManutencao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -677,8 +680,9 @@
                         <p:inputText value="#{manutencaoMB.manutencaoEnsinoSelecionadoParaManutencaoEnsino.tipoManutencao.rotulo}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{manutencaoMB.alterarManutencao()}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -893,8 +897,9 @@
                         </br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAtividade(manutencaoMB.manutencaoEnsinoSelecionadoParaHorário, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -986,8 +991,9 @@
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAtividade(manutencaoMB.manutencaoEnsinoSelecionadoParaHorário.horariosManutecao, manutencaoMB.manutencaoEnsinoSelecionadoParaHorário)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1037,8 +1043,9 @@
                         <p:inputText value="#{apoioMB.tipoApoio.rotulo}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{apoioMB.salvarApoio(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1058,8 +1065,9 @@
                         <p:inputText value="#{apoioMB.apoioSelecionadoParaApoio.tipoApoio.rotulo}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{apoioMB.alterarApoio()}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1368,8 +1376,9 @@
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAtividade(apoioMB.apoioSelecionadoParaHorario.horariosApoio, apoioMB.apoioSelecionadoParaHorario)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1465,8 +1474,9 @@
                         <p:inputText value="#{projetoPesquisaExtensaoMB.projetoAutorNovo.instituicaoPesquisa}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1522,8 +1532,9 @@
                         <p:inputText value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaParticipacaoAutor.projetoPesquisaExtensao.instituicaoPesquisa}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{projetoPesquisaExtensaoMB.alterarParticipacaoAutor()}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1769,8 +1780,9 @@
                         </br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAtividade(projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaHorario, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1862,8 +1874,9 @@
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAtividade(projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaHorario.horariosParticipacao, projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaHorario)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1977,8 +1990,9 @@
                         <p:inputText value="#{administracaoMB.tipoAdministracao.rotulo}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{administracaoMB.salvarAdministracao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1998,8 +2012,9 @@
                         <p:inputText value="#{administracaoMB.administracaoSelecionadaParaAdministracao.tipoAdministracao.rotulo}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{administracaoMB.alterarAdministracao()}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2214,8 +2229,9 @@
                         </br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAtividade(administracaoMB.administracaoSelecionadaParaHorario, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2307,8 +2323,9 @@
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAtividade(administracaoMB.administracaoSelecionadaParaHorario.horariosAdministracao, administracaoMB.administracaoSelecionadaParaHorario)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2379,8 +2396,9 @@
                         </p:selectOneMenu>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{outroTipoAtividadeMB.salvarOutroTipoAtividade(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2413,8 +2431,9 @@
 
                         </p:selectOneMenu>
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{outroTipoAtividadeMB.alterarOutroTipoAtividade()}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2639,8 +2658,9 @@
                         </br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAtividade(outroTipoAtividadeMB.outroTipoAtividadeSelecionadaParaHorario, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2732,8 +2752,9 @@
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAtividade(outroTipoAtividadeMB.outroTipoAtividadeSelecionadaParaHorario.horariosOutroTipoAtividade, outroTipoAtividadeMB.outroTipoAtividadeSelecionadaParaHorario)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2804,8 +2825,9 @@
                         </p:selectOneMenu>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{atividadeASerPropostaMB.salvarAtividadeASerProposta(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2838,8 +2860,9 @@
 
                         </p:selectOneMenu>
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{atividadeASerPropostaMB.alterarAtividadeASerProposta()}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3064,8 +3087,9 @@
                         </br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAtividade(atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaHorario, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3157,8 +3181,9 @@
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAtividade(atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaHorario.horariosAtividadesASerProposta, atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaHorario)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3181,7 +3206,7 @@
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaAtividadeEnsino}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
+                        <p:commandButton value="Comentar"
                                          action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
@@ -3201,7 +3226,7 @@
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaManutencaoEnsino}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
+                        <p:commandButton value="Comentar"
                                          action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
@@ -3221,7 +3246,7 @@
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaApoioEnsino}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
+                        <p:commandButton value="Comentar"
                                          action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
@@ -3241,7 +3266,7 @@
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaProjetoPesquisaExtensao}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
+                        <p:commandButton value="Comentar"
                                          action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
@@ -3261,7 +3286,7 @@
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaAdministracao}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
+                        <p:commandButton value="Comentar"
                                          action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
@@ -3281,7 +3306,7 @@
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaOutrasAtividades}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
+                        <p:commandButton value="Comentar"
                                          action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
@@ -3301,7 +3326,7 @@
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaSeremPropostas}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
+                        <p:commandButton value="Comentar"
                                          action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 

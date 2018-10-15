@@ -274,16 +274,13 @@ body{
 .ui-dialog .botaoAzul{
     width: auto;
     height: auto;
-    margin: 15px;
-    padding: 5px 10px;
-    font-size: large;
+    margin: 10px;
+    font-size: medium;
     font-family: calibri, sans-serif;
     font-weight: normal;
     color: #1785ad;
     border-color: #1785ad;
-    border-width: thin;
     border-radius: 50px;
-    border-style: solid;
     background-color: white;
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
     background-image: linear-gradient(to right, #FFFFFF, #FFFFFF);
