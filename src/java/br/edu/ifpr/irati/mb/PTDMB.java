@@ -121,6 +121,11 @@ public class PTDMB {
         }
     }
 
+    public void realizarConferencias() {
+        verificarErros();
+        verificarCargaHorariaPTD();
+    }
+
     public String abrirCriarCorrigirPTDEmBranco(Usuario usuario) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         Dao<Professor> professorDAOGenerico = new GenericDAO<>(Professor.class);
@@ -351,8 +356,7 @@ public class PTDMB {
         atualizarListasParticipacoes();
 
         // Conferência da existência de erros
-        verificarErros();
-        verificarCargaHorariaPTD();
+        realizarConferencias();
 
         if (errosTabelaAdministrativas.isEmpty() != true) {
             return "avisoErrosDialog";
@@ -378,8 +382,7 @@ public class PTDMB {
         if (errosTabelaPesquisaExtensaoColaborador.isEmpty() != true) {
             return "avisoErrosDialog";
 
-        }
-        // Conferência da existência de irregularidades
+        } // Conferência da existência de irregularidades
         //        if () {
         //            return "avisoIrregularidadeDialog";
         //        }
@@ -592,7 +595,7 @@ public class PTDMB {
     }
 
     public void verificarCargaHorariaPTD() {
-        
+
         irregularidades = new ArrayList<>();
         cargaHorariaTotalAdministracoes = 0;
         cargaHorariaTotalApoios = 0;
@@ -600,7 +603,7 @@ public class PTDMB {
         cargaHorariaTotalAulas = 0;
         cargaHorariaTotalManutencoesEnsino = 0;
         cargaHorariaTotalOutroTiposAtividade = 0;
-        
+
         for (Administracao adm : getPtd().getAdministrativas()) {
             setCargaHorariaTotalAdministracoes(getCargaHorariaTotalAdministracoes() + adm.getCargaHorariaSemanalAdministracao());
         }
@@ -641,7 +644,7 @@ public class PTDMB {
         if (!getPtd().getAulas().isEmpty()) {
             for (Aula a : getPtd().getAulas()) {
                 setCargaHorariaTotalAulas(getCargaHorariaTotalAulas() + a.getCargaHorariaTotal());
-               
+
             }
 
             if (getPtd().getProfessor().getRegimeTrabalho().equals("20h")) {
@@ -741,7 +744,7 @@ public class PTDMB {
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino(PTD ptd) {
         String resposta = "Correto";
         verificarCargaHorariaPTD();
-        if(irregularidades.isEmpty() != true){
+        if (irregularidades.isEmpty() != true) {
             resposta = "Incorreto";
         }
         return resposta;

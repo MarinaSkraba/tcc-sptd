@@ -1274,8 +1274,9 @@
                         </br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAtividade(apoioMB.apoioSelecionadoParaHorario, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3305,7 +3306,7 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
-                    
+
                     <!-- Caixa de aviso de erros de preenchimento -->
                     <p:dialog header="Há erros nos dados fornecidos" 
                               widgetVar="avisoErrosDialog" 
@@ -3325,7 +3326,7 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
-                    
+
                     <!-- Caixa de aviso de irregularidades -->
                     <p:dialog header="Há irregularidades no documento" 
                               widgetVar="avisoIrregularidadeDialog" 
@@ -3349,7 +3350,7 @@
                                          action="CriarCorrigirPTD?faces-redirect=true"/>
 
                     </p:dialog>
-                    
+
                     <!-- Caixa de confirmaçao de submissão com irregularidades -->
                     <p:dialog header="Há irregularidades no documento" 
                               widgetVar="confirmacaoIrregularidadeDialog" 
@@ -3371,7 +3372,7 @@
                                          action="#{pTDMB.submeterPTD()}"/>
 
                     </p:dialog>
-                    
+
                     <!-- Caixa de confirmaçao de conclusão -->
                     <p:dialog header="Confirmar submissão" 
                               widgetVar="conclusãoDialog" 
@@ -3392,7 +3393,8 @@
                                   style="font-size: 22pt;"/>
                     <br/><br/>
                     <center>
-                        <h:panelGrid columns="2" 
+                        <h:panelGrid id="tabelaGeral"
+                                     columns="2" 
                                      style="border-style: solid; border-width: thin;">
                             <h:outputText value="ATIVIDADES"  
                                           styleClass="text01"
@@ -3479,7 +3481,7 @@
                                         </f:facet>
                                         <h:outputText value="#{irregularidade}" 
                                                       styleClass="text01"
-                                                      style="font-size: small; color: #C92345;"/>
+                                                      style="font-size: small; color: #E0911C;"/>
                                     </h:column>
                                 </h:dataTable>
                             </h:panelGrid>

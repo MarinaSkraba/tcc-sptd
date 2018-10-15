@@ -174,7 +174,7 @@ body{
 #irregularidades{
     width: 400px;
     border-radius: 10px;
-    border-color: #FFC100;
+    border-color: #E0911C;
     border-style: solid;
     border-width: thin;
     background-color: #FFF9DF;
@@ -183,12 +183,12 @@ body{
 .exclamacaoIrregularidade{
     width: 25px;
     height: 25px;
-    color: #FFC100;
+    color: #E0911C;
     font-size: large; 
     font-weight: 100;
     font-family: calibri, sans-serif;
     border-radius: 50px;
-    border-color: #FFC100;
+    border-color: #E0911C;
     border-style: solid;
     border-width: thin;
     display: flex;
