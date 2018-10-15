@@ -346,16 +346,16 @@ public class PTDMB {
     }
 
     public String verificarPossibilidadeSubmissao() {
-        
+
         String nomeCaixaDialogo = "";
         atualizarListasParticipacoes();
 
         // Conferência da existência de erros
         realizarConferencias();
-        
-//        if(){
-//            nomeCaixaDialogo = "documentoVazioDialog";
-//        }
+
+        if (cargaHorariaTotalPTD == 0) {
+            nomeCaixaDialogo = "documentoVazioDialog";
+        }
         if (errosTabelaAdministrativas.isEmpty() != true) {
             nomeCaixaDialogo = "avisoErrosDialog";
         }
@@ -381,12 +381,13 @@ public class PTDMB {
             nomeCaixaDialogo = "avisoErrosDialog";
         }
         if (irregularidades.isEmpty() != true) {
-            for (String irregularidade: irregularidades) {
+            for (String irregularidade : irregularidades) {
                 if ((irregularidade.equals("A carga horária é superior "
                         + "à 4 horas em Apoio ao Ensino!") | irregularidade.equals("A carga horária é inferior à 4 horas em Apoio ao Ensino!")) && ptd.getCampoJustificativaApoioEnsino().isEmpty() != true) {
                     nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
-                } if ((irregularidade.equals("A carga horária de projetos de pesquisa "
+                }
+                if ((irregularidade.equals("A carga horária de projetos de pesquisa "
                         + "e/ou extensão como colaborador "
                         + "e autor é superior à 16 horas!") | irregularidade.equals("A carga horária de projetos"
                                 + "de pesquisa e/ou extensão como "
@@ -394,13 +395,15 @@ public class PTDMB {
 
                     nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
-                } if ((irregularidade.equals("A carga horária é inferior à 4 horas"
+                }
+                if ((irregularidade.equals("A carga horária é inferior à 4 horas"
                         + " em Manutenção ao Ensino") | irregularidade.equals("A carga horária é superior à 4"
                                 + " horas em Manutenção ao Ensino")) && ptd.getCampoJustificativaManutencaoEnsino().isEmpty() != true) {
 
                     nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
-                } if ((irregularidade.equals("A carga horária é inferior "
+                }
+                if ((irregularidade.equals("A carga horária é inferior "
                         + "à 8 horas em Aula!") | irregularidade.equals("A carga horária é superior "
                                 + "à 12 horas em Aula!") | irregularidade.equals("A carga horária é inferior "
                                 + "à 12 horas em Aula!") | irregularidade.equals("A carga horária é superior"
@@ -420,9 +423,9 @@ public class PTDMB {
         } else {
             nomeCaixaDialogo = "conclusãoDialog";
         }
-        
+
         return nomeCaixaDialogo;
-        
+
     }
 
     public void verificarErros() {
@@ -730,7 +733,7 @@ public class PTDMB {
                         getIrregularidades().add("A carga horária é inferior"
                                 + " à 4 horas em Manutenção ao Ensino");
 
-                    } else if (getCargaHorariaTotalManutencoesEnsino() > 4){
+                    } else if (getCargaHorariaTotalManutencoesEnsino() > 4) {
 
                         getIrregularidades().add("A carga horária é superior "
                                 + "à 4 horas em Manutenção ao Ensino!");
