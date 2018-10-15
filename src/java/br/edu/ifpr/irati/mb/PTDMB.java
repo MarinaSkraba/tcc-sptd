@@ -677,9 +677,9 @@ public class PTDMB {
 
         if (!getPtd().getParticipacoes().isEmpty()) {
             for (Participacao part : getPtd().getParticipacoes()) {
-                if (part.getRotulo().equals("AUTOR")) {
+                if (part.getRotulo().equals("Autor")) {
                     setCargaHorariaTotalProjetosPesquisaExtensaoAutor(getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + part.getCargaHorariaSemanalParticipacao());
-                } else if (part.getRotulo().equals("COLABORADOR")) {
+                } else if (part.getRotulo().equals("Colaborador")) {
                     setCargaHorariaTotalProjetosPesquisaExtensaoColab(getCargaHorariaTotalProjetosPesquisaExtensaoColab() + part.getCargaHorariaSemanalParticipacao());
                 }
             }
