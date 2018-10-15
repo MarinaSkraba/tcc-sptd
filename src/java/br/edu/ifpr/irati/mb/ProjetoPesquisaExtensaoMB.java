@@ -24,7 +24,7 @@ public class ProjetoPesquisaExtensaoMB {
     private Participacao participacaoAutorSelecionadoParaHorario;
     private Participacao participacaoColabSelecionadoParaParticipacaoColab;
     private Participacao participacaoSelecionadoParaHorarioColab;
-    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoCadastrados;
+    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAtivos;
     private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoCadastradosPorProfessor;
     private Horario horario;
     private List<Horario> horarios;
@@ -46,9 +46,9 @@ public class ProjetoPesquisaExtensaoMB {
         horario = new Horario();
         participacao = new Participacao();
         projetoAutorNovo = new ProjetoPesquisaExtensao();
-        projetosPesquisaExtensaoCadastrados = new ArrayList();
+        projetosPesquisaExtensaoAtivos = new ArrayList();
         Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-        projetosPesquisaExtensaoCadastrados = projetoPesquisaExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class);
+        projetosPesquisaExtensaoAtivos = projetoPesquisaExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class);
         projetosPesquisaExtensaoCadastradosPorProfessor = new ArrayList();
 
     }
@@ -152,6 +152,12 @@ public class ProjetoPesquisaExtensaoMB {
         return projetosPesquisaExtensaoCadastradosPorProfessor;
     }
 
+    public List<ProjetoPesquisaExtensao> atualizarListaProjetosAtivos(Serializable idUsuario) {
+        IProjetoPesquisaExtensaoDao projetoPesquisaExtensaoDAO = new ProjetoPesquisaExtensaoDAO();
+        setProjetosPesquisaExtensaoAtivos(projetoPesquisaExtensaoDAO.buscarProjetosExtensaoAtivos(idUsuario));
+        return projetosPesquisaExtensaoAtivos;
+    }
+
     public Horario getHorario() {
         return horario;
     }
@@ -200,12 +206,12 @@ public class ProjetoPesquisaExtensaoMB {
         this.ptdmb = ptdmb;
     }
 
-    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoCadastrados() {
-        return projetosPesquisaExtensaoCadastrados;
+    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoAtivos() {
+        return projetosPesquisaExtensaoAtivos;
     }
 
-    public void setProjetosPesquisaExtensaoCadastrados(List<ProjetoPesquisaExtensao> projetosPesquisaExtensao) {
-        this.projetosPesquisaExtensaoCadastrados = projetosPesquisaExtensao;
+    public void setProjetosPesquisaExtensaoAtivos(List<ProjetoPesquisaExtensao> projetosPesquisaExtensao) {
+        this.projetosPesquisaExtensaoAtivos = projetosPesquisaExtensao;
     }
 
     public ProjetoPesquisaExtensao getProjetoPesquisaExtensaoSelecionado() {

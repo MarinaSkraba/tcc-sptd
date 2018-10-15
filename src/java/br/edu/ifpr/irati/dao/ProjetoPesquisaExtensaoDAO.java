@@ -16,13 +16,18 @@ public class ProjetoPesquisaExtensaoDAO implements IProjetoPesquisaExtensaoDao {
     public List<ProjetoPesquisaExtensao> buscarProjetosExtensaoAtivos(Serializable idUsuario) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from projetopesquisaextensao, professor where estadoProjetoExtensao = 'Ativo' and idUsuario = ?";
+        String hql = "from projetopesquisaextensao";
         Query query = session.createQuery(hql);
-        query.setSerializable(0, idUsuario);
-        List results = query.list();
+        List<ProjetoPesquisaExtensao> results = query.list();
+        List<ProjetoPesquisaExtensao> filtrados = new ArrayList<>();
+        for (ProjetoPesquisaExtensao pesquisaExtensao : results) {
+            if(pesquisaExtensao.getEstadoProjetoPesquisaExtensao().equalsIgnoreCase("Ativo")){
+                filtrados.add(pesquisaExtensao);
+            }
+        }
         session.clear();
         session.close();
-        return results;
+        return filtrados;
         
     }
 
