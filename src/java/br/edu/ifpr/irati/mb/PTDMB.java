@@ -648,7 +648,7 @@ public class PTDMB {
 
                 }
 
-            } else if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h")) {
+            } else if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h")| getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
                 if (getCargaHorariaTotalAulas() < 12) {
 
                     getIrregularidades().add(" A carga horária é inferior à 12 horas em Aula!");
