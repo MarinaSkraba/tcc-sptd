@@ -20,16 +20,16 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class ProjetoPesquisaExtensaoMB {
 
-    private ProjetoPesquisaExtensao projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao;
-    private Participacao participacaoSelecionadoParaHorario;
-    private ProjetoPesquisaExtensao projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab;
+    private Participacao participacaoAutorSelecionadoParaParticipacaoAutor;
+    private Participacao participacaoAutorSelecionadoParaHorario;
+    private Participacao participacaoColabSelecionadoParaParticipacaoColab;
     private Participacao participacaoSelecionadoParaHorarioColab;
-    private ProjetoPesquisaExtensao projetoPesquisaExtensao;
-    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoCadastrados;
+    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAtivos;
     private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoCadastradosPorProfessor;
     private Horario horario;
     private List<Horario> horarios;
     private Participacao participacao;
+    private ProjetoPesquisaExtensao projetoAutorNovo;
     private ProjetoPesquisaExtensao projetoPesquisaExtensaoSelecionado;
     private String tipoProjetoAutor;
     private String tipoProjetoColab;
@@ -37,102 +37,96 @@ public class ProjetoPesquisaExtensaoMB {
 
     public ProjetoPesquisaExtensaoMB() {
 
-        projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao = new ProjetoPesquisaExtensao();
-        participacaoSelecionadoParaHorario = new Participacao();
-        projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab = new ProjetoPesquisaExtensao();
+        participacaoAutorSelecionadoParaParticipacaoAutor = new Participacao();
+        participacaoAutorSelecionadoParaHorario = new Participacao();
+        participacaoColabSelecionadoParaParticipacaoColab = new Participacao();
         participacaoSelecionadoParaHorarioColab = new Participacao();
         tipoProjetoAutor = "";
         tipoProjetoColab = "";
-        projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         horario = new Horario();
         participacao = new Participacao();
-        projetosPesquisaExtensaoCadastrados = new ArrayList();
+        projetoAutorNovo = new ProjetoPesquisaExtensao();
+        projetosPesquisaExtensaoAtivos = new ArrayList();
         Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-        projetosPesquisaExtensaoCadastrados = projetoPesquisaExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class);
+        projetosPesquisaExtensaoAtivos = projetoPesquisaExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class);
         projetosPesquisaExtensaoCadastradosPorProfessor = new ArrayList();
 
     }
 
-    public ProjetoPesquisaExtensaoMB(String tipoProjetoAutor, String tipoProjetoColab) {
-
-        this.tipoProjetoAutor = tipoProjetoAutor;
-        this.tipoProjetoColab = tipoProjetoColab;
-        
-    }
-
-    public void salvarProjetoPesquisaExtensao(Professor professorAutor, PTD ptd) {
+    public String salvarProjetoPesquisaExtensao(Professor professorAutor, PTD ptd) {
 
         Dao<ProjetoPesquisaExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-        participacao = new Participacao();
-        projetoExtensaoDAO.salvar(projetoPesquisaExtensao);
-        projetoPesquisaExtensao = projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).get(projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).size() - 1);
-        ptd.getProjetosPesquisaExtensao().add(projetoPesquisaExtensao);
+        projetoAutorNovo.setEstadoProjetoPesquisaExtensao("Ativo");
+        participacao.setProjetoPesquisaExtensao(projetoAutorNovo);
+        projetoExtensaoDAO.salvar(participacao.getProjetoPesquisaExtensao());
+        participacao.setProjetoPesquisaExtensao(projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).get(projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).size() - 1));
         participacao.setRotulo("Autor");
+        participacao.setEstadoParticipacao("Ativo");
         participacao.setProfessor(professorAutor);
-        participacao.setProjetoPesquisaExtensao(projetoPesquisaExtensao);
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
-        projetoExtensaoDAO.alterar(projetoPesquisaExtensao);
-        ptd.getp ;
+        projetoExtensaoDAO.alterar(participacao.getProjetoPesquisaExtensao());
+        ptd.getParticipacoes().add(participacao);
         ptdDAO.alterar(ptd);
-        projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         participacao = new Participacao();
+        projetoAutorNovo = new ProjetoPesquisaExtensao();
+        return "CriarCorrigirPTD?faces-redirect=true";
 
     }
 
-    public void salvarProjetoPesquisaExtensaoJaCadastradoAutor(Professor professorAutor, PTD ptd) {
+    public String salvarProjetoPesquisaExtensaoJaCadastradoAutor(Professor professorAutor, PTD ptd) {
 
         Dao<ProjetoPesquisaExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-        participacao = new Participacao();
-        ptd.getProjetosPesquisaExtensao().add(projetoPesquisaExtensao);
         participacao.setRotulo("Autor");
         participacao.setProfessor(professorAutor);
-        participacao.setProjetoPesquisaExtensao(projetoPesquisaExtensao);
+        participacao.setEstadoParticipacao("Ativo");
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
-        projetoExtensaoDAO.alterar(projetoPesquisaExtensao);
-        ptd. ;
+        projetoExtensaoDAO.alterar(participacao.getProjetoPesquisaExtensao());
+        ptd.getParticipacoes().add(participacao);
         ptdDAO.alterar(ptd);
-        projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         participacao = new Participacao();
+        return "CriarCorrigirPTD?faces-redirect=true";
 
     }
 
-    public void salvarProjetoPesquisaExtensaoJaCadastradoColaboracao(Professor professorAutor, PTD ptd) {
-        
+    public String salvarProjetoPesquisaExtensaoJaCadastradoColaboracao(Professor professorAutor, PTD ptd) {
+
         Dao<ProjetoPesquisaExtensao> projetoExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-        participacao = new Participacao();
-        ptd.getProjetosPesquisaExtensao().add(projetoPesquisaExtensao);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         participacao.setRotulo("Colaborador");
         participacao.setProfessor(professorAutor);
-        participacao.setProjetoPesquisaExtensao(projetoPesquisaExtensao);
+        participacao.setEstadoParticipacao("Ativo");
         participacaoDAO.salvar(participacao);
         participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
-        projetoExtensaoDAO.alterar(projetoPesquisaExtensao);
-        ptd. ;
+        projetoExtensaoDAO.alterar(participacao.getProjetoPesquisaExtensao());
+        ptd.getParticipacoes().add(participacao);
         ptdDAO.alterar(ptd);
-        projetoPesquisaExtensao = new ProjetoPesquisaExtensao();
         participacao = new Participacao();
-        
+        return "CriarCorrigirPTD?faces-redirect=true";
+
     }
 
-    public String alterarProjetoPesquisaExtensao() {
+    public String alterarParticipacaoAutor() {
         Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-        projetoPesquisaExtensaoDAO.alterar(projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao);
-        projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao = new ProjetoPesquisaExtensao();
+        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
+        participacaoDAO.alterar(participacaoAutorSelecionadoParaParticipacaoAutor);
+        projetoPesquisaExtensaoDAO.alterar(participacaoAutorSelecionadoParaParticipacaoAutor.getProjetoPesquisaExtensao());
+        participacaoAutorSelecionadoParaParticipacaoAutor = new Participacao();
         return "CriarCorrigirPTD?faces-redirect=true";
     }
-    
-    public String alterarProjetoPesquisaExtensaoColab() {
+
+    public String alterarParticipacaoColab() {
         Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-        projetoPesquisaExtensaoDAO.alterar(getProjetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab());
-        setProjetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab(new ProjetoPesquisaExtensao());
+        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
+        participacaoDAO.alterar(participacaoColabSelecionadoParaParticipacaoColab);
+        projetoPesquisaExtensaoDAO.alterar(participacaoColabSelecionadoParaParticipacaoColab.getProjetoPesquisaExtensao());
+        participacaoColabSelecionadoParaParticipacaoColab = new Participacao();
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
@@ -143,19 +137,25 @@ public class ProjetoPesquisaExtensaoMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public String excluirProjetoPesquisaExtensao(ProjetoPesquisaExtensao projetoPesquisaExtensao, PTD ptd) {
-        Dao<ProjetoPesquisaExtensao> projetoPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
+    public String excluirParticipacaoPesquisaExtensao(Participacao participacao, PTD ptd) {
+        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-        ptd.getProjetosPesquisaExtensao().remove(projetoPesquisaExtensao);
+        ptd.getParticipacoes().remove(participacao);
         ptdDAO.alterar(ptd);
-        projetoPesquisaExtensaoDAO.excluir(projetoPesquisaExtensao);
-
+        participacaoDAO.excluir(participacao);
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public void atualizarListaProjetosCadastradosPorProfessor(Serializable idUsuario) {
+    public List<ProjetoPesquisaExtensao> atualizarListaProjetosCadastradosPorProfessor(Serializable idUsuario) {
         IProjetoPesquisaExtensaoDao projetoPesquisaExtensaoDAO = new ProjetoPesquisaExtensaoDAO();
         setProjetosPesquisaExtensaoCadastradosPorProfessor(projetoPesquisaExtensaoDAO.buscarProjetosExtensaoPorProfessor(idUsuario));
+        return projetosPesquisaExtensaoCadastradosPorProfessor;
+    }
+
+    public List<ProjetoPesquisaExtensao> atualizarListaProjetosAtivos(Serializable idUsuario) {
+        IProjetoPesquisaExtensaoDao projetoPesquisaExtensaoDAO = new ProjetoPesquisaExtensaoDAO();
+        setProjetosPesquisaExtensaoAtivos(projetoPesquisaExtensaoDAO.buscarProjetosExtensaoAtivos(idUsuario));
+        return projetosPesquisaExtensaoAtivos;
     }
 
     public Horario getHorario() {
@@ -206,28 +206,12 @@ public class ProjetoPesquisaExtensaoMB {
         this.ptdmb = ptdmb;
     }
 
-    public ProjetoPesquisaExtensao getProjetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao() {
-        return projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao;
+    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoAtivos() {
+        return projetosPesquisaExtensaoAtivos;
     }
 
-    public void setProjetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao(ProjetoPesquisaExtensao projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao) {
-        this.projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao = projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao;
-    }
-
-    public ProjetoPesquisaExtensao getProjetoPesquisaExtensao() {
-        return projetoPesquisaExtensao;
-    }
-
-    public void setProjetoPesquisaExtensao(ProjetoPesquisaExtensao projetoPesquisaExtensao) {
-        this.projetoPesquisaExtensao = projetoPesquisaExtensao;
-    }
-
-    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoCadastrados() {
-        return projetosPesquisaExtensaoCadastrados;
-    }
-
-    public void setProjetosPesquisaExtensaoCadastrados(List<ProjetoPesquisaExtensao> projetosPesquisaExtensao) {
-        this.projetosPesquisaExtensaoCadastrados = projetosPesquisaExtensao;
+    public void setProjetosPesquisaExtensaoAtivos(List<ProjetoPesquisaExtensao> projetosPesquisaExtensao) {
+        this.projetosPesquisaExtensaoAtivos = projetosPesquisaExtensao;
     }
 
     public ProjetoPesquisaExtensao getProjetoPesquisaExtensaoSelecionado() {
@@ -242,6 +226,7 @@ public class ProjetoPesquisaExtensaoMB {
      * @return the projetosPesquisaExtensaoCadastradosPorProfessor
      */
     public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoCadastradosPorProfessor() {
+        
         return projetosPesquisaExtensaoCadastradosPorProfessor;
     }
 
@@ -254,34 +239,6 @@ public class ProjetoPesquisaExtensaoMB {
     }
 
     /**
-     * @return the projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab
-     */
-    public ProjetoPesquisaExtensao getProjetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab() {
-        return projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab;
-    }
-
-    /**
-     * @param projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab the projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab to set
-     */
-    public void setProjetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab(ProjetoPesquisaExtensao projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab) {
-        this.projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab = projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensaoColab;
-    }
-
-    /**
-     * @return the participacaoSelecionadoParaHorario
-     */
-    public Participacao getParticipacaoSelecionadoParaHorario() {
-        return participacaoSelecionadoParaHorario;
-    }
-
-    /**
-     * @param participacaoSelecionadoParaHorario the participacaoSelecionadoParaHorario to set
-     */
-    public void setParticipacaoSelecionadoParaHorario(Participacao participacaoSelecionadoParaHorario) {
-        this.participacaoSelecionadoParaHorario = participacaoSelecionadoParaHorario;
-    }
-
-    /**
      * @return the participacaoSelecionadoParaHorarioColab
      */
     public Participacao getParticipacaoSelecionadoParaHorarioColab() {
@@ -289,10 +246,70 @@ public class ProjetoPesquisaExtensaoMB {
     }
 
     /**
-     * @param participacaoSelecionadoParaHorarioColab the participacaoSelecionadoParaHorarioColab to set
+     * @param participacaoSelecionadoParaHorarioColab the
+     * participacaoSelecionadoParaHorarioColab to set
      */
     public void setParticipacaoSelecionadoParaHorarioColab(Participacao participacaoSelecionadoParaHorarioColab) {
         this.participacaoSelecionadoParaHorarioColab = participacaoSelecionadoParaHorarioColab;
+    }
+
+    /**
+     * @return the participacaoAutorSelecionadoParaParticipacaoAutor
+     */
+    public Participacao getParticipacaoAutorSelecionadoParaParticipacaoAutor() {
+        return participacaoAutorSelecionadoParaParticipacaoAutor;
+    }
+
+    /**
+     * @param participacaoAutorSelecionadoParaParticipacaoAutor the
+     * participacaoAutorSelecionadoParaParticipacaoAutor to set
+     */
+    public void setParticipacaoAutorSelecionadoParaParticipacaoAutor(Participacao participacaoAutorSelecionadoParaParticipacaoAutor) {
+        this.participacaoAutorSelecionadoParaParticipacaoAutor = participacaoAutorSelecionadoParaParticipacaoAutor;
+    }
+
+    /**
+     * @return the participacaoAutorSelecionadoParaHorario
+     */
+    public Participacao getParticipacaoAutorSelecionadoParaHorario() {
+        return participacaoAutorSelecionadoParaHorario;
+    }
+
+    /**
+     * @param participacaoAutorSelecionadoParaHorario the
+     * participacaoAutorSelecionadoParaHorario to set
+     */
+    public void setParticipacaoAutorSelecionadoParaHorario(Participacao participacaoAutorSelecionadoParaHorario) {
+        this.participacaoAutorSelecionadoParaHorario = participacaoAutorSelecionadoParaHorario;
+    }
+
+    /**
+     * @return the participacaoColabSelecionadoParaParticipacaoColab
+     */
+    public Participacao getParticipacaoColabSelecionadoParaParticipacaoColab() {
+        return participacaoColabSelecionadoParaParticipacaoColab;
+    }
+
+    /**
+     * @param participacaoColabSelecionadoParaParticipacaoColab the
+     * participacaoColabSelecionadoParaParticipacaoColab to set
+     */
+    public void setParticipacaoColabSelecionadoParaParticipacaoColab(Participacao participacaoColabSelecionadoParaParticipacaoColab) {
+        this.participacaoColabSelecionadoParaParticipacaoColab = participacaoColabSelecionadoParaParticipacaoColab;
+    }
+
+    /**
+     * @return the projetoAutorNovo
+     */
+    public ProjetoPesquisaExtensao getProjetoAutorNovo() {
+        return projetoAutorNovo;
+    }
+
+    /**
+     * @param projetoAutorNovo the projetoAutorNovo to set
+     */
+    public void setProjetoAutorNovo(ProjetoPesquisaExtensao projetoAutorNovo) {
+        this.projetoAutorNovo = projetoAutorNovo;
     }
 
 }

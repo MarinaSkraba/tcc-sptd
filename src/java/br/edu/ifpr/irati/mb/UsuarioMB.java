@@ -15,6 +15,7 @@ import br.edu.ifpr.irati.modelo.Usuario;
 import br.edu.ifpr.irati.util.Digest;
 import br.edu.ifpr.irati.util.HashGenerationException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -29,6 +30,34 @@ public class UsuarioMB {
     public UsuarioMB() {
         usuarioLogado = new Usuario();
         usuario = new Usuario();
+        verificarExistenciaUsuarios();
+    }
+    
+    public void verificarExistenciaUsuarios(){
+        Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
+        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
+        Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
+        List<Usuario> usuariosCadastrados = usuarioDAO.buscarTodos(Usuario.class);
+        if(usuariosCadastrados.isEmpty()){
+            Professor p01 = new Professor();
+            DiretorEnsino de01 = new DiretorEnsino();
+            p01.setDataContratacao(new Date());
+            p01.setEmail("adm");
+            p01.setMatriculaSIAPE("000000");
+            p01.setNomeCompleto("Administrador PRO");
+            p01.setRegimeTrabalho("Dedicação Exclusiva");
+            p01.setSenhaAlfanumerica("929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d");
+            p01.setTipoContrato("Efetivo");
+            p01.setEstadoUsuario("Ativo");
+            
+            de01.setEmail("adm");
+            de01.setNomeCompleto("Administrador DE");
+            de01.setSenhaAlfanumerica("48fb10b15f3d44a09dc82d02b06581e0c0c69478c9fd2cf8f9093659019a1687baecdbb38c9e72b12169dc4148690f87467f9154f5931c5df665c6496cbfd5f5");
+            de01.setEstadoUsuario("Ativo");
+            
+            professorDAO.salvar(p01);
+            diretorEnsinoDAO.salvar(de01);
+        }
     }
 
     public void salvar() {
@@ -64,8 +93,7 @@ public class UsuarioMB {
             if (getUsuarioLogado() instanceof Professor) {
                 return "/NotificacoesDocente";
             } else {
-                PTDMB ptdmb = new PTDMB();
-                return ptdmb.abrirNotificacoesDiretorEnsino(usuario.getIdUsuario());
+                return "/NotificacoesDiretorEnsino";
             }
         }
     }

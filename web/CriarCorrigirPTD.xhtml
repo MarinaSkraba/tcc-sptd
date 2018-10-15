@@ -71,7 +71,6 @@
 
                 <h:form id="PTD">
 
-
                     <!-- Caixa de confirmação sair de PTD -->
                     <p:dialog header="Cancelar PTD" 
                               widgetVar="sairTelaPTDDialog" 
@@ -110,10 +109,10 @@
                                          value="Manter e sair" 
                                          ajax="false" 
                                          immediate="true"
-                                         action="#{pTDMB.cancelarPTDEfetuandoLogout()}"/>
+                                         action="#{usuarioMB.realizarLogout()}"/>
 
                         <h:commandButton value="Descartar e sair" 
-                                         action="#{pTDMB.cancelarPTD()}"
+                                         action="#{pTDMB.cancelarPTDEfetuandoLogout()}"
                                          styleClass="botaoVermelho"/>
 
                     </p:dialog>
@@ -213,8 +212,8 @@
                         </p:selectOneMenu>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
-                                         action="#{aulaMB.salvarAula(usuarioMB.usuarioLogado.idUsuario, pTDMB.ptd)}" 
+                        <p:commandButton value="Salvar" 
+                                         action="#{aulaMB.salvarAula(usuarioMB.usuarioLogado.idUsuario, pTDMB.ptd)}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -276,7 +275,7 @@
                         </p:selectOneMenu>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{aulaMB.alterarAula()}" 
                                          styleClass="botaoAzul"/>
 
@@ -448,7 +447,7 @@
 
                     <!-- Mostrar erros na tabela aulas -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaAula)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaAula)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -517,8 +516,9 @@
                                          timeOnly="true"/></br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAula(aulaMB.aulaSelecionadaParaHorario,usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -610,8 +610,9 @@
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAula(aulaMB.aulaSelecionadaParaHorario.horariosAula)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -635,7 +636,7 @@
                                              id="ajudaManuEnsino"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Manutenção de ensino -->
                     <p:overlayPanel for="ajudaManuEnsino" 
                                     hideEffect="fade" 
@@ -663,8 +664,9 @@
                         <p:inputText value="#{manutencaoMB.tipoManutencao.rotulo}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{manutencaoMB.salvarManutencao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -684,8 +686,9 @@
                         <p:inputText value="#{manutencaoMB.manutencaoEnsinoSelecionadoParaManutencaoEnsino.tipoManutencao.rotulo}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{manutencaoMB.alterarManutencao()}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -830,7 +833,7 @@
 
                     <!-- Mostrar erros na tabela manutenção de ensino -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaManuEnsino)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaManuEnsino)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -900,8 +903,9 @@
                         </br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAtividade(manutencaoMB.manutencaoEnsinoSelecionadoParaHorário, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -993,8 +997,9 @@
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAtividade(manutencaoMB.manutencaoEnsinoSelecionadoParaHorário.horariosManutecao, manutencaoMB.manutencaoEnsinoSelecionadoParaHorário)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1019,7 +1024,7 @@
                                              id="ajudaApoioEnsino"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Apoio ao ensino -->
                     <p:overlayPanel for="ajudaApoioEnsino" 
                                     hideEffect="fade" 
@@ -1047,8 +1052,9 @@
                         <p:inputText value="#{apoioMB.tipoApoio.rotulo}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{apoioMB.salvarApoio(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1068,8 +1074,9 @@
                         <p:inputText value="#{apoioMB.apoioSelecionadoParaApoio.tipoApoio.rotulo}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{apoioMB.alterarApoio()}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1214,7 +1221,7 @@
 
                     <!-- Mostrar erros na tabela apoio ao ensino -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaApoioEnsino)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaApoioEnsino)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -1284,8 +1291,9 @@
                         </br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAtividade(apoioMB.apoioSelecionadoParaHorario, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1377,8 +1385,9 @@
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAtividade(apoioMB.apoioSelecionadoParaHorario.horariosApoio, apoioMB.apoioSelecionadoParaHorario)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1410,7 +1419,7 @@
 
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Pesquisa e/ou extensão (Autor) -->
                     <p:overlayPanel for="ajudaPesquisaExtensaoAutor" 
                                     hideEffect="fade" 
@@ -1445,9 +1454,47 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                          onclick="PF('addAtividadePesquisaExtensaoDialog').show();"/>
                     </p:dialog>
 
+                    <!-- Caixa de adição de um Novo Projeto Pesquisa Extensão -->
+                    <p:dialog header="Adicionar Projeto Pesquisa Extensão" 
+                              widgetVar="addProjetoPesquisaExtensaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
 
+                        <h:outputText value="PROCESSO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoAutorNovo.numeroProcesso}"/>
+                        <br/>
+                        <h:outputText value="TÍTULO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoAutorNovo.tituloProcesso}"/>
+                        <br/>
+                        <h:outputText value="PREVISÃO DE CONCLUSÃO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:calendar value="#{projetoPesquisaExtensaoMB.projetoAutorNovo.previsaoConclusao}" mode="popup" />
+                        <br/>
+                        <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoAutorNovo.instituicaoPesquisa}"/>
 
-                    <!-- Caixa de adição de uma atividade de um Projeto Pesquisa Extensão -->
+                        <br/>
+                        <p:commandButton value="Salvar" 
+                                         action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         update="tabelaGeral"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de adição de uma atividade de um Projeto Pesquisa Extensão (Autor) -->
                     <p:dialog header="Adicionar Atividade de Pesquisa e Extensão" 
                               widgetVar="addAtividadePesquisaExtensaoDialog" 
                               modal="true" 
@@ -1459,15 +1506,14 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-
                         <p:selectOneMenu id="selectProjetoSeu" 
-                                         value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensao}"
-                                         converter="projetoExtensaoConverter">
+                                         value="#{projetoPesquisaExtensaoMB.participacao.projetoPesquisaExtensao}"
+                                         converter="projetoPesquisaExtensaoConverter">
 
-                            <f:selectItems value="#{projetoPesquisaExtensaoMB.projetosPesquisaExtensaoCadastradosPorProfessor}" 
+                            <f:selectItems value="#{projetoPesquisaExtensaoMB.atualizarListaProjetosCadastradosPorProfessor(usuarioMB.usuarioLogado.idUsuario)}" 
                                            var="projetoSeu" 
-                                           itemValue="#{projetoSeu.tituloProcesso}"
-                                           itemLabel="#{projetoSeu.tituloProcesso}" />
+                                           itemValue="#{projetoSeu}"
+                                           itemLabel="#{projetoSeu}" />
                         </p:selectOneMenu>
 
                         <br/>
@@ -1477,7 +1523,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
 
                     </p:dialog>
 
-                    <!-- Caixa de edição de Atividade de Pesquisa e Extensão -->
+                    <!-- Caixa de edição de Atividade de Pesquisa e Extensão (Autor) -->
                     <p:dialog header="Atualizar Atividade de Pesquisa e Extensão" 
                               widgetVar="edtAtividadePesquisaExtensao" 
                               modal="true" 
@@ -1485,42 +1531,42 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                               hideEffect="fade" 
                               resizable="false">
 
-                        <h:outputText value="PROJETO" 
-                                      styleClass="text01"
-                                      style="margin: 10px 25px -10px 25px;"/>
-                        <br/>
-                        <p:inputText value="#{apoioMB.apoioSelecionadoParaApoio.tipoApoio.rotulo}"/>
-
                         <h:outputText value="PROCESSO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao.numeroProcesso}"/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaParticipacaoAutor.projetoPesquisaExtensao.numeroProcesso}"/>
                         <br/>
                         <h:outputText value="TÍTULO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:inputText value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao.tituloProcesso}"/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaParticipacaoAutor.projetoPesquisaExtensao.tituloProcesso}"/>
                         <br/>
                         <h:outputText value="PREVISÃO DE CONCLUSÃO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:calendar value="#{projetoPesquisaExtensaoMB.projetoPesquisaExtensaoSelecionadoParaProjetoPesquisaExtensao.previsaoConclusao}" mode="popup" />
+                        <p:calendar value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaParticipacaoAutor.projetoPesquisaExtensao.previsaoConclusao}" mode="popup" />
                         <br/>
+                        <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:inputText value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaParticipacaoAutor.projetoPesquisaExtensao.instituicaoPesquisa}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
-                                         action="#{projetoPesquisaExtensaoMB.alterarProjetoPesquisaExtensao()}" 
+                        <p:commandButton value="Salvar" 
+                                         action="#{projetoPesquisaExtensaoMB.alterarParticipacaoAutor()}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
 
                     <!-- Mostrar tabela atividades pesquisa e/ou extensão (Autor) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.projetosPesquisaExtensaoAutor}" 
-                                      var="projetoPesquisaExtensaoAutor" 
+                        <h:dataTable  value="#{pTDMB.participacoesAutor}" 
+                                      var="participacaoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
                                       footerClass="text-center">
@@ -1531,7 +1577,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoAutor.numeroProcesso}" 
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.numeroProcesso}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1541,12 +1587,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-
-                                <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{projetoPesquisaExtensaoAutor.tituloProcesso}"
-                                                  styleClass="text01"
-                                                  style="font-size: large; width: 100%;" />
-                                </p:scrollPanel>
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.tituloProcesso}"
+                                              styleClass="text01"
+                                              style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -1554,7 +1597,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoAutor.cargaHorariaSemanalProjetoExtensao}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.cargaHorariaSemanalParticipacao}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1581,31 +1624,58 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{projetoPesquisaExtensaoAutor.horariosProjetoExtensao}" 
-                                              var="horario" 
+                                <h:dataTable  value="#{participacaoPesquisaExtensaoAutor.horariosParticipacao}" 
+                                              var="horarioParticipacaoProjeto" 
                                               headerClass="text-center"
                                               footerClass="text-center"
                                               style="width: 100%;">
 
                                     <h:column>
-                                        <h:outputText value="#{horario.diaSemana}" 
+                                        <h:outputText value="#{horarioParticipacaoProjeto.diaSemana}" 
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
                                     </h:column>
                                     <h:column>
-                                        <h:outputText value="#{horario.horaInicio}"
+                                        <h:outputText value="#{horarioParticipacaoProjeto.horaInicio}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
                                     </h:column>
                                     <h:column>
-                                        <h:outputText value="#{horario.horaTermino}"
+                                        <h:outputText value="#{horarioParticipacaoProjeto.horaTermino}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
                                     </h:column>
+
+                                    <f:facet name="footer">
+
+                                        <p:commandButton styleClass="botaoCinza" 
+                                                         value="..."
+                                                         id="opPHorarioParticipacaoPesquisaExtensaoAutor"
+                                                         action="#{projetoPesquisaExtensaoMB.setParticipacaoAutorSelecionadoParaHorario(participacaoPesquisaExtensaoAutor)}"
+                                                         update="@(.ui-dialog)"/>
+
+                                        <!-- Caixa para seleção de ação referente à Horário -->
+                                        <p:overlayPanel id="opcoesHorarioParticipacaoPesquisaExtensaoAutor" 
+                                                        for="opPHorarioParticipacaoPesquisaExtensaoAutor" 
+                                                        hideEffect="fade" >
+                                            <p:commandButton value="Adicionar"
+                                                             styleClass="opMenuCRUD"
+                                                             onclick="PF('addHorarioPesquisaExtensaoDialog').show();"
+                                                             style="margin: 0px -10px;"/>
+                                            <br/>
+                                            <p:commandButton value="Editar"
+                                                             styleClass="opMenuCRUD"
+                                                             onclick="PF('edtHorariosPesquisaExtensaoDialog').show();"
+                                                             style="margin: 5px -10px 0px;"
+                                                             />
+
+                                        </p:overlayPanel>
+
+                                    </f:facet>
 
                                 </h:dataTable>
 
@@ -1616,7 +1686,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoAutor.previsaoConclusao}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.previsaoConclusao}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1626,16 +1696,45 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoAutor.instituicaoPesquisa}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.instituicaoPesquisa}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
+                            <h:column>
+
+                                <p:commandButton styleClass="botaoAzul" 
+                                                 value="..." 
+                                                 action="#{projetoPesquisaExtensaoMB.setParticipacaoAutorSelecionadoParaParticipacaoAutor(participacaoPesquisaExtensaoAutor)}"
+                                                 id="opPAtividadePesquisaExtensaoAutor"
+                                                 update="@(.ui-dialog)"/>
+
+                                <!-- Caixa para seleção de ação referente à Pesquisa Extenção (Autor) -->
+                                <p:overlayPanel id="opcoesPesquisaExtensaoAutor" 
+                                                for="opPAtividadePesquisaExtensaoAutor" 
+                                                hideEffect="fade">
+                                    <p:commandButton value="Atualizar"
+                                                     styleClass="opMenuCRUD"
+                                                     action="#{projetoPesquisaExtensaoMB.setParticipacaoAutorSelecionadoParaParticipacaoAutor(participacaoPesquisaExtensaoAutor)}"
+                                                     onclick="PF('edtAtividadePesquisaExtensao').show();"
+                                                     style="margin: 0px -10px;"/>
+                                    <br/>
+                                    <p:commandButton value="Deletar"
+                                                     styleClass="opMenuCRUD"
+                                                     ajax="false" 
+                                                     immediate="true"
+                                                     action="#{projetoPesquisaExtensaoMB.excluirParticipacaoPesquisaExtensao(participacaoPesquisaExtensaoAutor, pTDMB.ptd)}"
+                                                     style="margin: 5px -10px 0px;"/>
+
+                                </p:overlayPanel>
+
+                            </h:column>
+
                         </h:dataTable>
                     </div>
 
                     <!-- Mostrar erros na tabela pesquisa e/ou extensão (Autor) -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaPesquisaExtensaoAutor)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaPesquisaExtensaoAutor)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -1675,20 +1774,20 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <br/>
 
                         <p:selectOneMenu id="selectDiaSemanaPesquisaExtensao" 
-                                         value="#{horarioMB.horarioApoioEnsino.diaSemana}">
+                                         value="#{horarioMB.horarioPesquisaExtensaoAutor.diaSemana}">
 
                             <f:selectItems value="#{horarioMB.diasSemana}" 
-                                           var="diaSemanaPesquisaExtensao" 
-                                           itemValue="#{diaSemanaPesquisaExtensao}"
-                                           itemLabel="#{diaSemanaPesquisaExtensao}" />
+                                           var="diaSemanaPesquisaExtensaoAutor" 
+                                           itemValue="#{diaSemanaPesquisaExtensaoAutor}"
+                                           itemLabel="#{diaSemanaPesquisaExtensaoAutor}" />
                         </p:selectOneMenu>
 
                         <h:outputText value="HORÁRIO INÍCIO" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -30px 25px;"/>
                         <br/>
-                        <br> <p:calendar id="horaInicioPesquisaExtensao" 
-                                         value="#{horarioMB.horarioApoioEnsino.horaInicio}" 
+                        <br> <p:calendar id="horaInicioPesquisaExtensaoAutor" 
+                                         value="#{horarioMB.horarioPesquisaExtensaoAutor.horaInicio}" 
                                          pattern="HH:mm" 
                                          size="5"
                                          timeOnly="true"/></br>
@@ -1697,16 +1796,17 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                       styleClass="text01"
                                       style="margin: 10px 25px -30px 25px;"/>
                         <br/>
-                        <br> <p:calendar id="horaTerminoPesquisaExtensao" 
-                                         value="#{horarioMB.horarioApoioEnsino.horaTermino}" 
+                        <br> <p:calendar id="horaTerminoPesquisaExtensaoAutor" 
+                                         value="#{horarioMB.horarioPesquisaExtensaoAutor.horaTermino}" 
                                          pattern="HH:mm"
                                          size="5"
                                          timeOnly="true"/>
                         </br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
-                                         action="#{horarioMB.salvarHorarioAtividade(projetoPesquisaExtensaoMB.projetoPesquisaExtensaoSelecionadoParaHorario, usuarioMB.usuarioLogado)}"
+                        <p:commandButton value="Salvar" 
+                                         action="#{horarioMB.salvarHorarioAtividade(projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaHorario, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1719,8 +1819,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                               hideEffect="fade" 
                               resizable="false">
 
-                        <h:dataTable  value="#{projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario.horariosParticipacao}" 
-                                      var="horarioSelecionadoEdicaoPesquisaExtensao" 
+                        <h:dataTable  value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaHorario.horariosParticipacao}" 
+                                      var="horarioSelecionadoEdicaoPesquisaExtensaoAutor" 
                                       style="width: 100%;"
                                       headerClass="text-center"
                                       footerClass="text-center">
@@ -1736,8 +1836,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"/>
                                 </f:facet>
 
-                                <p:selectOneMenu id="selectDiaSemanaEdicaoPesquisaExtensao" 
-                                                 value="#{horarioSelecionadoEdicaoPesquisaExtensao.diaSemana}">
+                                <p:selectOneMenu id="selectDiaSemanaEdicaoPesquisaExtensaoAutor" 
+                                                 value="#{horarioSelecionadoEdicaoPesquisaExtensaoAutor.diaSemana}">
 
                                     <f:selectItems value="#{horarioMB.diasSemana}" 
                                                    var="diaSemana" 
@@ -1755,8 +1855,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"/>
                                 </f:facet>
 
-                                <p:calendar id="horaInicioEdicaoPesquisaExtensao" 
-                                            value="#{horarioSelecionadoEdicaoPesquisaExtensao.horaInicio}" 
+                                <p:calendar id="horaInicioEdicaoPesquisaExtensaoAutor" 
+                                            value="#{horarioSelecionadoEdicaoPesquisaExtensaoAutor.horaInicio}" 
                                             pattern="HH:mm" 
                                             size="5"
                                             timeOnly="true"/>
@@ -1770,8 +1870,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"/>
                                 </f:facet>
 
-                                <p:calendar id="horaTerminooEdicaoPesquisaExtensao" 
-                                            value="#{horarioSelecionadoEdicaoPesquisaExtensao.horaTermino}" 
+                                <p:calendar id="horaTerminooEdicaoPesquisaExtensaoAutor" 
+                                            value="#{horarioSelecionadoEdicaoPesquisaExtensaoAutor.horaTermino}" 
                                             pattern="HH:mm" 
                                             size="5"
                                             timeOnly="true"/>
@@ -1791,15 +1891,16 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                  value="X" 
                                                  ajax="false" 
                                                  immediate="true"
-                                                 action="#{horarioMB.excluirHorarioAtividade(horarioSelecionadoEdicaoPesquisaExtensao, projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario)}"/>
+                                                 action="#{horarioMB.excluirHorarioAtividade(horarioSelecionadoEdicaoPesquisaExtensaoAutor, projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaHorario)}"/>
 
                             </h:column>
 
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
-                                         action="#{horarioMB.alterarHorarioAtividade(projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario.horariosParticipacao, projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorario)}"
+                        <p:commandButton value="Salvar edição" 
+                                         action="#{horarioMB.alterarHorarioAtividade(projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaHorario.horariosParticipacao, projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaHorario)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -1817,14 +1918,14 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left;" 
                                              value="Adicionar"
-                                             onclick="PF('addPesquisaExtensaoColabDialog').show();"/>
+                                             onclick="PF('addAtividadePesquisaExtensaoColabDialog').show();"/>
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"
                                              id="ajudaPesquisaExtensaoColab"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Pesquisa e/ou extensao (Colaborador) -->
                     <p:overlayPanel for="ajudaPesquisaExtensaoColab" 
                                     hideEffect="fade" 
@@ -1837,10 +1938,69 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                       style="font-weight: normal; font-size: large; width: 470px; text-align: justify; "/>
                     </p:overlayPanel>
 
-                    <!-- Mostrar tabela atividades pesquisa e/ou extensão (Colaborador) -->
+                    <!-- Caixa de adição de uma atividade de um Projeto Pesquisa Extensão (Colab) -->
+                    <p:dialog header="Adicionar Colaboração de Pesquisa e Extensão" 
+                              widgetVar="addAtividadePesquisaExtensaoColabDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="PROJETOS" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:selectOneMenu id="selectProjetoColab" 
+                                         value="#{projetoPesquisaExtensaoMB.participacao.projetoPesquisaExtensao}"
+                                         converter="projetoPesquisaExtensaoConverter">
+
+                            <f:selectItems value="#{projetoPesquisaExtensaoMB.atualizarListaProjetosAtivos(usuarioMB.usuarioLogado.idUsuario)}" 
+                                           var="projetoColab" 
+                                           itemValue="#{projetoColab}"
+                                           itemLabel="#{projetoColab}" />
+                        </p:selectOneMenu>
+
+                        <br/>
+                        <p:commandButton value="Salvar" 
+                                         action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensaoJaCadastradoColaboracao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de edição de Atividade de Pesquisa e Extensão (Colab) -->
+                    <p:dialog header="Atualizar Colaboração de Pesquisa e Extensão" 
+                              widgetVar="edtAtividadePesquisaExtensaoColab" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="PROJETOS" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+                        <p:selectOneMenu id="selectProjetoColabEdicao" 
+                                         value="#{projetoPesquisaExtensaoMB.participacaoColabSelecionadoParaParticipacaoColab.projetoPesquisaExtensao}"
+                                         converter="projetoPesquisaExtensaoConverter">
+
+                            <f:selectItems value="#{projetoPesquisaExtensaoMB.atualizarListaProjetosAtivos(usuarioMB.usuarioLogado.idUsuario)}" 
+                                           var="projetoColabEdicao" 
+                                           itemValue="#{projetoColabEdicao}"
+                                           itemLabel="#{projetoColabEdicao}" />
+                        </p:selectOneMenu>
+
+                        <br/>
+                        <p:commandButton value="Salvar" 
+                                         action="#{projetoPesquisaExtensaoMB.alterarParticipacaoColab()}" 
+                                         update="tabelaGeral"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Mostrar tabela atividades pesquisa e/ou extensão (Colab) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.projetosPesquisaExtensaoColab}" 
-                                      var="projetoPesquisaExtensaoColab" 
+                        <h:dataTable  value="#{pTDMB.participacoesColab}" 
+                                      var="participacaoPesquisaExtensaoColab" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
                                       footerClass="text-center">
@@ -1851,7 +2011,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoColab.numeroProcesso}" 
+                                <h:outputText value="#{participacaoPesquisaExtensaoColab.projetoPesquisaExtensao.numeroProcesso}" 
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1861,12 +2021,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-
-                                <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{projetoPesquisaExtensaoColab.tituloProcesso}"
-                                                  styleClass="text01"
-                                                  style="font-size: large; width: 100%;" />
-                                </p:scrollPanel>
+                                <h:outputText value="#{participacaoPesquisaExtensaoColab.projetoPesquisaExtensao.tituloProcesso}"
+                                              styleClass="text01"
+                                              style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -1874,7 +2031,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoColab.cargaHorariaSemanalProjetoExtensao}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoColab.cargaHorariaSemanalParticipacao}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1901,31 +2058,58 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                 </f:facet>
 
                                 <!-- Tabela para o conteúdo de horários -->
-                                <h:dataTable  value="#{projetoPesquisaExtensaoColab.horariosProjetoExtensao}" 
-                                              var="horario" 
+                                <h:dataTable  value="#{participacaoPesquisaExtensaoColab.horariosParticipacao}" 
+                                              var="horarioParticipacaoProjetoColab" 
                                               headerClass="text-center"
                                               footerClass="text-center"
                                               style="width: 100%;">
 
                                     <h:column>
-                                        <h:outputText value="#{horario.diaSemana}" 
+                                        <h:outputText value="#{horarioParticipacaoProjetoColab.diaSemana}" 
                                                       styleClass="text01"
                                                       style="font-size: large;"/>
                                     </h:column>
                                     <h:column>
-                                        <h:outputText value="#{horario.horaInicio}"
+                                        <h:outputText value="#{horarioParticipacaoProjetoColab.horaInicio}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
                                     </h:column>
                                     <h:column>
-                                        <h:outputText value="#{horario.horaTermino}"
+                                        <h:outputText value="#{horarioParticipacaoProjetoColab.horaTermino}"
                                                       styleClass="text01"
                                                       style="font-size: large">
                                             <f:convertDateTime pattern="HH:mm" timeZone="GMT-3"/>
                                         </h:outputText>
                                     </h:column>
+
+                                    <f:facet name="footer">
+
+                                        <p:commandButton styleClass="botaoCinza" 
+                                                         value="..."
+                                                         id="opPHorarioParticipacaoPesquisaExtensaoAutor"
+                                                         action="#{projetoPesquisaExtensaoMB.setParticipacaoSelecionadoParaHorarioColab(participacaoPesquisaExtensaoColab)}"
+                                                         update="@(.ui-dialog)"/>
+
+                                        <!-- Caixa para seleção de ação referente à Horário -->
+                                        <p:overlayPanel id="opcoesHorarioParticipacaoPesquisaExtensaoAutor" 
+                                                        for="opPHorarioParticipacaoPesquisaExtensaoAutor" 
+                                                        hideEffect="fade" >
+                                            <p:commandButton value="Adicionar"
+                                                             styleClass="opMenuCRUD"
+                                                             onclick="PF('addHorarioPesquisaExtensaoColabDialog').show();"
+                                                             style="margin: 0px -10px;"/>
+                                            <br/>
+                                            <p:commandButton value="Editar"
+                                                             styleClass="opMenuCRUD"
+                                                             onclick="PF('edtHorariosPesquisaExtensaoColabDialog').show();"
+                                                             style="margin: 5px -10px 0px;"
+                                                             />
+
+                                        </p:overlayPanel>
+
+                                    </f:facet>
 
                                 </h:dataTable>
 
@@ -1936,7 +2120,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoColab.previsaoConclusao}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoColab.projetoPesquisaExtensao.previsaoConclusao}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
@@ -1946,17 +2130,45 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{projetoPesquisaExtensaoColab.instituicaoPesquisa}"
+                                <h:outputText value="#{participacaoPesquisaExtensaoColab.projetoPesquisaExtensao.instituicaoPesquisa}"
                                               styleClass="text01"
                                               style="font-size: large;"/>
                             </h:column>
+                            <h:column>
+
+                                <p:commandButton styleClass="botaoAzul" 
+                                                 value="..." 
+                                                 action="#{projetoPesquisaExtensaoMB.setParticipacaoColabSelecionadoParaParticipacaoColab(participacaoPesquisaExtensaoColab)}"
+                                                 id="opPAtividadePesquisaExtensaoColab"
+                                                 update="@(.ui-dialog)"/>
+
+                                <!-- Caixa para seleção de ação referente à Pesquisa Extenção (Autor) -->
+                                <p:overlayPanel id="opcoesPesquisaExtensaoColab" 
+                                                for="opPAtividadePesquisaExtensaoColab" 
+                                                hideEffect="fade">
+                                    <p:commandButton value="Atualizar"
+                                                     styleClass="opMenuCRUD"
+                                                     action="#{projetoPesquisaExtensaoMB.setParticipacaoColabSelecionadoParaParticipacaoColab(participacaoPesquisaExtensaoColab)}"
+                                                     onclick="PF('edtAtividadePesquisaExtensaoColab').show();"
+                                                     style="margin: 0px -10px;"/>
+                                    <br/>
+                                    <p:commandButton value="Deletar"
+                                                     styleClass="opMenuCRUD"
+                                                     ajax="false" 
+                                                     immediate="true"
+                                                     action="#{projetoPesquisaExtensaoMB.excluirParticipacaoPesquisaExtensao(participacaoPesquisaExtensaoColab, pTDMB.ptd)}"
+                                                     style="margin: 5px -10px 0px;"/>
+
+                                </p:overlayPanel>
+
+                            </h:column>
+
                         </h:dataTable>
                     </div>
-                    <br/>
 
-                    <!-- Mostrar erros na tabela pesquisa e/ou extensão (Colaborador) -->
+                    <!-- Mostrar erros na tabela pesquisa e/ou extensão (Colab) -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaPesquisaExtensaoColaborador)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaPesquisaExtensaoColaborador)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -1980,6 +2192,152 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                             </h:panelGrid>
                         </div>
                     </center>
+
+                    <!-- Caixa para adicionar horário à Atividade de Pesquisa e Extensão (Colab) -->
+                    <p:dialog header="Adicionar Horario à Colaboração de Pesquisa e Extensão" 
+                              widgetVar="addHorarioPesquisaExtensaoColabDialog" 
+                              modal="true"                              
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false"
+                              >
+
+                        <h:outputText value="DIA" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px;"/>
+                        <br/>
+
+                        <p:selectOneMenu id="selectDiaSemanaPesquisaExtensaoColab" 
+                                         value="#{horarioMB.horarioPesquisaExtensaoParticipacao.diaSemana}">
+
+                            <f:selectItems value="#{horarioMB.diasSemana}" 
+                                           var="diaSemanaPesquisaExtensaoColab" 
+                                           itemValue="#{diaSemanaPesquisaExtensaoColab}"
+                                           itemLabel="#{diaSemanaPesquisaExtensaoColab}" />
+                        </p:selectOneMenu>
+
+                        <h:outputText value="HORÁRIO INÍCIO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -30px 25px;"/>
+                        <br/>
+                        <br> <p:calendar id="horaInicioPesquisaExtensaoColab" 
+                                         value="#{horarioMB.horarioPesquisaExtensaoParticipacao.horaInicio}" 
+                                         pattern="HH:mm" 
+                                         size="5"
+                                         timeOnly="true"/></br>
+
+                        <h:outputText value="HORÁRIO TÉRMINO" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -30px 25px;"/>
+                        <br/>
+                        <br> <p:calendar id="horaTerminoPesquisaExtensaoColab" 
+                                         value="#{horarioMB.horarioPesquisaExtensaoParticipacao.horaTermino}" 
+                                         pattern="HH:mm"
+                                         size="5"
+                                         timeOnly="true"/>
+                        </br>
+
+                        <br/>
+                        <p:commandButton value="Salvar" 
+                                         action="#{horarioMB.salvarHorarioAtividade(projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorarioColab, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa para editar horário adicionado à Atividade de Pesquisa e Extensão (Colab) -->
+                    <p:dialog header="Editar Horarios de Colaboração de Pesquisa e Extensão" 
+                              widgetVar="edtHorariosPesquisaExtensaoColabDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:dataTable  value="#{projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorarioColab.horariosParticipacao}" 
+                                      var="horarioSelecionadoEdicaoPesquisaExtensaoColab" 
+                                      style="width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <f:facet name="header">
+                                <h:outputText value="" />
+                            </f:facet>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="DIA" 
+                                                  styleClass="text01"/>
+                                </f:facet>
+
+                                <p:selectOneMenu id="selectDiaSemanaEdicaoPesquisaExtensaoColab" 
+                                                 value="#{horarioSelecionadoEdicaoPesquisaExtensaoColab.diaSemana}">
+
+                                    <f:selectItems value="#{horarioMB.diasSemana}" 
+                                                   var="diaSemana" 
+                                                   itemValue="#{diaSemana}"
+                                                   itemLabel="#{diaSemana}" />
+
+                                </p:selectOneMenu>
+
+                            </h:column>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="INÍCIO" 
+                                                  styleClass="text01"/>
+                                </f:facet>
+
+                                <p:calendar id="horaInicioEdicaoPesquisaExtensaoColab" 
+                                            value="#{horarioSelecionadoEdicaoPesquisaExtensaoColab.horaInicio}" 
+                                            pattern="HH:mm" 
+                                            size="5"
+                                            timeOnly="true"/>
+
+                            </h:column>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="TÉRMINO" 
+                                                  styleClass="text01"/>
+                                </f:facet>
+
+                                <p:calendar id="horaTerminooEdicaoPesquisaExtensaoColab" 
+                                            value="#{horarioSelecionadoEdicaoPesquisaExtensaoColab.horaTermino}" 
+                                            pattern="HH:mm" 
+                                            size="5"
+                                            timeOnly="true"/>
+
+                            </h:column>
+
+                            <h:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                </f:facet>
+
+                                <p:commandButton styleClass="botaoCinza" 
+                                                 style="float: left; font-size: 12pt;" 
+                                                 value="X" 
+                                                 ajax="false" 
+                                                 immediate="true"
+                                                 action="#{horarioMB.excluirHorarioAtividade(horarioSelecionadoEdicaoPesquisaExtensaoColab, projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorarioColab)}"/>
+
+                            </h:column>
+
+                        </h:dataTable>
+
+                        <br/>
+                        <p:commandButton value="Salvar edição" 
+                                         action="#{horarioMB.alterarHorarioAtividade(projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorarioColab.horariosParticipacao, projetoPesquisaExtensaoMB.participacaoSelecionadoParaHorarioColab)}"
+                                         update="tabelaGeral"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
 
                     <!-- Atividades Administrativas -->
                     <h:outputText value="3. Atividades administrativas" 
@@ -2005,7 +2363,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                              id="ajudaAdministrativas"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Administrativas -->
                     <p:overlayPanel for="ajudaAdministrativas" 
                                     hideEffect="fade" 
@@ -2033,8 +2391,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <p:inputText value="#{administracaoMB.tipoAdministracao.rotulo}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{administracaoMB.salvarAdministracao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2054,8 +2413,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <p:inputText value="#{administracaoMB.administracaoSelecionadaParaAdministracao.tipoAdministracao.rotulo}"/>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{administracaoMB.alterarAdministracao()}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2200,7 +2560,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
 
                     <!-- Mostrar erros na tabela administrativas -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaAdministrativas)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaAdministrativas)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -2270,8 +2630,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         </br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAtividade(administracaoMB.administracaoSelecionadaParaHorario, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2363,8 +2724,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAtividade(administracaoMB.administracaoSelecionadaParaHorario.horariosAdministracao, administracaoMB.administracaoSelecionadaParaHorario)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2396,7 +2758,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                              id="ajudaOutrasAtividades"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Outras Atividades -->
                     <p:overlayPanel for="ajudaOutrasAtividades" 
                                     hideEffect="fade" 
@@ -2438,8 +2800,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         </p:selectOneMenu>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{outroTipoAtividadeMB.salvarOutroTipoAtividade(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2472,8 +2835,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
 
                         </p:selectOneMenu>
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{outroTipoAtividadeMB.alterarOutroTipoAtividade()}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2628,7 +2992,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
 
                     <!-- Mostrar erros na tabela outras atividades -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaOutrasAtividades)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaOutrasAtividades)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -2698,8 +3062,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         </br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAtividade(outroTipoAtividadeMB.outroTipoAtividadeSelecionadaParaHorario, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2791,8 +3156,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAtividade(outroTipoAtividadeMB.outroTipoAtividadeSelecionadaParaHorario.horariosOutroTipoAtividade, outroTipoAtividadeMB.outroTipoAtividadeSelecionadaParaHorario)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2824,7 +3190,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                              id="ajudaAtividadesAPropor"/>
                         </h:panelGrid>
                     </h:panelGrid>
-                    
+
                     <!-- Informações ajuda Atividades a propor -->
                     <p:overlayPanel for="ajudaAtividadesAPropor" 
                                     hideEffect="fade" 
@@ -2866,8 +3232,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         </p:selectOneMenu>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{atividadeASerPropostaMB.salvarAtividadeASerProposta(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -2900,8 +3267,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
 
                         </p:selectOneMenu>
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{atividadeASerPropostaMB.alterarAtividadeASerProposta()}" 
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3056,7 +3424,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
 
                     <!-- Mostrar erros na tabela atividades a serem propostas -->
                     <center>
-                        <div id="erros" style="opacity: #{pTDMB.verificarListaErros(pTDMB.errosTabelaAtividadesASeremPropostas)};">
+                        <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaAtividadesASeremPropostas)};">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
@@ -3126,8 +3494,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         </br>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{horarioMB.salvarHorarioAtividade(atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaHorario, usuarioMB.usuarioLogado)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3219,8 +3588,9 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         </h:dataTable>
 
                         <br/>
-                        <h:commandButton value="Salvar edição" 
+                        <p:commandButton value="Salvar edição" 
                                          action="#{horarioMB.alterarHorarioAtividade(atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaHorario.horariosAtividadesASerProposta, atividadeASerPropostaMB.atividadeASerPropostaSelecionadaParaHorario)}"
+                                         update="tabelaGeral"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3243,8 +3613,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaAtividadeEnsino}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                        <p:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3263,8 +3633,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaManutencaoEnsino}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                        <p:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3283,8 +3653,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaApoioEnsino}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                        <p:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3303,8 +3673,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaProjetoPesquisaExtensao}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                        <p:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3323,8 +3693,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaAdministracao}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                        <p:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3343,8 +3713,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaOutrasAtividades}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                        <p:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
@@ -3363,9 +3733,108 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaSeremPropostas}"/>
                         <br/>
-                        <h:commandButton value="Comentar"
-                                         action="#{pTDMB.salvarComentários()}"
+                        <p:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
                                          styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de aviso de erros de preenchimento -->
+                    <p:dialog header="Há erros nos dados fornecidos" 
+                              widgetVar="avisoErrosDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="O documento ainda não pode ser submetido devido ao(s) erro(s) nos dados fornecidos" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaSeremPropostas}"/>
+                        <br/>
+                        <h:commandButton value="Corrigir"
+                                         action="CriarCorrigirPTD?faces-redirect=true"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de aviso de irregularidades -->
+                    <p:dialog header="Há irregularidades no documento" 
+                              widgetVar="avisoIrregularidadeDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="O documento não esta completamente de acordo com a legislação, para enviar você deve corrigí-lo ou justificar as irregularidades." 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <h:outputText value="Irregularidades:" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaSeremPropostas}"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="Corrigir"
+                                         action="CriarCorrigirPTD?faces-redirect=true"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de confirmaçao de submissão com irregularidades -->
+                    <p:dialog header="Há irregularidades no documento" 
+                              widgetVar="confirmacaoIrregularidadeDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="O documento não esta completamente de acordo com a legislação" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="Corrigir"
+                                         action="CriarCorrigirPTD?faces-redirect=true"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="Enviar mesmo assim!"
+                                         action="#{pTDMB.submeterPTD()}"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de aviso de impedimento por tentativa de envio de documento vazio -->
+                    <p:dialog header="Confirmar submissão" 
+                              widgetVar="documentoVazioDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="O documento documento está vazio" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="Corrigir"
+                                         action="#{pTDMB.submeterPTD()}"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de confirmaçao de conclusão -->
+                    <p:dialog header="Confirmar submissão" 
+                              widgetVar="conclusãoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="Concluído"
+                                         action="#{pTDMB.submeterPTD()}"/>
 
                     </p:dialog>
 
@@ -3375,7 +3844,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                   style="font-size: 22pt;"/>
                     <br/><br/>
                     <center>
-                        <h:panelGrid columns="2" 
+                        <h:panelGrid id="tabelaGeral"
+                                     columns="2" 
                                      style="border-style: solid; border-width: thin;">
                             <h:outputText value="ATIVIDADES"  
                                           styleClass="text01"
@@ -3442,11 +3912,38 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                     </center>
 
                     <br/>
+                    <!-- Mostrar irregularidades -->
+                    <center>
+                        <div id="irregularidades" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.irregularidades)}">
+                            <h:panelGrid columns="2">
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="!" 
+                                                  styleClass="exclamacaoIrregularidade"/>
+                                </h:panelGrid>
+                                <h:dataTable  value="#{pTDMB.irregularidades}" 
+                                              var="irregularidade" 
+                                              style="width: auto;"
+                                              headerClass="text-center"
+                                              footerClass="text-center">
+
+                                    <h:column>
+                                        <f:facet name="header">
+
+                                        </f:facet>
+                                        <h:outputText value="#{irregularidade}" 
+                                                      styleClass="text01"
+                                                      style="font-size: small; color: #E0911C;"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGrid>
+                        </div>
+                    </center>
+                    <br/>
 
                     <p:commandButton styleClass="botaoAzul" 
                                      style="float: right; border-radius: 30px; font-size: large; margin-left: 10px;" 
                                      value="Submeter"
-                                     action="#{pTDMB.submeterPTD()}"/>
+                                     onclick="PF('#{pTDMB.verificarPossibilidadeSubmissao()}').show();"/>
                     <p:commandButton styleClass="botaoCinza" 
                                      style="float: right; border-radius: 30px; font-size: large;" 
                                      value="Cancelar"

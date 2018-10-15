@@ -56,7 +56,7 @@ public class PTD implements Serializable {
     private Date dataAvaliacaoPTD;
 
     @ManyToOne
-    @JoinColumn(name = "diretorEnsino_idUsuario")
+    @JoinColumn(name = "diretorEnsino_idUsuario", nullable = true)
     private DiretorEnsino diretorEnsino;
 
     @ManyToOne
@@ -77,12 +77,6 @@ public class PTD implements Serializable {
 
     @OneToMany
     private List<Participacao> participacoes;
-
-    @OneToMany
-    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAutor;
-
-    @OneToMany
-    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoColab;
 
     @OneToMany
     private List<AtividadeASerProposta> atividadesASeremPropostas;
@@ -106,13 +100,12 @@ public class PTD implements Serializable {
         apoios = new ArrayList();
         manutencoesEnsino = new ArrayList();
         administrativas = new ArrayList();
-        participacoes = new ArrayList();
         atividadesASeremPropostas = new ArrayList();
         outrosTiposAtividades = new ArrayList();
         estadoPTD = "";
         dataAvaliacaoPTD = new Date();
         diretorEnsino = new DiretorEnsino();
-        projetosPesquisaExtensaoAutor = new ArrayList();
+        participacoes = new ArrayList();
     }
 
     public PTD(int idPTD, String campoJustificativaAtividadeEnsino, String campoJustificativaManutencaoEnsino, String campoJustificativaApoioEnsino, String campoJustificativaAdministracao, String campoJustificativaProjetoEnsino, String campoJustificativaSeremPropostas, String campoJustificativaOutrasAtividades, String campoJustificativaProjetoPesquisaExtensao, String campoObservacoesDiretorEnsino, String estadoPTD) {
@@ -135,13 +128,11 @@ public class PTD implements Serializable {
         manutencoesEnsino = new ArrayList();
         administrativas = new ArrayList();
         participacoes = new ArrayList();
-        projetosPesquisaExtensaoAutor = new ArrayList();
-        projetosPesquisaExtensaoColab = new ArrayList();
         atividadesASeremPropostas = new ArrayList();
         outrosTiposAtividades = new ArrayList();
     }
 
-    public PTD(int idPTD, String campoJustificativaAtividadeEnsino, String campoJustificativaManutencaoEnsino, String campoJustificativaApoioEnsino, String campoJustificativaAdministracao, String campoJustificativaProjetoEnsino, String campoJustificativaSeremPropostas, String campoJustificativaOutrasAtividades, String campoJustificativaProjetoPesquisaExtensao, String campoObservacoesDiretorEnsino, String estadoPTD, Date dataAvaliacaoPTD, DiretorEnsino diretorEnsino, Professor professor, List<Aula> aulas, List<Apoio> apoios, List<ManutencaoEnsino> manutencoesEnsino, List<Administracao> administrativas, List<Participacao> participacoes, List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAutor, List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoColab, List<AtividadeASerProposta> atividadesASeremPropostas, List<OutroTipoAtividade> outrosTiposAtividades) {
+    public PTD(int idPTD, String campoJustificativaAtividadeEnsino, String campoJustificativaManutencaoEnsino, String campoJustificativaApoioEnsino, String campoJustificativaAdministracao, String campoJustificativaProjetoEnsino, String campoJustificativaSeremPropostas, String campoJustificativaOutrasAtividades, String campoJustificativaProjetoPesquisaExtensao, String campoObservacoesDiretorEnsino, String estadoPTD, Date dataAvaliacaoPTD, DiretorEnsino diretorEnsino, Professor professor, List<Aula> aulas, List<Apoio> apoios, List<ManutencaoEnsino> manutencoesEnsino, List<Administracao> administrativas, List<Participacao> participacoes, List<AtividadeASerProposta> atividadesASeremPropostas, List<OutroTipoAtividade> outrosTiposAtividades) {
         this.idPTD = idPTD;
         this.campoJustificativaAtividadeEnsino = campoJustificativaAtividadeEnsino;
         this.campoJustificativaManutencaoEnsino = campoJustificativaManutencaoEnsino;
@@ -161,8 +152,6 @@ public class PTD implements Serializable {
         this.manutencoesEnsino = manutencoesEnsino;
         this.administrativas = administrativas;
         this.participacoes = participacoes;
-        this.projetosPesquisaExtensaoAutor = projetosPesquisaExtensaoAutor;
-        this.projetosPesquisaExtensaoColab = projetosPesquisaExtensaoColab;
         this.atividadesASeremPropostas = atividadesASeremPropostas;
         this.outrosTiposAtividades = outrosTiposAtividades;
     }
@@ -327,28 +316,19 @@ public class PTD implements Serializable {
         this.campoObservacoesDiretorEnsino = campoObservacoesDiretorEnsino;
     }
 
+    /**
+     * @return the participacoesAutor
+     */
     public List<Participacao> getParticipacoes() {
         return participacoes;
     }
 
+    /**
+     * @param participacoes the participacoesAutor to set
+     */
     public void setParticipacoes(List<Participacao> participacoes) {
         this.participacoes = participacoes;
     }
 
-    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoAutor() {
-        return projetosPesquisaExtensaoAutor;
-    }
-
-    public void setProjetosPesquisaExtensaoAutor(List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAutor) {
-        this.projetosPesquisaExtensaoAutor = projetosPesquisaExtensaoAutor;
-    }
-
-    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoColab() {
-        return projetosPesquisaExtensaoColab;
-    }
-
-    public void setProjetosPesquisaExtensaoColab(List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoColab) {
-        this.projetosPesquisaExtensaoColab = projetosPesquisaExtensaoColab;
-    }
 
 }

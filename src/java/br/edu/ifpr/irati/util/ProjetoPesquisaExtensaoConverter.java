@@ -10,7 +10,7 @@ import javax.faces.convert.FacesConverter;
 
 
 
-@FacesConverter(forClass = ProjetoPesquisaExtensao.class, value = "projetoExtensaoConverter")
+@FacesConverter(forClass = ProjetoPesquisaExtensao.class, value = "projetoPesquisaExtensaoConverter")
 public class ProjetoPesquisaExtensaoConverter implements Converter {
 
     @Override

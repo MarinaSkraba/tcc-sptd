@@ -53,8 +53,12 @@ public class PTDMB {
 
     private PTD ptd;
     private PTD ptdEmAvaliacao;
-    private List<PTD> pdtsEmAvaliacao;
+    private List<PTD> ptdsEmAvaliacao;
+    private List<PTD> ptdsReprovados;
     private List<PTD> ptdsEmEdicao;
+    private List<PTD> ptdsAprovados;
+    private List<Participacao> participacoesAutor;
+    private List<Participacao> participacoesColab;
     private double cargaHorariaTotalAdministracoes;
     private double cargaHorariaTotalApoios;
     private double cargaHorariaTotalAtividadesASeremPropostas;
@@ -64,13 +68,11 @@ public class PTDMB {
     private double cargaHorariaTotalProjetosPesquisaExtensaoAutor;
     private double cargaHorariaTotalProjetosPesquisaExtensaoColab;
     private double cargaHorariaTotalPTD;
-    private boolean obrigatoriedadeJustificativaAula;
-    private boolean obrigatoriedadeJustificativaApoio;
-    private boolean obrigatoriedadeJustificativaManutencaoEnsino;
-    private boolean obrigatoriedadeJustificativaPesquisaExtensao;
+//    private boolean obrigatoriedadeJustificativaAula;
+//    private boolean obrigatoriedadeJustificativaApoio;
+//    private boolean obrigatoriedadeJustificativaManutencaoEnsino;
+//    private boolean obrigatoriedadeJustificativaPesquisaExtensao;
     private String estadoCargaHorariaPTD;
-    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAutor;
-    private List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoColab;
     private List<String> errosTabelaAula;
     private List<String> errosTabelaManuEnsino;
     private List<String> errosTabelaApoioEnsino;
@@ -79,31 +81,22 @@ public class PTDMB {
     private List<String> errosTabelaAdministrativas;
     private List<String> errosTabelaOutrasAtividades;
     private List<String> errosTabelaAtividadesASeremPropostas;
+    private List<String> irregularidades;
 
     public PTDMB() {
 
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptd = new PTD();
         ptdEmAvaliacao = new PTD();
-        pdtsEmAvaliacao = new ArrayList<>();
+        ptdsEmAvaliacao = new ArrayList<>();
+        ptdsReprovados = new ArrayList<>();
+//        ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados();
+//        ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados();
         ptdsEmEdicao = new ArrayList();
-        IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        pdtsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
-        this.cargaHorariaTotalAdministracoes = 0;
-        this.cargaHorariaTotalApoios = 0;
-        this.cargaHorariaTotalAtividadesASeremPropostas = 0;
-        this.cargaHorariaTotalAulas = 0;
-        this.cargaHorariaTotalManutencoesEnsino = 0;
-        this.cargaHorariaTotalOutroTiposAtividade = 0;
-        this.cargaHorariaTotalProjetosPesquisaExtensaoAutor = 0;
-        this.cargaHorariaTotalProjetosPesquisaExtensaoColab = 0;
-        this.cargaHorariaTotalPTD = 0;
-        this.obrigatoriedadeJustificativaApoio = false;
-        this.obrigatoriedadeJustificativaAula = false;
-        this.obrigatoriedadeJustificativaManutencaoEnsino = false;
-        this.obrigatoriedadeJustificativaPesquisaExtensao = false;
+        ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
+        participacoesAutor = new ArrayList<>();
+        participacoesColab = new ArrayList<>();
         this.estadoCargaHorariaPTD = "";
-        this.projetosPesquisaExtensaoAutor = new ArrayList();
-        this.projetosPesquisaExtensaoColab = new ArrayList();
         errosTabelaAula = new ArrayList<>();
         errosTabelaManuEnsino = new ArrayList<>();
         errosTabelaApoioEnsino = new ArrayList<>();
@@ -112,79 +105,29 @@ public class PTDMB {
         errosTabelaAdministrativas = new ArrayList<>();
         errosTabelaOutrasAtividades = new ArrayList<>();
         errosTabelaAtividadesASeremPropostas = new ArrayList<>();
+        irregularidades = new ArrayList<>();
 
     }
 
-    public void verificarCargaHorariaPTD() {
-
-        for (Administracao adm : getPtd().getAdministrativas()) {
-            setCargaHorariaTotalAdministracoes(getCargaHorariaTotalAdministracoes() + adm.getCargaHorariaSemanalAdministracao());
-        }
-
-        for (Apoio ap : getPtd().getApoios()) {
-            setCargaHorariaTotalApoios(getCargaHorariaTotalApoios() + ap.getCargaHorariaSemanalApoio());
-        }
-        if (getCargaHorariaTotalApoios() != 4) {
-            setObrigatoriedadeJustificativaApoio(true);
-        }
-
-        for (Aula a : getPtd().getAulas()) {
-            setCargaHorariaTotalAulas(getCargaHorariaTotalAulas() + a.getCargaHorariaTotal());
-        }
-
-        if (getPtd().getProfessor().getRegimeTrabalho().equals("20h")) {
-
-            if (getCargaHorariaTotalAulas() < 8 && getCargaHorariaTotalAulas() > 12) {
-
-                setObrigatoriedadeJustificativaAula(true);
-
-            }
-
-        } else if (getPtd().getProfessor().getRegimeTrabalho().equals("40h")) {
-            if (getCargaHorariaTotalAulas() < 12 && getCargaHorariaTotalAulas() > 16) {
-
-                setObrigatoriedadeJustificativaAula(true);
+    public void atualizarListasParticipacoes() {
+        participacoesAutor = new ArrayList<>();
+        participacoesColab = new ArrayList<>();
+        for (Participacao part : ptd.getParticipacoes()) {
+            if (part.getRotulo().equalsIgnoreCase("Autor")) {
+                participacoesAutor.add(part);
+            } else {
+                participacoesColab.add(part);
             }
         }
+    }
 
-        for (ManutencaoEnsino me : getPtd().getManutencoesEnsino()) {
-            setCargaHorariaTotalManutencoesEnsino(getCargaHorariaTotalManutencoesEnsino() + me.getCargaHorariaSemanalManutencaoEnsino());
-        }
-
-        if (getCargaHorariaTotalManutencoesEnsino() != 4) {
-            setObrigatoriedadeJustificativaManutencaoEnsino(true);
-        }
-
-        for (OutroTipoAtividade ota : getPtd().getOutrosTiposAtividades()) {
-            setCargaHorariaTotalOutroTiposAtividade(getCargaHorariaTotalOutroTiposAtividade() + ota.getCargaHorariaSemanalOutroTipoAtividade());
-        }
-        for (ProjetoPesquisaExtensao ppe : getPtd().getProjetosPesquisaExtensao()) {
-            for (Participacao part : ppe.getParticipacoesProjetoPesquisaExtensao()) {
-                if (part.getRotulo().equals("AUTOR")) {
-                    setCargaHorariaTotalProjetosPesquisaExtensaoAutor(getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + part.getCargaHorariaSemanalParticipacao());
-                } else if (part.getRotulo().equals("COLABORADOR")) {
-                    setCargaHorariaTotalProjetosPesquisaExtensaoColab(getCargaHorariaTotalProjetosPesquisaExtensaoColab() + part.getCargaHorariaSemanalParticipacao());
-                }
-            }
-        }
-        if ((getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 16) {
-            setObrigatoriedadeJustificativaPesquisaExtensao(true);
-        }
-
-        setCargaHorariaTotalPTD(getCargaHorariaTotalAdministracoes() + getCargaHorariaTotalApoios() + getCargaHorariaTotalAulas() + getCargaHorariaTotalManutencoesEnsino() + getCargaHorariaTotalOutroTiposAtividade() + getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab());
-        if (Double.parseDouble(getPtd().getProfessor().getRegimeTrabalho()) == getCargaHorariaTotalPTD()) {
-
-            setEstadoCargaHorariaPTD("CORRETO");
-
-        } else {
-
-            setEstadoCargaHorariaPTD("INCORRETO");
-        }
+    public void realizarConferencias() {
+        verificarErros();
+        verificarCargaHorariaPTD();
     }
 
     public String abrirCriarCorrigirPTDEmBranco(Usuario usuario) {
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
-        );
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         Dao<Professor> professorDAOGenerico = new GenericDAO<>(Professor.class);
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         Professor p = professorDAOGenerico.buscarPorId(usuario.getIdUsuario());
@@ -215,7 +158,17 @@ public class PTDMB {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario());
         setPtd(ptdEmEdicao.get(0));
+        errosTabelaAdministrativas = new ArrayList<>();
+        errosTabelaApoioEnsino = new ArrayList<>();
+        errosTabelaAtividadesASeremPropostas = new ArrayList<>();
+        errosTabelaAula = new ArrayList<>();
+        errosTabelaManuEnsino = new ArrayList<>();
+        errosTabelaOutrasAtividades = new ArrayList<>();
+        errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
+        errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
+        irregularidades = new ArrayList<>();
         return "/CriarCorrigirPTD";
+
     }
 
     public String abrirCriarCorrigirPTDAPartirDoUltimoArquivado(Usuario usuario) {
@@ -235,6 +188,16 @@ public class PTDMB {
             getPtd().setEstadoPTD("EDICAO");
             ptdDAOGenerico.salvar(getPtd());
             setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario()).get(0));
+
+            errosTabelaAdministrativas = new ArrayList<>();
+            errosTabelaApoioEnsino = new ArrayList<>();
+            errosTabelaAtividadesASeremPropostas = new ArrayList<>();
+            errosTabelaAula = new ArrayList<>();
+            errosTabelaManuEnsino = new ArrayList<>();
+            errosTabelaOutrasAtividades = new ArrayList<>();
+            errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
+            errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
+            irregularidades = new ArrayList<>();
             return "/CriarCorrigirPTD";
         } else {
 
@@ -242,26 +205,68 @@ public class PTDMB {
         }
     }
 
+    public String abrirCriarCorrigirPTDAPartirDeUmReprovado(PTD ptdReprovado) {
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(ptdReprovado.getProfessor().getIdUsuario());
+        for (PTD ptdE : ptdsEmEdicao) {
+            ptdE.setEstadoPTD("CANCELADO");
+            ptdDAOGenerico.alterar(ptdE);
+        }
+        ptdReprovado.setEstadoPTD("EDICAO");
+        ptdReprovado.setIdPTD(0);
+        ptdDAOGenerico.salvar(ptdReprovado);
+        setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(ptdReprovado.getProfessor().getIdUsuario()).get(0));
+        errosTabelaAdministrativas = new ArrayList<>();
+        errosTabelaApoioEnsino = new ArrayList<>();
+        errosTabelaAtividadesASeremPropostas = new ArrayList<>();
+        errosTabelaAula = new ArrayList<>();
+        errosTabelaManuEnsino = new ArrayList<>();
+        errosTabelaOutrasAtividades = new ArrayList<>();
+        errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
+        errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
+        irregularidades = new ArrayList<>();
+        return "/CriarCorrigirPTD";
+    }
+
     public String cancelarPTD() {
 
-        Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class);
-        Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
-        Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
-        Dao<TipoApoio> tipoApoioDAO = new GenericDAO<>(TipoApoio.class);
-        Dao<AtividadeASerProposta> aASPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
-        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-        Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class);
-        Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
-        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
-        Dao<ManutencaoEnsino> manutencaoDAO = new GenericDAO<>(ManutencaoEnsino.class);
-        Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class);
-        Dao<OutroTipoAtividade> oTAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
-        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
-        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
-        Dao<ProjetoPesquisaExtensao> pPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
-        Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
-        Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
+        Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class
+        );
+        Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class
+        );
+        Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class
+        );
+        Dao<TipoApoio> tipoApoioDAO = new GenericDAO<>(TipoApoio.class
+        );
+        Dao<AtividadeASerProposta> aASPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class
+        );
+        Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class
+        );
+        Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class
+        );
+        Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class
+        );
+        Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class
+        );
+        Dao<ManutencaoEnsino> manutencaoDAO = new GenericDAO<>(ManutencaoEnsino.class
+        );
+        Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class
+        );
+        Dao<OutroTipoAtividade> oTAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class
+        );
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class
+        );
+        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class
+        );
+        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class
+        );
+        Dao<ProjetoPesquisaExtensao> pPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class
+        );
+        Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class
+        );
+        Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class
+        );
 
         for (Administracao adm : getPtd().getAdministrativas()) {
 
@@ -343,7 +348,11 @@ public class PTDMB {
             oTAtividadeDAO.excluir(oTA);
         }
 
-        for (ProjetoPesquisaExtensao pPesquisaExtensao : getPtd().getProjetosPesquisaExtensao()) {
+        for (Participacao p : getPtd().getParticipacoes()) {
+
+            getPtd().getParticipacoes().remove(p);
+            ptdDAO.alterar(getPtd());
+            participacaoDAO.excluir(p);
 
         }
 
@@ -365,6 +374,80 @@ public class PTDMB {
         return "/NotificacoesDocente";
     }
 
+    public String verificarPossibilidadeSubmissao() {
+
+        String nomeCaixaDialogo = "";
+        atualizarListasParticipacoes();
+
+        // Conferência da existência de erros
+        realizarConferencias();
+
+        if (cargaHorariaTotalPTD == 0) {
+            nomeCaixaDialogo = "documentoVazioDialog";
+        } else if (errosTabelaAdministrativas.isEmpty() != true) {
+            nomeCaixaDialogo = "avisoErrosDialog";
+        } else if (errosTabelaApoioEnsino.isEmpty() != true) {
+            nomeCaixaDialogo = "avisoErrosDialog";
+        } else if (errosTabelaAtividadesASeremPropostas.isEmpty() != true) {
+            nomeCaixaDialogo = "avisoErrosDialog";
+        } else if (errosTabelaAula.isEmpty() != true) {
+            nomeCaixaDialogo = "avisoErrosDialog";
+        } else if (errosTabelaManuEnsino.isEmpty() != true) {
+            nomeCaixaDialogo = "avisoErrosDialog";
+        } else if (errosTabelaOutrasAtividades.isEmpty() != true) {
+            nomeCaixaDialogo = "avisoErrosDialog";
+        } else if (errosTabelaPesquisaExtensaoAutor.isEmpty() != true) {
+            nomeCaixaDialogo = "avisoErrosDialog";
+        } else if (errosTabelaPesquisaExtensaoColaborador.isEmpty() != true) {
+            nomeCaixaDialogo = "avisoErrosDialog";
+        } else if (irregularidades.isEmpty() != true) {
+            for (String irregularidade : irregularidades) {
+                if ((irregularidade.equals("A carga horária é superior "
+                        + "à 4 horas em Apoio ao Ensino!") | irregularidade.equals("A carga horária é inferior à 4 horas em Apoio ao Ensino!")) && ptd.getCampoJustificativaApoioEnsino().isEmpty() != true) {
+                    nomeCaixaDialogo = "avisoIrregularidadeDialog";
+
+                }
+                if ((irregularidade.equals("A carga horária de projetos de pesquisa "
+                        + "e/ou extensão como colaborador "
+                        + "e autor é superior à 16 horas!") | irregularidade.equals("A carga horária de projetos"
+                                + "de pesquisa e/ou extensão como "
+                                + "colaborador e autor é inferior à 16 horas!")) && ptd.getCampoJustificativaProjetoPesquisaExtensao().isEmpty() != true) {
+
+                    nomeCaixaDialogo = "avisoIrregularidadeDialog";
+
+                }
+                if ((irregularidade.equals("A carga horária é inferior à 4 horas"
+                        + " em Manutenção ao Ensino") | irregularidade.equals("A carga horária é superior à 4"
+                                + " horas em Manutenção ao Ensino")) && ptd.getCampoJustificativaManutencaoEnsino().isEmpty() != true) {
+
+                    nomeCaixaDialogo = "avisoIrregularidadeDialog";
+
+                }
+                if ((irregularidade.equals("A carga horária é inferior "
+                        + "à 8 horas em Aula!") | irregularidade.equals("A carga horária é superior "
+                                + "à 12 horas em Aula!") | irregularidade.equals("A carga horária é inferior "
+                                + "à 12 horas em Aula!") | irregularidade.equals("A carga horária é superior"
+                                + " à 16 horas em Aula!") | irregularidade.equals("Mesmo descontando a carga horária redistribuída"
+                                + "de projeto de pesquisa e/ou extensão para aula"
+                                + " e apoio ao ensino, o componente aula apresenta"
+                                + " carga horária superior à 16 horas") | irregularidade.equals("Descontando a carga horária redistribuída de projeto de pesquisa"
+                                + " e/ou extensão para aula e apoio ao ensino,"
+                                + " o componente aula apresenta carga horária inferior à 12 horas")) && ptd.getCampoJustificativaAtividadeEnsino().isEmpty() != true) {
+
+                    nomeCaixaDialogo = "avisoIrregularidadeDialog";
+
+                } else {
+                    nomeCaixaDialogo = "confirmacaoIrregularidadeDialog";
+                }
+            }
+        } else {
+            nomeCaixaDialogo = "conclusãoDialog";
+        }
+
+        return nomeCaixaDialogo;
+
+    }
+
     public void verificarErros() {
         errosTabelaAdministrativas = new ArrayList();
         errosTabelaApoioEnsino = new ArrayList();
@@ -375,38 +458,49 @@ public class PTDMB {
         errosTabelaPesquisaExtensaoAutor = new ArrayList();
         errosTabelaPesquisaExtensaoColaborador = new ArrayList();
 
-        // erro horaInício > horaTérmino
         for (Administracao adm : getPtd().getAdministrativas()) {
             for (Horario h : adm.getHorariosAdministracao()) {
 
                 if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
-                    errosTabelaAdministrativas.add("erroInTerm");
-                } else if (h.getHoraInicio() == null) {
-                    errosTabelaAdministrativas.add("Innull");
-                } else if (h.getHoraTermino() == null) {
-                    errosTabelaAdministrativas.add("Termnull");
+                    errosTabelaAdministrativas.add("Você inseriu um horário de início posterior ao de término!");
+
+                } else if (h.getHoraInicio().getTime() == 0) {
+                    errosTabelaAdministrativas.add("Insira um Horário de Início!");
+
+                } else if (h.getHoraTermino().getTime() == 0) {
+                    errosTabelaAdministrativas.add("Insira um Horário de Término!");
+
                 } else if (adm.getCargaHorariaSemanalAdministracao() == 0) {
-                    errosTabelaAdministrativas.add("CargZero");
-                } else if (adm.getTipoAdministracao().equals("")) {
-                    errosTabelaAdministrativas.add("SemTitulo");
+                    errosTabelaAdministrativas.add("Carga Horária Nula!");
 
                 }
             }
+            if (adm.getTipoAdministracao().getRotulo().equalsIgnoreCase("")) {
+                errosTabelaAdministrativas.add("Adicione um tipo à atividade de Administração");
+
+            }
         }
+
         for (Apoio apoio : getPtd().getApoios()) {
             for (Horario h : apoio.getHorariosApoio()) {
 
                 if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
-                    errosTabelaApoioEnsino.add("erroInTerm");
-                } else if (h.getHoraInicio() == null) {
-                    errosTabelaApoioEnsino.add("Innull");
-                } else if (h.getHoraTermino() == null) {
-                    errosTabelaApoioEnsino.add("Termnull");
+                    errosTabelaApoioEnsino.add("Você inseriu um horário de início posterior ao de término!");
+
+                } else if (h.getHoraInicio().getTime() == 0) {
+                    errosTabelaApoioEnsino.add("Insira um Horário de Início!");
+
+                } else if (h.getHoraTermino().getTime() == 0) {
+                    errosTabelaApoioEnsino.add("Insira um Horário de Término!");
+
                 } else if (apoio.getCargaHorariaSemanalApoio() == 0) {
-                    errosTabelaApoioEnsino.add("CargZero");
-                } else if (apoio.getTipoApoio().equals("")) {
-                    errosTabelaApoioEnsino.add("SemTitulo");
+                    errosTabelaApoioEnsino.add("Carga Horária Nula!");
+
                 }
+            }
+            if (apoio.getTipoApoio().getRotulo().equalsIgnoreCase("")) {
+                errosTabelaApoioEnsino.add("Adicione um tipo à atividadade de apoio");
+
             }
         }
 
@@ -414,16 +508,22 @@ public class PTDMB {
             for (Horario h : aSP.getHorariosAtividadesASerProposta()) {
 
                 if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
-                    errosTabelaAtividadesASeremPropostas.add("erroInTerm");
-                } else if (h.getHoraInicio() == null) {
-                    errosTabelaAtividadesASeremPropostas.add("Innull");
-                } else if (h.getHoraTermino() == null) {
-                    errosTabelaAtividadesASeremPropostas.add("Termnull");
+                    errosTabelaAtividadesASeremPropostas.add("Você inseriu um horário de início posterior ao de término!");
+
+                } else if (h.getHoraInicio().getTime() == 0) {
+                    errosTabelaAtividadesASeremPropostas.add("Insira um Horário de Início!");
+
+                } else if (h.getHoraTermino().getTime() == 0) {
+                    errosTabelaAtividadesASeremPropostas.add("Insira um Horário de Término!");
+
                 } else if (aSP.getCargaHorariaSemanalAtividadeASerProposta() == 0) {
-                    errosTabelaAtividadesASeremPropostas.add("CargZero");
-                } else if (aSP.getRotulo().equals("")) {
-                    errosTabelaAtividadesASeremPropostas.add("SemTitulo");
+                    errosTabelaAtividadesASeremPropostas.add("Carga Horária Nula!");
+
                 }
+            }
+            if (aSP.getRotulo().equalsIgnoreCase("")) {
+                errosTabelaAtividadesASeremPropostas.add("Adicione um rótulo à atividade a ser proposta");
+
             }
         }
 
@@ -431,106 +531,348 @@ public class PTDMB {
             for (Horario h : aula.getHorariosAula()) {
 
                 if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
-                    errosTabelaAula.add("erroInTerm");
+                    errosTabelaAula.add("Você inseriu um horário de início posterior ao de término!");
 
-                } else if (h.getHoraInicio() == null) {
-                    errosTabelaAula.add("Innull");
-                } else if (h.getHoraTermino() == null) {
-                    errosTabelaAula.add("Termnull");
+                } else if (h.getHoraInicio().getTime() == 0) {
+                    errosTabelaAula.add("Insira um Horário de Início!");
+
+                } else if (h.getHoraTermino().getTime() == 0) {
+                    errosTabelaAula.add("Insira um Horário de Término!");
+
                 } else if (aula.getCargaHorariaTotal() == 0) {
-                    errosTabelaAula.add("CargZero");
-                } else if (aula.getTipoOferta().getRotulo().equals("")) {
-                    errosTabelaAula.add("SemTitulo");
-                }
-            }
-
-            for (ManutencaoEnsino mE : getPtd().getManutencoesEnsino()) {
-                for (Horario h : mE.getHorariosManutecao()) {
-
-                    if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
-                        errosTabelaManuEnsino.add("erroInTerm");
-                    } else if (h.getHoraInicio() == null) {
-                        errosTabelaManuEnsino.add("Innull");
-                    } else if (h.getHoraTermino() == null) {
-                        errosTabelaManuEnsino.add("Termnull");
-                    } else if (mE.getCargaHorariaSemanalManutencaoEnsino() == 0) {
-                        errosTabelaManuEnsino.add("CargZero");
-                    } else if (mE.getTipoManutencao().equals("")) {
-                        errosTabelaManuEnsino.add("SemTitulo");
-                    }
+                    errosTabelaAula.add("Carga Horária Nula!");
 
                 }
             }
+            if (aula.getTipoOferta().getRotulo().equalsIgnoreCase("")) {
+                errosTabelaAula.add("Adicione um tipo de oferta à atividade aula!");
+            } else if (aula.getCurso() == null) {
+                errosTabelaAula.add("Adicione um curso à atividade aula!");
+            } else if (aula.getComponenteCurricular().equalsIgnoreCase("")) {
+                errosTabelaAula.add("Adicione um título para o componente curricular!");
+            }
+        }
 
-            for (OutroTipoAtividade oTA : getPtd().getOutrosTiposAtividades()) {
-                for (Horario h : oTA.getHorariosOutroTipoAtividade()) {
+        for (ManutencaoEnsino mE : getPtd().getManutencoesEnsino()) {
+            for (Horario h : mE.getHorariosManutecao()) {
 
-                    if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
-                        errosTabelaOutrasAtividades.add("erroInTerm");
-                    } else if (h.getHoraInicio() == null) {
-                        errosTabelaOutrasAtividades.add("Innull");
-                    } else if (h.getHoraTermino() == null) {
-                        errosTabelaOutrasAtividades.add("Termnull");
-                    } else if (oTA.getRotulo().equals("")) {
-                        errosTabelaOutrasAtividades.add("CargZero");
-                    } else if (oTA.getRotulo().equals("")) {
-                        errosTabelaOutrasAtividades.add("SemTitulo");
-                    }
+                if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+                    errosTabelaManuEnsino.add("Você inseriu um horário de início posterior ao de término!");
+                } else if (h.getHoraInicio().getTime() == 0) {
+                    errosTabelaManuEnsino.add("Insira um Horário de Início!");
+                } else if (h.getHoraTermino().getTime() == 0) {
+                    errosTabelaManuEnsino.add("Insira um Horário de Término!");
+                } else if (mE.getCargaHorariaSemanalManutencaoEnsino() == 0) {
+                    errosTabelaManuEnsino.add("Carga Horária Nula!");
                 }
             }
-            // fazer para Projeto Pesquisa e Extensão
-            for (Participacao p : getPtd().getParticipacoes()) {
+            if (mE.getTipoManutencao().getRotulo().equalsIgnoreCase("")) {
+                errosTabelaManuEnsino.add("Adicione um tipo à atividade de manutenção de ensino");
+            }
+
+        }
+
+        for (OutroTipoAtividade oTA : getPtd().getOutrosTiposAtividades()) {
+            for (Horario h : oTA.getHorariosOutroTipoAtividade()) {
+
+                if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+                    errosTabelaOutrasAtividades.add("Você inseriu um horário de início posterior ao de término!");
+                } else if (h.getHoraInicio().getTime() == 0) {
+                    errosTabelaOutrasAtividades.add("Insira um Horário de Início!");
+                } else if (h.getHoraTermino().getTime() == 0) {
+                    errosTabelaOutrasAtividades.add("Insira um Horário de Término!");
+                }
+                if (oTA.getCargaHorariaSemanalOutroTipoAtividade() == 0) {
+                    errosTabelaOutrasAtividades.add("Carga Horária Nula!");
+                }
+            }
+            if (oTA.getRotulo().equalsIgnoreCase("")) {
+                errosTabelaOutrasAtividades.add("Insira um título!");
+            }
+        }
+
+        for (Participacao p : getPtd().getParticipacoes()) {
+            if (p.getRotulo().equalsIgnoreCase("Autor")) {
                 for (Horario h : p.getHorariosParticipacao()) {
                     if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Autor")) {
-                        errosTabelaPesquisaExtensaoAutor.add("");
+                        errosTabelaPesquisaExtensaoAutor.add("Você inseriu um horário de início posterior ao de término!");
 
-                    } else if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Colaborador")) {
-                        errosTabelaPesquisaExtensaoColaborador.add("");
+                    } else if (h.getHoraInicio().getTime() == 0) {
+                        errosTabelaPesquisaExtensaoAutor.add("Insira um Horário de Início!");
 
-                    } else if (h.getHoraInicio() == null && p.getRotulo().equals("Autor")) {
-                        errosTabelaPesquisaExtensaoAutor.add("");
+                    } else if (h.getHoraTermino().getTime() == 0) {
+                        errosTabelaPesquisaExtensaoAutor.add("Insira um Horário de Término!");
 
-                    } else if (h.getHoraInicio() == null && p.getRotulo().equals("Colaborador")) {
-                        errosTabelaPesquisaExtensaoColaborador.add("");
+                    } else if (p.getCargaHorariaSemanalParticipacao() == 0) {
+                        errosTabelaPesquisaExtensaoAutor.add("Carga Horária Nula!");
+
+                    }
+                }
+                if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals("")) {
+                    errosTabelaPesquisaExtensaoAutor.add("Adicione um título ao projeto de pesquisa/extensão");
+
+                }
+                for (Participacao p2 : getPtd().getParticipacoes()) {
+                    if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals(p2.getProjetoPesquisaExtensao().getTituloProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
+                        errosTabelaPesquisaExtensaoAutor.add("Você tem mais de uma participação no mesmo projeto, caso trabalhe nele em mais de um dia, adicione um novo horário!");
+
+                    } else if (p.getProjetoPesquisaExtensao().getNumeroProcesso().equals(p2.getProjetoPesquisaExtensao().getNumeroProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
+                        errosTabelaPesquisaExtensaoAutor.add("Você tem mais de uma participação no mesmo projeto, caso trabalhe nele em mais de um dia, adicione um novo horário!");
+                    }
+                }
+            } else {
+                for (Horario h : p.getHorariosParticipacao()) {
+                    if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Autor")) {
+                        errosTabelaPesquisaExtensaoColaborador.add("Você inseriu um horário de início posterior ao de término!");
+
+                    } else if (h.getHoraInicio().getTime() == 0) {
+                        errosTabelaPesquisaExtensaoColaborador.add("Insira um Horário de Início!");
+
+                    } else if (h.getHoraTermino().getTime() == 0) {
+                        errosTabelaPesquisaExtensaoColaborador.add("Insira um Horário de Término!");
+
+                    } else if (p.getCargaHorariaSemanalParticipacao() == 0) {
+                        errosTabelaPesquisaExtensaoColaborador.add("Carga Horária Nula!");
+
+                    }
+                }
+                if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals("")) {
+                    errosTabelaPesquisaExtensaoColaborador.add("Adicione um título ao projeto de pesquisa/extensão");
+
+                }
+                for (Participacao p2 : getPtd().getParticipacoes()) {
+                    if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals(p2.getProjetoPesquisaExtensao().getTituloProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
+                        errosTabelaPesquisaExtensaoColaborador.add("Você tem mais de uma participação no mesmo projeto, caso trabalhe nele em mais de um dia, adicione um novo horário!");
+
+                    } else if (p.getProjetoPesquisaExtensao().getNumeroProcesso().equals(p2.getProjetoPesquisaExtensao().getNumeroProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
+                        errosTabelaPesquisaExtensaoColaborador.add("Você tem mais de uma participação no mesmo projeto, caso trabalhe nele em mais de um dia, adicione um novo horário!");
                     }
                 }
             }
+
         }
     }
 
-    public int verificarListaErros(List<String> erros) {
-        if (erros.isEmpty()) {
+    public int verificarConteúdoListaParaOpacidade(List<String> lista) {
+        if (lista.isEmpty()) {
             return 0;
         } else {
             return 1;
         }
     }
 
-    public String salvarComentários() {
+    public void verificarCargaHorariaPTD() {
+
+        irregularidades = new ArrayList<>();
+        cargaHorariaTotalAdministracoes = 0;
+        cargaHorariaTotalApoios = 0;
+        cargaHorariaTotalAtividadesASeremPropostas = 0;
+        cargaHorariaTotalAulas = 0;
+        cargaHorariaTotalManutencoesEnsino = 0;
+        cargaHorariaTotalOutroTiposAtividade = 0;
+        cargaHorariaTotalPTD = 0;
+        for (Administracao adm : getPtd().getAdministrativas()) {
+            setCargaHorariaTotalAdministracoes(getCargaHorariaTotalAdministracoes() + adm.getCargaHorariaSemanalAdministracao());
+        }
+
+        if (!getPtd().getParticipacoes().isEmpty()) {
+            for (Participacao part : getPtd().getParticipacoes()) {
+                if (part.getRotulo().equals("AUTOR")) {
+                    setCargaHorariaTotalProjetosPesquisaExtensaoAutor(getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + part.getCargaHorariaSemanalParticipacao());
+                } else if (part.getRotulo().equals("COLABORADOR")) {
+                    setCargaHorariaTotalProjetosPesquisaExtensaoColab(getCargaHorariaTotalProjetosPesquisaExtensaoColab() + part.getCargaHorariaSemanalParticipacao());
+                }
+            }
+            if ((getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 16) {
+                if (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab() > 16) {
+
+                    getIrregularidades().add("A carga horária de projetos de pesquisa e/ou extensão"
+                            + " como colaborador e autor é superior à 16 horas!");
+
+                } else if (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab() < 16 && getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab() > 1) {
+
+                    getIrregularidades().add("A carga horária de projetos de pesquisa e/ou extensão"
+                            + " como colaborador e autor é inferior à 16 horas!");
+
+                }
+            }
+        }
+
+        if (!getPtd().getApoios().isEmpty()) {
+            for (Apoio ap : getPtd().getApoios()) {
+                setCargaHorariaTotalApoios(getCargaHorariaTotalApoios() + ap.getCargaHorariaSemanalApoio());
+            }
+            if (getCargaHorariaTotalApoios() != 4) {
+
+                if (getCargaHorariaTotalApoios() > 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 0) {
+                    getIrregularidades().add("A carga horária é superior à 4 horas em Apoio ao Ensino!");
+                } else if (getCargaHorariaTotalApoios() < 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 0) {
+                    getIrregularidades().add("A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
+                }
+
+            }
+        }
+
+        if (!getPtd().getAulas().isEmpty()) {
+            for (Aula a : getPtd().getAulas()) {
+                setCargaHorariaTotalAulas(getCargaHorariaTotalAulas() + a.getCargaHorariaTotal());
+
+            }
+
+            if (getPtd().getProfessor().getRegimeTrabalho().equals("20h")) {
+
+                if (getCargaHorariaTotalAulas() < 8) {
+
+                    getIrregularidades().add("A carga horária é inferior à 8 horas em Aula!");
+
+                } else if (getCargaHorariaTotalAulas() > 12) {
+
+                    getIrregularidades().add("A carga horária é superior à 12 horas em Aula!");
+
+                }
+
+            } else if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
+                if (getCargaHorariaTotalAulas() < 12) {
+
+                    getIrregularidades().add("A carga horária é inferior à 12 horas em Aula!");
+
+                } else if (getCargaHorariaTotalAulas() > 16) {
+
+                    if (getCargaHorariaTotalApoios() > 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) == 0) {
+
+                        double excessoApoio = getCargaHorariaTotalApoios() - 4;
+                        double excessoEsperadoAula = 16 - excessoApoio;
+
+                        if ((getCargaHorariaTotalAulas() - excessoEsperadoAula) > 16) {
+
+                            getIrregularidades().add("Mesmo descontando a carga horária redistribuída de projeto de pesquisa"
+                                    + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
+                                    + "superior à 16 horas");
+
+                        }
+
+                    } else {
+                        getIrregularidades().add("A carga horária é superior à 16 horas em Aula!");
+                    }
+
+                    if (getCargaHorariaTotalAulas() >= 12 && getCargaHorariaTotalAulas() <= 16) {
+                        if ((getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) == 0) {
+
+                            double excessoApoio = getCargaHorariaTotalApoios() - 4;
+                            double excessoEsperadoAula = 16 - excessoApoio;
+
+                            if ((getCargaHorariaTotalAulas() - excessoEsperadoAula) < 12) {
+
+                                getIrregularidades().add("Descontando a carga horária redistribuída de projeto de pesquisa"
+                                        + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
+                                        + "inferior à 12 horas");
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!getPtd().getManutencoesEnsino().isEmpty()) {
+                for (ManutencaoEnsino me : getPtd().getManutencoesEnsino()) {
+                    setCargaHorariaTotalManutencoesEnsino(getCargaHorariaTotalManutencoesEnsino() + me.getCargaHorariaSemanalManutencaoEnsino());
+                }
+
+                if (getCargaHorariaTotalManutencoesEnsino() != 4) {
+                    if (getCargaHorariaTotalManutencoesEnsino() < 4) {
+
+                        getIrregularidades().add("A carga horária é inferior"
+                                + " à 4 horas em Manutenção ao Ensino");
+
+                    } else if (getCargaHorariaTotalManutencoesEnsino() > 4) {
+
+                        getIrregularidades().add("A carga horária é superior "
+                                + "à 4 horas em Manutenção ao Ensino!");
+
+                    }
+                }
+            }
+            for (OutroTipoAtividade ota : getPtd().getOutrosTiposAtividades()) {
+                setCargaHorariaTotalOutroTiposAtividade(getCargaHorariaTotalOutroTiposAtividade() + ota.getCargaHorariaSemanalOutroTipoAtividade());
+            }
+
+            setCargaHorariaTotalPTD(getCargaHorariaTotalAdministracoes() + getCargaHorariaTotalApoios() + getCargaHorariaTotalAulas() + getCargaHorariaTotalManutencoesEnsino() + getCargaHorariaTotalOutroTiposAtividade() + getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab());
+            double regime = 20;
+            if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
+                regime = 40;
+            }
+            if (regime == getCargaHorariaTotalPTD()) {
+
+                setEstadoCargaHorariaPTD("CORRETO");
+
+            } else {
+
+                setEstadoCargaHorariaPTD("INCORRETO");
+            }
+
+        }
+    }
+
+    public String salvarJustificativasEComentários() {
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public String abrirNotificacoesDiretorEnsino(int idUsuario) {
-        return "/NotificacoesDiretorEnsino";
-    }
-
-    public String verificacaoIrregularidadesNotificacoesDiretorEnsino() {
-        if (getPtd().getApoios().isEmpty() != true) {
-            return "Possui irregularidades";
-        } else {
-            return "Correto";
+    public String verificacaoIrregularidadesNotificacoesDiretorEnsino(PTD ptd) {
+        String resposta = "Correto";
+        verificarCargaHorariaPTD();
+        if (ptd.getCampoJustificativaAdministracao().isEmpty() != true) {
+            resposta = "Incorreto";
         }
+        if (ptd.getCampoJustificativaApoioEnsino().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaAtividadeEnsino().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaManutencaoEnsino().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaOutrasAtividades().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaProjetoEnsino().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaProjetoPesquisaExtensao().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaSeremPropostas().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+     
+        return resposta;
     }
 
     public String abrirPTDEmAvaliacao(PTD ptd) {
         setPtdEmAvaliacao(ptd);
-
-//        if(){
-//            
-//        }
+        verificarCargaHorariaPTD();
         return "PTDEmAvaliacao";
+    }
+
+    public String reprovarPTD() {
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
+        );
+        getPtdEmAvaliacao().setEstadoPTD("REPROVADO");
+        getPtdEmAvaliacao().setDiretorEnsino(null);
+        ptdDAOGenerico.alterar(getPtdEmAvaliacao());
+
+        return "/NotificacoesDiretorEnsino";
+    }
+
+    public String aprovarPTD(DiretorEnsino diretorEnsino) {
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        getPtdEmAvaliacao().setEstadoPTD("APROVADO");
+        getPtdEmAvaliacao().setDiretorEnsino(diretorEnsino);
+        ptdDAOGenerico.alterar(getPtdEmAvaliacao());
+
+        return "/NotificacoesDiretorEnsino";
     }
 
     public PTD getPtd() {
@@ -542,17 +884,19 @@ public class PTDMB {
     }
 
     /**
-     * @return the pdtsEmAvaliacao
+     * @return the ptdsEmAvaliacao
      */
-    public List<PTD> getPdtsEmAvaliacao() {
-        return pdtsEmAvaliacao;
+    public List<PTD> getPtdsEmAvaliacao() {
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
+        return ptdsEmAvaliacao;
     }
 
     /**
-     * @param pdtsEmAvaliacao the pdtsEmAvaliacao to set
+     * @param ptdsEmAvaliacao the pdtsEmAvaliacao to set
      */
-    public void setPdtsEmAvaliacao(List<PTD> pdtsEmAvaliacao) {
-        this.pdtsEmAvaliacao = pdtsEmAvaliacao;
+    public void setPtdsEmAvaliacao(List<PTD> ptdsEmAvaliacao) {
+        this.ptdsEmAvaliacao = ptdsEmAvaliacao;
     }
 
     public List<PTD> getPtdsEmEdicao() {
@@ -625,38 +969,6 @@ public class PTDMB {
         this.cargaHorariaTotalOutroTiposAtividade = cargaHorariaTotalOutroTiposAtividade;
     }
 
-    public boolean isObrigatoriedadeJustificativaAula() {
-        return obrigatoriedadeJustificativaAula;
-    }
-
-    public void setObrigatoriedadeJustificativaAula(boolean obrigatoriedadeJustificativaAula) {
-        this.obrigatoriedadeJustificativaAula = obrigatoriedadeJustificativaAula;
-    }
-
-    public boolean isObrigatoriedadeJustificativaApoio() {
-        return obrigatoriedadeJustificativaApoio;
-    }
-
-    public void setObrigatoriedadeJustificativaApoio(boolean obrigatoriedadeJustificativaApoio) {
-        this.obrigatoriedadeJustificativaApoio = obrigatoriedadeJustificativaApoio;
-    }
-
-    public boolean isObrigatoriedadeJustificativaManutencaoEnsino() {
-        return obrigatoriedadeJustificativaManutencaoEnsino;
-    }
-
-    public void setObrigatoriedadeJustificativaManutencaoEnsino(boolean obrigatoriedadeJustificativaManutencaoEnsino) {
-        this.obrigatoriedadeJustificativaManutencaoEnsino = obrigatoriedadeJustificativaManutencaoEnsino;
-    }
-
-    public boolean isObrigatoriedadeJustificativaPesquisaExtensao() {
-        return obrigatoriedadeJustificativaPesquisaExtensao;
-    }
-
-    public void setObrigatoriedadeJustificativaPesquisaExtensao(boolean obrigatoriedadeJustificativaPesquisaExtensao) {
-        this.obrigatoriedadeJustificativaPesquisaExtensao = obrigatoriedadeJustificativaPesquisaExtensao;
-    }
-
     public double getCargaHorariaTotalPTD() {
         return cargaHorariaTotalPTD;
     }
@@ -671,22 +983,6 @@ public class PTDMB {
 
     public void setEstadoCargaHorariaPTD(String estadoCargaHorariaPTD) {
         this.estadoCargaHorariaPTD = estadoCargaHorariaPTD;
-    }
-
-    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoAutor() {
-        return projetosPesquisaExtensaoAutor;
-    }
-
-    public void setProjetosPesquisaExtensaoAutor(List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoAutor) {
-        this.projetosPesquisaExtensaoAutor = projetosPesquisaExtensaoAutor;
-    }
-
-    public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoColab() {
-        return projetosPesquisaExtensaoColab;
-    }
-
-    public void setProjetosPesquisaExtensaoColab(List<ProjetoPesquisaExtensao> projetosPesquisaExtensaoColab) {
-        this.projetosPesquisaExtensaoColab = projetosPesquisaExtensaoColab;
     }
 
     public double getCargaHorariaTotalProjetosPesquisaExtensaoAutor() {
@@ -818,5 +1114,77 @@ public class PTDMB {
      */
     public void setErrosTabelaAtividadesASeremPropostas(List<String> errosTabelaAtividadesASeremPropostas) {
         this.errosTabelaAtividadesASeremPropostas = errosTabelaAtividadesASeremPropostas;
+    }
+
+    /**
+     * @return the participacoesAutor
+     */
+    public List<Participacao> getParticipacoesAutor() {
+        atualizarListasParticipacoes();
+        return participacoesAutor;
+    }
+
+    /**
+     * @param participacoesAutor the participacoesAutor to set
+     */
+    public void setParticipacoesAutor(List<Participacao> participacoesAutor) {
+        this.participacoesAutor = participacoesAutor;
+    }
+
+    /**
+     * @return the participacoesColab
+     */
+    public List<Participacao> getParticipacoesColab() {
+        atualizarListasParticipacoes();
+        return participacoesColab;
+    }
+
+    /**
+     * @param participacoesColab the participacoesColab to set
+     */
+    public void setParticipacoesColab(List<Participacao> participacoesColab) {
+        this.participacoesColab = participacoesColab;
+    }
+
+    /**
+     * @return the ptdsReprovados
+     */
+    public List<PTD> getPtdsReprovados() {
+        return ptdsReprovados;
+    }
+
+    /**
+     * @param ptdsReprovados the ptdsReprovados to set
+     */
+    public void setPtdsReprovados(List<PTD> ptdsReprovados) {
+        this.ptdsReprovados = ptdsReprovados;
+    }
+
+    /**
+     * @return the ptdsAprovados
+     */
+    public List<PTD> getPtdsAprovados() {
+        return ptdsAprovados;
+    }
+
+    /**
+     * @param ptdsAprovados the ptdsAprovados to set
+     */
+    public void setPtdsAprovados(List<PTD> ptdsAprovados) {
+        this.ptdsAprovados = ptdsAprovados;
+    }
+
+    /**
+     * @return the irregularidades
+     */
+    public List<String> getIrregularidades() {
+        return irregularidades;
+    }
+
+    /**
+     * @param irregularidades the irregularidades to set
+     */
+    public void setIrregularidades(List<String> irregularidades) {
+        this.irregularidades = irregularidades;
     }
 }

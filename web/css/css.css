@@ -146,12 +146,13 @@ body{
     align-items: center;
 }
 #erros{
-    width: auto;
+    width: 400px;
+    margin: 15px 0px;
     border-radius: 10px;
     border-color: #C92345;
     border-style: solid;
     border-width: thin;
-    background-color: #FAE1CD;
+    background-color: #FFBEC1;
     text-align: left;
 }
 .exclamacaoErro{
@@ -163,6 +164,31 @@ body{
     font-family: calibri, sans-serif;
     border-radius: 50px;
     border-color: #C92345;
+    border-style: solid;
+    border-width: thin;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+#irregularidades{
+    width: 400px;
+    border-radius: 10px;
+    border-color: #E0911C;
+    border-style: solid;
+    border-width: thin;
+    background-color: #FFF9DF;
+    text-align: left;
+}
+.exclamacaoIrregularidade{
+    width: 25px;
+    height: 25px;
+    color: #E0911C;
+    font-size: large; 
+    font-weight: 100;
+    font-family: calibri, sans-serif;
+    border-radius: 50px;
+    border-color: #E0911C;
     border-style: solid;
     border-width: thin;
     display: flex;
@@ -248,16 +274,13 @@ body{
 .ui-dialog .botaoAzul{
     width: auto;
     height: auto;
-    margin: 15px;
-    padding: 5px 10px;
-    font-size: large;
+    margin: 10px;
+    font-size: medium;
     font-family: calibri, sans-serif;
     font-weight: normal;
     color: #1785ad;
     border-color: #1785ad;
-    border-width: thin;
     border-radius: 50px;
-    border-style: solid;
     background-color: white;
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
     background-image: linear-gradient(to right, #FFFFFF, #FFFFFF);

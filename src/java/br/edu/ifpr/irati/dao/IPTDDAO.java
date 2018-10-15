@@ -18,4 +18,6 @@ public interface IPTDDAO {
     
     public List<PTD> buscarPTDEmAvaliacao();
     
+    public List<PTD> buscarPTDsReprovados(Serializable idUsuario);
+    
 }

@@ -10,6 +10,4 @@ public interface IProjetoPesquisaExtensaoDao {
 
     public List<ProjetoPesquisaExtensao> buscarProjetosExtensaoPorProfessor(Serializable idUsuario);
 
-     public List<ProjetoPesquisaExtensao> buscarProjetosExtensaoColabPorProfessor(Serializable idUsuario);
-
 }
