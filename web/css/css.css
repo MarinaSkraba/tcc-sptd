@@ -4,12 +4,12 @@ body{
     margin: 0;  	
     padding: 0;
     text-align: center;
-    background-color: #E5E5E5;
+    background-color: #f5f5f5;
 }.body{
     margin: 0;  	
     padding: 0;
     text-align: center;
-    background-color: #E5E5E5;
+    background-color: #f5f5f5;
 }
 #barraMenu{
     margin: 0;  	
@@ -157,7 +157,7 @@ body{
     border-color: #C92345;
     border-style: solid;
     border-width: thin;
-    background-color: #FFBEC1;
+    background-color: #FFF5E3;
     text-align: left;
 }
 .exclamacaoErro{
@@ -438,6 +438,7 @@ body{
     overflow: auto;
     position: relative;
     padding: 0 !important;
+    text-align: center;
 }
 
 .ui-widget-header {
@@ -452,7 +453,7 @@ body{
 .ui-dialog .ui-dialog-titlebar {
     padding: 0em .5em;
     position: relative;
-    font-size: 1.3em;
+    font-size: 1em;
     width: 500px;
 }
 
