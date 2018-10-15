@@ -139,7 +139,6 @@
                             <p:commandButton styleClass="botaoAzul" 
                                              style="float: left;" 
                                              value="?"
-                                             update="erroAulaText"
                                              id="ajudaAula"/>
                         </h:panelGrid>
                     </h:panelGrid>
@@ -446,8 +445,7 @@
                     <!-- Mostrar erros na tabela aulas -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaAula)};">
-                            <h:panelGrid columns="2"
-                                         id="erroAulaText">
+                            <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
@@ -1985,7 +1983,7 @@
 
                     <!-- Mostrar tabela atividades pesquisa e/ou extensão (Colab) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesAutor}" 
+                        <h:dataTable  value="#{pTDMB.participacoesColab}" 
                                       var="participacaoPesquisaExtensaoColab" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -2231,7 +2229,7 @@
 
                     </p:dialog>
 
-                    <!-- Caixa para editar horário adicionado à Atividade de Pesquisa e Extensão -->
+                    <!-- Caixa para editar horário adicionado à Atividade de Pesquisa e Extensão (Colab) -->
                     <p:dialog header="Editar Horarios de Colaboração de Pesquisa e Extensão" 
                               widgetVar="edtHorariosPesquisaExtensaoColabDialog" 
                               modal="true" 

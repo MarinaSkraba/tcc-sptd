@@ -168,7 +168,7 @@ public class PTDMB {
         errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
         irregularidades = new ArrayList<>();
         return "/CriarCorrigirPTD";
-        
+
     }
 
     public String abrirCriarCorrigirPTDAPartirDoUltimoArquivado(Usuario usuario) {
@@ -592,31 +592,61 @@ public class PTDMB {
         }
 
         for (Participacao p : getPtd().getParticipacoes()) {
-            for (Horario h : p.getHorariosParticipacao()) {
-                if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Autor")) {
-                    errosTabelaPesquisaExtensaoAutor.add("Você inseriu um horário de início posterior ao de término!");
+            if (p.getRotulo().equalsIgnoreCase("Autor")) {
+                for (Horario h : p.getHorariosParticipacao()) {
+                    if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Autor")) {
+                        errosTabelaPesquisaExtensaoAutor.add("Você inseriu um horário de início posterior ao de término!");
 
-                } else if (h.getHoraInicio().getTime() == 0) {
-                    errosTabelaPesquisaExtensaoAutor.add("Insira um Horário de Início!");
+                    } else if (h.getHoraInicio().getTime() == 0) {
+                        errosTabelaPesquisaExtensaoAutor.add("Insira um Horário de Início!");
 
-                } else if (h.getHoraTermino().getTime() == 0) {
-                    errosTabelaPesquisaExtensaoAutor.add("Insira um Horário de Término!");
+                    } else if (h.getHoraTermino().getTime() == 0) {
+                        errosTabelaPesquisaExtensaoAutor.add("Insira um Horário de Término!");
 
-                } else if (p.getCargaHorariaSemanalParticipacao() == 0) {
-                    errosTabelaPesquisaExtensaoAutor.add("Carga Horária Nula!");
+                    } else if (p.getCargaHorariaSemanalParticipacao() == 0) {
+                        errosTabelaPesquisaExtensaoAutor.add("Carga Horária Nula!");
+
+                    }
+                }
+                if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals("")) {
+                    errosTabelaPesquisaExtensaoAutor.add("Adicione um título ao projeto de pesquisa/extensão");
 
                 }
-            }
-            if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals("")) {
-                errosTabelaPesquisaExtensaoAutor.add("Adicione um título ao projeto de pesquisa/extensão");
+                for (Participacao p2 : getPtd().getParticipacoes()) {
+                    if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals(p2.getProjetoPesquisaExtensao().getTituloProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
+                        errosTabelaPesquisaExtensaoAutor.add("Você tem mais de uma participação no mesmo projeto, caso trabalhe nele em mais de um dia, adicione um novo horário!");
 
-            }
-            for (Participacao p2 : getPtd().getParticipacoes()) {
-                if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals(p2.getProjetoPesquisaExtensao().getTituloProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
-                    errosTabelaPesquisaExtensaoAutor.add("Você tem mais de uma participação no mesmo projeto, caso trabalhe nele em mais de um dia, adicione um novo horário!");
+                    } else if (p.getProjetoPesquisaExtensao().getNumeroProcesso().equals(p2.getProjetoPesquisaExtensao().getNumeroProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
+                        errosTabelaPesquisaExtensaoAutor.add("Você tem mais de uma participação no mesmo projeto, caso trabalhe nele em mais de um dia, adicione um novo horário!");
+                    }
+                }
+            } else {
+                for (Horario h : p.getHorariosParticipacao()) {
+                    if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime() && p.getRotulo().equals("Autor")) {
+                        errosTabelaPesquisaExtensaoColaborador.add("Você inseriu um horário de início posterior ao de término!");
 
-                } else if (p.getProjetoPesquisaExtensao().getNumeroProcesso().equals(p2.getProjetoPesquisaExtensao().getNumeroProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
-                    errosTabelaPesquisaExtensaoAutor.add("Você tem mais de uma participação no mesmo projeto, caso trabalhe nele em mais de um dia, adicione um novo horário!");
+                    } else if (h.getHoraInicio().getTime() == 0) {
+                        errosTabelaPesquisaExtensaoColaborador.add("Insira um Horário de Início!");
+
+                    } else if (h.getHoraTermino().getTime() == 0) {
+                        errosTabelaPesquisaExtensaoColaborador.add("Insira um Horário de Término!");
+
+                    } else if (p.getCargaHorariaSemanalParticipacao() == 0) {
+                        errosTabelaPesquisaExtensaoColaborador.add("Carga Horária Nula!");
+
+                    }
+                }
+                if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals("")) {
+                    errosTabelaPesquisaExtensaoColaborador.add("Adicione um título ao projeto de pesquisa/extensão");
+
+                }
+                for (Participacao p2 : getPtd().getParticipacoes()) {
+                    if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals(p2.getProjetoPesquisaExtensao().getTituloProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
+                        errosTabelaPesquisaExtensaoColaborador.add("Você tem mais de uma participação no mesmo projeto, caso trabalhe nele em mais de um dia, adicione um novo horário!");
+
+                    } else if (p.getProjetoPesquisaExtensao().getNumeroProcesso().equals(p2.getProjetoPesquisaExtensao().getNumeroProcesso()) && p.getIdParticipacao() != p2.getIdParticipacao()) {
+                        errosTabelaPesquisaExtensaoColaborador.add("Você tem mais de uma participação no mesmo projeto, caso trabalhe nele em mais de um dia, adicione um novo horário!");
+                    }
                 }
             }
 
