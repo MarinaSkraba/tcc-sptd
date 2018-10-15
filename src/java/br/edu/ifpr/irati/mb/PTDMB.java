@@ -321,12 +321,6 @@ public class PTDMB {
 
         for (Participacao p : getPtd().getParticipacoes()) {
 
-            if (p.getRotulo().equals("Autor")) {
-
-                pPesquisaExtensaoDAO.excluir(p.getProjetoPesquisaExtensao());
-
-            }
-
             getPtd().getParticipacoes().remove(p);
             ptdDAO.alterar(getPtd());
             participacaoDAO.excluir(p);
