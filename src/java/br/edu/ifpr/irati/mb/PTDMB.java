@@ -168,7 +168,7 @@ public class PTDMB {
         errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
         irregularidades = new ArrayList<>();
         return "/CriarCorrigirPTD";
-        
+
     }
 
     public String abrirCriarCorrigirPTDAPartirDoUltimoArquivado(Usuario usuario) {
@@ -721,7 +721,7 @@ public class PTDMB {
 
                         }
 
-                    } else{
+                    } else {
                         getIrregularidades().add("A carga horária é superior à 16 horas em Aula!");
                     }
 
@@ -795,7 +795,28 @@ public class PTDMB {
         if (ptd.getCampoJustificativaAdministracao().isEmpty() != true) {
             resposta = "Incorreto";
         }
-        //repetir para os outros campos de justificativa
+        if (ptd.getCampoJustificativaApoioEnsino().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaAtividadeEnsino().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaManutencaoEnsino().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaOutrasAtividades().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaProjetoEnsino().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaProjetoPesquisaExtensao().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+        if (ptd.getCampoJustificativaSeremPropostas().isEmpty() != true) {
+            resposta = "Incorreto";
+        }
+     
         return resposta;
     }
 
