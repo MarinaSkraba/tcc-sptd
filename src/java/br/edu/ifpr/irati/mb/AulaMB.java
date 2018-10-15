@@ -55,7 +55,7 @@ public class AulaMB {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
         aula.setTipoOferta(tipoOfertaSelecionado);
         aula.setCurso(cursoSelecionado);
-        if (NumeroSemanas != 0) {
+        if (NumeroSemanas != 0&HorasAulaTotal != 0) {
             aula.setCargaHorariaTotal(HorasAulaTotal / NumeroSemanas);
         } else {
             aula.setCargaHorariaTotal(0);
