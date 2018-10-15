@@ -494,7 +494,7 @@ public class PTDMB {
             }
             if (aula.getTipoOferta().getRotulo().equalsIgnoreCase("")) {
                 errosTabelaAula.add("Adicione um tipo de oferta à atividade aula!");
-            } else if (aula.getCurso().getNomeCurso().equalsIgnoreCase("")) {
+            } else if (aula.getCurso() == null) {
                 errosTabelaAula.add("Adicione um curso à atividade aula!");
             } else if (aula.getComponenteCurricular().equalsIgnoreCase("")) {
                 errosTabelaAula.add("Adicione um título para o componente curricular!");
