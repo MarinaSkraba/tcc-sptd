@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
         <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     </h:head>
-    <h:body>
+    <h:body styleClass="body">
 
         <!-- Barra de menu -->
         <div id="barraMenu">
@@ -259,8 +259,8 @@
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
                                 <h:outputText value="#{manutencao.tipoManutencao.rotulo}"
-                                                  styleClass="text01"
-                                                  style="font-size: large;" />
+                                              styleClass="text01"
+                                              style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -463,8 +463,8 @@
                                 </f:facet>
 
                                 <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.tituloProcesso}"
-                                                  styleClass="text01"
-                                                  style="font-size: large;" />
+                                              styleClass="text01"
+                                              style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -536,7 +536,9 @@
                                 </f:facet>
                                 <h:outputText value="#{participacaoPesquisaExtensaoAutor.projetoPesquisaExtensao.previsaoConclusao}"
                                               styleClass="text01"
-                                              style="font-size: large;"/>
+                                              style="font-size: large;">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -656,7 +658,9 @@
                                 </f:facet>
                                 <h:outputText value="#{participacaoPesquisaExtensaoColab.projetoPesquisaExtensao.previsaoConclusao}"
                                               styleClass="text01"
-                                              style="font-size: large;"/>
+                                              style="font-size: large;">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -700,8 +704,8 @@
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
                                 <h:outputText value="#{administracao.tipoAdministracao.rotulo}"
-                                                  styleClass="text01"
-                                                  style="font-size: large;" />
+                                              styleClass="text01"
+                                              style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -798,8 +802,8 @@
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
                                 <h:outputText value="#{outrasAtividades.rotulo}"
-                                                  styleClass="text01"
-                                                  style="font-size: large;" />
+                                              styleClass="text01"
+                                              style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -907,8 +911,8 @@
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
                                 <h:outputText value="#{atividadeASerProposta.rotulo}"
-                                                  styleClass="text01"
-                                                  style="font-size: large;" />
+                                              styleClass="text01"
+                                              style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -1062,7 +1066,7 @@
                         </h:panelGrid>
 
                     </center>
-                    
+
                     <!-- Mostrar irregularidades -->
                     <center>
                         <div id="irregularidades" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.irregularidades)}">

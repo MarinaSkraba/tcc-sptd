@@ -68,10 +68,6 @@ public class PTDMB {
     private double cargaHorariaTotalProjetosPesquisaExtensaoAutor;
     private double cargaHorariaTotalProjetosPesquisaExtensaoColab;
     private double cargaHorariaTotalPTD;
-//    private boolean obrigatoriedadeJustificativaAula;
-//    private boolean obrigatoriedadeJustificativaApoio;
-//    private boolean obrigatoriedadeJustificativaManutencaoEnsino;
-//    private boolean obrigatoriedadeJustificativaPesquisaExtensao;
     private String estadoCargaHorariaPTD;
     private List<String> errosTabelaAula;
     private List<String> errosTabelaManuEnsino;
@@ -90,8 +86,6 @@ public class PTDMB {
         ptdEmAvaliacao = new PTD();
         ptdsEmAvaliacao = new ArrayList<>();
         ptdsReprovados = new ArrayList<>();
-//        ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados();
-//        ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados();
         ptdsEmEdicao = new ArrayList();
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         participacoesAutor = new ArrayList<>();
@@ -119,6 +113,12 @@ public class PTDMB {
                 participacoesColab.add(part);
             }
         }
+    }
+    
+    public List<PTD> atualizarListaPTDsReprovados(int idUsuario){
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados(idUsuario);
+        return ptdsReprovados;
     }
 
     public void realizarConferencias() {
