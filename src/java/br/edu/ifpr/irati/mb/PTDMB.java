@@ -158,7 +158,17 @@ public class PTDMB {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario());
         setPtd(ptdEmEdicao.get(0));
+        errosTabelaAdministrativas = new ArrayList<>();
+        errosTabelaApoioEnsino = new ArrayList<>();
+        errosTabelaAtividadesASeremPropostas = new ArrayList<>();
+        errosTabelaAula = new ArrayList<>();
+        errosTabelaManuEnsino = new ArrayList<>();
+        errosTabelaOutrasAtividades = new ArrayList<>();
+        errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
+        errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
+        irregularidades = new ArrayList<>();
         return "/CriarCorrigirPTD";
+        
     }
 
     public String abrirCriarCorrigirPTDAPartirDoUltimoArquivado(Usuario usuario) {
@@ -178,6 +188,16 @@ public class PTDMB {
             getPtd().setEstadoPTD("EDICAO");
             ptdDAOGenerico.salvar(getPtd());
             setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario()).get(0));
+
+            errosTabelaAdministrativas = new ArrayList<>();
+            errosTabelaApoioEnsino = new ArrayList<>();
+            errosTabelaAtividadesASeremPropostas = new ArrayList<>();
+            errosTabelaAula = new ArrayList<>();
+            errosTabelaManuEnsino = new ArrayList<>();
+            errosTabelaOutrasAtividades = new ArrayList<>();
+            errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
+            errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
+            irregularidades = new ArrayList<>();
             return "/CriarCorrigirPTD";
         } else {
 
@@ -197,6 +217,15 @@ public class PTDMB {
         ptdReprovado.setIdPTD(0);
         ptdDAOGenerico.salvar(ptdReprovado);
         setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(ptdReprovado.getProfessor().getIdUsuario()).get(0));
+        errosTabelaAdministrativas = new ArrayList<>();
+        errosTabelaApoioEnsino = new ArrayList<>();
+        errosTabelaAtividadesASeremPropostas = new ArrayList<>();
+        errosTabelaAula = new ArrayList<>();
+        errosTabelaManuEnsino = new ArrayList<>();
+        errosTabelaOutrasAtividades = new ArrayList<>();
+        errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
+        errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
+        irregularidades = new ArrayList<>();
         return "/CriarCorrigirPTD";
     }
 
@@ -355,32 +384,23 @@ public class PTDMB {
 
         if (cargaHorariaTotalPTD == 0) {
             nomeCaixaDialogo = "documentoVazioDialog";
-        }
-        if (errosTabelaAdministrativas.isEmpty() != true) {
+        } else if (errosTabelaAdministrativas.isEmpty() != true) {
             nomeCaixaDialogo = "avisoErrosDialog";
-        }
-        if (errosTabelaApoioEnsino.isEmpty() != true) {
+        } else if (errosTabelaApoioEnsino.isEmpty() != true) {
             nomeCaixaDialogo = "avisoErrosDialog";
-        }
-        if (errosTabelaAtividadesASeremPropostas.isEmpty() != true) {
+        } else if (errosTabelaAtividadesASeremPropostas.isEmpty() != true) {
             nomeCaixaDialogo = "avisoErrosDialog";
-        }
-        if (errosTabelaAula.isEmpty() != true) {
+        } else if (errosTabelaAula.isEmpty() != true) {
             nomeCaixaDialogo = "avisoErrosDialog";
-        }
-        if (errosTabelaManuEnsino.isEmpty() != true) {
+        } else if (errosTabelaManuEnsino.isEmpty() != true) {
             nomeCaixaDialogo = "avisoErrosDialog";
-        }
-        if (errosTabelaOutrasAtividades.isEmpty() != true) {
+        } else if (errosTabelaOutrasAtividades.isEmpty() != true) {
             nomeCaixaDialogo = "avisoErrosDialog";
-        }
-        if (errosTabelaPesquisaExtensaoAutor.isEmpty() != true) {
+        } else if (errosTabelaPesquisaExtensaoAutor.isEmpty() != true) {
             nomeCaixaDialogo = "avisoErrosDialog";
-        }
-        if (errosTabelaPesquisaExtensaoColaborador.isEmpty() != true) {
+        } else if (errosTabelaPesquisaExtensaoColaborador.isEmpty() != true) {
             nomeCaixaDialogo = "avisoErrosDialog";
-        }
-        if (irregularidades.isEmpty() != true) {
+        } else if (irregularidades.isEmpty() != true) {
             for (String irregularidade : irregularidades) {
                 if ((irregularidade.equals("A carga horária é superior "
                         + "à 4 horas em Apoio ao Ensino!") | irregularidade.equals("A carga horária é inferior à 4 horas em Apoio ao Ensino!")) && ptd.getCampoJustificativaApoioEnsino().isEmpty() != true) {
@@ -772,9 +792,10 @@ public class PTDMB {
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino(PTD ptd) {
         String resposta = "Correto";
         verificarCargaHorariaPTD();
-        if (irregularidades.isEmpty() != true) {
+        if (ptd.getCampoJustificativaAdministracao().isEmpty() != true) {
             resposta = "Incorreto";
         }
+        //repetir para os outros campos de justificativa
         return resposta;
     }
 
