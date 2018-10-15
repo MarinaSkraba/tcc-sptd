@@ -620,6 +620,7 @@ public class PTDMB {
         cargaHorariaTotalAulas = 0;
         cargaHorariaTotalManutencoesEnsino = 0;
         cargaHorariaTotalOutroTiposAtividade = 0;
+        cargaHorariaTotalPTD = 0;
         for (Administracao adm : getPtd().getAdministrativas()) {
             setCargaHorariaTotalAdministracoes(getCargaHorariaTotalAdministracoes() + adm.getCargaHorariaSemanalAdministracao());
         }
@@ -700,7 +701,7 @@ public class PTDMB {
 
                         }
 
-                    } else {
+                    } else{
                         getIrregularidades().add("A carga horária é superior à 16 horas em Aula!");
                     }
 
