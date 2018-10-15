@@ -680,6 +680,10 @@ public class PTDMB {
         cargaHorariaTotalManutencoesEnsino = 0;
         cargaHorariaTotalOutroTiposAtividade = 0;
         cargaHorariaTotalPTD = 0;
+        cargaHorariaTotalProjetosPesquisaExtensaoAutor = 0;
+        cargaHorariaTotalProjetosPesquisaExtensaoColab = 0;
+        
+        
         for (Administracao adm : getPtd().getAdministrativas()) {
             setCargaHorariaTotalAdministracoes(getCargaHorariaTotalAdministracoes() + adm.getCargaHorariaSemanalAdministracao());
         }
