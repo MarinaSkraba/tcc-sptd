@@ -98,7 +98,7 @@ public class HorarioMB {
             horarioApoioEnsino = new Horario();
         }
         if (object instanceof Participacao) {
-            if (((Participacao) object).getRotulo().equals("Autor")) {
+            if (((Participacao) object).getRotulo().equals("Colaborador")) {
                 horarioAtividade = horarioPesquisaExtensaoColab;
             } else {
                 horarioAtividade = horarioPesquisaExtensaoAutor;
