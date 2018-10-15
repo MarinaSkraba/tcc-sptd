@@ -1493,9 +1493,20 @@
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <!--
-                        
-                        -->
+                        <p:selectOneMenu id="selectProjetoSeu" 
+                                         value="#{projetoPesquisaExtensaoMB.participacao.projetoPesquisaExtensao}"
+                                         converter="projetoPesquisaExtensaoConverter">
+
+                            <f:selectItems value="#{projetoPesquisaExtensaoMB.atualizarListaProjetosCadastradosPorProfessor(usuarioMB.usuarioLogado.idUsuario)}" 
+                                           var="projetoSeu" 
+                                           itemValue="#{projetoSeu}"
+                                           itemLabel="#{projetoSeu}" />
+                        </p:selectOneMenu>
+
+                        <br/>
+                        <h:commandButton value="Salvar" 
+                                         action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensaoJaCadastradoAutor(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
+                                         styleClass="botaoAzul"/>
 
                     </p:dialog>
 
