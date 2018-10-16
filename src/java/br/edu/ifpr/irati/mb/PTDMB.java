@@ -481,15 +481,106 @@ public class PTDMB {
         errosTabelaPesquisaExtensaoColaborador = new ArrayList();
 
         for (Administracao adm : getPtd().getAdministrativas()) {
-            for (Horario h : adm.getHorariosAdministracao()) {
 
-                if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
+            for (Horario hadm : adm.getHorariosAdministracao()) {
+
+                for (Apoio ap : getPtd().getApoios()) {
+
+                    for (Horario hap : ap.getHorariosApoio()) {
+                        if (hadm.getDiaSemana().equals(hap.getDiaSemana())) {
+                            if (hadm.getHoraInicio().getTime() <= hap.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= hap.getHoraInicio().getTime()) {
+
+                                errosTabelaAdministrativas.add("O horário de Início de uma de sua atividades administrativas corresponde ao horário de uma das atividades de Apoio ao Ensino");
+
+                            } else if (hadm.getHoraTermino().getTime() <= hap.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() >= hap.getHoraInicio().getTime()) {
+
+                                errosTabelaAdministrativas.add("O horário de Término de uma de sua atividades administrativas corresponde ao horário de uma das atividades de Apoio ao Ensino");
+
+                            }
+                        }
+                    }
+
+                }
+
+                for (Aula a : getPtd().getAulas()) {
+
+                    for (Horario ha : a.getHorariosAula()) {
+                        if (hadm.getDiaSemana().equals(ha.getDiaSemana())) {
+                            if (hadm.getHoraInicio().getTime() <= ha.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= ha.getHoraInicio().getTime()) {
+
+                                errosTabelaAdministrativas.add("O horário de Início de uma de sua atividades administrativas corresponde ao horário de uma das Aulas ");
+
+                            } else if (hadm.getHoraTermino().getTime() <= ha.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() >= ha.getHoraInicio().getTime()) {
+
+                                errosTabelaAdministrativas.add("O horário de Término de uma de sua atividades administrativas corresponde ao horário de uma das Aulas");
+
+                            }
+                        }
+                    }
+
+                }
+
+                for (ManutencaoEnsino mE : getPtd().getManutencoesEnsino()) {
+
+                    for (Horario hme : mE.getHorariosManutecao()) {
+                        if (hadm.getDiaSemana().equals(hme.getDiaSemana())) {
+                            if (hadm.getHoraInicio().getTime() <= hme.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= hme.getHoraInicio().getTime()) {
+
+                                errosTabelaAdministrativas.add("O horário de Início de uma de sua atividades administrativas corresponde ao horário de uma das atividades de Manutenção ao Ensino ");
+
+                            } else if (hadm.getHoraTermino().getTime() <= hme.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() >= hme.getHoraInicio().getTime()) {
+
+                                errosTabelaAdministrativas.add("O horário de Término de uma de sua atividades administrativas corresponde ao horário de uma das atividades de Manutenção ao Ensino");
+
+                            }
+                        }
+                    }
+
+                }
+
+                for (OutroTipoAtividade oTA : getPtd().getOutrosTiposAtividades()) {
+
+                    for (Horario hota : oTA.getHorariosOutroTipoAtividade()) {
+                        if (hadm.getDiaSemana().equals(hota.getDiaSemana())) {
+                            if (hadm.getHoraInicio().getTime() <= hota.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= hota.getHoraInicio().getTime()) {
+
+                                errosTabelaAdministrativas.add("O horário de Início de uma de sua atividades administrativas corresponde ao horário de uma das 'Outras Atividades' que exerce no Campus");
+
+                            } else if (hadm.getHoraTermino().getTime() <= hota.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() >= hota.getHoraInicio().getTime()) {
+
+                                errosTabelaAdministrativas.add("O horário de Término de uma de sua atividades administrativascorresponde ao horário de uma das 'Outras Atividades' que exerce no Campus");
+
+                            }
+                        }
+                    }
+
+                }
+
+                for (Participacao p : getPtd().getParticipacoes()) {
+
+                    for (Horario hp : p.getHorariosParticipacao()) {
+                        if (hadm.getDiaSemana().equals(hp.getDiaSemana())) {
+                            if (hadm.getHoraInicio().getTime() <= hp.getHoraTermino().getTime() && hadm.getHoraInicio().getTime() >= hp.getHoraInicio().getTime()) {
+
+                                errosTabelaAdministrativas.add("O horário de Início de uma de sua atividades administrativas corresponde ao horário de uma das suas participações em Projetos de Pesquisa e/ou Extensão");
+
+                            } else if (hadm.getHoraTermino().getTime() <= hp.getHoraTermino().getTime() && hadm.getHoraTermino().getTime() >= hp.getHoraInicio().getTime()) {
+
+                                errosTabelaAdministrativas.add("O horário de Término de uma de sua atividades administrativascorresponde ao horário de uma das suas participações em Projetos de Pesquisa e/ou Extensão");
+
+                            }
+                        }
+                    }
+
+                }
+
+                if (hadm.getHoraInicio().getTime() > hadm.getHoraTermino().getTime()) {
                     errosTabelaAdministrativas.add("Você inseriu um horário de início posterior ao de término!");
 
-                } else if (h.getHoraInicio().getTime() == 0) {
+                } else if (hadm.getHoraInicio().getTime() == 0) {
                     errosTabelaAdministrativas.add("Insira um Horário de Início!");
 
-                } else if (h.getHoraTermino().getTime() == 0) {
+                } else if (hadm.getHoraTermino().getTime() == 0) {
                     errosTabelaAdministrativas.add("Insira um Horário de Término!");
 
                 } else if (adm.getCargaHorariaSemanalAdministracao() == 0) {
@@ -689,7 +780,7 @@ public class PTDMB {
             Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
             ptd.setDiretorEnsino(null);
             ptdDAOGenerico.alterar(ptd);
-        } else if (ptdEmAvaliacao.getIdPTD() != 0){
+        } else if (ptdEmAvaliacao.getIdPTD() != 0) {
             Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
             ptdEmAvaliacao.setDiretorEnsino(null);
             ptdDAOGenerico.alterar(ptdEmAvaliacao);
