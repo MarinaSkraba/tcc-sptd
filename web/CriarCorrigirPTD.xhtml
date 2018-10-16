@@ -89,6 +89,8 @@
                                          action="/NotificacoesDocente"/>
 
                         <p:commandButton value="Descartar e sair" 
+                                         ajax="false" 
+                                         immediate="true"
                                          action="#{pTDMB.cancelarPTD(pTDMB.ptd)}"
                                          styleClass="botaoVermelho"/>
 
@@ -4000,7 +4002,7 @@
                                 </f:facet>
                                 <h:outputText value="#{irregularidade}" 
                                               styleClass="text01"
-                                              style="font-size: small; color: #E0911C; width: 400px;"/>
+                                              style="font-size: large; color: #E0911C; width: 400px;"/>
                             </h:column>
                         </h:dataTable>
                         <br/>

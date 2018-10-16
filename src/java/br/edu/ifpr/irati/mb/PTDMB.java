@@ -142,45 +142,13 @@ public class PTDMB {
         }
     }
 
-    public void atualizarPTDNoBanco() {
+    public void atualizarPTDNoBanco(PTD ptd) {
+
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        PTD p = ptd;
+        ptd.setDiretorEnsino(null);
+        ptdDAOGenerico.alterar(ptd);
         if (ptd.getIdPTD() != 0) {
-            Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-            ptd.setDiretorEnsino(null);
-            ptdDAOGenerico.alterar(ptd);
-            PTD p = ptd;
-            for (Administracao adm : p.getAdministrativas()) {
-                Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
-                administracaoDAO.alterar(adm);
-            }
-            for (Apoio apoio : p.getApoios()) {
-                Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
-                apoioDAO.alterar(apoio);
-            }
-            for (AtividadeASerProposta aasp : p.getAtividadesASeremPropostas()) {
-                Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
-                atividadeASerPropostaDAO.alterar(aasp);
-            }
-            for (Aula al : p.getAulas()) {
-                Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-                aulaDAO.alterar(al);
-            }
-            for (ManutencaoEnsino manuEn : p.getManutencoesEnsino()) {
-                Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
-                manutencaoEnsinoDAO.alterar(manuEn);
-            }
-            for (OutroTipoAtividade ota : p.getOutrosTiposAtividades()) {
-                Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
-                outroTipoAtividadeDAO.alterar(ota);
-            }
-            for (Participacao part : p.getParticipacoes()) {
-                Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-                participacaoDAO.alterar(part);
-            }
-        } else if (ptdEmAvaliacao.getIdPTD() != 0) {
-            Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-            ptdEmAvaliacao.setDiretorEnsino(null);
-            ptdDAOGenerico.alterar(ptdEmAvaliacao);
-            PTD p = ptd;
             for (Administracao adm : p.getAdministrativas()) {
                 Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
                 administracaoDAO.alterar(adm);
@@ -281,11 +249,15 @@ public class PTDMB {
     public String abrirCriarCorrigirPTDContinuarEdicao(Usuario usuario) {
 
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario());
-        setPtd(ptdEmEdicao.get(0));
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-        ptdDAOGenerico.alterar(ptd);
-        return "/CriarCorrigirPTD?faces-redirect=true";
+        List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario());
+        if (!ptdsEmEdicao.isEmpty()) {
+            setPtd(ptdsEmEdicao.get(0));
+            Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+            ptdDAOGenerico.alterar(ptd);
+            return "/CriarCorrigirPTD?faces-redirect=true";
+        } else {
+            return "/NotificacoesDocente?faces-redirect=true";
+        }
 
     }
 
@@ -1283,16 +1255,11 @@ public class PTDMB {
 
     public void verificarCargaHorariaPTDEdicao() {
 
-        atualizarPTDNoBanco();
-        if (ptd.getIdPTD() != 0) {
-            Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-            ptd.setDiretorEnsino(null);
-            ptdDAOGenerico.alterar(ptd);
-        } else if (ptdEmAvaliacao.getIdPTD() != 0) {
-            Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-            ptdEmAvaliacao.setDiretorEnsino(null);
-            ptdDAOGenerico.alterar(ptdEmAvaliacao);
-        }
+//        if (ptd.getIdPTD() != 0) {
+//            atualizarPTDNoBanco(ptd);
+//        } else if (ptdEmAvaliacao.getIdPTD() != 0) {
+//            atualizarPTDNoBanco(ptdEmAvaliacao);
+//        }
 
         irregularidadesPTDEdicao = new ArrayList<>();
         cargaHorariaTotalAdministracoesPTDEdicao = 0;
