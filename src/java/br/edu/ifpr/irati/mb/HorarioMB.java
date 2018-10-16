@@ -269,15 +269,16 @@ public class HorarioMB {
         double minTermino = horario.getHoraTermino().getMinutes();
         double horaInicio = horario.getHoraInicio().getHours();
         double horaTermino = horario.getHoraTermino().getHours();
-
-        cargaHoraNovoHorario = cargaHoraNovoHorario + (horaTermino - horaInicio);
+        
         if (minTermino > minInicio) {
+            cargaHoraNovoHorario = cargaHoraNovoHorario + (horaTermino - horaInicio);
             minTotal = minTermino - minInicio;
             cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
         }
         if (minTermino < minTermino) {
+            cargaHoraNovoHorario = cargaHoraNovoHorario + (horaTermino - horaInicio);
             minTotal = (60 - minInicio) + minTermino;
-            cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
+            cargaHoraNovoHorario = (cargaHoraNovoHorario + (minTotal / 60)) - 1;
         }
 
         if (object instanceof ManutencaoEnsino) {
