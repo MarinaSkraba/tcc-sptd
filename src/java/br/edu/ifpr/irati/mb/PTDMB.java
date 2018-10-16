@@ -212,6 +212,12 @@ public class PTDMB {
         ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados(idUsuario);
         return ptdsReprovados;
     }
+    
+    public List<PTD> atualizarListaPTDsAprovados(int idUsuario) {
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(idUsuario);
+        return ptdsAprovados;
+    }
 
     public void realizarConferencias() {
         verificarErros();
@@ -270,8 +276,7 @@ public class PTDMB {
 
         limparVariáveis();
 
-        if (ptdsAprovados.isEmpty()
-                != true) {
+        if (ptdsAprovados.isEmpty() != true) {
             setPtd(ptdsAprovados.get(ptdsAprovados.size() - 1));
             getPtd().setIdPTD(0);
             getPtd().setEstadoPTD("EDICAO");
@@ -306,13 +311,12 @@ public class PTDMB {
         limparVariáveis();
 
         ptdReprovado.setEstadoPTD("EDICAO");
-        ptdReprovado.setIdPTD(0);
-        ptdDAOGenerico.salvar(ptdReprovado);
+        ptdDAOGenerico.alterar(ptdReprovado);
         setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(ptdReprovado.getProfessor().getIdUsuario()).get(0));
         return "/CriarCorrigirPTD";
     }
 
-    public String cancelarPTD() {
+    public String cancelarPTD(PTD ptdACancelar) {
 
         Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class);
         Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
@@ -333,7 +337,7 @@ public class PTDMB {
         Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
 
-        for (Administracao adm : getPtd().getAdministrativas()) {
+        for (Administracao adm : ptdACancelar.getAdministrativas()) {
 
             List<Horario> aux = new ArrayList<>(adm.getHorariosAdministracao());
             for (Horario h : aux) {
@@ -341,27 +345,27 @@ public class PTDMB {
                 administracaoDAO.alterar(adm);
                 horarioDAO.excluir(h);
             }
-            getPtd().getAdministrativas().remove(adm);
-            ptdDAO.alterar(getPtd());
+            ptdACancelar.getAdministrativas().remove(adm);
+            ptdDAO.alterar(ptdACancelar);
             administracaoDAO.excluir(adm);
             tipoAdministracaoDAO.excluir(adm.getTipoAdministracao());
 
         }
 
-        for (Apoio apoio : getPtd().getApoios()) {
+        for (Apoio apoio : ptdACancelar.getApoios()) {
             List<Horario> aux = new ArrayList<>(apoio.getHorariosApoio());
             for (Horario h : aux) {
                 apoio.getHorariosApoio().remove(h);
                 apoioDAO.alterar(apoio);
                 horarioDAO.excluir(h);
             }
-            getPtd().getApoios().remove(apoio);
-            ptdDAO.alterar(getPtd());
+            ptdACancelar.getApoios().remove(apoio);
+            ptdDAO.alterar(ptdACancelar);
             apoioDAO.excluir(apoio);
             tipoApoioDAO.excluir(apoio.getTipoApoio());
         }
 
-        for (AtividadeASerProposta aASP : getPtd().getAtividadesASeremPropostas()) {
+        for (AtividadeASerProposta aASP : ptdACancelar.getAtividadesASeremPropostas()) {
             List<Horario> aux = new ArrayList<>(aASP.getHorariosAtividadesASerProposta());
             for (Horario h : aux) {
                 aASP.getHorariosAtividadesASerProposta().remove(h);
@@ -369,38 +373,38 @@ public class PTDMB {
                 horarioDAO.excluir(h);
             }
 
-            getPtd().getAtividadesASeremPropostas().remove(aASP);
-            ptdDAO.alterar(getPtd());
+            ptdACancelar.getAtividadesASeremPropostas().remove(aASP);
+            ptdDAO.alterar(ptdACancelar);
             aASPropostaDAO.excluir(aASP);
         }
 
-        for (Aula aula : getPtd().getAulas()) {
+        for (Aula aula : ptdACancelar.getAulas()) {
             List<Horario> aux = new ArrayList<>(aula.getHorariosAula());
             for (Horario h : aux) {
                 aula.getHorariosAula().remove(h);
                 aulaDAO.alterar(aula);
                 horarioDAO.excluir(h);
             }
-            getPtd().getAulas().remove(aula);
-            ptdDAO.alterar(getPtd());
+            ptdACancelar.getAulas().remove(aula);
+            ptdDAO.alterar(ptdACancelar);
             aulaDAO.excluir(aula);
             tipoOfertaDAO.excluir(aula.getTipoOferta());
         }
 
-        for (ManutencaoEnsino mEnsino : getPtd().getManutencoesEnsino()) {
+        for (ManutencaoEnsino mEnsino : ptdACancelar.getManutencoesEnsino()) {
             List<Horario> aux = new ArrayList<>(mEnsino.getHorariosManutecao());
             for (Horario h : aux) {
                 mEnsino.getHorariosManutecao().remove(h);
                 manutencaoDAO.alterar(mEnsino);
                 horarioDAO.excluir(h);
             }
-            getPtd().getManutencoesEnsino().remove(mEnsino);
-            ptdDAO.alterar(getPtd());
+            ptdACancelar.getManutencoesEnsino().remove(mEnsino);
+            ptdDAO.alterar(ptdACancelar);
             manutencaoDAO.excluir(mEnsino);
             tipoManutencaoDAO.excluir(mEnsino.getTipoManutencao());
         }
 
-        for (OutroTipoAtividade oTA : getPtd().getOutrosTiposAtividades()) {
+        for (OutroTipoAtividade oTA : ptdACancelar.getOutrosTiposAtividades()) {
             List<Horario> aux = new ArrayList<>(oTA.getHorariosOutroTipoAtividade());
             for (Horario h : aux) {
                 oTA.getHorariosOutroTipoAtividade().remove(h);
@@ -408,24 +412,26 @@ public class PTDMB {
                 horarioDAO.excluir(h);
             }
 
-            getPtd().getOutrosTiposAtividades().remove(oTA);
-            ptdDAO.alterar(getPtd());
+            ptdACancelar.getOutrosTiposAtividades().remove(oTA);
+            ptdDAO.alterar(ptdACancelar);
             oTAtividadeDAO.excluir(oTA);
         }
 
-        for (Participacao p : getPtd().getParticipacoes()) {
+        for (Participacao p : ptdACancelar.getParticipacoes()) {
 
-            getPtd().getParticipacoes().remove(p);
-            ptdDAO.alterar(getPtd());
+            ptdACancelar.getParticipacoes().remove(p);
+            ptdDAO.alterar(ptdACancelar);
             participacaoDAO.excluir(p);
 
         }
+        
+        ptdDAO.excluir(ptdACancelar);
 
         return "NotificacoesDocente";
     }
 
     public String cancelarPTDEfetuandoLogout() {
-        String variavelDescartavel = cancelarPTD();
+        String variavelDescartavel = cancelarPTD(ptd);
         variavelDescartavel = "";
         UsuarioMB usuarioMB = new UsuarioMB();
         return usuarioMB.realizarLogout();

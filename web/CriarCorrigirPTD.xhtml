@@ -89,7 +89,7 @@
                                          action="/NotificacoesDocente"/>
 
                         <h:commandButton value="Descartar e sair" 
-                                         action="#{pTDMB.cancelarPTD()}"
+                                         action="#{pTDMB.cancelarPTD(pTDMB.ptd)}"
                                          styleClass="botaoVermelho"/>
 
                     </p:dialog>
@@ -4209,7 +4209,7 @@
                                          action="/NotificacoesDocente"/>
 
                         <h:commandButton value="Sair" 
-                                         action="#{pTDMB.cancelarPTD()}"
+                                         action="#{pTDMB.cancelarPTD(pTDMB.ptd)}"
                                          styleClass="botaoVermelho"/>
 
                     </p:dialog>

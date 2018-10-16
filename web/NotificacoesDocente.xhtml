@@ -147,7 +147,14 @@
                                     <br/>
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Colocar em edição"
+                                                     ajax="false" 
+                                                     immediate="true"
                                                      action="#{pTDMB.abrirCriarCorrigirPTDAPartirDeUmReprovado(ptdReprovado)}"/>
+                                    <p:commandButton styleClass="botaoVermelho" 
+                                                     value="Descartar"
+                                                     ajax="false" 
+                                                     immediate="true"
+                                                     action="#{pTDMB.cancelarPTD(ptdReprovado)}"/>
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </h:panelGrid>
                             </h:column>
