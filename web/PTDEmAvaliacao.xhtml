@@ -244,7 +244,7 @@
 
                     <!-- Subtítulo: Manutenção de ensino -->
                     <h:panelGrid columns="1" >
-                        <h:outputText value="1.2 Manutenção de ensino" 
+                        <h:outputText value="1.2 Manutenção ao ensino" 
                                       styleClass="text01" />
                     </h:panelGrid>
 
@@ -357,11 +357,9 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{apoio.tipoApoio.rotulo}"
+                                <h:outputText value="#{apoio.tipoApoio.rotulo}"
                                                   styleClass="text01"
-                                                  style="font-size: large; width: 100%;" />
-                                </p:scrollPanel>
+                                                  style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -448,7 +446,7 @@
 
                         <!-- Mostrar atividades pesquisa e/ou extensão (Autor) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesAutor}" 
+                        <h:dataTable  value="#{pTDMB.participacoesAutorPTDAvaliacao}" 
                                       var="participacaoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -574,7 +572,7 @@
 
                         <!-- Mostrar atividades pesquisa e/ou extensão (Colaborador) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesColab}" 
+                        <h:dataTable  value="#{pTDMB.participacoesColabPTDAvaliacao}" 
                                       var="participacaoPesquisaExtensaoColab" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -1035,55 +1033,55 @@
                             <h:outputText value="ATIVIDADE 1.1"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.cargaHorariaTotalAulas}"  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalAulasPTDEdicao}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 1.2"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.cargaHorariaTotalManutencoesEnsino}"  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalManutencoesEnsinoPTDEdicao}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 1.3"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.cargaHorariaTotalApoios}"  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalApoiosPTDEdicao}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 2.1"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.cargaHorariaTotalProjetosPesquisaExtensaoAutor}"  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 2.2"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.cargaHorariaTotalProjetosPesquisaExtensaoColab}"  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 3"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.cargaHorariaTotalAdministracoes}"  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalAdministracoesPTDEdicao}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 4"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.cargaHorariaTotalOutroTiposAtividade}"  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalOutroTiposAtividadePTDEdicao}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 5"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.cargaHorariaTotalAtividadesASeremPropostas}"  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalAtividadesASeremPropostasPTDEdicao}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="TOTAL"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
-                            <h:outputText value="#{pTDMB.cargaHorariaTotalPTD}"  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalPTDPTDEdicao}"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
                         </h:panelGrid>
@@ -1093,13 +1091,13 @@
                     <br/>
                     <!-- Mostrar irregularidades -->
                     <center>
-                        <div id="irregularidades" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.irregularidades)}">
+                        <div id="irregularidades" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.irregularidadesPTDEdicao)}">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoIrregularidade"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.irregularidades}" 
+                                <h:dataTable  value="#{pTDMB.irregularidadesPTDEdicao}" 
                                               var="irregularidade" 
                                               style="width: auto;"
                                               headerClass="text-center"
