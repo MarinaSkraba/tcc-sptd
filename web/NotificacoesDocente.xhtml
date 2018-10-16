@@ -65,20 +65,16 @@
                                 style="padding: 0px;">
                     <p:commandButton value="PTD em branco"
                                      styleClass="opMenu"
-                                     ajax="false" 
-                                     immediate="true"
-                                     action="#{pTDMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
+                                     onclick="PF('confirmarCriacaoPTDEmBrancoDialog').show();"/>
                     <br/>
                     <p:commandButton value="Recuperar último"
                                      styleClass="opMenu"
                                      ajax="false" 
-                                     immediate="true"
                                      action="#{pTDMB.abrirCriarCorrigirPTDAPartirDoUltimoArquivado(usuarioMB.usuarioLogado)}"/>
                     <br/>
                     <p:commandButton value="Continuar editando"
                                      styleClass="opMenu"
                                      ajax="false" 
-                                     immediate="true"
                                      action="#{pTDMB.abrirCriarCorrigirPTDContinuarEdicao(usuarioMB.usuarioLogado)}"/>
                 </p:overlayPanel>
 
@@ -86,6 +82,27 @@
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Pesquisa"
                                  action="/pesquisa"/>
+
+                <!-- Caixa de aviso de impedimento por tentativa de envio de documento vazio -->
+                <p:dialog header="Confirmar criação" 
+                          widgetVar="confirmarCriacaoPTDEmBrancoDialog" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false">
+
+                    <h:outputText value="Ao criar um PTD em branco, você substitui qualquer outro que estava em edição." 
+                                  styleClass="text01"
+                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                    <br/>
+
+                    <p:commandButton styleClass="botaoAzul" 
+                                     value="Estou ciente."
+                                     ajax="false" 
+                                     immediate="true"
+                                     action="#{pTDMB.abrirCriarCorrigirPTDEmBranco(usuarioMB.usuarioLogado)}"/>
+
+                </p:dialog>
 
             </h:form>
         </div>
@@ -114,12 +131,12 @@
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
                                       footerClass="text-center">
-                            
+
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Observações do diretor" 
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </f:facet>
                                 <h:panelGrid columns="1" 
@@ -134,7 +151,7 @@
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </h:panelGrid>
                             </h:column>
-                            
+
                         </h:dataTable>
 
                     </div>

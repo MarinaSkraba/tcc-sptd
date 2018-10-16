@@ -1021,12 +1021,10 @@
                     <h:outputText value="6. Quadro geral das atividades - Carga Horaria Semanal" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
-
-                    <br/>
-                    <br/>
-
+                    <br/><br/>
                     <center>
-                        <h:panelGrid columns="2" 
+                        <h:panelGrid id="tabelaGeral"
+                                     columns="2" 
                                      style="border-style: solid; border-width: thin;">
                             <h:outputText value="ATIVIDADES"  
                                           styleClass="text01"
@@ -1037,61 +1035,62 @@
                             <h:outputText value="ATIVIDADE 1.1"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value=""  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalAulas}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 1.2"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value=""  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalManutencoesEnsino}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 1.3"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value=""  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalApoios}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 2.1"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value=""  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalProjetosPesquisaExtensaoAutor}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 2.2"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value=""  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalProjetosPesquisaExtensaoColab}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 3"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value=""  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalAdministracoes}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 4"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value=""  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalOutroTiposAtividade}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 5"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value=""  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalAtividadesASeremPropostas}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="TOTAL"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
-                            <h:outputText value=""  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalPTD}"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
                         </h:panelGrid>
 
                     </center>
 
+                    <br/>
                     <!-- Mostrar irregularidades -->
                     <center>
                         <div id="irregularidades" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.irregularidades)}">

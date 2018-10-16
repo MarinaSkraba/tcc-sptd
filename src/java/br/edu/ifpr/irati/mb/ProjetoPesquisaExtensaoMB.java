@@ -86,7 +86,8 @@ public class ProjetoPesquisaExtensaoMB {
         participacao.setProfessor(professorAutor);
         participacao.setEstadoParticipacao("Ativo");
         participacaoDAO.salvar(participacao);
-        participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
+        List<ProjetoPesquisaExtensao> p = projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class);
+        participacao.setProjetoPesquisaExtensao(p.get(p.size()-1));
         projetoExtensaoDAO.alterar(participacao.getProjetoPesquisaExtensao());
         ptd.getParticipacoes().add(participacao);
         ptdDAO.alterar(ptd);
@@ -104,7 +105,8 @@ public class ProjetoPesquisaExtensaoMB {
         participacao.setProfessor(professorAutor);
         participacao.setEstadoParticipacao("Ativo");
         participacaoDAO.salvar(participacao);
-        participacao = participacaoDAO.buscarTodos(Participacao.class).get(participacaoDAO.buscarTodos(Participacao.class).size() - 1);
+        List<ProjetoPesquisaExtensao> p = projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class);
+        participacao.setProjetoPesquisaExtensao(p.get(p.size()-1));
         projetoExtensaoDAO.alterar(participacao.getProjetoPesquisaExtensao());
         ptd.getParticipacoes().add(participacao);
         ptdDAO.alterar(ptd);

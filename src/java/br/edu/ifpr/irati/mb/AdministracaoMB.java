@@ -50,7 +50,8 @@ public class AdministracaoMB {
         tipoAdministracaoDAO.salvar(tipoAdministracao);
         administracao.setTipoAdministracao(tipoAdministracao);
         administracaoDAO.salvar(administracao);
-        administracao = administracaoDAO.buscarTodos(Administracao.class).get(administracaoDAO.buscarTodos(Administracao.class).size() - 1);
+        List<Administracao> as = administracaoDAO.buscarTodos(Administracao.class);
+        administracao = as.get(as.size() - 1);
         ptd.getAdministrativas().add(administracao);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);

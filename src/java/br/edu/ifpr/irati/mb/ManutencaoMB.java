@@ -49,7 +49,8 @@ public class ManutencaoMB {
         manutencaoEnsino.setTipoManutencao(tipoManutencao);
         tipoManutencaoDAO.salvar(tipoManutencao);
         manutencaoEnsinoDAO.salvar(manutencaoEnsino);
-        manutencaoEnsino = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class).get(manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class).size() - 1);
+        List<ManutencaoEnsino> mes = manutencaoEnsinoDAO.buscarTodos(ManutencaoEnsino.class);
+        manutencaoEnsino = mes.get(mes.size() - 1);
         ptd.getManutencoesEnsino().add(manutencaoEnsino);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);

@@ -42,18 +42,20 @@ public class ApoioMB {
 
     }
 
-    public void salvarApoio(Serializable idUsuario, PTD ptd) {
+    public String salvarApoio(Serializable idUsuario, PTD ptd) {
 
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
         Dao<TipoApoio> tipoApoioDAO = new GenericDAO<>(TipoApoio.class);
         tipoApoioDAO.salvar(tipoApoio);
         apoio.setTipoApoio(tipoApoio);
         apoioDAO.salvar(apoio);
-        apoio = apoioDAO.buscarTodos(Apoio.class).get(apoioDAO.buscarTodos(Apoio.class).size() - 1);
+        List<Apoio> apoios = apoioDAO.buscarTodos(Apoio.class);
+        apoio = apoios.get(apoios.size() - 1);
         ptd.getApoios().add(apoio);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         apoio = new Apoio();
+        return "CriarCorrigirPTD?faces-redirect=true";
 
     }
 

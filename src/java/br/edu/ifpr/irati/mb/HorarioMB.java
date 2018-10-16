@@ -127,15 +127,14 @@ public class HorarioMB {
         double horaInicio = horarioAtividade.getHoraInicio().getHours();
         double horaTermino = horarioAtividade.getHoraTermino().getHours();
 
-        cargaHoraNovoHorario = horaTermino - horaInicio;
+        cargaHoraNovoHorario = cargaHoraNovoHorario + (horaTermino - horaInicio);
         if (minTermino > minInicio) {
             minTotal = minTermino - minInicio;
-            System.out.println(minTotal / 60);
             cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
         }
         if (minTermino < minInicio) {
             minTotal = (60 - minInicio) + minTermino;
-            cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
+            cargaHoraNovoHorario = (cargaHoraNovoHorario + (minTotal / 60)) - 1;
         }
 
         if (object instanceof ManutencaoEnsino) {
@@ -212,7 +211,7 @@ public class HorarioMB {
             }
             if (minTermino < minInicio) {
                 minTotal = (60 - minInicio) + minTermino;
-                cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
+                cargaHoraNovoHorario = (cargaHoraNovoHorario + (minTotal / 60)) - 1;
             }
             horarioDAO.alterar(h);
         }
@@ -277,7 +276,7 @@ public class HorarioMB {
         }
         if (minTermino < minTermino) {
             minTotal = (60 - minInicio) + minTermino;
-            cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
+            cargaHoraNovoHorario = (cargaHoraNovoHorario + (minTotal / 60)) - 1;
         }
 
         if (object instanceof ManutencaoEnsino) {

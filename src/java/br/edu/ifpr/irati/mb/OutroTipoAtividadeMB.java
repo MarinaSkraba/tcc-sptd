@@ -42,7 +42,8 @@ public class OutroTipoAtividadeMB {
     public void salvarOutroTipoAtividade(Serializable idUsuario, PTD ptd) {
         Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
         outroTipoAtividadeDAO.salvar(outroTipoAtividade);
-        outroTipoAtividade = outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class).get(outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class).size() - 1);
+        List<OutroTipoAtividade> outroTipoAtividades = outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class);
+        outroTipoAtividade = outroTipoAtividades.get(outroTipoAtividades.size() - 1);
         ptd.getOutrosTiposAtividades().add(outroTipoAtividade);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
