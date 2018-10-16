@@ -61,7 +61,8 @@ public class ProjetoPesquisaExtensaoMB {
         projetoAutorNovo.setEstadoProjetoPesquisaExtensao("Ativo");
         participacao.setProjetoPesquisaExtensao(projetoAutorNovo);
         projetoExtensaoDAO.salvar(participacao.getProjetoPesquisaExtensao());
-        participacao.setProjetoPesquisaExtensao(projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).get(projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class).size() - 1));
+        List<ProjetoPesquisaExtensao> p = projetoExtensaoDAO.buscarTodos(ProjetoPesquisaExtensao.class);
+        participacao.setProjetoPesquisaExtensao(p.get(p.size()-1));
         participacao.setRotulo("Autor");
         participacao.setEstadoParticipacao("Ativo");
         participacao.setProfessor(professorAutor);

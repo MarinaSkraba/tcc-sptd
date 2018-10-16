@@ -132,8 +132,8 @@
                                       styleClass="text01"/>
                     </h:panelGrid>
 
-                    <div id="mostrarTabela">
                         <!-- Mostrar atividades aulas -->
+                    <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.aulas}" 
                                       var="aula" 
                                       style="border-spacing: 0pt; width: 100%;"
@@ -237,6 +237,9 @@
 
                         </h:dataTable>
                     </div>
+                    <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaAtividadeEnsino}" 
+                                  styleClass="text01"
+                                  style="font-size: large; width: 400px;"/>
                     <br/>
 
                     <!-- Subtítulo: Manutenção de ensino -->
@@ -245,9 +248,8 @@
                                       styleClass="text01" />
                     </h:panelGrid>
 
-
-                    <div id="mostrarTabela">
                         <!-- Mostrar atividades manutenção de ensino -->
+                    <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.manutencoesEnsino}" 
                                       var="manutencao" 
                                       style="border-spacing: 0pt; width: 100%;"
@@ -328,6 +330,9 @@
                             </h:column>
                         </h:dataTable>
                     </div>
+                    <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaManutencaoEnsino}" 
+                                  styleClass="text01"
+                                  style="font-size: large; width: 400px;"/>
                     <br/>
 
                     <br/>
@@ -338,8 +343,8 @@
                                       styleClass="text01" />
                     </h:panelGrid>
 
-                    <div id="mostrarTabela">
                         <!-- Mostrar atividades apoio ao ensino -->
+                    <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.apoios}" 
                                       var="apoio" 
                                       style="border-spacing: 0pt; width: 100%;"
@@ -422,7 +427,9 @@
                             </h:column>
                         </h:dataTable>
                     </div>
-
+                    <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaApoioEnsino}" 
+                                  styleClass="text01"
+                                  style="font-size: large; width: 400px;"/>
                     <br/>
 
                     <!-- Atividades de Pesquisa e Extensão -->
@@ -439,8 +446,8 @@
                                       styleClass="text01" />
                     </h:panelGrid>
 
-                    <div id="mostrarTabela">
                         <!-- Mostrar atividades pesquisa e/ou extensão (Autor) -->
+                    <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.participacoesAutor}" 
                                       var="participacaoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
@@ -554,6 +561,9 @@
                             </h:column>
                         </h:dataTable>
                     </div>
+                    <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaProjetoPesquisaExtensao}" 
+                                  styleClass="text01"
+                                  style="font-size: large; width: 400px;"/>
                     <br/>
 
                     <!-- Subtítulo: Pesquisa e/ou extensão (Colaborador) -->
@@ -562,8 +572,8 @@
                                       styleClass="text01" />
                     </h:panelGrid>
 
-                    <div id="mostrarTabela">
                         <!-- Mostrar atividades pesquisa e/ou extensão (Colaborador) -->
+                    <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.participacoesColab}" 
                                       var="participacaoPesquisaExtensaoColab" 
                                       style="border-spacing: 0pt; width: 100%;"
@@ -676,6 +686,9 @@
                             </h:column>
                         </h:dataTable>
                     </div>
+                    <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaProjetoPesquisaExtensao}" 
+                                  styleClass="text01"
+                                  style="font-size: large; width: 400px;"/>
                     <br/>
 
                     <!-- Atividades Administrativas -->
@@ -691,8 +704,9 @@
                         <h:outputText value="Atividades administrativas" 
                                       styleClass="text01" />
                     </h:panelGrid>
-                    <div id="mostrarTabela">
+                    
                         <!-- Mostrar atividades administrativas -->
+                    <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.administrativas}" 
                                       var="administracao" 
                                       style="border-spacing: 0pt; width: 100%;"
@@ -773,6 +787,9 @@
                             </h:column>
                         </h:dataTable>
                     </div>
+                    <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaAdministracao}" 
+                                  styleClass="text01"
+                                  style="font-size: large; width: 400px;"/>
                     <br/>
 
                     <!-- Outras atividades desenvolvidas no campus -->
@@ -789,8 +806,8 @@
                                       styleClass="text01" />
                     </h:panelGrid>
 
-                    <div id="mostrarTabela">
                         <!-- Mostrar outras atividades desenvolvidas no campus -->
+                    <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.outrosTiposAtividades}" 
                                       var="outrasAtividades" 
                                       style="border-spacing: 0pt; width: 100%;"
@@ -883,6 +900,9 @@
                             </h:column>
                         </h:dataTable>
                     </div>
+                    <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaOutrasAtividades}" 
+                                  styleClass="text01"
+                                  style="font-size: large; width: 400px;"/>
                     <br/>
 
                     <!-- Outras atividades que pretendo propor no semestre -->
@@ -898,8 +918,8 @@
                         <h:outputText value="Outras atividades que pretendo propor no semestre" 
                                       styleClass="text01" />
                     </h:panelGrid>
-                    <div id="mostrarTabela">
                         <!-- Mostrar atividades que pretende propor -->
+                    <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.atividadesASeremPropostas}" 
                                       var="atividadeASerProposta" 
                                       style="border-spacing: 0pt; width: 100%;"
@@ -992,6 +1012,9 @@
                             </h:column>
                         </h:dataTable>
                     </div>
+                    <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaSeremPropostas}" 
+                                  styleClass="text01"
+                                  style="font-size: large; width: 400px;"/>
                     <br/>
 
                     <!-- Tabela de resultados de horários -->
@@ -1123,9 +1146,41 @@
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptdEmAvaliacao.campoObservacoesDiretorEnsino}"/>
                         <br/>
-                        <h:commandButton value="Enviar"
-                                         action="#{pTDMB.reprovarPTD()}"
+                        <p:commandButton value="Enviar"
+                                         onclick="PF('#{pTDMB.verificarPossibilidadeReprovacao()}').show();"
                                          styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de aviso de falha da reprovação -->
+                    <p:dialog header="Observações são obrigatórias" 
+                              widgetVar="avisoFalhaReprovacaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Assim que reprovado, o documento será encaminhado àquele que o regidigiu. Dessa forma as suas observações são muito importantes! " 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="OK"
+                                         ajax="false"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de aviso de sucesso de reprovação -->
+                    <p:dialog header="Operação realizada!" 
+                              widgetVar="avisoSucessoReprovacaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="OK"
+                                         action="#{pTDMB.reprovarPTD()}"/>
 
                     </p:dialog>
 

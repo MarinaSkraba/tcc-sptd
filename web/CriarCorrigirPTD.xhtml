@@ -214,7 +214,8 @@
                         <br/>
                         <p:commandButton value="Salvar" 
                                          action="#{aulaMB.salvarAula(usuarioMB.usuarioLogado.idUsuario, pTDMB.ptd)}"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -277,7 +278,8 @@
                         <br/>
                         <p:commandButton value="Salvar" 
                                          action="#{aulaMB.alterarAula()}" 
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -444,7 +446,7 @@
                         </h:dataTable>
                     </div>
                     <br/>
-                    
+
                     <!-- Link para a caixa de comentar -->
                     <p:commandLink style="width: 200px; margin: 15px;"
                                    styleClass="link"
@@ -676,7 +678,8 @@
                         <p:commandButton value="Salvar" 
                                          action="#{manutencaoMB.salvarManutencao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -698,7 +701,8 @@
                         <p:commandButton value="Salvar" 
                                          action="#{manutencaoMB.alterarManutencao()}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -839,7 +843,7 @@
 
                         </h:dataTable>
                     </div>
-                    
+
                     <!-- Link para a caixa de comentar -->
                     <p:commandLink style="width: 200px; margin: 15px;"
                                    styleClass="link"
@@ -1073,7 +1077,8 @@
                         <p:commandButton value="Salvar" 
                                          action="#{apoioMB.salvarApoio(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -1095,7 +1100,8 @@
                         <p:commandButton value="Salvar" 
                                          action="#{apoioMB.alterarApoio()}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -1236,7 +1242,7 @@
 
                         </h:dataTable>
                     </div>
-                    
+
                     <!-- Link para a caixa de comentar -->
                     <p:commandLink style="width: 200px; margin: 15px;"
                                    styleClass="link"
@@ -1452,7 +1458,7 @@
                                     hideEffect="fade" 
                                     style="padding: 0px;">
                         <h:outputText value="Realize a escolha “Deseja cadastrar uma nova atividade com um projeto de pesquisa e/ou extensão” ou de utilizar um projeto já cadastrado em “Já cadastrado no sistema”.
-Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministradas, preenchendo as informações solicitadas. A direita de cada projeto adicionado, clicando em “...”, será disponibilizada as opções de “Deletar” o projeto como um todo, e de “Atualizar” as informações já inseridas." 
+                                      Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministradas, preenchendo as informações solicitadas. A direita de cada projeto adicionado, clicando em “...”, será disponibilizada as opções de “Deletar” o projeto como um todo, e de “Atualizar” as informações já inseridas." 
                                       styleClass="text01"
                                       style="font-weight: normal; font-size: large; width: 500px; text-align: justify; "/>
                         <h:outputText value="Na coluna de horários da tabela, clicando em “...” será disponibilizada as opções de “Adicionar” diferentes horários à atividade,  e de “Editar” os horários. Clicando em “X” ao lado de um  horário ele será excluído." 
@@ -1517,7 +1523,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <p:commandButton value="Salvar" 
                                          action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -1544,9 +1551,10 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         </p:selectOneMenu>
 
                         <br/>
-                        <h:commandButton value="Salvar" 
+                        <p:commandButton value="Salvar" 
                                          action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensaoJaCadastradoAutor(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -1586,7 +1594,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <p:commandButton value="Salvar" 
                                          action="#{projetoPesquisaExtensaoMB.alterarParticipacaoAutor()}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -1760,7 +1769,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
 
                         </h:dataTable>
                     </div>
-                    
+
                     <!-- Link para a caixa de comentar -->
                     <p:commandLink style="width: 200px; margin: 15px;"
                                    styleClass="link"
@@ -2001,7 +2010,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <br/>
                         <p:commandButton value="Salvar" 
                                          action="#{projetoPesquisaExtensaoMB.salvarProjetoPesquisaExtensaoJaCadastradoColaboracao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -2031,7 +2041,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <p:commandButton value="Salvar" 
                                          action="#{projetoPesquisaExtensaoMB.alterarParticipacaoColab()}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -2205,7 +2216,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
 
                         </h:dataTable>
                     </div>
-                    
+
                     <!-- Link para a caixa de comentar -->
                     <p:commandLink style="width: 200px; margin: 15px;"
                                    styleClass="link"
@@ -2443,7 +2454,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <p:commandButton value="Salvar" 
                                          action="#{administracaoMB.salvarAdministracao(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -2465,7 +2477,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <p:commandButton value="Salvar" 
                                          action="#{administracaoMB.alterarAdministracao()}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -2606,7 +2619,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
 
                         </h:dataTable>
                     </div>
-                    
+
                     <!-- Link para a caixa de comentar -->
                     <p:commandLink style="width: 200px; margin: 15px;"
                                    styleClass="link"
@@ -2861,7 +2874,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <p:commandButton value="Salvar" 
                                          action="#{outroTipoAtividadeMB.salvarOutroTipoAtividade(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -2896,7 +2910,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <p:commandButton value="Salvar" 
                                          action="#{outroTipoAtividadeMB.alterarOutroTipoAtividade()}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -3047,7 +3062,7 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
 
                         </h:dataTable>
                     </div>
-                    
+
                     <!-- Link para a caixa de comentar -->
                     <p:commandLink style="width: 200px; margin: 15px;"
                                    styleClass="link"
@@ -3302,7 +3317,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <p:commandButton value="Salvar" 
                                          action="#{atividadeASerPropostaMB.salvarAtividadeASerProposta(usuarioMB.usuarioLogado, pTDMB.ptd)}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -3337,7 +3353,8 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                         <p:commandButton value="Salvar" 
                                          action="#{atividadeASerPropostaMB.alterarAtividadeASerProposta()}" 
                                          update="tabelaGeral"
-                                         styleClass="botaoAzul"/>
+                                         styleClass="botaoAzul"
+                                         ajax="false" />
 
                     </p:dialog>
 
@@ -3827,9 +3844,128 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                         <br/>
-                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaSeremPropostas}"/>
+                        <h:dataTable  value="#{pTDMB.errosTabelaAdministrativas}" 
+                                      var="erroAdministrativas" 
+                                      style="width: auto;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <h:outputText value="#{erroAdministrativas}" 
+                                              styleClass="text01"
+                                              style="font-size: large; color: #C92345;"/>
+                            </h:column>
+                        </h:dataTable>
+                        <h:dataTable  value="#{pTDMB.errosTabelaApoioEnsino}" 
+                                      var="erroApoioEnsino" 
+                                      style="width: auto;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <h:outputText value="#{erroApoioEnsino}" 
+                                              styleClass="text01"
+                                              style="font-size: large; color: #C92345;"/>
+                            </h:column>
+                        </h:dataTable>
+                        <h:dataTable  value="#{pTDMB.errosTabelaAtividadesASeremPropostas}" 
+                                      var="erroAtividadesASeremPropostas" 
+                                      style="width: auto;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <h:outputText value="#{erroAtividadesASeremPropostas}" 
+                                              styleClass="text01"
+                                              style="font-size: large; color: #C92345;"/>
+                            </h:column>
+                        </h:dataTable>
+                        <h:dataTable  value="#{pTDMB.errosTabelaAula}" 
+                                      var="erroAulas" 
+                                      style="width: auto;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <h:outputText value="#{erroAulas}" 
+                                              styleClass="text01"
+                                              style="font-size: large; color: #C92345;"/>
+                            </h:column>
+                        </h:dataTable>
+                        <h:dataTable  value="#{pTDMB.errosTabelaManuEnsino}" 
+                                      var="erroManuEnsino" 
+                                      style="width: auto;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <h:outputText value="#{erroManuEnsino}" 
+                                              styleClass="text01"
+                                              style="font-size: large; color: #C92345;"/>
+                            </h:column>
+                        </h:dataTable>
+                        <h:dataTable  value="#{pTDMB.errosTabelaOutrasAtividades}" 
+                                      var="erroOutrasAtividades" 
+                                      style="width: auto;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <h:outputText value="#{erroOutrasAtividades}" 
+                                              styleClass="text01"
+                                              style="font-size: large; color: #C92345;"/>
+                            </h:column>
+                        </h:dataTable>
+                        <h:dataTable  value="#{pTDMB.errosTabelaPesquisaExtensaoAutor}" 
+                                      var="erroPesquisaExtensaoAutor" 
+                                      style="width: auto;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <h:outputText value="#{erroPesquisaExtensaoAutor}" 
+                                              styleClass="text01"
+                                              style="font-size: large; color: #C92345;"/>
+                            </h:column>
+                        </h:dataTable>
+                        <h:dataTable  value="#{pTDMB.errosTabelaPesquisaExtensaoColaborador}" 
+                                      var="erroPesquisaExtensao" 
+                                      style="width: auto;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <h:outputText value="#{erroPesquisaExtensao}" 
+                                              styleClass="text01"
+                                              style="font-size: large; color: #C92345;"/>
+                            </h:column>
+                        </h:dataTable>
                         <br/>
-                        <h:commandButton value="Corrigir"
+                        <p:commandButton value="Corrigir"
                                          action="CriarCorrigirPTD?faces-redirect=true"
                                          styleClass="botaoAzul"/>
 
@@ -3843,15 +3979,28 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                               hideEffect="fade" 
                               resizable="false">
 
-                        <h:outputText value="O documento não esta completamente de acordo com a legislação, para enviar você deve corrigí-lo ou justificar as irregularidades." 
+                        <h:outputText value="O documento não está completamente de acordo com a legislação, para enviar você deve corrigí-lo ou justificar as irregularidades." 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                         <br/>
                         <h:outputText value="Irregularidades:" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
-                        <br/>
-                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaSeremPropostas}"/>
+                        <h:dataTable  value="#{pTDMB.irregularidades}" 
+                                      var="irregularidade" 
+                                      style="width: auto;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <h:outputText value="#{irregularidade}" 
+                                              styleClass="text01"
+                                              style="font-size: small; color: #E0911C;"/>
+                            </h:column>
+                        </h:dataTable>
                         <br/>
                         <p:commandButton styleClass="botaoAzul" 
                                          value="Corrigir"
@@ -3871,6 +4020,21 @@ Insira, clicando em “Adicionar”, projetos de pesquisa e/ou extensão ministr
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                         <br/>
+                        <h:dataTable  value="#{pTDMB.irregularidades}" 
+                                      var="irregularidade" 
+                                      style="width: auto;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <h:outputText value="#{irregularidade}" 
+                                              styleClass="text01"
+                                              style="font-size: small; color: #E0911C;"/>
+                            </h:column>
+                        </h:dataTable>
                         <p:commandButton styleClass="botaoAzul" 
                                          value="Corrigir"
                                          action="CriarCorrigirPTD?faces-redirect=true"/>
