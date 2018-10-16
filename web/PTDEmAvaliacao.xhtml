@@ -357,11 +357,9 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <p:scrollPanel style="width: 150px; height: 60px; border-style: none;">
-                                    <h:outputText value="#{apoio.tipoApoio.rotulo}"
+                                <h:outputText value="#{apoio.tipoApoio.rotulo}"
                                                   styleClass="text01"
-                                                  style="font-size: large; width: 100%;" />
-                                </p:scrollPanel>
+                                                  style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -448,7 +446,7 @@
 
                         <!-- Mostrar atividades pesquisa e/ou extensão (Autor) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesAutor}" 
+                        <h:dataTable  value="#{pTDMB.participacoesAutorPTDAvaliacao}" 
                                       var="participacaoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -574,7 +572,7 @@
 
                         <!-- Mostrar atividades pesquisa e/ou extensão (Colaborador) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesColab}" 
+                        <h:dataTable  value="#{pTDMB.participacoesColabPTDAvaliacao}" 
                                       var="participacaoPesquisaExtensaoColab" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -1093,13 +1091,13 @@
                     <br/>
                     <!-- Mostrar irregularidades -->
                     <center>
-                        <div id="irregularidades" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.irregularidades)}">
+                        <div id="irregularidades" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.irregularidadesPTDEdicao)}">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoIrregularidade"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.irregularidades}" 
+                                <h:dataTable  value="#{pTDMB.irregularidadesPTDEdicao}" 
                                               var="irregularidade" 
                                               style="width: auto;"
                                               headerClass="text-center"

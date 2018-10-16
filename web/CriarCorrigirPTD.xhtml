@@ -88,7 +88,7 @@
                                          immediate="true"
                                          action="/NotificacoesDocente"/>
 
-                        <h:commandButton value="Descartar e sair" 
+                        <p:commandButton value="Descartar e sair" 
                                          action="#{pTDMB.cancelarPTD(pTDMB.ptd)}"
                                          styleClass="botaoVermelho"/>
 
@@ -111,7 +111,7 @@
                                          immediate="true"
                                          action="#{usuarioMB.realizarLogout()}"/>
 
-                        <h:commandButton value="Descartar e sair" 
+                        <p:commandButton value="Descartar e sair" 
                                          action="#{pTDMB.cancelarPTDEfetuandoLogout()}"
                                          styleClass="botaoVermelho"/>
 
@@ -1601,7 +1601,7 @@
 
                     <!-- Mostrar tabela atividades pesquisa e/ou extensão (Autor) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesAutor}" 
+                        <h:dataTable  value="#{pTDMB.participacoesAutorPTDEdicao}" 
                                       var="participacaoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -2048,7 +2048,7 @@
 
                     <!-- Mostrar tabela atividades pesquisa e/ou extensão (Colab) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesColab}" 
+                        <h:dataTable  value="#{pTDMB.participacoesColabPTDEdicao}" 
                                       var="participacaoPesquisaExtensaoColab" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -3856,7 +3856,7 @@
                                 </f:facet>
                                 <h:outputText value="#{erroAdministrativas}" 
                                               styleClass="text01"
-                                              style="font-size: large; color: #C92345;"/>
+                                              style="font-size: large; color: #C92345; width: 400px;"/>
                             </h:column>
                         </h:dataTable>
                         <h:dataTable  value="#{pTDMB.errosTabelaApoioEnsino}" 
@@ -3871,7 +3871,7 @@
                                 </f:facet>
                                 <h:outputText value="#{erroApoioEnsino}" 
                                               styleClass="text01"
-                                              style="font-size: large; color: #C92345;"/>
+                                              style="font-size: large; color: #C92345; width: 400px;"/>
                             </h:column>
                         </h:dataTable>
                         <h:dataTable  value="#{pTDMB.errosTabelaAtividadesASeremPropostas}" 
@@ -3886,7 +3886,7 @@
                                 </f:facet>
                                 <h:outputText value="#{erroAtividadesASeremPropostas}" 
                                               styleClass="text01"
-                                              style="font-size: large; color: #C92345;"/>
+                                              style="font-size: large; color: #C92345; width: 400px;"/>
                             </h:column>
                         </h:dataTable>
                         <h:dataTable  value="#{pTDMB.errosTabelaAula}" 
@@ -3901,7 +3901,7 @@
                                 </f:facet>
                                 <h:outputText value="#{erroAulas}" 
                                               styleClass="text01"
-                                              style="font-size: large; color: #C92345;"/>
+                                              style="font-size: large; color: #C92345; width: 400px;"/>
                             </h:column>
                         </h:dataTable>
                         <h:dataTable  value="#{pTDMB.errosTabelaManuEnsino}" 
@@ -3916,7 +3916,7 @@
                                 </f:facet>
                                 <h:outputText value="#{erroManuEnsino}" 
                                               styleClass="text01"
-                                              style="font-size: large; color: #C92345;"/>
+                                              style="font-size: large; color: #C92345; width: 400px;"/>
                             </h:column>
                         </h:dataTable>
                         <h:dataTable  value="#{pTDMB.errosTabelaOutrasAtividades}" 
@@ -3931,7 +3931,7 @@
                                 </f:facet>
                                 <h:outputText value="#{erroOutrasAtividades}" 
                                               styleClass="text01"
-                                              style="font-size: large; color: #C92345;"/>
+                                              style="font-size: large; color: #C92345; width: 400px;"/>
                             </h:column>
                         </h:dataTable>
                         <h:dataTable  value="#{pTDMB.errosTabelaPesquisaExtensaoAutor}" 
@@ -3946,7 +3946,7 @@
                                 </f:facet>
                                 <h:outputText value="#{erroPesquisaExtensaoAutor}" 
                                               styleClass="text01"
-                                              style="font-size: large; color: #C92345;"/>
+                                              style="font-size: large; color: #C92345; width: 400px;"/>
                             </h:column>
                         </h:dataTable>
                         <h:dataTable  value="#{pTDMB.errosTabelaPesquisaExtensaoColaborador}" 
@@ -3961,7 +3961,7 @@
                                 </f:facet>
                                 <h:outputText value="#{erroPesquisaExtensao}" 
                                               styleClass="text01"
-                                              style="font-size: large; color: #C92345;"/>
+                                              style="font-size: large; color: #C92345; width: 400px;"/>
                             </h:column>
                         </h:dataTable>
                         <br/>
@@ -3986,7 +3986,7 @@
                         <h:outputText value="Irregularidades:" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
-                        <h:dataTable  value="#{pTDMB.irregularidades}" 
+                        <h:dataTable  value="#{pTDMB.irregularidadesPTDEdicao}" 
                                       var="irregularidade" 
                                       style="width: auto;"
                                       headerClass="text-center"
@@ -3998,7 +3998,7 @@
                                 </f:facet>
                                 <h:outputText value="#{irregularidade}" 
                                               styleClass="text01"
-                                              style="font-size: small; color: #E0911C;"/>
+                                              style="font-size: small; color: #E0911C; width: 400px;"/>
                             </h:column>
                         </h:dataTable>
                         <br/>
@@ -4020,7 +4020,7 @@
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                         <br/>
-                        <h:dataTable  value="#{pTDMB.irregularidades}" 
+                        <h:dataTable  value="#{pTDMB.irregularidadesPTDEdicao}" 
                                       var="irregularidade" 
                                       style="width: auto;"
                                       headerClass="text-center"
@@ -4032,7 +4032,7 @@
                                 </f:facet>
                                 <h:outputText value="#{irregularidade}" 
                                               styleClass="text01"
-                                              style="font-size: small; color: #E0911C;"/>
+                                              style="font-size: small; color: #E0911C; width: 400px;"/>
                             </h:column>
                         </h:dataTable>
                         <p:commandButton styleClass="botaoAzul" 
@@ -4060,7 +4060,7 @@
 
                         <p:commandButton styleClass="botaoAzul" 
                                          value="Corrigir"
-                                         action="#{pTDMB.submeterPTD()}"/>
+                                         ajax="false"/>
 
                     </p:dialog>
 
@@ -4154,13 +4154,13 @@
                     <br/>
                     <!-- Mostrar irregularidades -->
                     <center>
-                        <div id="irregularidades" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.irregularidades)}">
+                        <div id="irregularidades" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.irregularidadesPTDEdicao)}">
                             <h:panelGrid columns="2">
                                 <h:panelGrid columns="1">
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoIrregularidade"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.irregularidades}" 
+                                <h:dataTable  value="#{pTDMB.irregularidadesPTDEdicao}" 
                                               var="irregularidade" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -4208,7 +4208,7 @@
                                          immediate="true"
                                          action="/NotificacoesDocente"/>
 
-                        <h:commandButton value="Sair" 
+                        <p:commandButton value="Sair" 
                                          action="#{pTDMB.cancelarPTD(pTDMB.ptd)}"
                                          styleClass="botaoVermelho"/>
 

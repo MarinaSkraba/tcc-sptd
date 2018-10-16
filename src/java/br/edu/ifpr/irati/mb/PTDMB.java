@@ -59,8 +59,10 @@ public class PTDMB {
     private List<PTD> ptdsReprovados;
     private List<PTD> ptdsEmEdicao;
     private List<PTD> ptdsAprovados;
-    private List<Participacao> participacoesAutor;
-    private List<Participacao> participacoesColab;
+    private List<Participacao> participacoesAutorPTDEdicao;
+    private List<Participacao> participacoesColabPTDEdicao;
+    private List<Participacao> participacoesAutorPTDAvaliacao;
+    private List<Participacao> participacoesColabPTDAvaliacao;
     private double cargaHorariaTotalAdministracoes;
     private double cargaHorariaTotalApoios;
     private double cargaHorariaTotalAtividadesASeremPropostas;
@@ -79,7 +81,8 @@ public class PTDMB {
     private List<String> errosTabelaAdministrativas;
     private List<String> errosTabelaOutrasAtividades;
     private List<String> errosTabelaAtividadesASeremPropostas;
-    private List<String> irregularidades;
+    private List<String> irregularidadesPTDEdicao;
+    private List<String> irregularidadesPTDAvaliacao;
 
     public PTDMB() {
 
@@ -90,8 +93,8 @@ public class PTDMB {
         ptdsReprovados = new ArrayList<>();
         ptdsEmEdicao = new ArrayList();
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
-        participacoesAutor = new ArrayList<>();
-        participacoesColab = new ArrayList<>();
+        participacoesAutorPTDEdicao = new ArrayList<>();
+        participacoesColabPTDEdicao = new ArrayList<>();
         this.estadoCargaHorariaPTD = "";
         errosTabelaAula = new ArrayList<>();
         errosTabelaManuEnsino = new ArrayList<>();
@@ -101,18 +104,31 @@ public class PTDMB {
         errosTabelaAdministrativas = new ArrayList<>();
         errosTabelaOutrasAtividades = new ArrayList<>();
         errosTabelaAtividadesASeremPropostas = new ArrayList<>();
-        irregularidades = new ArrayList<>();
+        irregularidadesPTDEdicao = new ArrayList<>();
+        irregularidadesPTDAvaliacao = new ArrayList<>();
 
     }
 
-    public void atualizarListasParticipacoes() {
-        participacoesAutor = new ArrayList<>();
-        participacoesColab = new ArrayList<>();
+    public void atualizarListasParticipacoesPTDEdicao() {
+        participacoesAutorPTDEdicao = new ArrayList<>();
+        participacoesColabPTDEdicao = new ArrayList<>();
         for (Participacao part : ptd.getParticipacoes()) {
             if (part.getRotulo().equalsIgnoreCase("Autor")) {
-                participacoesAutor.add(part);
+                participacoesAutorPTDEdicao.add(part);
             } else {
-                participacoesColab.add(part);
+                participacoesColabPTDEdicao.add(part);
+            }
+        }
+    }
+
+    public void atualizarListasParticipacoesPTDAvaliacao() {
+        setParticipacoesAutorPTDAvaliacao(new ArrayList<>());
+        setParticipacoesColabPTDAvaliacao(new ArrayList<>());
+        for (Participacao part : ptdEmAvaliacao.getParticipacoes()) {
+            if (part.getRotulo().equalsIgnoreCase("Autor")) {
+                participacoesAutorPTDAvaliacao.add(part);
+            } else {
+                participacoesColabPTDAvaliacao.add(part);
             }
         }
     }
@@ -196,7 +212,7 @@ public class PTDMB {
         errosTabelaOutrasAtividades = new ArrayList<>();
         errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
         errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
-        irregularidades = new ArrayList<>();
+        irregularidadesPTDEdicao = new ArrayList<>();
         cargaHorariaTotalAdministracoes = 0.0;
         cargaHorariaTotalApoios = 0.0;
         cargaHorariaTotalAtividadesASeremPropostas = 0.0;
@@ -212,7 +228,7 @@ public class PTDMB {
         ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados(idUsuario);
         return ptdsReprovados;
     }
-    
+
     public List<PTD> atualizarListaPTDsAprovados(int idUsuario) {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(idUsuario);
@@ -221,7 +237,7 @@ public class PTDMB {
 
     public void realizarConferencias() {
         verificarErros();
-        verificarCargaHorariaPTD();
+        verificarCargaHorariaPTDEdicao();
     }
 
     public String abrirCriarCorrigirPTDEmBranco(Usuario usuario) {
@@ -291,7 +307,7 @@ public class PTDMB {
             errosTabelaOutrasAtividades = new ArrayList<>();
             errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
             errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
-            irregularidades = new ArrayList<>();
+            irregularidadesPTDEdicao = new ArrayList<>();
             return "/CriarCorrigirPTD?faces-redirect=true";
         } else {
 
@@ -337,7 +353,8 @@ public class PTDMB {
         Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
 
-        for (Administracao adm : ptdACancelar.getAdministrativas()) {
+        List<Administracao> auxAdm = new ArrayList<>(ptdACancelar.getAdministrativas());
+        for (Administracao adm : auxAdm) {
 
             List<Horario> aux = new ArrayList<>(adm.getHorariosAdministracao());
             for (Horario h : aux) {
@@ -351,8 +368,8 @@ public class PTDMB {
             tipoAdministracaoDAO.excluir(adm.getTipoAdministracao());
 
         }
-
-        for (Apoio apoio : ptdACancelar.getApoios()) {
+        List<Apoio> auxApoio = new ArrayList<>(ptdACancelar.getApoios());
+        for (Apoio apoio : auxApoio) {
             List<Horario> aux = new ArrayList<>(apoio.getHorariosApoio());
             for (Horario h : aux) {
                 apoio.getHorariosApoio().remove(h);
@@ -364,21 +381,20 @@ public class PTDMB {
             apoioDAO.excluir(apoio);
             tipoApoioDAO.excluir(apoio.getTipoApoio());
         }
-
-        for (AtividadeASerProposta aASP : ptdACancelar.getAtividadesASeremPropostas()) {
+        List<AtividadeASerProposta> auxAASP = new ArrayList<>(ptdACancelar.getAtividadesASeremPropostas());
+        for (AtividadeASerProposta aASP : auxAASP) {
             List<Horario> aux = new ArrayList<>(aASP.getHorariosAtividadesASerProposta());
             for (Horario h : aux) {
                 aASP.getHorariosAtividadesASerProposta().remove(h);
                 aASPropostaDAO.alterar(aASP);
                 horarioDAO.excluir(h);
             }
-
             ptdACancelar.getAtividadesASeremPropostas().remove(aASP);
             ptdDAO.alterar(ptdACancelar);
             aASPropostaDAO.excluir(aASP);
         }
-
-        for (Aula aula : ptdACancelar.getAulas()) {
+        List<Aula> auxAula = new ArrayList<>(ptdACancelar.getAulas());
+        for (Aula aula : auxAula) {
             List<Horario> aux = new ArrayList<>(aula.getHorariosAula());
             for (Horario h : aux) {
                 aula.getHorariosAula().remove(h);
@@ -390,8 +406,8 @@ public class PTDMB {
             aulaDAO.excluir(aula);
             tipoOfertaDAO.excluir(aula.getTipoOferta());
         }
-
-        for (ManutencaoEnsino mEnsino : ptdACancelar.getManutencoesEnsino()) {
+        List<ManutencaoEnsino> auxManuEnsino = new ArrayList<>(ptdACancelar.getManutencoesEnsino());
+        for (ManutencaoEnsino mEnsino : auxManuEnsino) {
             List<Horario> aux = new ArrayList<>(mEnsino.getHorariosManutecao());
             for (Horario h : aux) {
                 mEnsino.getHorariosManutecao().remove(h);
@@ -403,8 +419,8 @@ public class PTDMB {
             manutencaoDAO.excluir(mEnsino);
             tipoManutencaoDAO.excluir(mEnsino.getTipoManutencao());
         }
-
-        for (OutroTipoAtividade oTA : ptdACancelar.getOutrosTiposAtividades()) {
+        List<OutroTipoAtividade> auxOTA = new ArrayList<>(ptdACancelar.getOutrosTiposAtividades());
+        for (OutroTipoAtividade oTA : auxOTA) {
             List<Horario> aux = new ArrayList<>(oTA.getHorariosOutroTipoAtividade());
             for (Horario h : aux) {
                 oTA.getHorariosOutroTipoAtividade().remove(h);
@@ -416,15 +432,15 @@ public class PTDMB {
             ptdDAO.alterar(ptdACancelar);
             oTAtividadeDAO.excluir(oTA);
         }
-
-        for (Participacao p : ptdACancelar.getParticipacoes()) {
+        List<Participacao> auxPart = new ArrayList<>(ptdACancelar.getParticipacoes());
+        for (Participacao p : auxPart) {
 
             ptdACancelar.getParticipacoes().remove(p);
             ptdDAO.alterar(ptdACancelar);
             participacaoDAO.excluir(p);
 
         }
-        
+
         ptdDAO.excluir(ptdACancelar);
 
         return "NotificacoesDocente";
@@ -448,7 +464,7 @@ public class PTDMB {
     public String verificarPossibilidadeSubmissao() {
 
         String nomeCaixaDialogo = "";
-        atualizarListasParticipacoes();
+        atualizarListasParticipacoesPTDEdicao();
 
         // Conferência da existência de erros
         realizarConferencias();
@@ -471,8 +487,8 @@ public class PTDMB {
             nomeCaixaDialogo = "avisoErrosDialog";
         } else if (errosTabelaPesquisaExtensaoColaborador.isEmpty() != true) {
             nomeCaixaDialogo = "avisoErrosDialog";
-        } else if (irregularidades.isEmpty() != true) {
-            for (String irregularidade : irregularidades) {
+        } else if (irregularidadesPTDEdicao.isEmpty() != true) {
+            for (String irregularidade : irregularidadesPTDEdicao) {
                 if ((irregularidade.equals("A carga horária é superior "
                         + "à 4 horas em Apoio ao Ensino!") | irregularidade.equals("A carga horária é inferior à 4 horas em Apoio ao Ensino!")) && ptd.getCampoJustificativaApoioEnsino().isEmpty() != true) {
                     nomeCaixaDialogo = "avisoIrregularidadeDialog";
@@ -832,7 +848,7 @@ public class PTDMB {
         }
     }
 
-    public void verificarCargaHorariaPTD() {
+    public void verificarCargaHorariaPTDEdicao() {
 
         atualizarPTDNoBanco();
         if (ptd.getIdPTD() != 0) {
@@ -845,7 +861,7 @@ public class PTDMB {
             ptdDAOGenerico.alterar(ptdEmAvaliacao);
         }
 
-        irregularidades = new ArrayList<>();
+        irregularidadesPTDEdicao = new ArrayList<>();
         cargaHorariaTotalAdministracoes = 0;
         cargaHorariaTotalApoios = 0;
         cargaHorariaTotalAtividadesASeremPropostas = 0;
@@ -872,12 +888,12 @@ public class PTDMB {
                 if ((getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 16) {
                     if (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab() > 16) {
 
-                        getIrregularidades().add("A carga horária de projetos de pesquisa e/ou extensão"
+                        getIrregularidadesPTDEdicao().add("A carga horária de projetos de pesquisa e/ou extensão"
                                 + " como colaborador e autor é superior à 16 horas!");
 
                     } else if (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab() < 16 && getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab() > 1) {
 
-                        getIrregularidades().add("A carga horária de projetos de pesquisa e/ou extensão"
+                        getIrregularidadesPTDEdicao().add("A carga horária de projetos de pesquisa e/ou extensão"
                                 + " como colaborador e autor é inferior à 16 horas!");
 
                     }
@@ -891,9 +907,9 @@ public class PTDMB {
             if (getCargaHorariaTotalApoios() != 4) {
 
                 if (getCargaHorariaTotalApoios() > 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 0) {
-                    getIrregularidades().add("A carga horária é superior à 4 horas em Apoio ao Ensino!");
+                    getIrregularidadesPTDEdicao().add("A carga horária é superior à 4 horas em Apoio ao Ensino!");
                 } else if (getCargaHorariaTotalApoios() < 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutor() + getCargaHorariaTotalProjetosPesquisaExtensaoColab()) != 0) {
-                    getIrregularidades().add("A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
+                    getIrregularidadesPTDEdicao().add("A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
                 }
 
             }
@@ -909,18 +925,18 @@ public class PTDMB {
 
                 if (getCargaHorariaTotalAulas() < 8) {
 
-                    getIrregularidades().add("A carga horária é inferior à 8 horas em Aula!");
+                    getIrregularidadesPTDEdicao().add("A carga horária é inferior à 8 horas em Aula!");
 
                 } else if (getCargaHorariaTotalAulas() > 12) {
 
-                    getIrregularidades().add("A carga horária é superior à 12 horas em Aula!");
+                    getIrregularidadesPTDEdicao().add("A carga horária é superior à 12 horas em Aula!");
 
                 }
 
             } else if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
                 if (getCargaHorariaTotalAulas() < 12) {
 
-                    getIrregularidades().add("A carga horária é inferior à 12 horas em Aula!");
+                    getIrregularidadesPTDEdicao().add("A carga horária é inferior à 12 horas em Aula!");
 
                 } else if (getCargaHorariaTotalAulas() > 16) {
 
@@ -931,14 +947,14 @@ public class PTDMB {
 
                         if ((getCargaHorariaTotalAulas() - excessoEsperadoAula) > 16) {
 
-                            getIrregularidades().add("Mesmo descontando a carga horária redistribuída de projeto de pesquisa"
+                            getIrregularidadesPTDEdicao().add("Mesmo descontando a carga horária redistribuída de projeto de pesquisa"
                                     + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
                                     + "superior à 16 horas");
 
                         }
 
                     } else {
-                        getIrregularidades().add("A carga horária é superior à 16 horas em Aula!");
+                        getIrregularidadesPTDEdicao().add("A carga horária é superior à 16 horas em Aula!");
                     }
 
                     if (getCargaHorariaTotalAulas() >= 12 && getCargaHorariaTotalAulas() <= 16) {
@@ -949,7 +965,7 @@ public class PTDMB {
 
                             if ((getCargaHorariaTotalAulas() - excessoEsperadoAula) < 12) {
 
-                                getIrregularidades().add("Descontando a carga horária redistribuída de projeto de pesquisa"
+                                getIrregularidadesPTDEdicao().add("Descontando a carga horária redistribuída de projeto de pesquisa"
                                         + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
                                         + "inferior à 12 horas");
 
@@ -967,12 +983,12 @@ public class PTDMB {
             if (getCargaHorariaTotalManutencoesEnsino() != 4) {
                 if (getCargaHorariaTotalManutencoesEnsino() < 4) {
 
-                    getIrregularidades().add("A carga horária é inferior"
+                    getIrregularidadesPTDEdicao().add("A carga horária é inferior"
                             + " à 4 horas em Manutenção ao Ensino");
 
                 } else if (getCargaHorariaTotalManutencoesEnsino() > 4) {
 
-                    getIrregularidades().add("A carga horária é superior "
+                    getIrregularidadesPTDEdicao().add("A carga horária é superior "
                             + "à 4 horas em Manutenção ao Ensino!");
 
                 }
@@ -986,11 +1002,11 @@ public class PTDMB {
             if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("20h")) {
                 if ((cargaHorariaTotalApoios + cargaHorariaTotalAulas + cargaHorariaTotalManutencoesEnsino) < 8) {
 
-                    irregularidades.add("A carga horária dedicada a Atividades de Ensino(apoio,manutenção e aulas) é inferior à 8 horas");
+                    irregularidadesPTDEdicao.add("A carga horária dedicada a Atividades de Ensino(apoio,manutenção e aulas) é inferior à 8 horas");
 
                 } else if ((cargaHorariaTotalApoios + cargaHorariaTotalAulas + cargaHorariaTotalManutencoesEnsino) > 20) {
 
-                    irregularidades.add("A carga horária dedicada a Atividades de Ensino(apoio,manutenção e aulas) é superior à 12 horas");
+                    irregularidadesPTDEdicao.add("A carga horária dedicada a Atividades de Ensino(apoio,manutenção e aulas) é superior à 12 horas");
 
                 }
             }
@@ -998,11 +1014,11 @@ public class PTDMB {
 
                 if ((cargaHorariaTotalApoios + cargaHorariaTotalAulas + cargaHorariaTotalManutencoesEnsino) < 12) {
 
-                    irregularidades.add("A carga horária dedicada a Atividades de Ensino(apoio,manutenção e aulas) é inferior à 12 horas");
+                    irregularidadesPTDEdicao.add("A carga horária dedicada a Atividades de Ensino(apoio,manutenção e aulas) é inferior à 12 horas");
 
                 } else if ((cargaHorariaTotalApoios + cargaHorariaTotalAulas + cargaHorariaTotalManutencoesEnsino) > 24) {
 
-                    irregularidades.add("A carga horária dedicada a Atividades de Ensino(apoio,manutenção e aulas) é superior à 24 horas");
+                    irregularidadesPTDEdicao.add("A carga horária dedicada a Atividades de Ensino(apoio,manutenção e aulas) é superior à 24 horas");
 
                 }
             }
@@ -1031,38 +1047,41 @@ public class PTDMB {
 
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino(PTD ptd) {
         String resposta = "Correto";
-        verificarCargaHorariaPTD();
-        if (ptd.getCampoJustificativaAdministracao().isEmpty() != true) {
-            resposta = "Incorreto";
+        verificarCargaHorariaPTDEdicao();
+        if (!irregularidadesPTDAvaliacao.isEmpty()) {
+            resposta = "Irregular";
         }
-        if (ptd.getCampoJustificativaApoioEnsino().isEmpty() != true) {
-            resposta = "Incorreto";
-        }
-        if (ptd.getCampoJustificativaAtividadeEnsino().isEmpty() != true) {
-            resposta = "Incorreto";
-        }
-        if (ptd.getCampoJustificativaManutencaoEnsino().isEmpty() != true) {
-            resposta = "Incorreto";
-        }
-        if (ptd.getCampoJustificativaOutrasAtividades().isEmpty() != true) {
-            resposta = "Incorreto";
-        }
-        if (ptd.getCampoJustificativaProjetoEnsino().isEmpty() != true) {
-            resposta = "Incorreto";
-        }
-        if (ptd.getCampoJustificativaProjetoPesquisaExtensao().isEmpty() != true) {
-            resposta = "Incorreto";
-        }
-        if (ptd.getCampoJustificativaSeremPropostas().isEmpty() != true) {
-            resposta = "Incorreto";
-        }
+//        if (ptd.getCampoJustificativaAdministracao().isEmpty() != true) {
+//            resposta = "Incorreto";
+//        }
+//        if (ptd.getCampoJustificativaApoioEnsino().isEmpty() != true) {
+//            resposta = "Incorreto";
+//        }
+//        if (ptd.getCampoJustificativaAtividadeEnsino().isEmpty() != true) {
+//            resposta = "Incorreto";
+//        }
+//        if (ptd.getCampoJustificativaManutencaoEnsino().isEmpty() != true) {
+//            resposta = "Incorreto";
+//        }
+//        if (ptd.getCampoJustificativaOutrasAtividades().isEmpty() != true) {
+//            resposta = "Incorreto";
+//        }
+//        if (ptd.getCampoJustificativaProjetoEnsino().isEmpty() != true) {
+//            resposta = "Incorreto";
+//        }
+//        if (ptd.getCampoJustificativaProjetoPesquisaExtensao().isEmpty() != true) {
+//            resposta = "Incorreto";
+//        }
+//        if (ptd.getCampoJustificativaSeremPropostas().isEmpty() != true) {
+//            resposta = "Incorreto";
+//        }
 
         return resposta;
     }
 
     public String abrirPTDEmAvaliacao(PTD ptd) {
         setPtdEmAvaliacao(ptd);
-        verificarCargaHorariaPTD();
+        verificarCargaHorariaPTDEdicao();
         return "PTDEmAvaliacao";
     }
 
@@ -1342,33 +1361,33 @@ public class PTDMB {
     }
 
     /**
-     * @return the participacoesAutor
+     * @return the participacoesAutorPTDEdicao
      */
-    public List<Participacao> getParticipacoesAutor() {
-        atualizarListasParticipacoes();
-        return participacoesAutor;
+    public List<Participacao> getParticipacoesAutorPTDEdicao() {
+        atualizarListasParticipacoesPTDEdicao();
+        return participacoesAutorPTDEdicao;
     }
 
     /**
-     * @param participacoesAutor the participacoesAutor to set
+     * @param participacoesAutorPTDEdicao the participacoesAutorPTDEdicao to set
      */
-    public void setParticipacoesAutor(List<Participacao> participacoesAutor) {
-        this.participacoesAutor = participacoesAutor;
+    public void setParticipacoesAutorPTDEdicao(List<Participacao> participacoesAutorPTDEdicao) {
+        this.participacoesAutorPTDEdicao = participacoesAutorPTDEdicao;
     }
 
     /**
-     * @return the participacoesColab
+     * @return the participacoesColabPTDEdicao
      */
-    public List<Participacao> getParticipacoesColab() {
-        atualizarListasParticipacoes();
-        return participacoesColab;
+    public List<Participacao> getParticipacoesColabPTDEdicao() {
+        atualizarListasParticipacoesPTDEdicao();
+        return participacoesColabPTDEdicao;
     }
 
     /**
-     * @param participacoesColab the participacoesColab to set
+     * @param participacoesColabPTDEdicao the participacoesColabPTDEdicao to set
      */
-    public void setParticipacoesColab(List<Participacao> participacoesColab) {
-        this.participacoesColab = participacoesColab;
+    public void setParticipacoesColabPTDEdicao(List<Participacao> participacoesColabPTDEdicao) {
+        this.participacoesColabPTDEdicao = participacoesColabPTDEdicao;
     }
 
     /**
@@ -1400,16 +1419,63 @@ public class PTDMB {
     }
 
     /**
-     * @return the irregularidades
+     * @return the irregularidadesPTDEdicao
      */
-    public List<String> getIrregularidades() {
-        return irregularidades;
+    public List<String> getIrregularidadesPTDEdicao() {
+        return irregularidadesPTDEdicao;
     }
 
     /**
-     * @param irregularidades the irregularidades to set
+     * @param irregularidadesPTDEdicao the irregularidadesPTDEdicao to set
      */
-    public void setIrregularidades(List<String> irregularidades) {
-        this.irregularidades = irregularidades;
+    public void setIrregularidadesPTDEdicao(List<String> irregularidadesPTDEdicao) {
+        this.irregularidadesPTDEdicao = irregularidadesPTDEdicao;
     }
+
+    /**
+     * @return the participacoesAutorPTDAvaliacao
+     */
+    public List<Participacao> getParticipacoesAutorPTDAvaliacao() {
+        atualizarListasParticipacoesPTDAvaliacao();
+        return participacoesAutorPTDAvaliacao;
+    }
+
+    /**
+     * @param participacoesAutorPTDAvaliacao the participacoesAutorPTDAvaliacao
+     * to set
+     */
+    public void setParticipacoesAutorPTDAvaliacao(List<Participacao> participacoesAutorPTDAvaliacao) {
+        this.participacoesAutorPTDAvaliacao = participacoesAutorPTDAvaliacao;
+    }
+
+    /**
+     * @return the participacoesColabPTDAvaliacao
+     */
+    public List<Participacao> getParticipacoesColabPTDAvaliacao() {
+        atualizarListasParticipacoesPTDAvaliacao();
+        return participacoesColabPTDAvaliacao;
+    }
+
+    /**
+     * @param participacoesColabPTDAvaliacao the participacoesColabPTDAvaliacao
+     * to set
+     */
+    public void setParticipacoesColabPTDAvaliacao(List<Participacao> participacoesColabPTDAvaliacao) {
+        this.participacoesColabPTDAvaliacao = participacoesColabPTDAvaliacao;
+    }
+
+    /**
+     * @return the irregularidadesPTDAvaliacao
+     */
+    public List<String> getIrregularidadesPTDAvaliacao() {
+        return irregularidadesPTDAvaliacao;
+    }
+
+    /**
+     * @param irregularidadesPTDAvaliacao the irregularidadesPTDAvaliacao to set
+     */
+    public void setIrregularidadesPTDAvaliacao(List<String> irregularidadesPTDAvaliacao) {
+        this.irregularidadesPTDAvaliacao = irregularidadesPTDAvaliacao;
+    }
+
 }
