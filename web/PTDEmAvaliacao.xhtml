@@ -1123,9 +1123,41 @@
                         <br/>
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptdEmAvaliacao.campoObservacoesDiretorEnsino}"/>
                         <br/>
-                        <h:commandButton value="Enviar"
-                                         action="#{pTDMB.reprovarPTD()}"
+                        <p:commandButton value="Enviar"
+                                         onclick="PF('#{pTDMB.verificarPossibilidadeReprovacao()}').show();"
                                          styleClass="botaoAzul"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de aviso de falha da reprovação -->
+                    <p:dialog header="Observações são obrigatórias" 
+                              widgetVar="avisoFalhaReprovacaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Assim que reprovado, o documento será encaminhado àquele que o regidigiu. Dessa forma as suas observações são muito importantes! " 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="OK"
+                                         ajax="false"/>
+
+                    </p:dialog>
+
+                    <!-- Caixa de aviso de sucesso de reprovação -->
+                    <p:dialog header="Operação realizada!" 
+                              widgetVar="avisoSucessoReprovacaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="OK"
+                                         action="#{pTDMB.reprovarPTD()}"/>
 
                     </p:dialog>
 

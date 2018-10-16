@@ -41,10 +41,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.swing.text.Document;
 
 @ManagedBean
@@ -165,14 +167,14 @@ public class PTDMB {
         getPtd().setDiretorEnsino(null);
         getPtd().setEstadoPTD("EDICAO");
         ptdDAOGenerico.salvar(getPtd());
-        
+
         limparVariáveis();
 
         if (!ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()).isEmpty()) {
             setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()).get(0));
         }
 
-        return "/CriarCorrigirPTD";
+        return "/CriarCorrigirPTD?faces-redirect=true";
     }
 
     public String abrirCriarCorrigirPTDContinuarEdicao(Usuario usuario) {
@@ -180,7 +182,9 @@ public class PTDMB {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario());
         setPtd(ptdEmEdicao.get(0));
-        return "/CriarCorrigirPTD";
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        ptdDAOGenerico.alterar(ptd);
+        return "/CriarCorrigirPTD?faces-redirect=true";
 
     }
 
@@ -193,7 +197,7 @@ public class PTDMB {
             ptdDAOGenerico.alterar(ptdE);
         }
         List<PTD> ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(usuario.getIdUsuario());
-        
+
         limparVariáveis();
 
         if (ptdsAprovados.isEmpty()
@@ -213,7 +217,7 @@ public class PTDMB {
             errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
             errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
             irregularidades = new ArrayList<>();
-            return "/CriarCorrigirPTD";
+            return "/CriarCorrigirPTD?faces-redirect=true";
         } else {
 
             return "/NotificacoesDocente";
@@ -228,9 +232,9 @@ public class PTDMB {
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
         }
-        
+
         limparVariáveis();
-        
+
         ptdReprovado.setEstadoPTD("EDICAO");
         ptdReprovado.setIdPTD(0);
         ptdDAOGenerico.salvar(ptdReprovado);
@@ -681,6 +685,16 @@ public class PTDMB {
 
     public void verificarCargaHorariaPTD() {
 
+        if (ptd.getIdPTD() != 0) {
+            Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+            ptd.setDiretorEnsino(null);
+            ptdDAOGenerico.alterar(ptd);
+        } else if (ptdEmAvaliacao.getIdPTD() != 0){
+            Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+            ptdEmAvaliacao.setDiretorEnsino(null);
+            ptdDAOGenerico.alterar(ptdEmAvaliacao);
+        }
+
         irregularidades = new ArrayList<>();
         cargaHorariaTotalAdministracoes = 0;
         cargaHorariaTotalApoios = 0;
@@ -691,8 +705,7 @@ public class PTDMB {
         cargaHorariaTotalPTD = 0;
         cargaHorariaTotalProjetosPesquisaExtensaoAutor = 0;
         cargaHorariaTotalProjetosPesquisaExtensaoColab = 0;
-        
-        
+
         for (Administracao adm : getPtd().getAdministrativas()) {
             setCargaHorariaTotalAdministracoes(getCargaHorariaTotalAdministracoes() + adm.getCargaHorariaSemanalAdministracao());
         }
@@ -902,9 +915,24 @@ public class PTDMB {
         return "PTDEmAvaliacao";
     }
 
+    public String verificarPossibilidadeReprovacao() {
+        String nomeCaixaDeAviso = "";
+        if (ptdEmAvaliacao.getCampoObservacoesDiretorEnsino().equalsIgnoreCase("")) {
+
+            nomeCaixaDeAviso = "avisoFalhaReprovacaoDialog";
+
+        } else {
+
+            nomeCaixaDeAviso = "avisoSucessoReprovacaoDialog";
+
+        }
+        return nomeCaixaDeAviso;
+    }
+
     public String reprovarPTD() {
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
-        );
+
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+
         getPtdEmAvaliacao().setEstadoPTD("REPROVADO");
         getPtdEmAvaliacao().setDiretorEnsino(null);
         ptdDAOGenerico.alterar(getPtdEmAvaliacao());

@@ -83,7 +83,6 @@ public class UsuarioMB {
         usuario = usuarioDao.verificarUsuario(getUsuario().getEmail(), senhaSHA512);
         if (usuario.getIdUsuario() == 0) {
             setUsuarioLogado(new Usuario());
-            System.out.println("Chegou object");
             System.out.println("Acesso negado");
             return "/Login";
         } else {

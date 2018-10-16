@@ -133,7 +133,7 @@ public class HorarioMB {
             System.out.println(minTotal / 60);
             cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
         }
-        if (minTermino < minTermino) {
+        if (minTermino < minInicio) {
             minTotal = (60 - minInicio) + minTermino;
             cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
         }
@@ -210,7 +210,7 @@ public class HorarioMB {
                 minTotal = minTermino - minInicio;
                 cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
             }
-            if (minTermino < minTermino) {
+            if (minTermino < minInicio) {
                 minTotal = (60 - minInicio) + minTermino;
                 cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
             }
