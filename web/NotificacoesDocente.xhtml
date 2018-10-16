@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
         <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     </h:head>
-    <h:body style="background-image: url(img/fundo_notificacoes.png)">
+    <h:body styleClass="body">
 
         <!-- Barra de menu -->
         <div id="barraMenu">
@@ -109,17 +109,21 @@
                                       styleClass="text01" 
                                       style="margin: 0px 0px 0px 0px;"/>
                         <br/>
-                        <h:dataTable  value="#{pTDMB.ptdsReprovados}" 
+                        <h:dataTable  value="#{pTDMB.atualizarListaPTDsReprovados(usuarioMB.usuarioLogado.idUsuario)}" 
                                       var="ptdReprovado"
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
                                       footerClass="text-center">
+                            
                             <h:column>
                                 <f:facet name="header">
+                                    <h:outputText value="Observações do diretor" 
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </f:facet>
                                 <h:panelGrid columns="1" 
-                                             style="width:100%" >
+                                             style="width:100%; text-align: center;" >
                                     <h:outputText value="#{ptdReprovado.campoObservacoesDiretorEnsino}" 
                                                   styleClass="text01"
                                                   style="font-size: large; width: 90%;"/>
@@ -130,39 +134,11 @@
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </h:panelGrid>
                             </h:column>
+                            
                         </h:dataTable>
 
                     </div>
                     <br/>
-                    <div id="content" style="width: 50%; border-radius: 15px; border-top-style: solid; border-top-width: medium; border-top-color: #1785ad;">
-                        
-                        <h:outputText value="PTDs Aprovados" 
-                                      styleClass="text01" 
-                                      style="margin: 0px 0px 0px 0px;"/>
-                        <br/>
-                        <h:dataTable  value="#{pTDMB.ptdsAprovados}" 
-                                      var="ptdAprovado"
-                                      style="border-spacing: 0pt; width: 100%;"
-                                      headerClass="text-center"
-                                      footerClass="text-center">
-                            <h:column>
-                                <f:facet name="header">
-                                    <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
-                                </f:facet>
-                                <h:panelGrid columns="1" 
-                                             style="width:100%" >
-                                    <h:outputText value="#{ptdAprovado.campoObservacoesDiretorEnsino}" 
-                                                  styleClass="text01"
-                                                  style="font-size: large; width: 90%;"/>
-                                    <br/>
-                                    <p:commandButton styleClass="botaoAzul" 
-                                                     value="Imprimir"/>
-                                    <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
-                                </h:panelGrid>
-                            </h:column>
-                        </h:dataTable>
-
-                    </div>
                 </center>
             </h:form>
 

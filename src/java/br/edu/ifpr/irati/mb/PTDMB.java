@@ -68,10 +68,6 @@ public class PTDMB {
     private double cargaHorariaTotalProjetosPesquisaExtensaoAutor;
     private double cargaHorariaTotalProjetosPesquisaExtensaoColab;
     private double cargaHorariaTotalPTD;
-//    private boolean obrigatoriedadeJustificativaAula;
-//    private boolean obrigatoriedadeJustificativaApoio;
-//    private boolean obrigatoriedadeJustificativaManutencaoEnsino;
-//    private boolean obrigatoriedadeJustificativaPesquisaExtensao;
     private String estadoCargaHorariaPTD;
     private List<String> errosTabelaAula;
     private List<String> errosTabelaManuEnsino;
@@ -90,8 +86,6 @@ public class PTDMB {
         ptdEmAvaliacao = new PTD();
         ptdsEmAvaliacao = new ArrayList<>();
         ptdsReprovados = new ArrayList<>();
-//        ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados();
-//        ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados();
         ptdsEmEdicao = new ArrayList();
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         participacoesAutor = new ArrayList<>();
@@ -121,6 +115,32 @@ public class PTDMB {
         }
     }
 
+    public void limparVariáveis() {
+        errosTabelaAdministrativas = new ArrayList<>();
+        errosTabelaApoioEnsino = new ArrayList<>();
+        errosTabelaAtividadesASeremPropostas = new ArrayList<>();
+        errosTabelaAula = new ArrayList<>();
+        errosTabelaManuEnsino = new ArrayList<>();
+        errosTabelaOutrasAtividades = new ArrayList<>();
+        errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
+        errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
+        irregularidades = new ArrayList<>();
+        cargaHorariaTotalAdministracoes = 0.0;
+        cargaHorariaTotalApoios = 0.0;
+        cargaHorariaTotalAtividadesASeremPropostas = 0.0;
+        cargaHorariaTotalAulas = 0.0;
+        cargaHorariaTotalManutencoesEnsino = 0.0;
+        cargaHorariaTotalOutroTiposAtividade = 0.0;
+        cargaHorariaTotalProjetosPesquisaExtensaoAutor = 0.0;
+        cargaHorariaTotalProjetosPesquisaExtensaoColab = 0.0;
+    }
+
+    public List<PTD> atualizarListaPTDsReprovados(int idUsuario) {
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados(idUsuario);
+        return ptdsReprovados;
+    }
+
     public void realizarConferencias() {
         verificarErros();
         verificarCargaHorariaPTD();
@@ -145,6 +165,8 @@ public class PTDMB {
         getPtd().setDiretorEnsino(null);
         getPtd().setEstadoPTD("EDICAO");
         ptdDAOGenerico.salvar(getPtd());
+        
+        limparVariáveis();
 
         if (!ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()).isEmpty()) {
             setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()).get(0));
@@ -158,15 +180,6 @@ public class PTDMB {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         List<PTD> ptdEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario());
         setPtd(ptdEmEdicao.get(0));
-        errosTabelaAdministrativas = new ArrayList<>();
-        errosTabelaApoioEnsino = new ArrayList<>();
-        errosTabelaAtividadesASeremPropostas = new ArrayList<>();
-        errosTabelaAula = new ArrayList<>();
-        errosTabelaManuEnsino = new ArrayList<>();
-        errosTabelaOutrasAtividades = new ArrayList<>();
-        errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
-        errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
-        irregularidades = new ArrayList<>();
         return "/CriarCorrigirPTD";
 
     }
@@ -180,6 +193,8 @@ public class PTDMB {
             ptdDAOGenerico.alterar(ptdE);
         }
         List<PTD> ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(usuario.getIdUsuario());
+        
+        limparVariáveis();
 
         if (ptdsAprovados.isEmpty()
                 != true) {
@@ -213,19 +228,13 @@ public class PTDMB {
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
         }
+        
+        limparVariáveis();
+        
         ptdReprovado.setEstadoPTD("EDICAO");
         ptdReprovado.setIdPTD(0);
         ptdDAOGenerico.salvar(ptdReprovado);
         setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(ptdReprovado.getProfessor().getIdUsuario()).get(0));
-        errosTabelaAdministrativas = new ArrayList<>();
-        errosTabelaApoioEnsino = new ArrayList<>();
-        errosTabelaAtividadesASeremPropostas = new ArrayList<>();
-        errosTabelaAula = new ArrayList<>();
-        errosTabelaManuEnsino = new ArrayList<>();
-        errosTabelaOutrasAtividades = new ArrayList<>();
-        errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
-        errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
-        irregularidades = new ArrayList<>();
         return "/CriarCorrigirPTD";
     }
 
@@ -680,6 +689,10 @@ public class PTDMB {
         cargaHorariaTotalManutencoesEnsino = 0;
         cargaHorariaTotalOutroTiposAtividade = 0;
         cargaHorariaTotalPTD = 0;
+        cargaHorariaTotalProjetosPesquisaExtensaoAutor = 0;
+        cargaHorariaTotalProjetosPesquisaExtensaoColab = 0;
+        
+        
         for (Administracao adm : getPtd().getAdministrativas()) {
             setCargaHorariaTotalAdministracoes(getCargaHorariaTotalAdministracoes() + adm.getCargaHorariaSemanalAdministracao());
         }

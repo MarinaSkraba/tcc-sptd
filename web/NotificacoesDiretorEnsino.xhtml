@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
         <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     </h:head>
-    <h:body style="background-image: url(img/fundo_notificacoes.png)">
+    <h:body styleClass="body">
 
         <!-- Barra de menu -->
         <div id="barraMenu">
@@ -102,8 +102,9 @@
 
                         <h:column>
                             <f:facet name="header">
-                                <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                                <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
                             </f:facet>
+
                             <div id="linha">
                                 <h:panelGrid columns="3" 
                                              style="width:100%;" >
@@ -112,10 +113,11 @@
                                                    title="Ver PTD" 
                                                    ajax="false" 
                                                    immediate="true"
-                                                   style="width: 200px;">
+                                                   style="width: 200px;"
+                                                   styleClass="link">
                                         <h:outputText value="#{ptdEsperando.professor.nomeCompleto}"  
                                                       styleClass="text01"
-                                                      style="font-size: large;"/>
+                                                      style="color: #1AB5D9; font-size: large;"/>
                                     </p:commandLink>
                                     <h:outputText value="#{pTDMB.verificacaoIrregularidadesNotificacoesDiretorEnsino(ptdEsperando)}"  
                                                   styleClass="text01"
@@ -129,7 +131,7 @@
 
                                 </h:panelGrid>
                             </div>
-                            <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.2; margin: 0; float: bottom;"/>
+                            <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
 
                         </h:column>
 
