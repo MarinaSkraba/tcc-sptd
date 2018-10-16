@@ -42,7 +42,8 @@ public class AtividadeASerPropostaMB {
 
         Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
         atividadeASerPropostaDAO.salvar(atividadeASerProposta);
-        atividadeASerProposta = atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class).get(atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class).size() - 1);
+        List<AtividadeASerProposta> aSerPropostas = atividadeASerPropostaDAO.buscarTodos(AtividadeASerProposta.class);
+        atividadeASerProposta = aSerPropostas.get(aSerPropostas.size() - 1);
         ptd.getAtividadesASeremPropostas().add(atividadeASerProposta);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);

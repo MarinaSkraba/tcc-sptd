@@ -61,7 +61,8 @@ public class AulaMB {
             aula.setCargaHorariaTotal(0);
         }
         aulaDAO.salvar(aula);
-        aula = aulaDAO.buscarTodos(Aula.class).get(aulaDAO.buscarTodos(Aula.class).size() - 1);
+        List<Aula> as = aulaDAO.buscarTodos(Aula.class);
+        aula = as.get(as.size() - 1);
         ptd.getAulas().add(aula);
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);

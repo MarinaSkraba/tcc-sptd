@@ -127,15 +127,14 @@ public class HorarioMB {
         double horaInicio = horarioAtividade.getHoraInicio().getHours();
         double horaTermino = horarioAtividade.getHoraTermino().getHours();
 
-        cargaHoraNovoHorario = horaTermino - horaInicio;
+        cargaHoraNovoHorario = cargaHoraNovoHorario + (horaTermino - horaInicio);
         if (minTermino > minInicio) {
             minTotal = minTermino - minInicio;
-            System.out.println(minTotal / 60);
             cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
         }
         if (minTermino < minInicio) {
             minTotal = (60 - minInicio) + minTermino;
-            cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
+            cargaHoraNovoHorario = (cargaHoraNovoHorario + (minTotal / 60)) - 1;
         }
 
         if (object instanceof ManutencaoEnsino) {
@@ -212,7 +211,7 @@ public class HorarioMB {
             }
             if (minTermino < minInicio) {
                 minTotal = (60 - minInicio) + minTermino;
-                cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
+                cargaHoraNovoHorario = (cargaHoraNovoHorario + (minTotal / 60)) - 1;
             }
             horarioDAO.alterar(h);
         }
@@ -269,14 +268,13 @@ public class HorarioMB {
         double minTermino = horario.getHoraTermino().getMinutes();
         double horaInicio = horario.getHoraInicio().getHours();
         double horaTermino = horario.getHoraTermino().getHours();
-        
+
+        cargaHoraNovoHorario = cargaHoraNovoHorario + (horaTermino - horaInicio);
         if (minTermino > minInicio) {
-            cargaHoraNovoHorario = cargaHoraNovoHorario + (horaTermino - horaInicio);
             minTotal = minTermino - minInicio;
             cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
         }
         if (minTermino < minTermino) {
-            cargaHoraNovoHorario = cargaHoraNovoHorario + (horaTermino - horaInicio);
             minTotal = (60 - minInicio) + minTermino;
             cargaHoraNovoHorario = (cargaHoraNovoHorario + (minTotal / 60)) - 1;
         }
