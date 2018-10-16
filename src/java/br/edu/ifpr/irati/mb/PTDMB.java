@@ -53,6 +53,36 @@ import javax.swing.text.Document;
 @SessionScoped
 public class PTDMB {
 
+    /**
+     * @return the cargaHorariaTotalPTDPTDEdicao
+     */
+    public double getCargaHorariaTotalPTDPTDEdicao() {
+        return cargaHorariaTotalPTDPTDEdicao;
+    }
+
+    /**
+     * @param cargaHorariaTotalPTDPTDEdicao the cargaHorariaTotalPTDPTDEdicao to
+     * set
+     */
+    public void setCargaHorariaTotalPTDPTDEdicao(double cargaHorariaTotalPTDPTDEdicao) {
+        this.cargaHorariaTotalPTDPTDEdicao = cargaHorariaTotalPTDPTDEdicao;
+    }
+
+    /**
+     * @return the cargaHorariaTotalPTDPTDAvaliacao
+     */
+    public double getCargaHorariaTotalPTDPTDAvaliacao() {
+        return cargaHorariaTotalPTDPTDAvaliacao;
+    }
+
+    /**
+     * @param cargaHorariaTotalPTDPTDAvaliacao the
+     * cargaHorariaTotalPTDPTDAvaliacao to set
+     */
+    public void setCargaHorariaTotalPTDPTDAvaliacao(double cargaHorariaTotalPTDPTDAvaliacao) {
+        this.cargaHorariaTotalPTDPTDAvaliacao = cargaHorariaTotalPTDPTDAvaliacao;
+    }
+
     private PTD ptd;
     private PTD ptdEmAvaliacao;
     private List<PTD> ptdsEmAvaliacao;
@@ -63,15 +93,6 @@ public class PTDMB {
     private List<Participacao> participacoesColabPTDEdicao;
     private List<Participacao> participacoesAutorPTDAvaliacao;
     private List<Participacao> participacoesColabPTDAvaliacao;
-    private double cargaHorariaTotalAdministracoesPTDEdicao;
-    private double cargaHorariaTotalApoiosPTDEdicao;
-    private double cargaHorariaTotalAtividadesASeremPropostasPTDEdicao;
-    private double cargaHorariaTotalAulasPTDEdicao;
-    private double cargaHorariaTotalManutencoesEnsinoPTDEdicao;
-    private double cargaHorariaTotalOutroTiposAtividadePTDEdicao;
-    private double cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao;
-    private double cargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao;
-    private double cargaHorariaTotalPTDPTDEdicao;
     private String estadoCargaHorariaPTD;
     private List<String> errosTabelaAula;
     private List<String> errosTabelaManuEnsino;
@@ -83,14 +104,7 @@ public class PTDMB {
     private List<String> errosTabelaAtividadesASeremPropostas;
     private List<String> irregularidadesPTDEdicao;
     private List<String> irregularidadesPTDAvaliacao;
-    private double cargaHorariaTotalAdministracoesPTDAvaliacao;
-    private double cargaHorariaTotalApoiosPTDAvaliacao;
-    private double cargaHorariaTotalAtividadesASeremPropostasPTDAvaliacao;
-    private double cargaHorariaTotalAulasPTDAvaliacao;
-    private double cargaHorariaTotalManutencoesEnsinoPTDAvaliacao;
-    private double cargaHorariaTotalOutroTiposAtividadePTDAvaliacao;
-    private double cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDAvaliacao;
-    private double cargaHorariaTotalProjetosPesquisaExtensaoColabPTDAvaliacao;
+    private double cargaHorariaTotalPTDPTDEdicao;
     private double cargaHorariaTotalPTDPTDAvaliacao;
 
     public PTDMB() {
@@ -190,14 +204,8 @@ public class PTDMB {
         errosTabelaPesquisaExtensaoAutor = new ArrayList<>();
         errosTabelaPesquisaExtensaoColaborador = new ArrayList<>();
         irregularidadesPTDEdicao = new ArrayList<>();
-        cargaHorariaTotalAdministracoesPTDEdicao = 0.0;
-        cargaHorariaTotalApoiosPTDEdicao = 0.0;
-        cargaHorariaTotalAtividadesASeremPropostasPTDEdicao = 0.0;
-        cargaHorariaTotalAulasPTDEdicao = 0.0;
-        cargaHorariaTotalManutencoesEnsinoPTDEdicao = 0.0;
-        cargaHorariaTotalOutroTiposAtividadePTDEdicao = 0.0;
-        cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao = 0.0;
-        cargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao = 0.0;
+        cargaHorariaTotalPTDPTDAvaliacao = 0;
+        cargaHorariaTotalPTDPTDEdicao = 0;
     }
 
     public List<PTD> atualizarListaPTDsReprovados(int idUsuario) {
@@ -450,7 +458,7 @@ public class PTDMB {
         // Conferência da existência de erros
         realizarConferencias();
 
-        if (cargaHorariaTotalPTDPTDEdicao == 0) {
+        if (getCargaHorariaTotalPTDPTDEdicao() == 0) {
             nomeCaixaDialogo = "documentoVazioDialog";
         } else if (errosTabelaAdministrativas.isEmpty() != true) {
             nomeCaixaDialogo = "avisoErrosDialog";
@@ -1260,38 +1268,36 @@ public class PTDMB {
 //        } else if (ptdEmAvaliacao.getIdPTD() != 0) {
 //            atualizarPTDNoBanco(ptdEmAvaliacao);
 //        }
-
         irregularidadesPTDEdicao = new ArrayList<>();
-        cargaHorariaTotalAdministracoesPTDEdicao = 0;
-        cargaHorariaTotalApoiosPTDEdicao = 0;
-        cargaHorariaTotalAtividadesASeremPropostasPTDEdicao = 0;
-        cargaHorariaTotalAulasPTDEdicao = 0;
-        cargaHorariaTotalManutencoesEnsinoPTDEdicao = 0;
-        cargaHorariaTotalOutroTiposAtividadePTDEdicao = 0;
+        cargaHorariaTotalPTDPTDAvaliacao = 0;
         cargaHorariaTotalPTDPTDEdicao = 0;
-        cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao = 0;
-        cargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao = 0;
+        double cargaHorariaTotalPTDAux = 0;
 
         for (Administracao adm : getPtd().getAdministrativas()) {
-            setCargaHorariaTotalAdministracoesPTDEdicao(getCargaHorariaTotalAdministracoesPTDEdicao() + adm.getCargaHorariaSemanalAdministracao());
+            ptd.setCargaHorariaSecaoAdministracao(ptd.getCargaHorariaSecaoAdministracao()
+                    + adm.getCargaHorariaSemanalAdministracao());
         }
 
         if (!getPtd().getParticipacoes().isEmpty()) {
             for (Participacao part : getPtd().getParticipacoes()) {
                 if (part.getRotulo().equals("Autor")) {
-                    setCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao(getCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao() + part.getCargaHorariaSemanalParticipacao());
+                    ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoAutor(ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
+                            + part.getCargaHorariaSemanalParticipacao());
                 } else if (part.getRotulo().equals("Colaborador")) {
-                    setCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao(getCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao() + part.getCargaHorariaSemanalParticipacao());
+                    ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoColab(ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()
+                            + part.getCargaHorariaSemanalParticipacao());
                 }
             }
             if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
-                if ((getCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao() + getCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao()) != 16) {
-                    if (getCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao() + getCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao() > 16) {
+                if ((ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
+                        + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 16) {
+                    if (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
+                            + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() > 16) {
 
                         getIrregularidadesPTDEdicao().add("A carga horária de projetos de pesquisa e/ou extensão"
                                 + " como colaborador e autor é superior à 16 horas!");
 
-                    } else if (getCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao() + getCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao() < 16 && getCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao() + getCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao() > 1) {
+                    } else if (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() < 16 && ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() > 1) {
 
                         getIrregularidadesPTDEdicao().add("A carga horária de projetos de pesquisa e/ou extensão"
                                 + " como colaborador e autor é inferior à 16 horas!");
@@ -1302,13 +1308,13 @@ public class PTDMB {
         }
         if (!getPtd().getApoios().isEmpty()) {
             for (Apoio ap : getPtd().getApoios()) {
-                setCargaHorariaTotalApoiosPTDEdicao(getCargaHorariaTotalApoiosPTDEdicao() + ap.getCargaHorariaSemanalApoio());
+                ptd.setCargaHorariaSecaoApoioEnsino(ptd.getCargaHorariaSecaoApoioEnsino() + ap.getCargaHorariaSemanalApoio());
             }
-            if (getCargaHorariaTotalApoiosPTDEdicao() != 4) {
+            if (ptd.getCargaHorariaSecaoApoioEnsino() != 4) {
 
-                if (getCargaHorariaTotalApoiosPTDEdicao() > 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao() + getCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao()) != 0) {
+                if (ptd.getCargaHorariaSecaoApoioEnsino() > 4 && (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 0) {
                     getIrregularidadesPTDEdicao().add("A carga horária é superior à 4 horas em Apoio ao Ensino!");
-                } else if (getCargaHorariaTotalApoiosPTDEdicao() < 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao() + getCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao()) != 0) {
+                } else if (ptd.getCargaHorariaSecaoApoioEnsino() < 4 && (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 0) {
                     getIrregularidadesPTDEdicao().add("A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
                 }
 
@@ -1318,35 +1324,35 @@ public class PTDMB {
         if (!getPtd().getAulas().isEmpty()) {
 
             for (Aula a : getPtd().getAulas()) {
-                setCargaHorariaTotalAulasPTDEdicao(getCargaHorariaTotalAulasPTDEdicao() + a.getCargaHorariaTotal());
+                ptd.setCargaHorariaSecaoAulas(ptd.getCargaHorariaSecaoAulas() + a.getCargaHorariaTotal());
 
             }
 
             if (getPtd().getProfessor().getRegimeTrabalho().equals("20h")) {
 
-                if (getCargaHorariaTotalAulasPTDEdicao() < 8) {
+                if (ptd.getCargaHorariaSecaoAulas() < 8) {
 
                     getIrregularidadesPTDEdicao().add("A carga horária é inferior à 8 horas em Aula!");
 
-                } else if (getCargaHorariaTotalAulasPTDEdicao() > 12) {
+                } else if (ptd.getCargaHorariaSecaoAulas() > 12) {
 
                     getIrregularidadesPTDEdicao().add("A carga horária é superior à 12 horas em Aula!");
 
                 }
 
             } else if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
-                if (getCargaHorariaTotalAulasPTDEdicao() < 12) {
+                if (ptd.getCargaHorariaSecaoAulas() < 12) {
 
                     getIrregularidadesPTDEdicao().add("A carga horária é inferior à 12 horas em Aula!");
 
-                } else if (getCargaHorariaTotalAulasPTDEdicao() > 16) {
+                } else if (ptd.getCargaHorariaSecaoAulas() > 16) {
 
-                    if (getCargaHorariaTotalApoiosPTDEdicao() > 4 && (getCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao() + getCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao()) == 0) {
+                    if (ptd.getCargaHorariaSecaoApoioEnsino() > 4 && (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) == 0) {
 
-                        double excessoApoio = getCargaHorariaTotalApoiosPTDEdicao() - 4;
+                        double excessoApoio = ptd.getCargaHorariaSecaoApoioEnsino() - 4;
                         double excessoEsperadoAula = 16 - excessoApoio;
 
-                        if ((getCargaHorariaTotalAulasPTDEdicao() - excessoEsperadoAula) > 16) {
+                        if ((ptd.getCargaHorariaSecaoAulas() - excessoEsperadoAula) > 16) {
 
                             getIrregularidadesPTDEdicao().add("Mesmo descontando a carga horária redistribuída de projeto de pesquisa"
                                     + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
@@ -1358,13 +1364,13 @@ public class PTDMB {
                         getIrregularidadesPTDEdicao().add("A carga horária é superior à 16 horas em Aula!");
                     }
 
-                    if (getCargaHorariaTotalAulasPTDEdicao() >= 12 && getCargaHorariaTotalAulasPTDEdicao() <= 16) {
-                        if ((getCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao() + getCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao()) == 0) {
+                    if (ptd.getCargaHorariaSecaoAulas() >= 12 && ptd.getCargaHorariaSecaoAulas() <= 16) {
+                        if ((ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) == 0) {
 
-                            double excessoApoio = getCargaHorariaTotalApoiosPTDEdicao() - 4;
+                            double excessoApoio = ptd.getCargaHorariaSecaoApoioEnsino() - 4;
                             double excessoEsperadoAula = 16 - excessoApoio;
 
-                            if ((getCargaHorariaTotalAulasPTDEdicao() - excessoEsperadoAula) < 12) {
+                            if ((ptd.getCargaHorariaSecaoAulas() - excessoEsperadoAula) < 12) {
 
                                 getIrregularidadesPTDEdicao().add("Descontando a carga horária redistribuída de projeto de pesquisa"
                                         + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
@@ -1378,16 +1384,16 @@ public class PTDMB {
         }
         if (!getPtd().getManutencoesEnsino().isEmpty()) {
             for (ManutencaoEnsino me : getPtd().getManutencoesEnsino()) {
-                setCargaHorariaTotalManutencoesEnsinoPTDEdicao(getCargaHorariaTotalManutencoesEnsinoPTDEdicao() + me.getCargaHorariaSemanalManutencaoEnsino());
+                ptd.setCargaHorariaSecaoManutencaoEnsino(ptd.getCargaHorariaSecaoManutencaoEnsino() + me.getCargaHorariaSemanalManutencaoEnsino());
             }
 
-            if (getCargaHorariaTotalManutencoesEnsinoPTDEdicao() != 4) {
-                if (getCargaHorariaTotalManutencoesEnsinoPTDEdicao() < 4) {
+            if (ptd.getCargaHorariaSecaoManutencaoEnsino() != 4) {
+                if (ptd.getCargaHorariaSecaoManutencaoEnsino() < 4) {
 
                     getIrregularidadesPTDEdicao().add("A carga horária é inferior"
                             + " à 4 horas em Manutenção ao Ensino");
 
-                } else if (getCargaHorariaTotalManutencoesEnsinoPTDEdicao() > 4) {
+                } else if (ptd.getCargaHorariaSecaoManutencaoEnsino() > 4) {
 
                     getIrregularidadesPTDEdicao().add("A carga horária é superior "
                             + "à 4 horas em Manutenção ao Ensino!");
@@ -1397,15 +1403,15 @@ public class PTDMB {
         }
 
         for (OutroTipoAtividade ota : getPtd().getOutrosTiposAtividades()) {
-            setCargaHorariaTotalOutroTiposAtividadePTDEdicao(getCargaHorariaTotalOutroTiposAtividadePTDEdicao() + ota.getCargaHorariaSemanalOutroTipoAtividade());
+            ptd.setCargaHorariaSecaoOutroTipoAtividade(ptd.getCargaHorariaSecaoOutroTipoAtividade() + ota.getCargaHorariaSemanalOutroTipoAtividade());
         }
         if (!getPtd().getApoios().isEmpty() && !getPtd().getAulas().isEmpty() && !getPtd().getManutencoesEnsino().isEmpty()) {
             if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("20h")) {
-                if ((cargaHorariaTotalApoiosPTDEdicao + cargaHorariaTotalAulasPTDEdicao + cargaHorariaTotalManutencoesEnsinoPTDEdicao) < 8) {
+                if ((ptd.getCargaHorariaSecaoApoioEnsino() + ptd.getCargaHorariaSecaoAulas() + ptd.getCargaHorariaSecaoManutencaoEnsino()) < 8) {
 
                     irregularidadesPTDEdicao.add("A carga horária dedicada a Atividades de Ensino(apoio,manutenção e aulas) é inferior à 8 horas");
 
-                } else if ((cargaHorariaTotalApoiosPTDEdicao + cargaHorariaTotalAulasPTDEdicao + cargaHorariaTotalManutencoesEnsinoPTDEdicao) > 20) {
+                } else if ((ptd.getCargaHorariaSecaoApoioEnsino() + ptd.getCargaHorariaSecaoAulas() + ptd.getCargaHorariaSecaoManutencaoEnsino()) > 20) {
 
                     irregularidadesPTDEdicao.add("A carga horária dedicada a Atividades de Ensino(apoio,manutenção e aulas) é superior à 12 horas");
 
@@ -1413,30 +1419,40 @@ public class PTDMB {
             }
             if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
 
-                if ((cargaHorariaTotalApoiosPTDEdicao + cargaHorariaTotalAulasPTDEdicao + cargaHorariaTotalManutencoesEnsinoPTDEdicao) < 12) {
+                if ((ptd.getCargaHorariaSecaoApoioEnsino()
+                        + ptd.getCargaHorariaSecaoAulas()
+                        + ptd.getCargaHorariaSecaoManutencaoEnsino()) < 12) {
 
                     irregularidadesPTDEdicao.add("A carga horária dedicada a Atividades de Ensino(apoio,manutenção e aulas) é inferior à 12 horas");
 
-                } else if ((cargaHorariaTotalApoiosPTDEdicao + cargaHorariaTotalAulasPTDEdicao + cargaHorariaTotalManutencoesEnsinoPTDEdicao) > 24) {
+                } else if ((ptd.getCargaHorariaSecaoApoioEnsino()
+                        + ptd.getCargaHorariaSecaoAulas()
+                        + ptd.getCargaHorariaSecaoManutencaoEnsino()) > 24) {
 
                     irregularidadesPTDEdicao.add("A carga horária dedicada a Atividades de Ensino(apoio,manutenção e aulas) é superior à 24 horas");
 
                 }
             }
         }
-        setCargaHorariaTotalPTDPTDEdicao(getCargaHorariaTotalAdministracoesPTDEdicao() + getCargaHorariaTotalApoiosPTDEdicao() + getCargaHorariaTotalAulasPTDEdicao() + getCargaHorariaTotalManutencoesEnsinoPTDEdicao() + getCargaHorariaTotalOutroTiposAtividadePTDEdicao() + getCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao() + getCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao());
+        cargaHorariaTotalPTDAux = ptd.getCargaHorariaSecaoAdministracao()
+                + ptd.getCargaHorariaSecaoApoioEnsino()
+                + ptd.getCargaHorariaSecaoAulas()
+                + ptd.getCargaHorariaSecaoManutencaoEnsino()
+                + ptd.getCargaHorariaSecaoOutroTipoAtividade()
+                + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
+                + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab();
         double regime = 20;
         if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
             regime = 40;
         }
-        if (regime == getCargaHorariaTotalPTDPTDEdicao()) {
-
+        if (regime == cargaHorariaTotalPTDAux) {
             setEstadoCargaHorariaPTD("CORRETO");
-
         } else {
-
             setEstadoCargaHorariaPTD("INCORRETO");
         }
+        
+        cargaHorariaTotalPTDPTDAvaliacao = cargaHorariaTotalPTDAux;
+        cargaHorariaTotalPTDPTDEdicao = cargaHorariaTotalPTDAux;
 
     }
 
@@ -1568,84 +1584,12 @@ public class PTDMB {
         this.ptdEmAvaliacao = ptdEmAvaliacao;
     }
 
-    public double getCargaHorariaTotalAdministracoesPTDEdicao() {
-        return cargaHorariaTotalAdministracoesPTDEdicao;
-    }
-
-    public void setCargaHorariaTotalAdministracoesPTDEdicao(double cargaHorariaTotalAdministracoesPTDEdicao) {
-        this.cargaHorariaTotalAdministracoesPTDEdicao = cargaHorariaTotalAdministracoesPTDEdicao;
-    }
-
-    public double getCargaHorariaTotalApoiosPTDEdicao() {
-        return cargaHorariaTotalApoiosPTDEdicao;
-    }
-
-    public void setCargaHorariaTotalApoiosPTDEdicao(double cargaHorariaTotalApoiosPTDEdicao) {
-        this.cargaHorariaTotalApoiosPTDEdicao = cargaHorariaTotalApoiosPTDEdicao;
-    }
-
-    public double getCargaHorariaTotalAtividadesASeremPropostasPTDEdicao() {
-        return cargaHorariaTotalAtividadesASeremPropostasPTDEdicao;
-    }
-
-    public void setCargaHorariaTotalAtividadesASeremPropostasPTDEdicao(double cargaHorariaTotalAtividadesASeremPropostasPTDEdicao) {
-        this.cargaHorariaTotalAtividadesASeremPropostasPTDEdicao = cargaHorariaTotalAtividadesASeremPropostasPTDEdicao;
-    }
-
-    public double getCargaHorariaTotalAulasPTDEdicao() {
-        return cargaHorariaTotalAulasPTDEdicao;
-    }
-
-    public void setCargaHorariaTotalAulasPTDEdicao(double cargaHorariaTotalAulasPTDEdicao) {
-        this.cargaHorariaTotalAulasPTDEdicao = cargaHorariaTotalAulasPTDEdicao;
-    }
-
-    public double getCargaHorariaTotalManutencoesEnsinoPTDEdicao() {
-        return cargaHorariaTotalManutencoesEnsinoPTDEdicao;
-    }
-
-    public void setCargaHorariaTotalManutencoesEnsinoPTDEdicao(double cargaHorariaTotalManutencoesEnsinoPTDEdicao) {
-        this.cargaHorariaTotalManutencoesEnsinoPTDEdicao = cargaHorariaTotalManutencoesEnsinoPTDEdicao;
-    }
-
-    public double getCargaHorariaTotalOutroTiposAtividadePTDEdicao() {
-        return cargaHorariaTotalOutroTiposAtividadePTDEdicao;
-    }
-
-    public void setCargaHorariaTotalOutroTiposAtividadePTDEdicao(double cargaHorariaTotalOutroTiposAtividadePTDEdicao) {
-        this.cargaHorariaTotalOutroTiposAtividadePTDEdicao = cargaHorariaTotalOutroTiposAtividadePTDEdicao;
-    }
-
-    public double getCargaHorariaTotalPTDPTDEdicao() {
-        return cargaHorariaTotalPTDPTDEdicao;
-    }
-
-    public void setCargaHorariaTotalPTDPTDEdicao(double cargaHorariaTotalPTDPTDEdicao) {
-        this.cargaHorariaTotalPTDPTDEdicao = cargaHorariaTotalPTDPTDEdicao;
-    }
-
     public String getEstadoCargaHorariaPTD() {
         return estadoCargaHorariaPTD;
     }
 
     public void setEstadoCargaHorariaPTD(String estadoCargaHorariaPTD) {
         this.estadoCargaHorariaPTD = estadoCargaHorariaPTD;
-    }
-
-    public double getCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao() {
-        return cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao;
-    }
-
-    public void setCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao(double cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao) {
-        this.cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao = cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDEdicao;
-    }
-
-    public double getCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao() {
-        return cargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao;
-    }
-
-    public void setCargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao(double cargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao) {
-        this.cargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao = cargaHorariaTotalProjetosPesquisaExtensaoColabPTDEdicao;
     }
 
     /**
@@ -1879,141 +1823,6 @@ public class PTDMB {
      */
     public void setIrregularidadesPTDAvaliacao(List<String> irregularidadesPTDAvaliacao) {
         this.irregularidadesPTDAvaliacao = irregularidadesPTDAvaliacao;
-    }
-
-    /**
-     * @return the cargaHorariaTotalAdministracoesPTDAvaliacao
-     */
-    public double getCargaHorariaTotalAdministracoesPTDAvaliacao() {
-        return cargaHorariaTotalAdministracoesPTDAvaliacao;
-    }
-
-    /**
-     * @param cargaHorariaTotalAdministracoesPTDAvaliacao the
-     * cargaHorariaTotalAdministracoesPTDAvaliacao to set
-     */
-    public void setCargaHorariaTotalAdministracoesPTDAvaliacao(double cargaHorariaTotalAdministracoesPTDAvaliacao) {
-        this.cargaHorariaTotalAdministracoesPTDAvaliacao = cargaHorariaTotalAdministracoesPTDAvaliacao;
-    }
-
-    /**
-     * @return the cargaHorariaTotalApoiosPTDAvaliacao
-     */
-    public double getCargaHorariaTotalApoiosPTDAvaliacao() {
-        return cargaHorariaTotalApoiosPTDAvaliacao;
-    }
-
-    /**
-     * @param cargaHorariaTotalApoiosPTDAvaliacao the
-     * cargaHorariaTotalApoiosPTDAvaliacao to set
-     */
-    public void setCargaHorariaTotalApoiosPTDAvaliacao(double cargaHorariaTotalApoiosPTDAvaliacao) {
-        this.cargaHorariaTotalApoiosPTDAvaliacao = cargaHorariaTotalApoiosPTDAvaliacao;
-    }
-
-    /**
-     * @return the cargaHorariaTotalAtividadesASeremPropostasPTDAvaliacao
-     */
-    public double getCargaHorariaTotalAtividadesASeremPropostasPTDAvaliacao() {
-        return cargaHorariaTotalAtividadesASeremPropostasPTDAvaliacao;
-    }
-
-    /**
-     * @param cargaHorariaTotalAtividadesASeremPropostasPTDAvaliacao the
-     * cargaHorariaTotalAtividadesASeremPropostasPTDAvaliacao to set
-     */
-    public void setCargaHorariaTotalAtividadesASeremPropostasPTDAvaliacao(double cargaHorariaTotalAtividadesASeremPropostasPTDAvaliacao) {
-        this.cargaHorariaTotalAtividadesASeremPropostasPTDAvaliacao = cargaHorariaTotalAtividadesASeremPropostasPTDAvaliacao;
-    }
-
-    /**
-     * @return the cargaHorariaTotalAulasPTDAvaliacao
-     */
-    public double getCargaHorariaTotalAulasPTDAvaliacao() {
-        return cargaHorariaTotalAulasPTDAvaliacao;
-    }
-
-    /**
-     * @param cargaHorariaTotalAulasPTDAvaliacao the
-     * cargaHorariaTotalAulasPTDAvaliacao to set
-     */
-    public void setCargaHorariaTotalAulasPTDAvaliacao(double cargaHorariaTotalAulasPTDAvaliacao) {
-        this.cargaHorariaTotalAulasPTDAvaliacao = cargaHorariaTotalAulasPTDAvaliacao;
-    }
-
-    /**
-     * @return the cargaHorariaTotalManutencoesEnsinoPTDAvaliacao
-     */
-    public double getCargaHorariaTotalManutencoesEnsinoPTDAvaliacao() {
-        return cargaHorariaTotalManutencoesEnsinoPTDAvaliacao;
-    }
-
-    /**
-     * @param cargaHorariaTotalManutencoesEnsinoPTDAvaliacao the
-     * cargaHorariaTotalManutencoesEnsinoPTDAvaliacao to set
-     */
-    public void setCargaHorariaTotalManutencoesEnsinoPTDAvaliacao(double cargaHorariaTotalManutencoesEnsinoPTDAvaliacao) {
-        this.cargaHorariaTotalManutencoesEnsinoPTDAvaliacao = cargaHorariaTotalManutencoesEnsinoPTDAvaliacao;
-    }
-
-    /**
-     * @return the cargaHorariaTotalOutroTiposAtividadePTDAvaliacao
-     */
-    public double getCargaHorariaTotalOutroTiposAtividadePTDAvaliacao() {
-        return cargaHorariaTotalOutroTiposAtividadePTDAvaliacao;
-    }
-
-    /**
-     * @param cargaHorariaTotalOutroTiposAtividadePTDAvaliacao the
-     * cargaHorariaTotalOutroTiposAtividadePTDAvaliacao to set
-     */
-    public void setCargaHorariaTotalOutroTiposAtividadePTDAvaliacao(double cargaHorariaTotalOutroTiposAtividadePTDAvaliacao) {
-        this.cargaHorariaTotalOutroTiposAtividadePTDAvaliacao = cargaHorariaTotalOutroTiposAtividadePTDAvaliacao;
-    }
-
-    /**
-     * @return the cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDAvaliacao
-     */
-    public double getCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDAvaliacao() {
-        return cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDAvaliacao;
-    }
-
-    /**
-     * @param cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDAvaliacao the
-     * cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDAvaliacao to set
-     */
-    public void setCargaHorariaTotalProjetosPesquisaExtensaoAutorPTDAvaliacao(double cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDAvaliacao) {
-        this.cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDAvaliacao = cargaHorariaTotalProjetosPesquisaExtensaoAutorPTDAvaliacao;
-    }
-
-    /**
-     * @return the cargaHorariaTotalProjetosPesquisaExtensaoColabPTDAvaliacao
-     */
-    public double getCargaHorariaTotalProjetosPesquisaExtensaoColabPTDAvaliacao() {
-        return cargaHorariaTotalProjetosPesquisaExtensaoColabPTDAvaliacao;
-    }
-
-    /**
-     * @param cargaHorariaTotalProjetosPesquisaExtensaoColabPTDAvaliacao the
-     * cargaHorariaTotalProjetosPesquisaExtensaoColabPTDAvaliacao to set
-     */
-    public void setCargaHorariaTotalProjetosPesquisaExtensaoColabPTDAvaliacao(double cargaHorariaTotalProjetosPesquisaExtensaoColabPTDAvaliacao) {
-        this.cargaHorariaTotalProjetosPesquisaExtensaoColabPTDAvaliacao = cargaHorariaTotalProjetosPesquisaExtensaoColabPTDAvaliacao;
-    }
-
-    /**
-     * @return the cargaHorariaTotalPTDPTDAvaliacao
-     */
-    public double getCargaHorariaTotalPTDPTDAvaliacao() {
-        return cargaHorariaTotalPTDPTDAvaliacao;
-    }
-
-    /**
-     * @param cargaHorariaTotalPTDPTDAvaliacao the
-     * cargaHorariaTotalPTDPTDAvaliacao to set
-     */
-    public void setCargaHorariaTotalPTDPTDAvaliacao(double cargaHorariaTotalPTDPTDAvaliacao) {
-        this.cargaHorariaTotalPTDPTDAvaliacao = cargaHorariaTotalPTDPTDAvaliacao;
     }
 
 }
