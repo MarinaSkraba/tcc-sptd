@@ -85,7 +85,7 @@
                         <p:commandButton styleClass="botaoCinza" 
                                          value="Manter e sair" 
                                          ajax="false" 
-                                         action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuario.idUsuario)}"/>
+                                         action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuarioLogado.idUsuario)}"/>
 
                         <p:commandButton value="Descartar e sair" 
                                          ajax="false" 
@@ -4044,7 +4044,7 @@
                         <br/>
                         <p:commandButton styleClass="botaoAzul" 
                                          value="Enviar mesmo assim!"
-                                         action="#{pTDMB.submeterPTD()}"/>
+                                         action="#{pTDMB.submeterPTD(usuarioMB.usuarioLogado.idUsuario)}"/>
 
                     </p:dialog>
 
@@ -4077,7 +4077,7 @@
 
                         <p:commandButton styleClass="botaoAzul" 
                                          value="Concluído"
-                                         action="#{pTDMB.submeterPTD()}"/>
+                                         action="#{pTDMB.submeterPTD(usuarioMB.usuarioLogado.idUsuario)}"/>
 
                     </p:dialog>
 

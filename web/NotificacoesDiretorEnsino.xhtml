@@ -27,7 +27,7 @@
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Notificações"
-                                 action="/NotificacoesDocente"
+                                 ajax="false"
                                  style="float: left;"/>
 
                 <p:commandButton id="logout"
@@ -47,7 +47,8 @@
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
-                                     action="#{usuarioMB.realizarLogout()}"/>
+                                     actionListener="#{usuarioMB.realizarLogout()}"
+                                     action="/Login?faces-redirect=true"/>
                 </p:overlayPanel>
 
                 <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 

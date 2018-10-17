@@ -27,7 +27,7 @@
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Notificações"
-                                 action="/NotificacoesDiretorEnsino"
+                                 action="#{pTDMB.abrirNotificacoesDiretorEnsino(usuarioMB.usuarioLogado.idUsuario)}"
                                  style="float: left;"/>
 
                 <p:commandButton id="logout"
@@ -47,7 +47,8 @@
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
-                                     action="#{usuarioMB.realizarLogout()}"/>
+                                     actionListener="#{usuarioMB.realizarLogout()}"
+                                     action="/Login?faces-redirect=true"/>
                 </p:overlayPanel>
 
                 <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
@@ -1150,8 +1151,26 @@
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptdEmAvaliacao.campoObservacoesDiretorEnsino}"/>
                         <br/>
                         <p:commandButton value="Enviar"
-                                         onclick="PF('#{pTDMB.verificarPossibilidadeReprovacao()}').show();"
+                                         onclick="PF('confirmacaoReprovacaoDialog').show();"
                                          styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <!-- Caixa de confirmação de reprovação -->
+                    <p:dialog header="Observações são obrigatórias" 
+                              widgetVar="confirmacaoReprovacaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Assim que reprovado, o documento será encaminhado àquele que o regidigiu. Dessa forma as suas observações são muito importantes! " 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="OK"
+                                         onclick="PF('#{pTDMB.verificarPossibilidadeReprovacao()}').show();"/>
 
                     </p:dialog>
 

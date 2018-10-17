@@ -53,36 +53,6 @@ import javax.swing.text.Document;
 @SessionScoped
 public class PTDMB {
 
-    /**
-     * @return the cargaHorariaTotalPTDPTDEdicao
-     */
-    public double getCargaHorariaTotalPTDPTDEdicao() {
-        return cargaHorariaTotalPTDPTDEdicao;
-    }
-
-    /**
-     * @param cargaHorariaTotalPTDPTDEdicao the cargaHorariaTotalPTDPTDEdicao to
-     * set
-     */
-    public void setCargaHorariaTotalPTDPTDEdicao(double cargaHorariaTotalPTDPTDEdicao) {
-        this.cargaHorariaTotalPTDPTDEdicao = cargaHorariaTotalPTDPTDEdicao;
-    }
-
-    /**
-     * @return the cargaHorariaTotalPTDPTDAvaliacao
-     */
-    public double getCargaHorariaTotalPTDPTDAvaliacao() {
-        return cargaHorariaTotalPTDPTDAvaliacao;
-    }
-
-    /**
-     * @param cargaHorariaTotalPTDPTDAvaliacao the
-     * cargaHorariaTotalPTDPTDAvaliacao to set
-     */
-    public void setCargaHorariaTotalPTDPTDAvaliacao(double cargaHorariaTotalPTDPTDAvaliacao) {
-        this.cargaHorariaTotalPTDPTDAvaliacao = cargaHorariaTotalPTDPTDAvaliacao;
-    }
-
     private PTD ptd;
     private PTD ptdEmAvaliacao;
     private List<PTD> ptdsEmAvaliacao;
@@ -207,12 +177,29 @@ public class PTDMB {
         cargaHorariaTotalPTDPTDAvaliacao = 0;
         cargaHorariaTotalPTDPTDEdicao = 0;
     }
+    
+    public String concluirLogin(String tela, int idUsuario){
+        if(tela.equalsIgnoreCase("/NotificacoesDocente?faces-redirect=true")){
+            return abrirNotificacoesDocente(idUsuario);
+        } else if (tela.equalsIgnoreCase("/NotificacoesDiretorEnsino?faces-redirect=true")) {
+            return abrirNotificacoesDiretorEnsino(idUsuario);
+        } else {
+            return tela;
+        }
+         
+    }
 
     public String abrirNotificacoesDocente(int idUsuario) {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados(idUsuario);
         ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(idUsuario);
         return "/NotificacoesDocente?faces-redirect=true";
+    }
+    
+    public String abrirNotificacoesDiretorEnsino(int idUsuario){
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
+        return "/NotificacoesDiretorEnsino?faces-redirect=true";
     }
 
     public void realizarConferencias() {
@@ -434,12 +421,12 @@ public class PTDMB {
 
     }
 
-    public String submeterPTD() {
+    public String submeterPTD(int idUsuario) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         getPtd().setEstadoPTD("AVALIACAO");
         ptdDAOGenerico.alterar(getPtd());
 
-        return "/NotificacoesDocente";
+        return abrirNotificacoesDocente(0);
     }
 
     public String verificarPossibilidadeSubmissao() {
@@ -1464,6 +1451,10 @@ public class PTDMB {
         } else {
             setEstadoCargaHorariaPTD("INCORRETO");
         }
+        
+        for(String irregularidade : irregularidadesPTDEdicao){
+            irregularidadesPTDAvaliacao.add(irregularidade);
+        }
 
         cargaHorariaTotalPTDPTDAvaliacao = cargaHorariaTotalPTDAux;
         cargaHorariaTotalPTDPTDEdicao = cargaHorariaTotalPTDAux;
@@ -1564,8 +1555,6 @@ public class PTDMB {
      * @return the ptdsEmAvaliacao
      */
     public List<PTD> getPtdsEmAvaliacao() {
-        IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         return ptdsEmAvaliacao;
     }
 
@@ -1837,6 +1826,36 @@ public class PTDMB {
      */
     public void setIrregularidadesPTDAvaliacao(List<String> irregularidadesPTDAvaliacao) {
         this.irregularidadesPTDAvaliacao = irregularidadesPTDAvaliacao;
+    }
+    
+    /**
+     * @return the cargaHorariaTotalPTDPTDEdicao
+     */
+    public double getCargaHorariaTotalPTDPTDEdicao() {
+        return cargaHorariaTotalPTDPTDEdicao;
+    }
+
+    /**
+     * @param cargaHorariaTotalPTDPTDEdicao the cargaHorariaTotalPTDPTDEdicao to
+     * set
+     */
+    public void setCargaHorariaTotalPTDPTDEdicao(double cargaHorariaTotalPTDPTDEdicao) {
+        this.cargaHorariaTotalPTDPTDEdicao = cargaHorariaTotalPTDPTDEdicao;
+    }
+
+    /**
+     * @return the cargaHorariaTotalPTDPTDAvaliacao
+     */
+    public double getCargaHorariaTotalPTDPTDAvaliacao() {
+        return cargaHorariaTotalPTDPTDAvaliacao;
+    }
+
+    /**
+     * @param cargaHorariaTotalPTDPTDAvaliacao the
+     * cargaHorariaTotalPTDPTDAvaliacao to set
+     */
+    public void setCargaHorariaTotalPTDPTDAvaliacao(double cargaHorariaTotalPTDPTDAvaliacao) {
+        this.cargaHorariaTotalPTDPTDAvaliacao = cargaHorariaTotalPTDPTDAvaliacao;
     }
 
 }
