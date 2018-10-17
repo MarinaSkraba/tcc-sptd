@@ -471,27 +471,24 @@ public class PTDMB {
         } else if (irregularidadesPTDEdicao.isEmpty() != true) {
             for (String irregularidade : irregularidadesPTDEdicao) {
                 if ((irregularidade.equals("A carga horária é superior "
-                        + "à 4 horas em Apoio ao Ensino!") | irregularidade.equals("A carga horária é inferior à 4 horas em Apoio ao Ensino!")) && ptd.getCampoJustificativaApoioEnsino().isEmpty() != true) {
+                        + "à 4 horas em Apoio ao Ensino!") | irregularidade.equals("A carga horária é inferior à 4 horas em Apoio ao Ensino!")) && ptd.getCampoJustificativaApoioEnsino().isEmpty() == true) {
                     nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
-                }
-                if ((irregularidade.equals("A carga horária de projetos de pesquisa "
+                } else if ((irregularidade.equals("A carga horária de projetos de pesquisa "
                         + "e/ou extensão como colaborador "
                         + "e autor é superior à 16 horas!") | irregularidade.equals("A carga horária de projetos"
                                 + "de pesquisa e/ou extensão como "
-                                + "colaborador e autor é inferior à 16 horas!")) && ptd.getCampoJustificativaProjetoPesquisaExtensao().isEmpty() != true) {
+                                + "colaborador e autor é inferior à 16 horas!")) && ptd.getCampoJustificativaProjetoPesquisaExtensao().isEmpty() == true) {
 
                     nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
-                }
-                if ((irregularidade.equals("A carga horária é inferior à 4 horas"
+                } else if ((irregularidade.equals("A carga horária é inferior à 4 horas"
                         + " em Manutenção ao Ensino") | irregularidade.equals("A carga horária é superior à 4"
-                                + " horas em Manutenção ao Ensino")) && ptd.getCampoJustificativaManutencaoEnsino().isEmpty() != true) {
+                                + " horas em Manutenção ao Ensino")) && ptd.getCampoJustificativaManutencaoEnsino().isEmpty() == true) {
 
                     nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
-                }
-                if ((irregularidade.equals("A carga horária é inferior "
+                } else if ((irregularidade.equals("A carga horária é inferior "
                         + "à 8 horas em Aula!") | irregularidade.equals("A carga horária é superior "
                                 + "à 12 horas em Aula!") | irregularidade.equals("A carga horária é inferior "
                                 + "à 12 horas em Aula!") | irregularidade.equals("A carga horária é superior"
@@ -500,12 +497,11 @@ public class PTDMB {
                                 + " e apoio ao ensino, o componente aula apresenta"
                                 + " carga horária superior à 16 horas") | irregularidade.equals("Descontando a carga horária redistribuída de projeto de pesquisa"
                                 + " e/ou extensão para aula e apoio ao ensino,"
-                                + " o componente aula apresenta carga horária inferior à 12 horas")) && ptd.getCampoJustificativaAtividadeEnsino().isEmpty() != true) {
+                                + " o componente aula apresenta carga horária inferior à 12 horas")) && ptd.getCampoJustificativaAtividadeEnsino().isEmpty() == true) {
 
                     nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
-                }
-                if (irregularidade.equals("A carga horária dedicada a Atividades de Ensino"
+                } else if (irregularidade.equals("A carga horária dedicada a Atividades de Ensino"
                         + "(apoio,manutenção e aulas) é inferior à 8 horas") | irregularidade.equals("A carga horária dedicada a Atividades de Ensino"
                                 + "(apoio,manutenção e aulas) é superior à 12 horas") | irregularidade.equals("A carga horária dedicada a Atividades de Ensino"
                                 + "(apoio,manutenção e aulas) é inferior à 12 horas") | irregularidade.equals("A carga horária dedicada a Atividades de Ensino"
@@ -1265,6 +1261,14 @@ public class PTDMB {
         irregularidadesPTDEdicao = new ArrayList<>();
         cargaHorariaTotalPTDPTDAvaliacao = 0;
         cargaHorariaTotalPTDPTDEdicao = 0;
+        ptd.setCargaHorariaSecaoAdministracao(0);
+        ptd.setCargaHorariaSecaoApoioEnsino(0);
+        ptd.setCargaHorariaSecaoAtividadesASeremPropostas(0);
+        ptd.setCargaHorariaSecaoAulas(0);
+        ptd.setCargaHorariaSecaoManutencaoEnsino(0);
+        ptd.setCargaHorariaSecaoOutroTipoAtividade(0);
+        ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoAutor(0);
+        ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoColab(0);
         double cargaHorariaTotalPTDAux = 0;
 
         PTD ptd = new PTD();
