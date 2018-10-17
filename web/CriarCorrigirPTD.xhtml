@@ -85,13 +85,11 @@
                         <p:commandButton styleClass="botaoCinza" 
                                          value="Manter e sair" 
                                          ajax="false" 
-                                         immediate="true"
-                                         action="/NotificacoesDocente"/>
+                                         action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuario.idUsuario)}"/>
 
                         <p:commandButton value="Descartar e sair" 
                                          ajax="false" 
-                                         immediate="true"
-                                         action="#{pTDMB.cancelarPTD(pTDMB.ptd)}"
+                                         action="#{pTDMB.cancelarPTD(pTDMB.ptd, usuarioMB.usuarioLogado.idUsuario, 'notificaçoes')}"
                                          styleClass="botaoVermelho"/>
 
                     </p:dialog>
@@ -111,18 +109,19 @@
                                          value="Manter e sair" 
                                          ajax="false" 
                                          immediate="true"
-                                         action="#{usuarioMB.realizarLogout()}"/>
+                                         actionListener="#{usuarioMB.realizarLogout()}"
+                                         action="/Login?faces-redirect=true"/>
 
                         <p:commandButton value="Descartar e sair" 
-                                         ajax="false" 
-                                         immediate="true"
-                                         action="#{pTDMB.cancelarPTDEfetuandoLogout()}"
+                                         ajax="false"
+                                         actionListener="#{usuarioMB.realizarLogout()}"
+                                         action="#{pTDMB.cancelarPTD(pTDMB.ptd, usuarioMB.usuarioLogado.idUsuario, 'login')}"
                                          styleClass="botaoVermelho"/>
 
                     </p:dialog>
 
                     <!-- Atividades de Ensino -->
-                    <h:outputText value="1. Atividades de Ensino" 
+                    <h:outputText value="2. Atividades de Ensino" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -133,7 +132,7 @@
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
-                            <h:outputText value="1.1 Aulas" 
+                            <h:outputText value="2.1 Aulas" 
                                           styleClass="text01" />
 
                             <p:commandButton styleClass="botaoCinza" 
@@ -638,7 +637,7 @@
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
-                            <h:outputText value="1.2 Manutenção de ensino" 
+                            <h:outputText value="2.2 Manutenção de ensino" 
                                           styleClass="text01" />
 
                             <p:commandButton styleClass="botaoCinza" 
@@ -1037,7 +1036,7 @@
                     <!-- Subtítulo: Apoio ao ensino -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" style="align-items: center;">
-                            <h:outputText value="1.3 Apoio ao ensino" 
+                            <h:outputText value="2.3 Apoio ao ensino" 
                                           styleClass="text01" />
 
                             <p:commandButton styleClass="botaoCinza" 
@@ -1432,7 +1431,7 @@
                     <br/>
 
                     <!-- Atividades de Pesquisa e Extensão -->
-                    <h:outputText value="2. Atividades de Pesquisa e Extensão" 
+                    <h:outputText value="3. Atividades de Pesquisa e Extensão" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -1442,7 +1441,7 @@
                     <!-- Subtítulo: Pesquisa e/ou extensão (Autor) -->
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" style="align-items: center;">
-                            <h:outputText value="2.1 Pesquisa e/ou extensão cadastradas no COPE (Autor)" 
+                            <h:outputText value="3.1 Pesquisa e/ou extensão cadastradas no COPE (Autor)" 
                                           styleClass="text01" />
 
                             <p:commandButton styleClass="botaoCinza" 
@@ -1545,10 +1544,10 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:selectOneMenu id="selectProjetoSeu" 
-                                         value="#{projetoPesquisaExtensaoMB.participacao.projetoPesquisaExtensao}"
+                                         value="#{projetoPesquisaExtensaoMB.participacaoAutor.projetoPesquisaExtensao}"
                                          converter="projetoPesquisaExtensaoConverter">
 
-                            <f:selectItems value="#{projetoPesquisaExtensaoMB.atualizarListaProjetosCadastradosPorProfessor(usuarioMB.usuarioLogado.idUsuario)}" 
+                            <f:selectItems value="#{projetoPesquisaExtensaoMB.projetosPesquisaExtensaoAtivos}" 
                                            var="projetoSeu" 
                                            itemValue="#{projetoSeu}"
                                            itemLabel="#{projetoSeu}" />
@@ -1963,7 +1962,7 @@
                     <h:panelGrid columns="1" >
                         <h:panelGrid columns="3" 
                                      style="align-items: center;">
-                            <h:outputText value="2.2 Pesquisa e/ou extensão cadastradas no COPE (Colaborador)" 
+                            <h:outputText value="3.2 Pesquisa e/ou extensão cadastradas no COPE (Colaborador)" 
                                           styleClass="text01" />
 
                             <p:commandButton styleClass="botaoCinza" 
@@ -2002,10 +2001,10 @@
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
                         <p:selectOneMenu id="selectProjetoColab" 
-                                         value="#{projetoPesquisaExtensaoMB.participacao.projetoPesquisaExtensao}"
+                                         value="#{projetoPesquisaExtensaoMB.participacaoColab.projetoPesquisaExtensao}"
                                          converter="projetoPesquisaExtensaoConverter">
 
-                            <f:selectItems value="#{projetoPesquisaExtensaoMB.atualizarListaProjetosAtivos(usuarioMB.usuarioLogado.idUsuario)}" 
+                            <f:selectItems value="#{projetoPesquisaExtensaoMB.projetosPesquisaExtensaoAtivos}" 
                                            var="projetoColab" 
                                            itemValue="#{projetoColab}"
                                            itemLabel="#{projetoColab}" />
@@ -2035,7 +2034,7 @@
                                          value="#{projetoPesquisaExtensaoMB.participacaoColabSelecionadoParaParticipacaoColab.projetoPesquisaExtensao}"
                                          converter="projetoPesquisaExtensaoConverter">
 
-                            <f:selectItems value="#{projetoPesquisaExtensaoMB.atualizarListaProjetosAtivos(usuarioMB.usuarioLogado.idUsuario)}" 
+                            <f:selectItems value="#{projetoPesquisaExtensaoMB.projetosPesquisaExtensaoAtivos}" 
                                            var="projetoColabEdicao" 
                                            itemValue="#{projetoColabEdicao}"
                                            itemLabel="#{projetoColabEdicao}" />
@@ -2404,7 +2403,7 @@
                     </p:dialog>
 
                     <!-- Atividades Administrativas -->
-                    <h:outputText value="3. Atividades administrativas" 
+                    <h:outputText value="4. Atividades administrativas" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -2809,7 +2808,7 @@
                     <br/>
 
                     <!-- Outras atividades desenvolvidas no campus -->
-                    <h:outputText value="4. Outras atividades desenvolvidas no campus" 
+                    <h:outputText value="5. Outras atividades desenvolvidas no campus" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -3252,7 +3251,7 @@
                     <br/>
 
                     <!-- Outras atividades que pretendo propor no semestre -->
-                    <h:outputText value="5. Outras atividades que pretendo propor no semestre" 
+                    <h:outputText value="6. Outras atividades que pretendo propor no semestre" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -4097,52 +4096,52 @@
                             <h:outputText value="CARGA HORÁRIA"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
-                            <h:outputText value="ATIVIDADE 1.1"  
+                            <h:outputText value="ATIVIDADE 2.1"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoAulas}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 1.2"  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoApoioEnsino}"  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 1.3"  
+                            <h:outputText value="ATIVIDADE 2.2"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoManutencaoEnsino}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 2.1"  
+                            <h:outputText value="ATIVIDADE 2.3"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoApoioEnsino}"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 3.1"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoProjetoPesquisaExtensaoAutor}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 2.2"  
+                            <h:outputText value="ATIVIDADE 3.2"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoProjetoPesquisaExtensaoColab}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 3"  
+                            <h:outputText value="ATIVIDADE 4"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoAdministracao}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 4"  
+                            <h:outputText value="ATIVIDADE 5"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoOutroTipoAtividade}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 5"  
+                            <h:outputText value="ATIVIDADE 6"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value=""  
+                            <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoAtividadesASeremPropostas}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="TOTAL"  
@@ -4191,32 +4190,9 @@
                     <p:commandButton styleClass="botaoCinza" 
                                      style="float: right; border-radius: 30px; font-size: large;" 
                                      value="Cancelar"
-                                     onclick="PF('cancelarPTDDialog').show();"/>
+                                     onclick="PF('sairTelaPTDDialog').show();"/>
 
                     <br/>
-
-                    <!-- Caixa de confirmação para cancelar PTD -->
-                    <p:dialog header="Cancelar PTD" 
-                              widgetVar="cancelarPTDDialog" 
-                              modal="true" 
-                              showEffect="fade" 
-                              hideEffect="fade" 
-                              resizable="false">
-
-                        <h:outputText value="Cancelando esse documento você perderá todas as informações preenchidas" 
-                                      styleClass="text01"
-                                      style="font-size: large; font-weight: bold; width: 400px;"/>
-                        <p:commandButton styleClass="botaoCinza" 
-                                         value="Manter e sair" 
-                                         ajax="false" 
-                                         immediate="true"
-                                         action="/NotificacoesDocente"/>
-
-                        <p:commandButton value="Sair" 
-                                         action="#{pTDMB.cancelarPTD(pTDMB.ptd)}"
-                                         styleClass="botaoVermelho"/>
-
-                    </p:dialog>
 
                 </h:form>
 

@@ -208,16 +208,11 @@ public class PTDMB {
         cargaHorariaTotalPTDPTDEdicao = 0;
     }
 
-    public List<PTD> atualizarListaPTDsReprovados(int idUsuario) {
+    public String abrirNotificacoesDocente(int idUsuario) {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados(idUsuario);
-        return ptdsReprovados;
-    }
-
-    public List<PTD> atualizarListaPTDsAprovados(int idUsuario) {
-        IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(idUsuario);
-        return ptdsAprovados;
+        return "/NotificacoesDocente?faces-redirect=true";
     }
 
     public void realizarConferencias() {
@@ -300,7 +295,7 @@ public class PTDMB {
             return "/CriarCorrigirPTD?faces-redirect=true";
         } else {
 
-            return "/NotificacoesDocente";
+            return "/NotificacoesDocente?faces-redirect=true";
         }
     }
 
@@ -321,7 +316,7 @@ public class PTDMB {
         return "/CriarCorrigirPTD";
     }
 
-    public String cancelarPTD(PTD ptdACancelar) {
+    public String cancelarPTD(PTD ptdACancelar, int idUsuario, String telaFutura) {
 
         Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class);
         Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
@@ -393,7 +388,6 @@ public class PTDMB {
             ptdACancelar.getAulas().remove(aula);
             ptdDAO.alterar(ptdACancelar);
             aulaDAO.excluir(aula);
-            tipoOfertaDAO.excluir(aula.getTipoOferta());
         }
         List<ManutencaoEnsino> auxManuEnsino = new ArrayList<>(ptdACancelar.getManutencoesEnsino());
         for (ManutencaoEnsino mEnsino : auxManuEnsino) {
@@ -432,14 +426,12 @@ public class PTDMB {
 
         ptdDAO.excluir(ptdACancelar);
 
-        return "NotificacoesDocente";
-    }
+        if (telaFutura.equalsIgnoreCase("login")) {
+            return "/Login?faces-redirect=true";
+        } else {
+            return abrirNotificacoesDocente(idUsuario);
+        }
 
-    public String cancelarPTDEfetuandoLogout() {
-        String variavelDescartavel = cancelarPTD(ptd);
-        variavelDescartavel = "";
-        UsuarioMB usuarioMB = new UsuarioMB();
-        return usuarioMB.realizarLogout();
     }
 
     public String submeterPTD() {
@@ -774,8 +766,10 @@ public class PTDMB {
                     cargaHoraHorario = (cargaHoraHorario + (minTotal / 60)) - 1;
                 }
             }
-            if (cargaHoraHorario != aula.getCargaHorariaTotal()) {
-                errosTabelaAula.add("A carga horária fornecida é diferente da carga resultante dos horários fornecidos!");
+            if (!aula.getHorariosAula().isEmpty()) {
+                if (cargaHoraHorario != aula.getCargaHorariaTotal()) {
+                    errosTabelaAula.add("A carga horária fornecida é diferente da carga resultante dos horários fornecidos!");
+                }
             }
 
             for (Horario ha : aula.getHorariosAula()) {
@@ -1273,6 +1267,22 @@ public class PTDMB {
         cargaHorariaTotalPTDPTDEdicao = 0;
         double cargaHorariaTotalPTDAux = 0;
 
+        PTD ptd = new PTD();
+        if (this.ptd.getIdPTD() != 0) {
+            ptd = this.ptd;
+
+            ptd.setCargaHorariaSecaoAdministracao(0);
+            ptd.setCargaHorariaSecaoApoioEnsino(0);
+            ptd.setCargaHorariaSecaoAtividadesASeremPropostas(0);
+            ptd.setCargaHorariaSecaoAulas(cargaHorariaTotalPTDAux);
+            ptd.setCargaHorariaSecaoManutencaoEnsino(0);
+            ptd.setCargaHorariaSecaoOutroTipoAtividade(0);
+            ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoAutor(0);
+            ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoColab(0);
+        } else {
+            ptd = this.ptdEmAvaliacao;
+        }
+
         for (Administracao adm : getPtd().getAdministrativas()) {
             ptd.setCargaHorariaSecaoAdministracao(ptd.getCargaHorariaSecaoAdministracao()
                     + adm.getCargaHorariaSemanalAdministracao());
@@ -1450,7 +1460,7 @@ public class PTDMB {
         } else {
             setEstadoCargaHorariaPTD("INCORRETO");
         }
-        
+
         cargaHorariaTotalPTDPTDAvaliacao = cargaHorariaTotalPTDAux;
         cargaHorariaTotalPTDPTDEdicao = cargaHorariaTotalPTDAux;
 

@@ -126,7 +126,7 @@
                                       styleClass="text01" 
                                       style="margin: 0px 0px 0px 0px;"/>
                         <br/>
-                        <h:dataTable  value="#{pTDMB.atualizarListaPTDsReprovados(usuarioMB.usuarioLogado.idUsuario)}" 
+                        <h:dataTable  value="#{pTDMB.ptdsReprovados}" 
                                       var="ptdReprovado"
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -152,7 +152,7 @@
                                     <p:commandButton styleClass="botaoVermelho" 
                                                      value="Descartar"
                                                      ajax="false" 
-                                                     action="#{pTDMB.cancelarPTD(ptdReprovado)}"/>
+                                                     action="#{pTDMB.excluirPTD(ptdReprovado)}"/>
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </h:panelGrid>
                             </h:column>
@@ -163,11 +163,11 @@
                     <br/>
                     <div id="content" style="width: 50%; border-radius: 15px; border-top-style: solid; border-top-width: medium; border-top-color: #1785ad;">
 
-                        <h:outputText value="PTDs Reprovados" 
+                        <h:outputText value="PTDs Aprovados" 
                                       styleClass="text01" 
                                       style="margin: 0px 0px 0px 0px;"/>
                         <br/>
-                        <h:dataTable  value="#{pTDMB.atualizarListaPTDsAprovados(usuarioMB.usuarioLogado.idUsuario)}" 
+                        <h:dataTable  value="#{pTDMB.ptdsAprovados}" 
                                       var="ptdAprovado"
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -175,7 +175,7 @@
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Observações do diretor" 
+                                    <h:outputText value="Não sei o que mostrar" 
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
