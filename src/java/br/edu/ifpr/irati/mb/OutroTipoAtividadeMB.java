@@ -39,7 +39,7 @@ public class OutroTipoAtividadeMB {
         
     }
 
-    public void salvarOutroTipoAtividade(Serializable idUsuario, PTD ptd) {
+    public String salvarOutroTipoAtividade(Serializable idUsuario, PTD ptd) {
         Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
         outroTipoAtividadeDAO.salvar(outroTipoAtividade);
         List<OutroTipoAtividade> outroTipoAtividades = outroTipoAtividadeDAO.buscarTodos(OutroTipoAtividade.class);
@@ -48,6 +48,7 @@ public class OutroTipoAtividadeMB {
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         outroTipoAtividade = new OutroTipoAtividade();
+        return "CriarCorrigirPTD?faces-redirect=true";
     }
 
     public String alterarOutroTipoAtividade() {

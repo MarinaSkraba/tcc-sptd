@@ -38,7 +38,7 @@ public class AtividadeASerPropostaMB {
         periodicidade.add("Mensalmente");
     }
 
-    public void salvarAtividadeASerProposta(Serializable idUsuario, PTD ptd) {
+    public String salvarAtividadeASerProposta(Serializable idUsuario, PTD ptd) {
 
         Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
         atividadeASerPropostaDAO.salvar(atividadeASerProposta);
@@ -48,6 +48,7 @@ public class AtividadeASerPropostaMB {
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptdDAO.alterar(ptd);
         atividadeASerProposta = new AtividadeASerProposta();
+        return "CriarCorrigirPTD?faces-redirect=true";
 
     }
 

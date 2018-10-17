@@ -1523,7 +1523,7 @@ public class PTDMB {
         return nomeCaixaDeAviso;
     }
 
-    public String reprovarPTD() {
+    public void reprovarPTD() {
 
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
 
@@ -1531,16 +1531,13 @@ public class PTDMB {
         getPtdEmAvaliacao().setDiretorEnsino(null);
         ptdDAOGenerico.alterar(getPtdEmAvaliacao());
 
-        return "/NotificacoesDiretorEnsino";
     }
 
-    public String aprovarPTD(DiretorEnsino diretorEnsino) {
+    public void aprovarPTD(DiretorEnsino diretorEnsino) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         getPtdEmAvaliacao().setEstadoPTD("APROVADO");
         getPtdEmAvaliacao().setDiretorEnsino(diretorEnsino);
         ptdDAOGenerico.alterar(getPtdEmAvaliacao());
-
-        return "/NotificacoesDiretorEnsino";
     }
 
     public PTD getPtd() {
