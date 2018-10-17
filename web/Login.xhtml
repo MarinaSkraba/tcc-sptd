@@ -42,7 +42,7 @@
                                      ajax="false" 
                                      validateClient="true"
                                      styleClass="botaoLogin"
-                                     action="#{usuarioMB.verificarLogin()}"/>
+                                     action="#{pTDMB.concluirLogin(usuarioMB.verificarLogin(), usuarioMB.usuarioLogado.idUsuario)}"/>
                 </h:form>
             </div>
         </div>

@@ -13,7 +13,7 @@ import org.hibernate.Session;
 public class ProjetoPesquisaExtensaoDAO implements IProjetoPesquisaExtensaoDao {
 
     @Override
-    public List<ProjetoPesquisaExtensao> buscarProjetosExtensaoAtivos(Serializable idUsuario) {
+    public List<ProjetoPesquisaExtensao> buscarProjetosExtensaoAtivos() {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "from projetopesquisaextensao";

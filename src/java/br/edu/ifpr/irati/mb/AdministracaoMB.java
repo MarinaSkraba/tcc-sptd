@@ -57,7 +57,6 @@ public class AdministracaoMB {
         ptdDAO.alterar(ptd);
         administracao = new Administracao();
         return "CriarCorrigirPTD?faces-redirect=true";
-
     }
 
     public String alterarAdministracao() {

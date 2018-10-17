@@ -84,23 +84,22 @@ public class UsuarioMB {
         if (usuario.getIdUsuario() == 0) {
             setUsuarioLogado(new Usuario());
             System.out.println("Acesso negado");
-            return "/Login";
+            return "/Login?faces-redirect=true";
         } else {
             setUsuarioLogado(usuario);
             System.out.println("Chegou object");
             System.out.println(getUsuarioLogado());
             if (getUsuarioLogado() instanceof Professor) {
-                return "/NotificacoesDocente";
+                return "/NotificacoesDocente?faces-redirect=true";
             } else {
-                return "/NotificacoesDiretorEnsino";
+                return "/NotificacoesDiretorEnsino?faces-redirect=true";
             }
         }
     }
 
-    public String realizarLogout(){
+    public void realizarLogout(){
         usuario = new Usuario();
         usuarioLogado = new Usuario();
-        return "/Login";
     }
 
     public Usuario getUsuario() {

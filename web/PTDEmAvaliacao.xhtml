@@ -27,7 +27,7 @@
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Notificações"
-                                 action="/NotificacoesDiretorEnsino"
+                                 action="#{pTDMB.abrirNotificacoesDiretorEnsino(usuarioMB.usuarioLogado.idUsuario)}"
                                  style="float: left;"/>
 
                 <p:commandButton id="logout"
@@ -47,7 +47,8 @@
                                      styleClass="opMenu"
                                      ajax="false" 
                                      immediate="true"
-                                     action="#{usuarioMB.realizarLogout()}"/>
+                                     actionListener="#{usuarioMB.realizarLogout()}"
+                                     action="/Login?faces-redirect=true"/>
                 </p:overlayPanel>
 
                 <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
@@ -75,6 +76,12 @@
                 <h:form id="PTD">
 
                     <br> </br>
+
+                    <h:outputText value="1. Identificação do docente" 
+                                  styleClass="text01" 
+                                  style="font-size: 22pt;"/>
+
+                    <br/>
                     <!-- Tabela informações docente -->
                     <center>
                         <h:panelGrid columns="2">
@@ -119,7 +126,7 @@
                     <br> </br>  
 
                     <!-- Atividades de Ensino -->
-                    <h:outputText value="1. Atividades de Ensino" 
+                    <h:outputText value="2. Atividades de Ensino" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -128,11 +135,11 @@
 
                     <!-- Subtítulo: Aulas -->
                     <h:panelGrid columns="1" >
-                        <h:outputText value="1.1 Aulas" 
+                        <h:outputText value="2.1 Aulas" 
                                       styleClass="text01"/>
                     </h:panelGrid>
 
-                        <!-- Mostrar atividades aulas -->
+                    <!-- Mostrar atividades aulas -->
                     <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.aulas}" 
                                       var="aula" 
@@ -244,11 +251,11 @@
 
                     <!-- Subtítulo: Manutenção de ensino -->
                     <h:panelGrid columns="1" >
-                        <h:outputText value="1.2 Manutenção ao ensino" 
+                        <h:outputText value="2.2 Manutenção ao ensino" 
                                       styleClass="text01" />
                     </h:panelGrid>
 
-                        <!-- Mostrar atividades manutenção de ensino -->
+                    <!-- Mostrar atividades manutenção de ensino -->
                     <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.manutencoesEnsino}" 
                                       var="manutencao" 
@@ -339,11 +346,11 @@
 
                     <!-- Subtítulo: Apoio ao ensino -->
                     <h:panelGrid columns="1" >
-                        <h:outputText value="1.3 Apoio ao ensino" 
+                        <h:outputText value="2.3 Apoio ao ensino" 
                                       styleClass="text01" />
                     </h:panelGrid>
 
-                        <!-- Mostrar atividades apoio ao ensino -->
+                    <!-- Mostrar atividades apoio ao ensino -->
                     <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.apoios}" 
                                       var="apoio" 
@@ -358,8 +365,8 @@
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
                                 <h:outputText value="#{apoio.tipoApoio.rotulo}"
-                                                  styleClass="text01"
-                                                  style="font-size: large;" />
+                                              styleClass="text01"
+                                              style="font-size: large;" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -431,7 +438,7 @@
                     <br/>
 
                     <!-- Atividades de Pesquisa e Extensão -->
-                    <h:outputText value="2. Atividades de Pesquisa e Extensão" 
+                    <h:outputText value="3. Atividades de Pesquisa e Extensão" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -440,11 +447,11 @@
 
                     <!-- Subtítulo: Pesquisa e/ou extensão (Autor) -->
                     <h:panelGrid columns="1" >
-                        <h:outputText value="2.1 Pesquisa e/ou extensão cadastradas no COPE (Autor)" 
+                        <h:outputText value="3.1 Pesquisa e/ou extensão cadastradas no COPE (Autor)" 
                                       styleClass="text01" />
                     </h:panelGrid>
 
-                        <!-- Mostrar atividades pesquisa e/ou extensão (Autor) -->
+                    <!-- Mostrar atividades pesquisa e/ou extensão (Autor) -->
                     <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.participacoesAutorPTDAvaliacao}" 
                                       var="participacaoPesquisaExtensaoAutor" 
@@ -566,11 +573,11 @@
 
                     <!-- Subtítulo: Pesquisa e/ou extensão (Colaborador) -->
                     <h:panelGrid columns="1" >
-                        <h:outputText value="2.2 Pesquisa e/ou extensão cadastradas no COPE (Colaborador)" 
+                        <h:outputText value="3.2 Pesquisa e/ou extensão cadastradas no COPE (Colaborador)" 
                                       styleClass="text01" />
                     </h:panelGrid>
 
-                        <!-- Mostrar atividades pesquisa e/ou extensão (Colaborador) -->
+                    <!-- Mostrar atividades pesquisa e/ou extensão (Colaborador) -->
                     <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.participacoesColabPTDAvaliacao}" 
                                       var="participacaoPesquisaExtensaoColab" 
@@ -690,7 +697,7 @@
                     <br/>
 
                     <!-- Atividades Administrativas -->
-                    <h:outputText value="3. Atividades administrativas" 
+                    <h:outputText value="4. Atividades administrativas" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -702,8 +709,8 @@
                         <h:outputText value="Atividades administrativas" 
                                       styleClass="text01" />
                     </h:panelGrid>
-                    
-                        <!-- Mostrar atividades administrativas -->
+
+                    <!-- Mostrar atividades administrativas -->
                     <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.administrativas}" 
                                       var="administracao" 
@@ -791,7 +798,7 @@
                     <br/>
 
                     <!-- Outras atividades desenvolvidas no campus -->
-                    <h:outputText value="4. Outras atividades desenvolvidas no campus" 
+                    <h:outputText value="5. Outras atividades desenvolvidas no campus" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -804,7 +811,7 @@
                                       styleClass="text01" />
                     </h:panelGrid>
 
-                        <!-- Mostrar outras atividades desenvolvidas no campus -->
+                    <!-- Mostrar outras atividades desenvolvidas no campus -->
                     <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.outrosTiposAtividades}" 
                                       var="outrasAtividades" 
@@ -904,7 +911,7 @@
                     <br/>
 
                     <!-- Outras atividades que pretendo propor no semestre -->
-                    <h:outputText value="5. Outras atividades que pretendo propor no semestre" 
+                    <h:outputText value="6. Outras atividades que pretendo propor no semestre" 
                                   styleClass="text01" 
                                   style="font-size: 22pt;"/>
 
@@ -916,7 +923,7 @@
                         <h:outputText value="Outras atividades que pretendo propor no semestre" 
                                       styleClass="text01" />
                     </h:panelGrid>
-                        <!-- Mostrar atividades que pretende propor -->
+                    <!-- Mostrar atividades que pretende propor -->
                     <div id="mostrarTabela">
                         <h:dataTable  value="#{pTDMB.ptdEmAvaliacao.atividadesASeremPropostas}" 
                                       var="atividadeASerProposta" 
@@ -1030,58 +1037,58 @@
                             <h:outputText value="CARGA HORÁRIA"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
-                            <h:outputText value="ATIVIDADE 1.1"  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoAulas}"  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 1.2"  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoApoioEnsino}"  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 1.3"  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoManutencaoEnsino}"  
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 2.1"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoProjetoPesquisaExtensaoAutor}"  
+                            <h:outputText value="#{pTDMB.ptdEmAvaliacao.cargaHorariaSecaoAulas}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 2.2"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoProjetoPesquisaExtensaoColab}"  
+                            <h:outputText value="#{pTDMB.ptdEmAvaliacao.cargaHorariaSecaoManutencaoEnsino}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="ATIVIDADE 3"  
+                            <h:outputText value="ATIVIDADE 2.3"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoAdministracao}"  
+                            <h:outputText value="#{pTDMB.ptdEmAvaliacao.cargaHorariaSecaoApoioEnsino}"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 3.1"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="#{pTDMB.ptdEmAvaliacao.cargaHorariaSecaoProjetoPesquisaExtensaoAutor}"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 3.2"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="#{pTDMB.ptdEmAvaliacao.cargaHorariaSecaoProjetoPesquisaExtensaoColab}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 4"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptd.cargaHorariaSecaoOutroTipoAtividade}"  
+                            <h:outputText value="#{pTDMB.ptdEmAvaliacao.cargaHorariaSecaoAdministracao}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 5"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value=""  
+                            <h:outputText value="#{pTDMB.ptdEmAvaliacao.cargaHorariaSecaoOutroTipoAtividade}"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="ATIVIDADE 6"  
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
+                            <h:outputText value="#{pTDMB.ptdEmAvaliacao.cargaHorariaSecaoAtividadesASeremPropostas}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="TOTAL"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
-                            <h:outputText value="#{pTDMB.cargaHorariaTotalPTDPTDEdicao}"  
+                            <h:outputText value="#{pTDMB.cargaHorariaTotalPTDPTDAvaliacao}"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
                         </h:panelGrid>
@@ -1121,7 +1128,8 @@
                     <p:commandButton styleClass="botaoAzul" 
                                      style="float: right; border-radius: 30px; font-size: large; margin-left: 10px;" 
                                      value="Aprovar"
-                                     action="#{pTDMB.aprovarPTD(usuarioMB.usuario)}"/>
+                                     actionListener="#{pTDMB.aprovarPTD(usuarioMB.usuario)}"
+                                     action="#{pTDMB.abrirNotificacoesDiretorEnsino(usuarioMB.usuarioLogado.idUsuario)}"/>
                     <p:commandButton styleClass="botaoVermelho" 
                                      style="float: right; border-radius: 30px; font-size: large;" 
                                      value="Reprovar PTD"
@@ -1144,8 +1152,26 @@
                         <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptdEmAvaliacao.campoObservacoesDiretorEnsino}"/>
                         <br/>
                         <p:commandButton value="Enviar"
-                                         onclick="PF('#{pTDMB.verificarPossibilidadeReprovacao()}').show();"
+                                         onclick="PF('confirmacaoReprovacaoDialog').show();"
                                          styleClass="botaoAzul"/>
+
+                    </p:dialog>
+                    
+                    <!-- Caixa de confirmação de reprovação -->
+                    <p:dialog header="Confirmação" 
+                              widgetVar="confirmacaoReprovacaoDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Você realmente deseja reprovar esse documento?" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:commandButton styleClass="botaoAzul" 
+                                         value="Confirmar"
+                                         onclick="PF('#{pTDMB.verificarPossibilidadeReprovacao()}').show();"/>
 
                     </p:dialog>
 
@@ -1177,7 +1203,8 @@
 
                         <p:commandButton styleClass="botaoAzul" 
                                          value="OK"
-                                         action="#{pTDMB.reprovarPTD()}"/>
+                                         actionListener="#{pTDMB.reprovarPTD()}"
+                                         action="#{pTDMB.abrirNotificacoesDiretorEnsino(usuarioMB.usuarioLogado.idUsuario)}"/>
 
                     </p:dialog>
 

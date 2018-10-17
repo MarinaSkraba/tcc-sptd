@@ -75,7 +75,11 @@ public class AulaMB {
 
     public String alterarAula() {
         Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-        aulaSelecionadaParaAula.setCargaHorariaTotal(HorasAulaTotalEdicao / NumeroSemanasEdicao);
+        if (NumeroSemanas != 0&HorasAulaTotal != 0) {
+            aulaSelecionadaParaAula.setCargaHorariaTotal(HorasAulaTotal / NumeroSemanas);
+        } else {
+            aulaSelecionadaParaAula.setCargaHorariaTotal(0);
+        }
         aulaDAO.alterar(aulaSelecionadaParaAula);
         aulaSelecionadaParaAula = new Aula();
         HorasAulaTotalEdicao = 0;
