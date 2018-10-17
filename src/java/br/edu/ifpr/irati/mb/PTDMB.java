@@ -517,8 +517,14 @@ public class PTDMB {
 
                     nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
+                } else if (irregularidade.equals("A carga horária do PTD diverge com seu regime de trabalho de 20h") | irregularidade.equals("A carga horária do PTD diverge com seu regime de trabalho de 40h")) {
+
+                    nomeCaixaDialogo = "avisoIrregularidadeDialog";
+
                 } else {
+
                     nomeCaixaDialogo = "confirmacaoIrregularidadeDialog";
+
                 }
             }
         } else {
@@ -1446,6 +1452,15 @@ public class PTDMB {
                 + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
                 + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab();
         double regime = 20;
+        if ((getPtd().getProfessor().getRegimeTrabalho().equals("40h") | getPtd().getProfessor().getRegimeTrabalho().equals("Dedicação Exclusiva")) && cargaHorariaTotalPTDAux != 40) {
+
+            irregularidadesPTDEdicao.add("A carga horária do PTD diverge com seu regime de trabalho de 40h");
+
+        } else if (getPtd().getProfessor().getRegimeTrabalho().equals("20h") && cargaHorariaTotalPTDAux != 20) {
+
+            irregularidadesPTDEdicao.add("A carga horária do PTD diverge com seu regime de trabalho de 20h");
+
+        }
         if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
             regime = 40;
         }
