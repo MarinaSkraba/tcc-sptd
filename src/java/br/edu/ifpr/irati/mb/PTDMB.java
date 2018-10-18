@@ -177,16 +177,16 @@ public class PTDMB {
         cargaHorariaTotalPTDPTDAvaliacao = 0;
         cargaHorariaTotalPTDPTDEdicao = 0;
     }
-    
-    public String concluirLogin(String tela, int idUsuario){
-        if(tela.equalsIgnoreCase("/NotificacoesDocente?faces-redirect=true")){
+
+    public String concluirLogin(String tela, int idUsuario) {
+        if (tela.equalsIgnoreCase("/NotificacoesDocente?faces-redirect=true")) {
             return abrirNotificacoesDocente(idUsuario);
         } else if (tela.equalsIgnoreCase("/NotificacoesDiretorEnsino?faces-redirect=true")) {
             return abrirNotificacoesDiretorEnsino(idUsuario);
         } else {
             return tela;
         }
-         
+
     }
 
     public String abrirNotificacoesDocente(int idUsuario) {
@@ -195,8 +195,8 @@ public class PTDMB {
         ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(idUsuario);
         return "/NotificacoesDocente?faces-redirect=true";
     }
-    
-    public String abrirNotificacoesDiretorEnsino(int idUsuario){
+
+    public String abrirNotificacoesDiretorEnsino(int idUsuario) {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         return "/NotificacoesDiretorEnsino?faces-redirect=true";
@@ -264,9 +264,8 @@ public class PTDMB {
         limparVariáveis();
 
         if (ptdsAprovados.isEmpty() != true) {
-            setPtd(ptdsAprovados.get(ptdsAprovados.size() - 1));
-            getPtd().setIdPTD(0);
-            getPtd().setEstadoPTD("EDICAO");
+            
+
             ptdDAOGenerico.salvar(getPtd());
             setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario()).get(0));
 
@@ -1466,8 +1465,8 @@ public class PTDMB {
         } else {
             setEstadoCargaHorariaPTD("INCORRETO");
         }
-        
-        for(String irregularidade : irregularidadesPTDEdicao){
+
+        for (String irregularidade : irregularidadesPTDEdicao) {
             irregularidadesPTDAvaliacao.add(irregularidade);
         }
 
@@ -1839,7 +1838,7 @@ public class PTDMB {
     public void setIrregularidadesPTDAvaliacao(List<String> irregularidadesPTDAvaliacao) {
         this.irregularidadesPTDAvaliacao = irregularidadesPTDAvaliacao;
     }
-    
+
     /**
      * @return the cargaHorariaTotalPTDPTDEdicao
      */
