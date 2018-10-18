@@ -3834,6 +3834,26 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
+                    
+                    <!-- Justificativa Tabela Geral -->
+                    <p:dialog header="Justificativas para tabela geral" 
+                              widgetVar="justificarTebelaGeralDialog" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:outputText value="Escreva comentários ou justificativas para as irregularidades não especificas de alguma seção" 
+                                      styleClass="text01"
+                                      style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                        <br/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaSeremPropostas}"/>
+                        <br/>
+                        <p:commandButton value="Comentar"
+                                         action="#{pTDMB.salvarJustificativasEComentários()}"
+                                         styleClass="botaoAzul"/>
+
+                    </p:dialog>
 
                     <!-- Caixa de aviso de erros de preenchimento -->
                     <p:dialog header="Há erros nos dados fornecidos" 
@@ -4154,6 +4174,15 @@
                         </h:panelGrid>
 
                     </center>
+                    
+                    <!-- Link para a caixa de comentar -->
+                    <p:commandLink style="width: 200px; margin: 15px;"
+                                   styleClass="link"
+                                   onclick="PF('justificarAtividadesAProporDialog').show();">
+                        <h:outputText value="Adicionar comentários e/ou justificativas"  
+                                      styleClass="text01"
+                                      style="color: #1AB5D9; font-size: large;"/>
+                    </p:commandLink>
 
                     <br/>
                     <!-- Mostrar irregularidades -->
