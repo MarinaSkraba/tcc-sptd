@@ -164,9 +164,11 @@ public class PTDMB {
             Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
             atividadeASerPropostaDAO.alterar(aasp);
         }
-        for (Aula al : ptd.getAulas()) {
-            Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-            aulaDAO.alterar(al);
+        List<Aula> aulas = ptd.getAulas();
+        for (Aula al : aulas) {
+            AulaMB aulaMB = new AulaMB();
+            aulaMB.setAula(al);
+            aulaMB.salvarAula(ptd.getProfessor().getIdUsuario(), ptd);
         }
         for (ManutencaoEnsino manuEn : ptd.getManutencoesEnsino()) {
             Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
@@ -263,7 +265,7 @@ public class PTDMB {
         if (!ptdsEmEdicao.isEmpty()) {
             setPtd(ptdsEmEdicao.get(0));
             Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-            ptdDAOGenerico.alterar(ptd);
+//            ptdDAOGenerico.alterar(ptd);
             return "/CriarCorrigirPTD?faces-redirect=true";
         } else {
             return "/NotificacoesDocente?faces-redirect=true";
