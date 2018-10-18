@@ -361,7 +361,7 @@ body{
     align-items: center;
     flex-direction: row;
     border-width: 2pt;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgb(255,255,255);
     border-radius: 500px;
     justify-content: center; 
     box-shadow: 5px 5px 5px rgba(0,0,0,0.7);

@@ -136,7 +136,7 @@ public class PTDMB {
             }
         }
     }
-    
+
     public void atualizarListasParticipacoesPTDAprovado() {
         setParticipacoesAutorPTDAprovado(new ArrayList<>());
         setParticipacoesColabPTDAprovado(new ArrayList<>());
@@ -149,42 +149,38 @@ public class PTDMB {
         }
     }
 
-    public void atualizarPTDNoBanco(PTD ptd) {
+    public String sairTelaManterPTD() {
 
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-        PTD p = ptd;
-        ptd.setDiretorEnsino(null);
-        ptdDAOGenerico.alterar(ptd);
-        if (ptd.getIdPTD() != 0) {
-            for (Administracao adm : p.getAdministrativas()) {
-                Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
-                administracaoDAO.alterar(adm);
-            }
-            for (Apoio apoio : p.getApoios()) {
-                Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
-                apoioDAO.alterar(apoio);
-            }
-            for (AtividadeASerProposta aasp : p.getAtividadesASeremPropostas()) {
-                Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
-                atividadeASerPropostaDAO.alterar(aasp);
-            }
-            for (Aula al : p.getAulas()) {
-                Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
-                aulaDAO.alterar(al);
-            }
-            for (ManutencaoEnsino manuEn : p.getManutencoesEnsino()) {
-                Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
-                manutencaoEnsinoDAO.alterar(manuEn);
-            }
-            for (OutroTipoAtividade ota : p.getOutrosTiposAtividades()) {
-                Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
-                outroTipoAtividadeDAO.alterar(ota);
-            }
-            for (Participacao part : p.getParticipacoes()) {
-                Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-                participacaoDAO.alterar(part);
-            }
+        for (Administracao adm : ptd.getAdministrativas()) {
+            Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
+            administracaoDAO.alterar(adm);
         }
+        for (Apoio apoio : ptd.getApoios()) {
+            Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
+            apoioDAO.alterar(apoio);
+        }
+        for (AtividadeASerProposta aasp : ptd.getAtividadesASeremPropostas()) {
+            Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
+            atividadeASerPropostaDAO.alterar(aasp);
+        }
+        for (Aula al : ptd.getAulas()) {
+            Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
+            aulaDAO.alterar(al);
+        }
+        for (ManutencaoEnsino manuEn : ptd.getManutencoesEnsino()) {
+            Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+            manutencaoEnsinoDAO.alterar(manuEn);
+        }
+        for (OutroTipoAtividade ota : ptd.getOutrosTiposAtividades()) {
+            Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
+            outroTipoAtividadeDAO.alterar(ota);
+        }
+        for (Participacao part : ptd.getParticipacoes()) {
+            Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
+            participacaoDAO.alterar(part);
+        }
+        return "/Login?faces-redirect=true";
     }
 
     public void limparVariáveis() {
@@ -288,7 +284,7 @@ public class PTDMB {
         limparVariáveis();
 
         if (ptdsAprovados.isEmpty() != true) {
-            
+
             Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class);
             Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
             Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
@@ -306,7 +302,7 @@ public class PTDMB {
             Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
             Dao<ProjetoPesquisaExtensao> pPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
             Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
-            
+
             setPtd(ptdsAprovados.get(ptdsAprovados.size() - 1));
             getPtd().setIdPTD(0);
             getPtd().setEstadoPTD("EDICAO");
@@ -316,7 +312,7 @@ public class PTDMB {
                 administracaoDAO.salvar(adm);
                 List<Administracao> as = administracaoDAO.buscarTodos(Administracao.class);
                 adm = as.get(as.size() - 1);
-                for(Horario h: adm.getHorariosAdministracao()){
+                for (Horario h : adm.getHorariosAdministracao()) {
                     h.setIdHorario(0);
                     horarioDAO.salvar(h);
                     List<Horario> hs = horarioDAO.buscarTodos(Horario.class);
@@ -2024,7 +2020,8 @@ public class PTDMB {
     }
 
     /**
-     * @param participacoesAutorPTDAprovado the participacoesAutorPTDAprovado to set
+     * @param participacoesAutorPTDAprovado the participacoesAutorPTDAprovado to
+     * set
      */
     public void setParticipacoesAutorPTDAprovado(List<Participacao> participacoesAutorPTDAprovado) {
         this.participacoesAutorPTDAprovado = participacoesAutorPTDAprovado;
@@ -2038,7 +2035,8 @@ public class PTDMB {
     }
 
     /**
-     * @param participacoesColabPTDAprovado the participacoesColabPTDAprovado to set
+     * @param participacoesColabPTDAprovado the participacoesColabPTDAprovado to
+     * set
      */
     public void setParticipacoesColabPTDAprovado(List<Participacao> participacoesColabPTDAprovado) {
         this.participacoesColabPTDAprovado = participacoesColabPTDAprovado;
