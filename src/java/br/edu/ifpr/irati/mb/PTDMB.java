@@ -40,6 +40,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -265,6 +266,64 @@ public class PTDMB {
 
         if (ptdsAprovados.isEmpty() != true) {
             
+            Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class);
+            Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
+            Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
+            Dao<TipoApoio> tipoApoioDAO = new GenericDAO<>(TipoApoio.class);
+            Dao<AtividadeASerProposta> aASPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
+            Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
+            Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class);
+            Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
+            Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+            Dao<ManutencaoEnsino> manutencaoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+            Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class);
+            Dao<OutroTipoAtividade> oTAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
+            Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+            Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
+            Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
+            Dao<ProjetoPesquisaExtensao> pPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
+            Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
+            
+            setPtd(ptdsAprovados.get(ptdsAprovados.size() - 1));
+            getPtd().setIdPTD(0);
+            getPtd().setEstadoPTD("EDICAO");
+
+            for (Administracao adm : ptd.getAdministrativas()) {
+                adm.setIdAdministracao(0);
+                administracaoDAO.salvar(adm);
+                List<Administracao> as = administracaoDAO.buscarTodos(Administracao.class);
+                adm = as.get(as.size() - 1);
+                for(Horario h: adm.getHorariosAdministracao()){
+                    h.setIdHorario(0);
+                    horarioDAO.salvar(h);
+                    List<Horario> hs = horarioDAO.buscarTodos(Horario.class);
+                    h = hs.get(hs.size() - 1);
+                }
+            }
+            for (Apoio apoio : ptd.getApoios()) {
+                apoio.setIdApoio(0);
+                apoioDAO.salvar(apoio);
+            }
+            for (AtividadeASerProposta aasp : ptd.getAtividadesASeremPropostas()) {
+                aasp.setIdAtividadeASerProposta(0);
+                aASPropostaDAO.salvar(aasp);
+            }
+            for (Aula al : ptd.getAulas()) {
+                al.setIdAula(0);
+                aulaDAO.salvar(al);
+            }
+            for (ManutencaoEnsino me : ptd.getManutencoesEnsino()) {
+                me.setIdManutencao(0);
+                manutencaoDAO.salvar(me);
+            }
+            for (OutroTipoAtividade ota : ptd.getOutrosTiposAtividades()) {
+                ota.setIdOutroTipoAtividade(0);
+                oTAtividadeDAO.salvar(ota);
+            }
+            for (Participacao part : ptd.getParticipacoes()) {
+                part.setIdParticipacao(0);
+                participacaoDAO.salvar(part);
+            }
 
             ptdDAOGenerico.salvar(getPtd());
             setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario()).get(0));
@@ -1586,6 +1645,7 @@ public class PTDMB {
     public void aprovarPTD(DiretorEnsino diretorEnsino) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         getPtdEmAvaliacao().setEstadoPTD("APROVADO");
+        getPtdEmAvaliacao().setDataAvaliacaoPTD(new Date());
         getPtdEmAvaliacao().setDiretorEnsino(diretorEnsino);
         ptdDAOGenerico.alterar(getPtdEmAvaliacao());
     }
