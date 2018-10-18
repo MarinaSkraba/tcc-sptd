@@ -12,6 +12,8 @@ import java.util.List;
 
 public interface IPTDDAO {
     
+    public List<PTD> buscarPTDsConcluidos(Serializable idUsuario);
+    
     public List<PTD> buscarPTDsAprovados(Serializable idUsuario);
     
     public List<PTD> buscarPTDsEmEdicao(Serializable idUsuario);

@@ -56,14 +56,18 @@ public class PTDMB {
 
     private PTD ptd;
     private PTD ptdEmAvaliacao;
+    private PTD ptdAprovado;
     private List<PTD> ptdsEmAvaliacao;
     private List<PTD> ptdsReprovados;
     private List<PTD> ptdsEmEdicao;
     private List<PTD> ptdsAprovados;
+    private List<PTD> ptdsConcluídos;
     private List<Participacao> participacoesAutorPTDEdicao;
     private List<Participacao> participacoesColabPTDEdicao;
     private List<Participacao> participacoesAutorPTDAvaliacao;
     private List<Participacao> participacoesColabPTDAvaliacao;
+    private List<Participacao> participacoesAutorPTDAprovado;
+    private List<Participacao> participacoesColabPTDAprovado;
     private String estadoCargaHorariaPTD;
     private List<String> errosTabelaAula;
     private List<String> errosTabelaManuEnsino;
@@ -82,13 +86,19 @@ public class PTDMB {
 
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptd = new PTD();
+        ptdAprovado = new PTD();
         ptdEmAvaliacao = new PTD();
         ptdsEmAvaliacao = new ArrayList<>();
         ptdsReprovados = new ArrayList<>();
         ptdsEmEdicao = new ArrayList();
+        ptdsConcluídos = new ArrayList();
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         participacoesAutorPTDEdicao = new ArrayList<>();
         participacoesColabPTDEdicao = new ArrayList<>();
+        participacoesAutorPTDAvaliacao = new ArrayList<>();
+        participacoesColabPTDAvaliacao = new ArrayList<>();
+        participacoesAutorPTDAprovado = new ArrayList<>();
+        participacoesColabPTDAprovado = new ArrayList<>();
         this.estadoCargaHorariaPTD = "";
         errosTabelaAula = new ArrayList<>();
         errosTabelaManuEnsino = new ArrayList<>();
@@ -123,6 +133,18 @@ public class PTDMB {
                 participacoesAutorPTDAvaliacao.add(part);
             } else {
                 participacoesColabPTDAvaliacao.add(part);
+            }
+        }
+    }
+    
+    public void atualizarListasParticipacoesPTDAprovado() {
+        setParticipacoesAutorPTDAprovado(new ArrayList<>());
+        setParticipacoesColabPTDAprovado(new ArrayList<>());
+        for (Participacao part : ptdAprovado.getParticipacoes()) {
+            if (part.getRotulo().equalsIgnoreCase("Autor")) {
+                participacoesAutorPTDAprovado.add(part);
+            } else {
+                participacoesColabPTDAprovado.add(part);
             }
         }
     }
@@ -194,6 +216,7 @@ public class PTDMB {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados(idUsuario);
         ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(idUsuario);
+        ptdsConcluídos = ptdDAOEspecifico.buscarPTDsConcluidos(idUsuario);
         return "/NotificacoesDocente?faces-redirect=true";
     }
 
@@ -1963,6 +1986,63 @@ public class PTDMB {
      */
     public void setCargaHorariaTotalPTDPTDAvaliacao(double cargaHorariaTotalPTDPTDAvaliacao) {
         this.cargaHorariaTotalPTDPTDAvaliacao = cargaHorariaTotalPTDPTDAvaliacao;
+    }
+
+    /**
+     * @return the ptdAprovado
+     */
+    public PTD getPtdAprovado() {
+        atualizarListasParticipacoesPTDAprovado();
+        return ptdAprovado;
+    }
+
+    /**
+     * @param ptdAprovado the ptdAprovado to set
+     */
+    public void setPtdAprovado(PTD ptdAprovado) {
+        this.ptdAprovado = ptdAprovado;
+    }
+
+    /**
+     * @return the ptdsConcluídos
+     */
+    public List<PTD> getPtdsConcluídos() {
+        return ptdsConcluídos;
+    }
+
+    /**
+     * @param ptdsConcluídos the ptdsConcluídos to set
+     */
+    public void setPtdsConcluídos(List<PTD> ptdsConcluídos) {
+        this.ptdsConcluídos = ptdsConcluídos;
+    }
+
+    /**
+     * @return the participacoesAutorPTDAprovado
+     */
+    public List<Participacao> getParticipacoesAutorPTDAprovado() {
+        return participacoesAutorPTDAprovado;
+    }
+
+    /**
+     * @param participacoesAutorPTDAprovado the participacoesAutorPTDAprovado to set
+     */
+    public void setParticipacoesAutorPTDAprovado(List<Participacao> participacoesAutorPTDAprovado) {
+        this.participacoesAutorPTDAprovado = participacoesAutorPTDAprovado;
+    }
+
+    /**
+     * @return the participacoesColabPTDAprovado
+     */
+    public List<Participacao> getParticipacoesColabPTDAprovado() {
+        return participacoesColabPTDAprovado;
+    }
+
+    /**
+     * @param participacoesColabPTDAprovado the participacoesColabPTDAprovado to set
+     */
+    public void setParticipacoesColabPTDAprovado(List<Participacao> participacoesColabPTDAprovado) {
+        this.participacoesColabPTDAprovado = participacoesColabPTDAprovado;
     }
 
 }
