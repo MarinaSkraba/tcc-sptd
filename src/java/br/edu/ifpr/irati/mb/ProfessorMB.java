@@ -56,7 +56,7 @@ public class ProfessorMB {
 
         }
         if (errosCadastroProfessor.isEmpty() == true) {
-           // primeiro verifica o email com link
+            // primeiro verifica o email com link
             // depois:
             Usuario usuario = new Usuario(professor.getIdUsuario(), professor.getNomeCompleto(), professor.getEmail(),
                     professor.getImagemPerfil(), senhaSHA512, "Habilitado");
@@ -68,6 +68,22 @@ public class ProfessorMB {
 
         return "/adicionar html";
 
+    }
+
+    public String alterarProfessor() {
+
+        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
+        professorDAO.alterar(professor);
+        professores = professorDAO.buscarTodos(Professor.class);
+
+        return "/ adicionar html";
+    }
+
+    public void desabilitarProfessor(Professor professor) {
+        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
+        professor.setEstadoUsuario("Desabilitado");
+        professorDAO.alterar(professor);
+        professores = professorDAO.buscarTodos(Professor.class);
     }
 
     public Professor getProfessor() {

@@ -35,6 +35,7 @@ public class CursoMB {
         for (Curso c : cursos) {
             
             cursoDAO.alterar(c);
+            cursos = cursoDAO.buscarTodos(Curso.class);
         }
         return "NotificacoesDiretorEnsino?faces-redirect=true";
     }
