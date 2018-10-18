@@ -569,11 +569,10 @@ public class PTDMB {
 
                     nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
-                } else if (irregularidade.equals("A carga horária dedicada a Atividades de Ensino"
+                } else if ((irregularidade.equals("A carga horária dedicada a Atividades de Ensino"
                         + "(apoio,manutenção e aulas) é inferior à 8 horas") | irregularidade.equals("A carga horária dedicada a Atividades de Ensino"
                                 + "(apoio,manutenção e aulas) é superior à 12 horas") | irregularidade.equals("A carga horária dedicada a Atividades de Ensino"
-                                + "(apoio,manutenção e aulas) é inferior à 12 horas") | irregularidade.equals("A carga horária dedicada a Atividades de Ensino"
-                                + "(apoio,manutenção e aulas) é superior à 24 horas")) {
+                                + "(apoio,manutenção e aulas) é superior à 24 horas")) && ptd.getCampoJustificativaGeral().isEmpty() == true) {
 
                     nomeCaixaDialogo = "avisoIrregularidadeDialog";
 
