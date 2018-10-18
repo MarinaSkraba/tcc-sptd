@@ -76,7 +76,6 @@ public class UsuarioMB {
 
     public String verificarLogin() throws HashGenerationException {
         String senhaSHA512 = Digest.hashString(usuario.getSenhaAlfanumerica(),"SHA-512");
-        System.out.println("Chegou criptografia");
         System.out.println(getUsuario().getEmail());
         System.out.println(senhaSHA512);
         IUsuarioDao usuarioDao = new UsuarioDAO();

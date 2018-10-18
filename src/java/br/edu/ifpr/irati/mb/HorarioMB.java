@@ -42,7 +42,7 @@ public class HorarioMB {
     private Horario horarioAtividadeASerProposta;
     private List<Horario> horarios;
     private List<String> diasSemana;
-    private PTDMB ptdmb;
+   
 
     public HorarioMB() {
 
