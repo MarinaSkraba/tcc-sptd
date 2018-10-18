@@ -244,9 +244,12 @@
 
                         </h:dataTable>
                     </div>
-                    <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaAtividadeEnsino}" 
-                                  styleClass="text01"
-                                  style="font-size: large; width: 400px;"/>
+                    <div id="justificativaIrregularidade">
+                        <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaAtividadeEnsino}" 
+                                      styleClass="text01"
+
+                                      style="font-size: large; width: 400px;"/>
+                    </div>
                     <br/>
 
                     <!-- Subtítulo: Manutenção de ensino -->
@@ -1156,7 +1159,7 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
-                    
+
                     <!-- Caixa de confirmação de reprovação -->
                     <p:dialog header="Confirmação" 
                               widgetVar="confirmacaoReprovacaoDialog" 
