@@ -55,6 +55,99 @@
                               styleClass="text01"
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
+                <p:commandButton id="cursoButton"
+                                 styleClass="opMenu"
+                                 icon="/img/Search/searchLarger_24.png"
+                                 value="Adicionar Curso"/>
+
+                <!-- Caixa de "novo" PTD -->
+                <p:overlayPanel id="cursoPanel" 
+                                for="cursoButton" 
+                                hideEffect="fade" 
+                                style="padding: 0px;">
+                    <p:commandButton value="Adicionar curso"
+                                     styleClass="opMenu"
+                                     onclick="PF('addCursoDialog').show();"/>
+                    <br/>
+                    <p:commandButton value="Editar cursos"
+                                     styleClass="opMenu"
+                                     ajax="false" 
+                                     onclick="PF('edtCursoDialog').show();"/>
+                </p:overlayPanel>
+
+                <!-- Caixa para adicionar curso -->
+                <p:dialog header="Adicionar um Curso" 
+                          widgetVar="addCursoDialog" 
+                          modal="true"                              
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false"
+                          >
+
+                    <h:outputText value="NOME CURSO" 
+                                  styleClass="text01"
+                                  style="margin: 10px 25px -10px 25px;"/>
+                    <br/>
+
+                    <p:inputText value="#{cursoMB}"/>
+
+                    <br/>
+                    <p:commandButton value="Salvar" 
+                                     styleClass="botaoAzul"/>
+
+                </p:dialog>
+
+                <!-- Caixa para editar cursos -->
+                <p:dialog header="Editar Horarios de Aula" 
+                          widgetVar="edtCursoDialog" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false">
+
+                    <h:dataTable  value="#{cursoMB.cursos}" 
+                                  var="curso" 
+                                  style="width: 100%;"
+                                  headerClass="text-center"
+                                  footerClass="text-center">
+
+                        <f:facet name="header">
+                            <h:outputText value="" />
+                        </f:facet>
+
+                        <h:column>
+
+                            <f:facet name="header">
+                                <h:outputText value="NOME CURSO" 
+                                              styleClass="text01"/>
+                            </f:facet>
+                            <p:inputText value=""/>
+
+                        </h:column>
+
+                        <h:column>
+
+                            <f:facet name="header">
+                                <h:outputText value="" 
+                                              styleClass="text01"
+                                              style="font-size: large; font-weight: bold;"/>
+                            </f:facet>
+
+                            <p:commandButton styleClass="botaoCinza" 
+                                             style="float: left; font-size: 12pt;" 
+                                             value="X" 
+                                             ajax="false" 
+                                             immediate="true"/>
+
+                        </h:column>
+
+                    </h:dataTable>
+
+                    <br/>
+                    <p:commandButton value="Salvar edição" 
+                                     styleClass="botaoAzul"/>
+
+                </p:dialog>
 
                 <p:commandButton styleClass="opMenu"
                                  icon="/img/Search/searchLarger_24.png"
@@ -78,7 +171,7 @@
             <div id="content" style="width: 70%;">
                 <br/>
                 <h:form>
-                    
+
                     <h:dataTable  value="#{pTDMB.ptdsEmAvaliacao}" 
                                   var="ptdEsperando"
                                   style="border-spacing: 0pt; width: 100%;"

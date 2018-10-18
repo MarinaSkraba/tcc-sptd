@@ -57,7 +57,7 @@
                 <p:commandButton id="addPTD"
                                  styleClass="opMenu"
                                  icon="/img/Search/searchLarger_24.png"
-                                 value="Novo PTD"/>
+                                 value="Editar PTD"/>
 
                 <!-- Caixa de "novo" PTD -->
                 <p:overlayPanel id="addPanel" 
@@ -78,13 +78,13 @@
                                      ajax="false" 
                                      action="#{pTDMB.abrirCriarCorrigirPTDContinuarEdicao(usuarioMB.usuarioLogado)}"/>
                 </p:overlayPanel>
-
+                
                 <p:commandButton styleClass="opMenu"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Pesquisa"
                                  action="/pesquisa"/>
 
-                <!-- Caixa de aviso de impedimento por tentativa de envio de documento vazio -->
+                <!-- Caixa de aviso de substituição de PTD -->
                 <p:dialog header="Confirmar criação" 
                           widgetVar="confirmarCriacaoPTDEmBrancoDialog" 
                           modal="true" 
@@ -176,14 +176,58 @@
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Não sei o que mostrar" 
+                                    <h:outputText value="Data aprovação e responsável pela aprovação" 
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </f:facet>
                                 <h:panelGrid columns="1" 
                                              style="width:100%; text-align: center;" >
-                                    <h:outputText value="#{ptdAprovado.idPTD}" 
+                                    <h:outputText value="#{ptdAprovado.dataAvaliacaoPTD}" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; width: 90%;"/>
+                                    <br/>
+                                    <h:outputText value="#{ptdAprovado.diretorEnsino.nomeCompleto}" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; width: 90%;"/>
+                                    <p:commandButton styleClass="botaoAzul" 
+                                                     value="Imprimir"
+                                                     ajax="false"/>
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                                </h:panelGrid>
+                            </h:column>
+
+                        </h:dataTable>
+
+                    </div>
+                    
+                    <br/>
+                    <div id="content" style="width: 50%; border-radius: 15px; border-top-style: solid; border-top-width: medium; border-top-color: #1785ad;">
+
+                        <h:outputText value="PTDs Concluídos" 
+                                      styleClass="text01" 
+                                      style="margin: 0px 0px 0px 0px;"/>
+                        <br/>
+                        <h:dataTable  value="#{pTDMB.ptdsAprovados}" 
+                                      var="ptdConcluido"
+                                      style="border-spacing: 0pt; width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Data aprovação e responsável pela aprovação" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; font-weight: bold;"/>
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
+                                </f:facet>
+                                <h:panelGrid columns="1" 
+                                             style="width:100%; text-align: center;" >
+                                    <h:outputText value="#{ptdConcluido.dataAvaliacaoPTD}" 
+                                                  styleClass="text01"
+                                                  style="font-size: large; width: 90%;"/>
+                                    <br/>
+                                    <h:outputText value="#{ptdConcluido.diretorEnsino.nomeCompleto}" 
                                                   styleClass="text01"
                                                   style="font-size: large; width: 90%;"/>
                                     <p:commandButton styleClass="botaoAzul" 

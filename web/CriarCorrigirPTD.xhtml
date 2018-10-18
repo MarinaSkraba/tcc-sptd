@@ -3843,11 +3843,11 @@
                               hideEffect="fade" 
                               resizable="false">
 
-                        <h:outputText value="Escreva comentários ou justificativas para as irregularidades não especificas de alguma seção" 
+                        <h:outputText value="Escreva comentários ou justificativas para as irregularidades não especificas de uma seção" 
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                         <br/>
-                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaSeremPropostas}"/>
+                        <p:inputTextarea rows="10" cols="50" value="#{pTDMB.ptd.campoJustificativaGeral}"/>
                         <br/>
                         <p:commandButton value="Comentar"
                                          action="#{pTDMB.salvarJustificativasEComentários()}"
