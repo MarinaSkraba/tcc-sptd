@@ -204,6 +204,15 @@ body{
 #mostrarTabela{
     overflow-x: auto;
 }
+#justificativaIrregularidade{
+    width: 400px;
+    border-style:solid;
+    border-radius: 10px;
+    border-width: thin;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
 ::-webkit-scrollbar-track {
     background-color: #F4F4F4;
 }
