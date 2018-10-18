@@ -32,13 +32,13 @@ public class UsuarioMB {
         usuario = new Usuario();
         verificarExistenciaUsuarios();
     }
-    
-    public void verificarExistenciaUsuarios(){
+
+    public void verificarExistenciaUsuarios() {
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
         List<Usuario> usuariosCadastrados = usuarioDAO.buscarTodos(Usuario.class);
-        if(usuariosCadastrados.isEmpty()){
+        if (usuariosCadastrados.isEmpty()) {
             Professor p01 = new Professor();
             DiretorEnsino de01 = new DiretorEnsino();
             p01.setDataContratacao(new Date());
@@ -49,12 +49,12 @@ public class UsuarioMB {
             p01.setSenhaAlfanumerica("929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d");
             p01.setTipoContrato("Efetivo");
             p01.setEstadoUsuario("Ativo");
-            
+
             de01.setEmail("adm");
             de01.setNomeCompleto("Administrador DE");
             de01.setSenhaAlfanumerica("48fb10b15f3d44a09dc82d02b06581e0c0c69478c9fd2cf8f9093659019a1687baecdbb38c9e72b12169dc4148690f87467f9154f5931c5df665c6496cbfd5f5");
             de01.setEstadoUsuario("Ativo");
-            
+
             professorDAO.salvar(p01);
             diretorEnsinoDAO.salvar(de01);
         }
@@ -75,7 +75,7 @@ public class UsuarioMB {
     }
 
     public String verificarLogin() throws HashGenerationException {
-        String senhaSHA512 = Digest.hashString(usuario.getSenhaAlfanumerica(),"SHA-512");
+        String senhaSHA512 = Digest.hashString(usuario.getSenhaAlfanumerica(), "SHA-512");
         System.out.println("Chegou criptografia");
         System.out.println(getUsuario().getEmail());
         System.out.println(senhaSHA512);
@@ -86,18 +86,23 @@ public class UsuarioMB {
             System.out.println("Acesso negado");
             return "/Login?faces-redirect=true";
         } else {
-            setUsuarioLogado(usuario);
-            System.out.println("Chegou object");
-            System.out.println(getUsuarioLogado());
-            if (getUsuarioLogado() instanceof Professor) {
-                return "/NotificacoesDocente?faces-redirect=true";
+            if (usuario.getEstadoUsuario().equalsIgnoreCase("Ativo")) {
+                setUsuarioLogado(usuario);
+                System.out.println("Chegou object");
+                System.out.println(getUsuarioLogado());
+                if (getUsuarioLogado() instanceof Professor) {
+                    return "/NotificacoesDocente?faces-redirect=true";
+                } else {
+                    return "/NotificacoesDiretorEnsino?faces-redirect=true";
+                }
             } else {
-                return "/NotificacoesDiretorEnsino?faces-redirect=true";
+                return "/Login?faces-redirect=true";
             }
+
         }
     }
 
-    public void realizarLogout(){
+    public void realizarLogout() {
         usuario = new Usuario();
         usuarioLogado = new Usuario();
     }
@@ -109,7 +114,7 @@ public class UsuarioMB {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
+
     /**
      * @return the usuarioLogado
      */

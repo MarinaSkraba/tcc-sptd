@@ -89,7 +89,7 @@
                                   style="margin: 10px 25px -10px 25px;"/>
                     <br/>
 
-                    <p:inputText value="#{cursoMB}"/>
+                    <p:inputText value="#{cursoMB.curso.nomeCurso}"/>
 
                     <br/>
                     <p:commandButton value="Salvar" 
@@ -121,7 +121,7 @@
                                 <h:outputText value="NOME CURSO" 
                                               styleClass="text01"/>
                             </f:facet>
-                            <p:inputText value=""/>
+                            <p:inputText value="#{curso.nomeCurso}"/>
 
                         </h:column>
 
