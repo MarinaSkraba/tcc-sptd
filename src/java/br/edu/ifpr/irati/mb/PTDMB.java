@@ -264,9 +264,8 @@ public class PTDMB {
         limparVariáveis();
 
         if (ptdsAprovados.isEmpty() != true) {
-            setPtd(ptdsAprovados.get(ptdsAprovados.size() - 1));
-            getPtd().setIdPTD(0);
-            getPtd().setEstadoPTD("EDICAO");
+            
+
             ptdDAOGenerico.salvar(getPtd());
             setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario()).get(0));
 
