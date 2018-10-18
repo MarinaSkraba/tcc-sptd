@@ -177,16 +177,16 @@ public class PTDMB {
         cargaHorariaTotalPTDPTDAvaliacao = 0;
         cargaHorariaTotalPTDPTDEdicao = 0;
     }
-    
-    public String concluirLogin(String tela, int idUsuario){
-        if(tela.equalsIgnoreCase("/NotificacoesDocente?faces-redirect=true")){
+
+    public String concluirLogin(String tela, int idUsuario) {
+        if (tela.equalsIgnoreCase("/NotificacoesDocente?faces-redirect=true")) {
             return abrirNotificacoesDocente(idUsuario);
         } else if (tela.equalsIgnoreCase("/NotificacoesDiretorEnsino?faces-redirect=true")) {
             return abrirNotificacoesDiretorEnsino(idUsuario);
         } else {
             return tela;
         }
-         
+
     }
 
     public String abrirNotificacoesDocente(int idUsuario) {
@@ -195,8 +195,8 @@ public class PTDMB {
         ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(idUsuario);
         return "/NotificacoesDocente?faces-redirect=true";
     }
-    
-    public String abrirNotificacoesDiretorEnsino(int idUsuario){
+
+    public String abrirNotificacoesDiretorEnsino(int idUsuario) {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         return "/NotificacoesDiretorEnsino?faces-redirect=true";
@@ -526,6 +526,12 @@ public class PTDMB {
 
         for (Administracao adm : getPtd().getAdministrativas()) {
 
+            if (adm.getHorariosAdministracao().isEmpty() == true) {
+
+                errosTabelaAdministrativas.add("Você precisa adicionar um horário à atividade que pertence a seção"
+                        + "Atividades Administrativas");
+            }
+
             for (Horario hadm : adm.getHorariosAdministracao()) {
 
                 for (Apoio ap : getPtd().getApoios()) {
@@ -621,6 +627,12 @@ public class PTDMB {
         }
 
         for (Apoio apoio : getPtd().getApoios()) {
+
+            if (apoio.getHorariosApoio().isEmpty() == true) {
+
+                errosTabelaApoioEnsino.add("Você precisa adicionar um horário à atividade que pertence a seção Apoio ao Ensino");
+            }
+
             for (Horario hapoio : apoio.getHorariosApoio()) {
 
                 for (Administracao adm : getPtd().getAdministrativas()) {
@@ -713,6 +725,13 @@ public class PTDMB {
         }
 
         for (AtividadeASerProposta aSP : getPtd().getAtividadesASeremPropostas()) {
+
+            if (aSP.getHorariosAtividadesASerProposta().isEmpty() == true) {
+
+                errosTabelaAtividadesASeremPropostas.add("Você precisa adicionar um horário à atividade que pertence a seção "
+                        + "Outras atividades que pretendo propor no semestre");
+            }
+
             for (Horario h : aSP.getHorariosAtividadesASerProposta()) {
 
                 if (h.getHoraInicio().getTime() > h.getHoraTermino().getTime()) {
@@ -736,6 +755,12 @@ public class PTDMB {
         }
 
         for (Aula aula : getPtd().getAulas()) {
+
+            if (aula.getHorariosAula().isEmpty() == true) {
+
+                errosTabelaAula.add("Você precisa adicionar um horário à atividade que pertence a seção Aulas");
+            }
+
             double cargaHoraHorario = 0;
             double minTotal = 0;
             for (Horario h : aula.getHorariosAula()) {
@@ -857,6 +882,12 @@ public class PTDMB {
         }
 
         for (ManutencaoEnsino mE : getPtd().getManutencoesEnsino()) {
+
+            if (mE.getHorariosManutecao().isEmpty() == true) {
+
+                errosTabelaManuEnsino.add("Você precisa adicionar um horário à atividade que pertence a seção Manutenção ao Ensino");
+            }
+
             for (Horario hME : mE.getHorariosManutecao()) {
 
                 for (Administracao adm : getPtd().getAdministrativas()) {
@@ -945,6 +976,13 @@ public class PTDMB {
         }
 
         for (OutroTipoAtividade oTA : getPtd().getOutrosTiposAtividades()) {
+
+            if (oTA.getHorariosOutroTipoAtividade().isEmpty() == true) {
+
+                errosTabelaOutrasAtividades.add("Você precisa adicionar um horário à atividade que pertence a seção Outras"
+                        + "atividades desenvolvidas no campus");
+            }
+
             for (Horario hoTa : oTA.getHorariosOutroTipoAtividade()) {
 
                 for (Administracao adm : getPtd().getAdministrativas()) {
@@ -1009,7 +1047,7 @@ public class PTDMB {
                             if ((hoTa.getHoraInicio().getTime() <= hp.getHoraTermino().getTime() && hoTa.getHoraInicio().getTime() >= hp.getHoraInicio().getTime()) | (hoTa.getHoraTermino().getTime() <= hp.getHoraTermino().getTime() && hoTa.getHoraTermino().getTime() >= hp.getHoraInicio().getTime())) {
 
                                 errosTabelaOutrasAtividades.add("Há conflitos entre horários de execução com "
-                                        + "os horários na seções de participação em Projetos de Pesquisa e/ou Extensão ");
+                                        + "os horários nas seções de participação em Projetos de Pesquisa e/ou Extensão ");
 
                             }
                         }
@@ -1034,6 +1072,12 @@ public class PTDMB {
         }
 
         for (Participacao p : getPtd().getParticipacoes()) {
+
+            if (p.getHorariosParticipacao().isEmpty() == true) {
+
+                errosTabelaOutrasAtividades.add("Você precisa adicionar um horário à atividade que pertence nas seções de participação em Projetos de Pesquisa e/ou Extensão ");
+            }
+
             if (p.getRotulo().equalsIgnoreCase("Autor")) {
                 for (Horario hpartAutor : p.getHorariosParticipacao()) {
 
@@ -1193,6 +1237,7 @@ public class PTDMB {
                     for (OutroTipoAtividade oTA : getPtd().getOutrosTiposAtividades()) {
 
                         for (Horario hoTa : oTA.getHorariosOutroTipoAtividade()) {
+
                             if (hpartColab.getDiaSemana().equals(hoTa.getDiaSemana())) {
                                 if ((hpartColab.getHoraInicio().getTime() <= hoTa.getHoraTermino().getTime() && hpartColab.getHoraInicio().getTime() >= hoTa.getHoraInicio().getTime()) | (hpartColab.getHoraTermino().getTime() <= hoTa.getHoraTermino().getTime() && hpartColab.getHoraTermino().getTime() >= hoTa.getHoraInicio().getTime())) {
 
@@ -1285,121 +1330,120 @@ public class PTDMB {
                     + adm.getCargaHorariaSemanalAdministracao());
         }
 
-            for (Participacao part : getPtd().getParticipacoes()) {
-                if (part.getRotulo().equals("Autor")) {
-                    ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoAutor(ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
-                            + part.getCargaHorariaSemanalParticipacao());
-                } else if (part.getRotulo().equals("Colaborador")) {
-                    ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoColab(ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()
-                            + part.getCargaHorariaSemanalParticipacao());
+        for (Participacao part : getPtd().getParticipacoes()) {
+            if (part.getRotulo().equals("Autor")) {
+                ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoAutor(ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
+                        + part.getCargaHorariaSemanalParticipacao());
+            } else if (part.getRotulo().equals("Colaborador")) {
+                ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoColab(ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()
+                        + part.getCargaHorariaSemanalParticipacao());
+            }
+        }
+        if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
+            if ((ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
+                    + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 16) {
+                if (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
+                        + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() > 16) {
+
+                    getIrregularidadesPTDEdicao().add("A carga horária de projetos de pesquisa e/ou extensão"
+                            + " como colaborador e autor é superior à 16 horas!");
+
+                } else if (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() < 16 && ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() > 1) {
+
+                    getIrregularidadesPTDEdicao().add("A carga horária de projetos de pesquisa e/ou extensão"
+                            + " como colaborador e autor é inferior à 16 horas!");
+
                 }
             }
-            if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
-                if ((ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
-                        + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 16) {
-                    if (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
-                            + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() > 16) {
+        }
+        for (Apoio ap : getPtd().getApoios()) {
+            ptd.setCargaHorariaSecaoApoioEnsino(ptd.getCargaHorariaSecaoApoioEnsino() + ap.getCargaHorariaSemanalApoio());
+        }
+        if (ptd.getCargaHorariaSecaoApoioEnsino() != 4) {
 
-                        getIrregularidadesPTDEdicao().add("A carga horária de projetos de pesquisa e/ou extensão"
-                                + " como colaborador e autor é superior à 16 horas!");
+            if (ptd.getCargaHorariaSecaoApoioEnsino() > 4 && (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 0) {
+                getIrregularidadesPTDEdicao().add("A carga horária é superior à 4 horas em Apoio ao Ensino!");
+            } else if (ptd.getCargaHorariaSecaoApoioEnsino() < 4) {
+                getIrregularidadesPTDEdicao().add("A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
+            }
 
-                    } else if (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() < 16 && ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab() > 1) {
+        }
 
-                        getIrregularidadesPTDEdicao().add("A carga horária de projetos de pesquisa e/ou extensão"
-                                + " como colaborador e autor é inferior à 16 horas!");
+        for (Aula a : getPtd().getAulas()) {
+            ptd.setCargaHorariaSecaoAulas(ptd.getCargaHorariaSecaoAulas() + a.getCargaHorariaTotal());
+
+        }
+
+        if (getPtd().getProfessor().getRegimeTrabalho().equals("20h")) {
+
+            if (ptd.getCargaHorariaSecaoAulas() < 8) {
+
+                getIrregularidadesPTDEdicao().add("A carga horária é inferior à 8 horas em Aula!");
+
+            } else if (ptd.getCargaHorariaSecaoAulas() > 12) {
+
+                getIrregularidadesPTDEdicao().add("A carga horária é superior à 12 horas em Aula!");
+
+            }
+
+        } else if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
+            if (ptd.getCargaHorariaSecaoAulas() < 12) {
+
+                getIrregularidadesPTDEdicao().add("A carga horária é inferior à 12 horas em Aula!");
+
+            } else if (ptd.getCargaHorariaSecaoAulas() > 16) {
+
+                if (ptd.getCargaHorariaSecaoApoioEnsino() > 4 && (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) == 0) {
+
+                    double excessoApoio = ptd.getCargaHorariaSecaoApoioEnsino() - 4;
+                    double excessoEsperadoAula = 16 - excessoApoio;
+
+                    if ((ptd.getCargaHorariaSecaoAulas() - excessoEsperadoAula) > 16) {
+
+                        getIrregularidadesPTDEdicao().add("Mesmo descontando a carga horária redistribuída de projeto de pesquisa"
+                                + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
+                                + "superior à 16 horas");
 
                     }
-                }
-            }
-            for (Apoio ap : getPtd().getApoios()) {
-                ptd.setCargaHorariaSecaoApoioEnsino(ptd.getCargaHorariaSecaoApoioEnsino() + ap.getCargaHorariaSemanalApoio());
-            }
-            if (ptd.getCargaHorariaSecaoApoioEnsino() != 4) {
 
-                if (ptd.getCargaHorariaSecaoApoioEnsino() > 4 && (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 0) {
-                    getIrregularidadesPTDEdicao().add("A carga horária é superior à 4 horas em Apoio ao Ensino!");
-                } else if (ptd.getCargaHorariaSecaoApoioEnsino() < 4 && (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 0) {
-                    getIrregularidadesPTDEdicao().add("A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
+                } else {
+                    getIrregularidadesPTDEdicao().add("A carga horária é superior à 16 horas em Aula!");
                 }
 
-            }
-
-
-            for (Aula a : getPtd().getAulas()) {
-                ptd.setCargaHorariaSecaoAulas(ptd.getCargaHorariaSecaoAulas() + a.getCargaHorariaTotal());
-
-            }
-
-            if (getPtd().getProfessor().getRegimeTrabalho().equals("20h")) {
-
-                if (ptd.getCargaHorariaSecaoAulas() < 8) {
-
-                    getIrregularidadesPTDEdicao().add("A carga horária é inferior à 8 horas em Aula!");
-
-                } else if (ptd.getCargaHorariaSecaoAulas() > 12) {
-
-                    getIrregularidadesPTDEdicao().add("A carga horária é superior à 12 horas em Aula!");
-
-                }
-
-            } else if (getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtd().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
-                if (ptd.getCargaHorariaSecaoAulas() < 12) {
-
-                    getIrregularidadesPTDEdicao().add("A carga horária é inferior à 12 horas em Aula!");
-
-                } else if (ptd.getCargaHorariaSecaoAulas() > 16) {
-
-                    if (ptd.getCargaHorariaSecaoApoioEnsino() > 4 && (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) == 0) {
+                if (ptd.getCargaHorariaSecaoAulas() >= 12 && ptd.getCargaHorariaSecaoAulas() <= 16) {
+                    if ((ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) == 0) {
 
                         double excessoApoio = ptd.getCargaHorariaSecaoApoioEnsino() - 4;
                         double excessoEsperadoAula = 16 - excessoApoio;
 
-                        if ((ptd.getCargaHorariaSecaoAulas() - excessoEsperadoAula) > 16) {
+                        if ((ptd.getCargaHorariaSecaoAulas() - excessoEsperadoAula) < 12) {
 
-                            getIrregularidadesPTDEdicao().add("Mesmo descontando a carga horária redistribuída de projeto de pesquisa"
+                            getIrregularidadesPTDEdicao().add("Descontando a carga horária redistribuída de projeto de pesquisa"
                                     + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
-                                    + "superior à 16 horas");
+                                    + "inferior à 12 horas");
 
-                        }
-
-                    } else {
-                        getIrregularidadesPTDEdicao().add("A carga horária é superior à 16 horas em Aula!");
-                    }
-
-                    if (ptd.getCargaHorariaSecaoAulas() >= 12 && ptd.getCargaHorariaSecaoAulas() <= 16) {
-                        if ((ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) == 0) {
-
-                            double excessoApoio = ptd.getCargaHorariaSecaoApoioEnsino() - 4;
-                            double excessoEsperadoAula = 16 - excessoApoio;
-
-                            if ((ptd.getCargaHorariaSecaoAulas() - excessoEsperadoAula) < 12) {
-
-                                getIrregularidadesPTDEdicao().add("Descontando a carga horária redistribuída de projeto de pesquisa"
-                                        + "e/ou extensão para aula e apoio ao ensino, o componente aula apresenta carga horária"
-                                        + "inferior à 12 horas");
-
-                            }
                         }
                     }
                 }
             }
-            for (ManutencaoEnsino me : getPtd().getManutencoesEnsino()) {
-                ptd.setCargaHorariaSecaoManutencaoEnsino(ptd.getCargaHorariaSecaoManutencaoEnsino() + me.getCargaHorariaSemanalManutencaoEnsino());
+        }
+        for (ManutencaoEnsino me : getPtd().getManutencoesEnsino()) {
+            ptd.setCargaHorariaSecaoManutencaoEnsino(ptd.getCargaHorariaSecaoManutencaoEnsino() + me.getCargaHorariaSemanalManutencaoEnsino());
+        }
+
+        if (ptd.getCargaHorariaSecaoManutencaoEnsino() != 4) {
+            if (ptd.getCargaHorariaSecaoManutencaoEnsino() < 4) {
+
+                getIrregularidadesPTDEdicao().add("A carga horária é inferior"
+                        + " à 4 horas em Manutenção ao Ensino");
+
+            } else if (ptd.getCargaHorariaSecaoManutencaoEnsino() > 4) {
+
+                getIrregularidadesPTDEdicao().add("A carga horária é superior "
+                        + "à 4 horas em Manutenção ao Ensino!");
+
             }
-
-            if (ptd.getCargaHorariaSecaoManutencaoEnsino() != 4) {
-                if (ptd.getCargaHorariaSecaoManutencaoEnsino() < 4) {
-
-                    getIrregularidadesPTDEdicao().add("A carga horária é inferior"
-                            + " à 4 horas em Manutenção ao Ensino");
-
-                } else if (ptd.getCargaHorariaSecaoManutencaoEnsino() > 4) {
-
-                    getIrregularidadesPTDEdicao().add("A carga horária é superior "
-                            + "à 4 horas em Manutenção ao Ensino!");
-
-                }
-            }
+        }
 
         for (OutroTipoAtividade ota : getPtd().getOutrosTiposAtividades()) {
             ptd.setCargaHorariaSecaoOutroTipoAtividade(ptd.getCargaHorariaSecaoOutroTipoAtividade() + ota.getCargaHorariaSemanalOutroTipoAtividade());
@@ -1458,8 +1502,8 @@ public class PTDMB {
         } else {
             setEstadoCargaHorariaPTD("INCORRETO");
         }
-        
-        for(String irregularidade : irregularidadesPTDEdicao){
+
+        for (String irregularidade : irregularidadesPTDEdicao) {
             irregularidadesPTDAvaliacao.add(irregularidade);
         }
 
@@ -1831,7 +1875,7 @@ public class PTDMB {
     public void setIrregularidadesPTDAvaliacao(List<String> irregularidadesPTDAvaliacao) {
         this.irregularidadesPTDAvaliacao = irregularidadesPTDAvaliacao;
     }
-    
+
     /**
      * @return the cargaHorariaTotalPTDPTDEdicao
      */
