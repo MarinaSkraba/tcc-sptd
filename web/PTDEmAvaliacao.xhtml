@@ -44,7 +44,7 @@
                                   style="color: #1785ad; font-weight: normal; font-size: large;"/>
                     <br/>
                     <p:commandButton value="Sair"
-                                     styleClass="opMenu"
+                                     styleClass="opVermelhaMenu"
                                      ajax="false" 
                                      immediate="true"
                                      actionListener="#{usuarioMB.realizarLogout()}"
@@ -244,13 +244,14 @@
 
                         </h:dataTable>
                     </div>
-
-                    <div id="justificativaIrregularidade">
+                    <center>
+                        <div id="justificativaIrregularidade">
                         <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaAtividadeEnsino}" 
                                       styleClass="text01"
 
-                                      style="font-size: large; width: 100%;"/>
+                                      style="font-size: large;"/>
                     </div>
+                    </center>
                     <br/>
 
                     <!-- Subtítulo: Manutenção de ensino -->
@@ -341,11 +342,14 @@
                             </h:column>
                         </h:dataTable>
                     </div>
+                    <center>
                     <div id="justificativaIrregularidade">
                         <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaManutencaoEnsino}" 
                                       styleClass="text01"
-                                      style="font-size: large; width: 100%;"/>
+                                      style="font-size: large;"/>
                     </div>
+                        
+                    </center>
                     <br/>
 
                     <br/>
@@ -438,12 +442,13 @@
                             </h:column>
                         </h:dataTable>
                     </div>
-
+                    <center>
                     <div id="justificativaIrregularidade">
                         <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaApoioEnsino}" 
                                       styleClass="text01"
-                                      style="font-size: large; width: 100%;"/>
+                                      style="font-size: large;"/>
                     </div>
+                    </center>
 
                     <br/>
 
@@ -576,12 +581,13 @@
                             </h:column>
                         </h:dataTable>
                     </div>
-
+                    <center>
                     <div id="justificativaIrregularidade">
                         <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaProjetoPesquisaExtensao}" 
                                       styleClass="text01"
-                                      style="font-size: large; width: 100%;"/>
+                                      style="font-size: large;"/>
                     </div>
+                    </center>
 
                     <br/>
 
@@ -705,12 +711,13 @@
                             </h:column>
                         </h:dataTable>
                     </div>
-
+                    <center>
                     <div id="justificativaIrregularidade">
                         <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaProjetoPesquisaExtensao}" 
                                       styleClass="text01"
-                                      style="font-size: large; width: 100%;"/>
+                                      style="font-size: large;"/>
                     </div>
+                    </center>
 
                     <br/>
 
@@ -810,12 +817,13 @@
                             </h:column>
                         </h:dataTable>
                     </div>
-
+                    <center>
                     <div id="justificativaIrregularidade">
                         <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaAdministracao}" 
                                       styleClass="text01"
-                                      style="font-size: large; width: 100%;"/>
+                                      style="font-size: large;"/>
                     </div>
+                    </center>
 
                     <br/>
 
@@ -927,13 +935,13 @@
                             </h:column>
                         </h:dataTable>
                     </div>
-
+                    <center>
                     <div id="justificativaIrregularidade">
                         <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaOutrasAtividades}" 
                                       styleClass="text01"
-                                      style="font-size: large; width: 100%;"/>
-                        <br/>
+                                      style="font-size: large;"/>
                     </div>
+                    </center>
 
                     <!-- Outras atividades que pretendo propor no semestre -->
                     <h:outputText value="6. Outras atividades que pretendo propor no semestre" 
@@ -1042,12 +1050,14 @@
                             </h:column>
                         </h:dataTable>
                     </div>
-
-                    <div id="justificativaIrregularidade">
+                    
+                    <center>
+                        <div id="justificativaIrregularidade">
                         <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaSeremPropostas}" 
                                       styleClass="text01"
-                                      style="font-size: large; width: 100%;"/>
+                                      style="font-size: large;"/>
                     </div>
+                    </center>
 
                     <br/>
 
@@ -1123,12 +1133,14 @@
                         </h:panelGrid>
 
                     </center>
-
+                    
+                    <center>
                     <div id="justificativaIrregularidade">
                         <h:outputText value="#{pTDMB.ptdEmAvaliacao.campoJustificativaGeral}" 
                                       styleClass="text01"
-                                      style="font-size: large; width: 100%;"/>
+                                      style="font-size: large;"/>
                     </div>
+                    </center>
 
                     <br/>
                     <!-- Mostrar irregularidades -->

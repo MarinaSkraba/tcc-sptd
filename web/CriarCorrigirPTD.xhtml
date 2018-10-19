@@ -23,7 +23,7 @@
 
             <h:form id="barraMenu">
 
-                <p:commandButton styleClass="opMenu"
+                <p:commandButton styleClass="opVermelhaMenu"
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Notificações"
@@ -89,7 +89,7 @@
 
                         <p:commandButton value="Descartar e sair" 
                                          ajax="false" 
-                                         action="#{pTDMB.cancelarPTD(pTDMB.ptd, usuarioMB.usuarioLogado.idUsuario, 'notificaçoes')}"
+                                         action="#{pTDMB.cancelarPTDEmEdicao(usuarioMB.usuarioLogado.idUsuario, 'notificaçoes')}"
                                          styleClass="botaoVermelho"/>
 
                     </p:dialog>
@@ -115,7 +115,7 @@
                         <p:commandButton value="Descartar e sair" 
                                          ajax="false"
                                          actionListener="#{usuarioMB.realizarLogout()}"
-                                         action="#{pTDMB.cancelarPTD(pTDMB.ptd, usuarioMB.usuarioLogado.idUsuario, 'login')}"
+                                         action="#{pTDMB.cancelarPTDEmEdicao(usuarioMB.usuarioLogado.idUsuario, 'login')}"
                                          styleClass="botaoVermelho"/>
 
                     </p:dialog>

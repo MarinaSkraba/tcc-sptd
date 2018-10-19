@@ -42,7 +42,6 @@ public class HorarioMB {
     private Horario horarioAtividadeASerProposta;
     private List<Horario> horarios;
     private List<String> diasSemana;
-   
 
     public HorarioMB() {
 
@@ -84,18 +83,28 @@ public class HorarioMB {
         Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
         Professor p = professorDAO.buscarPorId(usuario.getIdUsuario());
+        Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+        Dao<Apoio> apoioEnsinoDAO = new GenericDAO<>(Apoio.class);
+        Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
+        Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
+        Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
+        Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
+        List<Horario> horariosObjetoSelecionado = new ArrayList();
 
         double cargaHoraNovoHorario = 0;
+        double cargaHorariosTotal = 0;
         double minTotal = 0;
         Horario horarioAtividade = new Horario();
 
         if (object instanceof ManutencaoEnsino) {
             horarioAtividade = horarioManuEnsino;
             horarioManuEnsino = new Horario();
+            horariosObjetoSelecionado = manutencaoEnsinoDAO.buscarPorId(((ManutencaoEnsino) object).getIdManutencao()).getHorariosManutecao();
         }
         if (object instanceof Apoio) {
             horarioAtividade = horarioApoioEnsino;
             horarioApoioEnsino = new Horario();
+            horariosObjetoSelecionado = apoioEnsinoDAO.buscarPorId(((Apoio) object).getIdApoio()).getHorariosApoio();
         }
         if (object instanceof Participacao) {
             if (((Participacao) object).getRotulo().equals("Colaborador")) {
@@ -105,18 +114,22 @@ public class HorarioMB {
             }
             horarioPesquisaExtensaoAutor = new Horario();
             horarioPesquisaExtensaoColab = new Horario();
+            horariosObjetoSelecionado = participacaoDAO.buscarPorId(((Participacao) object).getIdParticipacao()).getHorariosParticipacao();
         }
         if (object instanceof Administracao) {
             horarioAtividade = horarioAdministracao;
             horarioAdministracao = new Horario();
+            horariosObjetoSelecionado = administracaoDAO.buscarPorId(((Administracao) object).getIdAdministracao()).getHorariosAdministracao();
         }
         if (object instanceof OutroTipoAtividade) {
             horarioAtividade = horarioOutroTipoAtividade;
             horarioOutroTipoAtividade = new Horario();
+            horariosObjetoSelecionado = outroTipoAtividadeDAO.buscarPorId(((OutroTipoAtividade) object).getIdOutroTipoAtividade()).getHorariosOutroTipoAtividade();
         }
         if (object instanceof AtividadeASerProposta) {
             horarioAtividade = horarioAtividadeASerProposta;
             horarioAtividadeASerProposta = new Horario();
+            horariosObjetoSelecionado = atividadeASerPropostaDAO.buscarPorId(((AtividadeASerProposta) object).getIdAtividadeASerProposta()).getHorariosAtividadesASerProposta();
         }
 
         horarioAtividade.setProfessor(p);
@@ -127,7 +140,7 @@ public class HorarioMB {
         double horaInicio = horarioAtividade.getHoraInicio().getHours();
         double horaTermino = horarioAtividade.getHoraTermino().getHours();
 
-        cargaHoraNovoHorario = cargaHoraNovoHorario + (horaTermino - horaInicio);
+        cargaHoraNovoHorario = horaTermino - horaInicio;
         if (minTermino > minInicio) {
             minTotal = minTermino - minInicio;
             cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
@@ -136,45 +149,58 @@ public class HorarioMB {
             minTotal = (60 - minInicio) + minTermino;
             cargaHoraNovoHorario = (cargaHoraNovoHorario + (minTotal / 60)) - 1;
         }
+        
+        for (Horario h : horariosObjetoSelecionado) {
+
+            double minutoInicio = h.getHoraInicio().getMinutes();
+            double minutoTermino = h.getHoraTermino().getMinutes();
+            double horasInicio = h.getHoraInicio().getHours();
+            double horasTermino = h.getHoraTermino().getHours();
+
+            cargaHorariosTotal = cargaHorariosTotal + (horasTermino - horasInicio);
+            if (minutoTermino > minutoInicio) {
+                minTotal = minutoTermino - minutoInicio;
+                cargaHoraNovoHorario = cargaHoraNovoHorario + (minTotal / 60);
+            }
+            if (minutoTermino < minutoInicio) {
+                minTotal = (60 - minutoInicio) + minutoTermino;
+                cargaHorariosTotal = (cargaHoraNovoHorario + (minTotal / 60)) - 1;
+            }
+        }
+        
 
         if (object instanceof ManutencaoEnsino) {
-            Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
-            ((ManutencaoEnsino) object).setCargaHorariaSemanalManutencaoEnsino(((ManutencaoEnsino) object).getCargaHorariaSemanalManutencaoEnsino() + cargaHoraNovoHorario);
+            ((ManutencaoEnsino) object).setCargaHorariaSemanalManutencaoEnsino(cargaHorariosTotal + cargaHoraNovoHorario);
             ((ManutencaoEnsino) object).getHorariosManutecao().add(horarioAtividade);
             horarioDAO.salvar(((ManutencaoEnsino) object).getHorariosManutecao().get(((ManutencaoEnsino) object).getHorariosManutecao().size() - 1));
             manutencaoEnsinoDAO.alterar(((ManutencaoEnsino) object));
         }
         if (object instanceof Apoio) {
-            Dao<Apoio> apoioEnsinoDAO = new GenericDAO<>(Apoio.class);
-            ((Apoio) object).setCargaHorariaSemanalApoio(((Apoio) object).getCargaHorariaSemanalApoio() + cargaHoraNovoHorario);
+            ((Apoio) object).setCargaHorariaSemanalApoio(cargaHorariosTotal + cargaHoraNovoHorario);
             ((Apoio) object).getHorariosApoio().add(horarioAtividade);
             horarioDAO.salvar(((Apoio) object).getHorariosApoio().get(((Apoio) object).getHorariosApoio().size() - 1));
             apoioEnsinoDAO.alterar(((Apoio) object));
         }
         if (object instanceof Participacao) {
-            Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-            ((Participacao) object).setCargaHorariaSemanalParticipacao(((Participacao) object).getCargaHorariaSemanalParticipacao() + cargaHoraNovoHorario);
+            ((Participacao) object).setCargaHorariaSemanalParticipacao(cargaHorariosTotal + cargaHoraNovoHorario);
             ((Participacao) object).getHorariosParticipacao().add(horarioAtividade);
             horarioDAO.salvar(((Participacao) object).getHorariosParticipacao().get(((Participacao) object).getHorariosParticipacao().size() - 1));
             participacaoDAO.alterar(((Participacao) object));
         }
         if (object instanceof Administracao) {
-            Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
-            ((Administracao) object).setCargaHorariaSemanalAdministracao(((Administracao) object).getCargaHorariaSemanalAdministracao() + cargaHoraNovoHorario);
+            ((Administracao) object).setCargaHorariaSemanalAdministracao(cargaHorariosTotal + cargaHoraNovoHorario);
             ((Administracao) object).getHorariosAdministracao().add(horarioAtividade);
             horarioDAO.salvar(((Administracao) object).getHorariosAdministracao().get(((Administracao) object).getHorariosAdministracao().size() - 1));
             administracaoDAO.alterar(((Administracao) object));
         }
         if (object instanceof OutroTipoAtividade) {
-            Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
-            ((OutroTipoAtividade) object).setCargaHorariaSemanalOutroTipoAtividade(((OutroTipoAtividade) object).getCargaHorariaSemanalOutroTipoAtividade() + cargaHoraNovoHorario);
+            ((OutroTipoAtividade) object).setCargaHorariaSemanalOutroTipoAtividade(cargaHorariosTotal + cargaHoraNovoHorario);
             ((OutroTipoAtividade) object).getHorariosOutroTipoAtividade().add(horarioAtividade);
             horarioDAO.salvar(((OutroTipoAtividade) object).getHorariosOutroTipoAtividade().get(((OutroTipoAtividade) object).getHorariosOutroTipoAtividade().size() - 1));
             outroTipoAtividadeDAO.alterar(((OutroTipoAtividade) object));
         }
         if (object instanceof AtividadeASerProposta) {
-            Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
-            ((AtividadeASerProposta) object).setCargaHorariaSemanalAtividadeASerProposta(((AtividadeASerProposta) object).getCargaHorariaSemanalAtividadeASerProposta() + cargaHoraNovoHorario);
+            ((AtividadeASerProposta) object).setCargaHorariaSemanalAtividadeASerProposta(cargaHorariosTotal + cargaHoraNovoHorario);
             ((AtividadeASerProposta) object).getHorariosAtividadesASerProposta().add(horarioAtividade);
             horarioDAO.salvar(((AtividadeASerProposta) object).getHorariosAtividadesASerProposta().get(((AtividadeASerProposta) object).getHorariosAtividadesASerProposta().size() - 1));
             atividadeASerPropostaDAO.alterar(((AtividadeASerProposta) object));

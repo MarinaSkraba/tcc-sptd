@@ -41,7 +41,7 @@ public class GenericDAO<T> implements Dao<T> {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        session.merge(t);
+        session.update(t);
 
         session.getTransaction().commit();
         session.clear();
@@ -53,7 +53,7 @@ public class GenericDAO<T> implements Dao<T> {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        session.(t);
+        session.delete(t);
 
         session.getTransaction().commit();
         session.clear();
