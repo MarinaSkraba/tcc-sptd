@@ -5,10 +5,8 @@
  */
 package br.edu.ifpr.irati.mb;
 
-import br.edu.ifpr.irati.dao.ApoioDAO;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
-import br.edu.ifpr.irati.dao.IApoioDao;
 import br.edu.ifpr.irati.modelo.Apoio;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.PTD;

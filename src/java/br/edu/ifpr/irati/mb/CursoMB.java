@@ -3,6 +3,7 @@ package br.edu.ifpr.irati.mb;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.modelo.Curso;
+import br.edu.ifpr.irati.modelo.DiretorEnsino;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -22,8 +23,11 @@ public class CursoMB {
         cursos = cursoDAO.buscarTodos(Curso.class);
     }
 
-    public String salvarCurso() {
+    public String salvarCurso(int idUsuario) {
         Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class);
+        Dao<DiretorEnsino> dEDAO = new GenericDAO<>(DiretorEnsino.class);
+        DiretorEnsino diretorEnsino = dEDAO.buscarPorId(idUsuario);
+        curso.setDiretorEnsino(diretorEnsino);
         cursoDAO.salvar(curso);
         cursos = cursoDAO.buscarTodos(Curso.class);
         curso = new Curso();
@@ -41,10 +45,11 @@ public class CursoMB {
 
     public String excluirCurso(Curso curso) {
         Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class);
+        I
+        curso.setEstadoCurso("Inativo");
         cursoDAO.excluir(curso);
         for (Curso c : cursos) {
             cursoDAO.alterar(c);
-            cursos = cursoDAO.buscarTodos(Curso.class);
         }
         cursos = cursoDAO.buscarTodos(Curso.class);
         return "NotificacoesDiretorEnsino?faces-redirect=true";

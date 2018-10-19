@@ -1,9 +1,7 @@
 package br.edu.ifpr.irati.mb;
 
-import br.edu.ifpr.irati.dao.AtividadeASerPropostaDAO;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
-import br.edu.ifpr.irati.dao.IAtividadeASerPropostaDao;
 import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
 import br.edu.ifpr.irati.modelo.Horario;
 import br.edu.ifpr.irati.modelo.PTD;

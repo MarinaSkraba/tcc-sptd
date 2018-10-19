@@ -40,19 +40,20 @@
                                 style="padding: 0px;">
                     <h:outputText value="#{usuarioMB.usuarioLogado.email}" 
                                   styleClass="text01"
-                                  style="color: #1785ad; font-weight: normal; font-size: large;"/>
+                                  style="color: #1785ad; font-weight: normal; font-size: large; margin: 0px;"/>
                     <br/>
                     <!-- Link para acesso ao perfil -->
-                    <p:commandLink style="width: 200px; margin: 5px;"
+                    <p:commandLink style="width: 200px; margin: 0px;"
                                    styleClass="link"
                                    >
                         <h:outputText value="Meu perfil"  
                                       styleClass="text01"
-                                      style="color: #1AB5D9; font-size: large;"/>
+                                      style="color: #1AB5D9; font-size: large; margin: 0px;"/>
                     </p:commandLink>
                     <br/>
                     <p:commandButton value="Sair"
                                      styleClass="opVermelhaMenu"
+                                     style="margin: 0px;"
                                      ajax="false" 
                                      immediate="true"
                                      actionListener="#{usuarioMB.realizarLogout()}"
@@ -199,8 +200,14 @@
                                                   styleClass="text01"
                                                   style="font-size: large; width: 90%;"/>
                                     <p:commandButton styleClass="botaoAzul" 
-                                                     value="Imprimir"
-                                                     ajax="false"/>
+                                                     value="Abrir"
+                                                     ajax="false"
+                                                     actionListener="#{pTDMB.abrirMostrarPTD(ptdAprovado)}"
+                                                     action="/MostrarPTDParaDocente"/>
+                                    <p:commandButton styleClass="botaoAzul" 
+                                                     value="Concluir"
+                                                     ajax="false"
+                                                     />
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </h:panelGrid>
                             </h:column>

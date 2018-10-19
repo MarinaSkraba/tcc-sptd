@@ -1,22 +1,10 @@
 package br.edu.ifpr.irati.mb;
 
-import br.edu.ifpr.irati.dao.AdministracaoDAO;
-import br.edu.ifpr.irati.dao.ApoioDAO;
-import br.edu.ifpr.irati.dao.AtividadeASerPropostaDAO;
-import br.edu.ifpr.irati.dao.AulaDAO;
 import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
-import br.edu.ifpr.irati.dao.IAdministracaoDao;
-import br.edu.ifpr.irati.dao.IApoioDao;
-import br.edu.ifpr.irati.dao.IAtividadeASerPropostaDao;
-import br.edu.ifpr.irati.dao.IAulaDao;
-import br.edu.ifpr.irati.dao.IManutencaoDao;
 import br.edu.ifpr.irati.dao.IPTDDAO;
-import br.edu.ifpr.irati.dao.IProjetoEnsinoDao;
 import br.edu.ifpr.irati.dao.IProjetoPesquisaExtensaoDao;
-import br.edu.ifpr.irati.dao.ManutencaoDAO;
 import br.edu.ifpr.irati.dao.PTDDAO;
-import br.edu.ifpr.irati.dao.ProjetoEnsinoDAO;
 import br.edu.ifpr.irati.dao.ProjetoPesquisaExtensaoDAO;
 import br.edu.ifpr.irati.modelo.Administracao;
 import br.edu.ifpr.irati.modelo.Apoio;
@@ -57,6 +45,7 @@ public class PTDMB {
     private PTD ptd;
     private PTD ptdEmAvaliacao;
     private PTD ptdAprovado;
+    private PTD ptdParaComunidade;
     private List<PTD> ptdsEmAvaliacao;
     private List<PTD> ptdsReprovados;
     private List<PTD> ptdsEmEdicao;
@@ -87,6 +76,7 @@ public class PTDMB {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptd = new PTD();
         ptdAprovado = new PTD();
+        ptdParaComunidade = new PTD();
         ptdEmAvaliacao = new PTD();
         ptdsEmAvaliacao = new ArrayList<>();
         ptdsReprovados = new ArrayList<>();
@@ -210,6 +200,14 @@ public class PTDMB {
 
     }
 
+    public void abrirMostrarPTDParaDocente(PTD ptd) {
+        ptdAprovado = ptd;
+    }
+
+    public void abrirMostrarPTD(PTD ptd) {
+        ptdParaComunidade = ptd;
+    }
+
     public String abrirNotificacoesDocente(int idUsuario) {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados(idUsuario);
@@ -238,8 +236,115 @@ public class PTDMB {
         getPtd().setProfessor(p);
         setPtdsEmEdicao(ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()));
         for (PTD ptdE : getPtdsEmEdicao()) {
-            ptdE.setEstadoPTD("CANCELADO");
-            ptdDAOGenerico.alterar(ptdE);
+            Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class);
+            Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
+            Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
+            Dao<TipoApoio> tipoApoioDAO = new GenericDAO<>(TipoApoio.class);
+            Dao<AtividadeASerProposta> aASPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
+            Dao<Aula> aulaDAO = new GenericDAO<>(Aula.class);
+            Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class);
+            Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
+            Dao<Horario> horarioDAO = new GenericDAO<>(Horario.class);
+            Dao<ManutencaoEnsino> manutencaoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+            Dao<TipoManutencao> tipoManutencaoDAO = new GenericDAO<>(TipoManutencao.class);
+            Dao<OutroTipoAtividade> oTAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
+            Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+            Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
+            Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
+            Dao<ProjetoPesquisaExtensao> pPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
+            Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
+            Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
+
+            PTD ptdACancelar = ptdE;
+
+            List<Administracao> auxAdm = new ArrayList<>(ptdACancelar.getAdministrativas());
+            for (Administracao adm : auxAdm) {
+
+                List<Horario> aux = new ArrayList<>(adm.getHorariosAdministracao());
+                for (Horario h : aux) {
+                    adm.getHorariosAdministracao().remove(h);
+                    administracaoDAO.alterar(adm);
+                    horarioDAO.excluir(h);
+                }
+                ptdACancelar.getAdministrativas().remove(adm);
+                ptdDAO.alterar(ptdACancelar);
+                administracaoDAO.excluir(adm);
+                tipoAdministracaoDAO.excluir(adm.getTipoAdministracao());
+
+            }
+            List<Apoio> auxApoio = new ArrayList<>(ptdACancelar.getApoios());
+            for (Apoio apoio : auxApoio) {
+                List<Horario> aux = new ArrayList<>(apoio.getHorariosApoio());
+                for (Horario h : aux) {
+                    apoio.getHorariosApoio().remove(h);
+                    apoioDAO.alterar(apoio);
+                    horarioDAO.excluir(h);
+                }
+                ptdACancelar.getApoios().remove(apoio);
+                ptdDAO.alterar(ptdACancelar);
+                apoioDAO.excluir(apoio);
+                tipoApoioDAO.excluir(apoio.getTipoApoio());
+            }
+            List<AtividadeASerProposta> auxAASP = new ArrayList<>(ptdACancelar.getAtividadesASeremPropostas());
+            for (AtividadeASerProposta aASP : auxAASP) {
+                List<Horario> aux = new ArrayList<>(aASP.getHorariosAtividadesASerProposta());
+                for (Horario h : aux) {
+                    aASP.getHorariosAtividadesASerProposta().remove(h);
+                    aASPropostaDAO.alterar(aASP);
+                    horarioDAO.excluir(h);
+                }
+                ptdACancelar.getAtividadesASeremPropostas().remove(aASP);
+                ptdDAO.alterar(ptdACancelar);
+                aASPropostaDAO.excluir(aASP);
+            }
+            List<Aula> auxAula = new ArrayList<>(ptdACancelar.getAulas());
+            for (Aula aula : auxAula) {
+                List<Horario> aux = new ArrayList<>(aula.getHorariosAula());
+                for (Horario h : aux) {
+                    aula.getHorariosAula().remove(h);
+                    aulaDAO.alterar(aula);
+                    horarioDAO.excluir(h);
+                }
+                ptdACancelar.getAulas().remove(aula);
+                ptdDAO.alterar(ptdACancelar);
+                aulaDAO.excluir(aula);
+            }
+            List<ManutencaoEnsino> auxManuEnsino = new ArrayList<>(ptdACancelar.getManutencoesEnsino());
+            for (ManutencaoEnsino mEnsino : auxManuEnsino) {
+                List<Horario> aux = new ArrayList<>(mEnsino.getHorariosManutecao());
+                for (Horario h : aux) {
+                    mEnsino.getHorariosManutecao().remove(h);
+                    manutencaoDAO.alterar(mEnsino);
+                    horarioDAO.excluir(h);
+                }
+                ptdACancelar.getManutencoesEnsino().remove(mEnsino);
+                ptdDAO.alterar(ptdACancelar);
+                manutencaoDAO.excluir(mEnsino);
+                tipoManutencaoDAO.excluir(mEnsino.getTipoManutencao());
+            }
+            List<OutroTipoAtividade> auxOTA = new ArrayList<>(ptdACancelar.getOutrosTiposAtividades());
+            for (OutroTipoAtividade oTA : auxOTA) {
+                List<Horario> aux = new ArrayList<>(oTA.getHorariosOutroTipoAtividade());
+                for (Horario h : aux) {
+                    oTA.getHorariosOutroTipoAtividade().remove(h);
+                    oTAtividadeDAO.alterar(oTA);
+                    horarioDAO.excluir(h);
+                }
+
+                ptdACancelar.getOutrosTiposAtividades().remove(oTA);
+                ptdDAO.alterar(ptdACancelar);
+                oTAtividadeDAO.excluir(oTA);
+            }
+            List<Participacao> auxPart = new ArrayList<>(ptdACancelar.getParticipacoes());
+            for (Participacao part : auxPart) {
+
+                ptdACancelar.getParticipacoes().remove(part);
+                ptdDAO.alterar(ptdACancelar);
+                participacaoDAO.excluir(part);
+
+            }
+
+            ptdDAO.excluir(ptdACancelar);
         }
         setPtd(new PTD());
 
@@ -379,7 +484,7 @@ public class PTDMB {
     }
 
     public String cancelarPTDEmEdicao(int idUsuario, String telaFutura) {
-        
+
         Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class);
         Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
         Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
@@ -398,7 +503,7 @@ public class PTDMB {
         Dao<ProjetoPesquisaExtensao> pPesquisaExtensaoDAO = new GenericDAO<>(ProjetoPesquisaExtensao.class);
         Dao<TipoOferta> tipoOfertaDAO = new GenericDAO<>(TipoOferta.class);
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
-        
+
         PTD ptdACancelar = ptd;
 
         List<Administracao> auxAdm = new ArrayList<>(ptdACancelar.getAdministrativas());
@@ -497,7 +602,7 @@ public class PTDMB {
         }
 
     }
-    
+
     public String cancelarPTDDeLista(PTD ptdACancelar, int idUsuario, String telaFutura) {
 
         Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class);
@@ -2128,6 +2233,20 @@ public class PTDMB {
      */
     public void setParticipacoesColabPTDAprovado(List<Participacao> participacoesColabPTDAprovado) {
         this.participacoesColabPTDAprovado = participacoesColabPTDAprovado;
+    }
+
+    /**
+     * @return the ptdParaComunidade
+     */
+    public PTD getPtdParaComunidade() {
+        return ptdParaComunidade;
+    }
+
+    /**
+     * @param ptdParaComunidade the ptdParaComunidade to set
+     */
+    public void setPtdParaComunidade(PTD ptdParaComunidade) {
+        this.ptdParaComunidade = ptdParaComunidade;
     }
 
 }
