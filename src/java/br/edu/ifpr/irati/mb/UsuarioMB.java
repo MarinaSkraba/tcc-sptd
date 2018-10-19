@@ -60,22 +60,8 @@ public class UsuarioMB {
         }
     }
 
-    public void salvar() {
-        Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
-        usuarioDAO.salvar(usuario);
-    }
-
-    public String alterar(Usuario usuario) {
-        this.usuario = usuario;
-        return " adicionar xhtml aqui";
-    }
-
-    public void desabilitar() {
-        //implementar depois
-    }
-
     public String verificarLogin() throws HashGenerationException {
-        String senhaSHA512 = Digest.hashString(usuario.getSenhaAlfanumerica(),"SHA-512");
+        String senhaSHA512 = Digest.hashString(usuario.getSenhaAlfanumerica(), "SHA-512");
         System.out.println(getUsuario().getEmail());
         System.out.println(senhaSHA512);
         IUsuarioDao usuarioDao = new UsuarioDAO();

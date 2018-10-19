@@ -1,6 +1,7 @@
 package br.edu.ifpr.irati.modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -32,6 +35,9 @@ public class Usuario implements Serializable {
     @Column(name = "estadoUsuario", nullable = false, length = 10)
     private String estadoUsuario;
 
+    @Temporal(TemporalType.DATE)
+    private Date dataContratacao;
+
     public Usuario() {
 
         this.idUsuario = 0;
@@ -39,6 +45,7 @@ public class Usuario implements Serializable {
         this.email = "";
         this.imagemPerfil = "";
         this.senhaAlfanumerica = "";
+        this.dataContratacao = new Date();
     }
 
     public Usuario(int idUsuario, String nomeCompleto, String email, String imagemPerfil, String senhaAlfanumerica, String estadoUsuario) {
@@ -48,6 +55,17 @@ public class Usuario implements Serializable {
         this.imagemPerfil = imagemPerfil;
         this.senhaAlfanumerica = senhaAlfanumerica;
         this.estadoUsuario = estadoUsuario;
+        this.dataContratacao = new Date();
+    }
+
+    public Usuario(int idUsuario, String nomeCompleto, String email, String imagemPerfil, String senhaAlfanumerica, String estadoUsuario, Date dataContratacao) {
+        this.idUsuario = idUsuario;
+        this.nomeCompleto = nomeCompleto;
+        this.email = email;
+        this.imagemPerfil = imagemPerfil;
+        this.senhaAlfanumerica = senhaAlfanumerica;
+        this.estadoUsuario = estadoUsuario;
+        this.dataContratacao = dataContratacao;
     }
 
     public int getIdUsuario() {
@@ -93,7 +111,7 @@ public class Usuario implements Serializable {
     @Override
     public boolean equals(Object obj) {
         Usuario u = (Usuario) obj;
-        if (this.idUsuario == u.getIdUsuario()) {
+        if (this.getIdUsuario() == u.getIdUsuario()) {
             return true;
         } else {
             return false;
@@ -112,5 +130,19 @@ public class Usuario implements Serializable {
      */
     public void setEstadoUsuario(String estadoUsuario) {
         this.estadoUsuario = estadoUsuario;
+    }
+
+    /**
+     * @return the dataContratacao
+     */
+    public Date getDataContratacao() {
+        return dataContratacao;
+    }
+
+    /**
+     * @param dataContratacao the dataContratacao to set
+     */
+    public void setDataContratacao(Date dataContratacao) {
+        this.dataContratacao = dataContratacao;
     }
 }
