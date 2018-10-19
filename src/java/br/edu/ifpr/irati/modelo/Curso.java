@@ -1,4 +1,3 @@
-
 package br.edu.ifpr.irati.modelo;
 
 import java.io.Serializable;

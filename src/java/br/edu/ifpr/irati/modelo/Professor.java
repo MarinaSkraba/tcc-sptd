@@ -25,9 +25,6 @@ public class Professor extends Usuario implements Serializable {
     @Column(name = "tipoContrato", nullable = false, length = 20)
     private String tipoContrato;
 
-    @Temporal(TemporalType.DATE)
-    private Date dataContratacao;
-
     @OneToMany(mappedBy = "professor", fetch = FetchType.EAGER)
     private List<PTD> PTDs;
 
@@ -36,7 +33,6 @@ public class Professor extends Usuario implements Serializable {
         this.matriculaSIAPE = "";
         this.regimeTrabalho = "";
         this.tipoContrato = "";
-        this.dataContratacao = new Date();
         this.PTDs = new ArrayList();
 
     }
@@ -45,11 +41,10 @@ public class Professor extends Usuario implements Serializable {
         super(idUsuario, nomeCompleto, email, imagemPerfil, senhaAlfanumerica, email);
     }
 
-    public Professor(String matriculaSIAPE, String regimeTrabalho, String tipoContrato, Date dataContratacao, List<PTD> PTDs) {
+    public Professor(String matriculaSIAPE, String regimeTrabalho, String tipoContrato, List<PTD> PTDs) {
         this.matriculaSIAPE = matriculaSIAPE;
         this.regimeTrabalho = regimeTrabalho;
         this.tipoContrato = tipoContrato;
-        this.dataContratacao = dataContratacao;
         this.PTDs = PTDs;
     }
 
@@ -58,7 +53,6 @@ public class Professor extends Usuario implements Serializable {
         this.matriculaSIAPE = matriculaSIAPE;
         this.regimeTrabalho = regimeTrabalho;
         this.tipoContrato = tipoContrato;
-        this.dataContratacao = dataContratacao;
         this.PTDs = PTDs;
     }
 
@@ -84,14 +78,6 @@ public class Professor extends Usuario implements Serializable {
 
     public void setTipoContrato(String tipoContrato) {
         this.tipoContrato = tipoContrato;
-    }
-
-    public Date getDataContratacao() {
-        return dataContratacao;
-    }
-
-    public void setDataContratacao(Date dataContratacao) {
-        this.dataContratacao = dataContratacao;
     }
 
     public List<PTD> getPTDs() {
