@@ -5,8 +5,15 @@
  */
 package br.edu.ifpr.irati.dao;
 
+import br.edu.ifpr.irati.modelo.Administracao;
+import br.edu.ifpr.irati.modelo.Apoio;
+import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
+import br.edu.ifpr.irati.modelo.Aula;
+import br.edu.ifpr.irati.modelo.Horario;
+import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
+import br.edu.ifpr.irati.modelo.OutroTipoAtividade;
 import br.edu.ifpr.irati.modelo.PTD;
-import br.edu.ifpr.irati.modelo.Professor;
+import br.edu.ifpr.irati.modelo.Participacao;
 import br.edu.ifpr.irati.util.HibernateUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,19 +43,19 @@ public class PTDDAO implements IPTDDAO {
         session.close();
         return filtrados;
     }
-    
+
     @Override
-    public List<PTD> buscarPTDsConcluidos(){
+    public List<PTD> buscarPTDsConcluidos() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         String estado = "CONCLUÍDO";
-        String hql = "from ptd p where p.estadoPTD like '"+ estado +"' ";       
+        String hql = "from ptd p where p.estadoPTD like '" + estado + "' ";
         Query query = session.createQuery(hql);
         List<PTD> results = query.list();
         session.clear();
         session.close();
         return results;
     }
-    
+
     @Override
     public List<PTD> buscarPTDsAprovadosPorProfessor(Serializable idUsuario) {
         int id = (int) idUsuario;
@@ -108,7 +115,7 @@ public class PTDDAO implements IPTDDAO {
         session.close();
         return filtrados;
     }
-    
+
     @Override
     public List<PTD> buscarPTDsReprovadosPorProfessor(Serializable idUsuario) {
         int id = (int) idUsuario;
@@ -128,6 +135,107 @@ public class PTDDAO implements IPTDDAO {
         session.clear();
         session.close();
         return filtrados;
+    }
+
+    @Override
+    public void excluirPTDEOQueTemDentro(PTD ptd) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        List<Administracao> adms = ptd.getAdministrativas();
+        List<Apoio> apoios = ptd.getApoios();
+        List<AtividadeASerProposta> aSerPropostas = ptd.getAtividadesASeremPropostas();
+        List<Aula> aulas = ptd.getAulas();
+        List<ManutencaoEnsino> manuEnsinos = ptd.getManutencoesEnsino();
+        List<Participacao> parts = ptd.getParticipacoes();
+        List<OutroTipoAtividade> oTAs = ptd.getOutrosTiposAtividades();
+        for (Administracao adm : adms) {
+            List<Horario> horariosAux = adm.getHorariosAdministracao();
+            for (Horario horario : horariosAux) {
+                adm.getHorariosAdministracao().remove(horario);
+                session.update(adm);
+                session.delete(horario);
+            }
+            ptd.getAdministrativas().remove(adm);
+            session.update(ptd);
+            session.delete(adm);
+        }
+        //Uma dupla de for para excluir horário
+        for (Apoio apoio : ptd.getApoios()) {
+            List<Horario> horariosAux = apoio.getHorariosApoio();
+            for (Horario horario : horariosAux) {
+                apoio.getHorariosApoio().remove(horario);
+                session.update(apoio);
+                session.delete(horario);
+            }
+        }
+        //Outra dupla de for para excluir atividade
+        for (Apoio apoio : apoios) {
+            ptd.getApoios().remove(apoio);
+            session.update(ptd);
+            session.delete(apoio);
+        }
+        for (AtividadeASerProposta aSerProposta : aSerPropostas) {
+            List<Horario> horariosAux = aSerProposta.getHorariosAtividadesASerProposta();
+            for (Horario horario : horariosAux) {
+                aSerProposta.getHorariosAtividadesASerProposta().remove(horario);
+                session.update(aSerProposta);
+                session.delete(horario);
+            }
+            ptd.getAtividadesASeremPropostas().remove(aSerProposta);
+            session.update(ptd);
+            session.delete(aSerProposta);
+        }
+        for (Aula aula : aulas) {
+            List<Horario> horariosAux = aula.getHorariosAula();
+            for (Horario horario : horariosAux) {
+                aula.getHorariosAula().remove(horario);
+                session.update(aula);
+                session.delete(horario);
+            }
+            ptd.getAulas().remove(aula);
+            session.update(ptd);
+            session.delete(aula);
+        }
+        for (ManutencaoEnsino manuEnsino : manuEnsinos) {
+            List<Horario> horariosAux = manuEnsino.getHorariosManutecao();
+            for (Horario horario : horariosAux) {
+                manuEnsino.getHorariosManutecao().remove(horario);
+                session.update(manuEnsino);
+                session.delete(horario);
+            }
+            ptd.getManutencoesEnsino().remove(manuEnsino);
+            session.update(ptd);
+            session.delete(manuEnsino);
+        }
+        for (Participacao part : parts) {
+            List<Horario> horariosAux = part.getHorariosParticipacao();
+            for (Horario horario : horariosAux) {
+                part.getHorariosParticipacao().remove(horario);
+                session.update(part);
+                session.delete(horario);
+            }
+            ptd.getParticipacoes().remove(part);
+            session.update(ptd);
+            session.delete(part);
+        }
+        for (OutroTipoAtividade ota : oTAs) {
+            List<Horario> horariosAux = ota.getHorariosOutroTipoAtividade();
+            for (Horario horario : horariosAux) {
+                ota.getHorariosOutroTipoAtividade().remove(horario);
+                session.update(ota);
+                session.delete(horario);
+            }
+            ptd.getOutrosTiposAtividades().remove(ota);
+            session.update(ptd);
+            session.delete(ota);
+        }
+        
+        session.delete(ptd);
+
+        session.getTransaction().commit();
+        session.clear();
+        session.close();
     }
 
 }

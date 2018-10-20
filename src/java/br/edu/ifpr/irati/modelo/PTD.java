@@ -78,6 +78,9 @@ public class PTD implements Serializable {
 
     @Column(name = "cargaHorariaSecaoProjetoPesquisaExtensaoColab", nullable = false)
     private double cargaHorariaSecaoProjetoPesquisaExtensaoColab;
+    
+    @Column(name = "cargaHorariaTotal", nullable = true)
+    private double cargaHorariaTotal;
 
     @Temporal(TemporalType.DATE)
     private Date dataAvaliacaoPTD;
@@ -142,9 +145,10 @@ public class PTD implements Serializable {
         cargaHorariaSecaoAtividadesASeremPropostas = 0;
         cargaHorariaSecaoProjetoPesquisaExtensaoAutor = 0;
         cargaHorariaSecaoProjetoPesquisaExtensaoColab = 0;
+        cargaHorariaTotal = 0;
     }
 
-    public PTD(int idPTD, String campoJustificativaAtividadeEnsino, String campoJustificativaManutencaoEnsino, String campoJustificativaApoioEnsino, String campoJustificativaAdministracao, String campoJustificativaProjetoEnsino, String campoJustificativaSeremPropostas, String campoJustificativaOutrasAtividades, String campoJustificativaProjetoPesquisaExtensao, String campoJustificativaGeral, String campoObservacoesDiretorEnsino, String estadoPTD, double cargaHorariaSecaoAdministracao, double cargaHorariaSecaoApoioEnsino, double cargaHorariaSecaoAulas, double cargaHorariaSecaoManutencaoEnsino, double cargaHorariaSecaoOutroTipoAtividade, double cargaHorariaSecaoAtividadesASeremPropostas, double cargaHorariaSecaoProjetoPesquisaExtensaoAutor, double cargaHorariaSecaoProjetoPesquisaExtensaoColab) {
+    public PTD(int idPTD, String campoJustificativaAtividadeEnsino, String campoJustificativaManutencaoEnsino, String campoJustificativaApoioEnsino, String campoJustificativaAdministracao, String campoJustificativaProjetoEnsino, String campoJustificativaSeremPropostas, String campoJustificativaOutrasAtividades, String campoJustificativaProjetoPesquisaExtensao, String campoJustificativaGeral, String campoObservacoesDiretorEnsino, String estadoPTD, double cargaHorariaSecaoAdministracao, double cargaHorariaSecaoApoioEnsino, double cargaHorariaSecaoAulas, double cargaHorariaSecaoManutencaoEnsino, double cargaHorariaSecaoOutroTipoAtividade, double cargaHorariaSecaoAtividadesASeremPropostas, double cargaHorariaSecaoProjetoPesquisaExtensaoAutor, double cargaHorariaSecaoProjetoPesquisaExtensaoColab, double cargaHorariaTotal) {
         this.idPTD = idPTD;
         this.campoJustificativaAtividadeEnsino = campoJustificativaAtividadeEnsino;
         this.campoJustificativaManutencaoEnsino = campoJustificativaManutencaoEnsino;
@@ -165,6 +169,7 @@ public class PTD implements Serializable {
         this.cargaHorariaSecaoAtividadesASeremPropostas = cargaHorariaSecaoAtividadesASeremPropostas;
         this.cargaHorariaSecaoProjetoPesquisaExtensaoAutor = cargaHorariaSecaoProjetoPesquisaExtensaoAutor;
         this.cargaHorariaSecaoProjetoPesquisaExtensaoColab = cargaHorariaSecaoProjetoPesquisaExtensaoColab;
+        this.cargaHorariaTotal = cargaHorariaTotal;
         this.dataAvaliacaoPTD = new Date();
         this.diretorEnsino = new DiretorEnsino();
         professor = new Professor();
@@ -177,7 +182,7 @@ public class PTD implements Serializable {
         outrosTiposAtividades = new ArrayList();
     }
 
-    public PTD(int idPTD, String campoJustificativaAtividadeEnsino, String campoJustificativaManutencaoEnsino, String campoJustificativaApoioEnsino, String campoJustificativaAdministracao, String campoJustificativaProjetoEnsino, String campoJustificativaSeremPropostas, String campoJustificativaOutrasAtividades, String campoJustificativaProjetoPesquisaExtensao, String campoJustificativaGeral, String campoObservacoesDiretorEnsino, String estadoPTD, double cargaHorariaSecaoAdministracao, double cargaHorariaSecaoApoioEnsino, double cargaHorariaSecaoAulas, double cargaHorariaSecaoManutencaoEnsino, double cargaHorariaSecaoOutroTipoAtividade, double cargaHorariaSecaoAtividadesASeremPropostas, double cargaHorariaSecaoProjetoPesquisaExtensaoAutor, double cargaHorariaSecaoProjetoPesquisaExtensaoColab, Date dataAvaliacaoPTD, DiretorEnsino diretorEnsino, Professor professor, List<Aula> aulas, List<Apoio> apoios, List<ManutencaoEnsino> manutencoesEnsino, List<Administracao> administrativas, List<Participacao> participacoes, List<AtividadeASerProposta> atividadesASeremPropostas, List<OutroTipoAtividade> outrosTiposAtividades) {
+    public PTD(int idPTD, String campoJustificativaAtividadeEnsino, String campoJustificativaManutencaoEnsino, String campoJustificativaApoioEnsino, String campoJustificativaAdministracao, String campoJustificativaProjetoEnsino, String campoJustificativaSeremPropostas, String campoJustificativaOutrasAtividades, String campoJustificativaProjetoPesquisaExtensao, String campoJustificativaGeral, String campoObservacoesDiretorEnsino, String estadoPTD, double cargaHorariaSecaoAdministracao, double cargaHorariaSecaoApoioEnsino, double cargaHorariaSecaoAulas, double cargaHorariaSecaoManutencaoEnsino, double cargaHorariaSecaoOutroTipoAtividade, double cargaHorariaSecaoAtividadesASeremPropostas, double cargaHorariaSecaoProjetoPesquisaExtensaoAutor, double cargaHorariaSecaoProjetoPesquisaExtensaoColab, double cargaHorariaTotal, Date dataAvaliacaoPTD, DiretorEnsino diretorEnsino, Professor professor, List<Aula> aulas, List<Apoio> apoios, List<ManutencaoEnsino> manutencoesEnsino, List<Administracao> administrativas, List<Participacao> participacoes, List<AtividadeASerProposta> atividadesASeremPropostas, List<OutroTipoAtividade> outrosTiposAtividades) {
         this.idPTD = idPTD;
         this.campoJustificativaAtividadeEnsino = campoJustificativaAtividadeEnsino;
         this.campoJustificativaManutencaoEnsino = campoJustificativaManutencaoEnsino;
@@ -198,6 +203,7 @@ public class PTD implements Serializable {
         this.cargaHorariaSecaoAtividadesASeremPropostas = cargaHorariaSecaoAtividadesASeremPropostas;
         this.cargaHorariaSecaoProjetoPesquisaExtensaoAutor = cargaHorariaSecaoProjetoPesquisaExtensaoAutor;
         this.cargaHorariaSecaoProjetoPesquisaExtensaoColab = cargaHorariaSecaoProjetoPesquisaExtensaoColab;
+        this.cargaHorariaTotal = cargaHorariaTotal;
         this.dataAvaliacaoPTD = dataAvaliacaoPTD;
         this.diretorEnsino = diretorEnsino;
         this.professor = professor;
@@ -454,6 +460,20 @@ public class PTD implements Serializable {
 
     public void setCampoJustificativaGeral(String campoJustificativaGeral) {
         this.campoJustificativaGeral = campoJustificativaGeral;
+    }
+
+    /**
+     * @return the cargaHorariaTotal
+     */
+    public double getCargaHorariaTotal() {
+        return cargaHorariaTotal;
+    }
+
+    /**
+     * @param cargaHorariaTotal the cargaHorariaTotal to set
+     */
+    public void setCargaHorariaTotal(double cargaHorariaTotal) {
+        this.cargaHorariaTotal = cargaHorariaTotal;
     }
 
 }

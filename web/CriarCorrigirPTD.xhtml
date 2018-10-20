@@ -89,7 +89,7 @@
 
                         <p:commandButton value="Descartar e sair" 
                                          ajax="false" 
-                                         action="#{pTDMB.cancelarPTDEmEdicao(usuarioMB.usuarioLogado.idUsuario, 'notificaçoes')}"
+                                         action="#{pTDMB.cancelarPTD(pTDMB.ptd, usuarioMB.usuarioLogado.idUsuario, 'notificaçoes')}"
                                          styleClass="botaoVermelho"/>
 
                     </p:dialog>
@@ -115,7 +115,7 @@
                         <p:commandButton value="Descartar e sair" 
                                          ajax="false"
                                          actionListener="#{usuarioMB.realizarLogout()}"
-                                         action="#{pTDMB.cancelarPTDEmEdicao(usuarioMB.usuarioLogado.idUsuario, 'login')}"
+                                         action="#{pTDMB.cancelarPTD(pTDMB.ptd, usuarioMB.usuarioLogado.idUsuario, 'login')}"
                                          styleClass="botaoVermelho"/>
 
                     </p:dialog>
