@@ -42,6 +42,20 @@ import javax.swing.text.Document;
 @SessionScoped
 public class PTDMB {
 
+    /**
+     * @return the ptdsResultadoBusca
+     */
+    public List<PTD> getPtdsResultadoBusca() {
+        return ptdsResultadoBusca;
+    }
+
+    /**
+     * @param ptdsResultadoBusca the ptdsResultadoBusca to set
+     */
+    public void setPtdsResultadoBusca(List<PTD> ptdsResultadoBusca) {
+        this.ptdsResultadoBusca = ptdsResultadoBusca;
+    }
+
     private PTD ptd;
     private PTD ptdEmAvaliacao;
     private PTD ptdAprovado;
@@ -51,6 +65,7 @@ public class PTDMB {
     private List<PTD> ptdsEmEdicao;
     private List<PTD> ptdsAprovados;
     private List<PTD> ptdsConcluídos;
+    private List<PTD> ptdsResultadoBusca;
     private List<Participacao> participacoesAutorPTDEdicao;
     private List<Participacao> participacoesColabPTDEdicao;
     private List<Participacao> participacoesAutorPTDAvaliacao;
@@ -82,6 +97,7 @@ public class PTDMB {
         ptdsReprovados = new ArrayList<>();
         ptdsEmEdicao = new ArrayList();
         ptdsConcluídos = new ArrayList();
+        ptdsResultadoBusca = new ArrayList<>();
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         participacoesAutorPTDEdicao = new ArrayList<>();
         participacoesColabPTDEdicao = new ArrayList<>();
@@ -139,40 +155,55 @@ public class PTDMB {
         }
     }
 
-    public String sairTelaManterPTD() {
+    public void realizarBuscaPTDs(int idUsuario) {
 
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-        for (Administracao adm : ptd.getAdministrativas()) {
-            Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
-            administracaoDAO.alterar(adm);
+    }
+
+//    public String sairTelaManterPTD() {
+//
+//        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+//        for (Administracao adm : ptd.getAdministrativas()) {
+//            Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
+//            administracaoDAO.alterar(adm);
+//        }
+//        for (Apoio apoio : ptd.getApoios()) {
+//            Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
+//            apoioDAO.alterar(apoio);
+//        }
+//        for (AtividadeASerProposta aasp : ptd.getAtividadesASeremPropostas()) {
+//            Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
+//            atividadeASerPropostaDAO.alterar(aasp);
+//        }
+//        List<Aula> aulas = ptd.getAulas();
+//        for (Aula al : aulas) {
+//            AulaMB aulaMB = new AulaMB();
+//            aulaMB.setAula(al);
+//            aulaMB.salvarAula(ptd.getProfessor().getIdUsuario(), ptd);
+//        }
+//        for (ManutencaoEnsino manuEn : ptd.getManutencoesEnsino()) {
+//            Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
+//            manutencaoEnsinoDAO.alterar(manuEn);
+//        }
+//        for (OutroTipoAtividade ota : ptd.getOutrosTiposAtividades()) {
+//            Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
+//            outroTipoAtividadeDAO.alterar(ota);
+//        }
+//        for (Participacao part : ptd.getParticipacoes()) {
+//            Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
+//            participacaoDAO.alterar(part);
+//        }
+//        return "/Login?faces-redirect=true";
+//    }
+    public String sairTelaBuscarPTDs(Usuario usuario) {
+        if (usuario.getIdUsuario() != 0) {
+            if (usuario instanceof Professor) {
+                return abrirNotificacoesDocente(usuario.getIdUsuario());
+            } else {
+                return abrirNotificacoesDiretorEnsino(usuario.getIdUsuario());
+            }
+        } else {
+            return "/index?faces-redirect=true";
         }
-        for (Apoio apoio : ptd.getApoios()) {
-            Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
-            apoioDAO.alterar(apoio);
-        }
-        for (AtividadeASerProposta aasp : ptd.getAtividadesASeremPropostas()) {
-            Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
-            atividadeASerPropostaDAO.alterar(aasp);
-        }
-        List<Aula> aulas = ptd.getAulas();
-        for (Aula al : aulas) {
-            AulaMB aulaMB = new AulaMB();
-            aulaMB.setAula(al);
-            aulaMB.salvarAula(ptd.getProfessor().getIdUsuario(), ptd);
-        }
-        for (ManutencaoEnsino manuEn : ptd.getManutencoesEnsino()) {
-            Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
-            manutencaoEnsinoDAO.alterar(manuEn);
-        }
-        for (OutroTipoAtividade ota : ptd.getOutrosTiposAtividades()) {
-            Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
-            outroTipoAtividadeDAO.alterar(ota);
-        }
-        for (Participacao part : ptd.getParticipacoes()) {
-            Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-            participacaoDAO.alterar(part);
-        }
-        return "/Login?faces-redirect=true";
     }
 
     public void limparVariáveis() {
@@ -200,6 +231,11 @@ public class PTDMB {
 
     }
 
+    public void abrirTelaBuscarPTDs() {
+        IPTDDAO ptddao = new PTDDAO();
+        ptdsResultadoBusca = ptddao.buscarPTDsConcluidos();
+    }
+
     public void abrirMostrarPTDParaDocente(PTD ptd) {
         ptdAprovado = ptd;
     }
@@ -210,9 +246,9 @@ public class PTDMB {
 
     public String abrirNotificacoesDocente(int idUsuario) {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovados(idUsuario);
-        ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(idUsuario);
-        ptdsConcluídos = ptdDAOEspecifico.buscarPTDsConcluidos(idUsuario);
+        ptdsReprovados = ptdDAOEspecifico.buscarPTDsReprovadosPorProfessor(idUsuario);
+        ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovadosPorProfessor(idUsuario);
+        ptdsConcluídos = ptdDAOEspecifico.buscarPTDsConcluidosPorProfessor(idUsuario);
         return "/NotificacoesDocente?faces-redirect=true";
     }
 
@@ -234,7 +270,7 @@ public class PTDMB {
         Professor p = professorDAOGenerico.buscarPorId(usuario.getIdUsuario());
 
         getPtd().setProfessor(p);
-        setPtdsEmEdicao(ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()));
+        setPtdsEmEdicao(ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(p.getIdUsuario()));
         for (PTD ptdE : getPtdsEmEdicao()) {
             Dao<Administracao> administracaoDAO = new GenericDAO<>(PTD.class);
             Dao<TipoAdministracao> tipoAdministracaoDAO = new GenericDAO<>(TipoAdministracao.class);
@@ -356,8 +392,8 @@ public class PTDMB {
 
         limparVariáveis();
 
-        if (!ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()).isEmpty()) {
-            setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(p.getIdUsuario()).get(0));
+        if (!ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(p.getIdUsuario()).isEmpty()) {
+            setPtd(ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(p.getIdUsuario()).get(0));
         }
 
         return "/CriarCorrigirPTD?faces-redirect=true";
@@ -366,7 +402,7 @@ public class PTDMB {
     public String abrirCriarCorrigirPTDContinuarEdicao(Usuario usuario) {
 
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario());
+        List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(usuario.getIdUsuario());
         if (!ptdsEmEdicao.isEmpty()) {
             setPtd(ptdsEmEdicao.get(0));
             return "/CriarCorrigirPTD?faces-redirect=true";
@@ -379,12 +415,12 @@ public class PTDMB {
     public String abrirCriarCorrigirPTDAPartirDoUltimoArquivado(Usuario usuario) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario());
+        List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(usuario.getIdUsuario());
         for (PTD ptdE : ptdsEmEdicao) {
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
         }
-        List<PTD> ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovados(usuario.getIdUsuario());
+        List<PTD> ptdsAprovados = ptdDAOEspecifico.buscarPTDsAprovadosPorProfessor(usuario.getIdUsuario());
 
         limparVariáveis();
 
@@ -450,7 +486,7 @@ public class PTDMB {
             }
 
             ptdDAOGenerico.salvar(getPtd());
-            setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(usuario.getIdUsuario()).get(0));
+            setPtd(ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(usuario.getIdUsuario()).get(0));
 
             errosTabelaAdministrativas = new ArrayList<>();
             errosTabelaApoioEnsino = new ArrayList<>();
@@ -471,7 +507,7 @@ public class PTDMB {
     public void abrirCriarCorrigirPTDAPartirDeUmReprovado(PTD ptdReprovado) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
-        List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicao(ptdReprovado.getProfessor().getIdUsuario());
+        List<PTD> ptdsEmEdicao = ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(ptdReprovado.getProfessor().getIdUsuario());
         for (PTD ptdE : ptdsEmEdicao) {
             ptdE.setEstadoPTD("CANCELADO");
             ptdDAOGenerico.alterar(ptdE);
@@ -480,7 +516,7 @@ public class PTDMB {
 
         ptdReprovado.setEstadoPTD("EDICAO");
         ptdDAOGenerico.alterar(ptdReprovado);
-        setPtd(ptdDAOEspecifico.buscarPTDsEmEdicao(ptdReprovado.getProfessor().getIdUsuario()).get(0));
+        setPtd(ptdDAOEspecifico.buscarPTDsEmEdicaoPorProfessor(ptdReprovado.getProfessor().getIdUsuario()).get(0));
     }
 
     public String cancelarPTDEmEdicao(int idUsuario, String telaFutura) {

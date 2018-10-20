@@ -17,7 +17,7 @@ import org.hibernate.Session;
 public class PTDDAO implements IPTDDAO {
 
     @Override
-    public List<PTD> buscarPTDsConcluidos(Serializable idUsuario) {
+    public List<PTD> buscarPTDsConcluidosPorProfessor(Serializable idUsuario) {
         int id = (int) idUsuario;
         String estado = "CONCLUÍDO";
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -38,7 +38,19 @@ public class PTDDAO implements IPTDDAO {
     }
     
     @Override
-    public List<PTD> buscarPTDsAprovados(Serializable idUsuario) {
+    public List<PTD> buscarPTDsConcluidos(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String estado = "CONCLUÍDO";
+        String hql = "from ptd p where p.estadoPTD like '"+ estado +"' ";       
+        Query query = session.createQuery(hql);
+        List<PTD> results = query.list();
+        session.clear();
+        session.close();
+        return results;
+    }
+    
+    @Override
+    public List<PTD> buscarPTDsAprovadosPorProfessor(Serializable idUsuario) {
         int id = (int) idUsuario;
         String estado = "APROVADO";
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -59,7 +71,7 @@ public class PTDDAO implements IPTDDAO {
     }
 
     @Override
-    public List<PTD> buscarPTDsEmEdicao(Serializable idUsuario) {
+    public List<PTD> buscarPTDsEmEdicaoPorProfessor(Serializable idUsuario) {
         int id = (int) idUsuario;
         String estado = "EDICAO";
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -98,7 +110,7 @@ public class PTDDAO implements IPTDDAO {
     }
     
     @Override
-    public List<PTD> buscarPTDsReprovados(Serializable idUsuario) {
+    public List<PTD> buscarPTDsReprovadosPorProfessor(Serializable idUsuario) {
         int id = (int) idUsuario;
         String estado = "REPROVADO";
         Session session = HibernateUtil.getSessionFactory().openSession();

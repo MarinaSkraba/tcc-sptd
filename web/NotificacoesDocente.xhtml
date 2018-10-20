@@ -69,6 +69,13 @@
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Editar PTD"/>
 
+                <p:commandButton styleClass="opMenu"
+                                 icon="/img/Search/searchLarger_24.png"
+                                 value="Pesquisa"
+                                 ajax="false" 
+                                 actionListener="#{pTDMB.abrirTelaBuscarPTDs()}"
+                                 action="/BuscarPTDs"/>
+
                 <!-- Caixa de "novo" PTD -->
                 <p:overlayPanel id="addPanel" 
                                 for="addPTD" 
@@ -88,11 +95,6 @@
                                      ajax="false" 
                                      action="#{pTDMB.abrirCriarCorrigirPTDContinuarEdicao(usuarioMB.usuarioLogado)}"/>
                 </p:overlayPanel>
-                
-                <p:commandButton styleClass="opMenu"
-                                 icon="/img/Search/searchLarger_24.png"
-                                 value="Pesquisa"
-                                 action="/pesquisa"/>
 
                 <!-- Caixa de aviso de substituição de PTD -->
                 <p:dialog header="Confirmar criação" 
@@ -194,7 +196,9 @@
                                              style="width:100%; text-align: center;" >
                                     <h:outputText value="#{ptdAprovado.dataAvaliacaoPTD}" 
                                                   styleClass="text01"
-                                                  style="font-size: large; width: 90%;"/>
+                                                  style="font-size: large; width: 90%;">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
                                     <br/>
                                     <h:outputText value="#{ptdAprovado.diretorEnsino.nomeCompleto}" 
                                                   styleClass="text01"
@@ -202,7 +206,7 @@
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Abrir"
                                                      ajax="false"
-                                                     actionListener="#{pTDMB.abrirMostrarPTD(ptdAprovado)}"
+                                                     actionListener="#{pTDMB.abrirMostrarPTDParaDocente(ptdAprovado)}"
                                                      action="/MostrarPTDParaDocente"/>
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Concluir"
@@ -215,7 +219,7 @@
                         </h:dataTable>
 
                     </div>
-                    
+
                     <br/>
                     <div id="content" style="width: 50%; border-radius: 15px; border-top-style: solid; border-top-width: medium; border-top-color: #1785ad;">
 
@@ -240,7 +244,9 @@
                                              style="width:100%; text-align: center;" >
                                     <h:outputText value="#{ptdConcluido.dataAvaliacaoPTD}" 
                                                   styleClass="text01"
-                                                  style="font-size: large; width: 90%;"/>
+                                                  style="font-size: large; width: 90%;">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
                                     <br/>
                                     <h:outputText value="#{ptdConcluido.diretorEnsino.nomeCompleto}" 
                                                   styleClass="text01"

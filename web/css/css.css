@@ -19,6 +19,20 @@ body{
     background-image: linear-gradient(to right, #1AB5D9, #179DBD);
     box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1);
 }
+#barraTelaBuscarPTDs{
+    width: 90%;
+    height: 30px;
+    
+    background-image: linear-gradient(to right, white, white);
+    
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #menuBarra{
     float: right;
     display: flex;
@@ -383,10 +397,11 @@ body{
     align-items: center;
     flex-direction: row;
     border-width: 2pt;
-    background-color: rgb(255,255,255);
+    background-color: rgba(255,255,255,0.8);
     border-radius: 500px;
     justify-content: center; 
     box-shadow: 5px 5px 5px rgba(0,0,0,0.7);
+    -webkit-box-shadow: inset 0 0 10px #1785ad;
 }
 .botaoLogin{
     color: #7497A3;
@@ -399,6 +414,25 @@ body{
     background-color: transparent;
 }
 .botaoLogin:hover{
+    color: white;
+    border-color: #1AB5D9;
+    background-image: linear-gradient(to right, #1AB5D9, #1AB5D9);
+    /*
+    box-shadow: inset 0 -3px 6px 0 rgba(0,0,0,0.2);
+    */
+}
+.botaoTelaInicio{
+    color: #1AB5D9;
+    font-size: larger; 
+    font-family: calibri, sans-serif;
+    font-weight: normal;
+    border-radius: 50px;
+    border-color: #1AB5D9;
+    box-shadow: 0px 0px 0px rgba(0,0,0,0);
+    box-shadow: inset 0 0px 0px 0 rgba(0,0,0,0.0);
+    background-color: transparent;
+}
+.botaoTelaInicio:hover{
     color: white;
     border-color: #1AB5D9;
     background-image: linear-gradient(to right, #1AB5D9, #1AB5D9);
@@ -419,11 +453,12 @@ body{
     background-color: white;
 
 
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 
     align-items: center;
     justify-content: center; 
+
     box-shadow: 5px 5px 5px rgba(0,0,0,0.7);
 }
 #telaInicioLadoDireito{
@@ -441,13 +476,25 @@ body{
     background-color: rgba(255,255,255,0.8);
     border-radius: 500px;
     justify-content: center; 
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.7);
+}
+#formTelaInicio:hover{
+    background-color: rgb(255,255,255);
 }
 .link{
     text-decoration: none;
 }
 .link:hover{
     color: #1AB5D9;
+    text-decoration: underline;
+}
+.link02{
+    padding: 20px;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+}
+.link02:hover{
+    color: #179DBD;
     text-decoration: underline;
 }
 .text{
@@ -484,6 +531,17 @@ body{
     box-shadow: 0 0px 0px 0 rgba(0,0,0,0);
 }
 
+#panelPesquisaPTDs{
+    margin: 20px;
+    padding: 10px;
+    width: 30%;
+    height: 30px;
+    border-radius: 50px;
+    background-color: rgba(255,255,255,0.5);
+}
+#panelPesquisaPTDs:hover{
+    background-color: rgba(255,255,255,0.8);
+}
 .ui-dialog {
     left: 0;
     outline: 0 none;

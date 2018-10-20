@@ -6,14 +6,16 @@ import java.util.List;
 
 public interface IPTDDAO {
     
-    public List<PTD> buscarPTDsConcluidos(Serializable idUsuario);
+    public List<PTD> buscarPTDsConcluidosPorProfessor(Serializable idUsuario);
     
-    public List<PTD> buscarPTDsAprovados(Serializable idUsuario);
+    public List<PTD> buscarPTDsConcluidos();
     
-    public List<PTD> buscarPTDsEmEdicao(Serializable idUsuario);
+    public List<PTD> buscarPTDsAprovadosPorProfessor(Serializable idUsuario);
+    
+    public List<PTD> buscarPTDsEmEdicaoPorProfessor(Serializable idUsuario);
     
     public List<PTD> buscarPTDEmAvaliacao();
     
-    public List<PTD> buscarPTDsReprovados(Serializable idUsuario);
+    public List<PTD> buscarPTDsReprovadosPorProfessor(Serializable idUsuario);
     
 }

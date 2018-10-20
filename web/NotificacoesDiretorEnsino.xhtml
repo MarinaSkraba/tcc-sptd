@@ -163,7 +163,9 @@
                 <p:commandButton styleClass="opMenu"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Pesquisa"
-                                 action="/pesquisa"/>
+                                 ajax="false" 
+                                 actionListener="#{pTDMB.abrirTelaBuscarPTDs()}"
+                                 action="/BuscarPTDs"/>
 
             </h:form>
         </div>
@@ -241,8 +243,6 @@
                         </h:column>
 
                     </h:dataTable>
-
-
 
                 </h:form>
                 <br/>

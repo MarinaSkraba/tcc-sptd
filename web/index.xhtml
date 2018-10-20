@@ -24,13 +24,15 @@
                     <br/>
                     <p:commandButton value="Realizar Login" 
                                      ajax="false" 
-                                     styleClass="botaoLogin"
+                                     styleClass="botaoTelaInicio"
                                      style="width: 40%; margin: 5px;"
                                      action="/Login"/>
                     <br/>
                     <p:commandButton value="Buscar PTDs" 
                                      ajax="false" 
-                                     styleClass="botaoLogin"
+                                     actionListener="#{pTDMB.abrirTelaBuscarPTDs()}"
+                                     action="/BuscarPTDs"
+                                     styleClass="botaoTelaInicio"
                                      style="width: 40%; margin: 5px;"/>
                 </div>
                 <div id="telaInicioLadoDireito" class="ui-g">
