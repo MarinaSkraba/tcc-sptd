@@ -25,6 +25,7 @@ public class DiretorEnsinoMB {
     private PTD ptd;
     private List<PTD> ptds;
     private List<String> errosCadastroDiretorEnsino;
+    private String confirmacaoSenha;
 
     public DiretorEnsinoMB() {
 
@@ -37,11 +38,11 @@ public class DiretorEnsinoMB {
     public String salvarDiretorEnsino() {
 
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
-        if (diretorEnsino.getEmail().contains("@ifpr.edu.br")) {
-            errosCadastroDiretorEnsino.add("O email informado deve ser institucional(@ifpr.edu.br)");
+        if (getDiretorEnsino().getEmail().contains("@ifpr.edu.br")) {
+            getErrosCadastroDiretorEnsino().add("O email informado deve ser institucional(@ifpr.edu.br)");
         } else {
-            diretorEnsinoDAO.salvar(diretorEnsino);
-            diretorEnsino = new DiretorEnsino();
+            diretorEnsinoDAO.salvar(getDiretorEnsino());
+            setDiretorEnsino(new DiretorEnsino());
         }
 
         return "/ adicionar html";
@@ -50,34 +51,38 @@ public class DiretorEnsinoMB {
     public String alterarDiretorEnsino() throws HashGenerationException {
 
         String senhaSHA512 = "";
-        if (diretorEnsino.getSenhaAlfanumerica().length() >= 8 && diretorEnsino.getSenhaAlfanumerica().length() <= 16) {
+        if (getDiretorEnsino().getSenhaAlfanumerica().length() >= 8 && getDiretorEnsino().getSenhaAlfanumerica().length() <= 16) {
 
-            senhaSHA512 = Digest.hashString(diretorEnsino.getSenhaAlfanumerica(), "SHA-512");
+            senhaSHA512 = Digest.hashString(getDiretorEnsino().getSenhaAlfanumerica(), "SHA-512");
 
-        } else if (diretorEnsino.getSenhaAlfanumerica().length() < 8 | diretorEnsino.getSenhaAlfanumerica().length() > 16) {
+        } else if (getDiretorEnsino().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
 
-            errosCadastroDiretorEnsino.add("Sua senha deve conter entre de 8 a 16 caracteres");
+            getErrosCadastroDiretorEnsino().add("Sua senha deve conter entre de 8 a 16 caracteres");
+
+        } else if (getDiretorEnsino().getSenhaAlfanumerica().equals(getConfirmacaoSenha()) == false) {
+
+            getErrosCadastroDiretorEnsino().add("As senhas informadas não coincidem");
 
         }
         Date dataAtual = new Date();
-        if (diretorEnsino.getDataContratacao().after(dataAtual)) {
+        if (getDiretorEnsino().getDataContratacao().after(dataAtual)) {
 
-            errosCadastroDiretorEnsino.add("A data que você inseriu como sua data de contratação "
+            getErrosCadastroDiretorEnsino().add("A data que você inseriu como sua data de contratação "
                     + "é posterior a data atual");
 
-        } else if (diretorEnsino.getEmail().contains("@ifpr.edu.br") == false) {
+        } else if (getDiretorEnsino().getEmail().contains("@ifpr.edu.br") == false) {
 
-            errosCadastroDiretorEnsino.add("O email deve ser institucional(@ifpr.edu.br)");
+            getErrosCadastroDiretorEnsino().add("O email deve ser institucional(@ifpr.edu.br)");
 
         }
-        if (errosCadastroDiretorEnsino.isEmpty() == true) {
+        if (getErrosCadastroDiretorEnsino().isEmpty() == true) {
 
             Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
-            Usuario u = new Usuario(diretorEnsino.getIdUsuario(), diretorEnsino.getNomeCompleto(), diretorEnsino.getEmail(), diretorEnsino.getImagemPerfil(), senhaSHA512, "Habilitado");
+            Usuario u = new Usuario(getDiretorEnsino().getIdUsuario(), getDiretorEnsino().getNomeCompleto(), getDiretorEnsino().getEmail(), getDiretorEnsino().getImagemPerfil(), senhaSHA512, "Habilitado");
             Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
             usuarioDAO.alterar(u);
-            diretorEnsinoDAO.alterar(diretorEnsino);
-            diretorEnsino = new DiretorEnsino();
+            diretorEnsinoDAO.alterar(getDiretorEnsino());
+            setDiretorEnsino(new DiretorEnsino());
 
         }
         return "";
@@ -86,8 +91,8 @@ public class DiretorEnsinoMB {
     public void desabilitarDiretorEnsino() {
 
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
-        diretorEnsino.setEstadoUsuario("Desabilitado");
-        diretorEnsinoDAO.alterar(diretorEnsino);
+        getDiretorEnsino().setEstadoUsuario("Desabilitado");
+        diretorEnsinoDAO.alterar(getDiretorEnsino());
 
     }
 
@@ -135,5 +140,33 @@ public class DiretorEnsinoMB {
      */
     public void setErrosCadastroDiretorEnsino(List<String> errosCadastroDiretorEnsino) {
         this.errosCadastroDiretorEnsino = errosCadastroDiretorEnsino;
+    }
+
+    /**
+     * @return the diretorEnsino
+     */
+    public DiretorEnsino getDiretorEnsino() {
+        return diretorEnsino;
+    }
+
+    /**
+     * @param diretorEnsino the diretorEnsino to set
+     */
+    public void setDiretorEnsino(DiretorEnsino diretorEnsino) {
+        this.diretorEnsino = diretorEnsino;
+    }
+
+    /**
+     * @return the confirmacaoSenha
+     */
+    public String getConfirmacaoSenha() {
+        return confirmacaoSenha;
+    }
+
+    /**
+     * @param confirmacaoSenha the confirmacaoSenha to set
+     */
+    public void setConfirmacaoSenha(String confirmacaoSenha) {
+        this.confirmacaoSenha = confirmacaoSenha;
     }
 }
