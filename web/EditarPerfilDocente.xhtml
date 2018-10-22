@@ -56,9 +56,31 @@
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Voltar"
-                                 action="/Login"
+                                 action="/PerfilDocente"
                                  ajax="false"
                                  style="float: left;"/>
+                
+                <p:commandButton id="logout"
+                                 image="img/fundo_login.png" 
+                                 styleClass="imgLogado"/>
+
+                <!-- Informações e Logout -->
+                <p:overlayPanel id="Usuário" 
+                                for="logout" 
+                                hideEffect="fade" 
+                                style="padding: 0px;">
+                    <h:outputText value="#{usuarioMB.usuarioLogado.email}" 
+                                  styleClass="text01"
+                                  style="color: #1785ad; font-weight: normal; font-size: large; margin: 0px;"/>
+                    <br/>
+                    <p:commandButton value="Sair"
+                                     styleClass="opVermelhaMenu"
+                                     style="margin: 0px;"
+                                     ajax="false" 
+                                     immediate="true"
+                                     actionListener="#{usuarioMB.realizarLogout()}"
+                                     action="/Login?faces-redirect=true"/>
+                </p:overlayPanel>
 
             </h:form>
         </div>
@@ -69,7 +91,7 @@
               color="#A8A8A8" 
               style="margin: 20px; font-weight: 100;" 
               styleClass="text">
-            Cadastro Docente
+            Editar Perfil
         </font>
 
         <div id="screen">
@@ -160,28 +182,28 @@
                         <p:commandButton styleClass="botaoAzul" 
                                      style="border-radius: 30px; font-size: large; margin-left: 10px;" 
                                      value="Cadastrar"
-                                     action="#{professorMB.salvarProfessor()}"
-                                     onclick="PF('confirmarCadastroDocenteDialog').show();"/>
+                                     onclick="PF('confirmarEdicaoDocenteDialog').show();"/>
 
                     </div>
                 </center>
 
-                <!-- Caixa de confirmação de cadastro -->
-                <p:dialog header="Confirmar cadastro" 
-                          widgetVar="confirmarCadastroDocenteDialog" 
+                <!-- Caixa de confirmação de edição -->
+                <p:dialog header="Confirmar edição" 
+                          widgetVar="confirmarEdicaoDocenteDialog" 
                           modal="true" 
                           showEffect="fade" 
                           hideEffect="fade" 
                           resizable="false">
 
-                    <h:outputText value="alguma coisa" 
+                    <h:outputText value="Você realmente deseja alterar suas informações?" 
                                   styleClass="text01"
                                   style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                     <br/>
 
                     <p:commandButton styleClass="botaoAzul" 
                                      value="Confirmar"
-                                     ajax="false"/>
+                                     ajax="false"
+                                     action="#{professorMB.alterarProfessor()}"/>
 
                 </p:dialog>
 

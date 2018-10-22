@@ -38,7 +38,7 @@
             allDayText: 'Todo o Dia'
         };
     </script>
-    
+
     <h:body styleClass="body">
 
         <!-- Barra de menu -->
@@ -56,9 +56,31 @@
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Voltar"
-                                 action="/Login"
+                                 action="/NotificacoesDocente"
                                  ajax="false"
                                  style="float: left;"/>
+
+                <p:commandButton id="logout"
+                                 image="img/fundo_login.png" 
+                                 styleClass="imgLogado"/>
+
+                <!-- Informações e Logout -->
+                <p:overlayPanel id="Usuário" 
+                                for="logout" 
+                                hideEffect="fade" 
+                                style="padding: 0px;">
+                    <h:outputText value="#{usuarioMB.usuarioLogado.email}" 
+                                  styleClass="text01"
+                                  style="color: #1785ad; font-weight: normal; font-size: large; margin: 0px;"/>
+                    <br/>
+                    <p:commandButton value="Sair"
+                                     styleClass="opVermelhaMenu"
+                                     style="margin: 0px;"
+                                     ajax="false" 
+                                     immediate="true"
+                                     actionListener="#{usuarioMB.realizarLogout()}"
+                                     action="/Login?faces-redirect=true"/>
+                </p:overlayPanel>
 
             </h:form>
         </div>
@@ -69,7 +91,7 @@
               color="#A8A8A8" 
               style="margin: 20px; font-weight: 100;" 
               styleClass="text">
-            Cadastro Docente
+            Seu Perfil
         </font>
 
         <div id="screen">
@@ -85,28 +107,16 @@
                         <h:panelGrid columns="2">
                             <h:outputText value="Nome completo: "
                                           styleClass="text01"
+                                          style="font-size: large; float: right; font-weight: bold;"/>
+                            <h:outputText value="#{professorMB.professor.nomeCompleto}"
+                                          styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:inputText value="#{professorMB.professor.nomeCompleto}"
-                                         style="margin: 5px; font-size: large;"
-                                         styleClass="text01"/>
                             <h:outputText value="Email: "
                                           styleClass="text01"
-                                          style="font-size: large; float: right;"/>
-                            <p:inputText value="#{professorMB.professor.email}"
-                                         style="margin: 5px; font-size: large;"
-                                         styleClass="text01"/>
-                            <h:outputText value="Senha: "
+                                          style="font-size: large; float: right; font-weight: bold;"/>
+                            <h:outputText value="#{professorMB.professor.email}"
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:password value="#{professorMB.professor.senhaAlfanumerica}"
-                                        style="margin: 5px; font-size: large;"
-                                        styleClass="text01"/>
-                            <h:outputText value="Confirmação senha: "
-                                          styleClass="text01"
-                                          style="font-size: large; float: right;"/>
-                            <p:password value="#{professorMB.confirmacaoSenha}"
-                                        style="margin: 5px; font-size: large;"
-                                        styleClass="text01"/>
                         </h:panelGrid>
                         <br/>
                         <h:outputText value="Perfil Docente" 
@@ -116,74 +126,41 @@
                         <h:panelGrid columns="2">
                             <h:outputText value="Matrícula SIAPE: "
                                           styleClass="text01"
+                                          style="font-size: large; float: right; font-weight: bold;"/>
+                            <h:outputText value="#{professorMB.professor.matriculaSIAPE}"
+                                          styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:inputText value="#{professorMB.professor.matriculaSIAPE}"
-                                         style="margin: 5px; font-size: large;"
-                                         styleClass="text01"/>
                             <h:outputText value="Regime de trabalho: "
                                           styleClass="text01"
+                                          style="font-size: large; float: right; font-weight: bold;"/>
+                            <h:outputText value="#{professorMB.professor.regimeTrabalho}"
+                                          styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:selectOneRadio value="#{professorMB.professor.regimeTrabalho}" 
-                                              style="font-size: large;"
-                                              styleClass="text01"
-                                              layout="grid" 
-                                              columns="1">
-                                <f:selectItem itemLabel=" Dedicação Exclusiva" 
-                                              itemValue="Dedicação Exclusiva" />
-                                <f:selectItem itemLabel=" 40 horas" 
-                                              itemValue="40h" />
-                                <f:selectItem itemLabel=" 20 horas" 
-                                              itemValue="20h" />
-                            </p:selectOneRadio>
                             <h:outputText value="Tipo de contrato: "
                                           styleClass="text01"
-                                          style="font-size: large; float: right;"/>
-                            <p:selectOneRadio value="#{professorMB.professor.tipoContrato}" 
-                                              layout="grid" columns="1"
-                                              style="font-size: large;"
-                                              styleClass="text01">
-                                <f:selectItem itemLabel=" Efetivo" 
-                                              itemValue="Efetivo" />
-                                <f:selectItem itemLabel=" Temporário" 
-                                              itemValue="Temporario" />
-                            </p:selectOneRadio>
-                            <h:outputText value="Data de contratação: "
+                                          style="font-size: large; float: right; font-weight: bold;"/>
+                            <h:outputText value="#{professorMB.professor.tipoContrato}"
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:calendar value="#{professorMB.professor.dataContratacao}" 
-                                        mode="popup" 
-                                        locale="pt"
-                                        size="17"/>
+                            <h:outputText value="Data de contratação: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right; font-weight: bold;"/>
+                            <h:outputText value="#{professorMB.professor.dataContratacao}"
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
                         </h:panelGrid>
                         <br/>
-                        
+
                         <p:commandButton styleClass="botaoAzul" 
-                                     style="border-radius: 30px; font-size: large; margin-left: 10px;" 
-                                     value="Cadastrar"
-                                     action="#{professorMB.salvarProfessor()}"
-                                     onclick="PF('confirmarCadastroDocenteDialog').show();"/>
+                                         style="border-radius: 30px; font-size: large; margin-left: 10px;" 
+                                         value="Editar Informações"
+                                         ajax="false"
+                                         action="/EditarPerfilDocente"/>
 
                     </div>
                 </center>
-
-                <!-- Caixa de confirmação de cadastro -->
-                <p:dialog header="Confirmar cadastro" 
-                          widgetVar="confirmarCadastroDocenteDialog" 
-                          modal="true" 
-                          showEffect="fade" 
-                          hideEffect="fade" 
-                          resizable="false">
-
-                    <h:outputText value="alguma coisa" 
-                                  styleClass="text01"
-                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
-                    <br/>
-
-                    <p:commandButton styleClass="botaoAzul" 
-                                     value="Confirmar"
-                                     ajax="false"/>
-
-                </p:dialog>
 
             </h:form>
 
