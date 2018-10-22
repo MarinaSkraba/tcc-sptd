@@ -149,18 +149,20 @@ public class PTDDAO implements IPTDDAO {
         List<ManutencaoEnsino> manuEnsinos = ptd.getManutencoesEnsino();
         List<Participacao> parts = ptd.getParticipacoes();
         List<OutroTipoAtividade> oTAs = ptd.getOutrosTiposAtividades();
-        for (Administracao adm : adms) {
+        
+        for (Administracao adm : ptd.getAdministrativas()) {
             List<Horario> horariosAux = adm.getHorariosAdministracao();
             for (Horario horario : horariosAux) {
                 adm.getHorariosAdministracao().remove(horario);
-                session.update(adm);
+                session.update(ptd.getAdministrativas());
                 session.delete(horario);
             }
+        }
+        for (Administracao adm : adms) {
             ptd.getAdministrativas().remove(adm);
             session.update(ptd);
             session.delete(adm);
         }
-        //Uma dupla de for para excluir horário
         for (Apoio apoio : ptd.getApoios()) {
             List<Horario> horariosAux = apoio.getHorariosApoio();
             for (Horario horario : horariosAux) {
@@ -169,63 +171,72 @@ public class PTDDAO implements IPTDDAO {
                 session.delete(horario);
             }
         }
-        //Outra dupla de for para excluir atividade
         for (Apoio apoio : apoios) {
             ptd.getApoios().remove(apoio);
             session.update(ptd);
             session.delete(apoio);
         }
-        for (AtividadeASerProposta aSerProposta : aSerPropostas) {
+        for (AtividadeASerProposta aSerProposta : ptd.getAtividadesASeremPropostas()) {
             List<Horario> horariosAux = aSerProposta.getHorariosAtividadesASerProposta();
             for (Horario horario : horariosAux) {
                 aSerProposta.getHorariosAtividadesASerProposta().remove(horario);
                 session.update(aSerProposta);
                 session.delete(horario);
             }
+        }
+        for (AtividadeASerProposta aSerProposta : aSerPropostas) {
             ptd.getAtividadesASeremPropostas().remove(aSerProposta);
             session.update(ptd);
             session.delete(aSerProposta);
         }
-        for (Aula aula : aulas) {
+        for (Aula aula : ptd.getAulas()) {
             List<Horario> horariosAux = aula.getHorariosAula();
             for (Horario horario : horariosAux) {
                 aula.getHorariosAula().remove(horario);
                 session.update(aula);
                 session.delete(horario);
             }
+        }
+        for (Aula aula : aulas) {
             ptd.getAulas().remove(aula);
             session.update(ptd);
             session.delete(aula);
         }
-        for (ManutencaoEnsino manuEnsino : manuEnsinos) {
+        for (ManutencaoEnsino manuEnsino : ptd.getManutencoesEnsino()) {
             List<Horario> horariosAux = manuEnsino.getHorariosManutecao();
             for (Horario horario : horariosAux) {
                 manuEnsino.getHorariosManutecao().remove(horario);
                 session.update(manuEnsino);
                 session.delete(horario);
             }
+        }
+        for (ManutencaoEnsino manuEnsino : manuEnsinos) {
             ptd.getManutencoesEnsino().remove(manuEnsino);
             session.update(ptd);
             session.delete(manuEnsino);
         }
-        for (Participacao part : parts) {
+        for (Participacao part : ptd.getParticipacoes()) {
             List<Horario> horariosAux = part.getHorariosParticipacao();
             for (Horario horario : horariosAux) {
                 part.getHorariosParticipacao().remove(horario);
                 session.update(part);
                 session.delete(horario);
             }
+        }
+        for (Participacao part : parts) {
             ptd.getParticipacoes().remove(part);
             session.update(ptd);
             session.delete(part);
         }
-        for (OutroTipoAtividade ota : oTAs) {
+        for (OutroTipoAtividade ota : ptd.getOutrosTiposAtividades()) {
             List<Horario> horariosAux = ota.getHorariosOutroTipoAtividade();
             for (Horario horario : horariosAux) {
                 ota.getHorariosOutroTipoAtividade().remove(horario);
                 session.update(ota);
                 session.delete(horario);
             }
+        }
+        for (OutroTipoAtividade ota : oTAs) {
             ptd.getOutrosTiposAtividades().remove(ota);
             session.update(ptd);
             session.delete(ota);

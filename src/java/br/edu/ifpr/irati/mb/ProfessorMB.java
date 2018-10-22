@@ -20,6 +20,7 @@ public class ProfessorMB {
     private Professor professor;
     private List<Professor> professores;
     private List<String> errosCadastroProfessor;
+    private String confirmacaoSenha;
 
     public ProfessorMB() {
 
@@ -108,6 +109,20 @@ public class ProfessorMB {
 
     public void setErrosCadastroProfessor(List<String> errosCadastroProfessor) {
         this.errosCadastroProfessor = errosCadastroProfessor;
+    }
+
+    /**
+     * @return the confirmacaoSenha
+     */
+    public String getConfirmacaoSenha() {
+        return confirmacaoSenha;
+    }
+
+    /**
+     * @param confirmacaoSenha the confirmacaoSenha to set
+     */
+    public void setConfirmacaoSenha(String confirmacaoSenha) {
+        this.confirmacaoSenha = confirmacaoSenha;
     }
 
 }

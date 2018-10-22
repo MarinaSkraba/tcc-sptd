@@ -10,6 +10,35 @@
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
         <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     </h:head>
+
+    <script>
+        PrimeFaces.locales['pt'] = {
+            closeText: 'Fechar',
+            prevText: 'Anterior',
+            nextText: 'Próximo',
+            currentText: 'Começo',
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Só Horas',
+            timeText: 'Tempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            ampm: false,
+            month: 'Mês',
+            week: 'Semana',
+            day: 'Dia',
+            allDayText: 'Todo o Dia'
+        };
+    </script>
     <h:body styleClass="body">
 
         <!-- Barra de menu -->
@@ -517,7 +546,8 @@
                                          value="#{horarioMB.horarioAula.horaInicio}" 
                                          pattern="HH:mm" 
                                          size="5"
-                                         timeOnly="true"/></br>
+                                         timeOnly="true"
+                                         locale="pt"/></br>
 
                         <h:outputText value="HORÁRIO TÉRMINO" 
                                       styleClass="text01"
@@ -527,7 +557,8 @@
                                          value="#{horarioMB.horarioAula.horaTermino}" 
                                          pattern="HH:mm"
                                          size="5"
-                                         timeOnly="true"/></br>
+                                         timeOnly="true"
+                                         locale="pt"/></br>
 
                         <br/>
                         <p:commandButton value="Salvar" 
@@ -585,7 +616,8 @@
                                             value="#{horarioSelecionadoEdicao.horaInicio}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -600,7 +632,8 @@
                                             value="#{horarioSelecionadoEdicao.horaTermino}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -914,7 +947,8 @@
                                          value="#{horarioMB.horarioManuEnsino.horaInicio}" 
                                          pattern="HH:mm" 
                                          size="5"
-                                         timeOnly="true"/></br>
+                                         timeOnly="true"
+                                         locale="pt"/></br>
 
                         <h:outputText value="HORÁRIO TÉRMINO" 
                                       styleClass="text01"
@@ -924,7 +958,8 @@
                                          value="#{horarioMB.horarioManuEnsino.horaTermino}" 
                                          pattern="HH:mm"
                                          size="5"
-                                         timeOnly="true"/>
+                                         timeOnly="true"
+                                         locale="pt"/>
                         </br>
 
                         <br/>
@@ -983,7 +1018,8 @@
                                             value="#{horarioSelecionadoEdicaoManuEnsino.horaInicio}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -998,7 +1034,8 @@
                                             value="#{horarioSelecionadoEdicaoManuEnsino.horaTermino}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -1313,7 +1350,8 @@
                                          value="#{horarioMB.horarioApoioEnsino.horaInicio}" 
                                          pattern="HH:mm" 
                                          size="5"
-                                         timeOnly="true"/></br>
+                                         timeOnly="true"
+                                         locale="pt"/></br>
 
                         <h:outputText value="HORÁRIO TÉRMINO" 
                                       styleClass="text01"
@@ -1323,7 +1361,8 @@
                                          value="#{horarioMB.horarioApoioEnsino.horaTermino}" 
                                          pattern="HH:mm"
                                          size="5"
-                                         timeOnly="true"/>
+                                         timeOnly="true"
+                                         locale="pt"/>
                         </br>
 
                         <br/>
@@ -1382,7 +1421,8 @@
                                             value="#{horarioSelecionadoEdicaoApoioEnsino.horaInicio}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -1397,7 +1437,8 @@
                                             value="#{horarioSelecionadoEdicaoApoioEnsino.horaTermino}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -1514,7 +1555,9 @@
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:calendar value="#{projetoPesquisaExtensaoMB.projetoAutorNovo.previsaoConclusao}" mode="popup" />
+                        <p:calendar value="#{projetoPesquisaExtensaoMB.projetoAutorNovo.previsaoConclusao}" 
+                                    mode="popup" 
+                                    locale="pt"/>
                         <br/>
                         <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
                                       styleClass="text01"
@@ -1585,7 +1628,9 @@
                                       styleClass="text01"
                                       style="margin: 10px 25px -10px 25px;"/>
                         <br/>
-                        <p:calendar value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaParticipacaoAutor.projetoPesquisaExtensao.previsaoConclusao}" mode="popup" />
+                        <p:calendar value="#{projetoPesquisaExtensaoMB.participacaoAutorSelecionadoParaParticipacaoAutor.projetoPesquisaExtensao.previsaoConclusao}" 
+                                    mode="popup" 
+                                    locale="pt"/>
                         <br/>
                         <h:outputText value="INSTITUIÇÃO ONDE A PESQUISA É DESENVOLVIDA" 
                                       styleClass="text01"
@@ -1840,7 +1885,8 @@
                                          value="#{horarioMB.horarioPesquisaExtensaoAutor.horaInicio}" 
                                          pattern="HH:mm" 
                                          size="5"
-                                         timeOnly="true"/></br>
+                                         timeOnly="true"
+                                         locale="pt"/></br>
 
                         <h:outputText value="HORÁRIO TÉRMINO" 
                                       styleClass="text01"
@@ -1850,7 +1896,8 @@
                                          value="#{horarioMB.horarioPesquisaExtensaoAutor.horaTermino}" 
                                          pattern="HH:mm"
                                          size="5"
-                                         timeOnly="true"/>
+                                         timeOnly="true"
+                                         locale="pt"/>
                         </br>
 
                         <br/>
@@ -1909,7 +1956,8 @@
                                             value="#{horarioSelecionadoEdicaoPesquisaExtensaoAutor.horaInicio}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -1924,7 +1972,8 @@
                                             value="#{horarioSelecionadoEdicaoPesquisaExtensaoAutor.horaTermino}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -2287,7 +2336,8 @@
                                          value="#{horarioMB.horarioPesquisaExtensaoParticipacao.horaInicio}" 
                                          pattern="HH:mm" 
                                          size="5"
-                                         timeOnly="true"/></br>
+                                         timeOnly="true"
+                                         locale="pt"/></br>
 
                         <h:outputText value="HORÁRIO TÉRMINO" 
                                       styleClass="text01"
@@ -2297,7 +2347,8 @@
                                          value="#{horarioMB.horarioPesquisaExtensaoParticipacao.horaTermino}" 
                                          pattern="HH:mm"
                                          size="5"
-                                         timeOnly="true"/>
+                                         timeOnly="true"
+                                         locale="pt"/>
                         </br>
 
                         <br/>
@@ -2356,7 +2407,8 @@
                                             value="#{horarioSelecionadoEdicaoPesquisaExtensaoColab.horaInicio}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -2371,7 +2423,8 @@
                                             value="#{horarioSelecionadoEdicaoPesquisaExtensaoColab.horaTermino}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -2690,7 +2743,8 @@
                                          value="#{horarioMB.horarioAdministracao.horaInicio}" 
                                          pattern="HH:mm" 
                                          size="5"
-                                         timeOnly="true"/></br>
+                                         timeOnly="true"
+                                         locale="pt"/></br>
 
                         <h:outputText value="HORÁRIO TÉRMINO" 
                                       styleClass="text01"
@@ -2700,7 +2754,8 @@
                                          value="#{horarioMB.horarioAdministracao.horaTermino}" 
                                          pattern="HH:mm"
                                          size="5"
-                                         timeOnly="true"/>
+                                         timeOnly="true"
+                                         locale="pt"/>
                         </br>
 
                         <br/>
@@ -2759,7 +2814,8 @@
                                             value="#{horarioSelecionadoEdicaoAdministracao.horaInicio}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -2774,7 +2830,8 @@
                                             value="#{horarioSelecionadoEdicaoAdministracao.horaTermino}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -3133,7 +3190,8 @@
                                          value="#{horarioMB.horarioOutroTipoAtividade.horaInicio}" 
                                          pattern="HH:mm" 
                                          size="5"
-                                         timeOnly="true"/></br>
+                                         timeOnly="true"
+                                         locale="pt"/></br>
 
                         <h:outputText value="HORÁRIO TÉRMINO" 
                                       styleClass="text01"
@@ -3143,7 +3201,8 @@
                                          value="#{horarioMB.horarioOutroTipoAtividade.horaTermino}" 
                                          pattern="HH:mm"
                                          size="5"
-                                         timeOnly="true"/>
+                                         timeOnly="true"
+                                         locale="pt"/>
                         </br>
 
                         <br/>
@@ -3202,7 +3261,8 @@
                                             value="#{horarioSelecionadoEdicaoOutraAtividade.horaInicio}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -3217,7 +3277,8 @@
                                             value="#{horarioSelecionadoEdicaoOutraAtividade.horaTermino}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -3576,7 +3637,8 @@
                                          value="#{horarioMB.horarioAtividadeASerProposta.horaInicio}" 
                                          pattern="HH:mm" 
                                          size="5"
-                                         timeOnly="true"/></br>
+                                         timeOnly="true"
+                                         locale="pt"/></br>
 
                         <h:outputText value="HORÁRIO TÉRMINO" 
                                       styleClass="text01"
@@ -3586,7 +3648,8 @@
                                          value="#{horarioMB.horarioAtividadeASerProposta.horaTermino}" 
                                          pattern="HH:mm"
                                          size="5"
-                                         timeOnly="true"/>
+                                         timeOnly="true"
+                                         locale="pt"/>
                         </br>
 
                         <br/>
@@ -3645,7 +3708,8 @@
                                             value="#{horarioSelecionadoEdicaoAtividadeAPropor.horaInicio}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -3660,7 +3724,8 @@
                                             value="#{horarioSelecionadoEdicaoAtividadeAPropor.horaTermino}" 
                                             pattern="HH:mm" 
                                             size="5"
-                                            timeOnly="true"/>
+                                            timeOnly="true"
+                                            locale="pt"/>
 
                             </h:column>
 
@@ -3834,7 +3899,7 @@
                                          styleClass="botaoAzul"/>
 
                     </p:dialog>
-                    
+
                     <!-- Justificativa Tabela Geral -->
                     <p:dialog header="Justificativas para tabela geral" 
                               widgetVar="justificarTebelaGeralDialog" 
@@ -4174,7 +4239,7 @@
                         </h:panelGrid>
 
                     </center>
-                    
+
                     <!-- Link para a caixa de comentar -->
                     <p:commandLink style="width: 200px; margin: 15px;"
                                    styleClass="link"
@@ -4230,5 +4295,5 @@
 
         </div>
     </h:body>
-</html>
 
+</html>

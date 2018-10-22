@@ -9,6 +9,36 @@
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
         <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     </h:head>
+
+    <script>
+        PrimeFaces.locales['pt'] = {
+            closeText: 'Fechar',
+            prevText: 'Anterior',
+            nextText: 'Próximo',
+            currentText: 'Começo',
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Só Horas',
+            timeText: 'Tempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            ampm: false,
+            month: 'Mês',
+            week: 'Semana',
+            day: 'Dia',
+            allDayText: 'Todo o Dia'
+        };
+    </script>
+    
     <h:body styleClass="body">
 
         <!-- Barra de menu -->
@@ -48,20 +78,103 @@
                 <center>
                     <div id="content" style="width: 50%; border-radius: 15px; border-top-style: solid; border-top-width: medium; border-top-color: #1785ad;">
 
+                        <h:outputText value="Informações Gerais" 
+                                      styleClass="text01" />
+                        <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom;"/>
+                        <br/>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Nome completo: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:inputText value="#{professorMB.professor.nomeCompleto}"
+                                         style="margin: 5px; font-size: large;"
+                                         styleClass="text01"/>
+                            <h:outputText value="Email: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:inputText value="#{professorMB.professor.email}"
+                                         style="margin: 5px; font-size: large;"
+                                         styleClass="text01"/>
+                            <h:outputText value="Senha: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:password value="#{professorMB.professor.senhaAlfanumerica}"
+                                        style="margin: 5px; font-size: large;"
+                                        styleClass="text01"/>
+                            <h:outputText value="Confirmação senha: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:password value="#{professorMB.confirmacaoSenha}"
+                                        style="margin: 5px; font-size: large;"
+                                        styleClass="text01"/>
+                        </h:panelGrid>
+                        <br/>
+                        <h:outputText value="Perfil Docente" 
+                                      styleClass="text01" />
+                        <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom;"/>
+                        <br/>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Matrícula SIAPE: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:inputText value="#{professorMB.professor.matriculaSIAPE}"
+                                         style="margin: 5px; font-size: large;"
+                                         styleClass="text01"/>
+                            <h:outputText value="Regime de trabalho: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:selectOneRadio value="#{professorMB.professor.regimeTrabalho}" 
+                                              style="font-size: large;"
+                                              styleClass="text01"
+                                              layout="grid" 
+                                              columns="1">
+                                <f:selectItem itemLabel=" Dedicação Exclusiva" 
+                                              itemValue="Dedicação Exclusiva" />
+                                <f:selectItem itemLabel=" 40 horas" 
+                                              itemValue="40h" />
+                                <f:selectItem itemLabel=" 20 horas" 
+                                              itemValue="20h" />
+                            </p:selectOneRadio>
+                            <h:outputText value="Tipo de contrato: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:selectOneRadio value="#{professorMB.professor.regimeTrabalho}" 
+                                              layout="grid" columns="1"
+                                              style="font-size: large;"
+                                              styleClass="text01">
+                                <f:selectItem itemLabel=" Efetivo" 
+                                              itemValue="Efetivo" />
+                                <f:selectItem itemLabel=" Temporário" 
+                                              itemValue="Temporario" />
+                            </p:selectOneRadio>
+                            <h:outputText value="Data de contratação: "
+                                          styleClass="text01"
+                                          style="font-size: large; float: right;"/>
+                            <p:calendar value="#{professorMB.professor.dataContratacao}" 
+                                        mode="popup" 
+                                        locale="pt"
+                                        size="10"/>
+                        </h:panelGrid>
+                        <br/>
                         
+                        <p:commandButton styleClass="botaoAzul" 
+                                     style="border-radius: 30px; font-size: large; margin-left: 10px;" 
+                                     value="Cadastrar"
+                                     action="#{professorMB.salvarProfessor()}"
+                                     onclick="PF('confirmarCadastroDocenteDialog').show();"/>
 
                     </div>
                 </center>
-                
+
                 <!-- Caixa de confirmação de cadastro -->
                 <p:dialog header="Confirmar cadastro" 
-                          widgetVar="confirmarCadastroDialog" 
+                          widgetVar="confirmarCadastroDocenteDialog" 
                           modal="true" 
                           showEffect="fade" 
                           hideEffect="fade" 
                           resizable="false">
 
-                    <h:outputText value="" 
+                    <h:outputText value="alguma coisa" 
                                   styleClass="text01"
                                   style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                     <br/>
@@ -71,7 +184,7 @@
                                      ajax="false"/>
 
                 </p:dialog>
-                
+
             </h:form>
 
         </div>
