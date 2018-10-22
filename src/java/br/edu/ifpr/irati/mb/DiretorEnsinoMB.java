@@ -39,7 +39,7 @@ public class DiretorEnsinoMB {
 
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
         if (getDiretorEnsino().getEmail().contains("@ifpr.edu.br")) {
-            getErrosCadastroDiretorEnsino().add("O email informado deve ser institucional(@ifpr.edu.br)");
+            errosCadastroDiretorEnsino.add("O email informado deve ser institucional(@ifpr.edu.br)");
         } else {
             diretorEnsinoDAO.salvar(getDiretorEnsino());
             setDiretorEnsino(new DiretorEnsino());
@@ -110,6 +110,20 @@ public class DiretorEnsinoMB {
         ptd.setEstadoPTD("Reprovado");
         ptdSubmetidoDAO.alterar(ptd);
 
+    }
+
+    /**
+     * @return the diretorEnsino
+     */
+    public DiretorEnsino getDiretorEnsino() {
+        return diretorEnsino;
+    }
+
+    /**
+     * @param diretorEnsino the diretorEnsino to set
+     */
+    public void setDiretorEnsino(DiretorEnsino diretorEnsino) {
+        this.diretorEnsino = diretorEnsino;
     }
 
     public PTD getPtd() {
