@@ -173,12 +173,12 @@ public class ProfessorMB {
 
         if (errosCadastroProfessor.isEmpty() == false) {
 
-            nomeCaixaRetorno = "erroCadastroDocenteDialog";
+            nomeCaixaRetorno = "erroEdicaoDocenteDialog";
             return nomeCaixaRetorno;
 
         } else {
 
-            nomeCaixaRetorno = "confirmarCadastroDocenteDialog";
+            nomeCaixaRetorno = "confirmarEdicaoDocenteDialog";
             return nomeCaixaRetorno;
         }
 
