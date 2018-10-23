@@ -17,16 +17,22 @@ import javax.faces.bean.SessionScoped;
 public class DiretorEnsinoMB {
 
     private DiretorEnsino diretorEnsino;
+    private DiretorEnsino diretorEnsinoSelecionado;
     private PTD ptd;
     private List<PTD> ptds;
     private List<String> errosCadastroDiretorEnsino;
     private String confirmacaoSenha;
+    private String confirmacaoSenhaSelecionado;
 
     public DiretorEnsinoMB() {
 
         ptd = new PTD();
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptds = ptdDAO.buscarTodos(PTD.class);
+        diretorEnsino = new DiretorEnsino();
+        diretorEnsinoSelecionado = new DiretorEnsino();
+        confirmacaoSenha = "";
+        confirmacaoSenhaSelecionado = "";
 
     }
 
@@ -99,18 +105,17 @@ public class DiretorEnsinoMB {
 
     }
 
-    public String alterarDiretorEnsino() throws HashGenerationException {
+    public void alterarDiretorEnsino() throws HashGenerationException {
 
         String senhaSHA512 = "";
-        senhaSHA512 = Digest.hashString(getDiretorEnsino().getSenhaAlfanumerica(), "SHA-512");
+        senhaSHA512 = Digest.hashString(diretorEnsinoSelecionado.getSenhaAlfanumerica(), "SHA-512");
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
-        Usuario u = new Usuario(getDiretorEnsino().getIdUsuario(), getDiretorEnsino().getNomeCompleto(), getDiretorEnsino().getEmail(), getDiretorEnsino().getImagemPerfil(), senhaSHA512, "Habilitado");
+        Usuario u = new Usuario(diretorEnsinoSelecionado.getIdUsuario(), diretorEnsinoSelecionado.getNomeCompleto(), diretorEnsinoSelecionado.getEmail(), diretorEnsinoSelecionado.getImagemPerfil(), senhaSHA512, "Habilitado");
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
         usuarioDAO.alterar(u);
-        diretorEnsinoDAO.alterar(getDiretorEnsino());
+        diretorEnsinoDAO.alterar(diretorEnsinoSelecionado);
         setDiretorEnsino(new DiretorEnsino());
 
-        return "";
     }
 
     public void desabilitarDiretorEnsino() {
@@ -193,5 +198,33 @@ public class DiretorEnsinoMB {
      */
     public void setConfirmacaoSenha(String confirmacaoSenha) {
         this.confirmacaoSenha = confirmacaoSenha;
+    }
+
+    /**
+     * @return the diretorEnsinoSelecionado
+     */
+    public DiretorEnsino getDiretorEnsinoSelecionado() {
+        return diretorEnsinoSelecionado;
+    }
+
+    /**
+     * @param diretorEnsinoSelecionado the diretorEnsinoSelecionado to set
+     */
+    public void setDiretorEnsinoSelecionado(DiretorEnsino diretorEnsinoSelecionado) {
+        this.diretorEnsinoSelecionado = diretorEnsinoSelecionado;
+    }
+
+    /**
+     * @return the confirmacaoSenhaSelecionado
+     */
+    public String getConfirmacaoSenhaSelecionado() {
+        return confirmacaoSenhaSelecionado;
+    }
+
+    /**
+     * @param confirmacaoSenhaSelecionado the confirmacaoSenhaSelecionado to set
+     */
+    public void setConfirmacaoSenhaSelecionado(String confirmacaoSenhaSelecionado) {
+        this.confirmacaoSenhaSelecionado = confirmacaoSenhaSelecionado;
     }
 }

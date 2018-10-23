@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Cadastro de usuário</title>
+        <title>Edição de perfil</title>
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
         <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     </h:head>
@@ -210,7 +210,7 @@
                     <p:commandButton styleClass="botaoAzul" 
                                      value="Confirmar"
                                      ajax="false"
-                                     action="#{professorMB.verificarPossibilidadeCadastro()}"/>
+                                     onclick="PF('#{professorMB.verificarPossibilidadeCadastro()}')"/>
 
                 </p:dialog>
 
@@ -248,7 +248,7 @@
                     <br/>
 
                     <h:dataTable  value="#{professorMB.errosCadastroProfessor}" 
-                                  var="erroCadastro" 
+                                  var="erroEdicao" 
                                   style="width: auto;"
                                   headerClass="text-center"
                                   footerClass="text-center">
@@ -257,7 +257,7 @@
                             <f:facet name="header">
 
                             </f:facet>
-                            <h:outputText value="#{erroCadastro}" 
+                            <h:outputText value="#{erroEdicao}" 
                                           styleClass="text01"
                                           style="font-size: large; color: #C92345; width: 400px;"/>
                         </h:column>
@@ -268,7 +268,7 @@
                     <p:commandButton styleClass="botaoAzul" 
                                      value="Confirmar"
                                      ajax="false"
-                                     onclick="PF('#{professorMB.alterarProfessor()}').show();"/>
+                                     action="#{professorMB.alterarProfessor()}"/>
 />
 
                 </p:dialog>
