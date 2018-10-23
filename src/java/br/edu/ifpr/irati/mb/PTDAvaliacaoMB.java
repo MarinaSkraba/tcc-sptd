@@ -34,10 +34,10 @@ public class PTDAvaliacaoMB {
 
     public String abrirPTDEmAvaliacao(PTD ptd) {
         setPtdEmAvaliacao(ptd);
-        verificarCargaHorariaPTD();
+        verificarCargaHorariaPTD(ptd);
         return "PTDEmAvaliacao";
     }
-    
+
     public int verificarConteúdoListaParaOpacidade(List<String> lista) {
         if (lista.isEmpty()) {
             return 0;
@@ -46,26 +46,11 @@ public class PTDAvaliacaoMB {
         }
     }
 
-    public void verificarCargaHorariaPTD() {
+    public void verificarCargaHorariaPTD(PTD ptd) {
 
-        PTD ptd = new PTD();
         double cargaHorariaTotalPTDAux = 0;
         irregularidadesPTDAvaliacao = new ArrayList<>();
 
-        for (Administracao adm : getPtdEmAvaliacao().getAdministrativas()) {
-            ptd.setCargaHorariaSecaoAdministracao(ptd.getCargaHorariaSecaoAdministracao()
-                    + adm.getCargaHorariaSemanalAdministracao());
-        }
-
-        for (Participacao part : getPtdEmAvaliacao().getParticipacoes()) {
-            if (part.getRotulo().equals("Autor")) {
-                ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoAutor(ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
-                        + part.getCargaHorariaSemanalParticipacao());
-            } else if (part.getRotulo().equals("Colaborador")) {
-                ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoColab(ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()
-                        + part.getCargaHorariaSemanalParticipacao());
-            }
-        }
         if (getPtdEmAvaliacao().getProfessor().getRegimeTrabalho().equalsIgnoreCase("40h") | getPtdEmAvaliacao().getProfessor().getRegimeTrabalho().equalsIgnoreCase("Dedicação Exclusiva")) {
             if ((ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor()
                     + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 16) {
@@ -83,9 +68,6 @@ public class PTDAvaliacaoMB {
                 }
             }
         }
-        for (Apoio ap : getPtdEmAvaliacao().getApoios()) {
-            ptd.setCargaHorariaSecaoApoioEnsino(ptd.getCargaHorariaSecaoApoioEnsino() + ap.getCargaHorariaSemanalApoio());
-        }
         if (ptd.getCargaHorariaSecaoApoioEnsino() != 4) {
 
             if (ptd.getCargaHorariaSecaoApoioEnsino() > 4 && (ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoAutor() + ptd.getCargaHorariaSecaoProjetoPesquisaExtensaoColab()) != 0) {
@@ -93,11 +75,6 @@ public class PTDAvaliacaoMB {
             } else if (ptd.getCargaHorariaSecaoApoioEnsino() < 4) {
                 irregularidadesPTDAvaliacao.add("A carga horária é  inferior à 4 horas em Apoio ao Ensino!");
             }
-
-        }
-
-        for (Aula a : getPtdEmAvaliacao().getAulas()) {
-            ptd.setCargaHorariaSecaoAulas(ptd.getCargaHorariaSecaoAulas() + a.getCargaHorariaTotal());
 
         }
 
@@ -154,10 +131,6 @@ public class PTDAvaliacaoMB {
                 }
             }
         }
-        for (ManutencaoEnsino me : getPtdEmAvaliacao().getManutencoesEnsino()) {
-            ptd.setCargaHorariaSecaoManutencaoEnsino(ptd.getCargaHorariaSecaoManutencaoEnsino() + me.getCargaHorariaSemanalManutencaoEnsino());
-        }
-
         if (ptd.getCargaHorariaSecaoManutencaoEnsino() != 4) {
             if (ptd.getCargaHorariaSecaoManutencaoEnsino() < 4) {
 
@@ -172,9 +145,6 @@ public class PTDAvaliacaoMB {
             }
         }
 
-        for (OutroTipoAtividade ota : getPtdEmAvaliacao().getOutrosTiposAtividades()) {
-            ptd.setCargaHorariaSecaoOutroTipoAtividade(ptd.getCargaHorariaSecaoOutroTipoAtividade() + ota.getCargaHorariaSemanalOutroTipoAtividade());
-        }
         if (!getPtdEmAvaliacao().getApoios().isEmpty() && !getPtdEmAvaliacao().getAulas().isEmpty() && !getPtdEmAvaliacao().getManutencoesEnsino().isEmpty()) {
             if (getPtdEmAvaliacao().getProfessor().getRegimeTrabalho().equalsIgnoreCase("20h")) {
                 if ((ptd.getCargaHorariaSecaoApoioEnsino() + ptd.getCargaHorariaSecaoAulas() + ptd.getCargaHorariaSecaoManutencaoEnsino()) < 8) {
@@ -229,7 +199,7 @@ public class PTDAvaliacaoMB {
 
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino(PTD ptd) {
         String resposta = "Correto";
-        verificarCargaHorariaPTD();
+        verificarCargaHorariaPTD(ptd);
         if (!irregularidadesPTDAvaliacao.isEmpty()) {
             resposta = "Irregular";
         }
@@ -267,9 +237,14 @@ public class PTDAvaliacaoMB {
         getPtdEmAvaliacao().setEstadoPTD("APROVADO");
         getPtdEmAvaliacao().setDataAvaliacaoPTD(new Date());
         getPtdEmAvaliacao().setDiretorEnsino(diretorEnsino);
+        for (Apoio apoio : getPtdEmAvaliacao().getApoios()) {
+            Dao<Apoio> apoioDao = new GenericDAO<>(Apoio.class);
+            apoioDao.alterar(apoio);
+        }
+
         ptdDAOGenerico.alterar(getPtdEmAvaliacao());
     }
-    
+
     public void atualizarListasParticipacoesPTDAvaliacao() {
         participacoesAutorPTDAvaliacao = new ArrayList<>();
         participacoesColabPTDAvaliacao = new ArrayList<>();
@@ -281,9 +256,9 @@ public class PTDAvaliacaoMB {
             }
         }
     }
-    
-    public void salvarObservações(){
-        
+
+    public void salvarObservações() {
+
     }
 
     /**
