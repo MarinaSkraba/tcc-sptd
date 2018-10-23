@@ -34,7 +34,7 @@ public class PTDAvaliacaoMB {
 
     public String abrirPTDEmAvaliacao(PTD ptd) {
         setPtdEmAvaliacao(ptd);
-        verificarCargaHorariaPTDEdicao();
+        verificarCargaHorariaPTD();
         return "PTDEmAvaliacao";
     }
     
@@ -46,10 +46,11 @@ public class PTDAvaliacaoMB {
         }
     }
 
-    public void verificarCargaHorariaPTDEdicao() {
+    public void verificarCargaHorariaPTD() {
 
         PTD ptd = new PTD();
         double cargaHorariaTotalPTDAux = 0;
+        irregularidadesPTDAvaliacao = new ArrayList<>();
 
         for (Administracao adm : getPtdEmAvaliacao().getAdministrativas()) {
             ptd.setCargaHorariaSecaoAdministracao(ptd.getCargaHorariaSecaoAdministracao()
@@ -228,7 +229,7 @@ public class PTDAvaliacaoMB {
 
     public String verificacaoIrregularidadesNotificacoesDiretorEnsino(PTD ptd) {
         String resposta = "Correto";
-        verificarCargaHorariaPTDEdicao();
+        verificarCargaHorariaPTD();
         if (!irregularidadesPTDAvaliacao.isEmpty()) {
             resposta = "Irregular";
         }
@@ -279,6 +280,10 @@ public class PTDAvaliacaoMB {
                 participacoesColabPTDAvaliacao.add(part);
             }
         }
+    }
+    
+    public void salvarObservações(){
+        
     }
 
     /**
