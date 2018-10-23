@@ -95,8 +95,6 @@ public class PTDMB {
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         participacoesAutorPTDEdicao = new ArrayList<>();
         participacoesColabPTDEdicao = new ArrayList<>();
-        participacoesAutorPTDAvaliacao = new ArrayList<>();
-        participacoesColabPTDAvaliacao = new ArrayList<>();
         participacoesAutorPTDAprovado = new ArrayList<>();
         participacoesColabPTDAprovado = new ArrayList<>();
         this.estadoCargaHorariaPTD = "";
@@ -109,7 +107,6 @@ public class PTDMB {
         errosTabelaOutrasAtividades = new ArrayList<>();
         errosTabelaAtividadesASeremPropostas = new ArrayList<>();
         irregularidadesPTDEdicao = new ArrayList<>();
-        irregularidadesPTDAvaliacao = new ArrayList<>();
 
     }
 
@@ -1394,6 +1391,18 @@ public class PTDMB {
         double cargaHorariaTotalPTDAux = 0;
 
         PTD ptd = new PTD();
+        if (this.ptd.getIdPTD() != 0) {
+            ptd = this.ptd;
+
+            ptd.setCargaHorariaSecaoAdministracao(0);
+            ptd.setCargaHorariaSecaoApoioEnsino(0);
+            ptd.setCargaHorariaSecaoAtividadesASeremPropostas(0);
+            ptd.setCargaHorariaSecaoAulas(cargaHorariaTotalPTDAux);
+            ptd.setCargaHorariaSecaoManutencaoEnsino(0);
+            ptd.setCargaHorariaSecaoOutroTipoAtividade(0);
+            ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoAutor(0);
+            ptd.setCargaHorariaSecaoProjetoPesquisaExtensaoColab(0);
+        }
 
         for (Administracao adm : getPtd().getAdministrativas()) {
             ptd.setCargaHorariaSecaoAdministracao(ptd.getCargaHorariaSecaoAdministracao()
@@ -1572,12 +1581,14 @@ public class PTDMB {
         } else {
             setEstadoCargaHorariaPTD("INCORRETO");
         }
-
-        for (String irregularidade : irregularidadesPTDEdicao) {
-            irregularidadesPTDAvaliacao.add(irregularidade);
-        }
-
+        
         cargaHorariaTotalPTDPTDEdicao = cargaHorariaTotalPTDAux;
+
+        ptd.setCargaHorariaTotal(cargaHorariaTotalPTDAux);
+        Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
+        ptdDAO.alterar(ptd);
+
+    
 
     }
 
@@ -1587,19 +1598,6 @@ public class PTDMB {
         return "CriarCorrigirPTD?faces-redirect=true";
     }
 
-    public String verificacaoIrregularidadesNotificacoesDiretorEnsino(PTD ptd) {
-        String resposta = "Correto";
-        verificarCargaHorariaPTDEdicao();
-        if (!irregularidadesPTDAvaliacao.isEmpty()) {
-            resposta = "Irregular";
-        }
-        return resposta;
-    }
-
-
-
-
-    
     public void concluirPTD(PTD ptd){
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         ptd.setEstadoPTD("CONCLUÍDO");
@@ -1832,52 +1830,6 @@ public class PTDMB {
     }
 
     /**
-     * @return the participacoesAutorPTDAvaliacao
-     */
-    public List<Participacao> getParticipacoesAutorPTDAvaliacao() {
-        atualizarListasParticipacoesPTDAvaliacao();
-        return participacoesAutorPTDAvaliacao;
-    }
-
-    /**
-     * @param participacoesAutorPTDAvaliacao the participacoesAutorPTDAvaliacao
-     * to set
-     */
-    public void setParticipacoesAutorPTDAvaliacao(List<Participacao> participacoesAutorPTDAvaliacao) {
-        this.participacoesAutorPTDAvaliacao = participacoesAutorPTDAvaliacao;
-    }
-
-    /**
-     * @return the participacoesColabPTDAvaliacao
-     */
-    public List<Participacao> getParticipacoesColabPTDAvaliacao() {
-        atualizarListasParticipacoesPTDAvaliacao();
-        return participacoesColabPTDAvaliacao;
-    }
-
-    /**
-     * @param participacoesColabPTDAvaliacao the participacoesColabPTDAvaliacao
-     * to set
-     */
-    public void setParticipacoesColabPTDAvaliacao(List<Participacao> participacoesColabPTDAvaliacao) {
-        this.participacoesColabPTDAvaliacao = participacoesColabPTDAvaliacao;
-    }
-
-    /**
-     * @return the irregularidadesPTDAvaliacao
-     */
-    public List<String> getIrregularidadesPTDAvaliacao() {
-        return irregularidadesPTDAvaliacao;
-    }
-
-    /**
-     * @param irregularidadesPTDAvaliacao the irregularidadesPTDAvaliacao to set
-     */
-    public void setIrregularidadesPTDAvaliacao(List<String> irregularidadesPTDAvaliacao) {
-        this.irregularidadesPTDAvaliacao = irregularidadesPTDAvaliacao;
-    }
-
-    /**
      * @return the cargaHorariaTotalPTDPTDEdicao
      */
     public double getCargaHorariaTotalPTDPTDEdicao() {
@@ -1890,21 +1842,6 @@ public class PTDMB {
      */
     public void setCargaHorariaTotalPTDPTDEdicao(double cargaHorariaTotalPTDPTDEdicao) {
         this.cargaHorariaTotalPTDPTDEdicao = cargaHorariaTotalPTDPTDEdicao;
-    }
-
-    /**
-     * @return the cargaHorariaTotalPTDPTDAvaliacao
-     */
-    public double getCargaHorariaTotalPTDPTDAvaliacao() {
-        return cargaHorariaTotalPTDPTDAvaliacao;
-    }
-
-    /**
-     * @param cargaHorariaTotalPTDPTDAvaliacao the
-     * cargaHorariaTotalPTDPTDAvaliacao to set
-     */
-    public void setCargaHorariaTotalPTDPTDAvaliacao(double cargaHorariaTotalPTDPTDAvaliacao) {
-        this.cargaHorariaTotalPTDPTDAvaliacao = cargaHorariaTotalPTDPTDAvaliacao;
     }
 
     /**
