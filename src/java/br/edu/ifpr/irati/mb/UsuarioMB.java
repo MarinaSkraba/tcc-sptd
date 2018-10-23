@@ -92,6 +92,14 @@ public class UsuarioMB {
         usuarioLogado = new Usuario();
     }
 
+    public String sairTelaLegislacao(Usuario usuario) {
+        if (usuario instanceof DiretorEnsino) {
+            return "NotificacoesDocente";
+        } else {
+            return "NotificacoesDiretorEnsino";
+        }
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
