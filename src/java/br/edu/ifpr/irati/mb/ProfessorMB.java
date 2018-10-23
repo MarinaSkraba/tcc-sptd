@@ -18,14 +18,19 @@ import javax.faces.bean.SessionScoped;
 public class ProfessorMB {
 
     private Professor professor;
+    private Professor professorSelecionado;
     private List<Professor> professores;
     private List<String> errosCadastroProfessor;
     private String confirmacaoSenha;
+    private String confirmacaoSenhaSelecionada;
 
     public ProfessorMB() {
 
         professor = new Professor();
+        professorSelecionado = new Professor();
         professores = new ArrayList();
+        confirmacaoSenha = "";
+        confirmacaoSenhaSelecionada = "";
         errosCadastroProfessor = new ArrayList<>();
 
     }
@@ -38,7 +43,7 @@ public class ProfessorMB {
 
         senhaSHA512 = Digest.hashString(getProfessor().getSenhaAlfanumerica(), "SHA-512");
         Usuario usuario = new Usuario(professor.getIdUsuario(), professor.getNomeCompleto(), professor.getEmail(),
-                professor.getImagemPerfil(), senhaSHA512, "Habilitado");
+                professor.getImagemPerfil(), senhaSHA512, "Desabilitado");
         usuarioDAO.salvar(usuario);
         professorDAO.salvar(professor);
         professores = professorDAO.buscarTodos(Professor.class);
@@ -89,16 +94,15 @@ public class ProfessorMB {
 
     }
 
-    public String alterarProfessor() throws HashGenerationException {
+    public void alterarProfessor() throws HashGenerationException {
 
         String senhaSHA512 = "";
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
         senhaSHA512 = Digest.hashString(getProfessor().getSenhaAlfanumerica(), "SHA-512");
-        professor.setSenhaAlfanumerica(senhaSHA512);
-        professorDAO.alterar(professor);
-        professores = professorDAO.buscarTodos(Professor.class);
-
-        return "PerfilDocente";
+        professorSelecionado.setSenhaAlfanumerica(senhaSHA512);
+        professorDAO.alterar(getProfessorSelecionado());
+        List<Professor> ps = professorDAO.buscarTodos(Professor.class);
+        professorSelecionado = ps.get(ps.size() - 1);
     }
 
     public void desabilitarProfessor(Professor professor) {
@@ -144,6 +148,34 @@ public class ProfessorMB {
      */
     public void setConfirmacaoSenha(String confirmacaoSenha) {
         this.confirmacaoSenha = confirmacaoSenha;
+    }
+
+    /**
+     * @return the professorSelecionado
+     */
+    public Professor getProfessorSelecionado() {
+        return professorSelecionado;
+    }
+
+    /**
+     * @param professorSelecionado the professorSelecionado to set
+     */
+    public void setProfessorSelecionado(Professor professorSelecionado) {
+        this.professorSelecionado = professorSelecionado;
+    }
+
+    /**
+     * @return the confirmacaoSenhaSelecionada
+     */
+    public String getConfirmacaoSenhaSelecionada() {
+        return confirmacaoSenhaSelecionada;
+    }
+
+    /**
+     * @param confirmacaoSenhaSelecionada the confirmacaoSenhaSelecionada to set
+     */
+    public void setConfirmacaoSenhaSelecionada(String confirmacaoSenhaSelecionada) {
+        this.confirmacaoSenhaSelecionada = confirmacaoSenhaSelecionada;
     }
 
 }

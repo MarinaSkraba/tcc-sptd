@@ -115,25 +115,25 @@
                             <h:outputText value="Nome completo: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:inputText value="#{professorMB.professor.nomeCompleto}"
+                            <p:inputText value="#{professorMB.professorSelecionado.nomeCompleto}"
                                          style="margin: 5px; font-size: large;"
                                          styleClass="text01"/>
                             <h:outputText value="Email: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:inputText value="#{professorMB.professor.email}"
+                            <p:inputText value="#{professorMB.professorSelecionado.email}"
                                          style="margin: 5px; font-size: large;"
                                          styleClass="text01"/>
                             <h:outputText value="Senha: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:password value="#{professorMB.professor.senhaAlfanumerica}"
+                            <p:password value="#{professorMB.professorSelecionado.senhaAlfanumerica}"
                                         style="margin: 5px; font-size: large;"
                                         styleClass="text01"/>
                             <h:outputText value="Confirmação senha: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:password value="#{professorMB.confirmacaoSenha}"
+                            <p:password value="#{professorMB.confirmacaoSenhaSelecionada}"
                                         style="margin: 5px; font-size: large;"
                                         styleClass="text01"/>
                         </h:panelGrid>
@@ -146,13 +146,13 @@
                             <h:outputText value="Matrícula SIAPE: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:inputText value="#{professorMB.professor.matriculaSIAPE}"
+                            <p:inputText value="#{professorMB.professorSelecionado.matriculaSIAPE}"
                                          style="margin: 5px; font-size: large;"
                                          styleClass="text01"/>
                             <h:outputText value="Regime de trabalho: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:selectOneRadio value="#{professorMB.professor.regimeTrabalho}" 
+                            <p:selectOneRadio value="#{professorMB.professorSelecionado.regimeTrabalho}" 
                                               style="font-size: large;"
                                               styleClass="text01"
                                               layout="grid" 
@@ -167,7 +167,7 @@
                             <h:outputText value="Tipo de contrato: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:selectOneRadio value="#{professorMB.professor.tipoContrato}" 
+                            <p:selectOneRadio value="#{professorMB.professorSelecionado.tipoContrato}" 
                                               layout="grid" columns="1"
                                               style="font-size: large;"
                                               styleClass="text01">
@@ -179,7 +179,7 @@
                             <h:outputText value="Data de contratação: "
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
-                            <p:calendar value="#{professorMB.professor.dataContratacao}" 
+                            <p:calendar value="#{professorMB.professorSelecionado.dataContratacao}" 
                                         mode="popup" 
                                         locale="pt"
                                         size="17"/>
