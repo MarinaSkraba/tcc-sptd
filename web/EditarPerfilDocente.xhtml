@@ -85,7 +85,9 @@
                 <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
                               styleClass="text01"
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
-
+                 
+                <!-- Temporizador verificar possibilidade Edição -->
+                <p:poll interval="5" listener="#{professorMB.verificarPossibilidadeCadastro()}"/>
             </h:form>
         </div>
 
