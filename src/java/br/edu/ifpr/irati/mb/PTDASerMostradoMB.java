@@ -12,30 +12,45 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class PTDASerMostradoMB {
-    
-    
+
     private PTD ptdConcluido;
     private List<PTD> ptdsResultadoBusca;
     private List<Participacao> participacoesAutorPTDConcluido;
     private List<Participacao> participacoesColabPTDConcluido;
+    private String textoBusca;
+    private String filtroBusca;
 
     public PTDASerMostradoMB() {
         ptdConcluido = new PTD();
         ptdsResultadoBusca = new ArrayList<>();
         participacoesAutorPTDConcluido = new ArrayList<>();
         participacoesColabPTDConcluido = new ArrayList<>();
+        textoBusca = "";
+        filtroBusca = "";
+    }
+
+    public void buscarComFiltro() {
+
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        if (filtroBusca.equals("buscaPorNome")) {
+
+            ptdDAOEspecifico.buscarPTDsPorNomeDocente(textoBusca);
+
+        } else if (filtroBusca.equals("")) {
+
+        }
+
     }
 
     public void abrirTelaBuscarPTDs() {
         IPTDDAO ptddao = new PTDDAO();
-        ptdsResultadoBusca = ptddao.buscarPTDsConcluidos();
+        setPtdsResultadoBusca(ptddao.buscarPTDsConcluidos());
     }
 
     public void abrirMostrarPTD(PTD ptd) {
-        ptdConcluido = ptd;
+        setPtdConcluido(ptd);
     }
-    
-    
+
     /**
      * @return the ptdsResultadoBusca
      */
@@ -72,7 +87,8 @@ public class PTDASerMostradoMB {
     }
 
     /**
-     * @param participacoesAutorPTDConcluido the participacoesAutorPTDConcluido to set
+     * @param participacoesAutorPTDConcluido the participacoesAutorPTDConcluido
+     * to set
      */
     public void setParticipacoesAutorPTDConcluido(List<Participacao> participacoesAutorPTDConcluido) {
         this.participacoesAutorPTDConcluido = participacoesAutorPTDConcluido;
@@ -86,10 +102,39 @@ public class PTDASerMostradoMB {
     }
 
     /**
-     * @param participacoesColabPTDConcluido the participacoesColabPTDConcluido to set
+     * @param participacoesColabPTDConcluido the participacoesColabPTDConcluido
+     * to set
      */
     public void setParticipacoesColabPTDConcluido(List<Participacao> participacoesColabPTDConcluido) {
         this.participacoesColabPTDConcluido = participacoesColabPTDConcluido;
     }
-    
+
+    /**
+     * @return the textoBusca
+     */
+    public String getTextoBusca() {
+        return textoBusca;
+    }
+
+    /**
+     * @param textoBusca the textoBusca to set
+     */
+    public void setTextoBusca(String textoBusca) {
+        this.textoBusca = textoBusca;
+    }
+
+    /**
+     * @return the filtroBusca
+     */
+    public String getFiltroBusca() {
+        return filtroBusca;
+    }
+
+    /**
+     * @param filtroBusca the filtroBusca to set
+     */
+    public void setFiltroBusca(String filtroBusca) {
+        this.filtroBusca = filtroBusca;
+    }
+
 }

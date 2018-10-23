@@ -141,12 +141,32 @@ public class PTDDAO implements IPTDDAO {
     public void excluirPTDEOQueTemDentro(PTD ptd) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        
+
         session.delete(ptd);
 
         session.getTransaction().commit();
         session.clear();
         session.close();
+    }
+
+    @Override
+    public List<PTD> buscarPTDsPorNomeDocente(String nomeDocente) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "from ptd";
+        Query query = session.createQuery(hql);
+        List<PTD> results = query.list();
+        List<PTD> filtrados = new ArrayList<>();
+        for (PTD ptd : results) {
+            if (ptd.getProfessor().getNomeCompleto().equals(nomeDocente) == true) {
+
+                filtrados.add(ptd);
+
+            }
+        }
+        session.clear();
+        session.close();
+        return filtrados;
     }
 
 }
