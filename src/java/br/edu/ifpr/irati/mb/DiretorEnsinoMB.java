@@ -50,7 +50,7 @@ public class DiretorEnsinoMB {
 
         if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
 
-            getErrosCadastroDiretorEnsino().add("Sua senha deve conter entre de 8 a 16 caracteres");
+            getErrosCadastroDiretorEnsino().add("Sua senha deve conter entre  8 a 16 caracteres");
 
         } else if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().equals(getConfirmacaoSenhaSelecionado()) == false) {
 
