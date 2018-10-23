@@ -46,7 +46,7 @@ public class DiretorEnsinoMB {
 
     }
 
-    public void verificarErrosCadastroAtualizacaoDiretorEnsino() {
+    public void verificarErrosAtualizacaoDiretorEnsino() {
 
         if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
 
@@ -88,7 +88,7 @@ public class DiretorEnsinoMB {
 
     public String verificarPossibilidadeAtualizacaoDiretorEnsino() {
 
-        verificarErrosCadastroAtualizacaoDiretorEnsino();
+        verificarErrosAtualizacaoDiretorEnsino();
         String nomeCaixaRetorno = "";
 
         if (errosCadastroDiretorEnsino.isEmpty() == false) {

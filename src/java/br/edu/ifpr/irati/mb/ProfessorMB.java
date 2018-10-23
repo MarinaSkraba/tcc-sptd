@@ -73,33 +73,33 @@ public class ProfessorMB {
 
             errosCadastroProfessor.add("O email deve ser institucional(@ifpr.edu.br)");
 
-        } else if(professor.getEmail().isEmpty() == true){
-            
+        } else if (professor.getEmail().isEmpty() == true) {
+
             errosCadastroProfessor.add("O campo 'Email' deve ser obrigatóriamente preenchido");
-            
-        }else if(professor.getMatriculaSIAPE().isEmpty() == true){
-            
+
+        } else if (professor.getMatriculaSIAPE().isEmpty() == true) {
+
             errosCadastroProfessor.add("O campo 'Matrícula SIAPE' deve ser obrigatóriamente preenchido");
-            
-        }else if(professor.getNomeCompleto().isEmpty() == true){
-           
+
+        } else if (professor.getNomeCompleto().isEmpty() == true) {
+
             errosCadastroProfessor.add("O campo 'Nome completo' deve ser obrigatóriamente preenchido");
-            
-        }else if(professor.getRegimeTrabalho().isEmpty() == true){
-            
+
+        } else if (professor.getRegimeTrabalho().isEmpty() == true) {
+
             errosCadastroProfessor.add("O campo 'Regime de trabalho' deve ser obrigatóriamente preenchido");
-            
-        }else if(professor.getSenhaAlfanumerica().isEmpty() == true){
-            
+
+        } else if (professor.getSenhaAlfanumerica().isEmpty() == true) {
+
             errosCadastroProfessor.add("O campo 'Senha' deve ser obrigatóriamente preenchido");
-            
-        }else if(confirmacaoSenha.isEmpty() == true){
-            
+
+        } else if (confirmacaoSenha.isEmpty() == true) {
+
             errosCadastroProfessor.add("O campo 'Confirmação senha' deve ser obrigatóriamente preenchido");
-            
+
         }
     }
-    
+
     public void verificarErrosAtualizacao() {
 
         errosCadastroProfessor = new ArrayList<>();
@@ -123,30 +123,30 @@ public class ProfessorMB {
 
             errosCadastroProfessor.add("O email deve ser institucional(@ifpr.edu.br)");
 
-        } else if(professorSelecionado.getEmail().isEmpty() == true){
-            
+        } else if (professorSelecionado.getEmail().isEmpty() == true) {
+
             errosCadastroProfessor.add("O campo 'Email' deve ser obrigatóriamente preenchido");
-            
-        }else if(professorSelecionado.getMatriculaSIAPE().isEmpty() == true){
-            
+
+        } else if (professorSelecionado.getMatriculaSIAPE().isEmpty() == true) {
+
             errosCadastroProfessor.add("O campo 'Matrícula SIAPE' deve ser obrigatóriamente preenchido");
-            
-        }else if(professorSelecionado.getNomeCompleto().isEmpty() == true){
-           
+
+        } else if (professorSelecionado.getNomeCompleto().isEmpty() == true) {
+
             errosCadastroProfessor.add("O campo 'Nome completo' deve ser obrigatóriamente preenchido");
-            
-        }else if(professorSelecionado.getRegimeTrabalho().isEmpty() == true){
-            
+
+        } else if (professorSelecionado.getRegimeTrabalho().isEmpty() == true) {
+
             errosCadastroProfessor.add("O campo 'Regime de trabalho' deve ser obrigatóriamente preenchido");
-            
-        }else if(professorSelecionado.getSenhaAlfanumerica().isEmpty() == true){
-            
+
+        } else if (professorSelecionado.getSenhaAlfanumerica().isEmpty() == true) {
+
             errosCadastroProfessor.add("O campo 'Senha' deve ser obrigatóriamente preenchido");
-            
-        }else if(confirmacaoSenhaSelecionada.isEmpty() == true){
-            
+
+        } else if (confirmacaoSenhaSelecionada.isEmpty() == true) {
+
             errosCadastroProfessor.add("O campo 'Confirmação senha' deve ser obrigatóriamente preenchido");
-            
+
         }
     }
 
@@ -166,7 +166,9 @@ public class ProfessorMB {
             return nomeCaixaRetorno;
         }
 
-    } public String verificarPossibilidadeAtualizacao() {
+    }
+
+    public String verificarPossibilidadeAtualizacao() {
 
         verificarErrosAtualizacao();
         String nomeCaixaRetorno = "";
@@ -184,7 +186,7 @@ public class ProfessorMB {
 
     }
 
-    public void alterarProfessor() throws HashGenerationException {
+    public String alterarProfessor() throws HashGenerationException {
 
         String senhaSHA512 = "";
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
@@ -193,6 +195,8 @@ public class ProfessorMB {
         professorDAO.alterar(professorSelecionado);
         List<Professor> ps = professorDAO.buscarTodos(Professor.class);
         professorSelecionado = ps.get(ps.size() - 1);
+        return "/PerfilDocente?faces-redirect=true";
+
     }
 
     public void desabilitarProfessor(Professor professor) {

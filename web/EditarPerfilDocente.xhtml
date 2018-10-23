@@ -87,7 +87,7 @@
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
                 <!-- Temporizador verificar possibilidade Edição -->
-                <p:poll interval="5" listener="#{professorMB.verificarPossibilidadeCadastro()}"/>
+                <p:poll interval="5" listener="#{professorMB.verificarErrosAtualizacao()}"/>
 
             </h:form>
         </div>
@@ -188,33 +188,13 @@
 
                         <p:commandButton styleClass="botaoAzul" 
                                          style="border-radius: 30px; font-size: large; margin-left: 10px;" 
-                                         value="Cadastrar"
-                                         onclick="PF('confirmarEdicaoDocenteDialog').show();"/>
+                                         value="Alterar"
+                                         onclick="PF('#{professorMB.verificarPossibilidadeAtualizacao()}').show();"/>
 
                     </div>
                 </center>
 
                 <!-- Caixa de confirmação de edição -->
-                <p:dialog header="Confirmar edição" 
-                          widgetVar="confirmarEdicaoDocenteDialog" 
-                          modal="true" 
-                          showEffect="fade" 
-                          hideEffect="fade" 
-                          resizable="false">
-
-                    <h:outputText value="Você realmente deseja alterar suas informações?" 
-                                  styleClass="text01"
-                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
-                    <br/>
-
-                    <p:commandButton styleClass="botaoAzul" 
-                                     value="Confirmar"
-                                     ajax="false"
-                                     onclick="PF('#{professorMB.verificarPossibilidadeCadastro()}')"/>
-
-                </p:dialog>
-
-                <!-- Caixa de confirmação de cadastro -->
                 <p:dialog header="Confirmar cadastro" 
                           widgetVar="confirmarEdicaoDocenteDialog" 
                           modal="true" 
@@ -222,7 +202,7 @@
                           hideEffect="fade" 
                           resizable="false">
 
-                    <h:outputText value="Você realmente deseja alterar essas informações" 
+                    <h:outputText value="Você realmente deseja alterar essas informações?" 
                                   styleClass="text01"
                                   style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                     <br/>
@@ -230,7 +210,7 @@
                     <p:commandButton styleClass="botaoAzul" 
                                      value="Confirmar"
                                      ajax="false"
-                                     onclick="PF('#{professorMB.verificarPossibilidadeCadastro()}').show();"/>
+                                     action="#{professorMB.alterarProfessor()}"/>
 
                 </p:dialog>
 

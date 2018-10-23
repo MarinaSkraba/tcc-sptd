@@ -32,7 +32,7 @@ public class Usuario implements Serializable {
     @Column(name = "senhaAlfanumérica", nullable = false, length = 128)
     private String senhaAlfanumerica;
 
-    @Column(name = "estadoUsuario", nullable = false, length = 10)
+    @Column(name = "estadoUsuario", nullable = false, length = 15)
     private String estadoUsuario;
 
     @Temporal(TemporalType.DATE)
