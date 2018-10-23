@@ -56,9 +56,39 @@
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Voltar"
-                                 action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuarioLogado.idUsuario)}"
+                                 action="#{pTDMB.abrirNotificacoesDiretorEnsino(usuarioMB.usuarioLogado.idUsuario)}"
                                  ajax="false"
                                  style="float: left;"/>
+
+                <p:commandButton styleClass="opMenu" 
+                                 style="float: left;" 
+                                 value="Novo Diretor" 
+                                 onclick="PF('addDiretorDialog').show();"/>
+                
+                <!-- Caixa para adicionar novo diretor -->
+
+                <p:dialog header="Cadastrar Novo Diretor" 
+                          widgetVar="addDiretorDialog" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false"> 
+                    
+                    <h:outputText value="EMAIL DO NOVO DIRETOR" 
+                                  styleClass="text01"
+                                  style="margin: 10px 25px -10px 25px;"/>
+                    <br/>
+
+                    <p:inputText value="#{diretorEnsinoMB.diretorEnsino.email}"/>
+
+                    <br/>
+                    <p:commandButton value="Salvar" 
+                                     styleClass="botaoAzul"
+                                     action="#{diretorEnsinoMB.salvarDiretorEnsino()}"
+                                     ajax="false"/>
+
+
+                </p:dialog>
 
                 <p:commandButton id="logout"
                                  image="img/fundo_login.png" 
@@ -112,56 +142,22 @@
                             <h:outputText value="Nome completo: "
                                           styleClass="text01"
                                           style="font-size: large; float: right; font-weight: bold;"/>
-                            <h:outputText value="#{professorMB.professorSelecionado.nomeCompleto}"
+                            <h:outputText value="#{diretorEnsinoMB.diretorEnsinoSelecionado.nomeCompleto}"
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
                             <h:outputText value="Email: "
                                           styleClass="text01"
                                           style="font-size: large; float: right; font-weight: bold;"/>
-                            <h:outputText value="#{professorMB.professorSelecionado.email}"
+                            <h:outputText value="#{diretorEnsinoMB.diretorEnsinoSelecionado.email}"
                                           styleClass="text01"
                                           style="font-size: large; float: right;"/>
                         </h:panelGrid>
-                        <br/>
-                        <h:outputText value="Perfil Docente" 
-                                      styleClass="text01" />
-                        <hr size="1px" style="color: #1785ad; width: 90%; opacity: 0.5; margin: 0; float: bottom;"/>
-                        <br/>
-                        <h:panelGrid columns="2">
-                            <h:outputText value="Matrícula SIAPE: "
-                                          styleClass="text01"
-                                          style="font-size: large; float: right; font-weight: bold;"/>
-                            <h:outputText value="#{professorMB.professorSelecionado.matriculaSIAPE}"
-                                          styleClass="text01"
-                                          style="font-size: large; float: right;"/>
-                            <h:outputText value="Regime de trabalho: "
-                                          styleClass="text01"
-                                          style="font-size: large; float: right; font-weight: bold;"/>
-                            <h:outputText value="#{professorMB.professorSelecionado.regimeTrabalho}"
-                                          styleClass="text01"
-                                          style="font-size: large; float: right;"/>
-                            <h:outputText value="Tipo de contrato: "
-                                          styleClass="text01"
-                                          style="font-size: large; float: right; font-weight: bold;"/>
-                            <h:outputText value="#{professorMB.professorSelecionado.tipoContrato}"
-                                          styleClass="text01"
-                                          style="font-size: large; float: right;"/>
-                            <h:outputText value="Data de contratação: "
-                                          styleClass="text01"
-                                          style="font-size: large; float: right; font-weight: bold;"/>
-                            <h:outputText value="#{professorMB.professorSelecionado.dataContratacao}"
-                                          styleClass="text01"
-                                          style="font-size: large; float: right;">
-                                <f:convertDateTime pattern="dd/MM/yyyy"/>
-                            </h:outputText>
-                        </h:panelGrid>
-                        <br/>
 
                         <p:commandButton styleClass="botaoAzul" 
                                          style="border-radius: 30px; font-size: large; margin-left: 10px;" 
                                          value="Editar Informações"
                                          ajax="false"
-                                         action="/EditarPerfilDocente"/>
+                                         action="/EditarPerfilDiretorEnsino"/>
 
                     </div>
                 </center>

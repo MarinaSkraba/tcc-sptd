@@ -98,9 +98,9 @@ public class ProfessorMB {
 
         String senhaSHA512 = "";
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
-        senhaSHA512 = Digest.hashString(getProfessor().getSenhaAlfanumerica(), "SHA-512");
+        senhaSHA512 = Digest.hashString(professorSelecionado.getSenhaAlfanumerica(), "SHA-512");
         professorSelecionado.setSenhaAlfanumerica(senhaSHA512);
-        professorDAO.alterar(getProfessorSelecionado());
+        professorDAO.alterar(professorSelecionado);
         List<Professor> ps = professorDAO.buscarTodos(Professor.class);
         professorSelecionado = ps.get(ps.size() - 1);
     }
