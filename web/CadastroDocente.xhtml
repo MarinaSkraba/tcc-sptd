@@ -164,7 +164,7 @@
                                          style="border-radius: 30px; font-size: large; margin-left: 10px;" 
                                          value="Cadastrar"
                                          action=""
-                                         onclick="PF('#{professorMB.salvarProfessor()}').show();"/>
+                                         onclick="PF('#{professorMB.verificarPossibilidadeCadastro()}').show();"/>
 
                     </div>
                 </center>
@@ -202,7 +202,7 @@
                                   style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                     <br/>
 
-                    <h:dataTable  value="#{pTDMB.errosTabelaManuEnsino}" 
+                    <h:dataTable  value="#{professorMB.errosCadastroProfessor}" 
                                   var="erroCadastro" 
                                   style="width: auto;"
                                   headerClass="text-center"
