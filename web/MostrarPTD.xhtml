@@ -63,7 +63,7 @@
                             <h:outputText value="DOCENTE"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.professor.nomeCompleto}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.professor.nomeCompleto}"  
                                           styleClass="text01"
                                           style="font-size: large; width: 300px;"/>
                         </h:panelGrid>
@@ -72,25 +72,25 @@
                             <h:outputText value="REGIME DE TRABALHO"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 190px;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.professor.regimeTrabalho}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.professor.regimeTrabalho}"  
                                           styleClass="text01"
                                           style="font-size: large; width: 100px;"/>
                             <h:outputText value="SIAPE"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 170px;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.professor.matriculaSIAPE}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.professor.matriculaSIAPE}"  
                                           styleClass="text01"
                                           style="font-size: large; width: 100px;"/>
                             <h:outputText value="CONTRATAÇÃO"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 190px;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.professor.tipoContrato}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.professor.tipoContrato}"  
                                           styleClass="text01"
                                           style="font-size: large; width: 100px;"/>
                             <h:outputText value="DATA CONTRATAÇÃO"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 170px;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.professor.dataContratacao}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.professor.dataContratacao}"  
                                           styleClass="text01"
                                           style="font-size: large; width: 100px;">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
@@ -116,7 +116,7 @@
 
                     <!-- Mostrar atividades aulas -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptdConcluido.aulas}" 
+                        <h:dataTable  value="#{pTDASerMostradoMB.ptdConcluido.aulas}" 
                                       var="aula" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -221,7 +221,7 @@
                     </div>
                     <center>
                         <div id="justificativaIrregularidade">
-                        <h:outputText value="#{pTDMB.ptdConcluido.campoJustificativaAtividadeEnsino}" 
+                        <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.campoJustificativaAtividadeEnsino}" 
                                       styleClass="text01"
 
                                       style="font-size: large;"/>
@@ -237,7 +237,7 @@
 
                     <!-- Mostrar atividades manutenção de ensino -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptdConcluido.manutencoesEnsino}" 
+                        <h:dataTable  value="#{pTDASerMostradoMB.ptdConcluido.manutencoesEnsino}" 
                                       var="manutencao" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -319,7 +319,7 @@
                     </div>
                     <center>
                     <div id="justificativaIrregularidade">
-                        <h:outputText value="#{pTDMB.ptdConcluido.campoJustificativaManutencaoEnsino}" 
+                        <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.campoJustificativaManutencaoEnsino}" 
                                       styleClass="text01"
                                       style="font-size: large;"/>
                     </div>
@@ -337,7 +337,7 @@
 
                     <!-- Mostrar atividades apoio ao ensino -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptdConcluido.apoios}" 
+                        <h:dataTable  value="#{pTDASerMostradoMB.ptdConcluido.apoios}" 
                                       var="apoio" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -419,7 +419,7 @@
                     </div>
                     <center>
                     <div id="justificativaIrregularidade">
-                        <h:outputText value="#{pTDMB.ptdConcluido.campoJustificativaApoioEnsino}" 
+                        <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.campoJustificativaApoioEnsino}" 
                                       styleClass="text01"
                                       style="font-size: large;"/>
                     </div>
@@ -443,7 +443,7 @@
 
                     <!-- Mostrar atividades pesquisa e/ou extensão (Autor) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesAutorPTDAvaliacao}" 
+                        <h:dataTable  value="#{pTDASerMostradoMB.participacoesAutorPTDAvaliacao}" 
                                       var="participacaoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -558,7 +558,7 @@
                     </div>
                     <center>
                     <div id="justificativaIrregularidade">
-                        <h:outputText value="#{pTDMB.ptdConcluido.campoJustificativaProjetoPesquisaExtensao}" 
+                        <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.campoJustificativaProjetoPesquisaExtensao}" 
                                       styleClass="text01"
                                       style="font-size: large;"/>
                     </div>
@@ -574,7 +574,7 @@
 
                     <!-- Mostrar atividades pesquisa e/ou extensão (Colaborador) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesColabPTDAvaliacao}" 
+                        <h:dataTable  value="#{pTDASerMostradoMB.participacoesColabPTDAvaliacao}" 
                                       var="participacaoPesquisaExtensaoColab" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -688,7 +688,7 @@
                     </div>
                     <center>
                     <div id="justificativaIrregularidade">
-                        <h:outputText value="#{pTDMB.ptdConcluido.campoJustificativaProjetoPesquisaExtensao}" 
+                        <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.campoJustificativaProjetoPesquisaExtensao}" 
                                       styleClass="text01"
                                       style="font-size: large;"/>
                     </div>
@@ -712,7 +712,7 @@
 
                     <!-- Mostrar atividades administrativas -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptdConcluido.administrativas}" 
+                        <h:dataTable  value="#{pTDASerMostradoMB.ptdConcluido.administrativas}" 
                                       var="administracao" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -794,7 +794,7 @@
                     </div>
                     <center>
                     <div id="justificativaIrregularidade">
-                        <h:outputText value="#{pTDMB.ptdConcluido.campoJustificativaAdministracao}" 
+                        <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.campoJustificativaAdministracao}" 
                                       styleClass="text01"
                                       style="font-size: large;"/>
                     </div>
@@ -818,7 +818,7 @@
 
                     <!-- Mostrar outras atividades desenvolvidas no campus -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptdConcluido.outrosTiposAtividades}" 
+                        <h:dataTable  value="#{pTDASerMostradoMB.ptdConcluido.outrosTiposAtividades}" 
                                       var="outrasAtividades" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -912,7 +912,7 @@
                     </div>
                     <center>
                     <div id="justificativaIrregularidade">
-                        <h:outputText value="#{pTDMB.ptdConcluido.campoJustificativaOutrasAtividades}" 
+                        <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.campoJustificativaOutrasAtividades}" 
                                       styleClass="text01"
                                       style="font-size: large;"/>
                     </div>
@@ -933,7 +933,7 @@
                     </h:panelGrid>
                     <!-- Mostrar atividades que pretende propor -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.ptdConcluido.atividadesASeremPropostas}" 
+                        <h:dataTable  value="#{pTDASerMostradoMB.ptdConcluido.atividadesASeremPropostas}" 
                                       var="atividadeASerProposta" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -1028,7 +1028,7 @@
                     
                     <center>
                         <div id="justificativaIrregularidade">
-                        <h:outputText value="#{pTDMB.ptdConcluido.campoJustificativaSeremPropostas}" 
+                        <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.campoJustificativaSeremPropostas}" 
                                       styleClass="text01"
                                       style="font-size: large;"/>
                     </div>
@@ -1054,55 +1054,55 @@
                             <h:outputText value="ATIVIDADE 2.1"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.cargaHorariaSecaoAulas}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.cargaHorariaSecaoAulas}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 2.2"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.cargaHorariaSecaoManutencaoEnsino}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.cargaHorariaSecaoManutencaoEnsino}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 2.3"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.cargaHorariaSecaoApoioEnsino}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.cargaHorariaSecaoApoioEnsino}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 3.1"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.cargaHorariaSecaoProjetoPesquisaExtensaoAutor}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.cargaHorariaSecaoProjetoPesquisaExtensaoAutor}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 3.2"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.cargaHorariaSecaoProjetoPesquisaExtensaoColab}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.cargaHorariaSecaoProjetoPesquisaExtensaoColab}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 4"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.cargaHorariaSecaoAdministracao}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.cargaHorariaSecaoAdministracao}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 5"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.cargaHorariaSecaoOutroTipoAtividade}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.cargaHorariaSecaoOutroTipoAtividade}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="ATIVIDADE 6"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.cargaHorariaSecaoAtividadesASeremPropostas}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.cargaHorariaSecaoAtividadesASeremPropostas}"  
                                           styleClass="text01"
                                           style="font-size: large;"/>
                             <h:outputText value="TOTAL"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
-                            <h:outputText value="#{pTDMB.ptdConcluido.cargaHorariaTotal}"  
+                            <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.cargaHorariaTotal}"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
                         </h:panelGrid>
@@ -1111,7 +1111,7 @@
                     
                     <center>
                     <div id="justificativaIrregularidade">
-                        <h:outputText value="#{pTDMB.ptdConcluido.campoJustificativaGeral}" 
+                        <h:outputText value="#{pTDASerMostradoMB.ptdConcluido.campoJustificativaGeral}" 
                                       styleClass="text01"
                                       style="font-size: large;"/>
                     </div>

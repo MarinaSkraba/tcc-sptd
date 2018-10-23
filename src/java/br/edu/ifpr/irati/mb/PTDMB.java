@@ -42,29 +42,13 @@ import javax.swing.text.Document;
 @SessionScoped
 public class PTDMB {
 
-    /**
-     * @return the ptdsResultadoBusca
-     */
-    public List<PTD> getPtdsResultadoBusca() {
-        return ptdsResultadoBusca;
-    }
-
-    /**
-     * @param ptdsResultadoBusca the ptdsResultadoBusca to set
-     */
-    public void setPtdsResultadoBusca(List<PTD> ptdsResultadoBusca) {
-        this.ptdsResultadoBusca = ptdsResultadoBusca;
-    }
-
     private PTD ptd;
     private PTD ptdAprovado;
-    private PTD ptdConcluido;
     private List<PTD> ptdsEmAvaliacao;
     private List<PTD> ptdsReprovados;
     private List<PTD> ptdsEmEdicao;
     private List<PTD> ptdsAprovados;
     private List<PTD> ptdsConcluídos;
-    private List<PTD> ptdsResultadoBusca;
     private List<Participacao> participacoesAutorPTDEdicao;
     private List<Participacao> participacoesColabPTDEdicao;
     private List<Participacao> participacoesAutorPTDAprovado;
@@ -86,12 +70,10 @@ public class PTDMB {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptd = new PTD();
         ptdAprovado = new PTD();
-        ptdConcluido = new PTD();
         ptdsEmAvaliacao = new ArrayList<>();
         ptdsReprovados = new ArrayList<>();
         ptdsEmEdicao = new ArrayList();
         ptdsConcluídos = new ArrayList();
-        ptdsResultadoBusca = new ArrayList<>();
         ptdsEmAvaliacao = ptdDAOEspecifico.buscarPTDEmAvaliacao();
         participacoesAutorPTDEdicao = new ArrayList<>();
         participacoesColabPTDEdicao = new ArrayList<>();
@@ -138,41 +120,6 @@ public class PTDMB {
 
     }
 
-//    public String sairTelaManterPTD() {
-//
-//        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-//        for (Administracao adm : ptd.getAdministrativas()) {
-//            Dao<Administracao> administracaoDAO = new GenericDAO<>(Administracao.class);
-//            administracaoDAO.alterar(adm);
-//        }
-//        for (Apoio apoio : ptd.getApoios()) {
-//            Dao<Apoio> apoioDAO = new GenericDAO<>(Apoio.class);
-//            apoioDAO.alterar(apoio);
-//        }
-//        for (AtividadeASerProposta aasp : ptd.getAtividadesASeremPropostas()) {
-//            Dao<AtividadeASerProposta> atividadeASerPropostaDAO = new GenericDAO<>(AtividadeASerProposta.class);
-//            atividadeASerPropostaDAO.alterar(aasp);
-//        }
-//        List<Aula> aulas = ptd.getAulas();
-//        for (Aula al : aulas) {
-//            AulaMB aulaMB = new AulaMB();
-//            aulaMB.setAula(al);
-//            aulaMB.salvarAula(ptd.getProfessor().getIdUsuario(), ptd);
-//        }
-//        for (ManutencaoEnsino manuEn : ptd.getManutencoesEnsino()) {
-//            Dao<ManutencaoEnsino> manutencaoEnsinoDAO = new GenericDAO<>(ManutencaoEnsino.class);
-//            manutencaoEnsinoDAO.alterar(manuEn);
-//        }
-//        for (OutroTipoAtividade ota : ptd.getOutrosTiposAtividades()) {
-//            Dao<OutroTipoAtividade> outroTipoAtividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
-//            outroTipoAtividadeDAO.alterar(ota);
-//        }
-//        for (Participacao part : ptd.getParticipacoes()) {
-//            Dao<Participacao> participacaoDAO = new GenericDAO<>(Participacao.class);
-//            participacaoDAO.alterar(part);
-//        }
-//        return "/Login?faces-redirect=true";
-//    }
     public String sairTelaBuscarPTDs(Usuario usuario) {
         if (usuario.getIdUsuario() != 0) {
             if (usuario instanceof Professor) {
@@ -209,17 +156,8 @@ public class PTDMB {
 
     }
 
-    public void abrirTelaBuscarPTDs() {
-        IPTDDAO ptddao = new PTDDAO();
-        ptdsResultadoBusca = ptddao.buscarPTDsConcluidos();
-    }
-
     public void abrirMostrarPTDAprovado(PTD ptd) {
         ptdAprovado = ptd;
-    }
-
-    public void abrirMostrarPTD(PTD ptd) {
-        ptdConcluido = ptd;
     }
 
     public String abrirNotificacoesDocente(int idUsuario) {
@@ -1901,20 +1839,6 @@ public class PTDMB {
      */
     public void setParticipacoesColabPTDAprovado(List<Participacao> participacoesColabPTDAprovado) {
         this.participacoesColabPTDAprovado = participacoesColabPTDAprovado;
-    }
-
-    /**
-     * @return the ptdConcluido
-     */
-    public PTD getPtdConcluido() {
-        return ptdConcluido;
-    }
-
-    /**
-     * @param ptdConcluido the ptdConcluido to set
-     */
-    public void setPtdConcluido(PTD ptdConcluido) {
-        this.ptdConcluido = ptdConcluido;
     }
 
 }
