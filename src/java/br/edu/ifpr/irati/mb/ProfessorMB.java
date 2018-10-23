@@ -21,7 +21,6 @@ public class ProfessorMB {
     private List<Professor> professores;
     private List<String> errosCadastroProfessor;
     private String confirmacaoSenha;
-    
 
     public ProfessorMB() {
 
@@ -31,28 +30,23 @@ public class ProfessorMB {
 
     }
 
-    public String salvarProfessor() throws HashGenerationException {
+    public void salvarProfessor() throws HashGenerationException {
 
         String senhaSHA512 = "";
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
 
-        if (errosCadastroProfessor.isEmpty() == true) {
-            // primeiro verifica o email com link
-            // depois:
-            Usuario usuario = new Usuario(professor.getIdUsuario(), professor.getNomeCompleto(), professor.getEmail(),
-                    professor.getImagemPerfil(), senhaSHA512, "Habilitado");
-            usuarioDAO.salvar(usuario);
-            professorDAO.salvar(professor);
-            professores = professorDAO.buscarTodos(Professor.class);
-
-        }
-
-        return "/adicionar html";
+        senhaSHA512 = Digest.hashString(getProfessor().getSenhaAlfanumerica(), "SHA-512");
+        Usuario usuario = new Usuario(professor.getIdUsuario(), professor.getNomeCompleto(), professor.getEmail(),
+                professor.getImagemPerfil(), senhaSHA512, "Habilitado");
+        usuarioDAO.salvar(usuario);
+        professorDAO.salvar(professor);
+        professores = professorDAO.buscarTodos(Professor.class);
 
     }
-    public void verificarErrosCadastro(){
-        
+
+    public void verificarErrosCadastro() {
+
         if (professor.getSenhaAlfanumerica().length() < 8 | professor.getSenhaAlfanumerica().length() > 16) {
 
             errosCadastroProfessor.add("Sua senha deve conter entre de 8 a 16 caracteres");
@@ -73,23 +67,25 @@ public class ProfessorMB {
             errosCadastroProfessor.add("O email deve ser institucional(@ifpr.edu.br)");
 
         }
-    } 
-    
-    public String verificarPossibilidadeCadastro(){
-        
+    }
+
+    public String verificarPossibilidadeCadastro() {
+
+        verificarErrosCadastro();
         String nomeCaixaRetorno = "";
         if (errosCadastroProfessor.isEmpty() == false) {
-            
-            nomeCaixaRetorno = "";
+
+            nomeCaixaRetorno = "erroCadastroDocenteDialog";
             return nomeCaixaRetorno;
-            
-        }else{
-            
-            nomeCaixaRetorno = "";
-            return nomeCaixaRetorno;
+
+        } else {
+
+            nomeCaixaRetorno = "confirmarCadastroDocenteDialog";
+            return nomeCaixaRetorno;           
         }
         
     }
+
     public String alterarProfessor() throws HashGenerationException {
 
         errosCadastroProfessor = new ArrayList();
