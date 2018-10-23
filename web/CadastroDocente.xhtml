@@ -38,7 +38,7 @@
             allDayText: 'Todo o Dia'
         };
     </script>
-    
+
     <h:body styleClass="body">
 
         <!-- Barra de menu -->
@@ -156,12 +156,12 @@
                                         size="17"/>
                         </h:panelGrid>
                         <br/>
-                        
+
                         <p:commandButton styleClass="botaoAzul" 
-                                     style="border-radius: 30px; font-size: large; margin-left: 10px;" 
-                                     value="Cadastrar"
-                                     action=""
-                                     onclick="PF('#{professorMB.salvarProfessor()}').show();"/>
+                                         style="border-radius: 30px; font-size: large; margin-left: 10px;" 
+                                         value="Cadastrar"
+                                         action=""
+                                         onclick="PF('#{professorMB.salvarProfessor()}').show();"/>
 
                     </div>
                 </center>
@@ -174,9 +174,47 @@
                           hideEffect="fade" 
                           resizable="false">
 
-                    <h:outputText value="alguma coisa" 
+                    <h:outputText value="Cadastro concluído" 
                                   styleClass="text01"
                                   style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                    <br/>
+
+                    <p:commandButton styleClass="botaoAzul" 
+                                     value="Confirmar"
+                                     ajax="false"
+                                     action="#{professorMB.salvarProfessor()}"/>
+
+                </p:dialog>
+
+                <!-- Caixa de aviso de erro -->
+                <p:dialog header="Confirmar cadastro" 
+                          widgetVar="erroCadastroDocenteDialog" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false">
+
+                    <h:outputText value="O cadastro ainda não pode ser concluído por causa dos seguintes " 
+                                  styleClass="text01"
+                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                    <br/>
+
+                    <h:dataTable  value="#{pTDMB.errosTabelaManuEnsino}" 
+                                  var="erroCadastro" 
+                                  style="width: auto;"
+                                  headerClass="text-center"
+                                  footerClass="text-center">
+
+                        <h:column>
+                            <f:facet name="header">
+
+                            </f:facet>
+                            <h:outputText value="#{erroCadastro}" 
+                                          styleClass="text01"
+                                          style="font-size: large; color: #C92345; width: 400px;"/>
+                        </h:column>
+                    </h:dataTable>
+
                     <br/>
 
                     <p:commandButton styleClass="botaoAzul" 
