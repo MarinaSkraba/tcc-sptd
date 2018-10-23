@@ -59,7 +59,10 @@
                                  action="/Login"
                                  ajax="false"
                                  style="float: left;"/>
-
+                
+                <!-- Temporizador verificar possibilidade cadastro -->
+                <p:poll interval="10" listener="#{professorMB.verificarPossibilidadeCadastro()}"/>
+                
             </h:form>
         </div>
 
