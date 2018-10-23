@@ -25,7 +25,7 @@
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Notificações"
-                                 action="#{usuarioMB.sairTelaLegislacao(usuario)}"
+                                 action="#{usuarioMB.sairTelaLegislacao(usuarioMB.usuarioLogado)}"
                                  style="float: left;"/>
 
                 <p:commandButton id="logout"
@@ -41,21 +41,7 @@
                                   styleClass="text01"
                                   style="color: #1785ad; font-weight: normal; font-size: large; margin: 0px;"/>
                     <br/>
-                    <p:commandButton value="Meu perfil"
-                                     styleClass="opMenu"
-                                     style="margin: 0px;"
-                                     ajax="false" 
-                                     actionListener="#{professorMB.setProfessor(usuarioMB.usuarioLogado)}"
-                                     action="/PerfilDocente?faces-redirect=true"/>
-                    <br/>
-                     <br/>
-                    <p:commandButton value="Consultar Legislação"
-                                     styleClass="opMenu"
-                                     style="margin: 0px;"
-                                     ajax="false" 
-                                     actionListener="#{professorMB.setProfessor(usuarioMB.usuarioLogado)}"
-                                     action="/legislacao?faces-redirect=true"/>
-                    <br/>
+                 
                     <p:commandButton value="Sair"
                                      styleClass="opVermelhaMenu"
                                      style="margin: 5px 0px;"

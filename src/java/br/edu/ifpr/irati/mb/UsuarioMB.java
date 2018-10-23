@@ -93,7 +93,7 @@ public class UsuarioMB {
     }
 
     public String sairTelaLegislacao(Usuario usuario) {
-        if (usuario instanceof DiretorEnsino) {
+        if (usuario instanceof Professor) {
             return "NotificacoesDocente";
         } else {
             return "NotificacoesDiretorEnsino";

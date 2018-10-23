@@ -48,6 +48,13 @@
                                      style="margin: 0px;"
                                      ajax="false" 
                                      actionListener="#{diretorEnsinoMB.setDiretorEnsino(usuarioMB.usuarioLogado)}"/>
+                    <br/> 
+                    <p:commandButton value="Legislação"
+                                     styleClass="opMenu"
+                                     style="margin: 5px 0px;"
+                                     ajax="false" 
+                                     actionListener="#{diretorEnsinoMB.setDiretorEnsino(usuarioMB.usuarioLogado)}"
+                                     action="/legislacao?faces-redirect=true"/>
                     <br/>
                     <p:commandButton value="Sair"
                                      styleClass="opVermelhaMenu"
@@ -182,7 +189,7 @@
             <div id="content" style="width: 70%;">
                 <br/>
                 <h:form>
-                    
+
                     <h:dataTable  value="#{pTDMB.ptdsEmAvaliacao}" 
                                   var="ptdEsperando"
                                   style="border-spacing: 0pt; width: 100%;"
@@ -190,8 +197,8 @@
                                   footerClass="text-center">
                         <f:facet name="header">
                             <h:outputText value="Professor | Status | Ver PTD" 
-                                              styleClass="text01"
-                                              style="font-size: large;"/>
+                                          styleClass="text01"
+                                          style="font-size: large;"/>
                         </f:facet>
 
                         <h:column>
