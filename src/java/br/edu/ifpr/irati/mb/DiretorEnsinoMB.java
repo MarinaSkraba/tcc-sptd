@@ -47,7 +47,7 @@ public class DiretorEnsinoMB {
         return "/ adicionar html";
     }
 
-    public void verificarErrosCadastroDiretorEnsino() {
+    public void verificarErrosCadastroAtualizacaoDiretorEnsino() {
 
         if (getDiretorEnsino().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
 
@@ -87,9 +87,9 @@ public class DiretorEnsinoMB {
         }
     }
 
-    public String verificarPossibilidadeCadastroDiretorEnsino() {
+    public String verificarPossibilidadeCadastroAtualizacaoDiretorEnsino() {
 
-        verificarErrosCadastroDiretorEnsino();
+        verificarErrosCadastroAtualizacaoDiretorEnsino();
         String nomeCaixaRetorno = "";
 
         if (errosCadastroDiretorEnsino.isEmpty() == false) {
