@@ -86,19 +86,19 @@ public class DiretorEnsinoMB {
         }
     }
 
-    public String verificarPossibilidadeCadastroAtualizacaoDiretorEnsino() {
+    public String verificarPossibilidadeAtualizacaoDiretorEnsino() {
 
         verificarErrosCadastroAtualizacaoDiretorEnsino();
         String nomeCaixaRetorno = "";
 
         if (errosCadastroDiretorEnsino.isEmpty() == false) {
 
-            nomeCaixaRetorno = "erroCadastroDiretorEnsinoDialog";
+            nomeCaixaRetorno = "erroEdicaoDiretorEnsinoDialog";
             return nomeCaixaRetorno;
 
         } else {
 
-            nomeCaixaRetorno = "confirmarCadastroDiretorEnsinoDialog";
+            nomeCaixaRetorno = "confirmarEdicaoDiretorEnsinoDialog";
             return nomeCaixaRetorno;
         }
 

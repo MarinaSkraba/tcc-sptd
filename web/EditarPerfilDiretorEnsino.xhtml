@@ -163,13 +163,13 @@
                     <p:commandButton styleClass="botaoAzul" 
                                      value="Confirmar"
                                      ajax="false"
-                                     onclick="PF('#{professorMB.verificarPossibilidadeCadastro()}')"/>
+                                     onclick="PF('#{diretorEnsinoMB.verificarPossibilidadeAtualizacaoDiretorEnsino()}')"/>
 
                 </p:dialog>
 
                 <!-- Caixa de confirmação de cadastro -->
                 <p:dialog header="Confirmar cadastro" 
-                          widgetVar="confirmarCadastroDocenteDialog" 
+                          widgetVar="confirmarEdicaoDocenteDialog" 
                           modal="true" 
                           showEffect="fade" 
                           hideEffect="fade" 
@@ -183,13 +183,13 @@
                     <p:commandButton styleClass="botaoAzul" 
                                      value="Confirmar"
                                      ajax="false"
-                                     onclick="PF('#{diretorEnsinoMB.verificarPossibilidadeCadastroDiretorEnsino()}').show();"/>
+                                     action="#{diretorEnsinoMB.alterarDiretorEnsino()}"/>
 
                 </p:dialog>
 
                 <!-- Caixa de aviso de erro -->
                 <p:dialog header="Confirmar cadastro" 
-                          widgetVar="erroCadastroDocenteDialog" 
+                          widgetVar="erroEdicaoDocenteDialog" 
                           modal="true" 
                           showEffect="fade" 
                           hideEffect="fade" 
