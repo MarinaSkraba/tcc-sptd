@@ -68,6 +68,30 @@ public class ProfessorMB {
 
             errosCadastroProfessor.add("O email deve ser institucional(@ifpr.edu.br)");
 
+        } else if(professor.getEmail().isEmpty() == true){
+            
+            errosCadastroProfessor.add("O campo 'Email' deve ser obrigatóriamente preenchido");
+            
+        }else if(professor.getMatriculaSIAPE().isEmpty() == true){
+            
+            errosCadastroProfessor.add("O campo 'Matrícula SIAPE' deve ser obrigatóriamente preenchido");
+            
+        }else if(professor.getNomeCompleto().isEmpty() == true){
+           
+            errosCadastroProfessor.add("O campo 'Nome completo' deve ser obrigatóriamente preenchido");
+            
+        }else if(professor.getRegimeTrabalho().isEmpty() == true){
+            
+            errosCadastroProfessor.add("O campo 'Regime de trabalho' deve ser obrigatóriamente preenchido");
+            
+        }else if(professor.getSenhaAlfanumerica().isEmpty() == true){
+            
+            errosCadastroProfessor.add("O campo 'Senha' deve ser obrigatóriamente preenchido");
+            
+        }else if(confirmacaoSenha.isEmpty() == true){
+            
+            errosCadastroProfessor.add("O campo 'Confirmação senha' deve ser obrigatóriamente preenchido");
+            
         }
     }
 
