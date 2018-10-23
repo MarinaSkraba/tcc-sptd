@@ -44,6 +44,10 @@ public class ProfessorMB {
 
             errosCadastroProfessor.add("Sua senha deve conter entre de 8 a 16 caracteres");
 
+        } else if (professor.getSenhaAlfanumerica().equals(confirmacaoSenha) == false) {
+
+            errosCadastroProfessor.add("As senhas informadas não coincidem");
+
         }
         Date dataAtual = new Date();
         if (professor.getDataContratacao().after(dataAtual)) {
@@ -71,11 +75,42 @@ public class ProfessorMB {
 
     }
 
-    public String alterarProfessor() {
+    public String alterarProfessor() throws HashGenerationException {
 
+        errosCadastroProfessor = new ArrayList();
+        String senhaSHA512 = "";
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
-        professorDAO.alterar(professor);
-        professores = professorDAO.buscarTodos(Professor.class);
+        if (professor.getSenhaAlfanumerica().length() >= 8 && professor.getSenhaAlfanumerica().length() <= 16) {
+
+            senhaSHA512 = Digest.hashString(professor.getSenhaAlfanumerica(), "SHA-512");
+
+        } else if (professor.getSenhaAlfanumerica().length() < 8 | professor.getSenhaAlfanumerica().length() > 16) {
+
+            errosCadastroProfessor.add("Sua senha deve conter entre de 8 a 16 caracteres");
+
+        } else if (professor.getSenhaAlfanumerica().equals(confirmacaoSenha) == false) {
+
+            errosCadastroProfessor.add("As senhas informadas não coincidem");
+
+        }
+        Date dataAtual = new Date();
+        if (professor.getDataContratacao().after(dataAtual)) {
+
+            errosCadastroProfessor.add("A data que você inseriu como sua data de contratação "
+                    + "é posterior a data atual");
+
+        } else if (professor.getEmail().contains("@ifpr.edu.br") == false) {
+
+            errosCadastroProfessor.add("O email deve ser institucional(@ifpr.edu.br)");
+
+        }
+        if (errosCadastroProfessor.isEmpty() == true) {
+
+            professor.setSenhaAlfanumerica(senhaSHA512);
+            professorDAO.alterar(professor);
+            professores = professorDAO.buscarTodos(Professor.class);
+
+        }
 
         return "/ adicionar html";
     }

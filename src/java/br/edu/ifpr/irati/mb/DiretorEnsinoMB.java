@@ -25,6 +25,7 @@ public class DiretorEnsinoMB {
     private PTD ptd;
     private List<PTD> ptds;
     private List<String> errosCadastroDiretorEnsino;
+    private String confirmacaoSenha;
 
     public DiretorEnsinoMB() {
 
@@ -56,21 +57,25 @@ public class DiretorEnsinoMB {
 
         } else if (getDiretorEnsino().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
 
-            errosCadastroDiretorEnsino.add("Sua senha deve conter entre de 8 a 16 caracteres");
+            getErrosCadastroDiretorEnsino().add("Sua senha deve conter entre de 8 a 16 caracteres");
+
+        } else if (getDiretorEnsino().getSenhaAlfanumerica().equals(getConfirmacaoSenha()) == false) {
+
+            getErrosCadastroDiretorEnsino().add("As senhas informadas não coincidem");
 
         }
         Date dataAtual = new Date();
         if (getDiretorEnsino().getDataContratacao().after(dataAtual)) {
 
-            errosCadastroDiretorEnsino.add("A data que você inseriu como sua data de contratação "
+            getErrosCadastroDiretorEnsino().add("A data que você inseriu como sua data de contratação "
                     + "é posterior a data atual");
 
         } else if (getDiretorEnsino().getEmail().contains("@ifpr.edu.br") == false) {
 
-            errosCadastroDiretorEnsino.add("O email deve ser institucional(@ifpr.edu.br)");
+            getErrosCadastroDiretorEnsino().add("O email deve ser institucional(@ifpr.edu.br)");
 
         }
-        if (errosCadastroDiretorEnsino.isEmpty() == true) {
+        if (getErrosCadastroDiretorEnsino().isEmpty() == true) {
 
             Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
             Usuario u = new Usuario(getDiretorEnsino().getIdUsuario(), getDiretorEnsino().getNomeCompleto(), getDiretorEnsino().getEmail(), getDiretorEnsino().getImagemPerfil(), senhaSHA512, "Habilitado");
@@ -149,5 +154,33 @@ public class DiretorEnsinoMB {
      */
     public void setErrosCadastroDiretorEnsino(List<String> errosCadastroDiretorEnsino) {
         this.errosCadastroDiretorEnsino = errosCadastroDiretorEnsino;
+    }
+
+    /**
+     * @return the diretorEnsino
+     */
+    public DiretorEnsino getDiretorEnsino() {
+        return diretorEnsino;
+    }
+
+    /**
+     * @param diretorEnsino the diretorEnsino to set
+     */
+    public void setDiretorEnsino(DiretorEnsino diretorEnsino) {
+        this.diretorEnsino = diretorEnsino;
+    }
+
+    /**
+     * @return the confirmacaoSenha
+     */
+    public String getConfirmacaoSenha() {
+        return confirmacaoSenha;
+    }
+
+    /**
+     * @param confirmacaoSenha the confirmacaoSenha to set
+     */
+    public void setConfirmacaoSenha(String confirmacaoSenha) {
+        this.confirmacaoSenha = confirmacaoSenha;
     }
 }
