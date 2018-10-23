@@ -33,9 +33,7 @@ public class DiretorEnsinoMB {
     public String salvarDiretorEnsino() {
 
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
-        if (getDiretorEnsino().getEmail().contains("@ifpr.edu.br")) {
-            errosCadastroDiretorEnsino.add("O email informado deve ser institucional(@ifpr.edu.br)");
-        } else {
+        if (getDiretorEnsino().getEmail().contains("@ifpr.edu.br") == true) {
             diretorEnsinoDAO.salvar(getDiretorEnsino());
             setDiretorEnsino(new DiretorEnsino());
         }
