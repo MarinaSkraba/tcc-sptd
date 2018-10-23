@@ -50,7 +50,7 @@ public class DiretorEnsinoMB {
 
         if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
 
-            getErrosCadastroDiretorEnsino().add("Sua senha deve conter entre de 8 a 16 caracteres");
+            getErrosCadastroDiretorEnsino().add("Sua senha deve conter entre  8 a 16 caracteres");
 
         } else if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().equals(getConfirmacaoSenhaSelecionado()) == false) {
 
@@ -69,19 +69,19 @@ public class DiretorEnsinoMB {
 
         } else if (diretorEnsinoSelecionado.getEmail().isEmpty() == true) {
 
-            errosCadastroDiretorEnsino.add("O campo 'Email' deve ser obrigatóriamente preenchido");
+            errosCadastroDiretorEnsino.add("O campo 'Email' deve ser obrigatoriamente preenchido");
 
         } else if (diretorEnsinoSelecionado.getNomeCompleto().isEmpty() == true) {
 
-            errosCadastroDiretorEnsino.add("O campo 'Nome completo' deve ser obrigatóriamente preenchido");
+            errosCadastroDiretorEnsino.add("O campo 'Nome completo' deve ser obrigatoriamente preenchido");
 
         } else if (diretorEnsinoSelecionado.getSenhaAlfanumerica().isEmpty() == true) {
 
-            errosCadastroDiretorEnsino.add("O campo 'Senha' deve ser obrigatóriamente preenchido");
+            errosCadastroDiretorEnsino.add("O campo 'Senha' deve ser obrigatoriamente preenchido");
 
         } else if (confirmacaoSenhaSelecionado.isEmpty() == true) {
 
-            errosCadastroDiretorEnsino.add("O campo 'Confirmação senha' deve ser obrigatóriamente preenchido");
+            errosCadastroDiretorEnsino.add("O campo 'Confirmação senha' deve ser obrigatoriamente preenchido");
 
         }
     }
