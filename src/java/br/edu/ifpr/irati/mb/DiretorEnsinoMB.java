@@ -157,20 +157,6 @@ public class DiretorEnsinoMB {
     }
 
     /**
-     * @return the diretorEnsino
-     */
-    public DiretorEnsino getDiretorEnsino() {
-        return diretorEnsino;
-    }
-
-    /**
-     * @param diretorEnsino the diretorEnsino to set
-     */
-    public void setDiretorEnsino(DiretorEnsino diretorEnsino) {
-        this.diretorEnsino = diretorEnsino;
-    }
-
-    /**
      * @return the confirmacaoSenha
      */
     public String getConfirmacaoSenha() {
