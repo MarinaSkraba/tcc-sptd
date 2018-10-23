@@ -7,6 +7,7 @@ import br.edu.ifpr.irati.modelo.PTD;
 import br.edu.ifpr.irati.modelo.Usuario;
 import br.edu.ifpr.irati.util.Digest;
 import br.edu.ifpr.irati.util.HashGenerationException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -29,6 +30,7 @@ public class DiretorEnsinoMB {
         ptd = new PTD();
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptds = ptdDAO.buscarTodos(PTD.class);
+        errosCadastroDiretorEnsino = new ArrayList<>();
         diretorEnsino = new DiretorEnsino();
         diretorEnsinoSelecionado = new DiretorEnsino();
         confirmacaoSenha = "";
@@ -36,7 +38,7 @@ public class DiretorEnsinoMB {
 
     }
 
-    public String salvarDiretorEnsino() {
+    public void salvarDiretorEnsino() {
 
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
         if (getDiretorEnsino().getEmail().contains("@ifpr.edu.br") == true) {
@@ -44,7 +46,6 @@ public class DiretorEnsinoMB {
             setDiretorEnsino(new DiretorEnsino());
         }
 
-        return "/ adicionar html";
     }
 
     public void verificarErrosCadastroDiretorEnsino() {
