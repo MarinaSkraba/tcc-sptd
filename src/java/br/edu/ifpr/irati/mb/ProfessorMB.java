@@ -21,6 +21,7 @@ public class ProfessorMB {
     private List<Professor> professores;
     private List<String> errosCadastroProfessor;
     private String confirmacaoSenha;
+    
 
     public ProfessorMB() {
 
@@ -36,11 +37,23 @@ public class ProfessorMB {
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
 
-        if (professor.getSenhaAlfanumerica().length() >= 8 && professor.getSenhaAlfanumerica().length() <= 16) {
+        if (errosCadastroProfessor.isEmpty() == true) {
+            // primeiro verifica o email com link
+            // depois:
+            Usuario usuario = new Usuario(professor.getIdUsuario(), professor.getNomeCompleto(), professor.getEmail(),
+                    professor.getImagemPerfil(), senhaSHA512, "Habilitado");
+            usuarioDAO.salvar(usuario);
+            professorDAO.salvar(professor);
+            professores = professorDAO.buscarTodos(Professor.class);
 
-            senhaSHA512 = Digest.hashString(professor.getSenhaAlfanumerica(), "SHA-512");
+        }
 
-        } else if (professor.getSenhaAlfanumerica().length() < 8 | professor.getSenhaAlfanumerica().length() > 16) {
+        return "/adicionar html";
+
+    }
+    public void verificarErrosCadastro(){
+        
+        if (professor.getSenhaAlfanumerica().length() < 8 | professor.getSenhaAlfanumerica().length() > 16) {
 
             errosCadastroProfessor.add("Sua senha deve conter entre de 8 a 16 caracteres");
 
@@ -60,21 +73,23 @@ public class ProfessorMB {
             errosCadastroProfessor.add("O email deve ser institucional(@ifpr.edu.br)");
 
         }
-        if (errosCadastroProfessor.isEmpty() == true) {
-            // primeiro verifica o email com link
-            // depois:
-            Usuario usuario = new Usuario(professor.getIdUsuario(), professor.getNomeCompleto(), professor.getEmail(),
-                    professor.getImagemPerfil(), senhaSHA512, "Habilitado");
-            usuarioDAO.salvar(usuario);
-            professorDAO.salvar(professor);
-            professores = professorDAO.buscarTodos(Professor.class);
-
+    } 
+    
+    public String verificarPossibilidadeCadastro(){
+        
+        String nomeCaixaRetorno = "";
+        if (errosCadastroProfessor.isEmpty() == false) {
+            
+            nomeCaixaRetorno = "";
+            return nomeCaixaRetorno;
+            
+        }else{
+            
+            nomeCaixaRetorno = "";
+            return nomeCaixaRetorno;
         }
-
-        return "/adicionar html";
-
+        
     }
-
     public String alterarProfessor() throws HashGenerationException {
 
         errosCadastroProfessor = new ArrayList();
