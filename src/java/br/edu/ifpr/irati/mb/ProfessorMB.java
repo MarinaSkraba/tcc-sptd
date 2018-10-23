@@ -46,6 +46,8 @@ public class ProfessorMB {
     }
 
     public void verificarErrosCadastro() {
+        
+        errosCadastroProfessor = new ArrayList<>();
 
         if (professor.getSenhaAlfanumerica().length() < 8 | professor.getSenhaAlfanumerica().length() > 16) {
 
@@ -73,6 +75,7 @@ public class ProfessorMB {
 
         verificarErrosCadastro();
         String nomeCaixaRetorno = "";
+        
         if (errosCadastroProfessor.isEmpty() == false) {
 
             nomeCaixaRetorno = "erroCadastroDocenteDialog";

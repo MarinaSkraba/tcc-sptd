@@ -85,9 +85,10 @@
                 <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
                               styleClass="text01"
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
-                 
+
                 <!-- Temporizador verificar possibilidade Edição -->
                 <p:poll interval="5" listener="#{professorMB.verificarPossibilidadeCadastro()}"/>
+
             </h:form>
         </div>
 
@@ -210,6 +211,63 @@
                                      value="Confirmar"
                                      ajax="false"
                                      action="#{professorMB.alterarProfessor()}"/>
+
+                </p:dialog>
+
+                <!-- Caixa de confirmação de cadastro -->
+                <p:dialog header="Confirmar cadastro" 
+                          widgetVar="confirmarCadastroDocenteDialog" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false">
+
+                    <h:outputText value="Você realmente deseja alterar essas informações" 
+                                  styleClass="text01"
+                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                    <br/>
+
+                    <p:commandButton styleClass="botaoAzul" 
+                                     value="Confirmar"
+                                     ajax="false"
+                                     onclick="PF('#{professorMB.verificarPossibilidadeCadastro()}').show();"/>
+
+                </p:dialog>
+
+                <!-- Caixa de aviso de erro -->
+                <p:dialog header="Confirmar cadastro" 
+                          widgetVar="erroCadastroDocenteDialog" 
+                          modal="true" 
+                          showEffect="fade" 
+                          hideEffect="fade" 
+                          resizable="false">
+
+                    <h:outputText value="O cadastro ainda não pode ser concluído por causa dos seguintes " 
+                                  styleClass="text01"
+                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
+                    <br/>
+
+                    <h:dataTable  value="#{professorMB.errosCadastroProfessor}" 
+                                  var="erroCadastro" 
+                                  style="width: auto;"
+                                  headerClass="text-center"
+                                  footerClass="text-center">
+
+                        <h:column>
+                            <f:facet name="header">
+
+                            </f:facet>
+                            <h:outputText value="#{erroCadastro}" 
+                                          styleClass="text01"
+                                          style="font-size: large; color: #C92345; width: 400px;"/>
+                        </h:column>
+                    </h:dataTable>
+
+                    <br/>
+
+                    <p:commandButton styleClass="botaoAzul" 
+                                     value="Confirmar"
+                                     ajax="false"/>
 
                 </p:dialog>
 
