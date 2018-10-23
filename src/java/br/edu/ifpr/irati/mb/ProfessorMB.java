@@ -46,7 +46,7 @@ public class ProfessorMB {
     }
 
     public void verificarErrosCadastro() {
-        
+
         errosCadastroProfessor = new ArrayList<>();
 
         if (professor.getSenhaAlfanumerica().length() < 8 | professor.getSenhaAlfanumerica().length() > 16) {
@@ -75,7 +75,7 @@ public class ProfessorMB {
 
         verificarErrosCadastro();
         String nomeCaixaRetorno = "";
-        
+
         if (errosCadastroProfessor.isEmpty() == false) {
 
             nomeCaixaRetorno = "erroCadastroDocenteDialog";
@@ -93,6 +93,7 @@ public class ProfessorMB {
 
         String senhaSHA512 = "";
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
+        senhaSHA512 = Digest.hashString(getProfessor().getSenhaAlfanumerica(), "SHA-512");
         professor.setSenhaAlfanumerica(senhaSHA512);
         professorDAO.alterar(professor);
         professores = professorDAO.buscarTodos(Professor.class);

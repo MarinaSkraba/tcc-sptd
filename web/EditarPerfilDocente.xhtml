@@ -210,7 +210,7 @@
                     <p:commandButton styleClass="botaoAzul" 
                                      value="Confirmar"
                                      ajax="false"
-                                     action="#{professorMB.alterarProfessor()}"/>
+                                     action="#{professorMB.verificarPossibilidadeCadastro()}"/>
 
                 </p:dialog>
 
@@ -267,7 +267,9 @@
 
                     <p:commandButton styleClass="botaoAzul" 
                                      value="Confirmar"
-                                     ajax="false"/>
+                                     ajax="false"
+                                     onclick="PF('#{professorMB.alterarProfessor()}').show();"/>
+/>
 
                 </p:dialog>
 
