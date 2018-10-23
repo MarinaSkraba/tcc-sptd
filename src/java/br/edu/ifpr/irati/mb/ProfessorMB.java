@@ -99,10 +99,76 @@ public class ProfessorMB {
             
         }
     }
+    
+    public void verificarErrosAtualizacao() {
+
+        errosCadastroProfessor = new ArrayList<>();
+
+        if (professorSelecionado.getSenhaAlfanumerica().length() < 8 | professor.getSenhaAlfanumerica().length() > 16) {
+
+            errosCadastroProfessor.add("Sua senha deve conter entre de 8 a 16 caracteres");
+
+        } else if (professorSelecionado.getSenhaAlfanumerica().equals(confirmacaoSenhaSelecionada) == false) {
+
+            errosCadastroProfessor.add("As senhas informadas não coincidem");
+
+        }
+        Date dataAtual = new Date();
+        if (professorSelecionado.getDataContratacao().after(dataAtual)) {
+
+            errosCadastroProfessor.add("A data que você inseriu como sua data de contratação "
+                    + "é posterior a data atual");
+
+        } else if (professorSelecionado.getEmail().contains("@ifpr.edu.br") == false) {
+
+            errosCadastroProfessor.add("O email deve ser institucional(@ifpr.edu.br)");
+
+        } else if(professorSelecionado.getEmail().isEmpty() == true){
+            
+            errosCadastroProfessor.add("O campo 'Email' deve ser obrigatóriamente preenchido");
+            
+        }else if(professorSelecionado.getMatriculaSIAPE().isEmpty() == true){
+            
+            errosCadastroProfessor.add("O campo 'Matrícula SIAPE' deve ser obrigatóriamente preenchido");
+            
+        }else if(professorSelecionado.getNomeCompleto().isEmpty() == true){
+           
+            errosCadastroProfessor.add("O campo 'Nome completo' deve ser obrigatóriamente preenchido");
+            
+        }else if(professorSelecionado.getRegimeTrabalho().isEmpty() == true){
+            
+            errosCadastroProfessor.add("O campo 'Regime de trabalho' deve ser obrigatóriamente preenchido");
+            
+        }else if(professorSelecionado.getSenhaAlfanumerica().isEmpty() == true){
+            
+            errosCadastroProfessor.add("O campo 'Senha' deve ser obrigatóriamente preenchido");
+            
+        }else if(confirmacaoSenhaSelecionada.isEmpty() == true){
+            
+            errosCadastroProfessor.add("O campo 'Confirmação senha' deve ser obrigatóriamente preenchido");
+            
+        }
+    }
 
     public String verificarPossibilidadeCadastro() {
 
         verificarErrosCadastro();
+        String nomeCaixaRetorno = "";
+
+        if (errosCadastroProfessor.isEmpty() == false) {
+
+            nomeCaixaRetorno = "erroCadastroDocenteDialog";
+            return nomeCaixaRetorno;
+
+        } else {
+
+            nomeCaixaRetorno = "confirmarCadastroDocenteDialog";
+            return nomeCaixaRetorno;
+        }
+
+    } public String verificarPossibilidadeAtualizacao() {
+
+        verificarErrosAtualizacao();
         String nomeCaixaRetorno = "";
 
         if (errosCadastroProfessor.isEmpty() == false) {
