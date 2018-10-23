@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
-        <title>Avaliação de PTD</title>
+        <title>PTD Aprovado</title>
         <link rel="stylesheet" type="text/css" href="css/css.css"/>
         <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     </h:head>
@@ -27,8 +27,35 @@
                                  iconPos="right"
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Voltar"
-                                 action="BuscarPTDs"
+                                 ajax="false"
+                                 action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuarioLogado.idUsuario)}"
                                  style="float: left;"/>
+                
+                <p:commandButton id="logout"
+                                 image="img/fundo_login.png" 
+                                 styleClass="imgLogado"/>
+
+                <!-- Informações e Logout -->
+                <p:overlayPanel id="Usuário" 
+                                for="logout" 
+                                hideEffect="fade" 
+                                style="padding: 0px;">
+                    <h:outputText value="#{usuarioMB.usuarioLogado.email}" 
+                                  styleClass="text01"
+                                  style="color: #1785ad; font-weight: normal; font-size: large; margin: 0px;"/>
+                    <br/>
+                    <p:commandButton value="Sair"
+                                     styleClass="opVermelhaMenu"
+                                     style="margin: 5px 0px;"
+                                     ajax="false" 
+                                     immediate="true"
+                                     actionListener="#{usuarioMB.realizarLogout()}"
+                                     action="/Login?faces-redirect=true"/>
+                </p:overlayPanel>
+
+                <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
+                              styleClass="text01"
+                              style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
             </h:form>
         </div>
@@ -1101,7 +1128,7 @@
                             <h:outputText value="TOTAL"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
-                            <h:outputText value="#{pTDMB.cargaHorariaTotalPTDPTDAvaliacao}"  
+                            <h:outputText value="#{pTDMB.ptdAprovado.cargaHorariaTotal}"  
                                           styleClass="text01"
                                           style="font-size: large; font-weight: bold; background-color: #f2f2f2; margin: 0px; padding: 5px; width: 300px;"/>
                         </h:panelGrid>

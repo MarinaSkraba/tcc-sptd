@@ -59,7 +59,7 @@ public class PTDMB {
     private PTD ptd;
     private PTD ptdEmAvaliacao;
     private PTD ptdAprovado;
-    private PTD ptdParaComunidade;
+    private PTD ptdConcluido;
     private List<PTD> ptdsEmAvaliacao;
     private List<PTD> ptdsReprovados;
     private List<PTD> ptdsEmEdicao;
@@ -91,7 +91,7 @@ public class PTDMB {
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptd = new PTD();
         ptdAprovado = new PTD();
-        ptdParaComunidade = new PTD();
+        ptdConcluido = new PTD();
         ptdEmAvaliacao = new PTD();
         ptdsEmAvaliacao = new ArrayList<>();
         ptdsReprovados = new ArrayList<>();
@@ -236,12 +236,12 @@ public class PTDMB {
         ptdsResultadoBusca = ptddao.buscarPTDsConcluidos();
     }
 
-    public void abrirMostrarPTDParaDocente(PTD ptd) {
+    public void abrirMostrarPTDAprovado(PTD ptd) {
         ptdAprovado = ptd;
     }
 
     public void abrirMostrarPTD(PTD ptd) {
-        ptdParaComunidade = ptd;
+        ptdConcluido = ptd;
     }
 
     public String abrirNotificacoesDocente(int idUsuario) {
@@ -429,8 +429,12 @@ public class PTDMB {
     public String submeterPTD(int idUsuario) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
         getPtd().setEstadoPTD("AVALIACAO");
+        if(cargaHorariaTotalPTDPTDAvaliacao != 0){
+            ptd.setCargaHorariaTotal(cargaHorariaTotalPTDPTDAvaliacao);
+        } else {
+            ptd.setCargaHorariaTotal(cargaHorariaTotalPTDPTDEdicao);
+        }
         ptdDAOGenerico.alterar(getPtd());
-
         return abrirNotificacoesDocente(0);
     }
 
@@ -1565,6 +1569,12 @@ public class PTDMB {
         getPtdEmAvaliacao().setDiretorEnsino(diretorEnsino);
         ptdDAOGenerico.alterar(getPtdEmAvaliacao());
     }
+    
+    public void concluirPTD(PTD ptd){
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        ptd.setEstadoPTD("CONCLUÍDO");
+        ptdDAOGenerico.alterar(ptd);
+    }
 
     public PTD getPtd() {
         return ptd;
@@ -1941,17 +1951,17 @@ public class PTDMB {
     }
 
     /**
-     * @return the ptdParaComunidade
+     * @return the ptdConcluido
      */
-    public PTD getPtdParaComunidade() {
-        return ptdParaComunidade;
+    public PTD getPtdConcluido() {
+        return ptdConcluido;
     }
 
     /**
-     * @param ptdParaComunidade the ptdParaComunidade to set
+     * @param ptdConcluido the ptdConcluido to set
      */
-    public void setPtdParaComunidade(PTD ptdParaComunidade) {
-        this.ptdParaComunidade = ptdParaComunidade;
+    public void setPtdConcluido(PTD ptdConcluido) {
+        this.ptdConcluido = ptdConcluido;
     }
 
 }

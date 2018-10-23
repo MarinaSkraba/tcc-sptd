@@ -159,9 +159,10 @@ public class PTDDAO implements IPTDDAO {
             }
         }
         for (Administracao adm : adms) {
+            Administracao admAux = adm;
             ptd.getAdministrativas().remove(adm);
             session.update(ptd);
-            session.delete(adm);
+            session.delete(admAux);
         }
         for (Apoio apoio : ptd.getApoios()) {
             List<Horario> horariosAux = apoio.getHorariosApoio();
@@ -172,9 +173,10 @@ public class PTDDAO implements IPTDDAO {
             }
         }
         for (Apoio apoio : apoios) {
+            Apoio apoioAux = apoio;
             ptd.getApoios().remove(apoio);
             session.update(ptd);
-            session.delete(apoio);
+            session.delete(apoioAux);
         }
         for (AtividadeASerProposta aSerProposta : ptd.getAtividadesASeremPropostas()) {
             List<Horario> horariosAux = aSerProposta.getHorariosAtividadesASerProposta();
@@ -185,9 +187,10 @@ public class PTDDAO implements IPTDDAO {
             }
         }
         for (AtividadeASerProposta aSerProposta : aSerPropostas) {
+            AtividadeASerProposta aSerPropostaAux = aSerProposta;
             ptd.getAtividadesASeremPropostas().remove(aSerProposta);
             session.update(ptd);
-            session.delete(aSerProposta);
+            session.delete(aSerPropostaAux);
         }
         for (Aula aula : ptd.getAulas()) {
             List<Horario> horariosAux = aula.getHorariosAula();
@@ -198,9 +201,10 @@ public class PTDDAO implements IPTDDAO {
             }
         }
         for (Aula aula : aulas) {
+            Aula aulaAux = aula;
             ptd.getAulas().remove(aula);
             session.update(ptd);
-            session.delete(aula);
+            session.delete(aulaAux);
         }
         for (ManutencaoEnsino manuEnsino : ptd.getManutencoesEnsino()) {
             List<Horario> horariosAux = manuEnsino.getHorariosManutecao();
@@ -211,9 +215,10 @@ public class PTDDAO implements IPTDDAO {
             }
         }
         for (ManutencaoEnsino manuEnsino : manuEnsinos) {
+            ManutencaoEnsino manuEnsinoAux = manuEnsino;
             ptd.getManutencoesEnsino().remove(manuEnsino);
             session.update(ptd);
-            session.delete(manuEnsino);
+            session.delete(manuEnsinoAux);
         }
         for (Participacao part : ptd.getParticipacoes()) {
             List<Horario> horariosAux = part.getHorariosParticipacao();
@@ -224,9 +229,10 @@ public class PTDDAO implements IPTDDAO {
             }
         }
         for (Participacao part : parts) {
+            Participacao partAux = part;
             ptd.getParticipacoes().remove(part);
             session.update(ptd);
-            session.delete(part);
+            session.delete(partAux);
         }
         for (OutroTipoAtividade ota : ptd.getOutrosTiposAtividades()) {
             List<Horario> horariosAux = ota.getHorariosOutroTipoAtividade();
@@ -237,9 +243,10 @@ public class PTDDAO implements IPTDDAO {
             }
         }
         for (OutroTipoAtividade ota : oTAs) {
+            OutroTipoAtividade otaAux = ota;
             ptd.getOutrosTiposAtividades().remove(ota);
             session.update(ptd);
-            session.delete(ota);
+            session.delete(otaAux);
         }
         
         session.delete(ptd);

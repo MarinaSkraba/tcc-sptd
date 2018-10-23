@@ -38,7 +38,7 @@
             allDayText: 'Todo o Dia'
         };
     </script>
-    
+
     <h:body styleClass="body">
 
         <!-- Barra de menu -->
@@ -59,7 +59,7 @@
                                  action="/PerfilDocente"
                                  ajax="false"
                                  style="float: left;"/>
-                
+
                 <p:commandButton id="logout"
                                  image="img/fundo_login.png" 
                                  styleClass="imgLogado"/>
@@ -81,6 +81,10 @@
                                      actionListener="#{usuarioMB.realizarLogout()}"
                                      action="/Login?faces-redirect=true"/>
                 </p:overlayPanel>
+
+                <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
+                              styleClass="text01"
+                              style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
             </h:form>
         </div>
@@ -178,11 +182,11 @@
                                         size="17"/>
                         </h:panelGrid>
                         <br/>
-                        
+
                         <p:commandButton styleClass="botaoAzul" 
-                                     style="border-radius: 30px; font-size: large; margin-left: 10px;" 
-                                     value="Cadastrar"
-                                     onclick="PF('confirmarEdicaoDocenteDialog').show();"/>
+                                         style="border-radius: 30px; font-size: large; margin-left: 10px;" 
+                                         value="Cadastrar"
+                                         onclick="PF('confirmarEdicaoDocenteDialog').show();"/>
 
                     </div>
                 </center>

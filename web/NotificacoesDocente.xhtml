@@ -204,12 +204,13 @@
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Abrir"
                                                      ajax="false"
-                                                     actionListener="#{pTDMB.abrirMostrarPTDParaDocente(ptdAprovado)}"
-                                                     action="/MostrarPTDParaDocente"/>
+                                                     actionListener="#{pTDMB.abrirMostrarPTDAprovado(ptdAprovado)}"
+                                                     action="/MostrarPTDAprovado"/>
                                     <p:commandButton styleClass="botaoAzul" 
                                                      value="Concluir"
                                                      ajax="false"
-                                                     />
+                                                     actionListener="#{pTDMB.concluirPTD(ptdAprovado)}"
+                                                     action="#{pTDMB.abrirNotificacoesDocente(usuarioMB.usuarioLogado.idUsuario)}"/>
                                     <hr size="1px" style="color: #A8A8A8; width: 100%;"/>
                                 </h:panelGrid>
                             </h:column>
@@ -225,7 +226,7 @@
                                       styleClass="text01" 
                                       style="margin: 0px 0px 0px 0px;"/>
                         <br/>
-                        <h:dataTable  value="#{pTDMB.ptdsAprovados}" 
+                        <h:dataTable  value="#{pTDMB.ptdsConcluídos}" 
                                       var="ptdConcluido"
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"

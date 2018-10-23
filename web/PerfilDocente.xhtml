@@ -81,6 +81,10 @@
                                      actionListener="#{usuarioMB.realizarLogout()}"
                                      action="/Login?faces-redirect=true"/>
                 </p:overlayPanel>
+                
+                <h:outputText value="#{usuarioMB.usuarioLogado.nomeCompleto}" 
+                              styleClass="text01"
+                              style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
             </h:form>
         </div>
