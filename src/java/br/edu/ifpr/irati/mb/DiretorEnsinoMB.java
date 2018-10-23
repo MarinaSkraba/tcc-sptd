@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifpr.irati.mb;
 
 import br.edu.ifpr.irati.dao.Dao;
@@ -38,9 +33,7 @@ public class DiretorEnsinoMB {
     public String salvarDiretorEnsino() {
 
         Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
-        if (getDiretorEnsino().getEmail().contains("@ifpr.edu.br")) {
-            errosCadastroDiretorEnsino.add("O email informado deve ser institucional(@ifpr.edu.br)");
-        } else {
+        if (getDiretorEnsino().getEmail().contains("@ifpr.edu.br") == true) {
             diretorEnsinoDAO.salvar(getDiretorEnsino());
             setDiretorEnsino(new DiretorEnsino());
         }
@@ -48,14 +41,9 @@ public class DiretorEnsinoMB {
         return "/ adicionar html";
     }
 
-    public String alterarDiretorEnsino() throws HashGenerationException {
+    public void verificarErrosCadastroDiretorEnsino() {
 
-        String senhaSHA512 = "";
-        if (getDiretorEnsino().getSenhaAlfanumerica().length() >= 8 && getDiretorEnsino().getSenhaAlfanumerica().length() <= 16) {
-
-            senhaSHA512 = Digest.hashString(getDiretorEnsino().getSenhaAlfanumerica(), "SHA-512");
-
-        } else if (getDiretorEnsino().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
+        if (getDiretorEnsino().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
 
             getErrosCadastroDiretorEnsino().add("Sua senha deve conter entre de 8 a 16 caracteres");
 
@@ -75,16 +63,36 @@ public class DiretorEnsinoMB {
             getErrosCadastroDiretorEnsino().add("O email deve ser institucional(@ifpr.edu.br)");
 
         }
-        if (getErrosCadastroDiretorEnsino().isEmpty() == true) {
+    }
+     public String verificarPossibilidadeCadastroDiretorEnsino() {
 
-            Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
-            Usuario u = new Usuario(getDiretorEnsino().getIdUsuario(), getDiretorEnsino().getNomeCompleto(), getDiretorEnsino().getEmail(), getDiretorEnsino().getImagemPerfil(), senhaSHA512, "Habilitado");
-            Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
-            usuarioDAO.alterar(u);
-            diretorEnsinoDAO.alterar(getDiretorEnsino());
-            setDiretorEnsino(new DiretorEnsino());
+        verificarErrosCadastroDiretorEnsino();
+        String nomeCaixaRetorno = "";
 
+        if (errosCadastroDiretorEnsino.isEmpty() == false) {
+
+            nomeCaixaRetorno = "erroCadastroDiretorEnsinoDialog";
+            return nomeCaixaRetorno;
+
+        } else {
+
+            nomeCaixaRetorno = "confirmarCadastroDiretorEnsinoDialog";
+            return nomeCaixaRetorno;
         }
+
+    }
+
+    public String alterarDiretorEnsino() throws HashGenerationException {
+
+        String senhaSHA512 = "";
+        senhaSHA512 = Digest.hashString(getDiretorEnsino().getSenhaAlfanumerica(), "SHA-512");
+        Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
+        Usuario u = new Usuario(getDiretorEnsino().getIdUsuario(), getDiretorEnsino().getNomeCompleto(), getDiretorEnsino().getEmail(), getDiretorEnsino().getImagemPerfil(), senhaSHA512, "Habilitado");
+        Dao<DiretorEnsino> diretorEnsinoDAO = new GenericDAO<>(DiretorEnsino.class);
+        usuarioDAO.alterar(u);
+        diretorEnsinoDAO.alterar(getDiretorEnsino());
+        setDiretorEnsino(new DiretorEnsino());
+
         return "";
     }
 
