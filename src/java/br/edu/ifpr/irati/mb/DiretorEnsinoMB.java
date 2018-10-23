@@ -22,7 +22,6 @@ public class DiretorEnsinoMB {
     private PTD ptd;
     private List<PTD> ptds;
     private List<String> errosCadastroDiretorEnsino;
-    private String confirmacaoSenha;
     private String confirmacaoSenhaSelecionado;
 
     public DiretorEnsinoMB() {
@@ -33,7 +32,6 @@ public class DiretorEnsinoMB {
         errosCadastroDiretorEnsino = new ArrayList<>();
         diretorEnsino = new DiretorEnsino();
         diretorEnsinoSelecionado = new DiretorEnsino();
-        confirmacaoSenha = "";
         confirmacaoSenhaSelecionado = "";
 
     }
@@ -50,38 +48,38 @@ public class DiretorEnsinoMB {
 
     public void verificarErrosCadastroAtualizacaoDiretorEnsino() {
 
-        if (getDiretorEnsino().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
+        if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
 
             getErrosCadastroDiretorEnsino().add("Sua senha deve conter entre de 8 a 16 caracteres");
 
-        } else if (getDiretorEnsino().getSenhaAlfanumerica().equals(getConfirmacaoSenha()) == false) {
+        } else if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().equals(getConfirmacaoSenhaSelecionado()) == false) {
 
             getErrosCadastroDiretorEnsino().add("As senhas informadas não coincidem");
 
         }
         Date dataAtual = new Date();
-        if (getDiretorEnsino().getDataContratacao().after(dataAtual)) {
+        if (getDiretorEnsinoSelecionado().getDataContratacao().after(dataAtual)) {
 
             getErrosCadastroDiretorEnsino().add("A data que você inseriu como sua data de contratação "
                     + "é posterior a data atual");
 
-        } else if (getDiretorEnsino().getEmail().contains("@ifpr.edu.br") == false) {
+        } else if (getDiretorEnsinoSelecionado().getEmail().contains("@ifpr.edu.br") == false) {
 
             getErrosCadastroDiretorEnsino().add("O email deve ser institucional(@ifpr.edu.br)");
 
-        } else if (diretorEnsino.getEmail().isEmpty() == true) {
+        } else if (diretorEnsinoSelecionado.getEmail().isEmpty() == true) {
 
             errosCadastroDiretorEnsino.add("O campo 'Email' deve ser obrigatóriamente preenchido");
 
-        } else if (diretorEnsino.getNomeCompleto().isEmpty() == true) {
+        } else if (diretorEnsinoSelecionado.getNomeCompleto().isEmpty() == true) {
 
             errosCadastroDiretorEnsino.add("O campo 'Nome completo' deve ser obrigatóriamente preenchido");
 
-        } else if (diretorEnsino.getSenhaAlfanumerica().isEmpty() == true) {
+        } else if (diretorEnsinoSelecionado.getSenhaAlfanumerica().isEmpty() == true) {
 
             errosCadastroDiretorEnsino.add("O campo 'Senha' deve ser obrigatóriamente preenchido");
 
-        } else if (confirmacaoSenha.isEmpty() == true) {
+        } else if (confirmacaoSenhaSelecionado.isEmpty() == true) {
 
             errosCadastroDiretorEnsino.add("O campo 'Confirmação senha' deve ser obrigatóriamente preenchido");
 
@@ -190,16 +188,6 @@ public class DiretorEnsinoMB {
     /**
      * @return the confirmacaoSenha
      */
-    public String getConfirmacaoSenha() {
-        return confirmacaoSenha;
-    }
-
-    /**
-     * @param confirmacaoSenha the confirmacaoSenha to set
-     */
-    public void setConfirmacaoSenha(String confirmacaoSenha) {
-        this.confirmacaoSenha = confirmacaoSenha;
-    }
 
     /**
      * @return the diretorEnsinoSelecionado
