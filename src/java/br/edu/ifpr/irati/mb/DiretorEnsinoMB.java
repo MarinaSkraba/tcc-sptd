@@ -62,9 +62,26 @@ public class DiretorEnsinoMB {
 
             getErrosCadastroDiretorEnsino().add("O email deve ser institucional(@ifpr.edu.br)");
 
+        } else if (diretorEnsino.getEmail().isEmpty() == true) {
+
+            errosCadastroDiretorEnsino.add("O campo 'Email' deve ser obrigatóriamente preenchido");
+
+        } else if (diretorEnsino.getNomeCompleto().isEmpty() == true) {
+
+            errosCadastroDiretorEnsino.add("O campo 'Nome completo' deve ser obrigatóriamente preenchido");
+
+        } else if (diretorEnsino.getSenhaAlfanumerica().isEmpty() == true) {
+
+            errosCadastroDiretorEnsino.add("O campo 'Senha' deve ser obrigatóriamente preenchido");
+
+        } else if (confirmacaoSenha.isEmpty() == true) {
+
+            errosCadastroDiretorEnsino.add("O campo 'Confirmação senha' deve ser obrigatóriamente preenchido");
+
         }
     }
-     public String verificarPossibilidadeCadastroDiretorEnsino() {
+
+    public String verificarPossibilidadeCadastroDiretorEnsino() {
 
         verificarErrosCadastroDiretorEnsino();
         String nomeCaixaRetorno = "";
