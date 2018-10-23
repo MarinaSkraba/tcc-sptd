@@ -122,8 +122,8 @@ public class ProfessorMB {
             professores = professorDAO.buscarTodos(Professor.class);
 
         }
-
-        return "/ adicionar html";
+        
+        return "PerfilDocente";
     }
 
     public void desabilitarProfessor(Professor professor) {
