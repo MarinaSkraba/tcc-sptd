@@ -28,19 +28,12 @@
                 </font>
 
                 <h:form>
-
-                    <p:commandLink style="width: 200px; margin: 0px;"
-                                   styleClass="link02"
-                                   ajax="false"
-                                   action="#{pTDMB.sairTelaBuscarPTDs(usuarioMB.usuarioLogado)}">
-                        <font face="Calibri" 
-                              size="4" 
-                              color="#179DBD"
-                              action="#{pTDMB.sairTelaBuscarPTDs(usuarioMB.usuarioLogado)}"
-                              style="margin: 10px 10px; float:left; font-family: calibri, sans-serif; font-weight: 500;" styleClass="text">
-                            Voltar
-                        </font>
-                    </p:commandLink>
+                    
+                    <p:commandButton value="voltar" 
+                                     ajax="false" 
+                                     styleClass="botaoAzul"
+                                     style="margin: 0px 10px; float:left; font-family: calibri, sans-serif; font-weight: 500; padding: 0px; font-size: smaller;"
+                                     action="#{pTDMB.sairTelaBuscarPTDs(usuarioMB.usuarioLogado)}"/>
 
                 </h:form>
             </div>
