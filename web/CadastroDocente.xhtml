@@ -59,10 +59,6 @@
                                  action="/Login"
                                  ajax="false"
                                  style="float: left;"/>
-                
-                <!-- Temporizador verificar possibilidade cadastro -->
-                <p:poll interval="5" listener="#{professorMB.verificarPossibilidadeCadastro()}"/>
-                
             </h:form>
         </div>
 
@@ -78,6 +74,7 @@
         <div id="screen">
 
             <h:form style="width: 100%;">
+
                 <center>
                     <div id="content" style="width: 50%; border-radius: 15px; border-top-style: solid; border-top-width: medium; border-top-color: #1785ad;">
 
@@ -166,7 +163,11 @@
                                          onclick="PF('#{professorMB.verificarPossibilidadeCadastro()}').show();"/>
 
                     </div>
+
                 </center>
+                
+                <!-- Temporizador verificar possibilidade cadastro -->
+                <p:poll interval="1" update="erros"/>
 
                 <!-- Caixa de confirmação de cadastro -->
                 <p:dialog header="Confirmar cadastro" 
@@ -196,12 +197,13 @@
                           hideEffect="fade" 
                           resizable="false">
 
-                    <h:outputText value="O cadastro ainda não pode ser concluído por causa dos seguintes " 
+                    <h:outputText value="O cadastro ainda não pode devido aos erros indicados" 
                                   styleClass="text01"
                                   style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                     <br/>
 
-                    <h:dataTable  value="#{professorMB.errosCadastroProfessor}" 
+                    <h:dataTable  id="erros"
+                                  value="#{professorMB.errosCadastroProfessor}" 
                                   var="erroCadastro" 
                                   style="width: auto;"
                                   headerClass="text-center"

@@ -21,6 +21,7 @@ public class ProfessorMB {
     private Professor professorSelecionado;
     private List<Professor> professores;
     private List<String> errosCadastroProfessor;
+    private List<String> errosEdicaoProfessor;
     private String confirmacaoSenha;
     private String confirmacaoSenhaSelecionada;
 
@@ -32,157 +33,26 @@ public class ProfessorMB {
         confirmacaoSenha = "";
         confirmacaoSenhaSelecionada = "";
         errosCadastroProfessor = new ArrayList<>();
+        errosEdicaoProfessor = new ArrayList<>();
 
     }
 
-    public void salvarProfessor() throws HashGenerationException {
+    public String salvarProfessor() throws HashGenerationException {
 
         String senhaSHA512 = "";
         Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
-
+        professor.setEstadoUsuario("Desabilitado");
         senhaSHA512 = Digest.hashString(getProfessor().getSenhaAlfanumerica(), "SHA-512");
-        Usuario usuario = new Usuario(professor.getIdUsuario(), professor.getNomeCompleto(), professor.getEmail(),
-                professor.getImagemPerfil(), senhaSHA512, "Desabilitado");
-        usuarioDAO.salvar(usuario);
+        professor.setSenhaAlfanumerica(senhaSHA512);
         professorDAO.salvar(professor);
         professores = professorDAO.buscarTodos(Professor.class);
+        return "/Login?faces-redirect=true";
 
-    }
-
-    public void verificarErrosCadastro() {
-
-        errosCadastroProfessor = new ArrayList<>();
-
-        if (professor.getSenhaAlfanumerica().length() < 8 | professor.getSenhaAlfanumerica().length() > 16) {
-
-            errosCadastroProfessor.add("Sua senha deve conter entre de 8 a 16 caracteres");
-
-        } else if (professor.getSenhaAlfanumerica().equals(confirmacaoSenha) == false) {
-
-            errosCadastroProfessor.add("As senhas informadas não coincidem");
-
-        }
-        Date dataAtual = new Date();
-        if (professor.getDataContratacao().after(dataAtual)) {
-
-            errosCadastroProfessor.add("A data que você inseriu como sua data de contratação "
-                    + "é posterior a data atual");
-
-        } else if (professor.getEmail().contains("@ifpr.edu.br") == false) {
-
-            errosCadastroProfessor.add("O email deve ser institucional(@ifpr.edu.br)");
-
-        } else if(professor.getEmail().isEmpty() == true){
-            
-            errosCadastroProfessor.add("O campo 'Email' deve ser obrigatoriamente preenchido");
-            
-        }else if(professor.getMatriculaSIAPE().isEmpty() == true){
-            
-            errosCadastroProfessor.add("O campo 'Matrícula SIAPE' deve ser obrigatoriamente preenchido");
-            
-        }else if(professor.getNomeCompleto().isEmpty() == true){
-           
-            errosCadastroProfessor.add("O campo 'Nome completo' deve ser obrigatoriamente preenchido");
-            
-        }else if(professor.getRegimeTrabalho().isEmpty() == true){
-            
-            errosCadastroProfessor.add("O campo 'Regime de trabalho' deve ser obrigatoriamente preenchido");
-            
-        }else if(professor.getSenhaAlfanumerica().isEmpty() == true){
-            
-            errosCadastroProfessor.add("O campo 'Senha' deve ser obrigatoriamente preenchido");
-            
-        }else if(confirmacaoSenha.isEmpty() == true){
-            
-            errosCadastroProfessor.add("O campo 'Confirmação senha' deve ser obrigatoriamente preenchido");
-            
-        }else if(professor.getRegimeTrabalho().isEmpty() == true){
-          
-            errosCadastroProfessor.add("Você deve obrigatoriamente selcionar um opção em 'Regime trabalho'");
-            
-        }else if(professor.getTipoContrato().isEmpty() == true){
-            
-        } else if (professor.getEmail().isEmpty() == true) {
-
-            errosCadastroProfessor.add("O campo 'Email' deve ser obrigatóriamente preenchido");
-
-        } else if (professor.getMatriculaSIAPE().isEmpty() == true) {
-
-            errosCadastroProfessor.add("O campo 'Matrícula SIAPE' deve ser obrigatóriamente preenchido");
-
-        } else if (professor.getNomeCompleto().isEmpty() == true) {
-
-            errosCadastroProfessor.add("O campo 'Nome completo' deve ser obrigatóriamente preenchido");
-
-        } else if (professor.getRegimeTrabalho().isEmpty() == true) {
-
-            errosCadastroProfessor.add("O campo 'Regime de trabalho' deve ser obrigatóriamente preenchido");
-
-        } else if (professor.getSenhaAlfanumerica().isEmpty() == true) {
-
-            errosCadastroProfessor.add("O campo 'Senha' deve ser obrigatóriamente preenchido");
-
-        } else if (confirmacaoSenha.isEmpty() == true) {
-
-            errosCadastroProfessor.add("O campo 'Confirmação senha' deve ser obrigatóriamente preenchido");
-
-        }
-    }
-
-    public void verificarErrosAtualizacao() {
-
-        errosCadastroProfessor = new ArrayList<>();
-
-        if (professorSelecionado.getSenhaAlfanumerica().length() < 8 | professor.getSenhaAlfanumerica().length() > 16) {
-
-            errosCadastroProfessor.add("Sua senha deve conter entre de 8 a 16 caracteres");
-
-        } else if (professorSelecionado.getSenhaAlfanumerica().equals(confirmacaoSenhaSelecionada) == false) {
-
-            errosCadastroProfessor.add("As senhas informadas não coincidem");
-
-        }
-        Date dataAtual = new Date();
-        if (professorSelecionado.getDataContratacao().after(dataAtual)) {
-
-            errosCadastroProfessor.add("A data que você inseriu como sua data de contratação "
-                    + "é posterior a data atual");
-
-        } else if (professorSelecionado.getEmail().contains("@ifpr.edu.br") == false) {
-
-            errosCadastroProfessor.add("O email deve ser institucional(@ifpr.edu.br)");
-
-        } else if (professorSelecionado.getEmail().isEmpty() == true) {
-
-            errosCadastroProfessor.add("O campo 'Email' deve ser obrigatóriamente preenchido");
-
-        } else if (professorSelecionado.getMatriculaSIAPE().isEmpty() == true) {
-
-            errosCadastroProfessor.add("O campo 'Matrícula SIAPE' deve ser obrigatóriamente preenchido");
-
-        } else if (professorSelecionado.getNomeCompleto().isEmpty() == true) {
-
-            errosCadastroProfessor.add("O campo 'Nome completo' deve ser obrigatóriamente preenchido");
-
-        } else if (professorSelecionado.getRegimeTrabalho().isEmpty() == true) {
-
-            errosCadastroProfessor.add("O campo 'Regime de trabalho' deve ser obrigatóriamente preenchido");
-
-        } else if (professorSelecionado.getSenhaAlfanumerica().isEmpty() == true) {
-
-            errosCadastroProfessor.add("O campo 'Senha' deve ser obrigatóriamente preenchido");
-
-        } else if (confirmacaoSenhaSelecionada.isEmpty() == true) {
-
-            errosCadastroProfessor.add("O campo 'Confirmação senha' deve ser obrigatóriamente preenchido");
-
-        }
     }
 
     public String verificarPossibilidadeCadastro() {
 
-        verificarErrosCadastro();
         String nomeCaixaRetorno = "";
 
         if (errosCadastroProfessor.isEmpty() == false) {
@@ -200,10 +70,9 @@ public class ProfessorMB {
 
     public String verificarPossibilidadeAtualizacao() {
 
-        verificarErrosAtualizacao();
         String nomeCaixaRetorno = "";
 
-        if (errosCadastroProfessor.isEmpty() == false) {
+        if (getErrosEdicaoProfessor().isEmpty() == false) {
 
             nomeCaixaRetorno = "erroEdicaoDocenteDialog";
             return nomeCaixaRetorno;
@@ -253,6 +122,57 @@ public class ProfessorMB {
     }
 
     public List<String> getErrosCadastroProfessor() {
+        errosCadastroProfessor = new ArrayList<>();
+
+        if (professor.getSenhaAlfanumerica().length() < 8 | professor.getSenhaAlfanumerica().length() > 16) {
+
+            errosCadastroProfessor.add("Sua senha deve conter entre de 8 a 16 caracteres");
+
+        } else if (professor.getSenhaAlfanumerica().equals(confirmacaoSenha) == false) {
+
+            errosCadastroProfessor.add("As senhas informadas não coincidem");
+
+        }
+        Date dataAtual = new Date();
+        if (professor.getDataContratacao().after(dataAtual)) {
+
+            errosCadastroProfessor.add("A data que você inseriu como sua data de contratação "
+                    + "é posterior a data atual");
+
+        } else if (professor.getEmail().contains("@ifpr.edu.br") == false) {
+
+            errosCadastroProfessor.add("O email deve ser institucional(@ifpr.edu.br)");
+
+        } else if (professor.getEmail().equalsIgnoreCase("")) {
+
+            errosCadastroProfessor.add("O campo 'Email' deve ser obrigatoriamente preenchido");
+
+        } else if (professor.getMatriculaSIAPE().equalsIgnoreCase("")) {
+
+            errosCadastroProfessor.add("O campo 'Matrícula SIAPE' deve ser obrigatoriamente preenchido");
+
+        } else if (professor.getNomeCompleto().equalsIgnoreCase("")) {
+
+            errosCadastroProfessor.add("O campo 'Nome completo' deve ser obrigatoriamente preenchido");
+
+        } else if (professor.getRegimeTrabalho() == null) {
+
+            errosCadastroProfessor.add("O campo 'Regime de trabalho' deve ser obrigatoriamente preenchido");
+
+        } else if (professor.getSenhaAlfanumerica().isEmpty() == true) {
+
+            errosCadastroProfessor.add("O campo 'Senha' deve ser obrigatoriamente preenchido");
+
+        } else if (confirmacaoSenha.equalsIgnoreCase("")) {
+
+            errosCadastroProfessor.add("O campo 'Confirmação senha' deve ser obrigatoriamente preenchido");
+
+        } else if (professor.getTipoContrato() == null) {
+            
+            errosCadastroProfessor.add("O campo 'Tipo contrato' deve ser obrigatoriamente preenchido");
+
+        } 
+        
         return errosCadastroProfessor;
     }
 
@@ -300,6 +220,67 @@ public class ProfessorMB {
      */
     public void setConfirmacaoSenhaSelecionada(String confirmacaoSenhaSelecionada) {
         this.confirmacaoSenhaSelecionada = confirmacaoSenhaSelecionada;
+    }
+
+    /**
+     * @return the errosEdicaoProfessor
+     */
+    public List<String> getErrosEdicaoProfessor() {
+
+        errosEdicaoProfessor = new ArrayList<>();
+
+        if (professorSelecionado.getSenhaAlfanumerica().length() < 8 | professor.getSenhaAlfanumerica().length() > 16) {
+
+            errosEdicaoProfessor.add("Sua senha deve conter entre de 8 a 16 caracteres");
+
+        } else if (professorSelecionado.getSenhaAlfanumerica().equals(confirmacaoSenhaSelecionada) == false) {
+
+            errosEdicaoProfessor.add("As senhas informadas não coincidem");
+
+        }
+        Date dataAtual = new Date();
+        if (professorSelecionado.getDataContratacao().after(dataAtual)) {
+
+            errosEdicaoProfessor.add("A data que você inseriu como sua data de contratação "
+                    + "é posterior a data atual");
+
+        } else if (professorSelecionado.getEmail().contains("@ifpr.edu.br") == false) {
+
+            errosEdicaoProfessor.add("O email deve ser institucional(@ifpr.edu.br)");
+
+        } else if (professorSelecionado.getEmail().equalsIgnoreCase("")) {
+
+            errosEdicaoProfessor.add("O campo 'Email' deve ser obrigatóriamente preenchido");
+
+        } else if (professorSelecionado.getMatriculaSIAPE().equalsIgnoreCase("")) {
+
+            errosEdicaoProfessor.add("O campo 'Matrícula SIAPE' deve ser obrigatóriamente preenchido");
+
+        } else if (professorSelecionado.getNomeCompleto().equalsIgnoreCase("")) {
+
+            errosEdicaoProfessor.add("O campo 'Nome completo' deve ser obrigatóriamente preenchido");
+
+        } else if (professorSelecionado.getRegimeTrabalho().equalsIgnoreCase("")) {
+
+            errosEdicaoProfessor.add("O campo 'Regime de trabalho' deve ser obrigatóriamente preenchido");
+
+        } else if (professorSelecionado.getSenhaAlfanumerica().equalsIgnoreCase("")) {
+
+            errosEdicaoProfessor.add("O campo 'Senha' deve ser obrigatóriamente preenchido");
+
+        } else if (confirmacaoSenhaSelecionada.equalsIgnoreCase("")) {
+
+            errosEdicaoProfessor.add("O campo 'Confirmação senha' deve ser obrigatóriamente preenchido");
+
+        }
+        return errosEdicaoProfessor;
+    }
+
+    /**
+     * @param errosEdicaoProfessor the errosEdicaoProfessor to set
+     */
+    public void setErrosEdicaoProfessor(List<String> errosEdicaoProfessor) {
+        this.errosEdicaoProfessor = errosEdicaoProfessor;
     }
 
 }

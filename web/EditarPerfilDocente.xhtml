@@ -86,9 +86,6 @@
                               styleClass="text01"
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
-                <!-- Temporizador verificar possibilidade Edição -->
-                <p:poll interval="5" listener="#{professorMB.verificarErrosAtualizacao()}"/>
-
             </h:form>
         </div>
 
@@ -104,6 +101,7 @@
         <div id="screen">
 
             <h:form style="width: 100%;">
+                
                 <center>
                     <div id="content" style="width: 50%; border-radius: 15px; border-top-style: solid; border-top-width: medium; border-top-color: #1785ad;">
 
@@ -193,6 +191,9 @@
 
                     </div>
                 </center>
+                
+                <!-- Temporizador verificar possibilidade cadastro -->
+                <p:poll interval="1" update="erros"/>
 
                 <!-- Caixa de confirmação de edição -->
                 <p:dialog header="Confirmar cadastro" 
@@ -227,7 +228,8 @@
                                   style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                     <br/>
 
-                    <h:dataTable  value="#{professorMB.errosCadastroProfessor}" 
+                    <h:dataTable  id="erros"
+                                  value="#{professorMB.errosCadastroProfessor}" 
                                   var="erroEdicao" 
                                   style="width: auto;"
                                   headerClass="text-center"
@@ -249,7 +251,6 @@
                                      value="Confirmar"
                                      ajax="false"
                                      action="#{professorMB.alterarProfessor()}"/>
-/>
 
                 </p:dialog>
 

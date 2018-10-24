@@ -26,17 +26,15 @@ public class PTDDAO implements IPTDDAO {
     @Override
     public List<PTD> buscarPTDsConcluidosPorProfessor(Serializable idUsuario) {
         int id = (int) idUsuario;
-        String estado = "CONCLUÍDO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd";
+        String estado = "CONCLUÍDO";
+        String hql = "from ptd p where p.estadoPTD like '" + estado + "' ";
         Query query = session.createQuery(hql);
         List<PTD> results = query.list();
         List<PTD> filtrados = new ArrayList<>();
         for (PTD ptd : results) {
             if (ptd.getProfessor().getIdUsuario() == id) {
-                if (ptd.getEstadoPTD().equals(estado)) {
-                    filtrados.add(ptd);
-                }
+                filtrados.add(ptd);
             }
         }
         session.clear();
@@ -59,17 +57,15 @@ public class PTDDAO implements IPTDDAO {
     @Override
     public List<PTD> buscarPTDsAprovadosPorProfessor(Serializable idUsuario) {
         int id = (int) idUsuario;
-        String estado = "APROVADO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd";
+        String estado = "APROVADO";
+        String hql = "from ptd p where p.estadoPTD like '" + estado + "' ";
         Query query = session.createQuery(hql);
         List<PTD> results = query.list();
         List<PTD> filtrados = new ArrayList<>();
         for (PTD ptd : results) {
             if (ptd.getProfessor().getIdUsuario() == id) {
-                if (ptd.getEstadoPTD().equals(estado)) {
-                    filtrados.add(ptd);
-                }
+                filtrados.add(ptd);
             }
         }
         session.clear();
@@ -80,34 +76,14 @@ public class PTDDAO implements IPTDDAO {
     @Override
     public List<PTD> buscarPTDsEmEdicaoPorProfessor(Serializable idUsuario) {
         int id = (int) idUsuario;
-        String estado = "EDICAO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd";
+        String estado = "EDICAO";
+        String hql = "from ptd p where p.estadoPTD like '" + estado + "' ";
         Query query = session.createQuery(hql);
         List<PTD> results = query.list();
         List<PTD> filtrados = new ArrayList<>();
         for (PTD ptd : results) {
             if (ptd.getProfessor().getIdUsuario() == id) {
-                if (ptd.getEstadoPTD().equals(estado)) {
-                    filtrados.add(ptd);
-                }
-            }
-        }
-        session.clear();
-        session.close();
-        return filtrados;
-    }
-
-    @Override
-    public List<PTD> buscarPTDEmAvaliacao() {
-        String estado = "AVALIACAO";
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd";
-        Query query = session.createQuery(hql);
-        List<PTD> results = query.list();
-        List<PTD> filtrados = new ArrayList<>();
-        for (PTD ptd : results) {
-            if (ptd.getEstadoPTD().equals(estado)) {
                 filtrados.add(ptd);
             }
         }
@@ -117,19 +93,29 @@ public class PTDDAO implements IPTDDAO {
     }
 
     @Override
+    public List<PTD> buscarPTDEmAvaliacao() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String estado = "AVALIACAO";
+        String hql = "from ptd p where p.estadoPTD like '" + estado + "' ";
+        Query query = session.createQuery(hql);
+        List<PTD> results = query.list();
+        session.clear();
+        session.close();
+        return results;
+    }
+
+    @Override
     public List<PTD> buscarPTDsReprovadosPorProfessor(Serializable idUsuario) {
         int id = (int) idUsuario;
-        String estado = "REPROVADO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd";
+        String estado = "REPROVADO";
+        String hql = "from ptd p where p.estadoPTD like '" + estado + "' ";
         Query query = session.createQuery(hql);
         List<PTD> results = query.list();
         List<PTD> filtrados = new ArrayList<>();
         for (PTD ptd : results) {
             if (ptd.getProfessor().getIdUsuario() == id) {
-                if (ptd.getEstadoPTD().equals(estado)) {
-                    filtrados.add(ptd);
-                }
+                filtrados.add(ptd);
             }
         }
         session.clear();

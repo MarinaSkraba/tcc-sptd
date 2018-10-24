@@ -13,6 +13,8 @@ public class UsuarioDAO implements IUsuarioDao {
     @Override
     public Usuario verificarUsuario(String email, String senhaAlfanumerica) {
         Usuario u = new Usuario();
+        Professor p = new Professor();
+        DiretorEnsino de = new DiretorEnsino();
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql01 = "from usuario where email = ? and senhaAlfanumérica = ?";
         Query query = session.createQuery(hql01);
@@ -21,18 +23,12 @@ public class UsuarioDAO implements IUsuarioDao {
         List resultados = query.list();
         if (resultados.isEmpty() != true) {
             u = (Usuario) resultados.get(0);
-            String hql02 = "from professor where idUsuario = ?";
-            query = session.createQuery(hql02);
-            query.setInteger(0, u.getIdUsuario());
-            List professores = query.list();
-            if (professores.isEmpty() != true) {
-                u = (Professor) professores.get(0);
+            if(u instanceof Professor){
+                p = (Professor) session.load(Professor.class, u.getIdUsuario());
+                u = p;
             } else {
-                String hql03 = "from diretorEnsino where idUsuario = ?";
-                query = session.createQuery(hql03);
-                query.setInteger(0, u.getIdUsuario());
-                List diretor = query.list();
-                u = (DiretorEnsino) diretor.get(0);
+                de = (DiretorEnsino) session.load(DiretorEnsino.class, u.getIdUsuario());
+                u = de;
             }
         }
         session.clear();

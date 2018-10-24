@@ -86,9 +86,6 @@
                               styleClass="text01"
                               style="color: white; float: right; font-weight: normal; font-size: large;"/>
 
-                <!-- Temporizador verificar possibilidade Edição -->
-                <p:poll interval="5" listener="#{diretorEnsinoMB.verificarErrosAtualizacaoDiretorEnsino()}"/>
-
             </h:form>
         </div>
 
@@ -147,6 +144,9 @@
                     </div>
                 </center>
 
+                <!-- Temporizador verificar possibilidade cadastro -->
+                <p:poll interval="1" update="erros"/>
+
                 <!-- Caixa de confirmação de edição -->
                 <p:dialog header="Confirmar edição" 
                           widgetVar="confirmarEdicaoDiretorEnsinoDialog" 
@@ -180,7 +180,8 @@
                                   style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
                     <br/>
 
-                    <h:dataTable  value="#{diretorEnsinoMB.errosCadastroDiretorEnsino}" 
+                    <h:dataTable  id="erros"
+                                  value="#{diretorEnsinoMB.errosCadastroDiretorEnsino}" 
                                   var="erroEdicao" 
                                   style="width: auto;"
                                   headerClass="text-center"
@@ -202,7 +203,7 @@
                                      value="Confirmar"
                                      ajax="false"
                                      action="#{diretorEnsinoMB.alterarDiretorEnsino()}"/>
-/>
+                    />
 
                 </p:dialog>
 

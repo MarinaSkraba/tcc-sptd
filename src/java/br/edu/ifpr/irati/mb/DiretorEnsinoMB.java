@@ -46,52 +46,11 @@ public class DiretorEnsinoMB {
 
     }
 
-    public void verificarErrosAtualizacaoDiretorEnsino() {
-
-        if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
-
-            getErrosCadastroDiretorEnsino().add("Sua senha deve conter entre  8 a 16 caracteres");
-
-        } else if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().equals(getConfirmacaoSenhaSelecionado()) == false) {
-
-            getErrosCadastroDiretorEnsino().add("As senhas informadas não coincidem");
-
-        }
-        Date dataAtual = new Date();
-        if (getDiretorEnsinoSelecionado().getDataContratacao().after(dataAtual)) {
-
-            getErrosCadastroDiretorEnsino().add("A data que você inseriu como sua data de contratação "
-                    + "é posterior a data atual");
-
-        } else if (getDiretorEnsinoSelecionado().getEmail().contains("@ifpr.edu.br") == false) {
-
-            getErrosCadastroDiretorEnsino().add("O email deve ser institucional(@ifpr.edu.br)");
-
-        } else if (diretorEnsinoSelecionado.getEmail().isEmpty() == true) {
-
-            errosCadastroDiretorEnsino.add("O campo 'Email' deve ser obrigatoriamente preenchido");
-
-        } else if (diretorEnsinoSelecionado.getNomeCompleto().isEmpty() == true) {
-
-            errosCadastroDiretorEnsino.add("O campo 'Nome completo' deve ser obrigatoriamente preenchido");
-
-        } else if (diretorEnsinoSelecionado.getSenhaAlfanumerica().isEmpty() == true) {
-
-            errosCadastroDiretorEnsino.add("O campo 'Senha' deve ser obrigatoriamente preenchido");
-
-        } else if (confirmacaoSenhaSelecionado.isEmpty() == true) {
-
-            errosCadastroDiretorEnsino.add("O campo 'Confirmação senha' deve ser obrigatoriamente preenchido");
-
-        }
-    }
-
     public String verificarPossibilidadeAtualizacaoDiretorEnsino() {
 
-        verificarErrosAtualizacaoDiretorEnsino();
         String nomeCaixaRetorno = "";
 
-        if (errosCadastroDiretorEnsino.isEmpty() == false) {
+        if (getErrosCadastroDiretorEnsino().isEmpty() == false) {
 
             nomeCaixaRetorno = "erroEdicaoDiretorEnsinoDialog";
             return nomeCaixaRetorno;
@@ -175,6 +134,42 @@ public class DiretorEnsinoMB {
      * @return the errosCadastroDiretorEnsino
      */
     public List<String> getErrosCadastroDiretorEnsino() {
+        if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
+
+            getErrosCadastroDiretorEnsino().add("Sua senha deve conter entre  8 a 16 caracteres");
+
+        } else if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().equals(getConfirmacaoSenhaSelecionado()) == false) {
+
+            getErrosCadastroDiretorEnsino().add("As senhas informadas não coincidem");
+
+        }
+        Date dataAtual = new Date();
+        if (getDiretorEnsinoSelecionado().getDataContratacao().after(dataAtual)) {
+
+            getErrosCadastroDiretorEnsino().add("A data que você inseriu como sua data de contratação "
+                    + "é posterior a data atual");
+
+        } else if (getDiretorEnsinoSelecionado().getEmail().contains("@ifpr.edu.br") == false) {
+
+            getErrosCadastroDiretorEnsino().add("O email deve ser institucional(@ifpr.edu.br)");
+
+        } else if (diretorEnsinoSelecionado.getEmail().equalsIgnoreCase("")) {
+
+            errosCadastroDiretorEnsino.add("O campo 'Email' deve ser obrigatoriamente preenchido");
+
+        } else if (diretorEnsinoSelecionado.getNomeCompleto().equalsIgnoreCase("")) {
+
+            errosCadastroDiretorEnsino.add("O campo 'Nome completo' deve ser obrigatoriamente preenchido");
+
+        } else if (diretorEnsinoSelecionado.getSenhaAlfanumerica().equalsIgnoreCase("")) {
+
+            errosCadastroDiretorEnsino.add("O campo 'Senha' deve ser obrigatoriamente preenchido");
+
+        } else if (confirmacaoSenhaSelecionado.equalsIgnoreCase("")) {
+
+            errosCadastroDiretorEnsino.add("O campo 'Confirmação senha' deve ser obrigatoriamente preenchido");
+
+        }
         return errosCadastroDiretorEnsino;
     }
 
