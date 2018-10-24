@@ -33,14 +33,17 @@ public class PTDASerMostradoMB {
 
     public void buscarComFiltro() {
 
+        ptdsResultadoBusca = new ArrayList();
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
+
         if (filtroBusca.equals("buscaPorNome")) {
 
-            ptdDAOEspecifico.buscarPTDsPorNomeDocente(textoBusca);
+            ptdsResultadoBusca = ptdDAOEspecifico.buscarPTDsPorNomeDocente(textoBusca);
 
         } else if (filtroBusca.equals("buscaPorAtividade")) {
 
-            
+            ptdsResultadoBusca = ptdDAOEspecifico.buscarPTDsPorAtividade(textoBusca);
+
         }
 
     }

@@ -20,6 +20,8 @@ public interface IPTDDAO {
     
     public List<PTD> buscarPTDsPorNomeDocente(String nomeDocente);
     
+    public List<PTD> buscarPTDsPorAtividade(String rotuloAtividade);
+    
     public void excluirPTDEOQueTemDentro(PTD ptd); 
     
     
