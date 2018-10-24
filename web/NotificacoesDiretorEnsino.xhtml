@@ -146,15 +146,14 @@
 
                             <f:facet name="header">
                                 <h:outputText value="OPÇÃO" 
-                                              styleClass="text01"
-                                              style="font-size: large; font-weight: bold;"/>
+                                              styleClass="text01"/>
                             </f:facet>
 
                             <p:commandButton styleClass="botaoCinza" 
                                              style="float: left; font-size: 12pt; margin: 0px;" 
                                              value="#{cursoMB.verificarEstadoCurso(curso)}" 
                                              ajax="false" 
-                                             immediate="true"/>
+                                             action="#{cursoMB.mudarEstadoCurso(curso)}"/>
 
                         </h:column>
 
@@ -171,7 +170,7 @@
                                  icon="/img/Search/searchLarger_24.png"
                                  value="Pesquisa"
                                  ajax="false" 
-                                 actionListener="#{pTDMB.abrirTelaBuscarPTDs()}"
+                                 actionListener="#{pTDASerMostradoMB.abrirTelaBuscarPTDs()}"
                                  action="/BuscarPTDs"/>
 
             </h:form>

@@ -207,7 +207,7 @@
                                          value="#{aulaMB.cursoSelecionado}"
                                          converter="cursoConverter">
 
-                            <f:selectItems value="#{cursoMB.cursos}" 
+                            <f:selectItems value="#{cursoMB.cursosAtivos}" 
                                            var="curso" 
                                            itemValue="#{curso}"
                                            itemLabel="#{curso}" />
@@ -271,7 +271,7 @@
                                          value="#{aulaMB.aulaSelecionadaParaAula.curso}"
                                          converter="cursoConverter">
 
-                            <f:selectItems value="#{cursoMB.cursos}" 
+                            <f:selectItems value="#{cursoMB.cursosAtivos}" 
                                            var="curso" 
                                            itemValue="#{curso}"
                                            itemLabel="#{curso}" />
