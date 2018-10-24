@@ -127,7 +127,7 @@ public class PTDDAO implements IPTDDAO {
     public void excluirPTDEOQueTemDentro(PTD ptd) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        
+
         session.delete(ptd);
 
         session.getTransaction().commit();
@@ -139,19 +139,74 @@ public class PTDDAO implements IPTDDAO {
     public List<PTD> buscarPTDsPorNomeDocente(String nomeDocente) {
         String estado = "CONCLUÍDO";
         Session session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "from ptd";
+        String hql = "from ptd p where p.estadoPTD like '" + estado + "' ";
         Query query = session.createQuery(hql);
         List<PTD> results = query.list();
         List<PTD> filtrados = new ArrayList<>();
         for (PTD ptd : results) {
             if (ptd.getProfessor().getNomeCompleto().equals(nomeDocente) == true) {
-                if (ptd.getEstadoPTD().equals(estado)) {
-                    filtrados.add(ptd);
-                }
+
+                filtrados.add(ptd);
+
             }
         }
         session.clear();
         session.close();
-        return filtrados;}
+        return filtrados;
+    }
 
+    @Override
+    public List<PTD> buscarPTDsPorAtividade(String rotuloAtividade) {
+
+        String estado = "CONCLUÍDO";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "from ptd p where p.estadoPTD like '" + estado + "' ";
+        Query query = session.createQuery(hql);
+        List<PTD> results = query.list();
+        List<PTD> filtrados = new ArrayList<>();
+        for (PTD ptd : results) {
+            for (Administracao a : ptd.getAdministrativas()) {
+                if (a.getTipoAdministracao().getRotulo().equals(rotuloAtividade)) {
+                    filtrados.add(ptd);
+                }
+            }
+            for (Apoio ap : ptd.getApoios()) {
+                if (ap.getTipoApoio().getRotulo().equals(rotuloAtividade)) {
+                    filtrados.add(ptd);
+                }
+            }
+            for (AtividadeASerProposta asp : ptd.getAtividadesASeremPropostas()) {
+                if (asp.getRotulo().equals(rotuloAtividade)) {
+                    filtrados.add(ptd);
+                }
+            }
+            for (Aula aula : ptd.getAulas()) {
+                if (aula.getComponenteCurricular().equals(rotuloAtividade)) {
+                    filtrados.add(ptd);
+                }
+            }
+            for (ManutencaoEnsino mE : ptd.getManutencoesEnsino()) {
+                if (mE.getTipoManutencao().getRotulo().equals(rotuloAtividade)) {
+                    filtrados.add(ptd);
+                }
+            }
+            for (OutroTipoAtividade oTa : ptd.getOutrosTiposAtividades()) {
+                if (oTa.getRotulo().equals(rotuloAtividade)) {
+                    filtrados.add(ptd);
+                }
+
+            }
+            for (Participacao p : ptd.getParticipacoes()) {
+                if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals(rotuloAtividade)) {
+                    filtrados.add(ptd);
+                }
+
+            }
+        }
+
+        session.clear();
+        session.close();
+        return filtrados;
+
+    }
 }
