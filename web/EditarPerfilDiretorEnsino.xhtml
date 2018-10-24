@@ -136,18 +136,14 @@
                         </h:panelGrid>
                         <br/>
 
-                        <p:commandButton id="botaoAcao"
-                                         update="botaoAcao"
-                                         styleClass="botaoAzul" 
+                        <p:commandButton styleClass="botaoAzul" 
                                          style="border-radius: 30px; font-size: large; margin-left: 10px;" 
-                                         value="Cadastrar"
+                                         value="Editar"
                                          onclick="PF('#{diretorEnsinoMB.verificarPossibilidadeAtualizacaoDiretorEnsino()}')"/>
 
                     </div>
                 </center>
 
-                <!-- Temporizador -->
-                <p:poll interval="1" update="erros"/>
 
                 <!-- Caixa de confirmação de edição -->
                 <p:dialog header="Confirmar edição" 
@@ -183,7 +179,7 @@
                     <br/>
 
                     <h:dataTable  id="erros"
-                                  value="#{diretorEnsinoMB.errosCadastroDiretorEnsino}" 
+                                  value="#{diretorEnsinoMB.errosEdicaoDiretorEnsino}" 
                                   var="erroEdicao" 
                                   style="width: auto;"
                                   headerClass="text-center"

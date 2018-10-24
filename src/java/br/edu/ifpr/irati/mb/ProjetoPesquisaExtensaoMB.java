@@ -40,8 +40,6 @@ public class ProjetoPesquisaExtensaoMB {
         participacaoColab = new Participacao();
         projetoAutorNovo = new ProjetoPesquisaExtensao();
         projetosPesquisaExtensaoAtivos = new ArrayList();
-        IProjetoPesquisaExtensaoDao projetoPesquisaExtensaoDAO = new ProjetoPesquisaExtensaoDAO();
-        projetosPesquisaExtensaoAtivos = projetoPesquisaExtensaoDAO.buscarProjetosExtensaoAtivos();
 
     }
 
@@ -158,6 +156,8 @@ public class ProjetoPesquisaExtensaoMB {
     }
 
     public List<ProjetoPesquisaExtensao> getProjetosPesquisaExtensaoAtivos() {
+        IProjetoPesquisaExtensaoDao projetoPesquisaExtensaoDAO = new ProjetoPesquisaExtensaoDAO();
+        projetosPesquisaExtensaoAtivos = projetoPesquisaExtensaoDAO.buscarProjetosExtensaoAtivos();
         return projetosPesquisaExtensaoAtivos;
     }
 

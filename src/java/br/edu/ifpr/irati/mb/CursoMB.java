@@ -99,6 +99,8 @@ public class CursoMB {
      * @return the cursosAtivos
      */
     public List<Curso> getCursosAtivos() {
+        ICursoDAO cursoDAOEspecifico = new CursoDAO();
+        cursosAtivos = cursoDAOEspecifico.buscarCursosAtivos();
         return cursosAtivos;
     }
 

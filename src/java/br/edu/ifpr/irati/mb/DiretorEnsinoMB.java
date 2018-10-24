@@ -21,7 +21,7 @@ public class DiretorEnsinoMB {
     private DiretorEnsino diretorEnsinoSelecionado;
     private PTD ptd;
     private List<PTD> ptds;
-    private List<String> errosCadastroDiretorEnsino;
+    private List<String> errosEdicaoDiretorEnsino;
     private String confirmacaoSenhaSelecionado;
 
     public DiretorEnsinoMB() {
@@ -29,7 +29,7 @@ public class DiretorEnsinoMB {
         ptd = new PTD();
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptds = ptdDAO.buscarTodos(PTD.class);
-        errosCadastroDiretorEnsino = new ArrayList<>();
+        errosEdicaoDiretorEnsino = new ArrayList<>();
         diretorEnsino = new DiretorEnsino();
         diretorEnsinoSelecionado = new DiretorEnsino();
         confirmacaoSenhaSelecionado = "";
@@ -50,7 +50,7 @@ public class DiretorEnsinoMB {
 
         String nomeCaixaRetorno = "";
 
-        if (getErrosCadastroDiretorEnsino().isEmpty() == false) {
+        if (getErrosEdicaoDiretorEnsino().isEmpty() == false) {
 
             nomeCaixaRetorno = "erroEdicaoDiretorEnsinoDialog";
             return nomeCaixaRetorno;
@@ -59,6 +59,7 @@ public class DiretorEnsinoMB {
 
             nomeCaixaRetorno = "confirmarEdicaoDiretorEnsinoDialog";
             return nomeCaixaRetorno;
+            
         }
 
     }
@@ -131,53 +132,55 @@ public class DiretorEnsinoMB {
     }
 
     /**
-     * @return the errosCadastroDiretorEnsino
+     * @return the errosEdicaoDiretorEnsino
      */
-    public List<String> getErrosCadastroDiretorEnsino() {
+    public List<String> getErrosEdicaoDiretorEnsino() {
+        errosEdicaoDiretorEnsino = new ArrayList<>();
+        
         if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().length() < 8 | getDiretorEnsino().getSenhaAlfanumerica().length() > 16) {
 
-            getErrosCadastroDiretorEnsino().add("Sua senha deve conter entre  8 a 16 caracteres");
+            errosEdicaoDiretorEnsino.add("Sua senha deve conter entre  8 a 16 caracteres");
 
         } else if (getDiretorEnsinoSelecionado().getSenhaAlfanumerica().equals(getConfirmacaoSenhaSelecionado()) == false) {
 
-            getErrosCadastroDiretorEnsino().add("As senhas informadas não coincidem");
+            errosEdicaoDiretorEnsino.add("As senhas informadas não coincidem");
 
         }
         Date dataAtual = new Date();
         if (getDiretorEnsinoSelecionado().getDataContratacao().after(dataAtual)) {
 
-            getErrosCadastroDiretorEnsino().add("A data que você inseriu como sua data de contratação "
+            errosEdicaoDiretorEnsino.add("A data que você inseriu como sua data de contratação "
                     + "é posterior a data atual");
 
         } else if (getDiretorEnsinoSelecionado().getEmail().contains("@ifpr.edu.br") == false) {
 
-            getErrosCadastroDiretorEnsino().add("O email deve ser institucional(@ifpr.edu.br)");
+            errosEdicaoDiretorEnsino.add("O email deve ser institucional(@ifpr.edu.br)");
 
         } else if (diretorEnsinoSelecionado.getEmail().equalsIgnoreCase("")) {
 
-            errosCadastroDiretorEnsino.add("O campo 'Email' deve ser obrigatoriamente preenchido");
+            errosEdicaoDiretorEnsino.add("O campo 'Email' deve ser obrigatoriamente preenchido");
 
         } else if (diretorEnsinoSelecionado.getNomeCompleto().equalsIgnoreCase("")) {
 
-            errosCadastroDiretorEnsino.add("O campo 'Nome completo' deve ser obrigatoriamente preenchido");
+            errosEdicaoDiretorEnsino.add("O campo 'Nome completo' deve ser obrigatoriamente preenchido");
 
         } else if (diretorEnsinoSelecionado.getSenhaAlfanumerica().equalsIgnoreCase("")) {
 
-            errosCadastroDiretorEnsino.add("O campo 'Senha' deve ser obrigatoriamente preenchido");
+            errosEdicaoDiretorEnsino.add("O campo 'Senha' deve ser obrigatoriamente preenchido");
 
         } else if (confirmacaoSenhaSelecionado.equalsIgnoreCase("")) {
 
-            errosCadastroDiretorEnsino.add("O campo 'Confirmação senha' deve ser obrigatoriamente preenchido");
+            errosEdicaoDiretorEnsino.add("O campo 'Confirmação senha' deve ser obrigatoriamente preenchido");
 
         }
-        return errosCadastroDiretorEnsino;
+        return errosEdicaoDiretorEnsino;
     }
 
     /**
-     * @param errosCadastroDiretorEnsino the errosCadastroDiretorEnsino to set
+     * @param errosEdicaoDiretorEnsino the errosEdicaoDiretorEnsino to set
      */
-    public void setErrosCadastroDiretorEnsino(List<String> errosCadastroDiretorEnsino) {
-        this.errosCadastroDiretorEnsino = errosCadastroDiretorEnsino;
+    public void setErrosEdicaoDiretorEnsino(List<String> errosEdicaoDiretorEnsino) {
+        this.errosEdicaoDiretorEnsino = errosEdicaoDiretorEnsino;
     }
 
     /**

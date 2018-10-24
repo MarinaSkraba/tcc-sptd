@@ -809,7 +809,7 @@ public class PTDMB {
             }
             if (!aula.getHorariosAula().isEmpty()) {
                 if (cargaHoraHorario != aula.getCargaHorariaTotal()) {
-                    errosTabelaAula.add("A carga horária fornecida é diferente da carga resultante dos horários fornecidos! Atualize a atividade ou seus horários.");
+                    errosTabelaAula.add("A carga horária fornecida é diferente da carga resultante dos horários fornecidos em aula! Atualize a atividade ou seus horários.");
                 }
             }
 
