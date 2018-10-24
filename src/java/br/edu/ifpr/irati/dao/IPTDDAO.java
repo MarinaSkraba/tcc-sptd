@@ -18,6 +18,9 @@ public interface IPTDDAO {
     
     public List<PTD> buscarPTDsReprovadosPorProfessor(Serializable idUsuario);
     
-    public void excluirPTDEOQueTemDentro(PTD ptd);
+    public List<PTD> buscarPTDsPorNomeDocente(String nomeDocente);
+    
+    public void excluirPTDEOQueTemDentro(PTD ptd); 
+    
     
 }
