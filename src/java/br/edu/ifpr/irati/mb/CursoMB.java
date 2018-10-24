@@ -59,6 +59,14 @@ public class CursoMB {
         cursos = cursoDAOEspecifico.buscarCursosAtivos();
         return "NotificacoesDiretorEnsino?faces-redirect=true";
     }
+    
+    public String verificarEstadoCurso(Curso curso){
+        if(curso.getEstadoCurso().equalsIgnoreCase("Ativo")){
+            return "Desativar";
+        }else{
+            return "Ativar";
+        }
+    }
 
     public Curso getCurso() {
         return curso;

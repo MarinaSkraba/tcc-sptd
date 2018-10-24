@@ -137,21 +137,22 @@
                                 <h:outputText value="NOME CURSO" 
                                               styleClass="text01"/>
                             </f:facet>
-                            <p:inputText value="#{curso.nomeCurso}"/>
+                            <p:inputText value="#{curso.nomeCurso}"
+                                         style="margin: 0px;"/>
 
                         </h:column>
 
                         <h:column>
 
                             <f:facet name="header">
-                                <h:outputText value="" 
+                                <h:outputText value="OPÇÃO" 
                                               styleClass="text01"
                                               style="font-size: large; font-weight: bold;"/>
                             </f:facet>
 
                             <p:commandButton styleClass="botaoCinza" 
-                                             style="float: left; font-size: 12pt;" 
-                                             value="X" 
+                                             style="float: left; font-size: 12pt; margin: 0px;" 
+                                             value="#{cursoMB.verificarEstadoCurso(curso)}" 
                                              ajax="false" 
                                              immediate="true"/>
 
