@@ -177,28 +177,38 @@ public class PTDDAO implements IPTDDAO {
             }
             for (AtividadeASerProposta asp : ptd.getAtividadesASeremPropostas()) {
                 if (asp.getRotulo().equals(rotuloAtividade)) {
-                    filtrados.add(ptd);
+                    if (filtrados.contains(ptd) == false) {
+                        filtrados.add(ptd);
+                    }
                 }
             }
             for (Aula aula : ptd.getAulas()) {
                 if (aula.getComponenteCurricular().equals(rotuloAtividade)) {
-                    filtrados.add(ptd);
+                    if (filtrados.contains(ptd) == false) {
+                        filtrados.add(ptd);
+                    }
                 }
             }
             for (ManutencaoEnsino mE : ptd.getManutencoesEnsino()) {
                 if (mE.getTipoManutencao().getRotulo().equals(rotuloAtividade)) {
-                    filtrados.add(ptd);
+                    if (filtrados.contains(ptd) == false) {
+                        filtrados.add(ptd);
+                    }
                 }
             }
             for (OutroTipoAtividade oTa : ptd.getOutrosTiposAtividades()) {
                 if (oTa.getRotulo().equals(rotuloAtividade)) {
-                    filtrados.add(ptd);
+                    if (filtrados.contains(ptd) == false) {
+                        filtrados.add(ptd);
+                    }
                 }
 
             }
             for (Participacao p : ptd.getParticipacoes()) {
                 if (p.getProjetoPesquisaExtensao().getTituloProcesso().equals(rotuloAtividade)) {
-                    filtrados.add(ptd);
+                    if (filtrados.contains(ptd) == false) {
+                        filtrados.add(ptd);
+                    }
                 }
 
             }
