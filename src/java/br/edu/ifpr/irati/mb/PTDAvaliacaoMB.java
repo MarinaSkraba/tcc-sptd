@@ -4,6 +4,7 @@ import br.edu.ifpr.irati.dao.Dao;
 import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.modelo.Administracao;
 import br.edu.ifpr.irati.modelo.Apoio;
+import br.edu.ifpr.irati.modelo.AtividadeASerProposta;
 import br.edu.ifpr.irati.modelo.Aula;
 import br.edu.ifpr.irati.modelo.DiretorEnsino;
 import br.edu.ifpr.irati.modelo.ManutencaoEnsino;
@@ -238,9 +239,33 @@ public class PTDAvaliacaoMB {
         getPtdEmAvaliacao().setEstadoPTD("APROVADO");
         getPtdEmAvaliacao().setDataAvaliacaoPTD(new Date());
         getPtdEmAvaliacao().setDiretorEnsino(diretorEnsino);
+        for (Administracao adm : getPtdEmAvaliacao().getAdministrativas()) {
+            Dao<Administracao> atividadeDAO = new GenericDAO<>(Administracao.class);
+            adm = atividadeDAO.buscarPorId(adm.getIdAdministracao());
+        }
         for (Apoio apoio : getPtdEmAvaliacao().getApoios()) {
-            Dao<Apoio> apoioDao = new GenericDAO<>(Apoio.class);
-            apoioDao.alterar(apoio);
+            Dao<Apoio> atividadeDAO = new GenericDAO<>(Apoio.class);
+            apoio = atividadeDAO.buscarPorId(apoio.getIdApoio());
+        }
+        for (AtividadeASerProposta aSerProposta : getPtdEmAvaliacao().getAtividadesASeremPropostas()) {
+            Dao<AtividadeASerProposta> atividadeDAO = new GenericDAO<>(AtividadeASerProposta.class);
+            aSerProposta = atividadeDAO.buscarPorId(aSerProposta.getIdAtividadeASerProposta());
+        }
+        for (Aula aula : getPtdEmAvaliacao().getAulas()) {
+            Dao<Aula> atividadeDAO = new GenericDAO<>(Aula.class);
+            aula = atividadeDAO.buscarPorId(aula.getIdAula());
+        }
+        for (ManutencaoEnsino me : getPtdEmAvaliacao().getManutencoesEnsino()) {
+            Dao<ManutencaoEnsino> atividadeDAO = new GenericDAO<>(ManutencaoEnsino.class);
+            me = atividadeDAO.buscarPorId(me.getIdManutencao());
+        }
+        for (OutroTipoAtividade ota : getPtdEmAvaliacao().getOutrosTiposAtividades()) {
+            Dao<OutroTipoAtividade> atividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
+            ota = atividadeDAO.buscarPorId(ota.getIdOutroTipoAtividade());
+        }
+        for (Participacao part : getPtdEmAvaliacao().getParticipacoes()) {
+            Dao<Participacao> atividadeDAO = new GenericDAO<>(Participacao.class);
+            part = atividadeDAO.buscarPorId(part.getIdParticipacao());
         }
 
         ptdDAOGenerico.alterar(getPtdEmAvaliacao());
