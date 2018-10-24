@@ -16,7 +16,7 @@
             <div id="barraTelaBuscarPTDs">
                 <font face="Calibri" 
                       size="4" 
-                      color="#179DBD" 
+                      color="#1785ad" 
                       style="margin: 10px 10px; float:left; font-family: calibri, sans-serif; font-weight: 500; " styleClass="text">
                     Busca de PTDs
                 </font>
@@ -49,15 +49,11 @@
                     <div id="panelPesquisaPTDs">
                         <p:inputText value="#{usuarioMB.usuario.email}" 
                                      required="true"
-                                     style="width: 80%; border-color: transparent; color: black; font-weight: 100;"
+                                     style="width: 90%; border-color: transparent; color: black; font-weight: 100;"
                                      styleClass="caixaTexto"/>
-                        <!-- Link para acionamento da pesquisa -->
-                        <p:commandLink ajax="false" 
-                                       actionListener="#{pTDMB.realizarBuscaPTDs(usuarioMB.usuarioLogado.idUsuario)}"
-                                       style="float: right; width: 10%;">
-                            <img src="img/search.png" width="25" height="25" style="margin: 3px 10px 0px;"/>
-                        </p:commandLink>
                     </div>
+                    <p:commandButton value="Pesquisar por professor" styleClass="opFiltroPesquisa"/>
+                    <p:commandButton value="Pesquisar por atividades" styleClass="opFiltroPesquisa"/>
                 </center>
 
                 <br/>
@@ -97,8 +93,8 @@
                                         <p:commandButton styleClass="botaoAzul" 
                                                      value="Abrir"
                                                      ajax="false"
-                                                     actionListener="#{pTDMB.abrirMostrarPTD(ptdAprovado)}"
-                                                     action="/MostrarPTDParaDocente"/>
+                                                     actionListener="#{pTDASerMostradoMB.abrirMostrarPTD(ptdAprovado)}"
+                                                     action="/MostrarPTD"/>
 
                                     </h:panelGrid>
                                 </div>
