@@ -47,14 +47,22 @@
 
                 <center>
                     <div id="panelPesquisaPTDs">
-                        <p:inputText value="#{usuarioMB.usuario.email}" 
+                        <p:inputText value="#{pTDASerMostradoMB.textoBusca}" 
                                      required="true"
                                      style="width: 90%; color: black; font-weight: 100;"
                                      styleClass="caixaTexto"/>
                     </div>
                     <div style="position: relative; display: flex; flex-direction: row; justify-content: center; align-items: center;">
-                        <p:commandButton value="Nome professor" styleClass="opFiltroPesquisa"/>
-                        <p:commandButton value="Título atividades" styleClass="opFiltroPesquisa"/>
+                        <p:commandButton value="Nome professor" 
+                                         styleClass="opFiltroPesquisa" 
+                                         ajax="false"
+                                         action="#{pTDASerMostradoMB.realizarBusca()}" 
+                                         actionListener="#{pTDASerMostradoMB.setFiltroBusca('buscaPorNome')}"/>
+                        <p:commandButton value="Título atividades" 
+                                         styleClass="opFiltroPesquisa"
+                                         ajax="false"
+                                         action="#{pTDASerMostradoMB.realizarBusca()}" 
+                                         actionListener="#{pTDASerMostradoMB.setFiltroBusca('buscaPorAtividade')}"/>
                         <img src="img/search.png" width="30" height="30" style="margin: 5px;"/>
                     </div>
                 </center>
@@ -63,7 +71,7 @@
                 <center>
                     <div id="contentEstilizado">
 
-                        <h:dataTable  value="#{pTDMB.ptdsConcluídos}" 
+                        <h:dataTable  value="#{pTDASerMostradoMB.ptdsResultadoBusca}" 
                                       var="ptdResultado"
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"

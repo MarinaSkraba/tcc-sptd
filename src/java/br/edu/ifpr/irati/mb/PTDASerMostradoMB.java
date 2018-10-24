@@ -23,15 +23,17 @@ public class PTDASerMostradoMB {
     private String filtroBusca;
 
     public PTDASerMostradoMB() {
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
         ptdConcluido = new PTD();
         ptdsResultadoBusca = new ArrayList<>();
+        ptdsResultadoBusca = ptdDAOEspecifico.buscarPTDsConcluidos();
         participacoesAutorPTDConcluido = new ArrayList<>();
         participacoesColabPTDConcluido = new ArrayList<>();
         textoBusca = "";
         filtroBusca = "";
     }
 
-    public void buscarComFiltro() {
+    public void realizarBusca() {
 
         ptdsResultadoBusca = new ArrayList();
         IPTDDAO ptdDAOEspecifico = new PTDDAO();
