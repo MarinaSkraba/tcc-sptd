@@ -28,7 +28,7 @@
                 </font>
 
                 <h:form>
-                    
+
                     <p:commandButton value="voltar" 
                                      ajax="false" 
                                      styleClass="botaoAzul"
@@ -49,16 +49,19 @@
                     <div id="panelPesquisaPTDs">
                         <p:inputText value="#{usuarioMB.usuario.email}" 
                                      required="true"
-                                     style="width: 90%; border-color: transparent; color: black; font-weight: 100;"
+                                     style="width: 90%; color: black; font-weight: 100;"
                                      styleClass="caixaTexto"/>
                     </div>
-                    <p:commandButton value="Pesquisar por professor" styleClass="opFiltroPesquisa"/>
-                    <p:commandButton value="Pesquisar por atividades" styleClass="opFiltroPesquisa"/>
+                    <div style="position: relative; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                        <p:commandButton value="Nome professor" styleClass="opFiltroPesquisa"/>
+                        <p:commandButton value="Título atividades" styleClass="opFiltroPesquisa"/>
+                        <img src="img/search.png" width="30" height="30" style="margin: 5px;"/>
+                    </div>
                 </center>
 
                 <br/>
                 <center>
-                    <div id="content" style="width: 50%; border-radius: 15px; border-top-style: solid; border-top-width: medium; border-top-color: #1785ad;">
+                    <div id="contentEstilizado">
 
                         <h:dataTable  value="#{pTDMB.ptdsConcluídos}" 
                                       var="ptdResultado"
@@ -91,10 +94,10 @@
                                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                                         </h:outputText>
                                         <p:commandButton styleClass="botaoAzul" 
-                                                     value="Abrir"
-                                                     ajax="false"
-                                                     actionListener="#{pTDASerMostradoMB.abrirMostrarPTD(ptdAprovado)}"
-                                                     action="/MostrarPTD"/>
+                                                         value="Abrir"
+                                                         ajax="false"
+                                                         actionListener="#{pTDASerMostradoMB.abrirMostrarPTD(ptdAprovado)}"
+                                                         action="/MostrarPTD"/>
 
                                     </h:panelGrid>
                                 </div>

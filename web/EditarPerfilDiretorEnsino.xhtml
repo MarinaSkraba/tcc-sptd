@@ -102,7 +102,7 @@
 
             <h:form style="width: 100%;">
                 <center>
-                    <div id="content" style="width: 50%; border-radius: 15px; border-top-style: solid; border-top-width: medium; border-top-color: #1785ad;">
+                    <div id="contentEstilizado">
 
                         <h:outputText value="Informações Gerais" 
                                       styleClass="text01" />
@@ -136,7 +136,9 @@
                         </h:panelGrid>
                         <br/>
 
-                        <p:commandButton styleClass="botaoAzul" 
+                        <p:commandButton id="botaoAcao"
+                                         update="botaoAcao"
+                                         styleClass="botaoAzul" 
                                          style="border-radius: 30px; font-size: large; margin-left: 10px;" 
                                          value="Cadastrar"
                                          onclick="PF('#{diretorEnsinoMB.verificarPossibilidadeAtualizacaoDiretorEnsino()}')"/>
@@ -144,7 +146,7 @@
                     </div>
                 </center>
 
-                <!-- Temporizador verificar possibilidade cadastro -->
+                <!-- Temporizador -->
                 <p:poll interval="1" update="erros"/>
 
                 <!-- Caixa de confirmação de edição -->
@@ -168,7 +170,7 @@
                 </p:dialog>
 
                 <!-- Caixa de aviso de erro -->
-                <p:dialog header="Confirmar cadastro" 
+                <p:dialog header="Não permitido" 
                           widgetVar="erroEdicaoDocenteDialog" 
                           modal="true" 
                           showEffect="fade" 
@@ -196,15 +198,8 @@
                                           style="font-size: large; color: #C92345; width: 400px;"/>
                         </h:column>
                     </h:dataTable>
-
                     <br/>
-
-                    <p:commandButton styleClass="botaoAzul" 
-                                     value="Confirmar"
-                                     ajax="false"
-                                     action="#{diretorEnsinoMB.alterarDiretorEnsino()}"/>
-                    />
-
+                    
                 </p:dialog>
 
             </h:form>

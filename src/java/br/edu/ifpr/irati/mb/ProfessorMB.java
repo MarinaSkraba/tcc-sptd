@@ -46,6 +46,7 @@ public class ProfessorMB {
         senhaSHA512 = Digest.hashString(getProfessor().getSenhaAlfanumerica(), "SHA-512");
         professor.setSenhaAlfanumerica(senhaSHA512);
         professorDAO.salvar(professor);
+        professor = new Professor();
         professores = professorDAO.buscarTodos(Professor.class);
         return "/Login?faces-redirect=true";
 
@@ -55,7 +56,7 @@ public class ProfessorMB {
 
         String nomeCaixaRetorno = "";
 
-        if (errosCadastroProfessor.isEmpty() == false) {
+        if (getErrosCadastroProfessor().isEmpty() == false) {
 
             nomeCaixaRetorno = "erroCadastroDocenteDialog";
             return nomeCaixaRetorno;
@@ -92,8 +93,6 @@ public class ProfessorMB {
         senhaSHA512 = Digest.hashString(professorSelecionado.getSenhaAlfanumerica(), "SHA-512");
         professorSelecionado.setSenhaAlfanumerica(senhaSHA512);
         professorDAO.alterar(professorSelecionado);
-        List<Professor> ps = professorDAO.buscarTodos(Professor.class);
-        professorSelecionado = ps.get(ps.size() - 1);
         return "/PerfilDocente?faces-redirect=true";
 
     }

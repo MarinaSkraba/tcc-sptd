@@ -33,8 +33,9 @@ public class PTDAvaliacaoMB {
     }
 
     public String abrirPTDEmAvaliacao(PTD ptd) {
-        setPtdEmAvaliacao(ptd);
-        verificarCargaHorariaPTD(ptd);
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        ptdEmAvaliacao = ptdDAOGenerico.buscarPorId(ptd.getIdPTD());
+        verificarCargaHorariaPTD(ptdEmAvaliacao);
         return "PTDEmAvaliacao";
     }
 
