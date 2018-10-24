@@ -186,63 +186,113 @@
         </font>
 
         <div id="screen">
+            <h:form style="width: 100%;">
+                <center>
 
-            <div id="contentEstilizado">
-                <br/>
-                <h:form>
-
-                    <h:dataTable  value="#{pTDMB.ptdsEmAvaliacao}" 
-                                  var="ptdEsperando"
-                                  style="border-spacing: 0pt; width: 100%;"
-                                  headerClass="text-center"
-                                  footerClass="text-center">
-                        <f:facet name="header">
-                            <h:outputText value="Professor | Status | Ver PTD" 
-                                          styleClass="text01"
-                                          style="font-size: large;"/>
-                        </f:facet>
-
-                        <h:column>
+                    <div id="contentEstilizado">
+                        <h:outputText value="PTDs em Avalição" 
+                                      styleClass="text01" 
+                                      style="margin: 0px ;"/>
+                        <br/>
+                        <h:dataTable  value="#{pTDMB.ptdsEmAvaliacao}" 
+                                      var="ptdEsperando"
+                                      style="border-spacing: 0pt; width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
                             <f:facet name="header">
-                                <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
+                                <h:outputText value="Professor | Status | Ver PTD" 
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
                             </f:facet>
 
-                            <div id="linha">
-                                <h:panelGrid columns="3" 
-                                             style="width:100%;" >
+                            <h:column>
+                                <f:facet name="header">
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
+                                </f:facet>
 
-                                    <p:commandLink action="#{pTDAvaliacaoMB.abrirPTDEmAvaliacao(ptdEsperando)}" 
-                                                   title="Ver PTD" 
-                                                   ajax="false" 
-                                                   immediate="true"
-                                                   style="width: 200px;"
-                                                   styleClass="link">
-                                        <h:outputText value="#{ptdEsperando.professor.nomeCompleto}"  
+                                <div id="linha">
+                                    <h:panelGrid columns="3" 
+                                                 style="width:100%;" >
+
+                                        <p:commandLink action="#{pTDAvaliacaoMB.abrirPTDEmAvaliacao(ptdEsperando)}" 
+                                                       title="Ver PTD" 
+                                                       ajax="false" 
+                                                       immediate="true"
+                                                       style="width: 200px;"
+                                                       styleClass="link">
+                                            <h:outputText value="#{ptdEsperando.professor.nomeCompleto}"  
+                                                          styleClass="text01"
+                                                          style="color: #1AB5D9; font-size: large;"/>
+                                        </p:commandLink>
+                                        <h:outputText value="#{pTDAvaliacaoMB.verificacaoIrregularidadesNotificacoesDiretorEnsino(ptdEsperando)}"  
                                                       styleClass="text01"
-                                                      style="color: #1AB5D9; font-size: large;"/>
-                                    </p:commandLink>
-                                    <h:outputText value="#{pTDAvaliacaoMB.verificacaoIrregularidadesNotificacoesDiretorEnsino(ptdEsperando)}"  
-                                                  styleClass="text01"
-                                                  style="font-size: large; width: 200px;"/>
-                                    <p:commandButton styleClass="botaoAzul" 
-                                                     style="margin: 5px 0px 5px; float: left;" 
-                                                     value="Abrir PTD"
-                                                     ajax="false" 
-                                                     immediate="true"
-                                                     action="#{pTDAvaliacaoMB.abrirPTDEmAvaliacao(ptdEsperando)}"/>
+                                                      style="font-size: large; width: 200px;"/>
+                                        <p:commandButton styleClass="botaoAzul" 
+                                                         style="margin: 5px 0px 5px; float: left;" 
+                                                         value="Abrir PTD"
+                                                         ajax="false" 
+                                                         immediate="true"
+                                                         action="#{pTDAvaliacaoMB.abrirPTDEmAvaliacao(ptdEsperando)}"/>
 
-                                </h:panelGrid>
-                            </div>
-                            <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
+                                    </h:panelGrid>
+                                </div>
+                                <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
 
-                        </h:column>
+                            </h:column>
 
-                    </h:dataTable>
+                        </h:dataTable>
 
-                </h:form>
-                <br/>
-            </div>
+                        <br/>
+                    </div>
+                    <br/>
+                    <div id="contentEstilizado">
+                        <h:outputText value="Professores a Habilitar" 
+                                      styleClass="text01" 
+                                      style="margin: 0px ;"/>
+                        <br/>
+                        <h:dataTable  value="#{pTDMB.professoresAHabilitar}" 
+                                      var="professorEsperando"
+                                      style="border-spacing: 0pt; width: 100%;"
+                                      headerClass="text-center"
+                                      footerClass="text-center">
+                            <f:facet name="header">
+                                <h:outputText value="Professor | Opção" 
+                                              styleClass="text01"
+                                              style="font-size: large;"/>
+                            </f:facet>
 
+                            <h:column>
+                                <f:facet name="header">
+                                    <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
+                                </f:facet>
+
+                                <div id="linha">
+                                    <h:panelGrid columns="3" 
+                                                 style="width:100%;" >
+                                        
+                                        <h:outputText value="#{professorEsperando.nomeCompleto}"  
+                                                      styleClass="text01"
+                                                      style="font-size: large; width: 200px;"/>
+                                        <p:commandButton styleClass="botaoAzul" 
+                                                         style="margin: 5px 0px 5px; float: left;" 
+                                                         value="Habilitar"
+                                                         ajax="false" 
+                                                         actionListener="#{professorMB.habilitarProfessor(professorEsperando)}"
+                                                         action="#{pTDMB.abrirNotificacoesDiretorEnsino(usuarioMB.usuarioLogado.idUsuario)}"/>
+
+                                    </h:panelGrid>
+                                </div>
+                                <hr size="1px" style="color: #A8A8A8; width: 100%; opacity: 0.5; margin: 0; float: bottom;"/>
+
+                            </h:column>
+
+                        </h:dataTable>
+
+                        <br/>
+                    </div>
+
+                </center>
+            </h:form>
         </div>
 
     </h:body>

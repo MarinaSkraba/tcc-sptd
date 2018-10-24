@@ -1,5 +1,7 @@
 package br.edu.ifpr.irati.mb;
 
+import br.edu.ifpr.irati.dao.Dao;
+import br.edu.ifpr.irati.dao.GenericDAO;
 import br.edu.ifpr.irati.dao.IPTDDAO;
 import br.edu.ifpr.irati.dao.PTDDAO;
 import br.edu.ifpr.irati.modelo.PTD;
@@ -44,12 +46,25 @@ public class PTDASerMostradoMB {
     }
 
     public void abrirTelaBuscarPTDs() {
-        IPTDDAO ptddao = new PTDDAO();
-        setPtdsResultadoBusca(ptddao.buscarPTDsConcluidos());
+        IPTDDAO ptdDAOEspecifico = new PTDDAO();
+        setPtdsResultadoBusca(ptdDAOEspecifico.buscarPTDsConcluidos());
     }
 
     public void abrirMostrarPTD(PTD ptd) {
-        setPtdConcluido(ptd);
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+        setPtdConcluido(ptdDAOGenerico.buscarPorId(ptd.getIdPTD()));
+    }
+
+    public void atualizarListasParticipacoesPTD() {
+        setParticipacoesAutorPTDConcluido(new ArrayList<>());
+        setParticipacoesColabPTDConcluido(new ArrayList<>());
+        for (Participacao part : ptdConcluido.getParticipacoes()) {
+            if (part.getRotulo().equalsIgnoreCase("Autor")) {
+                participacoesAutorPTDConcluido.add(part);
+            } else {
+                participacoesColabPTDConcluido.add(part);
+            }
+        }
     }
 
     /**
@@ -84,6 +99,7 @@ public class PTDASerMostradoMB {
      * @return the participacoesAutorPTDConcluido
      */
     public List<Participacao> getParticipacoesAutorPTDConcluido() {
+        atualizarListasParticipacoesPTD();
         return participacoesAutorPTDConcluido;
     }
 
@@ -99,6 +115,7 @@ public class PTDASerMostradoMB {
      * @return the participacoesColabPTDConcluido
      */
     public List<Participacao> getParticipacoesColabPTDConcluido() {
+        atualizarListasParticipacoesPTD();
         return participacoesColabPTDConcluido;
     }
 

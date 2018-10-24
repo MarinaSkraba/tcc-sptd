@@ -37,12 +37,17 @@ public class ProfessorMB {
 
     }
 
+    public void habilitarProfessor(Professor professor){
+        Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
+        professor.setEstadoUsuario("Habilitado");
+        professorDAO.alterar(professor);
+    }
+    
     public String salvarProfessor() throws HashGenerationException {
 
         String senhaSHA512 = "";
-        Dao<Usuario> usuarioDAO = new GenericDAO<>(Usuario.class);
         Dao<Professor> professorDAO = new GenericDAO<>(Professor.class);
-        professor.setEstadoUsuario("Desabilitado");
+        professor.setEstadoUsuario("AHabilitar");
         senhaSHA512 = Digest.hashString(getProfessor().getSenhaAlfanumerica(), "SHA-512");
         professor.setSenhaAlfanumerica(senhaSHA512);
         professorDAO.salvar(professor);

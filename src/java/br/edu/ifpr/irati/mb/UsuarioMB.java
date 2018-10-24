@@ -48,12 +48,12 @@ public class UsuarioMB {
             p01.setRegimeTrabalho("Dedicação Exclusiva");
             p01.setSenhaAlfanumerica("929872838cb9cfe6578e11f0a323438aee5ae7f61d41412d62db72b25dac52019de2d6a355eb2d033336fb70e73f0ec0afeca3ef36dd8a90d83f998fee23b78d");
             p01.setTipoContrato("Efetivo");
-            p01.setEstadoUsuario("Ativo");
+            p01.setEstadoUsuario("Habilitado");
 
             de01.setEmail("adm");
             de01.setNomeCompleto("Administrador DE");
             de01.setSenhaAlfanumerica("48fb10b15f3d44a09dc82d02b06581e0c0c69478c9fd2cf8f9093659019a1687baecdbb38c9e72b12169dc4148690f87467f9154f5931c5df665c6496cbfd5f5");
-            de01.setEstadoUsuario("Ativo");
+            de01.setEstadoUsuario("Habilitado");
 
             professorDAO.salvar(p01);
             diretorEnsinoDAO.salvar(de01);
@@ -71,7 +71,7 @@ public class UsuarioMB {
             System.out.println("Acesso negado");
             return "/Login?faces-redirect=true";
         } else {
-            if (usuario.getEstadoUsuario().equalsIgnoreCase("Ativo")) {
+            if (usuario.getEstadoUsuario().equalsIgnoreCase("Habilitado")) {
                 setUsuarioLogado(usuario);
                 System.out.println("Chegou object");
                 System.out.println(getUsuarioLogado());
@@ -81,6 +81,9 @@ public class UsuarioMB {
                     return "/NotificacoesDiretorEnsino?faces-redirect=true";
                 }
             } else {
+                Dao<Usuario> usuarioDAOGenerico = new GenericDAO<>(Usuario.class);
+                usuario.setEstadoUsuario("AHabilitar");
+                usuarioDAOGenerico.alterar(usuario);
                 return "/Login?faces-redirect=true";
             }
 
