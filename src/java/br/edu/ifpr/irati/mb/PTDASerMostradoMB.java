@@ -41,7 +41,7 @@ public class PTDASerMostradoMB {
             ptdsResultadoBusca = ptdDAOEspecifico.buscarPTDsPorNomeDocente(textoBusca);
 
         } else if (filtroBusca.equals("buscaPorAtividade")) {
-
+            
             ptdsResultadoBusca = ptdDAOEspecifico.buscarPTDsPorAtividade(textoBusca);
 
         }
