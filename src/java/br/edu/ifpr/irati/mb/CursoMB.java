@@ -17,47 +17,58 @@ public class CursoMB {
     private Curso curso;
     private Curso cursoSelecionado;
     private List<Curso> cursos;
+    private List<Curso> cursosAtivos;
 
     public CursoMB() {
         cursoSelecionado = new Curso();
         curso = new Curso();
         Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class);
+        ICursoDAO cursoDAOEspecifico = new CursoDAO();
         cursos = cursoDAO.buscarTodos(Curso.class);
+        cursosAtivos = cursoDAOEspecifico.buscarCursosAtivos();
     }
 
     public String salvarCurso(int idUsuario) {
         Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class);
         Dao<DiretorEnsino> dEDAO = new GenericDAO<>(DiretorEnsino.class);
-        ICursoDAO cursoDAOEspecifico = new CursoDAO();
         DiretorEnsino diretorEnsino = dEDAO.buscarPorId(idUsuario);
         curso.setDiretorEnsino(diretorEnsino);
         curso.setEstadoCurso("Ativo");
         cursoDAO.salvar(curso);
-        cursos = cursoDAOEspecifico.buscarCursosAtivos();
+        cursos = cursoDAO.buscarTodos(Curso.class);
         curso = new Curso();
         return "NotificacoesDiretorEnsino?faces-redirect=true";
     }
 
     public String alterarCurso() {
         Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class);
-        ICursoDAO cursoDAOEspecifico = new CursoDAO();
         for (Curso c : cursos) {
             cursoDAO.alterar(c);
         }
-        cursos = cursoDAOEspecifico.buscarCursosAtivos();
+        cursos = cursoDAO.buscarTodos(Curso.class);
         return "NotificacoesDiretorEnsino?faces-redirect=true";
     }
 
-    public String excluirCurso(Curso curso) {
+    public String mudarEstadoCurso(Curso curso) {
         Dao<Curso> cursoDAO = new GenericDAO<>(Curso.class);
-        ICursoDAO cursoDAOEspecifico = new CursoDAO();
-        curso.setEstadoCurso("Inativo");
-        cursoDAO.excluir(curso);
+        if (curso.getEstadoCurso().equalsIgnoreCase("Ativo")) {
+            curso.setEstadoCurso("Inativo");
+        } else {
+            curso.setEstadoCurso("Ativo");
+        }
         for (Curso c : cursos) {
             cursoDAO.alterar(c);
         }
-        cursos = cursoDAOEspecifico.buscarCursosAtivos();
+        cursos = cursoDAO.buscarTodos(Curso.class);
         return "NotificacoesDiretorEnsino?faces-redirect=true";
+    }
+
+    public String verificarEstadoCurso(Curso curso) {
+        if (curso.getEstadoCurso().equalsIgnoreCase("Ativo")) {
+            return "Desativar";
+        } else {
+            return "Ativar";
+        }
     }
 
     public Curso getCurso() {
@@ -82,6 +93,20 @@ public class CursoMB {
 
     public void setCursos(List<Curso> cursos) {
         this.cursos = cursos;
+    }
+
+    /**
+     * @return the cursosAtivos
+     */
+    public List<Curso> getCursosAtivos() {
+        return cursosAtivos;
+    }
+
+    /**
+     * @param cursosAtivos the cursosAtivos to set
+     */
+    public void setCursosAtivos(List<Curso> cursosAtivos) {
+        this.cursosAtivos = cursosAtivos;
     }
 
 }
