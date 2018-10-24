@@ -41,7 +41,7 @@ public class PTDASerMostradoMB {
             ptdsResultadoBusca = ptdDAOEspecifico.buscarPTDsPorNomeDocente(textoBusca);
 
         } else if (filtroBusca.equals("buscaPorAtividade")) {
-            
+
             ptdsResultadoBusca = ptdDAOEspecifico.buscarPTDsPorAtividade(textoBusca);
 
         }
@@ -53,8 +53,10 @@ public class PTDASerMostradoMB {
         setPtdsResultadoBusca(ptdDAOEspecifico.buscarPTDsConcluidos());
     }
 
-    public void abrirMostrarPTD(PTD ptd) {
-        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
+    public
+            void abrirMostrarPTD(PTD ptd) {
+        Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class
+        );
         setPtdConcluido(ptdDAOGenerico.buscarPorId(ptd.getIdPTD()));
     }
 
