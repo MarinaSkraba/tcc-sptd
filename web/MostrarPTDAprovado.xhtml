@@ -469,7 +469,7 @@
 
                     <!-- Mostrar atividades pesquisa e/ou extensão (Autor) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesAutorPTDAvaliacao}" 
+                        <h:dataTable  value="#{pTDMB.participacoesAutorPTDAprovado}" 
                                       var="participacaoPesquisaExtensaoAutor" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -600,7 +600,7 @@
 
                     <!-- Mostrar atividades pesquisa e/ou extensão (Colaborador) -->
                     <div id="mostrarTabela">
-                        <h:dataTable  value="#{pTDMB.participacoesColabPTDAvaliacao}" 
+                        <h:dataTable  value="#{pTDMB.participacoesColabPTDAprovado}" 
                                       var="participacaoPesquisaExtensaoColab" 
                                       style="border-spacing: 0pt; width: 100%;"
                                       headerClass="text-center"
@@ -750,7 +750,7 @@
                                                   styleClass="text01"
                                                   style="font-size: large; font-weight: bold;"/>
                                 </f:facet>
-                                <h:outputText value="#{administracao.tipoAdministracao.rotulo}"
+                                <h:outputText value="#{administracao.tipoAdministracao}"
                                               styleClass="text01"
                                               style="font-size: large;" />
                             </h:column>
