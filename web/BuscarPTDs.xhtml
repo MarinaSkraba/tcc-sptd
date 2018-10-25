@@ -104,8 +104,8 @@
                                         <p:commandButton styleClass="botaoAzul" 
                                                          value="Abrir"
                                                          ajax="false"
-                                                         actionListener="#{pTDASerMostradoMB.abrirMostrarPTD(ptdAprovado)}"
-                                                         action="/MostrarPTD"/>
+                                                         actionListener="#{pTDASerMostradoMB.abrirMostrarPTD(ptdResultado)}"
+                                                         action="MostrarPTD"/>
 
                                     </h:panelGrid>
                                 </div>
@@ -119,25 +119,6 @@
 
                     </div>
                 </center>
-
-                <!-- Caixa de confirmação de cadastro -->
-                <p:dialog header="Confirmar cadastro" 
-                          widgetVar="confirmarCadastroDialog" 
-                          modal="true" 
-                          showEffect="fade" 
-                          hideEffect="fade" 
-                          resizable="false">
-
-                    <h:outputText value="" 
-                                  styleClass="text01"
-                                  style="margin: 10px 25px -10px 25px; font-size: large; width: 400px;"/>
-                    <br/>
-
-                    <p:commandButton styleClass="botaoAzul" 
-                                     value="Confirmar"
-                                     ajax="false"/>
-
-                </p:dialog>
 
             </h:form>
 

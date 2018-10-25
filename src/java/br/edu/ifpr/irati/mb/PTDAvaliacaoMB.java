@@ -35,7 +35,7 @@ public class PTDAvaliacaoMB {
 
     public String abrirPTDEmAvaliacao(PTD ptd) {
         Dao<PTD> ptdDAOGenerico = new GenericDAO<>(PTD.class);
-        ptdEmAvaliacao = ptdDAOGenerico.buscarPorId(ptd.getIdPTD());
+        ptdEmAvaliacao = ptd;
         verificarCargaHorariaPTD(ptdEmAvaliacao);
         return "PTDEmAvaliacao";
     }
@@ -239,35 +239,6 @@ public class PTDAvaliacaoMB {
         getPtdEmAvaliacao().setEstadoPTD("APROVADO");
         getPtdEmAvaliacao().setDataAvaliacaoPTD(new Date());
         getPtdEmAvaliacao().setDiretorEnsino(diretorEnsino);
-        for (Administracao adm : getPtdEmAvaliacao().getAdministrativas()) {
-            Dao<Administracao> atividadeDAO = new GenericDAO<>(Administracao.class);
-            adm = atividadeDAO.buscarPorId(adm.getIdAdministracao());
-        }
-        for (Apoio apoio : getPtdEmAvaliacao().getApoios()) {
-            Dao<Apoio> atividadeDAO = new GenericDAO<>(Apoio.class);
-            apoio = atividadeDAO.buscarPorId(apoio.getIdApoio());
-        }
-        for (AtividadeASerProposta aSerProposta : getPtdEmAvaliacao().getAtividadesASeremPropostas()) {
-            Dao<AtividadeASerProposta> atividadeDAO = new GenericDAO<>(AtividadeASerProposta.class);
-            aSerProposta = atividadeDAO.buscarPorId(aSerProposta.getIdAtividadeASerProposta());
-        }
-        for (Aula aula : getPtdEmAvaliacao().getAulas()) {
-            Dao<Aula> atividadeDAO = new GenericDAO<>(Aula.class);
-            aula = atividadeDAO.buscarPorId(aula.getIdAula());
-        }
-        for (ManutencaoEnsino me : getPtdEmAvaliacao().getManutencoesEnsino()) {
-            Dao<ManutencaoEnsino> atividadeDAO = new GenericDAO<>(ManutencaoEnsino.class);
-            me = atividadeDAO.buscarPorId(me.getIdManutencao());
-        }
-        for (OutroTipoAtividade ota : getPtdEmAvaliacao().getOutrosTiposAtividades()) {
-            Dao<OutroTipoAtividade> atividadeDAO = new GenericDAO<>(OutroTipoAtividade.class);
-            ota = atividadeDAO.buscarPorId(ota.getIdOutroTipoAtividade());
-        }
-        for (Participacao part : getPtdEmAvaliacao().getParticipacoes()) {
-            Dao<Participacao> atividadeDAO = new GenericDAO<>(Participacao.class);
-            part = atividadeDAO.buscarPorId(part.getIdParticipacao());
-        }
-
         ptdDAOGenerico.alterar(getPtdEmAvaliacao());
     }
 

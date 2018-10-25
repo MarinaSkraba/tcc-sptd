@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class AtividadeASerProposta implements Serializable {
     @Column(name = "cargaHorariaSemanalAtividadeASerProposta", nullable = false)
     private double cargaHorariaSemanalAtividadeASerProposta;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Horario> horariosAtividadesASerProposta;
 
     public AtividadeASerProposta() {
