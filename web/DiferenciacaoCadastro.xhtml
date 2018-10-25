@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastro de usuário</title>
+        <link rel="stylesheet" type="text/css" href="css/css.css"/>
+        <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    </h:head>
+
+    <script>
+        PrimeFaces.locales['pt'] = {
+            closeText: 'Fechar',
+            prevText: 'Anterior',
+            nextText: 'Próximo',
+            currentText: 'Começo',
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Só Horas',
+            timeText: 'Tempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            ampm: false,
+            month: 'Mês',
+            week: 'Semana',
+            day: 'Dia',
+            allDayText: 'Todo o Dia'
+        };
+    </script>
+
+    <h:body styleClass="body">
+
+        <!-- Barra de menu -->
+        <div id="barraMenu">
+            <font face="Calibri" 
+                  size="6" 
+                  color="white" 
+                  style="margin: 10px 10px; float:left; font-family: calibri, sans-serif; font-weight: 500;" styleClass="text">
+                SPTD
+            </font>
+
+            <h:form id="barraMenu">
+
+                <p:commandButton styleClass="opMenu"
+                                 iconPos="right"
+                                 icon="/img/Search/searchLarger_24.png"
+                                 value="Voltar"
+                                 action="/Login"
+                                 ajax="false"
+                                 style="float: left;"/>
+            </h:form>
+        </div>
+
+        <!-- Conteúdo da Tela -->
+        <font face="Calibri" 
+              size="6" 
+              color="#A8A8A8" 
+              style="margin: 20px; font-weight: 100;" 
+              styleClass="text">
+            Cadastro Diretor de Ensino
+        </font>
+
+        <div id="screen">
+
+            <h:form style="width: 100%; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                    
+                    <p:commandButton value="Realizar Login" 
+                                     ajax="false" 
+                                     styleClass="botaoTelaInicio"
+                                     style="width: 40%; margin: 5px;"
+                                     action="/Login"/>
+                    <br/>
+                    <p:commandButton value="Buscar PTDs" 
+                                     ajax="false" 
+                                     actionListener="#{pTDASerMostradoMB.abrirTelaBuscarPTDs()}"
+                                     action="/BuscarPTDs"
+                                     styleClass="botaoTelaInicio"
+                                     style="width: 40%; margin: 5px;"/>
+
+            </h:form>
+
+        </div>
+
+    </h:body>
+</html>

@@ -39,9 +39,9 @@
             allDayText: 'Todo o Dia'
         };
     </script>
-    
+
     <h:body styleClass="body">
-        
+
         <!-- Barra de menu -->
         <div id="barraMenu">
             <font face="Calibri" 
@@ -491,6 +491,9 @@
                                       style="color: #1AB5D9; font-size: large;"/>
                     </p:commandLink>
 
+                    <!-- Temporizador -->
+                    <p:poll interval="1" update="errosAula"/>
+
                     <!-- Mostrar erros na tabela aulas -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaAula)};">
@@ -499,7 +502,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaAula}" 
+                                <h:dataTable  id="errosAula"
+                                              value="#{pTDMB.errosTabelaAula}" 
                                               var="erroAula" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -892,6 +896,9 @@
                                       style="color: #1AB5D9; font-size: large;"/>
                     </p:commandLink>
 
+                    <!-- Temporizador -->
+                    <p:poll interval="1" update="errosManu"/>
+
                     <!-- Mostrar erros na tabela manutenção de ensino -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaManuEnsino)};">
@@ -900,7 +907,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaManuEnsino}" 
+                                <h:dataTable  id="errosManu"
+                                              value="#{pTDMB.errosTabelaManuEnsino}" 
                                               var="erroManuEnsino" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -1295,6 +1303,9 @@
                                       style="color: #1AB5D9; font-size: large;"/>
                     </p:commandLink>
 
+                    <!-- Temporizador -->
+                    <p:poll interval="1" update="errosApoio"/>
+
                     <!-- Mostrar erros na tabela apoio ao ensino -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaApoioEnsino)};">
@@ -1303,7 +1314,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaApoioEnsino}" 
+                                <h:dataTable  id="errosApoio"
+                                              value="#{pTDMB.errosTabelaApoioEnsino}" 
                                               var="erroApoioEnsino" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -1830,6 +1842,9 @@
                                       style="color: #1AB5D9; font-size: large;"/>
                     </p:commandLink>
 
+                    <!-- Temporizador -->
+                    <p:poll interval="1" update="errosPAutor"/>
+
                     <!-- Mostrar erros na tabela pesquisa e/ou extensão (Autor) -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaPesquisaExtensaoAutor)};">
@@ -1838,7 +1853,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaPesquisaExtensaoAutor}" 
+                                <h:dataTable  id="errosPAutor"
+                                              value="#{pTDMB.errosTabelaPesquisaExtensaoAutor}" 
                                               var="erroPesquisaExtensaoAutor" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -2281,6 +2297,9 @@
                                       style="color: #1AB5D9; font-size: large;"/>
                     </p:commandLink>
 
+                    <!-- Temporizador -->
+                    <p:poll interval="1" update="errosPColab"/>
+
                     <!-- Mostrar erros na tabela pesquisa e/ou extensão (Colab) -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaPesquisaExtensaoColaborador)};">
@@ -2289,7 +2308,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaPesquisaExtensaoColaborador}" 
+                                <h:dataTable  id="errosPColab"
+                                              value="#{pTDMB.errosTabelaPesquisaExtensaoColaborador}" 
                                               var="erroPesquisaExtensaoColab" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -2688,6 +2708,9 @@
                                       style="color: #1AB5D9; font-size: large;"/>
                     </p:commandLink>
 
+                    <!-- Temporizador -->
+                    <p:poll interval="1" update="errosAdm"/>
+
                     <!-- Mostrar erros na tabela administrativas -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaAdministrativas)};">
@@ -2696,7 +2719,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaAdministrativas}" 
+                                <h:dataTable  id="errosAdm"
+                                              value="#{pTDMB.errosTabelaAdministrativas}" 
                                               var="erroAdministrativa" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -3135,6 +3159,9 @@
                                       style="color: #1AB5D9; font-size: large;"/>
                     </p:commandLink>
 
+                    <!-- Temporizador -->
+                    <p:poll interval="1" update="errosOTA"/>
+
                     <!-- Mostrar erros na tabela outras atividades -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaOutrasAtividades)};">
@@ -3143,7 +3170,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaOutrasAtividades}" 
+                                <h:dataTable  id="errosOTA"
+                                              value="#{pTDMB.errosTabelaOutrasAtividades}" 
                                               var="erroOutrasAtividades" 
                                               style="width: auto;"
                                               headerClass="text-center"
@@ -3582,6 +3610,9 @@
                                       style="color: #1AB5D9; font-size: large;"/>
                     </p:commandLink>
 
+                    <!-- Temporizador -->
+                    <p:poll interval="1" update="errosASP"/>
+
                     <!-- Mostrar erros na tabela atividades a serem propostas -->
                     <center>
                         <div id="erros" style="opacity: #{pTDMB.verificarConteúdoListaParaOpacidade(pTDMB.errosTabelaAtividadesASeremPropostas)};">
@@ -3590,7 +3621,8 @@
                                     <h:outputText value="!" 
                                                   styleClass="exclamacaoErro"/>
                                 </h:panelGrid>
-                                <h:dataTable  value="#{pTDMB.errosTabelaAtividadesASeremPropostas}" 
+                                <h:dataTable  id="errosASP"
+                                              value="#{pTDMB.errosTabelaAtividadesASeremPropostas}" 
                                               var="erroAtividadesASeremPropostas" 
                                               style="width: auto;"
                                               headerClass="text-center"

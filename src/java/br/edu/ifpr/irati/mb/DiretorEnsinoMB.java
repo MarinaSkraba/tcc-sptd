@@ -21,7 +21,9 @@ public class DiretorEnsinoMB {
     private DiretorEnsino diretorEnsinoSelecionado;
     private PTD ptd;
     private List<PTD> ptds;
+    private List<String> errosCadastroDiretorEnsino;
     private List<String> errosEdicaoDiretorEnsino;
+    private String confirmacaoSenha;
     private String confirmacaoSenhaSelecionado;
 
     public DiretorEnsinoMB() {
@@ -29,9 +31,11 @@ public class DiretorEnsinoMB {
         ptd = new PTD();
         Dao<PTD> ptdDAO = new GenericDAO<>(PTD.class);
         ptds = ptdDAO.buscarTodos(PTD.class);
+        errosCadastroDiretorEnsino = new ArrayList<>();
         errosEdicaoDiretorEnsino = new ArrayList<>();
         diretorEnsino = new DiretorEnsino();
         diretorEnsinoSelecionado = new DiretorEnsino();
+        confirmacaoSenha = "";
         confirmacaoSenhaSelecionado = "";
 
     }
@@ -213,5 +217,33 @@ public class DiretorEnsinoMB {
      */
     public void setConfirmacaoSenhaSelecionado(String confirmacaoSenhaSelecionado) {
         this.confirmacaoSenhaSelecionado = confirmacaoSenhaSelecionado;
+    }
+
+    /**
+     * @return the errosCadastroDiretorEnsino
+     */
+    public List<String> getErrosCadastroDiretorEnsino() {
+        return errosCadastroDiretorEnsino;
+    }
+
+    /**
+     * @param errosCadastroDiretorEnsino the errosCadastroDiretorEnsino to set
+     */
+    public void setErrosCadastroDiretorEnsino(List<String> errosCadastroDiretorEnsino) {
+        this.errosCadastroDiretorEnsino = errosCadastroDiretorEnsino;
+    }
+
+    /**
+     * @return the confirmacaoSenha
+     */
+    public String getConfirmacaoSenha() {
+        return confirmacaoSenha;
+    }
+
+    /**
+     * @param confirmacaoSenha the confirmacaoSenha to set
+     */
+    public void setConfirmacaoSenha(String confirmacaoSenha) {
+        this.confirmacaoSenha = confirmacaoSenha;
     }
 }
